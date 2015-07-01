@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/product_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/write"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/category_info_pager_relative"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/px_5" >
+
+        <com.hylsmart.yihui.util.view.RollViewPager
+            android:id="@+id/category_info_pager_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </com.hylsmart.yihui.util.view.RollViewPager>
+
+        <LinearLayout
+            android:id="@+id/category_info_pager_dot_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_alignParentBottom="true"
+            android:background="#55000000"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/category_info_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:listSelector="#F8F8F8"
+        android:cacheColorHint="#00000000"
+        android:fadingEdge="none"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:verticalSpacing="10dp" >
+    </GridView>
+
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/background"
+    >
+    <include layout="@layout/fragment_header" />
+
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+       <RelativeLayout 
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           >
+           <RatingBar 
+               android:id="@+id/list_bar"
+               android:layout_width="wrap_content"
+           	   android:layout_height="wrap_content"
+           	   style="@style/RatingBar"
+           	   android:layout_margin="@dimen/px_30"
+               />
+           <TextView 
+               android:id="@+id/list_text"
+               android:layout_width="wrap_content"
+           	   android:layout_height="wrap_content"
+           	   android:textColor="@color/button_login1"
+           	   android:textSize="@dimen/app_text_size_second"
+           	   android:text="@string/list_text"
+           	   android:layout_alignParentRight="true"
+           	   android:layout_alignBottom="@id/list_bar"
+           	   android:layout_marginBottom="2dp"
+           	   android:layout_marginRight="@dimen/px_30"
+               />
+           <com.hylsmart.yihui.util.view.XListView 
+               android:id="@+id/list_rate"
+               android:layout_width="match_parent"
+           	   android:layout_height="match_parent"
+           	   android:layout_below="@id/list_bar"
+           	   android:scrollbars="none"
+           	   android:divider="@color/button_login1"
+           	   android:dividerHeight="1dp"
+               />
+           <TextView 
+               android:id="@+id/rate_no_content"
+               android:layout_width="wrap_content"
+           	   android:layout_height="wrap_content"
+           	   android:textColor="@color/TextColorBLACK_SMALL"
+           	   android:textSize="@dimen/app_text_size_first"
+           	   android:text="@string/list_text"
+           	   android:layout_centerInParent="true"
+           	   android:visibility="invisible"
+               />
+       </RelativeLayout>
+        
+        </com.hylsmart.yihui.util.view.LoadingLayout>
+    
+
+</LinearLayout>

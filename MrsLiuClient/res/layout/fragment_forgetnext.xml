@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@color/login_bg"
+    android:orientation="vertical"
+    >
+    <include 
+        layout="@layout/fragment_header"
+        />
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame"
+        android:layout_margin="10dp"
+        >
+        <CheckBox 
+            android:id="@+id/next_see"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:button="@drawable/password_check"
+        	android:checked="true"
+        	android:layout_alignParentRight="true"
+        	android:layout_centerVertical="true"
+            /> 
+        <EditText 
+            android:id="@+id/next_et_old"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:background="@null"
+        	android:padding="@dimen/px_20"
+        	android:password="true"
+        	android:layout_toLeftOf="@id/next_see"
+        	android:hint="@string/oldpass_hint"
+            />
+        
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        >
+        <CheckBox 
+            android:id="@+id/next_see1"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:button="@drawable/password_check"
+        	android:checked="true"
+        	android:layout_alignParentRight="true"
+        	android:layout_centerVertical="true"
+            /> 
+        <EditText 
+            android:id="@+id/next_et_new"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:layout_toLeftOf="@id/next_see1"
+        	android:background="@null"
+        	android:padding="@dimen/px_20"
+        	android:password="true"
+        	android:hint="@string/pass_hint"
+            />
+        
+    </RelativeLayout>
+  
+    
+        <Button 
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+	    	android:layout_height="wrap_content" 
+	    	android:text="@string/change"
+	    	android:background="@drawable/login_button_blue"
+	    	android:textColor="@android:color/white"
+	    	android:layout_margin="10dp"
+	    	android:textSize="@dimen/app_text_size_first"
+	    	android:padding="10dp"
+            />
+        
+
+</LinearLayout>

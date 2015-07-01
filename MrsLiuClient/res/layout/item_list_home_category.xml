@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/write"
+    android:orientation="vertical" 
+>
+
+    <LinearLayout
+        android:id="@+id/category_floor_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clickable="true" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_floor_divider" />
+
+        <TextView
+            android:id="@+id/category_floor_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue_home_category_bg_color"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="1F 汇吃美食"
+            android:textSize="@dimen/app_text_size_first" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@drawable/ic_virtual_line" />
+
+    <LinearLayout
+        android:id="@+id/floor_goods_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/category_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:background="@drawable/head_back_response_area" >
+            
+            <ImageView
+                android:id="@+id/category_image_low_price"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_low_price" />
+
+            <TextView
+                android:id="@+id/category_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/category_image_low_price"
+                android:layout_alignTop="@id/category_image_low_price"
+                android:layout_marginTop="9dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="最爱赤果果"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_second" />
+
+            <TextView
+                android:id="@+id/category_describe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/category_name"
+                android:layout_toLeftOf="@id/category_image_low_price"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="裸奔价格最爱一冬天"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_min" />
+
+            <ImageView
+            	android:layout_marginLeft="8dp"
+            	android:layout_marginRight="8dp"
+                android:id="@+id/category_image"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="fitXY"
+                android:layout_below="@id/category_describe"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_hall_no_url" />
+
+            
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="9dp"
+            android:layout_marginTop="9dp"
+            android:background="@color/gray_bg_dashed" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/floor_goods_one_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/head_back_response_area">
+                
+                <ImageView
+                    android:id="@+id/floor_goods_image_one"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_hall_no_url" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/floor_goods_image_one"
+                    android:layout_alignLeft="@id/floor_goods_image_one"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_hurry_buy" />
+
+                <TextView
+                    android:id="@+id/floor_goods_name_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/floor_goods_image_one"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="粮油精选"
+                    android:textColor="@color/red_floor_goods_name"
+                    android:textSize="@dimen/app_text_size_second" />
+
+                <TextView
+                    android:id="@+id/floor_goods_describe_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/floor_goods_name_one"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/floor_goods_image_one"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="清仓价  疯抢中"
+                    android:textColor="@color/TextColorBLACK_NORMAL"
+                    android:textSize="@dimen/app_text_size_min" />
+
+                
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/gray_bg_dashed" />
+
+            <RelativeLayout
+                android:id="@+id/floor_goods_two_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/head_back_response_area" >
+                
+                <ImageView
+                    android:id="@+id/floor_goods_image_two"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_hall_no_url" />
+                
+
+                <TextView
+                    android:id="@+id/floor_goods_name_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/floor_goods_image_two"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="德芙风情"
+                    android:textColor="@color/purple_floor_goods_name"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                 <TextView
+                    android:id="@+id/floor_goods_describe_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/floor_goods_name_two"
+                    android:layout_toLeftOf="@id/floor_goods_image_two"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="众享丝滑  爱跟上"
+                    android:textColor="@color/TextColorBLACK_NORMAL"
+                    android:textSize="@dimen/app_text_size_min" />
+                
+                
+               
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/gray_bg_dashed" />
+
+    <LinearLayout
+        android:id="@+id/category_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

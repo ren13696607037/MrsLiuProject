@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+    
+    <ImageView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" 
+           android:layout_marginTop="30dp"
+           android:src="@drawable/unlogin_shopcar_flag"
+           android:layout_gravity="center_horizontal"
+        />
+    <TextView 
+          android:layout_marginTop="20dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" 
+          android:text="@string/empty_notice"
+          android:gravity="center_horizontal"
+          android:textColor="@color/TextColorBLACK_NORMAL"
+        />
+    
+   <Button 
+            android:layout_marginTop="33dp"
+            android:id="@+id/go_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:text="@string/welcome_shop"
+            android:background="@drawable/login_shopcar"
+            android:textSize="@dimen/app_text_size_first"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:layout_marginLeft="@dimen/px_75"
+            android:layout_marginRight="@dimen/px_75"
+            />
+    
+</LinearLayout>

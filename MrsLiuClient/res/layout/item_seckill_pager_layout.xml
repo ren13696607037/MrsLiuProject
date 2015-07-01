@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp" 
+    android:background="@drawable/bg_grid_and_pager"
+    android:orientation="vertical">
+    
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seckill_image"
+        android:src="@drawable/ic_hall_no_url"
+        android:scaleType="fitXY"/>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+         <TextView 
+        android:id="@+id/seckill_discount_text"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:text="6.5折"
+        android:textColor="@color/TextColorWhite"
+        android:textSize="@dimen/app_text_size_second"
+        android:background="@drawable/ic_discount_seckill_bg"/>
+    
+    <TextView 
+        android:id="@+id/seckill_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/seckill_discount_text"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:text="好丽友Q蒂12片"
+        android:textColor="@color/TextColorBLACK_NORMAL"
+        android:textSize="@dimen/app_text_size_second"/>
+    
+     <TextView 
+        android:id="@+id/seckill_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seckill_name"
+        android:layout_alignLeft="@id/seckill_name"
+        android:layout_marginBottom="5dp"
+        android:text="19.6元"
+        android:textColor="@color/orange_bg_home_header"
+        android:textSize="@dimen/app_text_size_first"/>
+     
+     <TextView 
+        android:id="@+id/seckill_buy_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:text="马上抢"
+        android:background="@drawable/bg_seckill_buy_btn"
+        android:textColor="@color/TextColorWhite"
+        android:textSize="@dimen/app_text_size_first"/>
+        
+    </RelativeLayout>
+    
+   
+    
+
+</LinearLayout>

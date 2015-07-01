@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/px_10" >
+
+    <TextView
+        android:id="@+id/product_info_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_15"
+        android:textColor="#777"
+        android:textSize="@dimen/app_text_size_second" />
+
+    <TextView
+        android:id="@+id/product_info_item__time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/product_info_item_name"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/px_30"
+        android:textColor="#ADADAD"
+        android:textSize="@dimen/app_text_size_second" />
+
+    <TextView
+        android:id="@+id/product_info_item__content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_info_item_name"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_10"
+        android:textColor="#ADADAD"
+        android:textSize="@dimen/app_text_size_second" />
+
+</RelativeLayout>

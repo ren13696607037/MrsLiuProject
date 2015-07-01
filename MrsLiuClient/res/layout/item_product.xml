@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout
+              xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/product_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="12dp"
+                android:paddingTop="8dp" >
+                <CheckBox
+        android:id="@+id/product_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:layout_centerVertical="true"
+        style="@style/CustomCheckboxTheme"
+            />
+            <ImageView 
+                android:id="@+id/product_icon"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="@drawable/product_frame"
+                android:padding="0.5dp"
+                android:src="@drawable/ic_mall_focus"
+                android:layout_marginLeft="0dp"
+                android:scaleType="fitXY"
+                android:layout_toRightOf="@id/product_checkbox"
+                />
+                
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text="Sanyo/三洋DG-F306ssss洗衣机大床 大床大床"
+                    android:layout_marginLeft="6dp"
+                    android:maxLines="2"
+                    android:layout_toRightOf="@id/product_icon"
+                    android:textColor="#565656"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                 <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_toRightOf="@id/product_icon"
+                    android:layout_below="@id/product_name"
+                    android:layout_marginLeft="6dp"
+                    android:text="￥1399.00"
+                    android:textColor="@color/orange_bg_home_header"
+                    android:textSize="@dimen/app_text_size_most" />
+                <TextView
+                    android:id="@+id/product_market_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:layout_toRightOf="@id/product_price"
+                    android:layout_below="@id/product_name"
+                    android:layout_marginLeft="12dp"
+                    android:text="￥2369.00"
+                    android:textColor="@color/color_blue"
+                    android:textSize="@dimen/app_text_size_min" />
+                
+                <ImageView 
+                	  android:id="@+id/line"
+                	  android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                	  android:layout_toRightOf="@id/product_icon"
+                      android:layout_below="@id/product_price"
+                      android:layout_marginLeft="6dp"
+                      android:layout_marginTop="6dp"
+                      android:src="@drawable/ic_virtual_line"
+                	/>
+                  <TextView
+                    android:id="@+id/product_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_toRightOf="@id/product_icon"
+                    android:layout_below="@id/line"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="128人已买"
+                    android:textColor="@color/TextColorBLACK_NORMAL"
+                    android:textSize="@dimen/app_text_size_min_best" />
+                
+                
+            </RelativeLayout>
+   

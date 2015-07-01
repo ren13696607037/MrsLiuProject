@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="header_bar_height">48dp</dimen>
+    <dimen name="app_text_size_best">32dp</dimen>
+    <dimen name="app_text_size_most">18dp</dimen>
+    <dimen name="app_text_size_first">16dp</dimen>
+    <dimen name="app_text_size_second">14dp</dimen>
+    <dimen name="app_text_size_min_best">10dp</dimen>
+    <dimen name="app_text_size_min">12dp</dimen>
+    <dimen name="app_text_size_min_detail">13sp</dimen>
+    <dimen name="tab_text_size">14dip</dimen>
+    <dimen name="dialog_title">22dp</dimen>
+    <dimen name="dialog_content">18dp</dimen>
+    <dimen name="px_32">17.78dp</dimen>
+    <dimen name="px_30">16.67dp</dimen>
+    <dimen name="px_20">11.11dp</dimen>
+    <dimen name="px_25">13.89dp</dimen>
+    <dimen name="px_10">5.56dp</dimen>
+    <dimen name="px_5">2.78dp</dimen>
+    <dimen name="px_15">8.33dp</dimen>
+    <dimen name="px_150">83.33dp</dimen>
+    <dimen name="px_28">15.56dp</dimen>
+    <dimen name="px_106">58dp</dimen>
+    <dimen name="px_40">22.22dp</dimen>
+    <dimen name="px_50">27.78dp</dimen>
+    <dimen name="px_70">38.89dp</dimen>
+    <dimen name="px_75">41.67dp</dimen>
+    <dimen name="px_60">33.33dp</dimen>
+    <dimen name="px_110">61.11dp</dimen>
+    <dimen name="px_128">71.11dp</dimen>
+    <dimen name="px_130">72.22dp</dimen>
+    <dimen name="px_80">44.44dp</dimen>
+    <dimen name="home_layout_height">60dip</dimen>
+
+</resources>

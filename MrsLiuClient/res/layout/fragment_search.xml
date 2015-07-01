@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    
+
+    <RelativeLayout
+        android:id="@+id/serch_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/header_bar_height"
+            android:layout_height="@dimen/header_bar_height"
+            android:background="@drawable/head_back_response_area"
+            android:clickable="true"
+            android:scaleType="center"
+            android:src="@drawable/header_back" />
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="@dimen/header_bar_height"
+            android:layout_height="@dimen/header_bar_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/back_arrow"
+            android:background="@drawable/head_back_response_area"
+            android:clickable="true"
+            android:scaleType="center"
+            android:src="@drawable/search" />
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/search_btn"
+            android:layout_toRightOf="@id/back_arrow"
+            android:background="@drawable/shape_bg_search_edit"
+            android:hint="@string/search_wanted_goods"
+            android:textColorHint="@color/color_blue"
+            android:padding="5dp" 
+            android:textSize="@dimen/app_text_size_second"
+            android:singleLine="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_bg_divider_search" />
+    
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+    </com.hylsmart.yihui.util.view.LoadingLayout>
+
+    <ListView
+        android:id="@+id/search_history_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:divider="@color/gray_bg_divider_search_tab"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@drawable/head_back_response_area" 
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/search_product_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/search_sale_num_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/head_back_response_area"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/search_sale_num"
+                android:textColor="@color/orange_bg_home_header" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_bg_divider_search_tab" />
+
+            <TextView
+                android:id="@+id/search_price_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/head_back_response_area"
+                android:drawableRight="@drawable/arrow_price_down"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/search_price"
+                android:textColor="@color/TextColorBLACK_NORMAL" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_bg_divider_search_tab" />
+
+            <TextView
+                android:id="@+id/search_store_time_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/head_back_response_area"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/search_store_tiem"
+                android:textColor="@color/TextColorBLACK_NORMAL" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_bg_divider_search_tab" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_layout_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:id="@+id/search_sale_num_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray_bg_divider_search" />
+
+            <View
+                android:id="@+id/search_price_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray_bg_divider_search" />
+
+            <View
+                android:id="@+id/search_store_time_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray_bg_divider_search" />
+        </LinearLayout>
+
+        <com.hylsmart.yihui.util.view.XListView
+            android:id="@+id/search_product_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/gray_bg_divider_search_tab"
+            android:dividerHeight="0.5dp"
+            android:listSelector="@drawable/head_back_response_area" />
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/hint_layout"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+        
+        <TextView
+        android:id="@+id/hint_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="@string/search_no_data"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/app_text_size_first"
+        android:drawableTop="@drawable/search_no_data"
+        android:drawablePadding="10dp"
+        android:visibility="gone" />
+    </LinearLayout>
+    
+
+</LinearLayout>

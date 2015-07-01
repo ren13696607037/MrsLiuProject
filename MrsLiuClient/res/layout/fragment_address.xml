@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/address_no_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/app_text_size_first"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:id="@+id/address_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/pcenter_frame"
+                android:orientation="horizontal"
+                android:padding="@dimen/px_20" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/px_130"
+                    android:src="@drawable/address_new" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/px_15"
+                    android:text="@string/add_title"
+                    android:textColor="@color/color_blue"
+                    android:textSize="@dimen/app_text_size_first" />
+            </LinearLayout>
+
+            <com.hylsmart.yihui.util.view.XListView
+                android:id="@+id/address_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/address_new"
+                android:divider="@color/color_gray"
+                android:dividerHeight="1dp" />
+        </RelativeLayout>
+    </com.hylsmart.yihui.util.view.LoadingLayout>
+
+</LinearLayout>

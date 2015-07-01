@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_ground_list_background"
+    android:gravity="center_vertical"
+    android:padding="10dip" >
+
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dip" />
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/product_image"
+        android:layout_marginTop="10dip"
+        android:layout_toRightOf="@+id/product_image"
+        android:ellipsize="end"
+        android:gravity="left|bottom"
+        android:lines="2"
+        android:textSize="@dimen/app_text_size_second" />
+
+    <TextView
+        android:id="@+id/product_marketprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/product_price"
+        android:layout_below="@+id/product_name"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:layout_toRightOf="@+id/product_image"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/TextColorGray"
+        android:textSize="@dimen/app_text_size_second" />
+
+    <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/product_image"
+        android:layout_marginBottom="5dip"
+        android:layout_toRightOf="@+id/product_image"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/TextColorOrange"
+        android:textSize="@dimen/app_text_size_second" />
+
+
+</RelativeLayout>

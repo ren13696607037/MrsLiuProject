@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/background"
+	android:orientation="vertical" >
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/header_bar_height"
+		android:background="@color/bg_header"
+		android:orientation="horizontal"
+		android:paddingRight="10dp" >
+		<RelativeLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="3" >
+			<LinearLayout
+				android:id="@+id/back"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:paddingRight="25dp" >
+				<ImageView
+					android:id="@+id/header_left_icon"
+					android:layout_width="@dimen/header_bar_height"
+					android:layout_height="@dimen/header_bar_height"
+					android:background="@drawable/head_back_response_area"
+					android:scaleType="center"
+					android:src="@drawable/head_back" />
+			</LinearLayout>
+			<EditText
+				android:id="@+id/search_edit"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_toRightOf="@id/back"
+				android:drawablePadding="5dp"
+				android:hint="快速搜索商品"
+				android:paddingBottom="8dp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:paddingTop="8dp" />
+		</RelativeLayout>
+		<Button
+			android:id="@+id/search_btn"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_weight="1"
+			android:background="@color/bg_header"
+			android:gravity="center"
+			android:padding="10dp"
+			android:text="搜索"
+			android:textColor="@android:color/white"
+			android:textSize="@dimen/app_text_size_first" />
+	</LinearLayout>
+	<ListView
+		android:id="@+id/search_history_list"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:layout_marginTop="15dp"
+		android:scrollbarStyle="outsideOverlay" />
+	<TextView
+		android:id="@+id/no_data_prompt"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:text="没有你搜索的商品"
+		android:textColor="@color/bg_header"
+		android:textSize="@dimen/app_text_size_first"
+		android:visibility="gone" />
+</LinearLayout>

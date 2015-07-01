@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@color/write">
+    
+    <TextView 
+        android:id="@+id/footer_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       	android:text="@string/clear_search_history"
+       	android:layout_marginLeft="50dp"
+       	android:layout_marginRight="50dp"
+       	android:layout_marginTop="15dp"
+       	android:layout_marginBottom="15dp"
+       	android:paddingTop="10dp"
+       	android:paddingBottom="10dp"
+       	android:gravity="center"
+       	android:background="@color/white_bg_home"
+       	android:textColor="@color/TextColorBLACK_NORMAL"/>
+    
+
+</LinearLayout>

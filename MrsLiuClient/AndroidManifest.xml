@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hylsmart.yihui"
+    android:versionCode="5"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+      <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+        <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+ <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <application
+        android:name="com.hylsmart.yihui.YiHuiApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:screenOrientation="portrait" >
+           <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".util.activities.GuideActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+       <activity
+            android:name=".SplashActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <provider
+            android:name="com.hylsmart.yihui.dao.YiHuiContentProvider"
+            android:authorities="com.hylsmart.yihui.provider"
+            android:exported="true" />
+        <service android:name=".update.DownloadService" 
+        	android:exported="false"
+        	>
+            <intent-filter>
+                <action android:name="com.hylsmart.yihui.update.IDownloadService" />
+            </intent-filter>
+        </service>
+        <!-- 教育模块配置 -->
+        <activity
+            android:name=".model.home.activities.HomeActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.home.activities.SearchActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 购物车模块配置 -->
+        <activity
+            android:name=".model.shopcar.activities.ShopCarHomeActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.shopcar.activities.ShopCarActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.shopcar.activities.TakingOrderActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@android:style/Theme.NoTitleBar" />
+         <activity
+            android:name=".model.shopcar.activities.OrderPayFinishActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@android:style/Theme.NoTitleBar" />
+      
+        <!-- 商城模块配置 -->
+        <activity
+            android:name=".model.mall.activities.CategoryListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.CategoryInfoListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.GroupListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.TuanGouActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.ProductInfoActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.ProductListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.ProSaleListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.ProPriceListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.ProShelvesListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.PicAndTextDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.StandardActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/StandardWindowStyle" />
+        <!-- 个人中心模块配置 -->
+        <activity
+            android:name=".model.pcenter.activities.PCenterHomeActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.OrderDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.RegisterActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.SuggestActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.MyOrderActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.ChangeAddressActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.AddressManageActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.MyCollectActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+           <activity
+            android:name=".model.pcenter.activities.MyBrowserActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".dialog.AskDialogActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.AboutUsActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.HelpActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.ForgetFirstActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.ForgetNextActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.PcenterInfoActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.SettingActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.CityListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.SearchLogisticsActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.RateActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.RateListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.ProvinceActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+    </application>
+
+</manifest>

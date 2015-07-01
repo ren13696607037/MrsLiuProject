@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/background"
+    >
+    <include 
+        layout="@layout/fragment_header"
+        />
+    
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+  
+    <com.hylsmart.yihui.util.view.XListView
+        android:id="@+id/browser_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/list_line"
+        android:listSelector="@drawable/listview_item_click_select"
+        />
+  
+      </com.hylsmart.yihui.util.view.LoadingLayout>
+      
+      <TextView 
+           android:id="@+id/empty"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:textColor="@color/TextColorBLACK_NORMAL"
+           android:textSize="@dimen/app_text_size_first"
+           android:gravity="center"
+           android:text="@string/empty_browser"
+        />
+    
+    
+</LinearLayout>
