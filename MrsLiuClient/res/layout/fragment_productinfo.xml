@@ -7,7 +7,7 @@
 
     <include layout="@layout/fragment_header" />
 
-    <com.hylsmart.yihui.util.view.LoadingLayout
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -103,11 +103,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp" >
 
-                        <com.hylsmart.yihui.util.view.RollViewPager
+                        <com.techfly.liutaitai.util.view.RollViewPager
                             android:id="@+id/product_info_viewpager"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
-                        </com.hylsmart.yihui.util.view.RollViewPager>
+                        </com.techfly.liutaitai.util.view.RollViewPager>
 
                         <LinearLayout
                             android:id="@+id/product_info_dot_linear"
@@ -296,7 +296,7 @@
                             android:textColor="@color/TextColorBLACK_NORMAL"
                             android:textSize="@dimen/app_text_size_first" />
 
-                        <com.hylsmart.yihui.util.view.ProductUpdateView
+                        <com.techfly.liutaitai.util.view.ProductUpdateView
                             android:id="@+id/product_info_product_update_count"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -304,7 +304,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:paddingLeft="@dimen/px_20" >
-                        </com.hylsmart.yihui.util.view.ProductUpdateView>
+                        </com.techfly.liutaitai.util.view.ProductUpdateView>
 
                         <TextView
                             android:id="@+id/product_info_store_count"
@@ -399,14 +399,14 @@
                         android:layout_height="0.5dp"
                         android:background="@color/color_gray" />
 
-                    <com.hylsmart.yihui.util.view.ListViewForScrollView
+                    <com.techfly.liutaitai.util.view.ListViewForScrollView
                         android:id="@+id/product_info_listview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:divider="@color/white_bg_home"
                         android:dividerHeight="0.5dp"
                         android:listSelector="#00000000" >
-                    </com.hylsmart.yihui.util.view.ListViewForScrollView>
+                    </com.techfly.liutaitai.util.view.ListViewForScrollView>
 
                     <View
                         android:id="@+id/product_info_view_2"
@@ -436,6 +436,6 @@
                 </LinearLayout>
             </ScrollView>
         </RelativeLayout>
-    </com.hylsmart.yihui.util.view.LoadingLayout>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
 
 </LinearLayout>

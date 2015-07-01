@@ -6,12 +6,12 @@
 
     <include layout="@layout/fragment_header" />
 
-    <com.hylsmart.yihui.util.view.LoadingLayout
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.hylsmart.yihui.util.view.XListView
+        <com.techfly.liutaitai.util.view.XListView
             android:id="@+id/xlistview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,7 +21,7 @@
             android:scrollbars="none"
             android:dividerHeight="15dip"
             android:listSelector="@drawable/listview_item_click_select" >
-        </com.hylsmart.yihui.util.view.XListView>
-    </com.hylsmart.yihui.util.view.LoadingLayout>
+        </com.techfly.liutaitai.util.view.XListView>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
 
 </LinearLayout>

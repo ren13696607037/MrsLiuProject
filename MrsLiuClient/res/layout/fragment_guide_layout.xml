@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.hylsmart.yihui"
+    xmlns:app="http://schemas.android.com/apk/res/com.techfly.liutaitai"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/detail_layout">
     
-    <com.hylsmart.yihui.util.view.ViewFlow
+    <com.techfly.liutaitai.util.view.ViewFlow
         android:id="@+id/viewflow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:sidebuffer="2" />
 
-    <com.hylsmart.yihui.util.view.CircleFlowIndicator
+    <com.techfly.liutaitai.util.view.CircleFlowIndicator
         android:id="@+id/viewflowindic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

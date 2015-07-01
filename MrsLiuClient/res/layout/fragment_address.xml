@@ -7,7 +7,7 @@
 
     <include layout="@layout/fragment_header" />
 
-    <com.hylsmart.yihui.util.view.LoadingLayout
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -51,7 +51,7 @@
                     android:textSize="@dimen/app_text_size_first" />
             </LinearLayout>
 
-            <com.hylsmart.yihui.util.view.XListView
+            <com.techfly.liutaitai.util.view.XListView
                 android:id="@+id/address_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -59,6 +59,6 @@
                 android:divider="@color/color_gray"
                 android:dividerHeight="1dp" />
         </RelativeLayout>
-    </com.hylsmart.yihui.util.view.LoadingLayout>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
 
 </LinearLayout>

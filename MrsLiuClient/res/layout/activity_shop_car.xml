@@ -8,18 +8,18 @@
         android:id="@+id/unlogin_shop_car"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.hylsmart.yihui.model.shopcar.fragment.UnLoginShopCarFragment" />
+        class="com.techfly.liutaitai.model.shopcar.fragment.UnLoginShopCarFragment" />
 
     <fragment
         android:id="@+id/empty_shop_car"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       class="com.hylsmart.yihui.model.shopcar.fragment.EmptyShopCarFragment" />
+       class="com.techfly.liutaitai.model.shopcar.fragment.EmptyShopCarFragment" />
     
      <fragment
         android:id="@+id/shop_car"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       class="com.hylsmart.yihui.model.shopcar.fragment.ShopCarHomeFragment" />
+       class="com.techfly.liutaitai.model.shopcar.fragment.ShopCarHomeFragment" />
 
 </LinearLayout>

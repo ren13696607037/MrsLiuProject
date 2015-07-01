@@ -12,11 +12,11 @@
         android:layout_height="200dp"
         android:layout_marginTop="@dimen/px_5" >
 
-        <com.hylsmart.yihui.util.view.RollViewPager
+        <com.techfly.liutaitai.util.view.RollViewPager
             android:id="@+id/category_info_pager_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-        </com.hylsmart.yihui.util.view.RollViewPager>
+        </com.techfly.liutaitai.util.view.RollViewPager>
 
         <LinearLayout
             android:id="@+id/category_info_pager_dot_linear"

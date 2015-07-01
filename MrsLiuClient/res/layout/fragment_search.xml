@@ -54,12 +54,12 @@
         android:layout_height="1dp"
         android:background="@color/gray_bg_divider_search" />
     
-    <com.hylsmart.yihui.util.view.LoadingLayout
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" >
-    </com.hylsmart.yihui.util.view.LoadingLayout>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
 
     <ListView
         android:id="@+id/search_history_listview"
@@ -168,7 +168,7 @@
                 android:background="@color/gray_bg_divider_search" />
         </LinearLayout>
 
-        <com.hylsmart.yihui.util.view.XListView
+        <com.techfly.liutaitai.util.view.XListView
             android:id="@+id/search_product_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

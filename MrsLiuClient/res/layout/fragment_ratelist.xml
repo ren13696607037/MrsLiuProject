@@ -7,7 +7,7 @@
     >
     <include layout="@layout/fragment_header" />
 
-    <com.hylsmart.yihui.util.view.LoadingLayout
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +35,7 @@
            	   android:layout_marginBottom="2dp"
            	   android:layout_marginRight="@dimen/px_30"
                />
-           <com.hylsmart.yihui.util.view.XListView 
+           <com.techfly.liutaitai.util.view.XListView 
                android:id="@+id/list_rate"
                android:layout_width="match_parent"
            	   android:layout_height="match_parent"
@@ -56,7 +56,7 @@
                />
        </RelativeLayout>
         
-        </com.hylsmart.yihui.util.view.LoadingLayout>
+        </com.techfly.liutaitai.util.view.LoadingLayout>
     
 
 </LinearLayout>

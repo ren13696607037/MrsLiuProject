@@ -8,18 +8,18 @@
         android:id="@+id/taking_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.hylsmart.yihui.model.shopcar.fragment.TakingOrderFragment" />
+        class="com.techfly.liutaitai.model.shopcar.fragment.TakingOrderFragment" />
 
     <fragment
         android:id="@+id/order_create"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.hylsmart.yihui.model.shopcar.fragment.CreateOrderSucFragment" />
+        class="com.techfly.liutaitai.model.shopcar.fragment.CreateOrderSucFragment" />
     
      <fragment
         android:id="@+id/order_finish"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.hylsmart.yihui.model.shopcar.fragment.FinishOrderFragment" />
+        class="com.techfly.liutaitai.model.shopcar.fragment.FinishOrderFragment" />
 
 </LinearLayout>

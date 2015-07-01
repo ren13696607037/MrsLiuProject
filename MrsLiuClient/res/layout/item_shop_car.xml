@@ -106,7 +106,7 @@
      />
 
    
- <com.hylsmart.yihui.util.view.CartUpdateView
+ <com.techfly.liutaitai.util.view.CartUpdateView
       android:id="@+id/product_update_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
       android:layout_alignParentBottom="true"
       android:layout_marginBottom="3dp"
      >
-    </com.hylsmart.yihui.util.view.CartUpdateView>
+    </com.techfly.liutaitai.util.view.CartUpdateView>
     
    <TextView
         android:id="@+id/product_edit"

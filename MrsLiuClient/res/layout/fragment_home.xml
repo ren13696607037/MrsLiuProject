@@ -45,12 +45,12 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <com.hylsmart.yihui.util.view.LoadingLayout
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" >
-    </com.hylsmart.yihui.util.view.LoadingLayout>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
 
     <ScrollView
         android:id="@+id/main_scrollview"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <com.hylsmart.yihui.util.view.ViewPagerWrapper
+            <com.techfly.liutaitai.util.view.ViewPagerWrapper
                 android:id="@+id/vpWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -104,7 +104,7 @@
 
             
 
-                <com.hylsmart.yihui.util.view.GridViewForScrollView
+                <com.techfly.liutaitai.util.view.GridViewForScrollView
                     android:id="@+id/grid_group_buy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

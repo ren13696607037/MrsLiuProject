@@ -125,13 +125,13 @@
                     android:textColor="@color/TextColorBLACK_NORMAL"
                     android:textSize="@dimen/app_text_size_first" />
 
-                <com.hylsmart.yihui.util.view.ProductUpdateView
+                <com.techfly.liutaitai.util.view.ProductUpdateView
                     android:id="@+id/standard_count_product_update_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="@dimen/px_20" >
-                </com.hylsmart.yihui.util.view.ProductUpdateView>
+                </com.techfly.liutaitai.util.view.ProductUpdateView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

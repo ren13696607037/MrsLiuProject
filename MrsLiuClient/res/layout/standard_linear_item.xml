@@ -17,7 +17,7 @@
         android:textColor="@color/TextColorBLACK_NORMAL"
         android:textSize="@dimen/app_text_size_first" />
 
-    <com.hylsmart.yihui.util.view.GridViewForScrollView
+    <com.techfly.liutaitai.util.view.GridViewForScrollView
         android:id="@+id/standard_item_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +26,6 @@
         android:numColumns="2"
         android:stretchMode="columnWidth"
         android:verticalSpacing="5dp" >
-    </com.hylsmart.yihui.util.view.GridViewForScrollView>
+    </com.techfly.liutaitai.util.view.GridViewForScrollView>
 
 </LinearLayout>

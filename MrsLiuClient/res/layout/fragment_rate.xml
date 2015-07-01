@@ -7,7 +7,7 @@
     >
     <include layout="@layout/fragment_header" />
 
-    <com.hylsmart.yihui.util.view.LoadingLayout
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
         	   android:textColor="@color/TextColorBLACK_SMALL"
         	   android:textSize="@dimen/app_text_size_second"
                />
-           <com.hylsmart.yihui.util.view.ListViewForScrollView 
+           <com.techfly.liutaitai.util.view.ListViewForScrollView 
                android:id="@+id/rate_list"
                android:layout_width="match_parent"
         	   android:layout_height="match_parent"
@@ -53,7 +53,7 @@
            </LinearLayout>
        </ScrollView>
         
-        </com.hylsmart.yihui.util.view.LoadingLayout>
+        </com.techfly.liutaitai.util.view.LoadingLayout>
     
 
 </LinearLayout>

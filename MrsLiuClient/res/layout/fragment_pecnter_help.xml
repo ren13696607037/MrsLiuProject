@@ -8,7 +8,7 @@
     <include 
         layout="@layout/fragment_header"
         />
-        <com.hylsmart.yihui.util.view.LoadingLayout
+        <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -22,6 +22,6 @@
         android:textSize="@dimen/app_text_size_second"
         android:text="内容暂定"
         android:textColor="@color/TextColorBLACK_NORMAL" />
-      </com.hylsmart.yihui.util.view.LoadingLayout>
+      </com.techfly.liutaitai.util.view.LoadingLayout>
     
 </LinearLayout>

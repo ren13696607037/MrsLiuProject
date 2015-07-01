@@ -8,11 +8,11 @@
 	<include layout="@layout/fragment_header"
 		     android:id="@+id/header_layout"
 		 />
-	<com.hylsmart.yihui.util.view.LoadingLayout
+	<com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </com.hylsmart.yihui.util.view.LoadingLayout>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
     
 	 <RelativeLayout
                 android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                     android:textSize="@dimen/app_text_size_second" />
                 
             </RelativeLayout>
-			<com.hylsmart.yihui.util.view.ListViewForScrollView 
+			<com.techfly.liutaitai.util.view.ListViewForScrollView 
 				android:id="@+id/listview"
 				android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -129,7 +129,7 @@
 				android:dividerHeight="0.5dp"
 				android:divider="@drawable/list_line"
 				>
-			</com.hylsmart.yihui.util.view.ListViewForScrollView>
+			</com.techfly.liutaitai.util.view.ListViewForScrollView>
 			     
 			<RelativeLayout
 				android:id="@+id/product_info"
