@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/loading_fail"   
+    android:layout_width="fill_parent"   
+    android:layout_height="fill_parent"  
+    >  
+        <ImageView
+            android:id="@+id/refresh_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+          />
+
+        <TextView
+            android:id="@+id/txt_loading_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/refresh_text"
+            android:textColor="@android:color/white"
+            android:text="@string/loading_fail_nodata"
+            android:textSize="18sp" />
+
+</RelativeLayout>

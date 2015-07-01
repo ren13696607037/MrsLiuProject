@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/address_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pcenter_frame"
+                android:padding="@dimen/px_20" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/area_hint"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <ImageView
+                    android:id="@+id/area_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/pcenter_arrow_blue" />
+
+                <TextView
+                    android:id="@+id/area_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/area_img"
+                    android:text="@string/area_hint"
+                    android:textColor="@color/color_blue"
+                    android:textSize="@dimen/app_text_size_first" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/address_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pcenter_frame_bottom"
+                android:hint="@string/address_hint"
+                android:padding="@dimen/px_20"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <EditText
+                android:id="@+id/address_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pcenter_frame_bottom"
+                android:hint="@string/name_hint"
+                android:padding="@dimen/px_20"
+                android:singleLine="true"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <EditText
+                android:id="@+id/address_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pcenter_frame_bottom"
+                android:hint="@string/phone_hint"
+                android:inputType="phone"
+                android:padding="@dimen/px_20"
+                android:singleLine="true"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <EditText
+                android:id="@+id/address_zipcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pcenter_frame_bottom"
+                android:hint="@string/zipcode_hint"
+                android:inputType="phone"
+                android:padding="@dimen/px_20"
+                android:singleLine="true"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <Button
+                android:id="@+id/address_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_75"
+                android:layout_marginRight="@dimen/px_75"
+                android:layout_marginTop="@dimen/px_30"
+                android:background="@drawable/login_button_blue"
+                android:padding="@dimen/px_20"
+                android:text="@string/save"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/app_text_size_first" />
+        </LinearLayout>
+    </com.hylsmart.yihui.util.view.LoadingLayout>
+
+</LinearLayout>

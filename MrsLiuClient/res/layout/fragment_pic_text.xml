@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:id="@+id/pic_text_group" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <WebView
+            android:id="@+id/pic_text_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.hylsmart.yihui.util.view.LoadingLayout>
+
+</LinearLayout>

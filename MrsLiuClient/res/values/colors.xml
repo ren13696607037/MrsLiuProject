@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--orange -->
+    <color name="orange_bg_home_header">#fa8c19</color>
+    <color name="light_orange_bg_home_search_edit_normal">#fcaf5e</color>
+    <color name="light_orange_bg_home_search_edit_focus">#eaa354</color>
+    <color name="orange_home_category_name_color">#FC846C</color>
+    
+    <!--white -->
+    <color name="bg_header">#ffffff</color>
+    <color name="write">#ffffff</color>
+    <color name="button_login">#ffffff</color>
+    <color name="white_bg_home">#eeeeee</color>
+    
+      <!--bule -->
+    <color name="color_blue">#1491d2</color>
+    <color name="color_blue_dark">#127bb1</color>
+    <color name="blue_home_category_name_color">#4fc1e9</color>
+    <color name="blue_home_category_bg_color">#f5fdfd</color>
+    
+    <!--gray -->
+    <color name="gray_bg_dashed">#b4b4b4</color>
+    <color name="gray_bg_divider_search">#efefef</color>
+    <color name="gray_bg_divider_search_tab">#d1d1d1</color>
+    
+    <!--red -->
+    <color name="red_floor_goods_name">#e51d1d</color>
+    <color name="red_hot_goods_category_name">#da4453</color>
+    <color name="red_hot_goods_category_bg">#fdf0f0</color>
+    
+     <!--purple -->
+    <color name="purple_floor_goods_name">#8957a1</color>
+    
+     <!--green -->
+    <color name="green_hot_goods_name_two">#37bc9b</color>
+    <color name="green_hot_goods_name_three">#8cc152</color>
+    
+    <!--yellow -->
+    <color name="yellow_sec_kill_bg">#fffae1</color>
+    
+    <color name="bg_header_focus">#E5E3E3</color>
+    <color name="category_info_right_background">#dedede</color>
+    <color name="category_info_left_background">#cccbcb</color>
+    <color name="button_login1">#bebebe</color>
+    <color name="line_color">#bebebe</color>
+    <color name="background">#ffffff</color>
+    <color name="dialog_background">#55000000</color>
+    <color name="list_item_1bbc9b">#1bbc9b</color>
+    <color name="list_item_4f4f4f">#4f4f4f</color>
+    <color name="list_item_click_color">#d6d6d6</color>
+    <color name="grid_item_focus_color">#D6D6D6</color>
+    <color name="grid_item_normal_color">#FFFFFF</color>
+    <color name="tab_content_bg_color">#ffffffff</color>
+    <color name="head_title_bg">#1BBC9B</color>
+    <color name="color_red">#FE0404</color>
+    <color name="color_dark_red">#E83C18</color>
+    <color name="color_dark_red_focus">#D60340</color>
+
+    <color name="login_button_red">#e43a3d</color>
+    <color name="login_button_red1">#c63235</color>
+    <color name="login_bg">#eaeaea</color>
+    <color name="register_code">#3592e2</color>
+
+    <color name="TextColorOrange">#fa8c19</color>
+	<color name="TextColorBLACK">#666666</color>
+	<color name="color_gray">#DFDFDF</color>
+	<color name="color_gray2">#B1B1B1</color>
+	
+	<color name="color_gray_dark">#B5B5B5</color>
+	<color name="color_black">#383838</color>
+	<color name="color_F8">#F8F8F8</color>
+	
+	<color name="TextColorBLACK_SMALL">#383838</color>
+	
+	<color name="TextColorBLACK_NORMAL">#383838</color>
+	<color name="color_96">#969696</color>
+
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
+
+            <ScrollView
+                android:id="@+id/category_list_scroll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="none" >
+
+                <RadioGroup
+                    android:id="@+id/category_list_radiogroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_gray"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+                </RadioGroup>
+            </ScrollView>
+
+            <FrameLayout
+                android:id="@+id/fragment_category_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+            </FrameLayout>
+        </LinearLayout>
+    </com.hylsmart.yihui.util.view.LoadingLayout>
+
+</LinearLayout>

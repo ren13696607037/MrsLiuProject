@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/write"
+    android:orientation="vertical"
+    >
+    <include 
+        layout="@layout/fragment_header"
+        />
+    <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        >
+        <ListView 
+            android:id="@+id/province_list"
+            android:layout_width="match_parent"
+        	android:layout_height="match_parent" 
+        	android:scrollbars="none"
+        	android:listSelector="@drawable/listview_item_click_select"
+        	android:divider="@drawable/list_line"
+            />
+        </com.hylsmart.yihui.util.view.LoadingLayout>
+    
+
+</LinearLayout>

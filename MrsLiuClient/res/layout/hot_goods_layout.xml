@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/write"
+    android:orientation="vertical" >
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_floor_divider"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:background="@color/red_hot_goods_category_bg"
+            android:text="热卖商品"
+            android:textSize="@dimen/app_text_size_first"
+            android:textColor="@color/red_hot_goods_category_name" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_bg_dashed" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        
+         <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/hot_goods_one_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/head_back_response_area">
+                
+                <ImageView
+                    android:id="@+id/hot_goods_image_one"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_hall_no_url" />
+                
+                <TextView
+                    android:id="@+id/hot_goods_describe_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/hot_goods_image_one"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="乐享温暖好空气"
+                    android:textColor="@color/red_hot_goods_category_name"
+                    android:textSize="@dimen/app_text_size_min" />
+
+                <TextView
+                    android:id="@+id/hot_goods_name_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/hot_goods_describe_one"
+                    android:layout_alignLeft="@id/hot_goods_describe_one"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:text="美菱语音制氧机"
+                    android:textColor="@color/TextColorBLACK_NORMAL"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                <TextView
+                    android:id="@+id/hot_goods_price_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/hot_goods_name_one"
+                    android:layout_alignLeft="@id/hot_goods_describe_one"
+                    android:text="849元"
+                    android:textColor="@color/orange_bg_home_header"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_discount" />
+
+                
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/gray_bg_dashed" />
+
+            <RelativeLayout
+                android:id="@+id/hot_goods_two_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/head_back_response_area">
+                
+                <ImageView
+                    android:id="@+id/hot_goods_image_two"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_hall_no_url" />
+                
+                <TextView
+                    android:id="@+id/hot_goods_describe_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/hot_goods_image_two"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="现在开始安全用水"
+                    android:textColor="@color/green_hot_goods_name_two"
+                    android:textSize="@dimen/app_text_size_min" />
+
+                <TextView
+                    android:id="@+id/hot_goods_name_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/hot_goods_describe_two"
+                    android:layout_alignLeft="@id/hot_goods_describe_two"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:text="美菱雅美娜净水机"
+                    android:textColor="@color/TextColorBLACK_NORMAL"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                <TextView
+                    android:id="@+id/hot_goods_price_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/hot_goods_name_two"
+                    android:layout_alignLeft="@id/hot_goods_describe_two"
+                    android:text="849元"
+                    android:textColor="@color/orange_bg_home_header"
+                    android:textSize="@dimen/app_text_size_first" />
+
+            </RelativeLayout>
+        </LinearLayout>
+        
+         <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="9dp"
+            android:layout_marginTop="9dp"
+            android:background="@color/gray_bg_dashed" />
+
+        <RelativeLayout
+            android:id="@+id/hot_goods_three_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:paddingLeft="10dp"
+            android:background="@drawable/head_back_response_area">
+            
+            <TextView
+                android:id="@+id/hot_goods_describe_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="众享丝滑"
+                android:textColor="@color/green_hot_goods_name_three"
+                android:textSize="@dimen/app_text_size_min" />
+
+            <TextView
+                android:id="@+id/hot_goods_name_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hot_goods_describe_three"
+                android:layout_marginRight="0dp"
+                android:layout_alignLeft="@id/hot_goods_describe_three"
+                android:text="德芙心印礼盒53kg"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_second" />
+
+            <ImageView
+                android:id="@+id/hot_goods_image_three"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_hall_no_url" />
+            
+            <TextView
+                android:id="@+id/hot_goods_price_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="21.5"
+                android:textColor="@color/TextColorWhite"
+                android:textSize="@dimen/app_text_size_first"
+                android:background="@drawable/ic_low_price_bg" />
+
+        </RelativeLayout>
+       
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/gray_bg_dashed" />
+
+</LinearLayout>

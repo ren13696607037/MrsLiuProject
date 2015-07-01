@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_grid_and_pager"
+     >
+
+    <ImageView
+        android:id="@+id/imag_group_buy"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_hall_no_url" />
+
+    <TextView
+        android:id="@+id/name_group_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imag_group_buy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:lines="1"
+        android:text="黄金钻石眼膜"
+        android:textColor="@color/TextColorBLACK_NORMAL"
+        android:textSize="@dimen/app_text_size_second" />
+
+    <TextView
+        android:id="@+id/current_price_group_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_group_buy"
+        android:layout_centerHorizontal="true"
+        android:text="￥86元"
+        android:textColor="@color/orange_bg_home_header"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <RelativeLayout
+        android:id="@+id/old_price_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_price_group_buy"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/old_price_group_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="￥152.50元"
+            android:textColor="@color/color_blue"
+            android:textSize="@dimen/app_text_size_min" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_alignLeft="@id/old_price_group_buy"
+            android:layout_alignRight="@id/old_price_group_buy"
+            android:layout_centerVertical="true"
+            android:background="@color/TextColorBLACK" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ic_buy_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="3dp"
+        android:layout_below="@id/old_price_layout"
+        android:src="@drawable/ic_buy_now" />
+
+    <TextView
+        android:id="@+id/buy_num_group_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:paddingBottom="8dp"
+        android:layout_toLeftOf="@id/ic_buy_now"
+        android:text="128人已买"
+        android:textColor="@color/TextColorBLACK"
+        android:textSize="@dimen/app_text_size_min" />
+
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+    	      xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/product_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="6dp"
+                android:paddingLeft="12dp"
+                android:background="@android:color/white"
+                android:paddingRight="12dp"
+                android:paddingTop="6dp" >
+            <ImageView 
+                android:id="@+id/product_icon"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:padding="0.5dp"
+                android:background="@drawable/product_frame"
+                android:src="@drawable/ic_mall_focus"
+                />
+                <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentRight="true"
+                    android:text="￥1399.00"
+                    android:textColor="#FF602B"
+                    android:textSize="@dimen/app_text_size_second" />
+                <TextView
+                    android:id="@+id/product_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="x1"
+                    android:textColor="#565656"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/product_icon"
+                    android:layout_marginRight="6dp"
+                    android:text="Sanyo/三洋DG-F306ssss洗衣机大床 大床大床"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toLeftOf="@id/product_price"
+                    android:textColor="#565656"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                
+            </RelativeLayout>
+   

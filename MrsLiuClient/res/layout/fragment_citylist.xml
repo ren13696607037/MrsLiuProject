@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@color/background"
+    >
+    <include 
+        layout="@layout/fragment_header"
+        />
+     <com.hylsmart.yihui.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_marginTop="@dimen/header_bar_height"
+        >
+    <ExpandableListView 
+        android:id="@+id/city_list"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent" 
+    	android:divider="@null"
+    	android:dividerHeight="0dp"
+    	android:scrollbars="none"
+    	android:groupIndicator="@null"
+        android:listSelector="@null"
+        />
+    
+</com.hylsmart.yihui.util.view.LoadingLayout>
+</RelativeLayout>

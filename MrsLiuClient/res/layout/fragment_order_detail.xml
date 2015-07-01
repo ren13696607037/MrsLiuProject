@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_bg_home" >
+
+    <include
+        android:id="@+id/order_detail_header"
+        layout="@layout/fragment_header" />
+
+    <RelativeLayout
+        android:id="@+id/detail_button_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" 
+        android:background="@drawable/frame_top"
+        >
+
+        <Button
+            android:id="@+id/detail_order_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px_30"
+            android:background="@drawable/button_order"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/px_10"
+            android:paddingLeft="@dimen/px_15"
+            android:paddingRight="@dimen/px_15"
+            android:paddingTop="@dimen/px_10"
+            android:text="@string/button_pay"
+            android:textColor="@color/color_blue"
+            android:textSize="@dimen/app_text_size_first" />
+
+        <Button
+            android:id="@+id/detail_order_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/px_30"
+            android:background="@drawable/button_order_yellow"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/px_10"
+            android:paddingLeft="@dimen/px_15"
+            android:paddingRight="@dimen/px_15"
+            android:paddingTop="@dimen/px_10"
+            android:text="@string/button_pay"
+            android:textColor="@color/write"
+            android:textSize="@dimen/app_text_size_first" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/detail_button_rel"
+        android:layout_below="@id/order_detail_header"
+        android:scrollbars="none"
+         >
+
+        <com.hylsmart.yihui.util.view.LoadingLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:id="@+id/detail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/order_frame" >
+
+                    <TextView
+                        android:id="@+id/detail_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/state_paying"
+                        android:textColor="@color/TextColorBLACK_NORMAL"
+                        android:textSize="@dimen/app_text_size_second" />
+
+                    <TextView
+                        android:id="@+id/detail_sn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        android:text="@string/order_sn"
+                        android:textColor="@color/color_blue"
+                        android:textSize="@dimen/app_text_size_second" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/order_frame" 
+                    android:layout_marginTop="10dp"
+                    >
+                    <ImageView 
+                        android:id="@+id/detail_arrow"
+                        android:layout_width="wrap_content"
+                    	android:layout_height="wrap_content"
+                    	android:src="@drawable/pcenter_arrow_blue"
+                    	android:layout_alignParentRight="true"
+                    	android:layout_centerVertical="true"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/iaddress_lin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/detail_arrow" 
+                        android:padding="10dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/login_user" />
+
+                        <TextView
+                            android:id="@+id/detail_people"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/px_15"
+                            android:text="@string/address_name"
+                            android:textColor="@color/TextColorBLACK"
+                            android:textSize="@dimen/app_text_size_first" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="@dimen/px_50"
+                            android:src="@drawable/address_phone" />
+
+                        <TextView
+                            android:id="@+id/detail_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/px_15"
+                            android:text="@string/address_name"
+                            android:textColor="@color/TextColorBLACK"
+                            android:textSize="@dimen/app_text_size_first" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/detail_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iaddress_lin"
+                        android:layout_toLeftOf="@id/detail_arrow"
+                        android:paddingBottom="@dimen/px_20"
+                        android:paddingLeft="@dimen/px_20"
+                        android:paddingRight="@dimen/px_50"
+                        android:text="@string/address_name"
+                        android:textColor="@color/TextColorBLACK"
+                        android:textSize="@dimen/app_text_size_first" 
+                        android:layout_alignParentLeft="true"
+                        />
+                </RelativeLayout>
+                <View 
+                	 android:layout_marginTop="10dp"
+                	android:layout_width="match_parent"
+                    android:layout_height="0.5dp" 
+                    android:background="@color/color_gray"
+                	/>
+                <com.hylsmart.yihui.util.view.ListViewForScrollView
+                    android:id="@+id/productlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" 
+                    android:divider="@drawable/list_line"
+                    android:dividerHeight="0.5dp"
+                    />
+                  <View 
+                      android:layout_width="match_parent"
+                    android:layout_height="0.5dp" 
+                    android:background="@color/color_gray"
+                    />
+                <RelativeLayout 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/detail_text"
+                        android:textColor="@color/TextColorBLACK_NORMAL"
+                        android:textSize="@dimen/app_text_size_first" />
+
+                    <TextView
+                        android:id="@+id/detail_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        android:text="@string/detail_text1"
+                        android:textColor="@color/color_blue"
+                        android:textSize="@dimen/app_text_size_first" />
+                </RelativeLayout>
+                <TextView 
+                    android:id="@+id/detail_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/order_frame"
+                    android:text="@string/order_detail_note"
+                    android:textSize="@dimen/app_text_size_first"
+                    android:textColor="@color/TextColorBLACK_NORMAL"
+                    android:padding="10dp"
+                    />
+                <RelativeLayout 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/detail_text2"
+                        android:textColor="@color/TextColorBLACK_NORMAL"
+                        android:textSize="@dimen/app_text_size_first" />
+
+                    <TextView
+                        android:id="@+id/detail_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        android:text="@string/detail_text1"
+                        android:textColor="@color/color_blue"
+                        android:textSize="@dimen/app_text_size_first" />
+                </RelativeLayout>
+                <RelativeLayout 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/order_frame"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/order_detail_free"
+                        android:textColor="@color/TextColorBLACK_NORMAL"
+                        android:textSize="@dimen/app_text_size_first" />
+
+                    <TextView
+                        android:id="@+id/detail_free"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        android:text="@string/detail_text1"
+                        android:textColor="@color/color_blue"
+                        android:textSize="@dimen/app_text_size_first" />
+                </RelativeLayout>
+                <RelativeLayout 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/detail_text3"
+                        android:textColor="@color/TextColorBLACK_NORMAL"
+                        android:textSize="@dimen/app_text_size_first" />
+
+                    <TextView
+                        android:id="@+id/detail_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        android:text="@string/detail_text1"
+                        android:textColor="@color/color_blue"
+                        android:textSize="@dimen/app_text_size_first" />
+                </RelativeLayout>
+                
+            </LinearLayout>
+        </com.hylsmart.yihui.util.view.LoadingLayout>
+    </ScrollView>
+
+</RelativeLayout>
