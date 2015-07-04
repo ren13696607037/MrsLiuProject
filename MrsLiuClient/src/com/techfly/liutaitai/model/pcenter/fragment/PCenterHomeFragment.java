@@ -30,9 +30,12 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 	private PCenterHomeActivity mActivity;
 	private RelativeLayout mWelcome;//登录注册头部
 	private RelativeLayout mTop;//个人中心头部
-	private RelativeLayout mOrder;//我的订单
-	private RelativeLayout mCollect;//我的收藏夹
-	private RelativeLayout mBrowser;//浏览痕迹
+	private RelativeLayout mBanlance;//我的余额
+	private RelativeLayout mCollect;//我的收藏
+	private RelativeLayout mVoucher;//我的现金券
+	private RelativeLayout mAddress;//我的收货地址
+	private RelativeLayout mApply;//申请成为技师
+	private RelativeLayout mService;//我的服务
 	private TextView mTvNick;
 	private User mUser;
 
@@ -80,18 +83,24 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 		});
     }
     private void onInitView(View view){
-    	mCollect=(RelativeLayout) view.findViewById(R.id.pcenter_collect);
-    	mOrder=(RelativeLayout) view.findViewById(R.id.pcenter_order);
-    	mTop=(RelativeLayout) view.findViewById(R.id.pcenter_top);
-    	mWelcome=(RelativeLayout) view.findViewById(R.id.pcenter_welcome);
-    	mTvNick=(TextView) view.findViewById(R.id.pcenter_name);
-    	mBrowser = (RelativeLayout) view.findViewById(R.id.pcenter_browser);
+    	mCollect = (RelativeLayout) view.findViewById(R.id.pcenter_collect);
+    	mBanlance = (RelativeLayout) view.findViewById(R.id.pcenter_balance);
+    	mTop = (RelativeLayout) view.findViewById(R.id.pcenter_top);
+    	mWelcome = (RelativeLayout) view.findViewById(R.id.pcenter_welcome);
+//    	mTvNick=(TextView) view.findViewById(R.id.pcenter_name);
+    	mAddress = (RelativeLayout) view.findViewById(R.id.pcenter_address);
+    	mApply = (RelativeLayout) view.findViewById(R.id.pcenter_apply);
+    	mService = (RelativeLayout) view.findViewById(R.id.pcenter_service);
+    	mVoucher = (RelativeLayout) view.findViewById(R.id.pcenter_voucher);
     	
     	mCollect.setOnClickListener(this);
-    	mOrder.setOnClickListener(this);
+    	mVoucher.setOnClickListener(this);
     	mWelcome.setOnClickListener(this);
     	mTop.setOnClickListener(this);
-    	mBrowser.setOnClickListener(this);
+    	mAddress.setOnClickListener(this);
+    	mApply.setOnClickListener(this);
+    	mService.setOnClickListener(this);
+    	mBanlance.setOnClickListener(this);
     	setView();
     }
     private void setView(){
@@ -137,7 +146,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 				showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
 			}
 			break;
-		case R.id.pcenter_order:
+		case R.id.pcenter_address:
 			if(mUser!=null){
 				intent=new Intent(mActivity,MyOrderActivity.class);
 			}else{
@@ -151,7 +160,28 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 		case R.id.pcenter_top:
 			intent=new Intent(mActivity,PcenterInfoActivity.class);
 			break;
-		case R.id.pcenter_browser:
+		case R.id.pcenter_apply:
+		    if(mUser!=null){
+                intent=new Intent(mActivity,MyBrowserActivity.class);
+            }else{
+                showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
+            }
+		    break;
+		case R.id.pcenter_voucher:
+		    if(mUser!=null){
+                intent=new Intent(mActivity,MyBrowserActivity.class);
+            }else{
+                showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
+            }
+		    break;
+		case R.id.pcenter_balance:
+		    if(mUser!=null){
+                intent=new Intent(mActivity,MyBrowserActivity.class);
+            }else{
+                showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
+            }
+		    break;
+		case R.id.pcenter_service:
 		    if(mUser!=null){
                 intent=new Intent(mActivity,MyBrowserActivity.class);
             }else{

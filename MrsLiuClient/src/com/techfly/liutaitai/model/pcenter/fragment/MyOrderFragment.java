@@ -58,7 +58,7 @@ public class MyOrderFragment extends CommonFragment {
         onInitView(view);
     }
     private void onInitView(View view){
-    	setTitleText(R.string.pcenter_order);
+//    	setTitleText(R.string.pcenter_order);
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	mViewPager=(ViewPager) view.findViewById(R.id.order_viewpager);
     	mTabView=(ScrollTabView) view.findViewById(R.id.order_tab_container);

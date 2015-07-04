@@ -94,7 +94,7 @@ public class MyBrowserFragment extends CommonFragment implements IXListViewListe
         onInitView(view);
     }
     private void onInitView(View view){
-        setTitleText(R.string.pcenter_browser);
+//        setTitleText(R.string.pcenter_browser);
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
 //        setRightText(R.string.editable_txt,new OnClickListener() {
 //                

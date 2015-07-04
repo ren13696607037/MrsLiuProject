@@ -1,168 +1,317 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background" >
+    android:background="@color/background"
+    android:orientation="vertical" >
 
-    <include layout="@layout/fragment_common" />
+    <include layout="@layout/fragment_header" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/header_bar_height"
-        android:background="@color/background"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" 
+        android:scrollbars="none"
+        android:paddingBottom="@dimen/px_20"
+        >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <RelativeLayout
-                android:id="@+id/pcenter_top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_top"
-                android:visibility="invisible" >
-
-                <ImageView
-                    android:id="@+id/pcenter_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/px_20"
-                    android:src="@drawable/login_img" />
-
-                <TextView
-                    android:id="@+id/pcenter_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/px_30"
-                    android:layout_toRightOf="@id/pcenter_img"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/app_text_size_first" />
-
-                <ImageView
-                    android:id="@+id/pcenter_img1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/px_20"
-                    android:src="@drawable/pcenter_arrow" />
-            </RelativeLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
             <RelativeLayout
                 android:id="@+id/pcenter_welcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_top"
-                android:visibility="visible" >
-
-                <ImageView
-                    android:id="@+id/welcome_img"
+                android:background="@drawable/pcenter_top" 
+                android:visibility="gone"
+                >
+                <Button 
+                    android:id="@+id/mine_btn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/px_20"
-                    android:src="@drawable/login_img" />
-
-                <TextView
-                    android:id="@+id/welcome_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/px_30"
-                    android:layout_toRightOf="@id/welcome_img"
-                    android:text="@string/welcome_text"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/app_text_size_most" />
-
-                <ImageView
-                    android:id="@+id/welcome_img1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/px_20"
-                    android:src="@drawable/pcenter_arrow" />
+            		android:layout_height="wrap_content"
+            		android:text="@string/login_notice"
+            		android:textColor="@color/write"
+            		android:background="@drawable/button_login"
+                    android:textSize="@dimen/app_text_size_first"
+                    android:paddingLeft="@dimen/px_20"
+                    android:paddingRight="@dimen/px_20"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/px_10"
+                    android:paddingBottom="@dimen/px_10"
+                    />
+                
             </RelativeLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/pcenter_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame"
-            android:padding="@dimen/px_20" >
-
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/pcenter_top"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/px_20"
-                android:text="@string/pcenter_order"
-                android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" />
+                android:background="@drawable/pcenter_top" >
+                <ImageView 
+                    android:id="@+id/mine_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/login_img"
+            		android:layout_centerVertical="true"
+            		android:layout_marginLeft="@dimen/px_50"
+                    />
+                <TextView 
+                    android:id="@+id/mine_name"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:text="@string/app_name"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:layout_toRightOf="@id/mine_img"
+            		android:layout_marginLeft="@dimen/px_50"
+            		android:layout_centerVertical="true"
+                    />
+                </RelativeLayout>
+           
+            <RelativeLayout 
+                android:id="@+id/pcenter_balance"
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:paddingTop="@dimen/px_25"
+            	android:paddingLeft="@dimen/px_25"
+            	android:paddingRight="@dimen/px_25"
+            	android:background="@drawable/selector_customer_background"
+                >
+                <ImageView 
+                    android:id="@+id/mine_order_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_balance"
+            		android:layout_marginRight="@dimen/px_25"
+                    />
+                <TextView 
+                    android:id="@+id/mine_order_text"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_toRightOf="@id/mine_order_img"
+            		android:text="@string/pcenter_balance"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:paddingBottom="@dimen/px_25"
+                    />
+                <View 
+	                android:layout_width="match_parent"
+	            	android:layout_height="1dp"
+	            	android:background="@color/color_gray"
+	            	android:layout_below="@id/mine_order_text"
+	            	android:layout_toRightOf="@id/mine_order_img"
+	                />
+                <ImageView 
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_arrow"
+            		android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout 
+                android:id="@+id/pcenter_voucher"
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:paddingTop="@dimen/px_25"
+            	android:paddingLeft="@dimen/px_25"
+            	android:paddingRight="@dimen/px_25"
+            	android:background="@drawable/selector_customer_background"
+                >
+                <ImageView 
+                    android:id="@+id/mine_tyrant_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_voucher"
+            		android:layout_marginRight="@dimen/px_25"
+                    />
+                <TextView 
+                    android:id="@+id/mine_tyrant_text"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_toRightOf="@id/mine_tyrant_img"
+            		android:text="@string/pcenter_voucher"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:paddingBottom="@dimen/px_25"
+                    />
+                <View 
+	                android:layout_width="match_parent"
+	            	android:layout_height="1dp"
+	            	android:background="@color/color_gray"
+	            	android:layout_below="@id/mine_tyrant_text"
+	            	android:layout_toRightOf="@id/mine_tyrant_img"
+	                />
+                <ImageView 
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_arrow"
+            		android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout 
+                android:id="@+id/pcenter_address"
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:paddingTop="@dimen/px_25"
+            	android:paddingLeft="@dimen/px_25"
+            	android:paddingRight="@dimen/px_25"
+            	android:background="@drawable/selector_customer_background"
+                >
+                <ImageView 
+                    android:id="@+id/mine_score_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_address"
+            		android:layout_marginRight="@dimen/px_25"
+                    />
+                <TextView 
+                    android:id="@+id/mine_score_text"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_toRightOf="@id/mine_score_img"
+            		android:text="@string/pcenter_address"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:paddingBottom="@dimen/px_25"
+                    />
+                <View 
+	                android:layout_width="match_parent"
+	            	android:layout_height="1dp"
+	            	android:background="@color/color_gray"
+	            	android:layout_below="@id/mine_score_text"
+	            	android:layout_toRightOf="@id/mine_score_img"
+	                />
+                <ImageView 
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_arrow"
+            		android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout 
+                android:id="@+id/pcenter_collect"
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:paddingTop="@dimen/px_25"
+            	android:paddingLeft="@dimen/px_25"
+            	android:paddingRight="@dimen/px_25"
+            	android:background="@drawable/selector_customer_background"
+                >
+                <ImageView 
+                    android:id="@+id/mine_voucher_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_collect"
+            		android:layout_marginRight="@dimen/px_25"
+                    />
+                <TextView 
+                    android:id="@+id/mine_voucher_text"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_toRightOf="@id/mine_voucher_img"
+            		android:text="@string/pcenter_collect"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:paddingBottom="@dimen/px_25"
+                    />
+                <View 
+	                android:layout_width="match_parent"
+	            	android:layout_height="1dp"
+	            	android:background="@color/color_gray"
+	            	android:layout_below="@id/mine_voucher_text"
+	            	android:layout_toRightOf="@id/mine_voucher_img"
+	                />
+                <ImageView 
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_arrow"
+            		android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout 
+                android:id="@+id/pcenter_apply"
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:paddingTop="@dimen/px_25"
+            	android:paddingLeft="@dimen/px_25"
+            	android:paddingRight="@dimen/px_25"
+            	android:background="@drawable/selector_customer_background"
+                >
+                <ImageView 
+                    android:id="@+id/mine_collect_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_apply"
+            		android:layout_marginRight="@dimen/px_25"
+                    />
+                <TextView 
+                    android:id="@+id/mine_collect_text"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_toRightOf="@id/mine_collect_img"
+            		android:text="@string/pcenter_apply"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:paddingBottom="@dimen/px_25"
+                    />
+                <View 
+	                android:layout_width="match_parent"
+	            	android:layout_height="1dp"
+	            	android:background="@color/color_gray"
+	            	android:layout_below="@id/mine_collect_text"
+	            	android:layout_toRightOf="@id/mine_collect_img"
+	                />
+                <ImageView 
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_arrow"
+            		android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout 
+                android:id="@+id/pcenter_service"
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:paddingTop="@dimen/px_25"
+            	android:paddingLeft="@dimen/px_25"
+            	android:paddingRight="@dimen/px_25"
+            	android:background="@drawable/selector_customer_background"
+                >
+                <ImageView 
+                    android:id="@+id/mine_address_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_service"
+            		android:layout_marginRight="@dimen/px_30"
+                    />
+                <TextView 
+                    android:id="@+id/mine_address_text"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_toRightOf="@id/mine_address_img"
+            		android:text="@string/pcenter_service"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:paddingBottom="@dimen/px_25"
+                    />
+                <View 
+	                android:layout_width="match_parent"
+	            	android:layout_height="1dp"
+	            	android:background="@color/color_gray"
+	            	android:layout_below="@id/mine_address_text"
+	            	android:layout_toRightOf="@id/mine_address_img"
+	                />
+                <ImageView 
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_arrow"
+            		android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+            
+           
+        </LinearLayout>
+    </ScrollView>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/pcenter_arrow_blue" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/pcenter_collect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame_bottom"
-            android:padding="@dimen/px_20" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/px_20"
-                android:text="@string/pcenter_collect"
-                android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/pcenter_arrow_blue" />
-        </RelativeLayout>
-        
-        
-        <RelativeLayout
-            android:id="@+id/pcenter_browser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame_bottom"
-            android:padding="@dimen/px_20" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/px_20"
-                android:text="@string/pcenter_browser"
-                android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/pcenter_arrow_blue" />
-        </RelativeLayout>
-        
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
