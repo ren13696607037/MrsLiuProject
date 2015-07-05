@@ -12,12 +12,35 @@
         android:layout_marginTop="@dimen/header_bar_height"
         android:background="@color/background"
         android:orientation="vertical" >
+        <RelativeLayout
+            android:id="@+id/setting_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pcenter_frame"
+            android:padding="@dimen/px_20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/px_20"
+                android:text="@string/pcenter_share"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/pcenter_arrow" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/setting_help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame"
+            android:background="@drawable/pcenter_frame_bottom"
             android:padding="@dimen/px_20" >
 
             <TextView
@@ -34,32 +57,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/pcenter_arrow_blue" />
+                android:src="@drawable/pcenter_arrow" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/setting_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame_bottom"
-            android:padding="@dimen/px_20" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/px_20"
-                android:text="@string/pcenter_about"
-                android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/pcenter_arrow_blue" />
-        </RelativeLayout>
+        
         <RelativeLayout
             android:id="@+id/setting_suggest"
             android:layout_width="match_parent"
@@ -81,11 +82,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/pcenter_arrow_blue" />
+                android:src="@drawable/pcenter_arrow" />
         </RelativeLayout>
-        
-         <RelativeLayout
-            android:id="@+id/version_update"
+        <RelativeLayout
+            android:id="@+id/setting_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/pcenter_frame_bottom"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/px_20"
-                android:text="@string/version_update"
+                android:text="@string/pcenter_about"
                 android:textColor="@color/TextColorBLACK_NORMAL"
                 android:textSize="@dimen/app_text_size_first" />
 
@@ -105,8 +105,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/pcenter_arrow_blue" />
+                android:src="@drawable/pcenter_arrow" />
         </RelativeLayout>
+        
+        <Button
+            android:id="@+id/setting_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/px_20"
+            android:background="@drawable/login_button_blue"
+            android:padding="10dp"
+            android:text="@string/pinfo_exit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first" />
+        
+         
     </LinearLayout>
 
 </RelativeLayout>

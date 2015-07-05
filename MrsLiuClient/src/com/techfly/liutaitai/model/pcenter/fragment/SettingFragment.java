@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.techfly.liutaitai.R;
@@ -23,7 +24,8 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
 	private RelativeLayout mHelp;//帮助说明
 	private RelativeLayout mAbout;//关于我们
 	private RelativeLayout mSuggest;//意见反馈
-	private RelativeLayout mUpdate;
+	private RelativeLayout mShare;  //分享
+	private Button mExit;      //退出登录
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -71,11 +73,14 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
     	mAbout=(RelativeLayout) view.findViewById(R.id.setting_about);
     	mHelp=(RelativeLayout) view.findViewById(R.id.setting_help);
     	mSuggest=(RelativeLayout) view.findViewById(R.id.setting_suggest);
-    	mUpdate = (RelativeLayout) view.findViewById(R.id.version_update);
+    	mShare = (RelativeLayout) view.findViewById(R.id.setting_share);
+    	mExit = (Button) view.findViewById(R.id.setting_exit);
+    	
+    	mExit.setOnClickListener(this);
     	mAbout.setOnClickListener(this);
     	mHelp.setOnClickListener(this);
     	mSuggest.setOnClickListener(this);
-    	mUpdate.setOnClickListener(this);
+    	mShare.setOnClickListener(this);
     }
 	@Override
 	public void requestData() {
@@ -95,9 +100,12 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
 		case R.id.setting_suggest:
 			intent=new Intent(mActivity,SuggestActivity.class);
 			break;
-		case R.id.version_update:
-		    UpdateMgr.getInstance(mActivity).checkUpdateInfo(null, false);
+		case R.id.setting_share:
+			
 		    break;
+		case R.id.setting_exit:
+			
+			break;
 		default:
 			break;
 		}

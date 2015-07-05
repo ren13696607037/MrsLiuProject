@@ -132,7 +132,7 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	mButton=(Button) view.findViewById(R.id.info_btn);
     	mTvAddress=(TextView) view.findViewById(R.id.info_address_text);
-    	mTvPhone=(TextView) view.findViewById(R.id.info_phone);
+    	mTvPhone=(TextView) view.findViewById(R.id.info_nick);
     	mRlAddress=(RelativeLayout) view.findViewById(R.id.info_address);
     	mTvPass=(TextView) view.findViewById(R.id.info_pass);
     	

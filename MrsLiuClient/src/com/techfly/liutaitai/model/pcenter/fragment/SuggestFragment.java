@@ -38,12 +38,6 @@ import com.techfly.liutaitai.util.fragment.CommonFragment;
 public class SuggestFragment extends CommonFragment implements OnClickListener{
 	private SuggestActivity mActivity;
 	private EditText mEtContent;//反馈建议
-	private EditText mEtContact;//联系方式
-	private TextView mTvQQ;//官方QQ
-	private TextView mTvQQCopy;//复制QQ
-	private TextView mTvWX;//官方微信
-	private TextView mTvWXCopy;//复制微信
-	
 	private Button mButton;
 	private User mUser;
 	private final int MSG_SUGGEST=0x101;
@@ -119,21 +113,8 @@ public class SuggestFragment extends CommonFragment implements OnClickListener{
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	mEtContent=(EditText) view.findViewById(R.id.suggest_content);
     	mButton=(Button) view.findViewById(R.id.suggest_btn);
-    	mEtContact=(EditText) view.findViewById(R.id.suggest_contact);
-    	mTvQQ=(TextView) view.findViewById(R.id.suggest_qq);
-    	mTvQQCopy=(TextView) view.findViewById(R.id.suggest_qq_copy);
-    	mTvWX=(TextView) view.findViewById(R.id.suggest_wx);
-    	mTvWXCopy=(TextView) view.findViewById(R.id.suggest_wx_copy);
     	
     	mButton.setOnClickListener(this);
-    	mTvQQCopy.setOnClickListener(this);
-    	mTvWXCopy.setOnClickListener(this);
-    	
-    	ContactInfo contactInfo=SharePreferenceUtils.getInstance(mActivity).getContactInfo();
-    	if(contactInfo!=null){
-    		mTvQQ.setText(contactInfo.getmQQ());
-    		mTvWX.setText(contactInfo.getmWeixin());
-    	}
     	
     }
 
@@ -142,8 +123,8 @@ public class SuggestFragment extends CommonFragment implements OnClickListener{
 		RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SUGGEST_URL);
-        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(mUser.getmId())
-        .setmGetParamPrefix(JsonKey.SuggestKey.CONTACT).setmGetParamValues(mEtContact.getText().toString());
+//        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(mUser.getmId())
+//        .setmGetParamPrefix(JsonKey.SuggestKey.CONTACT).setmGetParamValues(mEtContact.getText().toString());
         url.setmGetParamPrefix(JsonKey.SuggestKey.CONTENT).setmGetParamValues(mEtContent.getText().toString());
         param.setPostRequestMethod();
         param.setmHttpURL(url);
@@ -187,14 +168,6 @@ public class SuggestFragment extends CommonFragment implements OnClickListener{
 		case R.id.suggest_btn:
 			toSuggest();
 			break;
-		case R.id.suggest_qq_copy:
-			toCopy(mTvQQ.getText().toString());
-			break;
-		case R.id.suggest_wx_copy:
-			toCopy(mTvWX.getText().toString());
-			break;
-		
-
 		default:
 			break;
 		}
@@ -209,12 +182,6 @@ public class SuggestFragment extends CommonFragment implements OnClickListener{
 		}else{
 			showSmartToast(R.string.input_error, Toast.LENGTH_SHORT);
 		}
-	}
-	private void toCopy(String string){
-		ClipboardManager cmb=(ClipboardManager) mActivity.getSystemService(Context.CLIPBOARD_SERVICE); 
-		AppLog.Loge("xll", string);
-		ClipData clip = ClipData.newPlainText("simple text",string);
-		cmb.setPrimaryClip(clip);
 	}
 
 }

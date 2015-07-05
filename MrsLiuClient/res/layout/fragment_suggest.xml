@@ -7,17 +7,11 @@
     
     <include layout="@layout/fragment_header" />
 
-    <com.techfly.liutaitai.util.view.LoadingLayout
+   <!--  <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/header_bar_height" >
-        <ScrollView 
-            android:layout_width="match_parent"
-        	android:layout_height="match_parent"
-        	 android:background="@color/background"
-        	 android:scrollbars="none"
-            >
+        android:layout_marginTop="@dimen/header_bar_height" > -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,25 +29,6 @@
             android:lines="5"
             android:padding="@dimen/px_10" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/button_login1" />
-
-        <EditText
-            android:id="@+id/suggest_contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/suggest_text"
-            android:padding="@dimen/px_15"
-            android:singleLine="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/button_login1" />
-
         <Button
             android:id="@+id/suggest_btn"
             android:layout_width="match_parent"
@@ -66,144 +41,7 @@
             android:text="@string/submit"
             android:textColor="@android:color/white"
             android:textSize="@dimen/app_text_size_first" />
-        <View 
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginTop="@dimen/px_106"
-            android:background="@color/white_bg_home"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/px_15"
-            android:text="@string/suggest_text1"
-            android:textColor="@color/button_login1"
-            android:textSize="@dimen/app_text_size_min" 
-            android:layout_marginTop="@dimen/px_20"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/button_login1" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/px_15" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/suggest_text2"
-                    android:textColor="@color/button_login1"
-                    android:textSize="@dimen/app_text_size_first" />
-
-                <TextView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_15"
-                    android:layout_marginRight="@dimen/px_15"
-                    android:background="@color/button_login1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/suggest_text2"
-                    android:textColor="@color/color_blue"
-                    android:textSize="@dimen/app_text_size_first" 
-                    android:id="@+id/suggest_qq"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_15"
-                    android:layout_marginRight="@dimen/px_15"
-                    android:background="@color/button_login1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/suggest_text3"
-                    android:textColor="@color/button_login1"
-                    android:textSize="@dimen/app_text_size_first" 
-                    android:id="@+id/suggest_qq_copy"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/px_15" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/suggest_text4"
-                    android:textColor="@color/button_login1"
-                    android:textSize="@dimen/app_text_size_first" />
-
-                <TextView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_15"
-                    android:layout_marginRight="@dimen/px_15"
-                    android:background="@color/button_login1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/suggest_text2"
-                    android:textColor="@color/color_blue"
-                    android:textSize="@dimen/app_text_size_first" 
-                    android:id="@+id/suggest_wx"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_15"
-                    android:layout_marginRight="@dimen/px_15"
-                    android:background="@color/button_login1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/suggest_text5"
-                    android:textColor="@color/button_login1"
-                    android:textSize="@dimen/app_text_size_first" 
-                    android:id="@+id/suggest_wx_copy"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
+        
     </LinearLayout>
-    </ScrollView>
-</com.techfly.liutaitai.util.view.LoadingLayout>
+<!-- </com.techfly.liutaitai.util.view.LoadingLayout> -->
 </RelativeLayout>

@@ -211,9 +211,10 @@
 	<!-- 个人信息 -->
 	<string name="pinfo_title">个人资料</string>
 	<string name="pinfo_name">昵称</string>
-	<string name="pinfo_address">地址</string>
+	<string name="pinfo_pass">修改密码</string>
 	<string name="pinfo_exit">退出登录</string>
-	
+	<string name="pinfo_hint">请输入昵称</string>
+	<string name="pinfo_hint1">请输入地址</string>
 	
 	<!--首页 -->
 	<string name="search_wanted_goods">搜索你想要的商品</string>
@@ -299,5 +300,11 @@
     <string name="pass_hint">请输入新密码</string>
     <string name="repass_hint">请输入确认密码</string>
     <string name="push_toast">你的帐号已在另一台手机登录了……</string>
-
+	<!-- 我的余额 -->
+	<string name="balance_text">余额记录</string>
+	<string name="balance_text1">￥%1$s</string>
+	<string name="balance_text2">元&#160;&#160;充值卡</string>
+	<string name="balance_text3">充%1$s&#160;&#160;送%1$s</string>
+	<string name="balance_text4">有效期%1$s</string>
+	<string name="balance_text5">立即\n充值</string>
 </resources>

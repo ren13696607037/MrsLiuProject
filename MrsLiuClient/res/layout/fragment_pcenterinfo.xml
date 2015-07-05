@@ -12,6 +12,12 @@
         android:layout_marginTop="@dimen/header_bar_height"
         android:background="@color/background"
         android:orientation="vertical" >
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pcenter_top"
+            >
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,12 +32,12 @@
                 android:textColor="@color/TextColorBLACK_NORMAL"
                 android:textSize="@dimen/app_text_size_first" />
 
-            <TextView
-                android:id="@+id/info_phone"
+            <EditText
+                android:id="@+id/info_nick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="@string/pinfo_name"
+                android:hint="@string/pinfo_hint"
                 android:textColor="@color/TextColorBLACK_NORMAL"
                 android:textSize="@dimen/app_text_size_first" />
         </RelativeLayout>
@@ -47,7 +53,7 @@
                 android:id="@+id/info_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pinfo_address"
+                android:text="@string/pinfo_pass"
                 android:textColor="@color/TextColorBLACK_NORMAL"
                 android:textSize="@dimen/app_text_size_first" />
 
@@ -60,12 +66,12 @@
                 android:layout_marginRight="@dimen/px_15"
                 android:src="@drawable/pcenter_arrow_blue" />
 
-            <TextView
+            <EditText
                 android:id="@+id/info_address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/info_img"
-                android:text="@string/pinfo_address"
+                android:hint="@string/pinfo_hint1"
                 android:textColor="@color/TextColorBLACK_NORMAL"
                 android:textSize="@dimen/app_text_size_first" 
                 android:layout_toRightOf="@id/info_text"
