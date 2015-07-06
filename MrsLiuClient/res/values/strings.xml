@@ -307,4 +307,12 @@
 	<string name="balance_text3">充%1$s&#160;&#160;送%1$s</string>
 	<string name="balance_text4">有效期%1$s</string>
 	<string name="balance_text5">立即\n充值</string>
+	<!-- 我的抵用券 -->
+	<string name="voucher_text">使用规则</string>
+	<string name="voucher_text1">抵价券全场通用，每次仅可使用一张</string>
+	<string name="voucher_text2">请输入抵价券号</string>
+	<string name="voucher_text3">使用</string>
+	<string name="voucher_text4">RMB\n优惠券</string>
+	<string name="voucher_text5">满%1$s元可用\n有效期：%1$s</string>
+	<string name="voucher_text6">全场通用</string>
 </resources>
