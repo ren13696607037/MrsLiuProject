@@ -1,0 +1,200 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.techfly.liutaitai.util.view.ViewPagerWrapper
+        android:id="@+id/vpWrapper"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.techfly.liutaitai.util.view.ViewPagerWrapper>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="6dp"
+        android:weightSum="3" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="3dp"
+            android:weightSum="3" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:id="@+id/laundry_service"
+                android:background="#19d1d1"
+                android:orientation="vertical" >
+                
+                <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:text="洗衣 保养"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />
+                
+                
+            </LinearLayout>
+
+          
+            <LinearLayout
+                android:id="@+id/manicure_service"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:background="#ff6e6e"
+                android:orientation="vertical" >
+                  <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:text="美甲"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />
+                
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="3dp"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <LinearLayout
+                android:id="@+id/beauty_service"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#fd9220"
+                android:orientation="vertical" >
+                 <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:text="美睫"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />  
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:background="@android:color/white"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cosmetology_service"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:background="#b46dca"
+                android:orientation="vertical" >
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:text="美容"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />  
+                
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <LinearLayout
+                android:id="@+id/makeup_service"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#ffbc00"
+                android:orientation="vertical" >
+                 <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:text="化妆造型"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />      
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cleaning_service"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:background="#00d69d"
+                android:orientation="vertical" >
+                  <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:text="保洁"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />      
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phone_service"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:background="#0080dc"
+                android:orientation="vertical" >
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:text="电话"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />        
+                
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
