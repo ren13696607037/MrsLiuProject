@@ -12,14 +12,30 @@
         android:layout_marginTop="@dimen/header_bar_height"
         android:background="@color/background"
         android:orientation="vertical" >
-        <RelativeLayout 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_top"
-            >
-        </RelativeLayout>
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pcenter_top" >
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_be" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_20"
+            android:background="@color/color_ea" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_be" />
+
+        <RelativeLayout
+            android:id="@+id/info_nick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/pcenter_frame"
@@ -30,20 +46,28 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pinfo_name"
                 android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" />
+                android:textSize="@dimen/app_text_size_first" 
+                android:layout_centerVertical="true"
+                />
 
-            <EditText
-                android:id="@+id/info_nick"
+            <ImageView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/pcenter_arrow"
                 android:layout_alignParentRight="true"
-                android:hint="@string/pinfo_hint"
-                android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" />
+                android:layout_centerVertical="true"
+                />
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_be" 
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            />
 
         <RelativeLayout
-            android:id="@+id/info_address"
+            android:id="@+id/info_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/pcenter_frame"
@@ -55,58 +79,28 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pinfo_pass"
                 android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" />
+                android:textSize="@dimen/app_text_size_first" 
+                android:layout_centerVertical="true"
+                />
 
             <ImageView
                 android:id="@+id/info_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="@dimen/px_15"
-                android:layout_marginRight="@dimen/px_15"
-                android:src="@drawable/pcenter_arrow_blue" />
-
-            <EditText
-                android:id="@+id/info_address_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/info_img"
-                android:hint="@string/pinfo_hint1"
-                android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" 
-                android:layout_toRightOf="@id/info_text"
-                android:layout_marginLeft="@dimen/px_10"
+                android:src="@drawable/pcenter_arrow" 
+                android:layout_centerVertical="true"
                 />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame"
-           	android:visibility="gone"
-           >
-
-            <TextView
-                android:id="@+id/info_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pinfo_name"
-                android:textColor="@color/TextColorBLACK_NORMAL"
-                android:textSize="@dimen/app_text_size_first" 
-                android:padding="@dimen/px_20" 
-                />
+            
         </RelativeLayout>
 
-        <Button
-            android:visibility="gone"
-            android:id="@+id/info_btn"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/px_20"
-            android:background="@drawable/login_button_blue"
-            android:padding="10dp"
-            android:text="@string/pinfo_exit"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/app_text_size_first" />
+            android:layout_height="1dp"
+            android:background="@color/color_be" 
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            />
     </LinearLayout>
 
 </RelativeLayout>

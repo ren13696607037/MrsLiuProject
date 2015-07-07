@@ -2,8 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <!-- 边框颜色值 --><item>  
     <shape  android:shape="rectangle">
-     <gradient android:startColor="@color/button_login1"
-         android:endColor="@color/button_login1"
+     <gradient android:startColor="@android:color/white"
+         android:endColor="@android:color/white"
          />
 
 </shape> 

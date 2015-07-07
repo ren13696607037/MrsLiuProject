@@ -5,8 +5,8 @@
     <!-- android:radius 弧形的半径 -->
      <corners android:radius="5dp"
          />
-     <gradient android:startColor="@color/color_blue_dark"
-         android:endColor="@color/color_blue_dark"
+     <gradient android:startColor="@color/color_register_on"
+         android:endColor="@color/color_register_on"
          />
 
 </shape>

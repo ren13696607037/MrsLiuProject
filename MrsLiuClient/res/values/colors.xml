@@ -10,7 +10,7 @@
     <!--white -->
     <color name="bg_header">#ffffff</color>
     <color name="write">#ffffff</color>
-    <color name="button_login">#ffffff</color>
+    <color name="button_login">#b83d00</color>
     <color name="white_bg_home">#eeeeee</color>
     
       <!--bule -->
@@ -42,7 +42,7 @@
     <color name="bg_header_focus">#E5E3E3</color>
     <color name="category_info_right_background">#dedede</color>
     <color name="category_info_left_background">#cccbcb</color>
-    <color name="button_login1">#bebebe</color>
+    <color name="button_login1">#ff5400</color>
     <color name="line_color">#bebebe</color>
     <color name="background">#ffffff</color>
     <color name="dialog_background">#55000000</color>
@@ -75,5 +75,9 @@
 	
 	<color name="TextColorBLACK_NORMAL">#383838</color>
 	<color name="color_96">#969696</color>
+	<color name="color_be">#bebebe</color>
+	<color name="color_ea">#eaeaea</color>
+	<color name="color_register">#ff7800</color>
+	<color name="color_register_on">#FF7006</color>
 
 </resources>

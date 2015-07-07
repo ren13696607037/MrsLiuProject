@@ -4,14 +4,15 @@
     android:layout_height="match_parent"
     android:background="@android:color/white" >
 
-    
     <include layout="@layout/fragment_header" />
 
-    <!-- <com.techfly.liutaitai.util.view.LoadingLayout
+    
+         <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/header_bar_height" > -->
+        android:layout_marginTop="@dimen/header_bar_height" >
+   
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,91 +22,96 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame"
+            android:layout_marginLeft="@dimen/px_40"
+            android:layout_marginRight="@dimen/px_40"
+            android:layout_marginTop="@dimen/px_40"
+            android:background="@drawable/login_frame"
             android:orientation="horizontal"
             android:padding="@dimen/px_20" >
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/px_20"
-                android:text="@string/register_text"
-                android:textColor="@color/color_blue"
-                android:textSize="@dimen/app_text_size_first" />
+                android:layout_marginLeft="5px"
+                android:src="@drawable/login_phone" />
 
-            <TextView
+            <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/button_login1" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/px_25"
+                android:layout_marginRight="@dimen/px_20"
+                android:background="@color/color_be" />
 
             <EditText
                 android:id="@+id/register_phone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/px_15"
                 android:background="@null"
-                android:hint="@string/register_hint2"
+                android:hint="@string/login_phone_hint"
                 android:inputType="phone"
-                android:padding="@dimen/px_10"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/TextColorBLACK"
+                android:textColorHint="@color/color_be"
+                android:textSize="@dimen/app_text_size_first" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame"
-            android:orientation="horizontal"
-            android:padding="@dimen/px_20" 
-            android:visibility="gone"
-            >
+            android:layout_marginLeft="@dimen/px_40"
+            android:layout_marginRight="@dimen/px_40"
+            android:background="@drawable/login_frame_bottom"
+            android:orientation="horizontal" >
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/px_20"
-                android:text="@string/register_text1"
-                android:textColor="@color/color_gray"
-                android:textSize="@dimen/app_text_size_first" />
+                android:paddingBottom="@dimen/px_20"
+                android:paddingLeft="@dimen/px_20"
+                android:paddingTop="@dimen/px_20"
+                android:src="@drawable/register_code" />
 
-            <TextView
+            <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/button_login1" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/px_15"
+                android:layout_marginLeft="@dimen/px_20"
+                android:layout_marginTop="@dimen/px_15"
+                android:background="@color/color_be" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" >
+
 
                 <LinearLayout
+                    android:id="@+id/register_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" 
-                    android:id="@+id/register_lin"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    >
+                    android:orientation="horizontal" >
 
-                    <TextView
+                    <View
+                        android:id="@+id/register_line"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/button_login1" />
+                        android:background="@color/color_be" />
 
                     <TextView
-                        android:id="@+id/register_code"
+                        android:id="@+id/register_code_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/px_15"
-                        android:layout_marginRight="@dimen/px_15"
-                        android:gravity="center"
-                        android:padding="@dimen/px_10"
-                        android:text="@string/register_code"
-                        android:textColor="@color/register_code"
-                        android:textSize="@dimen/app_text_size_first" />
+                        android:padding="@dimen/px_20"
+                        android:text="@string/find_code_text"
+                        android:textColor="@color/color_register"
+                        android:textSize="@dimen/app_text_size_second" />
                 </LinearLayout>
-
                 <ProgressBar
                     android:id="@+id/code_progress"
                     android:layout_width="25dp"
@@ -118,140 +124,58 @@
                     android:visibility="invisible" />
 
                 <EditText
-                    android:id="@+id/register_code_et"
+                    android:id="@+id/register_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/px_15"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
                     android:layout_toLeftOf="@id/register_lin"
                     android:background="@null"
-                    android:hint="@string/register_hint"
-                    android:inputType="phone"
-                    android:padding="@dimen/px_10"
-                    android:singleLine="true" />
+                    android:hint="@string/find_code_hint"
+                    android:padding="@dimen/px_20"
+                    android:singleLine="true"
+                    android:textColor="@color/TextColorBLACK"
+                    android:textColorHint="@color/color_be"
+                    android:textSize="@dimen/app_text_size_first" />
             </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame"
+            android:layout_marginLeft="@dimen/px_40"
+            android:layout_marginRight="@dimen/px_40"
+            android:background="@drawable/login_frame_bottom"
             android:orientation="horizontal"
             android:padding="@dimen/px_20" >
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/px_20"
-                android:text="@string/login_text1"
-                android:textColor="@color/color_gray"
-                android:textSize="@dimen/app_text_size_first" />
+                android:layout_marginLeft="5px"
+                android:src="@drawable/login_pass" />
 
-            <TextView
+            <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/button_login1" />
-            <RelativeLayout 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" 
-                    android:id="@+id/register_see"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    >
-                    <TextView
-		                android:layout_width="1dp"
-		                android:layout_height="match_parent"
-		                android:background="@color/button_login1" 
-		                android:layout_marginRight="@dimen/px_15"
-		                />
-                    <CheckBox
-		                android:id="@+id/register_pass_see"
-		                android:layout_width="wrap_content"
-		                android:layout_height="wrap_content"
-		                android:button="@drawable/password_checkbox"
-		                android:checked="true" />
-                    </LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/px_25"
+                android:layout_marginRight="@dimen/px_20"
+                android:background="@color/color_be" />
 
             <EditText
                 android:id="@+id/register_pass"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/px_15"
-                android:background="@null"
-                android:hint="@string/login_pass_hint"
-                android:padding="@dimen/px_10"
-                android:password="true"
-                android:singleLine="true" 
-                android:layout_toLeftOf="@id/register_see"
-                />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/frame"
-            android:orientation="horizontal"
-            android:padding="@dimen/px_20" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/px_20"
-                android:text="@string/register_text2"
-                android:textColor="@color/color_gray"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <TextView
-                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/button_login1" />
-            <RelativeLayout 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" 
-                    android:id="@+id/register_resee"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    >
-                    <TextView
-		                android:layout_width="1dp"
-		                android:layout_height="match_parent"
-		                android:background="@color/button_login1" 
-		                android:layout_marginRight="@dimen/px_15"
-		                />
-                    <CheckBox
-		                android:id="@+id/register_pass_resee"
-		                android:layout_width="wrap_content"
-		                android:layout_height="wrap_content"
-		                android:button="@drawable/password_checkbox"
-		                android:checked="true" />
-                    </LinearLayout>
-
-            <EditText
-                android:id="@+id/register_repass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/px_15"
                 android:background="@null"
                 android:hint="@string/login_pass_hint"
-                android:padding="@dimen/px_10"
                 android:password="true"
-                android:layout_toLeftOf="@id/register_resee"
-                android:singleLine="true" />
-            </RelativeLayout>
+                android:singleLine="true"
+                android:textColor="@color/TextColorBLACK"
+                android:textColorHint="@color/color_be"
+                android:textSize="@dimen/app_text_size_first" />
         </LinearLayout>
 
         <Button
@@ -260,35 +184,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
-            android:layout_marginTop="@dimen/px_30"
+            android:layout_marginTop="@dimen/px_80"
             android:background="@drawable/login_button_blue"
             android:padding="@dimen/px_15"
             android:text="@string/welcome_reg"
             android:textColor="@android:color/white"
             android:textSize="@dimen/app_text_size_first" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px_20"
-            android:layout_marginRight="@dimen/px_20"
-            android:layout_marginTop="@dimen/px_30"
-            android:orientation="horizontal" >
-
-            <CheckBox
-                android:id="@+id/register_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/register_checkbox"
-                android:checked="true" />
-
-            <TextView
-                android:id="@+id/register_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/px_15"
-                android:text="@string/register_text3" />
-        </LinearLayout>
     </LinearLayout>
-<!-- </com.techfly.liutaitai.util.view.LoadingLayout> -->
+    </com.techfly.liutaitai.util.view.LoadingLayout>
+
 </RelativeLayout>

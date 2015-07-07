@@ -30,7 +30,7 @@
                     android:id="@+id/mine_btn"
                     android:layout_width="wrap_content"
             		android:layout_height="wrap_content"
-            		android:text="@string/login_notice"
+            		android:text="@string/welcome_text"
             		android:textColor="@color/write"
             		android:background="@drawable/button_login"
                     android:textSize="@dimen/app_text_size_first"
@@ -47,7 +47,8 @@
                 android:id="@+id/pcenter_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_top" >
+                android:background="@drawable/pcenter_top" 
+                >
                 <ImageView 
                     android:id="@+id/mine_img"
                     android:layout_width="wrap_content"

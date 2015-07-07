@@ -9,8 +9,8 @@
      <stroke android:width="0dp"
          android:color="#7f000000"
          />
-     <gradient android:startColor="@color/button_login1"
-         android:endColor="@color/button_login1"
+     <gradient android:startColor="@color/button_login"
+         android:endColor="@color/button_login"
          />
 
 </shape>
@@ -25,8 +25,8 @@
      <stroke android:width="0dp"
          android:color="#7f000000"
          />
-     <gradient android:startColor="@color/button_login"
-         android:endColor="@color/button_login"
+     <gradient android:startColor="@color/button_login1"
+         android:endColor="@color/button_login1"
          />
 
 </shape>      

@@ -43,46 +43,9 @@ import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class PcenterInfoFragment extends CommonFragment implements OnClickListener{
 	private PcenterInfoActivity mActivity;
-	private TextView mTvPhone;
-	private TextView mTvAddress;
-	private TextView mTvPass;
-	private RelativeLayout mRlAddress;
-	private Button mButton;
-	private Dialog mDialog;
+	private RelativeLayout mRlNick;
+	private RelativeLayout mRlChange;
 	private User mUser;
-	private ArrayList<Address> mList = new ArrayList<Address>();
-	private final int MSG_LIST = 0x101;
-	public Handler mInfoHandler=new Handler(){
-
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case MSG_LIST:
-				int size=mList.size();
-				Address addr=null;
-				for(int i=0;i<size;i++){
-					Address address =mList.get(i);
-					if(address.ismIsSelect()){
-						addr=address;
-					}
-				}
-				if(addr!=null){
-					mTvAddress.setText(addr.getmAddress());
-				}else{
-					if(mList.size()>0){
-						mTvAddress.setText(mList.get(0).getmAddress());
-					}else{
-						mTvAddress.setText("无");
-					}
-				}
-				break;
-
-			default:
-				break;
-			}
-		}
-		
-	};
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -130,49 +93,40 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
     private void onInitView(View view){
     	setTitleText(R.string.pinfo_title);
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-    	mButton=(Button) view.findViewById(R.id.info_btn);
-    	mTvAddress=(TextView) view.findViewById(R.id.info_address_text);
-    	mTvPhone=(TextView) view.findViewById(R.id.info_nick);
-    	mRlAddress=(RelativeLayout) view.findViewById(R.id.info_address);
-    	mTvPass=(TextView) view.findViewById(R.id.info_pass);
+    	mRlChange = (RelativeLayout) view.findViewById(R.id.info_change);
+    	mRlNick = (RelativeLayout) view.findViewById(R.id.info_nick);
     	
-    	mButton.setOnClickListener(this);
-    	mRlAddress.setOnClickListener(this);
-    	mTvPass.setOnClickListener(this);
-    	if(mUser.getmPhone()!=null&&!TextUtils.isEmpty(mUser.getmPhone())&&!"null".equals(mUser.getmPhone())){
-    		mTvPhone.setText(mUser.getmPhone());
-    	}else{
-    		mTvPhone.setText("无");
-    	}
+    	mRlChange.setOnClickListener(this);
+    	mRlNick.setOnClickListener(this);
     }
 
 	@Override
 	public void requestData() {
-		RequestParam param = new RequestParam();
-		HttpURL url = new HttpURL();
-		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ADDRESS_URL);
-		url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL)
-				.setmGetParamValues(
-						SharePreferenceUtils.getInstance(mActivity)
-								.getUser().getmId());
-		param.setmHttpURL(url);
-		param.setmParserClassName(AddressManageParser.class.getName());
-		RequestManager.getRequestData(mActivity,
-				createMyReqSuccessListener(), createMyReqErrorListener(),
-				param);
+//		RequestParam param = new RequestParam();
+//		HttpURL url = new HttpURL();
+//		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ADDRESS_URL);
+//		url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL)
+//				.setmGetParamValues(
+//						SharePreferenceUtils.getInstance(mActivity)
+//								.getUser().getmId());
+//		param.setmHttpURL(url);
+//		param.setmParserClassName(AddressManageParser.class.getName());
+//		RequestManager.getRequestData(mActivity,
+//				createMyReqSuccessListener(), createMyReqErrorListener(),
+//				param);
 	}
 	private Response.Listener<Object> createMyReqSuccessListener() {
 		return new Listener<Object>() {
 			@Override
 			public void onResponse(Object object) {
-				AppLog.Logd(object.toString());
-				mList = (ArrayList<Address>) object;
-				if (!isDetached()) {
-					mInfoHandler.removeMessages(MSG_LIST);
-					mInfoHandler.sendEmptyMessage(MSG_LIST);
-					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-				}
+//				AppLog.Logd(object.toString());
+//				mList = (ArrayList<Address>) object;
+//				if (!isDetached()) {
+//					mInfoHandler.removeMessages(MSG_LIST);
+//					mInfoHandler.sendEmptyMessage(MSG_LIST);
+//					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+//					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+//				}
 			}
 		};
 	}
@@ -193,26 +147,11 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.info_btn:
-			mDialog= new Dialog(mActivity, R.style.MyDialog);
-        	mDialog=AlertDialogUtils.displayMyAlertChoice(mActivity, R.string.pinfo_exit, R.string.pinfo_exit, R.string.confirm, new View.OnClickListener() {
-                
-                @Override
-                public void onClick(View arg0) {
-//                    exit();
-                	SharePreferenceUtils.getInstance(mActivity).clearUser();
-                    OnShopCarLisManager.getShopCarLisManager().onNotifyShopCarChange(null); 
-                    mActivity.finish();
-                    mDialog.dismiss();
-                }
-            }, R.string.cancel, null);
-        	mDialog.show();
+		case R.id.info_change:
+			
 			break;
-		case R.id.info_address:
+		case R.id.info_nick:
 			startActivity(new Intent(mActivity,AddressManageActivity.class));
-			break;
-		case R.id.info_pass:
-			startActivity(new Intent(mActivity,ForgetNextActivity.class));
 			break;
 
 		default:
@@ -223,52 +162,8 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 	@Override
 	public void onResume() {
 		super.onResume();
-		mUser=SharePreferenceUtils.getInstance(mActivity).getUser();
-        startReqTask(PcenterInfoFragment.this);
-	}
-	private void exit(){
-		RequestParam param = new RequestParam();
-		HttpURL url = new HttpURL();
-		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.LOGOUT_URL);
-		url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL)
-				.setmGetParamValues(
-						SharePreferenceUtils.getInstance(mActivity)
-								.getUser().getmId());
-		param.setmHttpURL(url);
-		param.setmParserClassName(CommonParser.class.getName());
-		RequestManager.getRequestData(mActivity,
-				createReqSuccessListener(), createReqErrorListener(),
-				param);
-	}
-	private Response.Listener<Object> createReqSuccessListener() {
-		return new Listener<Object>() {
-			@Override
-			public void onResponse(Object object) {
-				AppLog.Logd(object.toString());
-				ResultInfo info=(ResultInfo) object;
-				if (!isDetached()) {
-					if(info.getmCode()==0){
-						SharePreferenceUtils.getInstance(mActivity).clearUser();
-	                    OnShopCarLisManager.getShopCarLisManager().onNotifyShopCarChange(null); 
-	                    mActivity.finish();
-	                    mDialog.dismiss();
-					}else{
-						showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
-					}
-				}
-			}
-		};
-	}
-
-	private Response.ErrorListener createReqErrorListener() {
-		return new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				AppLog.Loge(" data failed to load" + error.getMessage());
-				if (!isDetached()) {
-				}
-			}
-		};
+//		mUser=SharePreferenceUtils.getInstance(mActivity).getUser();
+//        startReqTask(PcenterInfoFragment.this);
 	}
 
 }
