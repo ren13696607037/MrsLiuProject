@@ -7,14 +7,18 @@
     android:orientation="vertical" >
 
     <include layout="@layout/fragment_header" />
+ <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <com.techfly.liutaitai.util.view.ViewPagerWrapper
-        android:id="@+id/vpWrapper"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </com.techfly.liutaitai.util.view.ViewPagerWrapper>
-
+            <com.techfly.liutaitai.util.view.ViewPagerWrapper
+                android:id="@+id/vpWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="144dp" />
+            
+   </LinearLayout>
+  
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,13 +42,16 @@
                 android:layout_weight="2"
                 android:id="@+id/laundry_service"
                 android:background="#19d1d1"
+                android:gravity="center"
                 android:orientation="vertical" >
                 
                 <TextView 
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:text="洗衣 保养"
+                        android:drawableTop="@drawable/tag6"
+                        android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"
                         android:gravity="center"
                     />
@@ -60,12 +67,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="3dp"
                 android:background="#ff6e6e"
+                android:gravity="center"
                 android:orientation="vertical" >
                   <TextView 
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:text="美甲"
+                        android:drawableTop="@drawable/tag5"
+                        android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"
                         android:gravity="center"
                     />
@@ -89,12 +99,15 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:background="#fd9220"
+                android:gravity="center"
                 android:orientation="vertical" >
                  <TextView 
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:text="美睫"
+                        android:drawableTop="@drawable/tag2"
+                        android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"
                         android:gravity="center"
                     />  
@@ -117,12 +130,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="3dp"
                 android:background="#b46dca"
+                android:gravity="center"
                 android:orientation="vertical" >
                     <TextView 
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:text="美容"
+                        android:drawableTop="@drawable/tag1"
+                        android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"
                         android:gravity="center"
                     />  
@@ -145,13 +161,16 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="#ffbc00"
                 android:orientation="vertical" >
                  <TextView 
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:text="化妆造型"
+                        android:drawableTop="@drawable/tag4"
+                        android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"
                         android:gravity="center"
                     />      
@@ -165,12 +184,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="3dp"
                 android:background="#00d69d"
+                android:gravity="center"
                 android:orientation="vertical" >
                   <TextView 
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:text="保洁"
+                        android:drawableTop="@drawable/tag3"
+                        android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"
                         android:gravity="center"
                     />      
@@ -181,14 +203,17 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:layout_marginLeft="3dp"
                 android:background="#0080dc"
                 android:orientation="vertical" >
                     <TextView 
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:text="电话"
+                        android:drawableTop="@drawable/tag7"
+                        android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"
                         android:gravity="center"
                     />        

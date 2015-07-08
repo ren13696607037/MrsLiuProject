@@ -51,7 +51,7 @@ public class BannerAdapter extends PagerAdapter {
 		image.setLayoutParams(params);
 		container.addView(image);
 		int width = mContext.getResources().getDisplayMetrics().widthPixels;
-		int height = (int) (width * 0.31);
+		int height = mContext.getResources().getDisplayMetrics().heightPixels;
 		container.setLayoutParams(new RelativeLayout.LayoutParams(width, height));
 		image.setScaleType(ScaleType.FIT_XY);
 		mLoader.displayImage(mdata.get(position).getmImage(), image, ImageLoaderUtil.mHallIconLoaderOptions);
