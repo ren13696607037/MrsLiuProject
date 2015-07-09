@@ -20,11 +20,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.activities.RegisterActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.SmartToast;
+import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class LoginFragment extends CommonFragment implements OnClickListener {
@@ -112,15 +115,19 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 	}
 
 	private void onInitView(View view) {
+		setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+		setTitleText(R.string.welcome_login);
 		mPass = (EditText) view.findViewById(R.id.login_pass);
 		mPhone = (EditText) view.findViewById(R.id.login_phone);
-//		mButton = (Button) view.findViewById(R.id.login_btn);
+		mButton = (Button) view.findViewById(R.id.login_button);
+		mRegister = (Button) view.findViewById(R.id.register_button);
 //		mLayout = (LinearLayout) view.findViewById(R.id.login_about);
 //		mTvForget = (TextView) view.findViewById(R.id.login_forget);
 
 		mButton.setOnClickListener(this);
-		mLayout.setOnClickListener(this);
-		mTvForget.setOnClickListener(this);
+		mRegister.setOnClickListener(this);
+//		mLayout.setOnClickListener(this);
+//		mTvForget.setOnClickListener(this);
 	}
 
 	@Override
@@ -180,24 +187,24 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 //		case R.id.login_about:
 //
 //			break;
-//		case R.id.login_btn:
-//			if (mPhone.length() != 0 && mPass.length() != 0) {
-//				if (Utility.isPhone(mPhone.getText().toString())) {
-//					startReqTask(LoginFragment.this);
-//				} else {
-//					SmartToast.makeText(getActivity(), R.string.phone_error,
-//							Toast.LENGTH_SHORT).show();
-//					mPhone.setText("");
-//					mPass.setText("");
-//				}
-//			} else {
-//				SmartToast.makeText(getActivity(), R.string.input_error,
-//						Toast.LENGTH_SHORT).show();
-//			}
-//			break;
-//		case R.id.login_forget:
-//			startActivity(new Intent(getActivity(), ForgetPassActivity.class));
-//			break;
+		case R.id.login_button:
+			if (mPhone.length() != 0 && mPass.length() != 0) {
+				if (Utility.isPhone(mPhone.getText().toString())) {
+					startReqTask(LoginFragment.this);
+				} else {
+					SmartToast.makeText(getActivity(), R.string.phone_error,
+							Toast.LENGTH_SHORT).show();
+					mPhone.setText("");
+					mPass.setText("");
+				}
+			} else {
+				SmartToast.makeText(getActivity(), R.string.input_error,
+						Toast.LENGTH_SHORT).show();
+			}
+			break;
+		case R.id.register_button:
+			startActivity(new Intent(getActivity(), RegisterActivity.class));
+			break;
 
 		default:
 			break;

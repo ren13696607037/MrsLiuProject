@@ -84,7 +84,7 @@
                     android:paddingBottom="6dp"
                     android:textColor="#565656"
                     android:drawablePadding="12dp"
-                    android:drawableLeft="@drawable/login_user"
+                    android:drawableLeft="@drawable/icon_error"
                     android:gravity="center"
                     android:textSize="@dimen/app_text_size_second" />
               

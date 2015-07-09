@@ -105,11 +105,11 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     }
     private void setView(){
     	if(mUser==null){
-    		mTop.setVisibility(View.INVISIBLE);
+    		mTop.setVisibility(View.GONE);
         	mWelcome.setVisibility(View.VISIBLE);
     	}else{
     		mTop.setVisibility(View.VISIBLE);
-    		mWelcome.setVisibility(View.INVISIBLE);
+    		mWelcome.setVisibility(View.GONE);
     		mTvNick.setText(mUser.getmNick());
     	}
     }
@@ -210,7 +210,6 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 		if(mTvNick!=null){
 			setView();
 		}
-		
 	}
 	
 }
