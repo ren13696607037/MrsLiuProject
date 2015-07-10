@@ -311,6 +311,7 @@
 	<string name="balance_text3">充%1$s&#160;&#160;送%1$s</string>
 	<string name="balance_text4">有效期%1$s</string>
 	<string name="balance_text5">立即\n充值</string>
+	<string name="balance_no_content">当前您还没有充值卡~</string>
 	<!-- 我的抵用券 -->
 	<string name="voucher_text">使用规则</string>
 	<string name="voucher_text1">抵价券全场通用，每次仅可使用一张</string>
