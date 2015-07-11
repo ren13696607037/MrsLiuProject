@@ -1,3 +1,6 @@
+/**
+ * 洗衣 产品
+ */
 package com.techfly.liutaitai.model.mall.bean;
 
 import java.io.Serializable;
