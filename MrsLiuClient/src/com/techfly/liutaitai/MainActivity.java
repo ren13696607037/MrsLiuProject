@@ -16,6 +16,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.home.activities.HomeActivity;
 import com.techfly.liutaitai.model.mall.activities.CategoryListActivity;
+import com.techfly.liutaitai.model.order.activities.OrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PCenterHomeActivity;
 import com.techfly.liutaitai.model.shopcar.activities.ShopCarHomeActivity;
 import com.techfly.liutaitai.update.UpdateMgr;

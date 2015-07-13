@@ -109,7 +109,7 @@
                         android:id="@+id/detail_arrow"
                         android:layout_width="wrap_content"
                     	android:layout_height="wrap_content"
-                    	android:src="@drawable/pcenter_arrow_blue"
+                    	android:src="@drawable/pcenter_arrow"
                     	android:layout_alignParentRight="true"
                     	android:layout_centerVertical="true"
                         />

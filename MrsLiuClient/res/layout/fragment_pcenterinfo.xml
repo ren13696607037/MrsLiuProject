@@ -38,7 +38,7 @@
             android:id="@+id/info_nick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame"
+            android:background="@drawable/selector_customer_background"
             android:padding="@dimen/px_20" >
 
             <TextView
@@ -70,7 +70,7 @@
             android:id="@+id/info_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/pcenter_frame"
+            android:background="@drawable/selector_customer_background"
             android:padding="@dimen/px_20" >
 
             <TextView

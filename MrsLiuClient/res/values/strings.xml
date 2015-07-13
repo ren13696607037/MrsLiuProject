@@ -112,7 +112,7 @@
     <string name="market_price">市场价:￥%1$s</string>
     <string name="group_price">团购价:￥%1$s</string>
     <!-- 意见反馈 -->
-    <string name="suggest_hint">点击输入您的建议~</string>
+    <string name="suggest_hint">您的每条意见和建议都是我们成长的动力！</string>
     <string name="submit">提交</string>
     <string name="submit_success">提交成功</string>
     <string name="submit_fail">提交失败</string>

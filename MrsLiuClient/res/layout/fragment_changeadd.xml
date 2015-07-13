@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/pcenter_arrow_blue" />
+                    android:src="@drawable/pcenter_arrow" />
 
                 <TextView
                     android:id="@+id/area_text"

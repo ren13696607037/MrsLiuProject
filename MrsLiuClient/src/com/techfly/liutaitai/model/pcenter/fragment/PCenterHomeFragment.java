@@ -54,7 +54,12 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        User user = new User();
+        user.setmId("1");
+        user.setmPhone("13112345678");
+        user.setmNick("ceshi");
+        SharePreferenceUtils.getInstance(mActivity).saveUser(user);
+        mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
     }
 
     @Override
@@ -111,7 +116,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	}else{
     		mTop.setVisibility(View.VISIBLE);
     		mWelcome.setVisibility(View.GONE);
-    		mTvNick.setText(mUser.getmNick());
+//    		mTvNick.setText(mUser.getmNick());
     	}
     }
     @Override
