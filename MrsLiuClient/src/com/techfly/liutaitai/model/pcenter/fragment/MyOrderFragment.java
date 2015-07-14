@@ -66,7 +66,7 @@ public class MyOrderFragment extends CommonFragment {
     	onInitViewPager();
     }
     private void onInitTabConfig(){
-    	mTabAdapter=new ScrollTabsAdapter(getActivity());
+    	mTabAdapter=new ScrollTabsAdapter(getActivity(), 4);
     	mTabAdapter.add(getActivity().getString(R.string.order_all));
     	mTabAdapter.add(getActivity().getString(R.string.order_paying));
     	mTabAdapter.add(getActivity().getString(R.string.order_delivery));

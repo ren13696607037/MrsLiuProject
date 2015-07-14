@@ -2,6 +2,8 @@ package com.techfly.liutaitai.util.tab;
 
 import java.util.ArrayList;
 
+import com.techfly.liutaitai.util.tab.TabActionBar.Tab;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.techfly.liutaitai.util.tab.TabActionBar.Tab;
 
 
 public class TabAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener, TabActionBar.TabListener {

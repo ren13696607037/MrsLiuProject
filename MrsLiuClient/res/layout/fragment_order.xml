@@ -11,7 +11,7 @@
     <com.techfly.liutaitai.util.view.ScrollTabView 
           android:id="@+id/order_tab_container"
           android:layout_width="match_parent"
-          android:layout_height="50dp"
+          android:layout_height="wrap_content"
         >
     </com.techfly.liutaitai.util.view.ScrollTabView>
     <com.techfly.liutaitai.util.view.LoadingLayout

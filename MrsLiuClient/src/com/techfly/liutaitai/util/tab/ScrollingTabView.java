@@ -1,5 +1,9 @@
 package com.techfly.liutaitai.util.tab;
 
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
+
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
@@ -23,9 +27,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.util.AppLog;
-import com.techfly.liutaitai.util.Constant;
 
 /**
  * This widget implements the dynamic action bar tab behavior that can change

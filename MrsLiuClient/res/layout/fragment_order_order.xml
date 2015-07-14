@@ -8,14 +8,13 @@
         android:id="@+id/order_header"
         layout="@layout/fragment_header"
         />
-    <com.hylsmart.busylife.util.tab.ScrollingTabView 
+    <com.techfly.liutaitai.util.view.ScrollTabView
           android:id="@+id/order_tab_container"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
+          android:layout_height="50dp"
           android:background="@android:color/transparent"
-        >
-    </com.hylsmart.busylife.util.tab.ScrollingTabView>
+          android:layout_below="@id/order_header"
+        />
     
     <android.support.v4.view.ViewPager
         android:layout_below="@id/order_tab_container"

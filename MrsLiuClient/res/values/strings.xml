@@ -321,4 +321,7 @@
 	<string name="voucher_text5">满%1$s元可用\n有效期：%1$s</string>
 	<string name="voucher_text6">全场通用</string>
 	<!-- 技师 -->
+	<!-- 订单 -->
+	<string name="order_appointment_title">预约</string>
+	<string name="order_service_title">洗衣</string>
 </resources>

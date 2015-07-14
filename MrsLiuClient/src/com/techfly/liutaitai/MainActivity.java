@@ -65,7 +65,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack {
 				.setIndicator(
 						getMenuItem(R.drawable.ic_tab_shopcar,
 								getString(R.string.home_shopcar_tab)))
-				.setContent(new Intent(this, ShopCarHomeActivity.class)));
+				.setContent(new Intent(this, OrderActivity.class)));
 		mTabHost.addTab(mTabHost
 				.newTabSpec(TAB_PCENTER)
 				.setIndicator(

@@ -3,9 +3,10 @@ package com.techfly.liutaitai.model.order.fragment;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
-import com.techfly.liutaitai.util.tab.ScrollingTabView;
-import com.techfly.liutaitai.util.tab.TabActionBar;
-import com.techfly.liutaitai.util.tab.TabAdapter;
+import com.techfly.liutaitai.util.view.PagerAdapter;
+import com.techfly.liutaitai.util.view.ScrollTabView;
+import com.techfly.liutaitai.util.view.ScrollTabsAdapter;
+import com.techfly.liutaitai.util.view.TabAdapter;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import android.view.ViewGroup;
 
 public class OrderFragment extends CommonFragment {
 	private ViewPager mViewPager;
-	private ScrollingTabView mTabView;
+	private ScrollTabView mTabView;
 	private TabAdapter mTabAdapter;
 	@Override
     public void onAttach(Activity activity) {
@@ -59,14 +60,23 @@ public class OrderFragment extends CommonFragment {
     }
     private void onInitView(View view){
     	mViewPager=(ViewPager) view.findViewById(R.id.order_viewpager);
-    	mTabView=(ScrollingTabView) view.findViewById(R.id.order_tab_container);
+    	mTabView=(ScrollTabView) view.findViewById(R.id.order_tab_container);
     	onInitTabConfig();
+    	onInitViewPager();
     }
     private void onInitTabConfig(){
-    	TabActionBar tabsActionBar = new TabActionBar(getActivity(), mTabView);
-        mTabAdapter = new TabAdapter(getActivity(), mViewPager, tabsActionBar);
-//        mTabAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.tab_order_now, null)).setmTabbgDrawableId(R.drawable.login_tab), OrderNowFragment.class, null);
-//        mTabAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.tab_order_old, null)).setmTabbgDrawableId(R.drawable.login_tab), OrderOldFragment.class, null);
+    	mTabAdapter=new ScrollTabsAdapter(getActivity(), 2);
+    	mTabAdapter.add(getActivity().getString(R.string.order_appointment_title));
+    	mTabAdapter.add(getActivity().getString(R.string.order_service_title));
+    	mTabView.setAdapter(mTabAdapter);
+    }
+    private void onInitViewPager(){
+    	PagerAdapter pagerAdapter=new PagerAdapter(
+				getActivity().getSupportFragmentManager());
+    	pagerAdapter.addFragment(new AppointmentOrderFragment());
+    	pagerAdapter.addFragment(new ServiceOrderFragment());
+    	mViewPager.setAdapter(pagerAdapter);
+    	mTabView.setViewPager(mViewPager);
     }
 
 	@Override
