@@ -267,7 +267,7 @@ public class OrderDetailFragment extends OrderPayFragment implements OrderCancel
     	
     }
     private void setView(){
-    	mTvAddress.setText(mOrder.getmAddress().getmAddress());
+    	mTvAddress.setText(mOrder.getmAddress().getmDetail());
     	mTvFree.setText(mOrder.getmFree());
     	mTvName.setText(mOrder.getmAddress().getmName());
     	mTvNote.setText(getString(R.string.order_detail_note,mOrder.getmNote()));

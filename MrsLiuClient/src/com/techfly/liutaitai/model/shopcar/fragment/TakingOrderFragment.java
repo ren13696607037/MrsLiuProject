@@ -27,7 +27,7 @@ import com.techfly.liutaitai.bean.BuyInfo;
 import com.techfly.liutaitai.bizz.parser.AddressManageParser;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.pcenter.bean.Address;
+import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.model.shopcar.adapter.OrderProAdapter;
@@ -63,7 +63,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     private ImageView mProImg;
     private RelativeLayout mProductInfoLayout;
     private ListViewForScrollView mListView;
-    private Address mAddressManage;
+    private AddressManage mAddressManage;
     private Product mProduct;
 //    private RelativeLayout mWholeLayout;
     private boolean mIsFirstTakingOrder;
@@ -113,7 +113,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if(resultCode==Constant.ORDER_ADDRESS_SUCCESS||resultCode==Constant.ORDER_CITY_SUCCESS){
     		if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES)!=null){
-                mAddressManage = (Address) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
+                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
                 onDisplay();
             }
     	}
@@ -122,11 +122,11 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
    
     private void onDisplay() {
 //        mWholeLayout.setVisibility(View.VISIBLE);
-        if(mAddressManage!=null&&!TextUtils.isEmpty(mAddressManage.getmAddress()) && !mAddressManage.getmAddress().equals("null")){
+        if(mAddressManage!=null&&!TextUtils.isEmpty(mAddressManage.getmDetail()) && !mAddressManage.getmDetail().equals("null")){
             mIsFirstTakingOrder = false;
             mAddressRelativeLayout.setVisibility(View.VISIBLE);
             mPhone.setText(mAddressManage.getmPhone());
-            mAddress.setText(mAddressManage.getmAddress().replace("=", "-")+"/"+mAddressManage.getmDetail());
+            mAddress.setText(mAddressManage.getmDetail());
             mNickName.setText(mAddressManage.getmName());
         }else{
             mIsFirstTakingOrder = true;
@@ -274,12 +274,12 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
                     mLoadingLayout.setVisibility(View.GONE);
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                    ArrayList<Address> list = (ArrayList<Address>) result;
+                    ArrayList<AddressManage> list = (ArrayList<AddressManage>) result;
                     if(list==null || list.size()==0){
                         mAddressManage = null;
                     }else{
-                        for(Address address: list){
-                            if(address.ismIsSelect()){
+                        for(AddressManage address: list){
+                            if(address.isDefault()){
                                 mAddressManage = address;
                             }
                         }

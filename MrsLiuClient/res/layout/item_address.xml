@@ -2,100 +2,103 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background" 
-    android:descendantFocusability="blocksDescendants"
-    android:padding="@dimen/px_20"
-    >
-    <CheckBox
-        android:id="@+id/iaddress_delete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:button="@drawable/selector_check"
-        android:checked="true" 
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        />
-    <LinearLayout 
-        android:id="@+id/iaddress_lin"
+    android:background="@drawable/login_frame"
+    android:descendantFocusability="blocksDescendants" >
+
+    <RelativeLayout
+        android:id="@+id/iaddm_rel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iaddress_delete"
-        >
-        <ImageView 
-            android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_error"
+        android:padding="@dimen/px_20"
+         >
+
+        <ImageView
+            android:id="@+id/iaddm_select"
+            android:layout_width="@dimen/px_40"
+            android:layout_height="@dimen/px_40"
+            android:layout_alignParentRight="true"
+            
             />
 
-    <TextView
-        android:id="@+id/iaddress_people"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/address_name"
-        android:textColor="@color/TextColorBLACK"
-        android:textSize="@dimen/app_text_size_first"
-        android:padding="@dimen/px_15"
-         />
-    <ImageView 
+        <TextView
+            android:id="@+id/iaddm_name"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/address_phone"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/px_50"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_33"
+            android:textSize="@dimen/app_text_size_first" 
             />
 
-    <TextView
-        android:id="@+id/iaddress_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/address_name"
-        android:textColor="@color/TextColorBLACK"
-        android:textSize="@dimen/app_text_size_first"
-        android:padding="@dimen/px_15"
-         />
+        <TextView
+            android:id="@+id/iaddm_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iaddm_name"
+            android:textColor="@color/color_33"
+            android:textSize="@dimen/app_text_size_first" 
+            android:layout_marginLeft="@dimen/px_15"
+            />
 
-    </LinearLayout>
-    <TextView
-        android:id="@+id/iaddress_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iaddress_lin"
-        android:paddingBottom="@dimen/px_20"
-        android:paddingLeft="@dimen/px_20"
-        android:paddingRight="@dimen/px_50"
-        android:text="@string/address_name"
-        android:textColor="@color/TextColorBLACK"
-        android:textSize="@dimen/app_text_size_first" 
-        android:layout_toRightOf="@id/iaddress_delete"
+        <TextView
+            android:id="@+id/iaddm_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iaddm_name"
+            android:textColor="@color/color_33"
+            android:textSize="@dimen/app_text_size_second" 
+            android:layout_marginTop="@dimen/px_10"
+            />
+    </RelativeLayout>
+    <TextView 
+        android:id="@+id/iaddm_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_be"
+        android:layout_below="@id/iaddm_rel"
+        android:layout_marginTop="@dimen/px_10"
         />
-    
-     <TextView
-        android:id="@+id/iaddress_modify"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iaddress_address"
-        android:paddingBottom="@dimen/px_20"
-        android:paddingTop="@dimen/px_20"
-        android:paddingLeft="@dimen/px_50"
-        android:paddingRight="@dimen/px_50"
-        android:text="@string/change"
-        android:background="@drawable/login_button_blue"
-        android:textColor="@color/write"
-        android:textSize="@dimen/app_text_size_first" 
-        android:layout_alignParentRight="true"
+        android:layout_below="@id/iaddm_line"
+        android:orientation="horizontal" 
+        android:layout_marginLeft="1dp"
         android:layout_marginRight="1dp"
-        />
+        android:padding="@dimen/px_10"
+        >
 
-    <CheckBox
-        android:id="@+id/iaddress_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/selector_check"
-        android:checked="true" 
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:clickable="false"
-        />
+        <TextView
+            android:id="@+id/iaddm_change"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/px_10"
+            android:text="@string/address_change" 
+            android:textColor="@color/color_33"
+            android:textSize="@dimen/app_text_size_first"
+            android:background="@drawable/selector_customer_background"
+            />
+        <TextView 
+            android:layout_width="1dp"
+        	android:layout_height="match_parent"
+        	android:background="@color/color_be"
+        	android:layout_gravity="center"
+        	android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/iaddm_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/px_10"
+            android:text="@string/tyrant_delete"
+            android:textColor="@color/color_register" 
+            android:textSize="@dimen/app_text_size_first"
+            android:background="@drawable/selector_customer_background"
+            />
+    </LinearLayout>
 
 </RelativeLayout>

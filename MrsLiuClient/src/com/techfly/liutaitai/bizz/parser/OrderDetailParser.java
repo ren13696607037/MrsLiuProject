@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.pcenter.bean.Address;
+import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
@@ -24,10 +24,10 @@ public class OrderDetailParser implements Parser {
 			if (data!=null) {
 				order.setmId(data.optString(JsonKey.MyOrderKey.ID));
 				order.setmFree(data.optString(JsonKey.MyOrderKey.FREE));
-				Address address=new Address();
+				AddressManage address=new AddressManage();
 				address.setmName(data.optString(JsonKey.MyOrderKey.ADDRNAME));
 				address.setmPhone(data.optString(JsonKey.MyOrderKey.ADDRPHONE));
-				address.setmAddress(data.optString(JsonKey.MyOrderKey.ADDRESS));
+				address.setmDetail(data.optString(JsonKey.MyOrderKey.ADDRESS));
 				order.setmAddress(address);
 				order.setmNote(data.optString(JsonKey.MyOrderKey.NOTE));
 				order.setmPay(data.optInt(JsonKey.MyOrderKey.PAYSTATE));

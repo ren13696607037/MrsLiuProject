@@ -14,11 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyBalanceActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyBrowserActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyCollectActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyOrderActivity;
+import com.techfly.liutaitai.model.pcenter.activities.MyServiceActivity;
+import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PCenterHomeActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PcenterInfoActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SettingActivity;
@@ -154,7 +157,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 			break;
 		case R.id.pcenter_address:
 			if(mUser!=null){
-				intent=new Intent(mActivity,MyOrderActivity.class);
+				intent=new Intent(mActivity,AddressManageActivity.class);
 			}else{
 				showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
 			}
@@ -175,7 +178,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 		    break;
 		case R.id.pcenter_voucher:
 		    if(mUser!=null){
-                intent=new Intent(mActivity,MyBrowserActivity.class);
+                intent=new Intent(mActivity,MyVoucherActivity.class);
             }else{
                 showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
             }
@@ -189,7 +192,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 		    break;
 		case R.id.pcenter_service:
 		    if(mUser!=null){
-                intent=new Intent(mActivity,MyBrowserActivity.class);
+                intent=new Intent(mActivity,MyServiceActivity.class);
             }else{
                 showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
             }

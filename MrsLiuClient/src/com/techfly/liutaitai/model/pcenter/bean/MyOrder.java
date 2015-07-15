@@ -48,10 +48,10 @@ public class MyOrder implements Serializable{
 	public void setmNote(String mNote) {
 		this.mNote = mNote;
 	}
-	public Address getmAddress() {
+	public AddressManage getmAddress() {
 		return mAddress;
 	}
-	public void setmAddress(Address mAddress) {
+	public void setmAddress(AddressManage mAddress) {
 		this.mAddress = mAddress;
 	}
 	public int getmPay() {
@@ -67,7 +67,7 @@ public class MyOrder implements Serializable{
 		this.mFree = mFree;
 	}
 	private String mNote;
-	private Address mAddress;
+	private AddressManage mAddress;
 	private int mPay;
 	private String mFree;
 	public String getmId() {

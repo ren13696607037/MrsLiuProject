@@ -1,37 +1,22 @@
 package com.techfly.liutaitai.model.pcenter.fragment;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.activities.MyBalanceActivity;
-import com.techfly.liutaitai.model.pcenter.adapter.BalanceAdapter;
-import com.techfly.liutaitai.model.pcenter.bean.Balance;
+import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
-import com.techfly.liutaitai.util.view.XListView;
 
-public class MyBalanceFragment extends CommonFragment {
-	private MyBalanceActivity mActivity;
-	private TextView mPrice;
-	private XListView mListView;
-	private BalanceAdapter mAdapter;
-	private ArrayList<Balance> mList = new ArrayList<Balance>();
-	private Handler mBalanceHandler = new Handler(){
-		public void handleMessage(android.os.Message msg) {
-			
-		};
-	};
+public class MyVoucherFragment extends CommonFragment {
+	private MyVoucherActivity mActivity;
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mActivity = (MyBalanceActivity) activity;
+        mActivity = (MyVoucherActivity) activity;
     }
 
     @Override
@@ -42,7 +27,7 @@ public class MyBalanceFragment extends CommonFragment {
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mybalance,
+        View view = inflater.inflate(R.layout.fragment_voucher,
                 container, false);
         return view;
     }
@@ -68,10 +53,8 @@ public class MyBalanceFragment extends CommonFragment {
         onInitView(view);
     }
     private void onInitView(View view){
-    	mPrice = (TextView) view.findViewById(R.id.mybalance_price);
-    	mListView = (XListView) view.findViewById(R.id.mybalance_list);
-    	mAdapter = new BalanceAdapter(mActivity, mList);
-    	mListView.setAdapter(mAdapter);
+    	setTitleText(R.string.pcenter_voucher);
+    	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     }
 
 	@Override

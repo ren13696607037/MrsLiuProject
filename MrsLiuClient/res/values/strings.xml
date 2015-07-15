@@ -311,17 +311,26 @@
 	<string name="balance_text3">充%1$s&#160;&#160;送%1$s</string>
 	<string name="balance_text4">有效期%1$s</string>
 	<string name="balance_text5">立即\n充值</string>
-	<string name="balance_no_content">当前您还没有充值卡~</string>
-	<!-- 我的抵用券 -->
+	<string name="balance_no_content">暂无充值卡，敬请期待~</string>
+	<!-- 我的现金券 -->
 	<string name="voucher_text">使用规则</string>
-	<string name="voucher_text1">抵价券全场通用，每次仅可使用一张</string>
-	<string name="voucher_text2">请输入抵价券号</string>
+	<string name="voucher_text1">现金券全场通用，每次仅可使用一张</string>
+	<string name="voucher_text2">请输入现金券号</string>
 	<string name="voucher_text3">使用</string>
 	<string name="voucher_text4">RMB\n优惠券</string>
 	<string name="voucher_text5">满%1$s元可用\n有效期：%1$s</string>
 	<string name="voucher_text6">全场通用</string>
+	<string name="voucher_hint">您当前还没有现金券~</string>
 	<!-- 技师 -->
 	<!-- 订单 -->
 	<string name="order_appointment_title">预约</string>
 	<string name="order_service_title">洗衣</string>
+	<string name="delete_dialog">是否删除？</string>
+	<string name="address_change">修改</string>
+	<string name="tyrant_delete">删除</string>
+	<string name="address_text">收货地址：%1$s</string>
+	<string name="changeadd_text">请输入姓名</string>
+    <string name="changeadd_text1">请输入手机号码</string>
+    <string name="changeadd_text2">请输入收货地址</string>
+    <string name="changeadd_text3">确认</string>
 </resources>

@@ -29,7 +29,6 @@ import com.techfly.liutaitai.bizz.shopcar.OnShopCarLisManager;
 import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.ForgetNextActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PcenterInfoActivity;
-import com.techfly.liutaitai.model.pcenter.bean.Address;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;

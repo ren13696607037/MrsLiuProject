@@ -2,110 +2,158 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/background"
-    android:orientation="vertical" >
-
-    <include layout="@layout/fragment_header" />
-
-    <com.techfly.liutaitai.util.view.LoadingLayout
-        android:id="@+id/loading_layout"
+    >
+    <include 
+        layout="@layout/fragment_header"
+        />
+    <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_frame_top"
+        android:layout_marginTop="@dimen/px_15"
+        android:layout_marginLeft="@dimen/px_15"
+        android:layout_marginRight="@dimen/px_15"
+        android:paddingTop="@dimen/px_10"
+        android:paddingBottom="@dimen/px_10"
+        >
+        <ImageView 
+            android:id="@+id/changeadd_img"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:padding="@dimen/px_15"
+        	android:src="@drawable/register_name"
+            />
+        <View 
+            android:layout_width="0.5dp"
+        	android:layout_height="wrap_content"
+        	android:background="@color/color_be"
+        	android:layout_alignTop="@id/changeadd_img"
+        	android:layout_alignBottom="@id/changeadd_img"
+        	android:layout_toRightOf="@id/changeadd_img"
+        	android:layout_marginLeft="@dimen/px_10"
+        	android:layout_marginTop="@dimen/px_15"
+        	android:layout_marginBottom="@dimen/px_15"
+            />
+        <EditText 
+            android:layout_toRightOf="@id/changeadd_img"
+            android:id="@+id/changeadd_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background"
-            android:orientation="vertical" >
-
-            <RelativeLayout
-                android:id="@+id/address_area"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_frame"
-                android:padding="@dimen/px_20" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/area_hint"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/app_text_size_first" />
-
-                <ImageView
-                    android:id="@+id/area_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/pcenter_arrow" />
-
-                <TextView
-                    android:id="@+id/area_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/area_img"
-                    android:text="@string/area_hint"
-                    android:textColor="@color/color_blue"
-                    android:textSize="@dimen/app_text_size_first" />
-            </RelativeLayout>
-
-            <EditText
-                android:id="@+id/address_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_frame_bottom"
-                android:hint="@string/address_hint"
-                android:padding="@dimen/px_20"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <EditText
-                android:id="@+id/address_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_frame_bottom"
-                android:hint="@string/name_hint"
-                android:padding="@dimen/px_20"
-                android:singleLine="true"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <EditText
-                android:id="@+id/address_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_frame_bottom"
-                android:hint="@string/phone_hint"
-                android:inputType="phone"
-                android:padding="@dimen/px_20"
-                android:singleLine="true"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <EditText
-                android:id="@+id/address_zipcode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pcenter_frame_bottom"
-                android:hint="@string/zipcode_hint"
-                android:inputType="phone"
-                android:padding="@dimen/px_20"
-                android:singleLine="true"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <Button
-                android:id="@+id/address_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/px_75"
-                android:layout_marginRight="@dimen/px_75"
-                android:layout_marginTop="@dimen/px_30"
-                android:background="@drawable/login_button_blue"
-                android:padding="@dimen/px_20"
-                android:text="@string/save"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/app_text_size_first" />
-        </LinearLayout>
-    </com.techfly.liutaitai.util.view.LoadingLayout>
-
-</LinearLayout>
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:background="@null"
+        	android:singleLine="true"
+        	android:hint="@string/changeadd_text"
+        	android:textColorHint="@color/color_be"
+        	android:textSize="@dimen/app_text_size_first"
+        	android:textColor="@color/color_33"
+        	android:layout_marginLeft="@dimen/px_28"
+        	android:layout_alignTop="@id/changeadd_img"
+        	android:layout_alignBottom="@id/changeadd_img"
+            />
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_frame_bottom"
+        android:layout_marginLeft="@dimen/px_15"
+        android:layout_marginRight="@dimen/px_15"
+        >
+        <ImageView 
+            android:id="@+id/changeadd_img1"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:padding="@dimen/px_15"
+        	android:src="@drawable/register_phone"
+            />
+        <View 
+            android:layout_width="0.5dp"
+        	android:layout_height="wrap_content"
+        	android:background="@color/color_be"
+        	android:layout_alignTop="@id/changeadd_img1"
+        	android:layout_alignBottom="@id/changeadd_img1"
+        	android:layout_toRightOf="@id/changeadd_img1"
+        	android:layout_marginLeft="@dimen/px_10"
+        	android:layout_marginTop="@dimen/px_15"
+        	android:layout_marginBottom="@dimen/px_15"
+            />
+        <EditText 
+            android:layout_toRightOf="@id/changeadd_img1"
+            android:id="@+id/changeadd_phone"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:background="@null"
+        	android:layout_alignTop="@id/changeadd_img1"
+        	android:layout_alignBottom="@id/changeadd_img1"
+        	android:singleLine="true"
+        	android:layout_marginLeft="@dimen/px_28"
+        	android:inputType="phone"
+        	android:hint="@string/changeadd_text1"
+        	android:textColorHint="@color/color_be"
+        	android:textSize="@dimen/app_text_size_first"
+        	android:textColor="@color/color_33"
+            />
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_frame_bottom"
+        android:layout_marginLeft="@dimen/px_15"
+        android:layout_marginRight="@dimen/px_15"
+        >
+        <ImageView 
+            android:id="@+id/changeadd_img2"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:padding="@dimen/px_15"
+        	android:src="@drawable/address_detail"
+            />
+        <View 
+            android:layout_width="0.5dp"
+        	android:layout_height="wrap_content"
+        	android:background="@color/color_be"
+        	android:layout_alignTop="@id/changeadd_img2"
+        	android:layout_alignBottom="@id/changeadd_img2"
+        	android:layout_toRightOf="@id/changeadd_img2"
+        	android:layout_marginLeft="@dimen/px_10"
+        	android:layout_marginTop="@dimen/px_15"
+        	android:layout_marginBottom="@dimen/px_15"
+            />
+        <EditText 
+            android:layout_toRightOf="@id/changeadd_img2"
+            android:id="@+id/changeadd_add"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+        	android:background="@null"
+        	android:singleLine="true"
+        	android:layout_marginLeft="@dimen/px_28"
+        	android:hint="@string/changeadd_text2"
+        	android:textColorHint="@color/color_be"
+        	android:textSize="@dimen/app_text_size_first"
+        	android:textColor="@color/color_33"
+        	android:layout_alignTop="@id/changeadd_img2"
+        	android:layout_alignBottom="@id/changeadd_img2"
+            />
+    </RelativeLayout>
+    
+    <Button 
+        android:id="@+id/changeadd_btn"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="@string/changeadd_text3"
+    	android:textColor="@android:color/white"
+    	android:background="@drawable/button_login"
+    	android:layout_marginTop="@dimen/px_30"
+    	android:layout_marginLeft="@dimen/px_15"
+    	android:layout_marginRight="@dimen/px_15"
+    	android:padding="@dimen/px_20"
+    	android:textSize="@dimen/app_text_size_first" 
+        />
+    
+    </LinearLayout>
