@@ -82,5 +82,9 @@
 	<color name="color_33">#333333</color>
 	<color name="color_balance_red">#ea5e4d</color>
 	<color name="color_fa">#fafafa</color>
+	<color name="color_22">#222222</color>
+	<color name="color_8f">#8f8f8f</color>
+	<color name="color_service_num">#f78222</color>
+	<color name="color_service_price">#fb0808</color>
 
 </resources>

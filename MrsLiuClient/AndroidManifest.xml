@@ -259,6 +259,11 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+         <activity
+            android:name=".model.pcenter.activities.MyApplyActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".model.pcenter.activities.CityListActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"

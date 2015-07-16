@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background" >
+
+    <include
+        android:id="@+id/apply_header"
+        layout="@layout/fragment_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/header_bar_height"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/px_20" >
+
+            <TextView
+                android:id="@+id/apply_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:text="@string/apply_text"
+                android:textColor="@color/color_33"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <RadioGroup
+                android:id="@+id/apply_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_30"
+                android:layout_marginRight="@dimen/px_30"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/apply_manicure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/radio_bg_selector"
+                    android:drawablePadding="10dip"
+                    android:padding="10dip"
+                    android:text="@string/apply_text1"
+                    android:textColor="@color/color_33" />
+
+                <RadioButton
+                    android:id="@+id/apply_beauty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_bg_selector"
+                    android:drawablePadding="10dip"
+                    android:padding="10dip"
+                    android:text="@string/apply_text2"
+                    android:textColor="@color/color_33" />
+
+                <RadioButton
+                    android:id="@+id/apply_eyelash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_bg_selector"
+                    android:drawablePadding="10dip"
+                    android:padding="10dip"
+                    android:text="@string/apply_text3"
+                    android:textColor="@color/color_33" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/apply_group1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/px_20"
+                android:layout_marginLeft="@dimen/px_30"
+                android:layout_marginRight="@dimen/px_30"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/apply_makeup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_bg_selector"
+                    android:drawablePadding="10dip"
+                    android:padding="10dip"
+                    android:text="@string/apply_text4"
+                    android:textColor="@color/color_33" />
+
+                <RadioButton
+                    android:id="@+id/apply_daily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_bg_selector"
+                    android:drawablePadding="10dip"
+                    android:padding="10dip"
+                    android:text="@string/apply_text5"
+                    android:textColor="@color/color_33" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_10"
+                android:background="@color/color_ea" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:text="@string/apply_text6"
+                android:textColor="@color/color_33"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <ImageView
+                android:id="@+id/apply_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/apply_img" />
+
+            <ImageView
+                android:id="@+id/apply_img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/px_25"
+                android:scaleType="centerCrop"
+                android:src="@drawable/apply_img1" />
+
+            <Button
+                android:id="@+id/apply_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_40"
+                android:layout_marginRight="@dimen/px_40"
+                android:layout_marginTop="@dimen/px_50"
+                android:background="@drawable/login_button_blue"
+                android:padding="@dimen/px_20"
+                android:text="@string/apply_btn"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/app_text_size_first" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

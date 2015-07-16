@@ -23,6 +23,7 @@
     <dimen name="px_15">8.33dp</dimen>
     <dimen name="px_150">83.33dp</dimen>
     <dimen name="px_28">15.56dp</dimen>
+    <dimen name="px_27">15dp</dimen>
     <dimen name="px_106">58dp</dimen>
     <dimen name="px_40">22.22dp</dimen>
     <dimen name="px_50">27.78dp</dimen>
@@ -31,8 +32,12 @@
     <dimen name="px_60">33.33dp</dimen>
     <dimen name="px_110">61.11dp</dimen>
     <dimen name="px_128">71.11dp</dimen>
+    <dimen name="px_121">67.22dp</dimen>
     <dimen name="px_130">72.22dp</dimen>
     <dimen name="px_80">44.44dp</dimen>
     <dimen name="home_layout_height">60dip</dimen>
+    <dimen name="px_180">100dp</dimen>
+    <dimen name="px_350">194.44dp</dimen>
+    <dimen name="px_250">138.89dp</dimen>
 
 </resources>

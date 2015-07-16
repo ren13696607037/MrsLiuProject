@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
+import com.techfly.liutaitai.model.pcenter.activities.MyApplyActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyBalanceActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyBrowserActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyCollectActivity;
@@ -171,7 +172,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 			break;
 		case R.id.pcenter_apply:
 		    if(mUser!=null){
-                intent=new Intent(mActivity,MyBrowserActivity.class);
+                intent=new Intent(mActivity,MyApplyActivity.class);
             }else{
                 showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
             }

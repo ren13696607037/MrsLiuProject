@@ -321,7 +321,15 @@
 	<string name="voucher_text5">满%1$s元可用\n有效期：%1$s</string>
 	<string name="voucher_text6">全场通用</string>
 	<string name="voucher_hint">您当前还没有现金券~</string>
-	<!-- 技师 -->
+	<!-- 我的服务 -->
+	<string name="service_text">待接单</string>
+	<string name="service_text1">待服务</string>
+	<string name="service_text2">进行中</string>
+	<string name="service_text3">全部订单</string>
+	<string name="service_text4">申请提现</string>
+	<string name="service_text5">查看评价</string>
+	<string name="service_sex">性别：%1$s</string>
+	<string name="service_count">服务：%1$s次</string>
 	<!-- 订单 -->
 	<string name="order_appointment_title">预约</string>
 	<string name="order_service_title">洗衣</string>
@@ -333,4 +341,13 @@
     <string name="changeadd_text1">请输入手机号码</string>
     <string name="changeadd_text2">请输入收货地址</string>
     <string name="changeadd_text3">确认</string>
+    <!-- 申请成为技师 -->
+    <string name="apply_text">请选择职业类型（可多选）</string>
+    <string name="apply_text1">美甲</string>
+    <string name="apply_text2">美容</string>
+    <string name="apply_text3">美睫</string>
+    <string name="apply_text4">化妆造型</string>
+    <string name="apply_text5">日常保洁</string>
+    <string name="apply_text6">请上传身份证正反面</string>
+    <string name="apply_btn">提交申请</string>
 </resources>
