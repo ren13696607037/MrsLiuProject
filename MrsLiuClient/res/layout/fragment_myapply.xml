@@ -29,7 +29,7 @@
                 android:textColor="@color/color_33"
                 android:textSize="@dimen/app_text_size_first" />
 
-            <RadioGroup
+            <LinearLayout
                 android:id="@+id/apply_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,9 +73,9 @@
                     android:padding="10dip"
                     android:text="@string/apply_text3"
                     android:textColor="@color/color_33" />
-            </RadioGroup>
+            </LinearLayout>
 
-            <RadioGroup
+            <LinearLayout
                 android:id="@+id/apply_group1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                     android:padding="10dip"
                     android:text="@string/apply_text5"
                     android:textColor="@color/color_33" />
-            </RadioGroup>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

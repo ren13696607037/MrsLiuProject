@@ -302,7 +302,7 @@
     
     <string name="oldpass_hint">请输入旧密码</string>
     <string name="pass_hint">请输入新密码</string>
-    <string name="repass_hint">请输入确认密码</string>
+    <string name="repass_hint">请再次输入新密码</string>
     <string name="push_toast">你的帐号已在另一台手机登录了……</string>
 	<!-- 我的余额 -->
 	<string name="balance_text">余额记录</string>
@@ -350,4 +350,10 @@
     <string name="apply_text5">日常保洁</string>
     <string name="apply_text6">请上传身份证正反面</string>
     <string name="apply_btn">提交申请</string>
+    
+    <string name="change_pass_btn">确认提交</string>
+    <string name="cash_text">当前可提现金额：%1$s</string>
+    <string name="cash_text1">当前尚未绑定提款账户</string>
+    <string name="cash_text2">提交申请</string>
+    <string name="cash_hint">提交申请后3-5个工作日内到账</string>
 </resources>

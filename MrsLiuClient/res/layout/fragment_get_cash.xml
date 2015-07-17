@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include layout="@layout/fragment_common" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/header_bar_height"
+        android:background="@color/background" >
+
+        <TextView
+            android:id="@+id/cash_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_20"
+            android:background="@drawable/cash_frame_off"
+            android:gravity="center"
+            android:paddingBottom="@dimen/px_40"
+            android:paddingTop="@dimen/px_40"
+            android:text="@string/cash_text"
+            android:textColor="@color/color_3d"
+            android:textSize="@dimen/dialog_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/cash_text"
+            android:layout_marginLeft="@dimen/px_21"
+            android:layout_marginRight="@dimen/px_21"
+            android:background="@color/color_cash_line" />
+
+        <TextView
+            android:id="@+id/cash_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cash_text"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_21"
+            android:background="@drawable/cash_frame"
+            android:gravity="center"
+            android:paddingBottom="@dimen/px_20"
+            android:paddingTop="@dimen/px_20"
+            android:text="@string/cash_text1"
+            android:textColor="@color/color_3d"
+            android:textSize="@dimen/app_text_size_first" />
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pcenter_arrow"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/cash_account"
+            android:layout_alignBottom="@id/cash_account"
+            android:scaleType="centerInside"
+            android:layout_marginRight="@dimen/px_40"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/cash_account"
+            android:layout_marginLeft="@dimen/px_21"
+            android:layout_marginRight="@dimen/px_21"
+            android:background="@color/color_cash_line" />
+        <Button 
+            android:id="@+id/cash_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cash_account"
+            android:layout_marginTop="@dimen/px_110"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:background="@drawable/login_button_blue"
+            android:text="@string/cash_text2"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first"
+            android:padding="@dimen/px_20"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cash_btn"
+            android:text="@string/cash_hint"
+            android:textColor="@color/color_cash_hint"
+            android:textSize="@dimen/app_text_size_min"
+            android:layout_marginTop="@dimen/px_25"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

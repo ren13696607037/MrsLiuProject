@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -20,8 +21,6 @@ import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class MyApplyFragment extends CommonFragment implements OnClickListener{
 	private MyApplyActivity mActivity;
-	private RadioGroup mGroup;
-	private RadioGroup mGroup2;
 	private RadioButton mManicure;
 	private RadioButton mBeauty;
 	private RadioButton mEyelash;
@@ -74,75 +73,18 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
     	setTitleText(R.string.pcenter_apply);
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	
-    	mGroup = (RadioGroup) view.findViewById(R.id.apply_group);
-    	mGroup2 = (RadioGroup) view.findViewById(R.id.apply_group1);
     	mBeauty = (RadioButton) view.findViewById(R.id.apply_beauty);
     	mDaily = (RadioButton) view.findViewById(R.id.apply_daily);
     	mEyelash = (RadioButton) view.findViewById(R.id.apply_eyelash);
     	mMakeup = (RadioButton) view.findViewById(R.id.apply_makeup);
     	mManicure = (RadioButton) view.findViewById(R.id.apply_manicure);
     	
-//    	mBeauty.setOnClickListener(this);
-//    	mDaily.setOnClickListener(this);
-//    	mEyelash.setOnClickListener(this);
-//    	mMakeup.setOnClickListener(this);
-//    	mManicure.setOnClickListener(this);
+    	mBeauty.setOnClickListener(this);
+    	mDaily.setOnClickListener(this);
+    	mEyelash.setOnClickListener(this);
+    	mMakeup.setOnClickListener(this);
+    	mManicure.setOnClickListener(this);
     	
-    	mGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-//				Toast.makeText(mActivity, "1 is-=-"+checkedId, Toast.LENGTH_SHORT).show();
-//				switch (checkedId) {
-//				case R.id.apply_beauty:
-//					mBeauty.setChecked(true);
-//					break;
-//				case R.id.apply_manicure:
-//					mManicure.setChecked(true);
-//					break;
-//				case R.id.apply_eyelash:
-//					mEyelash.setChecked(true);
-//					break;
-//				default:
-//					break;
-//				}
-				if(!isSelect){
-					Toast.makeText(mActivity, "1 group is-=-"+checkedId, Toast.LENGTH_SHORT).show();
-					mGroup2.clearCheck();
-					isSelect = true;
-				}/*else{
-//					mGroup.check(checkedId);
-//				}*/
-			}
-		});
-    	mGroup2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-//				Toast.makeText(mActivity, "2 is-=-"+checkedId, Toast.LENGTH_SHORT).show();
-//				switch (checkedId) {
-//				case R.id.apply_makeup:
-//					mMakeup.setChecked(true);
-//					break;
-//				case R.id.apply_daily:
-//					mDaily.setChecked(true);
-//					break;
-//				default:
-//					break;
-//				}
-				if(isSelect){
-//					Toast.makeText(mActivity, "2 group is-=-"+checkedId, Toast.LENGTH_SHORT).show();
-//					mBeauty.setChecked(false);
-//					mManicure.setChecked(false);
-//					mEyelash.setChecked(false);
-					mGroup.clearCheck();
-					isSelect = false;
-				}/*else{
-//					mGroup2.check(checkedId);
-//				}*/
-				
-			}
-		});
     }
 
 	@Override
@@ -152,41 +94,46 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		Toast.makeText(mActivity, "click id is" + v.getId() + isSelect, Toast.LENGTH_SHORT).show();
 		switch (v.getId()) {
 		case R.id.apply_beauty:
-			if(!isSelect && mGroup.getCheckedRadioButtonId() != v.getId()){
-				mBeauty.setChecked(true);
-			}
+			mBeauty.setChecked(true);
+			mDaily.setChecked(false);
+			mEyelash.setChecked(false);
+			mMakeup.setChecked(false);
+			mManicure.setChecked(false);
 			break;
 		case R.id.apply_daily:
-			if(isSelect && mGroup2.getCheckedRadioButtonId() != v.getId()){
-				mDaily.setChecked(true);
-			}
+			mDaily.setChecked(true);
+			mBeauty.setChecked(false);
+			mEyelash.setChecked(false);
+			mMakeup.setChecked(false);
+			mManicure.setChecked(false);
 			break;
 		case R.id.apply_eyelash:
-			if(!isSelect && mGroup.getCheckedRadioButtonId() != v.getId()){
-				mEyelash.setChecked(true);
-			}
+			mEyelash.setChecked(true);
+			mBeauty.setChecked(false);
+			mDaily.setChecked(false);
+			mMakeup.setChecked(false);
+			mManicure.setChecked(false);
 			break;
 		case R.id.apply_makeup:
-			if(isSelect && mGroup2.getCheckedRadioButtonId() != v.getId()){
-				mMakeup.setChecked(true);
-			}
+			mMakeup.setChecked(true);
+			mBeauty.setChecked(false);
+			mDaily.setChecked(false);
+			mEyelash.setChecked(false);
+			mManicure.setChecked(false);
 			break;
 		case R.id.apply_manicure:
-			if(!isSelect && mGroup.getCheckedRadioButtonId() != v.getId()){
-				mManicure.setChecked(true);
-			}
+			mManicure.setChecked(true);
+			mBeauty.setChecked(false);
+			mDaily.setChecked(false);
+			mEyelash.setChecked(false);
+			mMakeup.setChecked(false);
 			break;
 
 		default:
 			break;
 		}
-	}
-	private void setOtherFalse(int id, RadioGroup group){
-		group.check(id);
-		group.clearCheck();
 	}
 
 }

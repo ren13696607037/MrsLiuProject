@@ -23,39 +23,41 @@
             android:paddingTop="@dimen/px_10" >
 
             <ImageView
-                android:id="@+id/changeadd_img"
+                android:id="@+id/changepass_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/px_15"
-                android:src="@drawable/register_name" />
+                android:padding="@dimen/px_25"
+                android:src="@drawable/login_pass" />
 
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/changeadd_img"
-                android:layout_alignTop="@id/changeadd_img"
+                android:layout_alignBottom="@id/changepass_img"
+                android:layout_alignTop="@id/changepass_img"
                 android:layout_marginBottom="@dimen/px_15"
                 android:layout_marginLeft="@dimen/px_10"
                 android:layout_marginTop="@dimen/px_15"
-                android:layout_toRightOf="@id/changeadd_img"
+                android:layout_toRightOf="@id/changepass_img"
                 android:background="@color/color_be" />
 
             <EditText
-                android:id="@+id/changeadd_name"
+                android:id="@+id/changepass_old"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/changeadd_img"
-                android:layout_alignTop="@id/changeadd_img"
+                android:layout_alignBottom="@id/changepass_img"
+                android:layout_alignTop="@id/changepass_img"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/px_28"
-                android:layout_toRightOf="@id/changeadd_img"
+                android:layout_toRightOf="@id/changepass_img"
                 android:background="@null"
-                android:hint="@string/changeadd_text"
+                android:hint="@string/oldpass_hint"
                 android:singleLine="true"
                 android:textColor="@color/color_33"
                 android:textColorHint="@color/color_be"
-                android:textSize="@dimen/app_text_size_first" />
+                android:textSize="@dimen/app_text_size_first" 
+                android:password="true"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -66,40 +68,41 @@
             android:background="@drawable/add_frame_bottom" >
 
             <ImageView
-                android:id="@+id/changeadd_img1"
+                android:id="@+id/changepass_img1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/px_15"
-                android:src="@drawable/register_phone" />
+                android:padding="@dimen/px_25"
+                android:src="@drawable/login_pass" />
 
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/changeadd_img1"
-                android:layout_alignTop="@id/changeadd_img1"
+                android:layout_alignBottom="@id/changepass_img1"
+                android:layout_alignTop="@id/changepass_img1"
                 android:layout_marginBottom="@dimen/px_15"
                 android:layout_marginLeft="@dimen/px_10"
                 android:layout_marginTop="@dimen/px_15"
-                android:layout_toRightOf="@id/changeadd_img1"
+                android:layout_toRightOf="@id/changepass_img1"
                 android:background="@color/color_be" />
 
             <EditText
-                android:id="@+id/changeadd_phone"
+                android:id="@+id/changepass_new"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/changeadd_img1"
-                android:layout_alignTop="@id/changeadd_img1"
+                android:layout_alignBottom="@id/changepass_img1"
+                android:layout_alignTop="@id/changepass_img1"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/px_28"
-                android:layout_toRightOf="@id/changeadd_img1"
+                android:layout_toRightOf="@id/changepass_img1"
                 android:background="@null"
-                android:hint="@string/changeadd_text1"
-                android:inputType="phone"
+                android:hint="@string/pass_hint"
                 android:singleLine="true"
                 android:textColor="@color/color_33"
                 android:textColorHint="@color/color_be"
-                android:textSize="@dimen/app_text_size_first" />
+                android:textSize="@dimen/app_text_size_first" 
+                android:password="true"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -110,43 +113,45 @@
             android:background="@drawable/add_frame_bottom" >
 
             <ImageView
-                android:id="@+id/changeadd_img2"
+                android:id="@+id/changepass_img2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/px_15"
-                android:src="@drawable/address_detail" />
+                android:padding="@dimen/px_25"
+                android:src="@drawable/login_pass" />
 
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/changeadd_img2"
-                android:layout_alignTop="@id/changeadd_img2"
+                android:layout_alignBottom="@id/changepass_img2"
+                android:layout_alignTop="@id/changepass_img2"
                 android:layout_marginBottom="@dimen/px_15"
                 android:layout_marginLeft="@dimen/px_10"
                 android:layout_marginTop="@dimen/px_15"
-                android:layout_toRightOf="@id/changeadd_img2"
+                android:layout_toRightOf="@id/changepass_img2"
                 android:background="@color/color_be" />
 
             <EditText
-                android:id="@+id/changeadd_add"
+                android:id="@+id/changepass_repass"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/changeadd_img2"
-                android:layout_alignTop="@id/changeadd_img2"
+                android:layout_alignBottom="@id/changepass_img2"
+                android:layout_alignTop="@id/changepass_img2"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/px_28"
-                android:layout_toRightOf="@id/changeadd_img2"
+                android:layout_toRightOf="@id/changepass_img2"
                 android:background="@null"
-                android:hint="@string/changeadd_text2"
+                android:hint="@string/repass_hint"
                 android:singleLine="true"
                 android:textColor="@color/color_33"
                 android:textColorHint="@color/color_be"
-                android:textSize="@dimen/app_text_size_first" />
+                android:textSize="@dimen/app_text_size_first" 
+                android:password="true"
+                />
         </RelativeLayout>
 
         <Button
-            android:id="@+id/changeadd_btn"
+            android:id="@+id/changepass_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/px_40"
@@ -154,7 +159,7 @@
             android:layout_marginTop="@dimen/px_80"
             android:background="@drawable/login_button_blue"
             android:padding="@dimen/px_20"
-            android:text="@string/changeadd_text3"
+            android:text="@string/change_pass_btn"
             android:textColor="@android:color/white"
             android:textSize="@dimen/app_text_size_first" />
     </LinearLayout>

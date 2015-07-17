@@ -80,11 +80,16 @@
 	<color name="color_register">#ff7800</color>
 	<color name="color_register_on">#FF7006</color>
 	<color name="color_33">#333333</color>
+	<color name="color_3d">#3d3d3d</color>
 	<color name="color_balance_red">#ea5e4d</color>
 	<color name="color_fa">#fafafa</color>
+	<color name="color_f2">#f2f2f2</color>
 	<color name="color_22">#222222</color>
 	<color name="color_8f">#8f8f8f</color>
 	<color name="color_service_num">#f78222</color>
 	<color name="color_service_price">#fb0808</color>
+	<color name="color_cash_line">#c7c7c7</color>
+	<color name="color_cash_price">#ee110c</color>
+	<color name="color_cash_hint">#858585</color>
 
 </resources>
