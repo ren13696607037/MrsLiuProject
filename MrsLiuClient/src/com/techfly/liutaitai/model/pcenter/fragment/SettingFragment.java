@@ -1,6 +1,7 @@
 package com.techfly.liutaitai.model.pcenter.fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +17,9 @@ import com.techfly.liutaitai.model.pcenter.activities.HelpActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SettingActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SuggestActivity;
 import com.techfly.liutaitai.update.UpdateMgr;
+import com.techfly.liutaitai.util.AlertDialogUtils;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class SettingFragment extends CommonFragment implements OnClickListener{
@@ -26,6 +29,8 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
 	private RelativeLayout mSuggest;//意见反馈
 	private RelativeLayout mShare;  //分享
 	private Button mExit;      //退出登录
+	private Dialog mDialog;
+	private SharePreferenceUtils mPreferenceUtils;
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -35,6 +40,7 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPreferenceUtils = SharePreferenceUtils.getInstance(mActivity);
     }
     
 
@@ -104,7 +110,18 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
 			
 		    break;
 		case R.id.setting_exit:
-			
+			mDialog = new Dialog(mActivity, R.style.MyDialog);
+        	mDialog = AlertDialogUtils.displayMyAlertChoice(mActivity, R.string.setting_exit, R.string.setting_exit, R.string.confirm, new View.OnClickListener() {
+                
+                @Override
+                public void onClick(View arg0) {
+                    mPreferenceUtils.clearUser();
+                    mDialog.dismiss();
+                    mActivity.setResult(Constant.EXIT_SUCCESS);
+                    mActivity.finish();
+                }
+            }, R.string.cancel, null);
+        	mDialog.show();
 			break;
 		default:
 			break;

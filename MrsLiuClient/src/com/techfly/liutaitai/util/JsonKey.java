@@ -27,7 +27,7 @@ public interface JsonKey {
 	interface UserKey {
 		static final String ID = "id";
 		static final String NAME = "name";
-		static final String MOBILE = "mobile";
+		static final String MOBILE = "phone_number";
 		static final String PASS = "password";
 		static final String OPASS = "oldpasswd";
 		static final String TOKEN = "token";

@@ -1,18 +1,20 @@
 package com.techfly.liutaitai.util;
 
+import android.R.integer;
+
 public class Constant {
 
-	public static final String YIHUIMALL_BASE_URL = "http://app.yhmall.com:8880/apis/";
+	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/jerservice/";
 //	public static final String YIHUIMALL_BASE_URL = "http://192.168.0.212:8080/yhmall-api/";
 
 
 
 	public static final String PRODUCT_CATEGORY = "goods/category/root";
 	public static final String PRODUCT_GROUP = "yiqituan";
-	public static final String SMSCODE_URL = "auth/smscode";
+	public static final String SMSCODE_URL = "user/vcode";
 	public static final String LOGIN_URL = "auth/login";
 	public static final String LOGIN_EMAIL_URL = "auth-web/login";
-	public static final String REGISTER_URL = "auth/regist";
+	public static final String REGISTER_URL = "user/appregist";
 	public static final String REGISTER_EMAIL_URL = "auth-web/regist";
 	public static final String SUGGEST_URL = "member/suggestions";
 	public static final String ADDRESS_URL = "member/address";
@@ -105,6 +107,8 @@ public class Constant {
 	public static final int AD_MANAGE_SUCCESS = 820;
 	public static final int PRO_INTENT = 821;
 	public static final int PRO_SUCCESS = 822;
+	public static final int EXIT_INTENT = 823;
+	public static final int EXIT_SUCCESS = 824;
 
 	public static final int PRODUCT_SALE_REQ = 1;// 按销量请求
 	public static final int PRODUCT_PRICE_REQ = 2;// 按价格请求

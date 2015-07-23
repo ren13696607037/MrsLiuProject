@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,9 +19,7 @@ import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyApplyActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyBalanceActivity;
-import com.techfly.liutaitai.model.pcenter.activities.MyBrowserActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyCollectActivity;
-import com.techfly.liutaitai.model.pcenter.activities.MyOrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyServiceActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PCenterHomeActivity;
@@ -43,6 +42,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 	private RelativeLayout mService;//我的服务
 	private TextView mTvNick;
 	private User mUser;
+	private Button mButton;
 
     @Override
     public void requestData() {
@@ -58,11 +58,6 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        User user = new User();
-        user.setmId("1");
-        user.setmPhone("13112345678");
-        user.setmNick("ceshi");
-        SharePreferenceUtils.getInstance(mActivity).saveUser(user);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
     }
 
@@ -88,7 +83,8 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(mActivity,SettingActivity.class));
+				startActivityForResult(new Intent(mActivity,SettingActivity.class), Constant.EXIT_INTENT);
+				
 			}
 		});
     }
@@ -102,7 +98,9 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	mApply = (RelativeLayout) view.findViewById(R.id.pcenter_apply);
     	mService = (RelativeLayout) view.findViewById(R.id.pcenter_service);
     	mVoucher = (RelativeLayout) view.findViewById(R.id.pcenter_voucher);
+    	mButton = (Button) view.findViewById(R.id.mine_btn);
     	
+    	mButton.setOnClickListener(this);
     	mCollect.setOnClickListener(this);
     	mVoucher.setOnClickListener(this);
     	mWelcome.setOnClickListener(this);
@@ -163,7 +161,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 				showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
 			}
 			break;
-		case R.id.pcenter_welcome:
+		case R.id.pcenter_welcome: case R.id.mine_btn:
 			 Intent loginIntent=new Intent(mActivity,LoginActivity.class);
 			 startActivityForResult(loginIntent, Constant.LOGIN_INTENT);
 			break;
@@ -208,7 +206,10 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(resultCode==Constant.LOGIN_SUCCESS){
+		if (resultCode == Constant.EXIT_SUCCESS
+				|| resultCode == Constant.LOGIN_SUCCESS
+				|| resultCode == Constant.REGISTER_SUCCESS) {
+			mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 			setView();
 		}
 	}

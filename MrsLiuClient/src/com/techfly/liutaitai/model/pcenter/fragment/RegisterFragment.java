@@ -21,12 +21,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.bizz.parser.RegisterParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.MD5;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -49,29 +54,29 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
         @Override
         public void handleMessage(Message msg) {
             if (mUser != null) {
-//            	if (mUser.getId()==0&&mUser.getPhone() != null) {
-//                    if (!TextUtils.isEmpty(mUser.getScore()) && !"null".equals(mUser.getScore())) {
-//                        SmartToast.makeText(getActivity(), mUser.getScore(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }else if(mUser.getId()!=0){
-//                	mUser.setPass(mEtPass.getText().toString());
-//                		SmartToast.makeText(getActivity(), R.string.register_success, Toast.LENGTH_SHORT).show();
-//                		SharePreferenceUtils.getInstance(getActivity()).saveUser(mUser);
-//                        getActivity().setResult(Constant.REGISTER_SUCCESS);
-//                        getActivity().finish();
-//                }else if (mUser.getId()== 0 && mUser.getPhone()== null) {
-//                    if(!TextUtils.isEmpty(mUser.getScore()) && !"null".equals(mUser.getScore())){
-//                    	SmartToast.makeText(getActivity(), mUser.getScore(), Toast.LENGTH_SHORT).show();
-//                    }else {
-//                    	SmartToast.makeText(getActivity(), R.string.register_error, Toast.LENGTH_SHORT).show();
-//                    }
-//                    mEtCode.setText("");
-//                    mEtPass.setText("");
-//                    MSG_TOTAL_TIME=-2;
-//                    Message message = new Message();
-//                    message.what = MSG_UPDATE_TIME;
-//                    timeHandler.sendMessage(message);
-//                }
+            	if ("0".equals(mUser.getmId()) && mUser.getmPhone() != null) {
+                    if (!TextUtils.isEmpty(mUser.getmMessage()) && !"null".equals(mUser.getmMessage())) {
+                        SmartToast.makeText(getActivity(), mUser.getmMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }else if(!"0".equals(mUser.getmId())){
+                	mUser.setmPass(mEtPass.getText().toString());
+                		SmartToast.makeText(getActivity(), R.string.register_success, Toast.LENGTH_SHORT).show();
+                		SharePreferenceUtils.getInstance(getActivity()).saveUser(mUser);
+                        getActivity().setResult(Constant.REGISTER_SUCCESS);
+                        getActivity().finish();
+                }else if ("0".equals(mUser.getmId()) && mUser.getmPhone()== null) {
+                    if(!TextUtils.isEmpty(mUser.getmMessage()) && !"null".equals(mUser.getmMessage())){
+                    	SmartToast.makeText(getActivity(), mUser.getmMessage(), Toast.LENGTH_SHORT).show();
+                    }else {
+                    	SmartToast.makeText(getActivity(), R.string.register_error, Toast.LENGTH_SHORT).show();
+                    }
+                    mEtCode.setText("");
+                    mEtPass.setText("");
+                    MSG_TOTAL_TIME=-2;
+                    Message message = new Message();
+                    message.what = MSG_UPDATE_TIME;
+                    timeHandler.sendMessage(message);
+                }
             }
         }
 
@@ -153,6 +158,8 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
         onInitView(view);
     }
     private void onInitView(View view){
+    	setTitleText(R.string.welcome_reg);
+    	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	mEtCode = (EditText) view.findViewById(R.id.register_code);
         mEtPass = (EditText) view.findViewById(R.id.register_pass);
         mEtPhone = (EditText) view.findViewById(R.id.register_phone);
@@ -167,23 +174,22 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
 		if (mIsCode) {
             RequestParam param = new RequestParam();
             HttpURL url = new HttpURL();
-//            url.setmBaseUrl(Constant.BASE_URL + Constant.CODE_URL);
-//            url.setmGetParamPrefix(JsonKey.UserKey.MOBILE).setmGetParamValues(mEtPhone.getText().toString());
-//            param.setmHttpURL(url);
-//            param.setmParserClassName(CommonParser.class.getName());
-//            RequestManager.getRequestData(getActivity(), createReqSuccessListener(), createReqErrorListener(), param);
+            url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SMSCODE_URL);
+            url.setmGetParamPrefix(JsonKey.UserKey.MOBILE).setmGetParamValues(mEtPhone.getText().toString());
+            param.setmHttpURL(url);
+            param.setPostRequestMethod();
+            param.setmParserClassName(CommonParser.class.getName());
+            RequestManager.getRequestData(getActivity(), createReqSuccessListener(), createReqErrorListener(), param);
         } else{
             RequestParam param = new RequestParam();
             HttpURL url = new HttpURL();
-//            url.setmBaseUrl(Constant.BASE_URL +Constant.REGISTER_URL);
-//            url.setmGetParamPrefix(JsonKey.UserKey.MOBILE).setmGetParamValues(mEtPhone.getText().toString()).setmGetParamPrefix(JsonKey.UserKey.PASS)
-//                    .setmGetParamValues(mEtPass.getText().toString()).setmGetParamPrefix(JsonKey.UserKey.SMS)
-//                    .setmGetParamValues(mEtCode.getText().toString()).setmGetParamPrefix(JsonKey.UserKey.TOKEN).setmGetParamValues(mToken);
-//            url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(JPushInterface.getRegistrationID(getActivity()));
-//            param.setPostRequestMethod();
-//            param.setmHttpURL(url);
-//            param.setmParserClassName(RegisterParser.class.getName());
-//            RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
+            url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL +Constant.REGISTER_URL);
+            url.setmGetParamPrefix(JsonKey.UserKey.MOBILE).setmGetParamValues(mEtPhone.getText().toString()).setmGetParamPrefix(JsonKey.UserKey.PASS)
+                    .setmGetParamValues(MD5.getDigest(mEtPass.getText().toString()));
+            param.setPostRequestMethod();
+            param.setmHttpURL(url);
+            param.setmParserClassName(RegisterParser.class.getName());
+            RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
         } 
 	}
 	private Response.Listener<Object> createMyReqSuccessListener() {
@@ -191,11 +197,23 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                mUser = (User) object;
+//                mUser = (User) object;
                 if (!isDetached()) {
+                	String code = (String) object;
+                	if(code == "200"){
+                		User user = new User();
+                		user.setmPhone(mEtPhone.getText().toString());
+                		user.setmId("1");
+                		SmartToast.makeText(getActivity(), R.string.register_success, Toast.LENGTH_SHORT).show();
+                		SharePreferenceUtils.getInstance(getActivity()).saveUser(mUser);
+                        getActivity().setResult(Constant.REGISTER_SUCCESS);
+                        getActivity().finish();
+                	}else{
+                		SmartToast.makeText(getActivity(), R.string.register_error, Toast.LENGTH_SHORT).show();
+                	}
                     timeHandler.sendEmptyMessage(2);
-                    mRegisterHandler.removeMessages(0);
-                    mRegisterHandler.sendEmptyMessage(0);
+//                    mRegisterHandler.removeMessages(0);
+//                    mRegisterHandler.sendEmptyMessage(0);
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }
@@ -222,12 +240,13 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ResultInfo info=(ResultInfo) object;
-                AppLog.Loge("xll", info.getmCode()+"="+info.getmData()+"="+info.getmMessage());
+                mToken = (String) object;
+//                ResultInfo info=(ResultInfo) object;
+//                AppLog.Loge("xll", info.getmCode()+"="+info.getmData()+"="+info.getmMessage());
                 if(!isDetached()){
                 	mEtCode.setText("");
                 	mEtPass.setText("");
-                	mToken=info.getmData();
+//                	mToken=info.getmData();
                 	Message msg1 = new Message();
                     msg1.what = 2;
                     timeHandler.sendMessage(msg1);
@@ -300,7 +319,11 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
 	            SmartToast.makeText(getActivity(), R.string.input_error, Toast.LENGTH_SHORT).show();
 	        } else {
 	            if (mEtPass.length() > 5&&mEtPass.length()<13) {
-	                startReqTask(this);
+//	            	if(mEtCode.getText().toString().equals(mToken)){
+	            		startReqTask(this);
+//	            	}else{
+//	            		showSmartToast(R.string.register_code_error, Toast.LENGTH_SHORT);
+//	            	}
 	            } else {
 	                showSmartToast(R.string.register_pass_error, Toast.LENGTH_SHORT);
 	                mEtPass.setText("");
