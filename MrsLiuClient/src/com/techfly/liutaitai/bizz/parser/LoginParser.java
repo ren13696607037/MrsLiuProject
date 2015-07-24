@@ -18,7 +18,7 @@ public class LoginParser implements Parser {
 			JSONObject obj = object.optJSONObject(JsonKey.DATA);
 			if (obj != null) {
 				user.setmId(obj.optString(JsonKey.UserKey.ID));
-				user.setmPhone(obj.optString(JsonKey.UserKey.MOBILE));
+				user.setmPhone(obj.optString(JsonKey.UserKey.LNAME));
 				user.setmPass(obj.optString(JsonKey.UserKey.PASS));
 				user.setmNick(obj.optString(JsonKey.UserKey.NAME));
 			} else {

@@ -20,17 +20,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.parser.LoginParser;
+import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
 import com.techfly.liutaitai.model.pcenter.activities.RegisterActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.AppManager;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.MD5;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class LoginFragment extends CommonFragment implements OnClickListener {
+	private LoginActivity mActivity;
 	private User mUser = new User();
 	private final int MSG_LOGIN = 0x102;
 	private LinearLayout mLayout;
@@ -47,26 +55,26 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case MSG_LOGIN:
-//				if (mUser.getPhone() != null) {
-//					Toast.makeText(getActivity(), R.string.login_success,
-//							Toast.LENGTH_SHORT).show();
+				if (mUser.getmPhone() != null) {
+					Toast.makeText(getActivity(), R.string.login_success,
+							Toast.LENGTH_SHORT).show();
 //					AppManager.getAppManager().finishActivity(
 //							TakeFirstOrderVerifyActivity.class);
-//					SharePreferenceUtils.getInstance(getActivity()).saveUser(
-//							mUser);
-//					getActivity().setResult(Constant.LOGIN_SUCCESS);
-//					getActivity().finish();
-//				} else {
-//					if (!TextUtils.isEmpty(mUser.getScore())
-//							&& !"null".equals(mUser.getScore())) {
-//						Toast.makeText(getActivity(), mUser.getScore(),
-//								Toast.LENGTH_SHORT).show();
-//					} else {
-//						Toast.makeText(getActivity(), R.string.login_error,
-//								Toast.LENGTH_SHORT).show();
-//					}
-//					mPass.setText("");
-//				}
+					SharePreferenceUtils.getInstance(mActivity).saveUser(
+							mUser);
+					mActivity.setResult(Constant.LOGIN_SUCCESS);
+					mActivity.finish();
+				} else {
+					if (!TextUtils.isEmpty(mUser.getmMessage())
+							&& !"null".equals(mUser.getmMessage())) {
+						Toast.makeText(getActivity(), mUser.getmMessage(),
+								Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(getActivity(), R.string.login_error,
+								Toast.LENGTH_SHORT).show();
+					}
+					mPass.setText("");
+				}
 				break;
 			default:
 				break;
@@ -77,6 +85,7 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mActivity = (LoginActivity) activity;
 	}
 
 	@Override
@@ -134,19 +143,19 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 	public void requestData() {
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
-//		url.setmBaseUrl(Constant.BASE_URL + Constant.LOGIN_URL);
-//		url.setmGetParamPrefix(JsonKey.UserKey.MOBILE)
-//				.setmGetParamValues(mPhone.getText().toString())
-//				.setmGetParamPrefix(JsonKey.UserKey.PASS)
-//				.setmGetParamValues(mPass.getText().toString());
+		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.LOGIN_URL);
+		url.setmGetParamPrefix(JsonKey.UserKey.LNAME)
+				.setmGetParamValues(mPhone.getText().toString())
+				.setmGetParamPrefix(JsonKey.UserKey.PASS)
+				.setmGetParamValues(MD5.getDigest(mPass.getText().toString()));
 //		url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
 //				JPushInterface.getRegistrationID(getActivity()));
-//		param.setmHttpURL(url);
-//		param.setPostRequestMethod();
-//		param.setmParserClassName(LoginParser.class.getName());
-//		RequestManager
-//				.getRequestData(getActivity(), createMyReqSuccessListener(),
-//						createMyReqErrorListener(), param);
+		param.setmHttpURL(url);
+		param.setPostRequestMethod();
+		param.setmParserClassName(LoginParser.class.getName());
+		RequestManager
+				.getRequestData(getActivity(), createMyReqSuccessListener(),
+						createMyReqErrorListener(), param);
 
 	}
 
@@ -156,6 +165,7 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 			public void onResponse(Object object) {
 				AppLog.Logd(object.toString());
 				mUser = (User) object;
+				AppLog.Loge("xll", mUser.toString());
 //				mUser.setPass(mPass.getText().toString());
 				if (!isDetached()) {
 					loginHandler.removeMessages(MSG_LOGIN);

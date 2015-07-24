@@ -25,10 +25,10 @@ public interface JsonKey {
 	}
 
 	interface UserKey {
-		static final String ID = "id";
+		static final String ID = "uid";
 		static final String NAME = "name";
 		static final String MOBILE = "phone_number";
-		static final String PASS = "password";
+		static final String PASS = "login_password";
 		static final String OPASS = "oldpasswd";
 		static final String TOKEN = "token";
 		static final String SMS = "smscode";
@@ -37,6 +37,8 @@ public interface JsonKey {
 		static final String EMAIL = "email";
 		static final String CODEURL = "codeUrl";
 		static final String COMMENT = "commentjson";
+		static final String LNAME = "login_name";
+		static final String NPASS = "newpassword";
 	}
 
 	interface SuggestKey {

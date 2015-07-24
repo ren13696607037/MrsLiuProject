@@ -12,7 +12,7 @@ public class Constant {
 	public static final String PRODUCT_CATEGORY = "goods/category/root";
 	public static final String PRODUCT_GROUP = "yiqituan";
 	public static final String SMSCODE_URL = "user/vcode";
-	public static final String LOGIN_URL = "auth/login";
+	public static final String LOGIN_URL = "user/applogin";
 	public static final String LOGIN_EMAIL_URL = "auth-web/login";
 	public static final String REGISTER_URL = "user/appregist";
 	public static final String REGISTER_EMAIL_URL = "auth-web/regist";
@@ -54,7 +54,7 @@ public class Constant {
 	public static final String GOODS_COLLECT = "goods/collect";// 收藏
 	public static final String GOODS_UNCOLLECT = "goods/collect/delete";// 取消收藏
 	public static final String GOODS_PIC_TEXT = "goods/detail/";// 取消收藏
-	public static final String PASS_URL = "auth/passwd";
+	public static final String PASS_URL = "user/updatepassword";//修改密码
 
 	public static final String PRODUCT_LIST = "goods/category/list";
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";

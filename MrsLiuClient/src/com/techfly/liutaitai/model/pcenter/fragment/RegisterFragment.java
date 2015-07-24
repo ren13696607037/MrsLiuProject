@@ -197,23 +197,11 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-//                mUser = (User) object;
+                mUser = (User) object;
                 if (!isDetached()) {
-                	String code = (String) object;
-                	if(code == "200"){
-                		User user = new User();
-                		user.setmPhone(mEtPhone.getText().toString());
-                		user.setmId("1");
-                		SmartToast.makeText(getActivity(), R.string.register_success, Toast.LENGTH_SHORT).show();
-                		SharePreferenceUtils.getInstance(getActivity()).saveUser(mUser);
-                        getActivity().setResult(Constant.REGISTER_SUCCESS);
-                        getActivity().finish();
-                	}else{
-                		SmartToast.makeText(getActivity(), R.string.register_error, Toast.LENGTH_SHORT).show();
-                	}
                     timeHandler.sendEmptyMessage(2);
-//                    mRegisterHandler.removeMessages(0);
-//                    mRegisterHandler.sendEmptyMessage(0);
+                    mRegisterHandler.removeMessages(0);
+                    mRegisterHandler.sendEmptyMessage(0);
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }
@@ -240,18 +228,25 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                mToken = (String) object;
-//                ResultInfo info=(ResultInfo) object;
-//                AppLog.Loge("xll", info.getmCode()+"="+info.getmData()+"="+info.getmMessage());
+                ResultInfo info=(ResultInfo) object;
+                AppLog.Loge("xll", info.getmCode()+"="+info.getmData()+"="+info.getmMessage());
                 if(!isDetached()){
-                	mEtCode.setText("");
-                	mEtPass.setText("");
-//                	mToken=info.getmData();
                 	Message msg1 = new Message();
                     msg1.what = 2;
                     timeHandler.sendMessage(msg1);
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                	if(info.getmCode() == 10){
+                		mEtCode.setText("");
+                    	mEtPass.setText("");
+                    	mToken=info.getmData();
+                	}else{
+                		MSG_TOTAL_TIME=-2;
+                        Message message = new Message();
+                        message.what = MSG_UPDATE_TIME;
+                        timeHandler.sendMessageDelayed(message,50);
+                		showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
+                	}
                 }
             }
         };

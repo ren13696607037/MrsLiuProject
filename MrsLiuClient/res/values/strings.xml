@@ -91,7 +91,7 @@
     <string name="input_error">填写为空，请重新填写！</string>
     <string name="area_error">所在地为空，请选择地址！</string>
     <string name="phone_error">请输入正确的手机号码！</string>
-    <string name="register_pass_error">您输入的密码过短，请输入5位以上的密码！</string>
+    <string name="register_pass_error">请输入6-12位密码！</string>
     <string name="register_code_error">您输入的验证码有误，请重新输入！</string>
     <string name="register_repass_error">您输入的密码和确认密码不一致，请重新输入！</string>
     <string name="register_email_hint">请输入邮箱</string>

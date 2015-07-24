@@ -28,15 +28,14 @@ public class CommonParser implements Parser{
     @Override
     public Object fromJson(String json) {
     	AppLog.Loge("xll", json);
-    	return json;
-//        JSONObject object;
-//        try {
-//            object = new JSONObject(json);
-//            return fromJson(object);
-//        } catch (JSONException e) {
-//            AppLog.Logd("Fly", "JSONException" + e.getMessage());
-//        }
-//        return null;
+        JSONObject object;
+        try {
+            object = new JSONObject(json);
+            return fromJson(object);
+        } catch (JSONException e) {
+            AppLog.Logd("Fly", "JSONException" + e.getMessage());
+        }
+        return null;
     }
     
 }

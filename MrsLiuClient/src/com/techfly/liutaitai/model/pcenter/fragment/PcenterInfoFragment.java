@@ -27,6 +27,8 @@ import com.techfly.liutaitai.bizz.parser.AddressManageParser;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.shopcar.OnShopCarLisManager;
 import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
+import com.techfly.liutaitai.model.pcenter.activities.ChangeNickActivity;
+import com.techfly.liutaitai.model.pcenter.activities.ChangePassActivity;
 import com.techfly.liutaitai.model.pcenter.activities.ForgetNextActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PcenterInfoActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -147,10 +149,10 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.info_change:
-			
+			startActivity(new Intent(mActivity,ChangePassActivity.class));
 			break;
 		case R.id.info_nick:
-			startActivity(new Intent(mActivity,AddressManageActivity.class));
+			startActivity(new Intent(mActivity,ChangeNickActivity.class));
 			break;
 
 		default:
