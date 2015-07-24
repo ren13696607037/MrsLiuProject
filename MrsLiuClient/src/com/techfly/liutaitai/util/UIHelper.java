@@ -123,5 +123,15 @@ public class UIHelper {
 				Constant.ORDER_CITY_INTENT);
 		context.startActivityForResult(intent, Constant.ORDER_CITY_INTENT);
 	}
+	
+	
+	public static void toServiceListActivity(Fragment context) {
+        Intent intent = new Intent(context.getActivity(),
+                AddressManageActivity.class);
+        intent.putExtra(IntentBundleKey.ADDRESS_EXTRA,
+                Constant.ORDER_CITY_INTENT);
+        context.startActivityForResult(intent, Constant.ORDER_CITY_INTENT);
+    }
+
 
 }

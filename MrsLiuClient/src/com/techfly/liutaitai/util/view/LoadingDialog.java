@@ -185,7 +185,7 @@ public class LoadingDialog extends Dialog {
             failMsg = mActivity.getString(R.string.loading_fail_nodata);
             break;
         }
-        Toast.makeText(mActivity, failMsg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity,  failMsg, Toast.LENGTH_LONG).show();
     }
     private class OnClickListener implements View.OnClickListener{
 

@@ -14,6 +14,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.home.adapter.BannerAdapter;
 import com.techfly.liutaitai.model.home.bean.Banner;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.ViewPagerWrapper;
 
@@ -167,7 +168,7 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
             
             break;
         case R.id.manicure_service:
-            
+          
             break;
             
         case R.id.laundry_service:
