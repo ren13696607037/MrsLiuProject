@@ -93,15 +93,29 @@
     	android:src="@drawable/list_line"
          />
      
-      <com.techfly.liutaitai.util.view.XListView
-        android:id="@+id/xlistview"
-        android:scrollbars="none"
+  <com.techfly.liutaitai.util.view.PullToRefreshLayout
+        android:id="@+id/layout_parts"
         android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:divider="@drawable/list_line"
-        android:listSelector="@drawable/listview_item_click_select"
-        />
-    
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal" >
+
+        <include layout="@layout/refresh_head" />
+
+        <com.techfly.liutaitai.util.view.PullableGridView
+            android:id="@+id/gridview_parts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/TextColorWhite"
+            android:horizontalSpacing="30dp"
+            android:numColumns="2"
+            android:padding="12dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp" >
+        </com.techfly.liutaitai.util.view.PullableGridView>
+
+        <include layout="@layout/load_more" />
+    </com.techfly.liutaitai.util.view.PullToRefreshLayout>
 
 </LinearLayout>
 

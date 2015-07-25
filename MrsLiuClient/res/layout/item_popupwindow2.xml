@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_common"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/service_cate1"
+      android:gravity="center"
+      android:paddingTop="5dp"
+      android:paddingBottom="5dp"
+    android:orientation="vertical" >
+
+    <TextView 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/textview"
+         android:text="蜀山区"
+         android:gravity="center"
+         android:textSize="@dimen/app_text_size_second"
+         android:textColor="@color/TextColorBLACK_SMALL"
+        ></TextView>
+
+    
+    
+</LinearLayout>

@@ -165,20 +165,21 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
         switch (arg0.getId()) {
         
         case R.id.makeup_service:
-            
+             UIHelper.toServiceListActivity(this,4);
             break;
         case R.id.manicure_service:
-          
+            UIHelper.toServiceListActivity(this,1);
+            
             break;
             
         case R.id.laundry_service:
             
             break;
         case R.id.beauty_service:
-            
+            UIHelper.toServiceListActivity(this,3);
             break;
        case R.id.   cosmetology_service:
-            
+           UIHelper.toServiceListActivity(this,2);
             break;      
        case R.id.   cleaning_service:
            

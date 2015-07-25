@@ -8,6 +8,7 @@ import com.techfly.liutaitai.model.home.activities.SearchActivity;
 import com.techfly.liutaitai.model.mall.activities.CategoryInfoListActivity;
 import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
+import com.techfly.liutaitai.model.mall.activities.ServiceListActivity;
 import com.techfly.liutaitai.model.mall.activities.TuanGouActivity;
 import com.techfly.liutaitai.model.mall.bean.Category;
 import com.techfly.liutaitai.model.mall.bean.Product;
@@ -125,12 +126,12 @@ public class UIHelper {
 	}
 	
 	
-	public static void toServiceListActivity(Fragment context) {
+	public static void toServiceListActivity(Fragment context,int type) {
         Intent intent = new Intent(context.getActivity(),
-                AddressManageActivity.class);
-        intent.putExtra(IntentBundleKey.ADDRESS_EXTRA,
-                Constant.ORDER_CITY_INTENT);
-        context.startActivityForResult(intent, Constant.ORDER_CITY_INTENT);
+                ServiceListActivity.class);
+        intent.putExtra("type",
+                type);
+        context.startActivity(intent);
     }
 
 
