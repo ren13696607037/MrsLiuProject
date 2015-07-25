@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -26,6 +25,12 @@ public class PopUpAdapter2 extends BaseAdapter{
         return mItemList==null?0:mItemList.size();
 //        return 10;
     }
+    
+    public void updateListView(List<SortRule> itemList){
+        mItemList =itemList;
+        notifyDataSetChanged();
+    }
+    
     public PopUpAdapter2(Context context, List<SortRule> items) {
         this.mContext = context;
         this.mItemList = items;

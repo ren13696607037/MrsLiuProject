@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +30,7 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.ServiceCategoryParser;
 import com.techfly.liutaitai.bizz.parser.ServiceParser;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter;
+import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter2;
 import com.techfly.liutaitai.model.mall.adapter.ServiceAdapter;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.mall.bean.SortRule;
@@ -67,7 +70,7 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
     private String mSortId;
    
 
-    private PopUpAdapter mPopAdapter1;
+    private PopUpAdapter2 mPopAdapter1;
     private PopUpAdapter mPopAdapter2;
     
     private List<SortRule> mSortRuleList;
@@ -78,6 +81,17 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
     List<Service> mList = new ArrayList<Service>();
     private PullToRefreshLayout mPull;
     private GridView mGrid;
+    
+    private Handler mHander = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            mPopAdapter1.updateListView(mSortRuleList);
+        }
+        
+    };
+    
     /**
      * 
      */
@@ -88,11 +102,11 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
         // 引入窗口配置文件
         View view = inflater.inflate(R.layout.service_popupwindow2, null);
         // 创建PopupWindow对象
-        mSortPop1 = new PopupWindow(view, Constant.SCREEN_WIDTH / 3 - 60,
+        mSortPop1 = new PopupWindow(view, Constant.SCREEN_WIDTH,
                 LayoutParams.WRAP_CONTENT, false);
         // 需要设置一下此参数，点击外边可消失
         mPopList1 = (GridViewForScrollView) view.findViewById(R.id.gridview);
-        mPopAdapter1 = new PopUpAdapter(getActivity(), mSortRuleList);
+        mPopAdapter1 = new PopUpAdapter2(getActivity(), mSortRuleList);
         mSortPop1.setBackgroundDrawable(new BitmapDrawable());
         mPopList1.setAdapter(mPopAdapter1);
         mPopList1.setOnItemClickListener(new OnItemClickListener() {
@@ -100,18 +114,21 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 sellerSortRuleStr = mSortRuleList.get(position).getmId();
+              
+                
                 for(int i =0;i<mSortRuleList.size();i++ ){
                     if(i==position){
-                        mSortRuleList.get(position).setmIsSelect(true);
+                        mSortRuleList.get(i).setmIsSelect(true);
                     }else{
-                        mSortRuleList.get(position).setmIsSelect(false);
+                        mSortRuleList.get(i).setmIsSelect(false);
                     }
                 }
                 mSortId =mSortRuleList.get(position).getmId();
                 mSortTv1.setText(mSortRuleList.get(position).getmName());
-                mPage=1;
-                mLoadHandler.sendEmptyMessageDelayed(Constant.NET_LOAD, 0);
-                mPopAdapter1.notifyDataSetChanged();
+                
+                mHander.sendEmptyMessageDelayed(0, 2000);
+                mPage = 1;
+                mList.clear();
                 getServiceList();
                 
                 mSortPop1.dismiss();
@@ -202,6 +219,7 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
                 AppLog.Loge(" data failed to load" + error.getMessage());
                 showSmartToast(R.string.loading_fail_server, Toast.LENGTH_SHORT);
                 if (!isDetached()) {
+                    mPull.refreshFinish(PullToRefreshLayout.FAIL);
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }
@@ -213,7 +231,7 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
       
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "commodity/sort/"+type+"/"+mSortId+"/"+mPage);
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "commodity/content/"+type+"/"+mSortId+"/"+mPage);
        
 //      url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
 //              JPushInterface.getRegistrationID(getActivity()));
@@ -229,23 +247,26 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
                 if (getActivity()!=null&&!isDetached()) {
-                   mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                   mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                    mLoadHandler.sendEmptyMessageDelayed(Constant.NET_SUCCESS,0);
+                    mPull.refreshFinish(PullToRefreshLayout.SUCCEED);
                    ResultInfo result = (ResultInfo) object;
                    if(result.getmCode()==10){
                        List<Service> list = new ArrayList<Service>();
                        list = (List<Service>) result.getObject();
                        if(list.size()>=10){
-                           mPull.setPullLoadEnable(false);
-                       }else{
+                           mPull.setPullRefreshEnable(true);
                            mPull.setPullLoadEnable(true);
+                       }else{
+                           mPull.setPullRefreshEnable(true);
+                           mPull.setPullLoadEnable(false);
                        }
                        mList.addAll(list);
                        mAdapter.notifyDataSetChanged();
                    }else{
                        showSmartToast(result.getmMessage(), Toast.LENGTH_LONG);
                    }
-                 
+                
                    
                 }
             }
@@ -307,8 +328,6 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
       
         mPull = (PullToRefreshLayout) view.findViewById(R.id.layout_parts);
         mPull.setOnRefreshListener(this);
-        
-     
         mGrid = (GridView) view.findViewById(R.id.gridview_parts);
         mAdapter = new ServiceAdapter(getActivity(), mList);
         mGrid.setAdapter(mAdapter);

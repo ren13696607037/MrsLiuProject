@@ -217,7 +217,7 @@ public class PullToRefreshLayout extends RelativeLayout {
 				changeState(DONE);
 				hide();
 			}
-		}.sendEmptyMessageDelayed(0, 1000);
+		}.sendEmptyMessageDelayed(0, 0);
 	}
 
 	/**
@@ -315,6 +315,12 @@ public class PullToRefreshLayout extends RelativeLayout {
      * @param enable
      */
     public void setPullRefreshEnable(boolean enable) {
+        if(enable){
+            refreshView.setVisibility(View.VISIBLE);
+            
+        }else{
+            refreshView.setVisibility(View.GONE);
+        }
          canPullDown=enable;
     }
 
@@ -324,7 +330,12 @@ public class PullToRefreshLayout extends RelativeLayout {
      * @param enable
      */
     public void setPullLoadEnable(boolean enable) {
-       canPullUp=enable;
+        if(enable){
+            loadmoreView.setVisibility(View.VISIBLE);
+        }else{
+            loadmoreView.setVisibility(View.GONE);
+        }
+       canPullUp = enable;
     }
 	/*
 	 * （非 Javadoc）由父控件决定是否分发事件，防止事件冲突
@@ -363,7 +374,9 @@ public class PullToRefreshLayout extends RelativeLayout {
 						// 正在刷新的时候触摸移动
 						isTouch = true;
 					}
-				} else if (((Pullable) pullableView).canPullUp() && canPullUp && state != REFRESHING) {
+				} else if (((Pullable) pullableView).canPullUp() && canPullUp && state != REFRESHING
+				        && loadmoreView.getVisibility()==View.VISIBLE)
+				        {
 					// 可以上拉，正在刷新时不能上拉
 					pullUpY = pullUpY + (ev.getY() - lastY) / radio;
 					if (pullUpY > 0) {
@@ -416,7 +429,7 @@ public class PullToRefreshLayout extends RelativeLayout {
 				// 刷新操作
 				if (mListener != null)
 					mListener.onRefresh(this);
-			} else if (state == RELEASE_TO_LOAD) {
+			} else if (state == RELEASE_TO_LOAD&&canPullUp) {
 				changeState(LOADING);
 				// 加载操作
 				if (mListener != null)
@@ -451,6 +464,8 @@ public class PullToRefreshLayout extends RelativeLayout {
 			refreshView = getChildAt(0);
 			pullableView = getChildAt(1);
 			loadmoreView = getChildAt(2);
+			refreshView.setVisibility(View.GONE);
+			loadmoreView.setVisibility(View.GONE);
 			isLayout = true;
 			initView();
 			refreshDist = ((ViewGroup) refreshView).getChildAt(0).getMeasuredHeight();

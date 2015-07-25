@@ -148,6 +148,7 @@ public class LoadingLayout extends FrameLayout {
 	 */
 	public void dissmissLoadingLayout() {
 		mLoadingLayout.setVisibility(View.GONE);
+	
   	    setContentVisibility(true);
 	}
 
