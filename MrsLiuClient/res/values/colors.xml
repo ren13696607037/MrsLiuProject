@@ -91,5 +91,10 @@
 	<color name="color_cash_line">#c7c7c7</color>
 	<color name="color_cash_price">#ee110c</color>
 	<color name="color_cash_hint">#858585</color>
+	<color name="color_order_service_manicure_color">#ff6e6e</color>
+	<color name="color_order_service_beauty_color">#b46dca</color>
+	<color name="color_order_service_eyelash_color">#fd9220</color>
+	<color name="color_order_service_makeup_color">#ffbc00</color>
+	<color name="color_order_service_daily_color">#00d69d</color>
 
 </resources>

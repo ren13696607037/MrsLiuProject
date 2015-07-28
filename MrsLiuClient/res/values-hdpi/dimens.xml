@@ -19,6 +19,7 @@
     <dimen name="px_20">11.11dp</dimen>
     <dimen name="px_21">11.67dp</dimen>
     <dimen name="px_25">13.89dp</dimen>
+    <dimen name="px_35">19.44dp</dimen>
     <dimen name="px_10">5.56dp</dimen>
     <dimen name="px_5">2.78dp</dimen>
     <dimen name="px_15">8.33dp</dimen>

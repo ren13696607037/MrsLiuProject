@@ -370,4 +370,28 @@
     <string name="cash_text2">提交申请</string>
     <string name="cash_hint">提交申请后3-5个工作日内到账</string>
     <string name="setting_exit">退出当前账号</string>
+    
+    <string name="order_service_text">服务时间：%1$s</string>
+    <string name="order_service_text1">美甲师</string>
+    <string name="order_service_text2">美容师</string>
+    <string name="order_service_text3">美睫师</string>
+    <string name="order_service_text4">化妆师</string>
+    <string name="order_service_text5">保洁师</string>
+    <string name="order_service_text6">保洁</string>
+    <string name="order_service_text7">化妆</string>
+    <string name="order_service_state">待支付</string>
+    <string name="order_service_state1">待接单</string>
+    <string name="order_service_state2">待服务</string>
+    <string name="order_service_state3">进行中</string>
+    <string name="order_service_state4">待评价</string>
+    <string name="order_service_state5">已完成</string>
+    <string name="order_service_state6">已取消</string>
+    <string name="order_service_btn">删除预约</string>
+    <string name="order_service_btn1">去付款</string>
+    <string name="order_service_btn2">取消预约</string>
+    <string name="order_service_btn3">联系客服</string>
+    <string name="order_service_btn4">再次预约</string>
+    <string name="order_service_btn5">去评价</string>
+    <string name="order_service_text8">暂无</string>
+    
 </resources>
