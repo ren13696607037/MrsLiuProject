@@ -267,5 +267,33 @@ public interface JsonKey {
 		static final String INRO = "ProcessInfo";
 
 	}
+	interface ServiceKey{
+		static final String ID = "id";
+		static final String TIME = "time";
+		static final String TECH = "technician";
+		static final String PRICE = "price";
+		static final String NAME = "name";
+		static final String STATE = "state";
+		static final String IMAGE = "images";
+		static final String DATE = "date";
+		static final String TYPE = "type";
+	}
+	interface ServiceDetailKey{
+		static final String ID = "id";
+		static final String TIME = "time";
+		static final String TECH = "technician";
+		static final String PRICE = "price";
+		static final String NAME = "name";
+		static final String STATE = "state";
+		static final String IMAGE = "images";
+		static final String DATE = "date";
+		static final String TYPE = "type";
+		static final String UNAME = "uname";
+		static final String NUMBER = "number";
+		static final String VOUCHER = "voucher";
+		static final String AMOUNT = "amount";
+		static final String ADDRESS = "address";
+		static final String ADDTIME = "addtime";
+	}
 
 }

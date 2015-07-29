@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background" >
+
+    <include layout="@layout/fragment_common" />
+
+    <RelativeLayout
+        android:id="@+id/osd_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_alignParentBottom="true"
+        >
+
+        <View
+            android:id="@+id/osd_line5"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_be" />
+        <TextView 
+            android:id="@+id/osd_state"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textColor="@color/color_3d" 
+        	android:textSize="@dimen/app_text_size_first"
+        	android:text="@string/order_service_state"
+        	android:padding="@dimen/px_30"
+            />
+        <Button 
+            android:id="@+id/osd_btn"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentRight="true"
+            />
+        <Button 
+            android:id="@+id/osd_btn2"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toLeftOf="@id/osd_btn"
+            />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/osd_buttom"
+        android:layout_marginTop="@dimen/header_bar_height" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/osd_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:layout_marginTop="@dimen/px_35"
+                android:text="@string/service_detail_text"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/osd_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_no"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:layout_marginTop="@dimen/px_10"
+                android:text="@string/service_detail_text1"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <View
+                android:id="@+id/osd_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_time"
+                android:layout_margin="@dimen/px_20"
+                android:background="@drawable/order_line" />
+
+            <TextView
+                android:id="@+id/osd_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_line"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:text="@string/service_detail_text2"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/osd_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_name"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:layout_marginTop="@dimen/px_10"
+                android:text="@string/service_detail_text3"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/osd_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_phone"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:layout_marginTop="@dimen/px_10"
+                android:text="@string/service_detail_text4"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/osd_service_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_address"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:layout_marginTop="@dimen/px_10"
+                android:text="@string/order_service_text"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <View
+                android:id="@+id/osd_line1"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/osd_service_time"
+                android:layout_marginTop="@dimen/px_30"
+                android:background="@color/color_be" />
+
+            <ImageView 
+                android:id="@+id/osd_img"
+                android:layout_width="@dimen/px_121"
+                android:layout_height="@dimen/px_121"
+                android:scaleType="centerCrop"
+                android:layout_margin="@dimen/px_20"
+                android:layout_below="@id/osd_line1"
+                />
+            <TextView 
+                android:id="@+id/osd_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_3d" 
+        		android:textSize="@dimen/app_text_size_first"
+        		android:layout_toRightOf="@id/osd_img"
+        		android:layout_alignTop="@id/osd_img"
+        		android:text="@string/service_detail_text8"
+        		android:layout_marginLeft="@dimen/px_5"
+        		android:layout_marginTop="@dimen/px_10"
+                />
+            <TextView 
+                android:id="@+id/osd_product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_service_detail_red_color" 
+        		android:textSize="@dimen/app_text_size_first"
+        		android:layout_toRightOf="@id/osd_img"
+        		android:layout_alignBottom="@id/osd_img"
+        		android:text="@string/service_detail_text5"
+        		android:layout_marginLeft="@dimen/px_5"
+        		android:layout_marginBottom="@dimen/px_20"
+                />
+
+            <View
+                android:id="@+id/osd_line2"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/osd_img"
+                android:background="@color/color_be" />
+
+            <TextView
+                android:id="@+id/osd_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_line2"
+                android:layout_margin="@dimen/px_20"
+                android:text="@string/service_detail_text6"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/osd_voucher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/osd_text"
+                android:layout_marginRight="@dimen/px_20"
+                android:text="@string/service_detail_text7"
+                android:textColor="@color/color_service_detail_red_color"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <View
+                android:id="@+id/osd_line3"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/osd_text"
+                android:background="@color/color_be" />
+
+            <TextView
+                android:id="@+id/osd_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_line3"
+                android:layout_margin="@dimen/px_20"
+                android:text="@string/service_detail_text8"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/osd_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/osd_text1"
+                android:layout_marginRight="@dimen/px_20"
+                android:text="@string/service_detail_text9"
+                android:textColor="@color/color_service_detail_red_color"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <View
+                android:id="@+id/osd_line4"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/osd_text1"
+                android:background="@color/color_be" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

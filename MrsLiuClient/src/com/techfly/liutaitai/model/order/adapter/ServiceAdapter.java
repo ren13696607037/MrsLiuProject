@@ -2,8 +2,10 @@ package com.techfly.liutaitai.model.order.adapter;
 
 import java.util.ArrayList;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.bean.Service;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -61,11 +63,43 @@ public class ServiceAdapter extends BaseAdapter {
 		}else{
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.mType.setText(mList.get(position).getmServiceType());
-		holder.mDate.setText(mList.get(position).getmCash());
+		
+		holder.mDate.setText(mContext.getString(R.string.order_service_text,mList.get(position).getmCash()));
 		holder.mName.setText(mList.get(position).getmServiceName());
-		holder.mPrice.setText(mList.get(position).getmServicePrice());
+		holder.mPrice.setText("￥"+mList.get(position).getmServicePrice());
+		holder.mTime.setText(mList.get(position).getmServiceTime());
+		setType(mList.get(position).getmServiceType(), holder.mType, mList.get(position).getmServicePerson(), holder.mTech);
+		setState(mList.get(position).getmServiceStatus(), holder.mState, holder.mButton, holder.mButton2);
+		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.mImageView , ImageLoaderUtil.mOrderServiceIconLoaderOptions);
+		
 		return convertView;
+	}
+	private void setType(String type, TextView textView, String string, TextView textView2){
+		if("1".equals(type)){
+			textView.setText(R.string.apply_text1);
+			textView.setBackgroundResource(R.drawable.order_service_manicure_bg);
+			textView2.setText(mContext.getString(R.string.order_service_text1) + string);
+		}else if("2".equals(type)){
+			textView.setText(R.string.apply_text2);
+			textView.setBackgroundResource(R.drawable.order_service_beauty_bg);
+			textView2.setText(mContext.getString(R.string.order_service_text2, string));
+		}else if("3".equals(type)){
+			textView.setText(R.string.apply_text3);
+			textView.setBackgroundResource(R.drawable.order_service_eyelash_bg);
+			textView2.setText(mContext.getString(R.string.order_service_text3, string));
+		}else if("4".equals(type)){
+			textView.setText(R.string.order_service_text7);
+			textView.setBackgroundResource(R.drawable.order_service_makeup_bg);
+			textView2.setText(mContext.getString(R.string.order_service_text4, string));
+		}else if("5".equals(type)){
+			textView.setText(R.string.order_service_text6);
+			textView.setBackgroundResource(R.drawable.order_service_daily_bg);
+			textView2.setText(mContext.getString(R.string.order_service_text5, string));
+		}
+		//TODO 暂无提示
+	}
+	private void setState(String state, TextView textView, Button button, Button button2){
+		//TODO
 	}
 	
 	class ViewHolder{

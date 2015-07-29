@@ -372,11 +372,11 @@
     <string name="setting_exit">退出当前账号</string>
     
     <string name="order_service_text">服务时间：%1$s</string>
-    <string name="order_service_text1">美甲师</string>
-    <string name="order_service_text2">美容师</string>
-    <string name="order_service_text3">美睫师</string>
-    <string name="order_service_text4">化妆师</string>
-    <string name="order_service_text5">保洁师</string>
+    <string name="order_service_text1">美甲师:</string>
+    <string name="order_service_text2">美容师:</string>
+    <string name="order_service_text3">美睫师:</string>
+    <string name="order_service_text4">化妆师:</string>
+    <string name="order_service_text5">保洁师:</string>
     <string name="order_service_text6">保洁</string>
     <string name="order_service_text7">化妆</string>
     <string name="order_service_state">待支付</string>
@@ -394,4 +394,26 @@
     <string name="order_service_btn5">去评价</string>
     <string name="order_service_text8">暂无</string>
     
+    <string name="login_toast">您还没有登录呢~</string>
+    <string name="service_detail_title">预约详情</string>
+    <string name="service_detail_text">预约编号：%1$s</string>
+    <string name="service_detail_text1">预约时间：%1$s</string>
+    <string name="service_detail_text2">姓名：%1$s</string>
+    <string name="service_detail_text3">联系方式：%1$s</string>
+    <string name="service_detail_text4">上门地址：%1$s</string>
+    <string name="service_detail_text5">￥%1$s/次</string>
+    <string name="service_detail_text6">使用代金券</string>
+    <string name="service_detail_text7">￥ -%1$s</string>
+    <string name="service_detail_text8">共计（在线支付）</string>
+    <string name="service_detail_text9">￥%1$s</string>
+    <string name="orders_detail_title">订单详情</string>
+    <string name="orders_detail_text">订单编号：%1$s</string>
+    <string name="orders_detail_text1">下单时间：%1$s</string>
+    <string name="orders_detail_text2">收货人：%1$s</string>
+    <string name="orders_detail_text3">收货地址：%1$s</string>
+    <string name="orders_detail_text4">备注：%1$s</string>
+    <string name="orders_detail_text5">%1$s件</string>
+    <string name="orders_detail_text6">X%1$s</string>
+    <string name="orders_detail_text7">总数</string>
+    <string name="orders_detail_text8">共%1$s件</string>
 </resources>

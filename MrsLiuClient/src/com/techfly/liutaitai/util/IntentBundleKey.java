@@ -26,4 +26,5 @@ public class IntentBundleKey {
 	public final static String ADDRESS_EXTRA="address_extra";
     public static final String ORDER_DETAIL = "is_from_order_detail";
     public static String CHANGEADD_ID = "changeadd_id";
+    public static String ORDER_SERVICE = "order_service";
 }

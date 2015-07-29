@@ -57,6 +57,7 @@ public class Constant {
 	public static final String PASS_URL = "user/updatepassword";//修改密码
 	public static final String ORDER_SERVICE_URL = "commodity/bespeak/";//美甲等预约订单
 	public static final String ORDER_APPOINTMENT_URL = "";//洗衣预约订单
+	public static final String ORDER_SERVICE_DETAIL_URL = "commodity/bespeakdetails/";
 
 	public static final String PRODUCT_LIST = "goods/category/list";
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
