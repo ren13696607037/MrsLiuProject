@@ -16,11 +16,12 @@ public class LoginParser implements Parser {
 		User user = new User();
 		if (object != null) {
 			JSONObject obj = object.optJSONObject(JsonKey.DATA);
-			if (obj != null) {
+			if (obj != null ) {
 				user.setmId(obj.optString(JsonKey.UserKey.ID));
 				user.setmPhone(obj.optString(JsonKey.UserKey.LNAME));
 				user.setmPass(obj.optString(JsonKey.UserKey.PASS));
 				user.setmNick(obj.optString(JsonKey.UserKey.NAME));
+				user.setmMessage(object.optString(JsonKey.MESSAGE));
 			} else {
 				user.setmMessage(object.optString(JsonKey.MESSAGE));
 			}

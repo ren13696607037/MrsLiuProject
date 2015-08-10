@@ -58,6 +58,7 @@ public class Constant {
 	public static final String ORDER_SERVICE_URL = "commodity/bespeak/";//美甲等预约订单
 	public static final String ORDER_APPOINTMENT_URL = "";//洗衣预约订单
 	public static final String ORDER_SERVICE_DETAIL_URL = "commodity/bespeakdetails/";
+	public static final String USER_HEADER_URL = "uploadfile/pic/";
 
 	public static final String PRODUCT_LIST = "goods/category/list";
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
@@ -121,5 +122,6 @@ public class Constant {
 	public static final String[] EMAILS = { "@qq.com", "@163.com", "@126.com",
 			"@yeah.net", "@sina.cn", "@sina.com", "@vip.qq.com",
 			"@vip.163.com", "@vip.sina.com", "@gmail.com", };
+	public static final String REFRESH_UPLOAD_GRIDVIEW_IMAGE = "refresh_upload_gridview_image";
 
 }

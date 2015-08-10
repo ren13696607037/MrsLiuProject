@@ -6,6 +6,7 @@ public class User {
 	private String mPass;
 	private String mNick;
 	private String mMessage;
+	private String mImage;
 	public String getmId() {
 		return mId;
 	}
@@ -40,6 +41,12 @@ public class User {
 	}
 	public void setmMessage(String mMessage) {
 		this.mMessage = mMessage;
+	}
+	public String getmImage() {
+		return mImage;
+	}
+	public void setmImage(String mImage) {
+		this.mImage = mImage;
 	}
 	
 }

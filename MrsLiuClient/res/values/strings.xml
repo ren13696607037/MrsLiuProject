@@ -415,5 +415,12 @@
     <string name="orders_detail_text5">%1$s件</string>
     <string name="orders_detail_text6">X%1$s</string>
     <string name="orders_detail_text7">总数</string>
+    
+    <string name="operate_failed">操作失败</string>
+    <string name="error_nosdcard">手机没有SD卡,请插入后再试!</string>
+    <string name="life_helper_image_photo">相册</string>
+    <string name="life_helper_camera_photo">拍照</string>
+    <string name="life_helper_send_fail">发布失败</string>
+    <string name="life_helper_send_success">发布成功</string>
     <string name="orders_detail_text8">共%1$s件</string>
 </resources>

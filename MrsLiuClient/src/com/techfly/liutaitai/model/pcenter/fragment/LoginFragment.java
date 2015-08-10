@@ -213,11 +213,18 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 			}
 			break;
 		case R.id.register_button:
-			startActivity(new Intent(getActivity(), RegisterActivity.class));
+			startActivityForResult(new Intent(getActivity(), RegisterActivity.class), Constant.REGISTER_INTENT);
 			break;
 
 		default:
 			break;
+		}
+	}
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == Constant.REGISTER_SUCCESS){
+			mActivity.setResult(Constant.LOGIN_SUCCESS);
+			mActivity.finish();
 		}
 	}
 
