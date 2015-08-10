@@ -171,7 +171,7 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 //		params.addBodyParameter(JsonKey.UserKey.AVATAR, new File(mSelectItems));
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, Constant.YIHUIMALL_BASE_URL
-				+ Constant.USER_HEADER_URL+ principalId + "/" + 1, params,
+				+ Constant.USER_HEADER_URL+ principalId + "/" + 1 + "/" + new File(mSelectItems), params,
 				new RequestCallBack<String>() {
 					@Override
 					public void onFailure(HttpException exception, String arg1) {
