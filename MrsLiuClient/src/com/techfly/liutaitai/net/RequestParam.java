@@ -11,6 +11,12 @@ public class RequestParam implements IRequestParam {
     
     private int   mRequestMethod=-1;
     
+    private boolean mIsLogin;
+    
+    private String mToken;
+    
+    private String mId;
+    
     public HttpURL getmHttpURL() {
         return mHttpURL;
     }
@@ -49,5 +55,29 @@ public class RequestParam implements IRequestParam {
         return  mRequestMethod;
     }
     
+
+    public boolean ismIsLogin() {
+        return mIsLogin;
+    }
+
+    public void setmIsLogin(boolean mIsLogin) {
+        this.mIsLogin = mIsLogin;
+    }
+
+    public String getmToken() {
+        return mToken;
+    }
+
+    public void setmToken(String mToken) {
+        this.mToken = mToken;
+    }
+
+    public String getmId() {
+        return mId;
+    }
+
+    public void setmId(String mId) {
+        this.mId = mId;
+    }
 
 }

@@ -1,10 +1,15 @@
 package com.techfly.liutaitai.net;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
@@ -46,6 +51,7 @@ public class ObjectRequest extends JsonRequest<Object> {
 //        // TODO Auto-generated method stub
 //        return mRequestParam.getPostParamMap();
 //    }
+    
     /**
      * Constructor which defaults to <code>GET</code> if <code>jsonRequest</code> is
      * <code>null</code>, <code>POST</code> otherwise.
@@ -55,13 +61,25 @@ public class ObjectRequest extends JsonRequest<Object> {
      */
     public ObjectRequest(RequestParam param, Listener<Object> listener,
             ErrorListener errorListener) throws JSONException {
-      
         this(param.requestMethod()==-1 ? Method.GET : param.requestMethod(), param, 
                 param.requestMethod()!=-1?null:null,
                 listener, errorListener);
        
     }
-
+    @Override  
+    public Map<String, String> getHeaders() throws AuthFailureError {  
+        if(mRequestParam.ismIsLogin()){
+            HashMap<String, String> headers = (HashMap<String, String>) super.getHeaders();
+            headers.put("lt-token",mRequestParam.getmToken());  
+            headers.put("lt-id", mRequestParam.getmId());  
+            // MyLog.d(TAG, "headers=" + headers);  
+            return headers;  
+        }else{
+           return super.getHeaders();
+        }
+        
+      
+    }  
     @Override
     protected Response<Object> parseNetworkResponse(NetworkResponse response) {
         try {
