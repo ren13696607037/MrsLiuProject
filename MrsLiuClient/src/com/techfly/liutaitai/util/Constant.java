@@ -53,7 +53,7 @@ public class Constant {
 	public static final String GOODS_COLLECT = "goods/collect";// 收藏
 	public static final String GOODS_UNCOLLECT = "goods/collect/delete";// 取消收藏
 	public static final String GOODS_PIC_TEXT = "goods/detail/";// 取消收藏
-	public static final String PASS_URL = "user/updatepassword";//修改密码
+	public static final String PASS_URL = "user/modifypwd";//修改密码
 	public static final String ORDER_SERVICE_URL = "commodity/bespeak/";//美甲等预约订单
 	public static final String ORDER_APPOINTMENT_URL = "";//洗衣预约订单
 	public static final String ORDER_SERVICE_DETAIL_URL = "commodity/bespeakdetails/";
@@ -64,6 +64,9 @@ public class Constant {
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
 	public static final String CHANGE_INFO_URL = "user/modifyprofile";
+	public static final String BALANCE_URL = "user/moneyrecords";
+	public static final String VOUCHER_URL = "user/myvouchers";
+	
 	public static final int PAY_TYPE_ORDER = 110; // 对已有订单的支付
 	public static final int PAY_TYPE_CREATE = 111; // 创建订单的支付
 

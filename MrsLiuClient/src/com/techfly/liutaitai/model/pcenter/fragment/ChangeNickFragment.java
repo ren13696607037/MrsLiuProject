@@ -109,6 +109,7 @@ public class ChangeNickFragment extends CommonFragment implements OnClickListene
 		params.addHeader("It-id", mUser.getmId());
 		if(mUser != null){
 			AppLog.Loge("xll", mUser.getmToken());
+			AppLog.Loge("xll", mUser.getmId());
 		}
 		params.addBodyParameter(JsonKey.UserKey.NICK, mNick.getText().toString());
 		final HttpUtils http = new HttpUtils();

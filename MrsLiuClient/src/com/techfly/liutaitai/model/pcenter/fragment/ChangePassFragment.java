@@ -142,8 +142,7 @@ public class ChangePassFragment extends CommonFragment {
 		RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.PASS_URL);
-        url.setmGetParamPrefix(JsonKey.UserKey.MOBILE).setmGetParamValues(SharePreferenceUtils.getInstance(mActivity).getUser().getmPhone()+"");
-        url.setmGetParamPrefix(JsonKey.UserKey.PASS).setmGetParamValues(MD5.getDigest(mOldPass.getText().toString()));
+        url.setmGetParamPrefix(JsonKey.UserKey.OPASS).setmGetParamValues(MD5.getDigest(mOldPass.getText().toString()));
         url.setmGetParamPrefix(JsonKey.UserKey.NPASS).setmGetParamValues(MD5.getDigest(mNewPass.getText().toString()));
         param.setPostRequestMethod();
         param.setmHttpURL(url);

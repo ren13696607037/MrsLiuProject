@@ -31,7 +31,7 @@ public interface JsonKey {
 		static final String MONEY = "money";
 		static final String MOBILE = "phone_number";
 		static final String PASS = "pwd";
-		static final String OPASS = "oldpasswd";
+		static final String OPASS = "oldpwd";
 		static final String TOKEN = "token";
 		static final String SMS = "smscode";
 		static final String PRINCIPAL = "principal";
@@ -40,7 +40,7 @@ public interface JsonKey {
 		static final String CODEURL = "codeUrl";
 		static final String COMMENT = "commentjson";
 		static final String LNAME = "login_name";
-		static final String NPASS = "newpassword";
+		static final String NPASS = "newpwd";
 		static final String TYPE = "type";
 		static final String ROLE = "role";
 		static final String PUSH = "jpushcode";
