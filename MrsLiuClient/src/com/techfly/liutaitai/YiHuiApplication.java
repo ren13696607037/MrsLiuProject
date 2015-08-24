@@ -2,6 +2,8 @@ package com.techfly.liutaitai;
 
 import android.app.Application;
 
+import cn.jpush.android.api.JPushInterface;
+
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.util.Utility;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -22,7 +24,8 @@ public class YiHuiApplication extends Application {
         RequestManager.init(this);
         initImageLoader();
         Utility.getScreenSize(this);
-   
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
     private void initImageLoader() {
         // This configuration tuning is custom. You can tune every option, you

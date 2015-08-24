@@ -3,7 +3,7 @@
     
  	<string name="error_get_user_id">请先登录</string>
     
-    <string name="app_name">易汇商城</string>
+    <string name="app_name">刘太太.生活</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="loading_text">正在加载,请稍候!</string>
@@ -423,4 +423,6 @@
     <string name="life_helper_send_fail">发布失败</string>
     <string name="life_helper_send_success">发布成功</string>
     <string name="orders_detail_text8">共%1$s件</string>
+    <string name="change_nick_text">此昵称非登录账号</string>
+    <string name="change_nick_title">修改昵称</string>
 </resources>

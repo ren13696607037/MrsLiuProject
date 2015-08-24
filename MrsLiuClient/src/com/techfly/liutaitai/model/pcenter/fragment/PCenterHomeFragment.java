@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
@@ -26,6 +27,7 @@ import com.techfly.liutaitai.model.pcenter.activities.PCenterHomeActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PcenterInfoActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SettingActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.util.CircleImageView;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -40,6 +42,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 	private RelativeLayout mAddress;//我的收货地址
 	private RelativeLayout mApply;//申请成为技师
 	private RelativeLayout mService;//我的服务
+	private CircleImageView mHeader;
 	private TextView mTvNick;
 	private User mUser;
 	private Button mButton;
@@ -93,7 +96,8 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	mBanlance = (RelativeLayout) view.findViewById(R.id.pcenter_balance);
     	mTop = (RelativeLayout) view.findViewById(R.id.pcenter_top);
     	mWelcome = (RelativeLayout) view.findViewById(R.id.pcenter_welcome);
-//    	mTvNick=(TextView) view.findViewById(R.id.pcenter_name);
+    	mTvNick=(TextView) view.findViewById(R.id.mine_name);
+    	mHeader = (CircleImageView) view.findViewById(R.id.mine_img);
     	mAddress = (RelativeLayout) view.findViewById(R.id.pcenter_address);
     	mApply = (RelativeLayout) view.findViewById(R.id.pcenter_apply);
     	mService = (RelativeLayout) view.findViewById(R.id.pcenter_service);
@@ -109,6 +113,8 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	mApply.setOnClickListener(this);
     	mService.setOnClickListener(this);
     	mBanlance.setOnClickListener(this);
+    	
+    	mService.setVisibility(View.INVISIBLE);
     	setView();
     }
     private void setView(){
@@ -118,7 +124,13 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	}else{
     		mTop.setVisibility(View.VISIBLE);
     		mWelcome.setVisibility(View.GONE);
-//    		mTvNick.setText(mUser.getmNick());
+    		mTvNick.setText(mUser.getmNick());
+    		ImageLoader.getInstance().displayImage(mUser.getmImage(), mHeader);
+    		if("1".equals(mUser.getmType())){
+    			mService.setVisibility(View.VISIBLE);
+    		}else if("0".equals(mUser.getmType())){
+    			mService.setVisibility(View.INVISIBLE);
+    		}
     	}
     }
     @Override

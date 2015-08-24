@@ -1,20 +1,19 @@
 package com.techfly.liutaitai.util;
 
-import android.R.integer;
 
 public class Constant {
 
-	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/jerservice/";
+	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/liu/";
 //	public static final String YIHUIMALL_BASE_URL = "http://192.168.0.212:8080/yhmall-api/";
-
+	public static final String IMG_HEADER_URL = "http://121.43.158.189/liu";
 
 
 	public static final String PRODUCT_CATEGORY = "goods/category/root";
 	public static final String PRODUCT_GROUP = "yiqituan";
-	public static final String SMSCODE_URL = "user/vcode";
-	public static final String LOGIN_URL = "user/applogin";
+	public static final String SMSCODE_URL = "user/vercode";
+	public static final String LOGIN_URL = "user/login";
 	public static final String LOGIN_EMAIL_URL = "auth-web/login";
-	public static final String REGISTER_URL = "user/appregist";
+	public static final String REGISTER_URL = "user/signup";
 	public static final String REGISTER_EMAIL_URL = "auth-web/regist";
 	public static final String SUGGEST_URL = "member/suggestions";
 	public static final String ADDRESS_URL = "member/address";
@@ -64,6 +63,7 @@ public class Constant {
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
+	public static final String CHANGE_INFO_URL = "user/modifyprofile";
 	public static final int PAY_TYPE_ORDER = 110; // 对已有订单的支付
 	public static final int PAY_TYPE_CREATE = 111; // 创建订单的支付
 

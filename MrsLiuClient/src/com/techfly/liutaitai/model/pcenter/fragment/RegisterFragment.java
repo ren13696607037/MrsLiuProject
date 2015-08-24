@@ -54,7 +54,7 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
         @Override
         public void handleMessage(Message msg) {
             if (mUser != null) {
-            	if ("0".equals(mUser.getmId()) && mUser.getmPhone() != null) {
+            	if ("0".equals(mUser.getmId()) && mUser.getmPhone() == null) {
                     if (!TextUtils.isEmpty(mUser.getmMessage()) && !"null".equals(mUser.getmMessage())) {
                         SmartToast.makeText(getActivity(), mUser.getmMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -64,7 +64,7 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
                 		SharePreferenceUtils.getInstance(getActivity()).saveUser(mUser);
                         getActivity().setResult(Constant.REGISTER_SUCCESS);
                         getActivity().finish();
-                }else if ("0".equals(mUser.getmId()) && mUser.getmPhone()== null) {
+                }else if ("0".equals(mUser.getmId()) && mUser.getmPhone()!= null) {
                     if(!TextUtils.isEmpty(mUser.getmMessage()) && !"null".equals(mUser.getmMessage())){
                     	SmartToast.makeText(getActivity(), mUser.getmMessage(), Toast.LENGTH_SHORT).show();
                     }else {
@@ -175,17 +175,21 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             RequestParam param = new RequestParam();
             HttpURL url = new HttpURL();
             url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SMSCODE_URL);
-            url.setmGetParamPrefix(JsonKey.UserKey.MOBILE).setmGetParamValues(mEtPhone.getText().toString());
+            url.setmGetParamPrefix(JsonKey.UserKey.NAME).setmGetParamValues(mEtPhone.getText().toString());
+            url.setmGetParamPrefix(JsonKey.UserKey.TYPE).setmGetParamValues("1");//TODO
             param.setmHttpURL(url);
-            param.setPostRequestMethod();
+//            param.setPostRequestMethod();
             param.setmParserClassName(CommonParser.class.getName());
             RequestManager.getRequestData(getActivity(), createReqSuccessListener(), createReqErrorListener(), param);
         } else{
             RequestParam param = new RequestParam();
             HttpURL url = new HttpURL();
             url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL +Constant.REGISTER_URL);
-            url.setmGetParamPrefix(JsonKey.UserKey.MOBILE).setmGetParamValues(mEtPhone.getText().toString()).setmGetParamPrefix(JsonKey.UserKey.PASS)
+            url.setmGetParamPrefix(JsonKey.UserKey.NAME).setmGetParamValues(mEtPhone.getText().toString()).setmGetParamPrefix(JsonKey.UserKey.PASS)
                     .setmGetParamValues(MD5.getDigest(mEtPass.getText().toString()));
+            url.setmGetParamPrefix(JsonKey.CODE).setmGetParamValues(mEtCode.getText().toString());
+            url.setmGetParamPrefix(JsonKey.UserKey.TYPE).setmGetParamValues("0");
+            url.setmGetParamPrefix(JsonKey.UserKey.ROLE).setmGetParamValues("0");
             param.setPostRequestMethod();
             param.setmHttpURL(url);
             param.setmParserClassName(RegisterParser.class.getName());
@@ -236,10 +240,10 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
                     timeHandler.sendMessage(msg1);
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                	if(info.getmCode() == 10){
+                	if(info.getmCode() == 0){
                 		mEtCode.setText("");
                     	mEtPass.setText("");
-                    	mToken=info.getmData();
+//                    	mToken=info.getmData();
                 	}else{
                 		MSG_TOTAL_TIME=-2;
                         Message message = new Message();
