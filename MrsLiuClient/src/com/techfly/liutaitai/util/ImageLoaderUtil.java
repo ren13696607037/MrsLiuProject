@@ -4,6 +4,7 @@ import android.graphics.Bitmap.Config;
 
 import com.techfly.liutaitai.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 public class ImageLoaderUtil {
@@ -35,6 +36,12 @@ public class ImageLoaderUtil {
 			.bitmapConfig(Config.RGB_565)
 			.showImageOnFail(R.drawable.ic_hall_no_url).cacheInMemory(true)
 			.cacheOnDisk(true).displayer(new SimpleBitmapDisplayer()).build();
+	public static DisplayImageOptions mOrderServiceIconLoaderOptions = new DisplayImageOptions.Builder()
+	.showImageForEmptyUri(R.drawable.ic_hall_no_url)
+	.showImageOnLoading(R.drawable.ic_hall_no_url)
+	.bitmapConfig(Config.RGB_565)
+	.showImageOnFail(R.drawable.ic_hall_no_url).cacheInMemory(true)
+	.cacheOnDisk(true).displayer(new RoundedBitmapDisplayer(10)).build();
 
 	/*
 	 * public static DisplayImageOptions mCollectCaterOptions=new

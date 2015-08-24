@@ -73,8 +73,8 @@ public class OrderFragment extends CommonFragment {
     private void onInitViewPager(){
     	PagerAdapter pagerAdapter=new PagerAdapter(
 				getActivity().getSupportFragmentManager());
-    	pagerAdapter.addFragment(new AppointmentOrderFragment());
     	pagerAdapter.addFragment(new ServiceOrderFragment());
+    	pagerAdapter.addFragment(new AppointmentOrderFragment());
     	mViewPager.setAdapter(pagerAdapter);
     	mTabView.setViewPager(mViewPager);
     }
