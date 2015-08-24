@@ -29,6 +29,8 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.LoginParser;
 import com.techfly.liutaitai.model.pcenter.activities.ChangeNickActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -105,6 +107,9 @@ public class ChangeNickFragment extends CommonFragment implements OnClickListene
 		RequestParams params = new RequestParams();
 		params.addHeader("It-token", mUser.getmToken());
 		params.addHeader("It-id", mUser.getmId());
+		if(mUser != null){
+			AppLog.Loge("xll", mUser.getmToken());
+		}
 		params.addBodyParameter(JsonKey.UserKey.NICK, mNick.getText().toString());
 		final HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, Constant.YIHUIMALL_BASE_URL
@@ -157,7 +162,54 @@ public class ChangeNickFragment extends CommonFragment implements OnClickListene
 						}
 					}
 				});
+//		RequestParam param = new RequestParam();
+//		HttpURL url = new HttpURL();
+//		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.CHANGE_INFO_URL);
+//		url.setmGetParamPrefix(JsonKey.UserKey.NICK)
+//				.setmGetParamValues(mNick.getText().toString())
+//				;
+//		param.setmIsLogin(true);
+//		param.setmId(mUser.getmId());
+//		param.setmToken(mUser.getmToken());
+//		param.setmHttpURL(url);
+//		param.setPostRequestMethod();
+//		param.setmParserClassName(CommonParser.class.getName());
+//		RequestManager
+//				.getRequestData(getActivity(), createMyReqSuccessListener(),
+//						createMyReqErrorListener(), param);
 
+	}
+
+	private Response.Listener<Object> createMyReqSuccessListener() {
+		return new Listener<Object>() {
+			@Override
+			public void onResponse(Object object) {
+				AppLog.Logd(object.toString());
+				ResultInfo info = (ResultInfo) object;
+				AppLog.Loge("xll", info.toString());
+//				mUser.setPass(mPass.getText().toString());
+				if (!isDetached()) {
+//					loginHandler.removeMessages(MSG_LOGIN);
+//					loginHandler.sendEmptyMessage(MSG_LOGIN);
+					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+				}
+			}
+		};
+	}
+
+	private Response.ErrorListener createMyReqErrorListener() {
+		return new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				AppLog.Loge(" data failed to load" + error.getMessage());
+				showSmartToast(R.string.login_error, Toast.LENGTH_SHORT);
+				if (!isDetached()) {
+					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+				}
+			}
+		};
 	}
 
 	
