@@ -301,5 +301,22 @@ public interface JsonKey {
 		static final String ADDRESS = "address";
 		static final String ADDTIME = "addtime";
 	}
+	interface BalanceKey{
+		static final String PAGE = "no";
+		static final String SIZE = "size";
+		static final String DATAS = "datas";
+		static final String ID = "id";
+		static final String MONEY = "money";
+		static final String TIME = "create_time";
+		static final String TYPE = "type";
+	}
+	interface VoucherKey{
+		static final String PAGE = "no";
+		static final String SIZE = "size";
+		static final String DATAS = "datas";
+		static final String ID = "id";
+		static final String MONEY = "money";
+		static final String NEED = "need";
+	}
 
 }

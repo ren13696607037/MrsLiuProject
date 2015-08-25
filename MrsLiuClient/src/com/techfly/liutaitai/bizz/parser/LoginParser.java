@@ -22,7 +22,7 @@ public class LoginParser implements Parser {
 				user.setmPhone(obj.optString(JsonKey.UserKey.USERNAME));
 //				user.setmPass(obj.optString(JsonKey.UserKey.PASS));
 				user.setmImage(Constant.IMG_HEADER_URL + obj.optString(JsonKey.UserKey.AVATAR));
-				user.setmNick(obj.optString(JsonKey.UserKey.NAME));
+				user.setmNick(obj.optString(JsonKey.UserKey.NICK));
 				user.setmType(obj.optString(JsonKey.UserKey.TYPE));
 				user.setmToken(obj.optString(JsonKey.UserKey.TOKEN));
 				user.setmMessage(object.optString(JsonKey.MESSAGE));

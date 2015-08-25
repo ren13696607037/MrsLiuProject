@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -104,80 +105,83 @@ public class ChangeNickFragment extends CommonFragment implements OnClickListene
 
 	@Override
 	public void requestData() {
-		RequestParams params = new RequestParams();
-		params.addHeader("It-token", mUser.getmToken());
-		params.addHeader("It-id", mUser.getmId());
-		if(mUser != null){
-			AppLog.Loge("xll", mUser.getmToken());
-			AppLog.Loge("xll", mUser.getmId());
-		}
-		params.addBodyParameter(JsonKey.UserKey.NICK, mNick.getText().toString());
-		final HttpUtils http = new HttpUtils();
-		http.send(HttpRequest.HttpMethod.POST, Constant.YIHUIMALL_BASE_URL
-				+ Constant.CHANGE_INFO_URL, params,
-				new RequestCallBack<String>() {
-					@Override
-					public void onFailure(HttpException exception, String arg1) {
-						AppLog.Logd("Fly",
-								"exception===" + exception.getMessage());
-						if (!isDetached()) {
-							mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-							mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-							SmartToast.makeText(getActivity(),
-									getString(R.string.life_helper_send_fail),
-									Toast.LENGTH_LONG).show();
-						}
-					}
-
-					@Override
-					public void onSuccess(ResponseInfo<String> info) {
-						AppLog.Logd("Fly", "info===" + info.result);
-						if (!isDetached()) {
-							mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-							mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-							// TODO修改成功后的操作
-							JSONObject obj;
-							try {
-								obj = new JSONObject(info.result);
-								if (obj != null) {
-									if (obj.optInt(JsonKey.CODE) == 0) {
-										mUser.setmNick(mNick.getText().toString());
-										SmartToast
-												.makeText(
-														getActivity(),
-														getString(R.string.life_helper_send_success),
-														Toast.LENGTH_LONG)
-												.show();
-										mActivity.finish();
-									} else {
-										SmartToast.makeText(getActivity(),
-												obj.optString(JsonKey.MESSAGE),
-												Toast.LENGTH_LONG).show();
-									}
-								}
-								SharePreferenceUtils.getInstance(getActivity())
-										.saveUser(mUser);
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-				});
-//		RequestParam param = new RequestParam();
-//		HttpURL url = new HttpURL();
-//		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.CHANGE_INFO_URL);
-//		url.setmGetParamPrefix(JsonKey.UserKey.NICK)
-//				.setmGetParamValues(mNick.getText().toString())
-//				;
-//		param.setmIsLogin(true);
-//		param.setmId(mUser.getmId());
-//		param.setmToken(mUser.getmToken());
-//		param.setmHttpURL(url);
-//		param.setPostRequestMethod();
-//		param.setmParserClassName(CommonParser.class.getName());
-//		RequestManager
-//				.getRequestData(getActivity(), createMyReqSuccessListener(),
-//						createMyReqErrorListener(), param);
+//		RequestParams params = new RequestParams();
+//		params.addHeader("enctype", "multipart/form-data");
+//		params.addHeader("lt-token", mUser.getmToken());
+//		params.addHeader("lt-id", mUser.getmId());
+//		if(mUser != null){
+//			AppLog.Loge("xll", mUser.getmToken());
+//			AppLog.Loge("xll", mUser.getmId());
+//		}
+//		params.addBodyParameter(JsonKey.UserKey.NICK, mNick.getText().toString());
+//		final HttpUtils http = new HttpUtils();
+//		http.send(HttpRequest.HttpMethod.POST, Constant.YIHUIMALL_BASE_URL
+//				+ Constant.CHANGE_INFO_URL, params,
+//				new RequestCallBack<String>() {
+//					@Override
+//					public void onFailure(HttpException exception, String arg1) {
+//						AppLog.Logd("Fly",
+//								"exception===" + exception.getMessage());
+//						if (!isDetached()) {
+//							mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+//							mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+//							SmartToast.makeText(getActivity(),
+//									getString(R.string.life_helper_send_fail),
+//									Toast.LENGTH_LONG).show();
+//						}
+//					}
+//
+//					@Override
+//					public void onSuccess(ResponseInfo<String> info) {
+//						AppLog.Logd("Fly", "info===" + info.result);
+//						if (!isDetached()) {
+//							mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+//							mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+//							// TODO修改成功后的操作
+//							JSONObject obj;
+//							try {
+//								obj = new JSONObject(info.result);
+//								if (obj != null) {
+//									if (obj.optInt(JsonKey.CODE) == 0) {
+//										mUser.setmNick(mNick.getText().toString());
+//										SmartToast
+//												.makeText(
+//														getActivity(),
+//														getString(R.string.life_helper_send_success),
+//														Toast.LENGTH_LONG)
+//												.show();
+//										mActivity.finish();
+//									} else {
+//										SmartToast.makeText(getActivity(),
+//												obj.optString(JsonKey.MESSAGE),
+//												Toast.LENGTH_LONG).show();
+//									}
+//								}
+//								SharePreferenceUtils.getInstance(getActivity())
+//										.saveUser(mUser);
+//							} catch (JSONException e) {
+//								e.printStackTrace();
+//							}
+//						}
+//					}
+//				});
+		RequestParam param = new RequestParam();
+		HttpURL url = new HttpURL();
+		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.CHANGE_NICK_URL);
+		url.setmGetParamPrefix(JsonKey.UserKey.NICK)
+				.setmGetParamValues(mNick.getText().toString())
+				;
+		param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		AppLog.Loge("xll", mUser.getmToken());
+		AppLog.Loge("xll", mUser.getmId());
+		param.setmHttpURL(url);
+		param.setPostRequestMethod();
+		param.setmParserClassName(CommonParser.class.getName());
+		RequestManager
+				.getRequestData(getActivity(), createMyReqSuccessListener(),
+						createMyReqErrorListener(), param);
 
 	}
 
@@ -188,12 +192,23 @@ public class ChangeNickFragment extends CommonFragment implements OnClickListene
 				AppLog.Logd(object.toString());
 				ResultInfo info = (ResultInfo) object;
 				AppLog.Loge("xll", info.toString());
-//				mUser.setPass(mPass.getText().toString());
 				if (!isDetached()) {
-//					loginHandler.removeMessages(MSG_LOGIN);
-//					loginHandler.sendEmptyMessage(MSG_LOGIN);
 					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
 					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+					if(info.getmCode() == 0){
+						mUser.setmNick(mNick.getText().toString());
+						SmartToast
+								.makeText(
+										getActivity(),
+										getString(R.string.life_helper_send_success),
+										Toast.LENGTH_LONG)
+								.show();
+						mActivity.finish();
+					}else{
+						SmartToast.makeText(getActivity(),
+								info.getmMessage(),
+								Toast.LENGTH_LONG).show();
+					}
 				}
 			}
 		};
@@ -204,7 +219,6 @@ public class ChangeNickFragment extends CommonFragment implements OnClickListene
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				AppLog.Loge(" data failed to load" + error.getMessage());
-				showSmartToast(R.string.login_error, Toast.LENGTH_SHORT);
 				if (!isDetached()) {
 					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
 					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);

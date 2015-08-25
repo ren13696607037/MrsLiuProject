@@ -66,13 +66,13 @@ public class ObjectRequest extends JsonRequest<Object> {
                 listener, errorListener);
        
     }
+    
     @Override  
     public Map<String, String> getHeaders() throws AuthFailureError {  
         if(mRequestParam.ismIsLogin()){
-            HashMap<String, String> headers = (HashMap<String, String>) super.getHeaders();
+            Map<String, String> headers = new HashMap<String, String>();
             headers.put("lt-token",mRequestParam.getmToken());  
             headers.put("lt-id", mRequestParam.getmId());  
-            // MyLog.d(TAG, "headers=" + headers);  
             return headers;  
         }else{
            return super.getHeaders();

@@ -64,8 +64,10 @@ public class Constant {
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
 	public static final String CHANGE_INFO_URL = "user/modifyprofile";
-	public static final String BALANCE_URL = "user/moneyrecords";
+	public static final String BALANCE_HISTORY_URL = "user/moneyrecords";
+	public static final String BALANCE_URL = "";
 	public static final String VOUCHER_URL = "user/myvouchers";
+	public static final String CHANGE_NICK_URL = "user/modifynickname";
 	
 	public static final int PAY_TYPE_ORDER = 110; // 对已有订单的支付
 	public static final int PAY_TYPE_CREATE = 111; // 创建订单的支付
