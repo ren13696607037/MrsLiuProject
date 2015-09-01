@@ -9,7 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.alipay.android.app.sdk.AliPay;
+import com.alipay.sdk.app.PayTask;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.AppLog;
 
@@ -34,7 +34,7 @@ public class PaymentImpl implements IPayment {
       final String orderInfo = info;
       new Thread() {
           public void run() {
-              AliPay alipay = new AliPay((Activity) context, mHandler);
+        	  PayTask alipay = new PayTask((Activity) context);
               //设置为沙箱模式，不设置默认为线上环境
 //              alipay.setSandBox(true);
               String result = alipay.pay(orderInfo);
