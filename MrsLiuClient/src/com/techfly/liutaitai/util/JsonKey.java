@@ -60,7 +60,7 @@ public interface JsonKey {
 		static final String REGIONID = "regionId";
 		static final String REGION = "region";
 		static final String DETAIL = "location";
-		static final String DEFAULT = "defaultAddress";
+		static final String DEFAULT = "isdefault";
 		static final String ADDRESS = "address";
 		static final String AREAID = "areaId";
 		static final String ZIPCODE = "postCode";

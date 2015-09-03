@@ -72,7 +72,8 @@ public class ObjectRequest extends JsonRequest<Object> {
         if(mRequestParam.ismIsLogin()){
             Map<String, String> headers = new HashMap<String, String>();
             headers.put("lt-token",mRequestParam.getmToken());  
-            headers.put("lt-id", mRequestParam.getmId());  
+            headers.put("lt-id", mRequestParam.getmId()); 
+            AppLog.Loge("xll", headers.toString());
             return headers;  
         }else{
            return super.getHeaders();
@@ -94,7 +95,7 @@ public class ObjectRequest extends JsonRequest<Object> {
             }else{
                object = deliverParser.deliverJson(mRequestParam.getmParserClassName(),jsonString);
             }
-            
+            AppLog.Loge("xll", object.toString());
             return Response.success(object,
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {

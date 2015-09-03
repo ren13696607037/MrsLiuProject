@@ -16,7 +16,7 @@ public class Constant {
 	public static final String REGISTER_URL = "user/signup";
 	public static final String REGISTER_EMAIL_URL = "auth-web/regist";
 	public static final String SUGGEST_URL = "member/suggestions";
-	public static final String ADDRESS_URL = "member/address";
+	public static final String ADDRESS_URL = "user/addresses";
 	public static final String MYORDER_LIST_URL = "member/order";
 	public static final String EMAIL_CODE_URL = "auth-web/smscode";
 	public static final String ORDER_DELETE_URL = "member/order/remove";

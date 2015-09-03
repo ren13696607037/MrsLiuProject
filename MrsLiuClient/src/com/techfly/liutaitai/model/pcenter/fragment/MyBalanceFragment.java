@@ -29,19 +29,35 @@ import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
+import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyBalanceFragment extends CommonFragment {
+public class MyBalanceFragment extends CommonFragment implements IXListViewListener{
 	private MyBalanceActivity mActivity;
 	private TextView mPrice;
 	private XListView mListView;
+	private TextView mTextView;
 	private BalanceAdapter mAdapter;
-	private int mPage = 0;
+	private final int MSG_LIST = 0x101;
+	private int mPage = 1;
 	private int mSize = 10;
 	private User mUser;
+	private boolean isRefresh = false;
 	private ArrayList<Balance> mList = new ArrayList<Balance>();
 	private Handler mBalanceHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
-			
+			switch (msg.what) {
+			case MSG_LIST:
+				mListView.setVisibility(View.VISIBLE);
+				mTextView.setVisibility(View.GONE);
+				if (mList.size() == 0) {
+					setNoData();
+				}
+				mAdapter.updateList(mList);
+				break;
+
+			default:
+				break;
+			}
 		};
 	};
 	@Override
@@ -117,10 +133,29 @@ public class MyBalanceFragment extends CommonFragment {
 			@Override
 			public void onResponse(Object object) {
 				AppLog.Loge("xll", object.toString());
-//				mUser.setPass(mPass.getText().toString());
+				ArrayList<Balance> list = (ArrayList<Balance>) object;
+				if(isRefresh){
+					mList.addAll(list);
+				}else{
+					mList.clear();
+					mList.addAll(list);
+				}
+				if (list == null || list.size() == 0) {
+
+				} else if (list.size() < 10) {
+					mListView.setVisibility(View.VISIBLE);
+					mTextView.setVisibility(View.GONE);
+					mListView.setPullLoadEnable(false);
+				} else {
+					mListView.setVisibility(View.VISIBLE);
+					mTextView.setVisibility(View.GONE);
+					mListView.setPullLoadEnable(true);
+				}
+				mListView.stopLoadMore();
+				mListView.stopRefresh();
 				if (!isDetached()) {
-//					loginHandler.removeMessages(MSG_LOGIN);
-//					loginHandler.sendEmptyMessage(MSG_LOGIN);
+					mBalanceHandler.removeMessages(MSG_LIST);
+					mBalanceHandler.sendEmptyMessage(MSG_LIST);
 					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
 					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
 				}
@@ -139,6 +174,36 @@ public class MyBalanceFragment extends CommonFragment {
 				}
 			}
 		};
+	}
+	@Override
+	public void onRefresh() {
+		mBalanceHandler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				mPage = 0;
+				mList.clear();
+				requestData();
+			}
+		}, 0);
+	}
+
+	@Override
+	public void onLoadMore() {
+		mBalanceHandler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				isRefresh = true;
+				mPage += mSize;
+				requestData();
+			}
+		}, 0);
+	}
+	private void setNoData() {
+		mListView.setVisibility(View.GONE);
+		mTextView.setVisibility(View.VISIBLE);
+		mTextView.setText(R.string.balance_no_content);
 	}
 
 }

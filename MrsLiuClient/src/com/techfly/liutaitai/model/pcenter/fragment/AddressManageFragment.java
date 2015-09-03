@@ -30,6 +30,8 @@ import com.techfly.liutaitai.model.pcenter.activities.ChangeAddressActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.AddManageAdapter;
 import com.techfly.liutaitai.model.pcenter.adapter.AddManageAdapter.OnDeleteListener;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
+import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.model.pcenter.bean.Voucher;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -55,7 +57,10 @@ public class AddressManageFragment extends CommonFragment {
     private final int MSG_DEFAULT=0x102;
     private String mAddressId=null;
     private boolean isDefault=false;
-    private SharePreferenceUtils mPreferenceUtils;
+    private int mPage = 1;
+	private int mSize = 10;
+    private User mUser;
+    private boolean isRefresh = false;
     public Handler mAddressHandler=new Handler(){
 
 		@Override
@@ -94,7 +99,7 @@ public class AddressManageFragment extends CommonFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPreferenceUtils=SharePreferenceUtils.getInstance(mActivity);
+        mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
         mFromOrder=mActivity.getIntent().getIntExtra(IntentBundleKey.ADDRESS_EXTRA, -1);
         startReqTask(this);
     }
@@ -182,7 +187,7 @@ public class AddressManageFragment extends CommonFragment {
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.ADDRESS_DEFAULT_URL);
 			url.setmGetParamPrefix(JsonKey.AddressKey.ADDRESSID).setmGetParamValues(mAddressId);
 			url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(
-					mPreferenceUtils.getUser().getmId()
+					mUser.getmId()
 							+ "");
 			param.setmHttpURL(url);
 			param.setPostRequestMethod();
@@ -190,11 +195,14 @@ public class AddressManageFragment extends CommonFragment {
 			RequestManager.getRequestData(mActivity, createReqSuccessListener(), createReqErrorListener(), param);
 		}else{
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
-					+ Constant.YIHUIMALL_BASE_URL);
-//			url.setmGetParamPrefix(JsonKey.AddressKey.CITY).setmGetParamValues(mPreferenceUtils.getCity().getmId());
-			url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(
-					mPreferenceUtils.getUser().getmId()
-							+ "");
+					+ Constant.ADDRESS_URL);
+			url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
+			.setmGetParamValues(mPage + "")
+			;
+			url.setmGetParamPrefix(JsonKey.BalanceKey.SIZE).setmGetParamValues(mSize + "");
+			param.setmIsLogin(true);
+			param.setmId(mUser.getmId());
+			param.setmToken(mUser.getmToken());
 			param.setmHttpURL(url);
 			param.setmParserClassName(AddressManageParser.class.getName());
 			RequestManager.getRequestData(mActivity, createMyReqSuccessListener(), createMyReqErrorListener(), param);
@@ -206,7 +214,26 @@ public class AddressManageFragment extends CommonFragment {
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                mList=(ArrayList<AddressManage>) object;
+                ArrayList<AddressManage> list= (ArrayList<AddressManage>) object;
+				if(isRefresh){
+					mList.addAll(list);
+				}else{
+					mList.clear();
+					mList.addAll(list);
+				}
+				if (list == null || list.size() == 0) {
+
+				} else if (list.size() < 10) {
+					mListView.setVisibility(View.VISIBLE);
+					mTextView.setVisibility(View.GONE);
+					mListView.setPullLoadEnable(false);
+				} else {
+					mListView.setVisibility(View.VISIBLE);
+					mTextView.setVisibility(View.GONE);
+					mListView.setPullLoadEnable(true);
+				}
+				mListView.stopLoadMore();
+				mListView.stopRefresh();
                 if(!isDetached()){
                 	mAddressHandler.removeMessages(MSG_LIST);
                 	mAddressHandler.sendEmptyMessage(MSG_LIST);

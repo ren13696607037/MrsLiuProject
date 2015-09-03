@@ -17,7 +17,7 @@ public class AddressManageParser implements Parser {
 	public Object fromJson(JSONObject object) {
 		ArrayList<AddressManage> list=new ArrayList<AddressManage>();
 		if (object != null) {
-			JSONArray array = object.optJSONArray(JsonKey.DATA);
+			JSONArray array = object.optJSONObject(JsonKey.DATA).optJSONArray(JsonKey.VoucherKey.DATAS);
 			if (array!=null) {
 				int size=array.length();
 				for(int i=0;i<size;i++){
@@ -26,7 +26,8 @@ public class AddressManageParser implements Parser {
 					address.setmId(data.optString(JsonKey.AddressKey.ID));
 					address.setmName(data.optString(JsonKey.AddressKey.NAME));
 					address.setmPhone(data.optString(JsonKey.AddressKey.MOBILE));
-					address.setmDetail(data.optString(JsonKey.AddressKey.DETAIL));
+					address.setmDetail(data.optString(JsonKey.AddressKey.ADDRESS));
+					address.setDefault(data.optInt(JsonKey.AddressKey.DEFAULT) == 0 ? false : true );
 					list.add(address);
 				}
 			}

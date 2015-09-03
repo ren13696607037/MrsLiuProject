@@ -223,6 +223,11 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
+            android:name=".model.pcenter.activities.ChangeNickActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
             android:name=".model.pcenter.activities.AddressManageActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
@@ -304,11 +309,6 @@
             android:theme="@android:style/Theme.NoTitleBar" />
          <activity
             android:name=".model.pcenter.activities.GetCashActivity"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-         <activity
-            android:name=".model.pcenter.activities.ChangeNickActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
