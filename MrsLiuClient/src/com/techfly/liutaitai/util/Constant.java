@@ -15,7 +15,7 @@ public class Constant {
 	public static final String LOGIN_EMAIL_URL = "auth-web/login";
 	public static final String REGISTER_URL = "user/signup";
 	public static final String REGISTER_EMAIL_URL = "auth-web/regist";
-	public static final String SUGGEST_URL = "member/suggestions";
+	public static final String SUGGEST_URL = "user/feedback";
 	public static final String ADDRESS_URL = "user/addresses";
 	public static final String MYORDER_LIST_URL = "member/order";
 	public static final String EMAIL_CODE_URL = "auth-web/smscode";
@@ -40,12 +40,12 @@ public class Constant {
 	public static final String CITY_URL = "member/address/city";
 	public static final String PROVINCE_URL = "member/address/province";
 	public static final String ADD_ADDRESS_URL = "member/address/input";
-	public static final String PRODUCT_COLLECT = "member/collect";
+	public static final String PRODUCT_COLLECT = "user/collections";
 	public static final String PRODUCT_BROWSER = "member/history";
 	public static final String PRODUCT_CANCEL_COLLECT = "goods/collect/deleteAll";
 	public static final String PRODUCT_TUANGOU = "tuangou";
-	public static final String ADDRESS_DEFAULT_URL = "member/address/defaulted";
-	public static final String ADDRESS_DELETE_URL = "member/addresses/remove";
+	public static final String ADDRESS_DEFAULT_URL = "user/setaddress";
+	public static final String ADDRESS_DELETE_URL = "user/deladdress";
 	public static final String CHANGE_ADDRESS_URL = "member/address/edit";
 	public static final String GOODS_DETAIL = "goods/detail";// 商品详情
 	public static final String SECKILL_DETAIL = "seckill/detail";//  限时秒杀详情
@@ -68,6 +68,7 @@ public class Constant {
 	public static final String BALANCE_URL = "";
 	public static final String VOUCHER_URL = "user/myvouchers";
 	public static final String CHANGE_NICK_URL = "user/modifynickname";
+	public static final String APPLY_URL = "master/apply";
 	
 	public static final int PAY_TYPE_ORDER = 110; // 对已有订单的支付
 	public static final int PAY_TYPE_CREATE = 111; // 创建订单的支付

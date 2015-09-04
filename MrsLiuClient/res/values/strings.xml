@@ -45,6 +45,7 @@
     <string name="welcome_shop">去逛逛</string>
     <string name="commit_order">提交订单</string>
     <string name="collect_text">收藏</string>
+    <string name="collect_no_content">当前您还没有收藏~</string>
     <string name="double_back_exit_ap">再按一次退出程序</string>
     <string name="alipay_fail_promt">付款失败，请再次尝试付款!</string>
     <string name="unknown_error">Unknown error</string>

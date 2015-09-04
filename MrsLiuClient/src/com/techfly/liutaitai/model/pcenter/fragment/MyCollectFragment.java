@@ -44,11 +44,18 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
 	private ArrayList<Product> mList =new ArrayList<Product>();
 	private ProItemAdapter mAdapter;
 	private TextView mEmptyTv;
+	private int mPage = 1;
+	private int mSize = 10;
+	private TextView mTextView;
 	private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-          mAdapter.updateListView(mList);
+        	mListView.setVisibility(View.VISIBLE);
+			mTextView.setVisibility(View.GONE);
+			if(mList.size()==0){
+				setNoData();
+			}
+			mAdapter.updateList(mList);
         }
 	};
 	
@@ -166,7 +173,6 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
 
     @Override
     public void requestData() {
-        // TODO Auto-generated method stub
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.PRODUCT_COLLECT);
@@ -244,4 +250,9 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
         // TODO Auto-generated method stub
         
     }
+    private void setNoData(){
+		mListView.setVisibility(View.GONE);
+        mTextView.setVisibility(View.VISIBLE);
+        mTextView.setText(getResources().getString(R.string.collect_no_content));
+	}
 }

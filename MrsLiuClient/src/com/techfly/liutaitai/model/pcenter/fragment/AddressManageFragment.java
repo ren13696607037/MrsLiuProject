@@ -185,10 +185,10 @@ public class AddressManageFragment extends CommonFragment {
 		HttpURL url = new HttpURL();
 		if(isDefault){
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.ADDRESS_DEFAULT_URL);
-			url.setmGetParamPrefix(JsonKey.AddressKey.ADDRESSID).setmGetParamValues(mAddressId);
-			url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(
-					mUser.getmId()
-							+ "");
+			url.setmGetParamPrefix(JsonKey.AddressKey.AID).setmGetParamValues(mAddressId);
+			param.setmIsLogin(true);
+			param.setmId(mUser.getmId());
+			param.setmToken(mUser.getmToken());
 			param.setmHttpURL(url);
 			param.setPostRequestMethod();
 			param.setmParserClassName(CommonParser.class.getName());
@@ -283,6 +283,8 @@ public class AddressManageFragment extends CommonFragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 AppLog.Loge(" data failed to load"+error.getMessage());
+                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
             }
        };
     }

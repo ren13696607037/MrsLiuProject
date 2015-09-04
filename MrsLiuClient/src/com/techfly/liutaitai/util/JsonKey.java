@@ -48,7 +48,7 @@ public interface JsonKey {
 	}
 
 	interface SuggestKey {
-		static final String CONTENT = "content";
+		static final String CONTENT = "message";
 		static final String CONTACT = "contact";
 	}
 
@@ -69,6 +69,7 @@ public interface JsonKey {
 		static final String ADDRESSPKS = "addressPks";
 		static final String ISDEFAULT = "isDefault";
 		static final String PROVINCE="province";
+		static final String AID = "aid";
 	}
 
 	interface HomeKey {
