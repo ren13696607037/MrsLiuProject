@@ -15,6 +15,7 @@ public class CityListParser implements Parser {
 
 	@Override
 	public Object fromJson(JSONObject object) {
+		AppLog.Loge("xll", object.toString());
 		ArrayList<Area> list=new ArrayList<Area>();
 		if (object != null) {
 			JSONArray array = object.optJSONArray(JsonKey.DATA);

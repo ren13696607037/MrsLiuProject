@@ -27,6 +27,7 @@ public class AddressManageParser implements Parser {
 					address.setmName(data.optString(JsonKey.AddressKey.NAME));
 					address.setmPhone(data.optString(JsonKey.AddressKey.MOBILE));
 					address.setmDetail(data.optString(JsonKey.AddressKey.ADDRESS));
+					address.setmCityId(data.optString(JsonKey.AddressKey.CITY));
 					address.setDefault(data.optInt(JsonKey.AddressKey.DEFAULT) == 0 ? false : true );
 					list.add(address);
 				}

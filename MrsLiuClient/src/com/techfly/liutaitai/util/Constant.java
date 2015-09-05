@@ -37,7 +37,7 @@ public class Constant {
 	public static final String HELP_CENTER = "system/help";
 	// 搜索商品列表接口
 	public static final String SEARCH_PRODUCT_URL = "goods/category/list";
-	public static final String CITY_URL = "member/address/city";
+	public static final String CITY_URL = "common/citys";
 	public static final String PROVINCE_URL = "member/address/province";
 	public static final String ADD_ADDRESS_URL = "member/address/input";
 	public static final String PRODUCT_COLLECT = "user/collections";
@@ -46,7 +46,7 @@ public class Constant {
 	public static final String PRODUCT_TUANGOU = "tuangou";
 	public static final String ADDRESS_DEFAULT_URL = "user/setaddress";
 	public static final String ADDRESS_DELETE_URL = "user/deladdress";
-	public static final String CHANGE_ADDRESS_URL = "member/address/edit";
+	public static final String CHANGE_ADDRESS_URL = "user/doaddress";
 	public static final String GOODS_DETAIL = "goods/detail";// 商品详情
 	public static final String SECKILL_DETAIL = "seckill/detail";//  限时秒杀详情
 	public static final String TUANGOU_DETAIL = "tuangou/detail";// 团购商品详情
