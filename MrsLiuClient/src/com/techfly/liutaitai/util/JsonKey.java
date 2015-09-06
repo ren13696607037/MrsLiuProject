@@ -319,5 +319,23 @@ public interface JsonKey {
 		static final String MONEY = "money";
 		static final String NEED = "need";
 	}
+	interface MyServiceKey{
+		static final String ID = "id";
+		static final String MONEY = "money";
+		static final String ING_ORDERS = "ing_orders";
+		static final String SERVICE_ORDERS = "service_orders";
+		static final String TYPE = "type";
+		static final String NEW_ORDERS = "new_orders";
+	}
+	interface TechnicianKey{
+		static final String ID = "id";
+		static final String TIMES = "times";
+		static final String STARS = "stars";
+		static final String NAME = "name";
+		static final String SEX = "gender";
+		static final String IMAGE = "image";
+		static final String TYPE = "type";
+		static final String CITY = "city";
+	}
 
 }

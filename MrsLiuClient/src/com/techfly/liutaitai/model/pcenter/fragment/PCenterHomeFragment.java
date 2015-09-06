@@ -126,7 +126,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     		mWelcome.setVisibility(View.GONE);
     		mTvNick.setText(mUser.getmNick());
     		ImageLoader.getInstance().displayImage(mUser.getmImage(), mHeader);
-    		if("1".equals(mUser.getmType())){
+    		if("2".equals(mUser.getmType())){
     			mService.setVisibility(View.VISIBLE);
     		}else if("0".equals(mUser.getmType())){
     			mService.setVisibility(View.INVISIBLE);

@@ -20,6 +20,7 @@ public class SharePreferenceUtils {
 	private static final String USER_NICK="user_nick";
 	private static final String USER_IMG = "user_img";
 	private static final String USER_TOKEN = "user_token";
+	private static final String USER_TYPE = "user_type";
     private static final String IS_FISRT="is_first";
     private static final String SHARE_CONTENT="share_content";
     private static final String SHARE_URL="share_url";
@@ -50,6 +51,7 @@ public class SharePreferenceUtils {
              editor.putString(USER_PASS, user.getmPass());
              editor.putString(USER_IMG, user.getmImage());
              editor.putString(USER_TOKEN, user.getmToken());
+             editor.putString(USER_TYPE, user.getmType());
              editor.commit();
          }
     }
@@ -62,6 +64,7 @@ public class SharePreferenceUtils {
             editor.remove(USER_PASS);
             editor.remove(USER_IMG);
             editor.remove(USER_TOKEN);
+            editor.remove(USER_TYPE);
             editor.commit();
         }
     }
@@ -74,6 +77,7 @@ public class SharePreferenceUtils {
             String nick=mSharePreference.getString(USER_NICK, null);
             String image=mSharePreference.getString(USER_IMG, null);
             String token = mSharePreference.getString(USER_TOKEN, null);
+            String type = mSharePreference.getString(USER_TYPE, null);
             User user = new User();
             if (!TextUtils.isEmpty(id)) {
                 user.setmId(id);
@@ -82,6 +86,7 @@ public class SharePreferenceUtils {
                 user.setmNick(nick);
                 user.setmImage(image);
                 user.setmToken(token);
+                user.setmType(type);
                 return user;
             }
         }

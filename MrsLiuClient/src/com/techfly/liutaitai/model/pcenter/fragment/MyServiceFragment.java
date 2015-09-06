@@ -8,10 +8,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.Response.Listener;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.bizz.parser.MyServiceParser;
 import com.techfly.liutaitai.model.pcenter.activities.MyServiceActivity;
+import com.techfly.liutaitai.model.pcenter.bean.MyService;
+import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
+import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
+import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class MyServiceFragment extends CommonFragment{
@@ -31,6 +48,8 @@ public class MyServiceFragment extends CommonFragment{
 	private RelativeLayout mAll;
 	private RelativeLayout mApply;
 	private RelativeLayout mRate;
+	private User mUser;
+	private MyService mService;
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -40,7 +59,8 @@ public class MyServiceFragment extends CommonFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        startReqTask(this);
+        mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
+        startReqTask(this);
     }
     
     @Override
@@ -93,7 +113,52 @@ public class MyServiceFragment extends CommonFragment{
 
 	@Override
 	public void requestData() {
-		
+		RequestParam param = new RequestParam();
+		HttpURL url = new HttpURL();
+		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_URL);
+		param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		param.setmHttpURL(url);
+		param.setPostRequestMethod();
+		param.setmParserClassName(MyServiceParser.class.getName());
+		RequestManager
+				.getRequestData(getActivity(), createMyReqSuccessListener(),
+						createMyReqErrorListener(), param);
+
+	}
+
+	private Response.Listener<Object> createMyReqSuccessListener() {
+		return new Listener<Object>() {
+			@Override
+			public void onResponse(Object object) {
+				AppLog.Logd(object.toString());
+				mService = (MyService) object;
+				if (!isDetached()) {
+					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+					setData();
+				}
+			}
+		};
+	}
+
+	private Response.ErrorListener createMyReqErrorListener() {
+		return new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				AppLog.Loge(" data failed to load" + error.getMessage());
+				if (!isDetached()) {
+					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+				}
+			}
+		};
+	}
+	private void setData(){
+		ImageLoader.getInstance().displayImage(mService.getmTechnician().getmHeader(), mHeader);
+		mName.setText(mService.getmTechnician().getmName());
+		mPrice.setText(mService.getmPrice());
 	}
 
 }
