@@ -2,289 +2,302 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     android:orientation="vertical" >
 
     <include layout="@layout/fragment_header" />
 
-    <RelativeLayout
-        android:id="@+id/service_info"
+    <com.techfly.liutaitai.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_customer_background" >
+        android:layout_height="match_parent" >
 
-        <ImageView
-            android:id="@+id/service_img"
-            android:layout_width="@dimen/px_121"
-            android:layout_height="@dimen/px_121"
-            android:layout_centerVertical="true"
-            android:layout_margin="@dimen/px_27"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/service_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/service_img"
-            android:layout_toRightOf="@id/service_img"
-            android:textColor="@color/color_22"
-            android:textSize="@dimen/app_text_size_first" />
-
-        <TextView
-            android:id="@+id/service_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/service_name"
-            android:layout_toRightOf="@id/service_img"
-            android:textColor="@color/color_8f"
-            android:textSize="@dimen/app_text_size_second" />
-
-        <TextView
-            android:id="@+id/service_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/service_sex"
-            android:layout_toRightOf="@id/service_img"
-            android:textColor="@color/color_8f"
-            android:textSize="@dimen/app_text_size_second" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/px_20"
-            android:src="@drawable/pcenter_arrow" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_be" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <RelativeLayout
-            android:id="@+id/service_taking"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selector_customer_background"
-            android:padding="@dimen/px_15" >
-
-            <TextView
-                android:id="@+id/service_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:paddingBottom="@dimen/px_10"
-                android:paddingTop="@dimen/px_10"
-                android:text="@string/service_text"
-                android:textColor="@color/color_22"
-                android:textSize="@dimen/app_text_size_first" />
-
-            <TextView
-                android:id="@+id/serivce_taking_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/service_text"
-                android:layout_toRightOf="@id/service_text"
-                android:background="@drawable/service_num"
-                android:gravity="center"
-                android:padding="@dimen/px_5"
-                android:text="1"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/app_text_size_second" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="0.5dp"
             android:layout_height="match_parent"
-            android:background="@color/color_be" />
+            android:background="@color/background"
+            android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/service_servicing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selector_customer_background"
-            android:padding="@dimen/px_15" >
-
-            <TextView
-                android:id="@+id/service_text1"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/service_info"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:paddingBottom="@dimen/px_10"
-                android:paddingTop="@dimen/px_10"
-                android:text="@string/service_text1"
-                android:textColor="@color/color_22"
-                android:textSize="@dimen/app_text_size_first" />
+                android:background="@drawable/selector_customer_background" >
 
-            <TextView
-                android:id="@+id/serivce_servicing_num"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/service_img"
+                    android:layout_width="@dimen/px_121"
+                    android:layout_height="@dimen/px_121"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/px_27"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/service_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/service_img"
+                    android:layout_toRightOf="@id/service_img"
+                    android:textColor="@color/color_22"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <TextView
+                    android:id="@+id/service_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/service_name"
+                    android:layout_toRightOf="@id/service_img"
+                    android:textColor="@color/color_8f"
+                    android:textSize="@dimen/app_text_size_second" />
+
+                <TextView
+                    android:id="@+id/service_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/service_sex"
+                    android:layout_toRightOf="@id/service_img"
+                    android:textColor="@color/color_8f"
+                    android:textSize="@dimen/app_text_size_second" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/px_20"
+                    android:src="@drawable/pcenter_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/service_text1"
-                android:layout_toRightOf="@id/service_text1"
-                android:background="@drawable/service_num"
-                android:gravity="center"
-                android:padding="@dimen/px_5"
-                android:text="1"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/app_text_size_second" />
-        </RelativeLayout>
+                android:orientation="horizontal" >
 
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/color_be" />
+                <RelativeLayout
+                    android:id="@+id/service_taking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_customer_background"
+                    android:padding="@dimen/px_15" >
 
-        <RelativeLayout
-            android:id="@+id/service_continue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/selector_customer_background"
-            android:padding="@dimen/px_15" >
+                    <TextView
+                        android:id="@+id/service_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:paddingBottom="@dimen/px_10"
+                        android:paddingTop="@dimen/px_10"
+                        android:text="@string/service_text"
+                        android:textColor="@color/color_22"
+                        android:textSize="@dimen/app_text_size_first" />
 
-            <TextView
-                android:id="@+id/service_text2"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/serivce_taking_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/service_text"
+                        android:layout_toRightOf="@id/service_text"
+                        android:background="@drawable/service_num"
+                        android:gravity="center"
+                        android:padding="@dimen/px_5"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/app_text_size_second" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_be" />
+
+                <RelativeLayout
+                    android:id="@+id/service_servicing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_customer_background"
+                    android:padding="@dimen/px_15" >
+
+                    <TextView
+                        android:id="@+id/service_text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:paddingBottom="@dimen/px_10"
+                        android:paddingTop="@dimen/px_10"
+                        android:text="@string/service_text1"
+                        android:textColor="@color/color_22"
+                        android:textSize="@dimen/app_text_size_first" />
+
+                    <TextView
+                        android:id="@+id/serivce_servicing_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/service_text1"
+                        android:layout_toRightOf="@id/service_text1"
+                        android:background="@drawable/service_num"
+                        android:gravity="center"
+                        android:padding="@dimen/px_5"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/app_text_size_second" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_be" />
+
+                <RelativeLayout
+                    android:id="@+id/service_continue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_customer_background"
+                    android:padding="@dimen/px_15" >
+
+                    <TextView
+                        android:id="@+id/service_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:paddingBottom="@dimen/px_10"
+                        android:paddingTop="@dimen/px_10"
+                        android:text="@string/service_text2"
+                        android:textColor="@color/color_22"
+                        android:textSize="@dimen/app_text_size_first" />
+
+                    <TextView
+                        android:id="@+id/serivce_continue_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/service_text2"
+                        android:layout_toRightOf="@id/service_text2"
+                        android:background="@drawable/service_num"
+                        android:gravity="center"
+                        android:padding="@dimen/px_5"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/app_text_size_second" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_10"
+                android:background="@color/color_ea" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
+
+            <RelativeLayout
+                android:id="@+id/service_all"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:paddingBottom="@dimen/px_10"
-                android:paddingTop="@dimen/px_10"
-                android:text="@string/service_text2"
-                android:textColor="@color/color_22"
-                android:textSize="@dimen/app_text_size_first" />
+                android:background="@drawable/selector_customer_background"
+                android:padding="@dimen/px_20" >
 
-            <TextView
-                android:id="@+id/serivce_continue_num"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/service_text3"
+                    android:textColor="@color/color_22"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/pcenter_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
+
+            <RelativeLayout
+                android:id="@+id/service_apply"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/service_text2"
-                android:layout_toRightOf="@id/service_text2"
-                android:background="@drawable/service_num"
-                android:gravity="center"
-                android:padding="@dimen/px_5"
-                android:text="1"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/app_text_size_second" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:background="@drawable/selector_customer_background"
+                android:padding="@dimen/px_20" >
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_be" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/service_text4"
+                    android:textColor="@color/color_22"
+                    android:textSize="@dimen/app_text_size_first" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px_10"
-        android:background="@color/color_ea" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_be" />
+                <ImageView
+                    android:id="@+id/service_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/pcenter_arrow" />
 
-    <RelativeLayout
-        android:id="@+id/service_all"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_customer_background"
-        android:padding="@dimen/px_20" >
+                <TextView
+                    android:id="@+id/service_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/px_10"
+                    android:layout_toLeftOf="@id/service_arrow"
+                    android:text="@string/service_text4"
+                    android:textColor="@color/color_service_price"
+                    android:textSize="@dimen/app_text_size_first" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/service_text3"
-            android:textColor="@color/color_22"
-            android:textSize="@dimen/app_text_size_first" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/pcenter_arrow" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/service_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_customer_background"
+                android:padding="@dimen/px_20" >
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_be" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/service_text5"
+                    android:textColor="@color/color_22"
+                    android:textSize="@dimen/app_text_size_first" />
 
-    <RelativeLayout
-        android:id="@+id/service_apply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_customer_background"
-        android:padding="@dimen/px_20" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/pcenter_arrow" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/service_text4"
-            android:textColor="@color/color_22"
-            android:textSize="@dimen/app_text_size_first" />
-
-        <ImageView
-            android:id="@+id/service_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/pcenter_arrow" />
-        <TextView 
-            android:id="@+id/service_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/service_text4"
-            android:textColor="@color/color_service_price"
-            android:textSize="@dimen/app_text_size_first" 
-            android:layout_toLeftOf="@id/service_arrow"
-            android:layout_marginRight="@dimen/px_10"
-            />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_be" />
-
-    <RelativeLayout
-        android:id="@+id/service_rate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_customer_background"
-        android:padding="@dimen/px_20" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/service_text5"
-            android:textColor="@color/color_22"
-            android:textSize="@dimen/app_text_size_first" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/pcenter_arrow" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_be" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_be" />
+        </LinearLayout>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
 
 </LinearLayout>

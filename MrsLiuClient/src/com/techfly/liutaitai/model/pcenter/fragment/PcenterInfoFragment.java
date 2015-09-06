@@ -92,9 +92,11 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 	BroadcastReceiver mImageWallChangeBroadcastReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (!intent.getBooleanExtra(IntentBundleKey.REDIRECT_TYPE, false)
+			if (intent.getBooleanExtra(IntentBundleKey.REDIRECT_TYPE, false)
 					&& null != intent
 							.getStringExtra(IntentBundleKey.IMAGE_PATH)) {
+				AppLog.Loge("xll", intent
+						.getStringExtra(IntentBundleKey.IMAGE_PATH));
 				mSelectItems = intent
 						.getStringExtra(IntentBundleKey.IMAGE_PATH);
 			}
@@ -277,7 +279,6 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 								getImage.setType("image/*");
 								startActivityForResult(getImage,
 										TAKE_BIG_PICTURE);
-
 							}
 						}
 					}).show();

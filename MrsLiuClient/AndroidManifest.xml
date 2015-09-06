@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>  
 
-    
+    <uses-permission android:name="android.permission.CAMERA" />
     
     <!-- Optional for location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -253,6 +253,16 @@
             android:theme="@android:style/Theme.NoTitleBar" />
            <activity
             android:name=".model.pcenter.activities.MyBrowserActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+           <activity
+            android:name=".model.pcenter.activities.TechnicianInfoActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+           <activity
+            android:name=".model.pcenter.activities.TechnicianOrderActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
