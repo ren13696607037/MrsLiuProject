@@ -1,9 +1,11 @@
 package com.techfly.liutaitai.model.pcenter.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -19,6 +21,7 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.MyServiceParser;
 import com.techfly.liutaitai.model.pcenter.activities.MyServiceActivity;
+import com.techfly.liutaitai.model.pcenter.activities.TechnicianInfoActivity;
 import com.techfly.liutaitai.model.pcenter.bean.MyService;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -31,7 +34,7 @@ import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
-public class MyServiceFragment extends CommonFragment{
+public class MyServiceFragment extends CommonFragment implements OnClickListener{
 	private MyServiceActivity mActivity;
 	private ImageView mHeader;
 	private TextView mName;
@@ -109,6 +112,14 @@ public class MyServiceFragment extends CommonFragment{
     	mSex = (TextView) view.findViewById(R.id.service_sex);
     	mTaking = (RelativeLayout) view.findViewById(R.id.service_taking);
     	mTakingNum = (TextView) view.findViewById(R.id.serivce_taking_num);
+    	
+    	mInfo.setOnClickListener(this);
+    	mContinue.setOnClickListener(this);
+    	mServicing.setOnClickListener(this);
+    	mTaking.setOnClickListener(this);
+    	mAll.setOnClickListener(this);
+    	mApply.setOnClickListener(this);
+    	mRate.setOnClickListener(this);
     }
 
 	@Override
@@ -159,6 +170,45 @@ public class MyServiceFragment extends CommonFragment{
 		ImageLoader.getInstance().displayImage(mService.getmTechnician().getmHeader(), mHeader);
 		mName.setText(mService.getmTechnician().getmName());
 		mPrice.setText(mService.getmPrice());
+		mTakingNum.setText(mService.getmOrderNum());
+		mServicingNum.setText(mService.getmServiceingNum());
+		mContinueNum.setText(mService.getmOrderingNum());
+		mSex.setText(mService.getmType());
+		mCount.setText(getString(R.string.service_count, mService.getmTechnician().getmTimes()));
+	}
+
+	@Override
+	public void onClick(View v) {
+		Intent intent = null;
+		switch (v.getId()) {
+		case R.id.service_info:
+			intent = new Intent(mActivity, TechnicianInfoActivity.class);
+			break;
+		case R.id.service_continue:
+			
+			break;
+		case R.id.service_all:
+			
+			break;
+		case R.id.service_apply:
+			
+			break;
+		case R.id.service_rate:
+			
+			break;
+		case R.id.service_servicing:
+			
+			break;
+		case R.id.service_taking:
+			
+			break;
+
+		default:
+			break;
+		}
+		if(intent != null){
+			startActivity(intent);
+		}
 	}
 
 }

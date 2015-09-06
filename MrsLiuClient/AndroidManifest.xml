@@ -247,6 +247,16 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+           <activity
+            android:name=".model.pcenter.activities.TechnicianInfoActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+           <activity
+            android:name=".model.pcenter.activities.TechnicianOrderActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".dialog.AskDialogActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"

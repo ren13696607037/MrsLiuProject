@@ -439,5 +439,13 @@
 
     <string name="change_nick_text">此昵称非登录账号</string>
     <string name="change_nick_title">修改昵称</string>
+    <string name="sex_man">男</string>
+    <string name="sex_woman">女</string>
+    <string name="sex_other">保密</string>
+    <string name="tech_info_title">技师资料</string>
+    <string name="tech_info_sex">性别</string>
+    <string name="tech_info_address">地址</string>
+    <string name="tech_info_address_hint">请输入地址</string>
+    <string name="tech_info_city">城市</string>
 
 </resources>

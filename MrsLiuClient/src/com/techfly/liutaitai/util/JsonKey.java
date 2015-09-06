@@ -336,6 +336,10 @@ public interface JsonKey {
 		static final String IMAGE = "image";
 		static final String TYPE = "type";
 		static final String CITY = "city";
+		static final String MID = "mid";
+		static final String ADDRESS = "address";
+		static final String NICKNAME = "nickname";
+		static final String CITYNAME = "cityname";
 	}
 
 }

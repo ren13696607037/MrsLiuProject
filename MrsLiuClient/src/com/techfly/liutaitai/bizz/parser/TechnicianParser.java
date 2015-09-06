@@ -25,6 +25,8 @@ public class TechnicianParser implements Parser{
 				technician.setmSex(data.optString(JsonKey.TechnicianKey.SEX));
 				technician.setmStar(data.optString(JsonKey.TechnicianKey.STARS));
 				technician.setmCity(data.optString(JsonKey.TechnicianKey.CITY));
+				technician.setmCityName(data.optString(JsonKey.TechnicianKey.CITYNAME));
+				technician.setmAddress(data.optString(JsonKey.TechnicianKey.ADDRESS));
 			}
 		}
 		return technician;

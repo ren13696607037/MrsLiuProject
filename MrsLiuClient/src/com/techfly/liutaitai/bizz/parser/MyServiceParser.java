@@ -27,8 +27,10 @@ public class MyServiceParser implements Parser{
 				technician.setmTimes(data.optString(JsonKey.TechnicianKey.TIMES));
 				technician.setmHeader(Constant.IMG_HEADER_URL + data.optString(JsonKey.TechnicianKey.IMAGE));
 				technician.setmName(data.optString(JsonKey.TechnicianKey.NAME));
+				technician.setmSex(data.optString(JsonKey.TechnicianKey.SEX));
 				service.setmPrice(data.optString(JsonKey.MyServiceKey.MONEY));
 				service.setmTechnician(technician);
+				AppLog.Loge("xll", technician.toString());
 			}
 		}
 		return service;
