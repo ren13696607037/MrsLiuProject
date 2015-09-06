@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import com.techfly.liutaitai.model.home.bean.ContactInfo;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.util.JsonKey.UserKey;
 
 
 public class SharePreferenceUtils {
@@ -17,6 +18,8 @@ public class SharePreferenceUtils {
 	private static final String USER_PHONE="user_phone";
 	private static final String USER_PASS="user_pass";
 	private static final String USER_NICK="user_nick";
+	private static final String USER_IMG = "user_img";
+	private static final String USER_TOKEN = "user_token";
     private static final String IS_FISRT="is_first";
     private static final String SHARE_CONTENT="share_content";
     private static final String SHARE_URL="share_url";
@@ -45,6 +48,8 @@ public class SharePreferenceUtils {
              editor.putString(USER_PHONE, user.getmPhone());
              editor.putString(USER_NICK, user.getmNick());
              editor.putString(USER_PASS, user.getmPass());
+             editor.putString(USER_IMG, user.getmImage());
+             editor.putString(USER_TOKEN, user.getmToken());
              editor.commit();
          }
     }
@@ -55,6 +60,8 @@ public class SharePreferenceUtils {
             editor.remove(USER_PHONE);
             editor.remove(USER_NICK);
             editor.remove(USER_PASS);
+            editor.remove(USER_IMG);
+            editor.remove(USER_TOKEN);
             editor.commit();
         }
     }
@@ -65,12 +72,16 @@ public class SharePreferenceUtils {
             String phone = mSharePreference.getString(USER_PHONE, null);
             String pass=mSharePreference.getString(USER_PASS, null);
             String nick=mSharePreference.getString(USER_NICK, null);
+            String image=mSharePreference.getString(USER_IMG, null);
+            String token = mSharePreference.getString(USER_TOKEN, null);
             User user = new User();
             if (!TextUtils.isEmpty(id)) {
                 user.setmId(id);
                 user.setmPhone(phone);
                 user.setmPass(pass);
                 user.setmNick(nick);
+                user.setmImage(image);
+                user.setmToken(token);
                 return user;
             }
         }

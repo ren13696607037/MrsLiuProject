@@ -1,9 +1,6 @@
 package com.techfly.liutaitai.model.pcenter.fragment;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -23,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
-import com.techfly.liutaitai.model.home.bean.ContactInfo;
 import com.techfly.liutaitai.model.pcenter.activities.SuggestActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -123,9 +118,10 @@ public class SuggestFragment extends CommonFragment implements OnClickListener{
 		RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SUGGEST_URL);
-//        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(mUser.getmId())
-//        .setmGetParamPrefix(JsonKey.SuggestKey.CONTACT).setmGetParamValues(mEtContact.getText().toString());
         url.setmGetParamPrefix(JsonKey.SuggestKey.CONTENT).setmGetParamValues(mEtContent.getText().toString());
+        param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
         param.setPostRequestMethod();
         param.setmHttpURL(url);
         param.setmParserClassName(CommonParser.class.getName());

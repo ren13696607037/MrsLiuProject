@@ -49,6 +49,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.AddressManageParser;
@@ -161,17 +162,20 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
     	mRlChange.setOnClickListener(this);
     	mRlNick.setOnClickListener(this);
     	mCircleImageView.setOnClickListener(this);
+    	
+    	ImageLoader.getInstance().displayImage(mUser.getmImage(), mCircleImageView);
     }
 
 	@Override
 	public void requestData() {
 		RequestParams params = new RequestParams();
 		params.addHeader("enctype", "multipart/form-data");
-		String principalId = String.valueOf(mUser.getmId());
-//		params.addBodyParameter(JsonKey.UserKey.AVATAR, new File(mSelectItems));
+		params.addHeader("lt-token", mUser.getmToken());
+		params.addHeader("lt-id", mUser.getmId());  
+		params.addBodyParameter("img", new File(mSelectItems));
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, Constant.YIHUIMALL_BASE_URL
-				+ Constant.USER_HEADER_URL+ principalId + "/" + 1 + "/" + new File(mSelectItems), params,
+				+ Constant.CHANGE_INFO_URL, params,
 				new RequestCallBack<String>() {
 					@Override
 					public void onFailure(HttpException exception, String arg1) {

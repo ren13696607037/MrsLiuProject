@@ -7,6 +7,27 @@ public class User {
 	private String mNick;
 	private String mMessage;
 	private String mImage;
+	private String mToken;
+	public String getmToken() {
+		return mToken;
+	}
+	public void setmToken(String mToken) {
+		this.mToken = mToken;
+	}
+	public String getmMoney() {
+		return mMoney;
+	}
+	public void setmMoney(String mMoney) {
+		this.mMoney = mMoney;
+	}
+	public String getmType() {
+		return mType;
+	}
+	public void setmType(String mType) {
+		this.mType = mType;
+	}
+	private String mMoney;
+	private String mType;
 	public String getmId() {
 		return mId;
 	}
@@ -31,11 +52,6 @@ public class User {
 	public void setmNick(String mNick) {
 		this.mNick = mNick;
 	}
-	@Override
-	public String toString() {
-		return "User [mId=" + mId + ", mPhone=" + mPhone + ", mPass=" + mPass
-				+ ", mNick=" + mNick + "]";
-	}
 	public String getmMessage() {
 		return mMessage;
 	}
@@ -48,5 +64,13 @@ public class User {
 	public void setmImage(String mImage) {
 		this.mImage = mImage;
 	}
+	@Override
+	public String toString() {
+		return "User [mId=" + mId + ", mPhone=" + mPhone + ", mPass=" + mPass
+				+ ", mNick=" + mNick + ", mMessage=" + mMessage + ", mImage="
+				+ mImage + ", mToken=" + mToken + ", mMoney=" + mMoney
+				+ ", mType=" + mType + "]";
+	}
+	
 	
 }

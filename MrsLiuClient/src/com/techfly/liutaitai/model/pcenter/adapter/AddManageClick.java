@@ -16,6 +16,7 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.pcenter.activities.ChangeAddressActivity;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.model.pcenter.fragment.AddressManageFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -25,6 +26,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 
 public class AddManageClick implements OnClickListener{
@@ -91,10 +93,14 @@ public class AddManageClick implements OnClickListener{
 		}
 	}
 	private void delete(){
+		User mUser = SharePreferenceUtils.getInstance(mContext).getUser();
 		RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ADDRESS_DELETE_URL);
-        url.setmGetParamPrefix(JsonKey.AddressKey.ID).setmGetParamValues(mId);
+        url.setmGetParamPrefix(JsonKey.AddressKey.AID).setmGetParamValues(mId);
+        param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
         param.setmHttpURL(url);
         param.setPostRequestMethod();
         param.setmParserClassName(CommonParser.class.getName());

@@ -31,6 +31,9 @@ public class ManagerListener {
 	public interface OrderLogiticsListener{
 		void onOrderLogiticsListener(MyOrder order);
 	}
+	public interface spinnerClickListener{
+		void onClickNotify(String time);
+	}
 	
 	private List<CityUpdateListener> mCityUpdateListeners=new ArrayList<CityUpdateListener>();
 	private List<AddressListener> mAddressListeners=new ArrayList<AddressListener>();
@@ -39,6 +42,7 @@ public class ManagerListener {
 	private List<OrderLogiticsListener> mLogiticsListeners=new ArrayList<OrderLogiticsListener>();
 	private List<OrderPayListener> mPayListeners=new ArrayList<OrderPayListener>();
 	private List<OrderRateListener> mRateListeners=new ArrayList<OrderRateListener>();
+	private List<spinnerClickListener> mSpinnerClickListener=new ArrayList<spinnerClickListener>();
 	private static ManagerListener mListener;
 	private static Object object = new Object();
     private ManagerListener(){
@@ -123,6 +127,22 @@ public class ManagerListener {
     public void onUnRegisterOrderDeleteListener(OrderDeleteListener deleteListener){
     	if(mDeleteListeners.contains(deleteListener)){
     		mDeleteListeners.remove(deleteListener);
+    	}
+    }
+    public void onRegisterSpinnerClickListener(spinnerClickListener spinnerClickListener){
+    	if(!mSpinnerClickListener.contains(spinnerClickListener)){
+    		mSpinnerClickListener.add(spinnerClickListener);
+    	}
+    }
+    public void onUnRegisterSpinnerClickListener(spinnerClickListener spinnerClickListener){
+    	if(mSpinnerClickListener.contains(spinnerClickListener)){
+    		mSpinnerClickListener.remove(spinnerClickListener);
+    	}
+    }
+    public void notifySpinnerClickListener(String time){
+    	int size=mSpinnerClickListener.size();
+    	for(int i=0;i<size;i++){
+    		mSpinnerClickListener.get(i).onClickNotify(time);
     	}
     }
    

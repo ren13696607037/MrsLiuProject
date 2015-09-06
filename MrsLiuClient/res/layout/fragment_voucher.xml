@@ -22,6 +22,7 @@
 	    android:layout_height="wrap_content"
 	    android:background="@color/write"
 	    android:paddingBottom="@dimen/px_40"
+	    android:visibility="gone"
         >
         <TextView 
             android:id="@+id/voucher_text"

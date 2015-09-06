@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background" >
+
+    <include layout="@layout/fragment_common" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/header_bar_height"
+        android:padding="@dimen/px_20" >
+
+        <EditText
+            android:id="@+id/change_nick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nick_edit_bg"
+            android:hint="@string/pinfo_hint"
+            android:padding="@dimen/px_20"
+            android:textColor="@color/color_nick_edit_text"
+            android:textSize="@dimen/app_text_size_first" />
+
+        <RelativeLayout
+            android:id="@+id/change_nick_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/change_nick"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/change_nick"
+            android:padding="@dimen/px_20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/nick_delete"
+                android:gravity="center"
+                android:text="X"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/app_text_size_first" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/change_nick_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/change_nick"
+            android:layout_marginBottom="@dimen/px_50"
+            android:layout_marginLeft="@dimen/px_15"
+            android:layout_marginTop="@dimen/px_15"
+            android:text="@string/change_nick_text"
+            android:textColor="@color/color_nick_edit_text"
+            android:textSize="@dimen/app_text_size_first" />
+
+        <Button
+            android:id="@+id/change_nick_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:background="@drawable/login_button_blue"
+            android:padding="@dimen/px_15"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first" 
+            android:layout_below="@id/change_nick_text"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

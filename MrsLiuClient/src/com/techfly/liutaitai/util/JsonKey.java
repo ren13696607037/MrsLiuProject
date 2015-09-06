@@ -25,24 +25,30 @@ public interface JsonKey {
 	}
 
 	interface UserKey {
-		static final String ID = "uid";
+		static final String ID = "id";
 		static final String NAME = "name";
+		static final String NICK = "nickname";
+		static final String MONEY = "money";
 		static final String MOBILE = "phone_number";
-		static final String PASS = "login_password";
-		static final String OPASS = "oldpasswd";
+		static final String PASS = "pwd";
+		static final String OPASS = "oldpwd";
 		static final String TOKEN = "token";
 		static final String SMS = "smscode";
 		static final String PRINCIPAL = "principal";
-		static final String USERNAME = "username";
+		static final String USERNAME = "userName";
 		static final String EMAIL = "email";
 		static final String CODEURL = "codeUrl";
 		static final String COMMENT = "commentjson";
 		static final String LNAME = "login_name";
-		static final String NPASS = "newpassword";
+		static final String NPASS = "newpwd";
+		static final String TYPE = "type";
+		static final String ROLE = "role";
+		static final String PUSH = "jpushcode";
+		static final String AVATAR = "avatar";
 	}
 
 	interface SuggestKey {
-		static final String CONTENT = "content";
+		static final String CONTENT = "message";
 		static final String CONTACT = "contact";
 	}
 
@@ -54,7 +60,7 @@ public interface JsonKey {
 		static final String REGIONID = "regionId";
 		static final String REGION = "region";
 		static final String DETAIL = "location";
-		static final String DEFAULT = "defaultAddress";
+		static final String DEFAULT = "isdefault";
 		static final String ADDRESS = "address";
 		static final String AREAID = "areaId";
 		static final String ZIPCODE = "postCode";
@@ -63,6 +69,7 @@ public interface JsonKey {
 		static final String ADDRESSPKS = "addressPks";
 		static final String ISDEFAULT = "isDefault";
 		static final String PROVINCE="province";
+		static final String AID = "aid";
 	}
 
 	interface HomeKey {
@@ -294,6 +301,23 @@ public interface JsonKey {
 		static final String AMOUNT = "amount";
 		static final String ADDRESS = "address";
 		static final String ADDTIME = "addtime";
+	}
+	interface BalanceKey{
+		static final String PAGE = "no";
+		static final String SIZE = "size";
+		static final String DATAS = "datas";
+		static final String ID = "id";
+		static final String MONEY = "money";
+		static final String TIME = "create_time";
+		static final String TYPE = "type";
+	}
+	interface VoucherKey{
+		static final String PAGE = "no";
+		static final String SIZE = "size";
+		static final String DATAS = "datas";
+		static final String ID = "id";
+		static final String MONEY = "money";
+		static final String NEED = "need";
 	}
 
 }

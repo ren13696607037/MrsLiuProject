@@ -37,7 +37,7 @@
                 android:layout_marginRight="@dimen/px_30"
                 android:orientation="horizontal" >
 
-                <RadioButton
+                <CheckBox
                     android:id="@+id/apply_manicure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -50,19 +50,8 @@
                     android:text="@string/apply_text1"
                     android:textColor="@color/color_33" />
 
-                <RadioButton
-                    android:id="@+id/apply_beauty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_bg_selector"
-                    android:drawablePadding="10dip"
-                    android:padding="10dip"
-                    android:text="@string/apply_text2"
-                    android:textColor="@color/color_33" />
 
-                <RadioButton
+                <CheckBox
                     android:id="@+id/apply_eyelash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,39 +64,6 @@
                     android:textColor="@color/color_33" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/apply_group1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/px_20"
-                android:layout_marginLeft="@dimen/px_30"
-                android:layout_marginRight="@dimen/px_30"
-                android:orientation="horizontal" >
-
-                <RadioButton
-                    android:id="@+id/apply_makeup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_bg_selector"
-                    android:drawablePadding="10dip"
-                    android:padding="10dip"
-                    android:text="@string/apply_text4"
-                    android:textColor="@color/color_33" />
-
-                <RadioButton
-                    android:id="@+id/apply_daily"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/radio_bg_selector"
-                    android:drawablePadding="10dip"
-                    android:padding="10dip"
-                    android:text="@string/apply_text5"
-                    android:textColor="@color/color_33" />
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

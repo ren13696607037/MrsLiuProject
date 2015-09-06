@@ -97,4 +97,6 @@
 	<color name="color_order_service_makeup_color">#ffbc00</color>
 	<color name="color_order_service_daily_color">#00d69d</color>
 	<color name="color_service_detail_red_color">#e7391c</color>
+	<color name="color_nick_edit_bg">#ebebeb</color>
+	<color name="color_nick_edit_text">#7d7d7d</color>
 </resources>

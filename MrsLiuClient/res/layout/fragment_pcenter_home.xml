@@ -49,10 +49,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/pcenter_top" 
                 >
-                <ImageView 
+                <com.techfly.liutaitai.util.CircleImageView 
                     android:id="@+id/mine_img"
-                    android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+            		android:layout_height="80dp"
             		android:src="@drawable/login_img"
             		android:layout_centerVertical="true"
             		android:layout_marginLeft="@dimen/px_50"

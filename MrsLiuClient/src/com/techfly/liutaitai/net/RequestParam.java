@@ -54,6 +54,7 @@ public class RequestParam implements IRequestParam {
     public int requestMethod() {
         return  mRequestMethod;
     }
+    
 
     public boolean ismIsLogin() {
         return mIsLogin;

@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.jpush.android.api.JPushInterface;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
@@ -144,12 +146,12 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.LOGIN_URL);
-		url.setmGetParamPrefix(JsonKey.UserKey.LNAME)
+		url.setmGetParamPrefix(JsonKey.UserKey.NAME)
 				.setmGetParamValues(mPhone.getText().toString())
 				.setmGetParamPrefix(JsonKey.UserKey.PASS)
 				.setmGetParamValues(MD5.getDigest(mPass.getText().toString()));
-//		url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
-//				JPushInterface.getRegistrationID(getActivity()));
+		url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
+				JPushInterface.getRegistrationID(mActivity.getApplicationContext()));
 		param.setmHttpURL(url);
 		param.setPostRequestMethod();
 		param.setmParserClassName(LoginParser.class.getName());

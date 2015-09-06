@@ -13,6 +13,7 @@ public class RegisterParser implements Parser {
 
     @Override
     public Object fromJson(JSONObject object) {
+    	AppLog.Loge("xll", "JSONObject-=-=-=-=" + object.toString());
         User user=new User();
         if(object!=null){
             JSONObject obj = object.optJSONObject(JsonKey.DATA);

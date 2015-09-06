@@ -101,6 +101,48 @@
                 android:textColorHint="@color/color_be"
                 android:textSize="@dimen/app_text_size_first" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_40"
+            android:layout_marginRight="@dimen/px_40"
+            android:background="@drawable/add_frame_bottom" >
+
+            <ImageView
+                android:id="@+id/changeadd_img3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/px_15"
+                android:src="@drawable/address_detail" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/changeadd_img3"
+                android:layout_alignTop="@id/changeadd_img3"
+                android:layout_marginBottom="@dimen/px_15"
+                android:layout_marginLeft="@dimen/px_10"
+                android:layout_marginTop="@dimen/px_15"
+                android:layout_toRightOf="@id/changeadd_img3"
+                android:background="@color/color_be" />
+
+            <TextView
+                android:id="@+id/changeadd_city"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/changeadd_img3"
+                android:layout_alignTop="@id/changeadd_img3"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_toRightOf="@id/changeadd_img3"
+                android:background="@null"
+                android:hint="@string/changeadd_text2"
+                android:singleLine="true"
+                android:textColor="@color/color_33"
+                android:textColorHint="@color/color_be"
+                android:textSize="@dimen/app_text_size_first" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
