@@ -27,6 +27,15 @@ public class Area implements Serializable{
 	}
 	
 	@Override
+    public boolean equals(Object o) {
+        Area area = (Area) o;
+        if(mName.equals(area.getmName())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    @Override
 	public String toString() {
 		return "Area [mId=" + mId + ", mName=" + mName + ", mList=" + mList
 				+ "]";

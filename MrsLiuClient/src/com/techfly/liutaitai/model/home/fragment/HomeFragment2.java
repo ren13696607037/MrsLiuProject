@@ -3,18 +3,38 @@ package com.techfly.liutaitai.model.home.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.location.LocationClientOption.LocationMode;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.parser.CityListParser;
 import com.techfly.liutaitai.model.home.adapter.BannerAdapter;
 import com.techfly.liutaitai.model.home.bean.Banner;
+import com.techfly.liutaitai.model.pcenter.bean.Area;
+import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
+import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
+import com.techfly.liutaitai.util.activities.CitySelectActivity;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.ViewPagerWrapper;
 
@@ -23,45 +43,122 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
     private BannerAdapter mBannerAdapter;
     private ArrayList<Banner> mdataBanner = new ArrayList<Banner>();
     private LinearLayout mLinearLayout1;
-    
     private LinearLayout mLinearLayout2;
-    
     private LinearLayout mLinearLayout3;
-    
-  
-    
     private LinearLayout mLinearLayout5;
-    
     private LinearLayout mLinearLayout6;
-    
-    
     private LinearLayout mLinearLayout7;
-    
-    private LinearLayout mLinearLayout8;
-    
-  
-    
+    private TextView mCityTv;
+    public LocationClient mLocationClient = null;
+    public BDLocationListener myListener = new MyLocationListener();
+    private String mLatitude;
+    private String mLongitude;
+    private String mLocCity;
+    private boolean mIsFirst = true;
     @Override
     public void requestData() {
-        // TODO Auto-generated method stub
-        
+     
     }
 
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         startReqTask(this);
         mLoadHandler.sendEmptyMessageDelayed(Constant.NET_SUCCESS, 1500);// 停止加载框
         initBanner();
+        mLocationClient = new LocationClient(getActivity().getApplicationContext()); // 声明LocationClient类
+        initLocationOption();
+        mLocationClient.registerLocationListener(myListener); // 注册监听函数
+        mLocationClient.start();
     }
+    private void initLocationOption() {
+        // TODO Auto-generated method stub
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationMode.Hight_Accuracy);// 设置定位模式
+        option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+//        option.setScanSpan(1000*60);// 设置发起定位请求的间隔时间为5000ms
+//        option.setOpenGps(false);
+        option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
+        option.setNeedDeviceDirect(true);// 返回的定位结果包含手机机头的方向
+        mLocationClient.setLocOption(option);
+    }
+    private class MyLocationListener implements BDLocationListener {
 
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if(mIsFirst){
+                mIsFirst = false;
+                if (location == null) {
+                    mLocCity ="合肥市";
+                    return;
+                } else {
+                    mLatitude = String.valueOf(location.getLatitude());
+                    mLongitude = String.valueOf(location.getLongitude());
+                    AppLog.Logd("Fly", "mLatitude===="+mLatitude);
+                    mLocCity = String.valueOf(location.getCity());
+                    requestCityList();
+                }
+            }
+          
+        }
+
+    }
+    /**
+     * 请求城市列表
+     */
+    private void requestCityList() {
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.CITY_REQUEST_LIST_URL);
+        param.setmHttpURL(url);
+        param.setmParserClassName(CityListParser.class.getName());
+        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
+    }
+    
+    
+    /**
+     * 
+     * @return
+     */
+    private Response.Listener<Object> createMyReqSuccessListener() {
+        return new Listener<Object>() {
+            @Override
+            public void onResponse(Object object) {
+                AppLog.Logd(object.toString());
+                ArrayList<Area> list = (ArrayList<Area>) object;
+                if(list.size()>0){
+                    if (!TextUtils.isEmpty(mLocCity) && !mLocCity.equals("null")){
+                        Area area = new Area();
+                        area.setmName(mLocCity);
+                        area = list.get(list.indexOf(area));
+                        SharePreferenceUtils.getInstance(getActivity()).saveArea(area);
+                        mCityTv.setText(mLocCity);
+                    }else{
+                        SharePreferenceUtils.getInstance(getActivity()).saveArea(list.get(0));
+                        mCityTv.setText(list.get(0).getmName());
+                    }
+                }
+              
+            }
+        };
+    }
+    
+
+ 
+    private Response.ErrorListener createMyReqErrorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load"+error.getMessage());
+
+            }
+        };
+    }
     @Override
     public void onDestroy() {
         // TODO Auto-generated method stub
@@ -120,19 +217,15 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
         mLinearLayout5 = (LinearLayout) view.findViewById(R.id. cosmetology_service);
         mLinearLayout5.setOnClickListener(this);
         
-        
         mLinearLayout6 = (LinearLayout) view.findViewById(R.id. makeup_service);
         mLinearLayout6.setOnClickListener(this);
         
         mLinearLayout7 = (LinearLayout) view.findViewById(R.id. cleaning_service);
         mLinearLayout7.setOnClickListener(this);
         
-        mLinearLayout8 = (LinearLayout) view.findViewById(R.id. phone_service);
-        mLinearLayout8.setOnClickListener(this);
-        
-       
+        mCityTv = (TextView) view.findViewById(R.id.city);
+        mCityTv .setOnClickListener(this);
     
-       
         
     }
     @Override
@@ -144,13 +237,11 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        // TODO Auto-generated method stub
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onDetach() {
-        // TODO Auto-generated method stub
         super.onDetach();
     }
 
@@ -184,12 +275,26 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
        case R.id.   cleaning_service:
            
            break;   
-       case R.id.   phone_service:
+       case R.id.city:
+           UIHelper.toClassActivity(this, CitySelectActivity.class.getName());
            
-           break;   
+           break;
         default:
             break;
             
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        
+        super.onActivityResult(requestCode, resultCode, data);
+        
+        if(data!=null){
+            String city = data.getStringExtra(IntentBundleKey.LOCCITY);
+            mCityTv.setText(city);
+        }
+    }
+    
+    
 }

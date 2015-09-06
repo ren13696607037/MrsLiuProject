@@ -69,7 +69,7 @@ public class Constant {
     public static String UPDATE_TO_CART_REQUEST_URL="";
     public static String ADD_TO_CART_REQUEST_URL="";
     public static String DELETE_TO_CART_REQUEST_URL="";
-    public static String CITY_REQUEST_LIST_URL="";
+    public static String CITY_REQUEST_LIST_URL="common/citys";
 
 	public static final String CHANGE_INFO_URL = "user/modifyprofile";
 	public static final String BALANCE_HISTORY_URL = "user/moneyrecords";
