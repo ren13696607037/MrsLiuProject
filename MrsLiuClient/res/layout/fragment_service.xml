@@ -90,7 +90,7 @@
             android:id="@+id/gridview_parts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/TextColorWhite"
+            android:background="@android:color/white"
             android:horizontalSpacing="30dp"
             android:numColumns="2"
             android:padding="12dp"

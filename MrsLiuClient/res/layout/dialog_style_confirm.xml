@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dip"
-        android:textColor="@color/TextColorBlack"
+        android:textColor="@color/color_black"
         android:textSize="@dimen/dialog_title" />
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_marginBottom="10dip"
         android:gravity="left|top"
         android:padding="10dip"
-        android:textColor="@color/TextColorBlack"
+        android:textColor="@color/color_black"
         android:textSize="@dimen/dialog_content" />
 
     <ImageView

@@ -264,7 +264,7 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
             break;
         case R.id.del_all:
             if(ShopCar.getShopCar().getShopCheckedAmountSum()>0){
-             mDialog =   AlertDialogUtils.displayMyAlertChoice(getActivity(), R.string.cancel, R.string.product_shop_del_confirm_message, R.string.confirm,
+             mDialog =   AlertDialogUtils.displayMyAlertChoice(getActivity(), R.string.giveup, R.string.product_shop_del_confirm_message, R.string.confirm,
                         new OnClickListener() {
                             
                             @Override
@@ -274,7 +274,7 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
                                 
                             }
                         }
-                        , R.string.cancel,  new OnClickListener() {
+                        , R.string.giveup,  new OnClickListener() {
                             
                             @Override
                             public void onClick(View arg0) {

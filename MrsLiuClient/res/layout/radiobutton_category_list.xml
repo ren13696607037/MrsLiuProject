@@ -7,7 +7,7 @@
     android:paddingTop="15dp"
     android:paddingRight="10dp"
     android:paddingBottom="15dp"
-    android:textColor="@color/TextColorBlack"
+    android:textColor="@color/color_black"
     android:textSize="@dimen/app_text_size_second"
     android:singleLine="true"
     android:ellipsize="end" >

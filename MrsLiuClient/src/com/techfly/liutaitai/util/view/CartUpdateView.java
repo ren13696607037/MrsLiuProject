@@ -131,8 +131,8 @@ public class CartUpdateView extends LinearLayout implements OnClickListener{
           		 if(mproduct.getmAmount()<=1){
                      if(mIsWithDialog){
                          // dialog show
-                        mDialog = AlertDialogUtils.displayMyAlertChoice(mContext, R.string.cancel, R.string.product_shop_del_confirm_message, R.string.confirm, mOnClickListener
-                             , R.string.cancel, mOnClickListener2);
+                        mDialog = AlertDialogUtils.displayMyAlertChoice(mContext, R.string.giveup, R.string.product_shop_del_confirm_message, R.string.confirm, mOnClickListener
+                             , R.string.giveup, mOnClickListener2);
                         mDialog.show();
                      }else{
                     	ShopCar.getShopCar().updateproduct(true,mproduct, false);   

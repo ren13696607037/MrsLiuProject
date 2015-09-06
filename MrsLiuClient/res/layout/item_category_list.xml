@@ -22,7 +22,7 @@
         android:layout_toLeftOf="@+id/arrow_right"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/TextColorGray" />
+        android:textColor="@color/color_black" />
 
     <ImageView
         android:id="@+id/arrow_right"

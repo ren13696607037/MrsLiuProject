@@ -120,7 +120,7 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
                     mActivity.setResult(Constant.EXIT_SUCCESS);
                     mActivity.finish();
                 }
-            }, R.string.cancel, null);
+            }, R.string.giveup, null);
         	mDialog.show();
 			break;
 		default:

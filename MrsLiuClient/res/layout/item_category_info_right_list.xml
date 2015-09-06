@@ -11,7 +11,7 @@
         android:background="@drawable/category_detail_right_list_selecor"
         android:gravity="center_vertical|left"
         android:paddingLeft="30dip"
-        android:textColor="@color/TextColorBlack"
+        android:textColor="@color/color_black"
         android:textSize="@dimen/app_text_size_second"
         android:textStyle="bold" >
     </TextView>

@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:onClick="onBtnClick"
             android:layout_marginRight="2dp"
-            android:text="@string/cancel" />
+            android:text="@string/giveup" />
     </LinearLayout>
 
 </LinearLayout>

@@ -222,7 +222,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="21.5"
-                android:textColor="@color/TextColorWhite"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/app_text_size_first"
                 android:background="@drawable/ic_low_price_bg" />
 

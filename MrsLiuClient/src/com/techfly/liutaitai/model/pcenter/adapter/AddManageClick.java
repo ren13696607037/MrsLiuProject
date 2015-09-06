@@ -87,7 +87,7 @@ public class AddManageClick implements OnClickListener{
 	                	delete();
 	                	dialog.dismiss();
 	                }
-	            }, R.string.cancel, null).show();
+	            }, R.string.giveup, null).show();
 		}
 	}
 	private void delete(){

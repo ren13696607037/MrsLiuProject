@@ -180,7 +180,7 @@
                                         android:layout_width="60dp"
                                         android:layout_height="1dp"
                                         android:layout_gravity="center_vertical"
-                                        android:background="@color/TextColorBlack" />
+                                        android:background="@color/color_black" />
                                 </FrameLayout>
                             </LinearLayout>
 
