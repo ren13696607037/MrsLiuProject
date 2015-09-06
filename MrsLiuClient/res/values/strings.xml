@@ -54,7 +54,7 @@
     <string name="double_back_exit_ap">再按一次退出程序</string>
     <string name="alipay_fail_promt">付款失败，请再次尝试付款!</string>
     <string name="unknown_error">Unknown error</string>
-    <string name="category_title">分类</string>
+    <string name="category_title">订单篮</string>
     <string name="product_shop_del_confirm_message">确认从购物车中移除？</string>
     <string name="confirm">确定</string>
     <string name="confirm_order">确认订单</string>
@@ -439,5 +439,7 @@
 
     <string name="change_nick_text">此昵称非登录账号</string>
     <string name="change_nick_title">修改昵称</string>
+    <!-- 订单篮 -->
+    <string name="order_basket_empty">订单篮是空的</string>
 
 </resources>

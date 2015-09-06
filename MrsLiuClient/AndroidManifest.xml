@@ -126,7 +126,7 @@
       
         <!-- 商城模块配置 -->
         <activity
-            android:name=".model.mall.activities.CategoryListActivity"
+            android:name=".model.mall.activities.OrderBastketActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.home.activities.HomeActivity;
-import com.techfly.liutaitai.model.mall.activities.CategoryListActivity;
+import com.techfly.liutaitai.model.mall.activities.OrderBastketActivity;
 import com.techfly.liutaitai.model.order.activities.OrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.PCenterHomeActivity;
 import com.techfly.liutaitai.model.shopcar.activities.ShopCarHomeActivity;
@@ -59,7 +59,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack {
 				.setIndicator(
 						getMenuItem(R.drawable.ic_tab_mall,
 								getString(R.string.home_mall_tab)))
-				.setContent(new Intent(this, CategoryListActivity.class)));
+				.setContent(new Intent(this, OrderBastketActivity.class)));
 		mTabHost.addTab(mTabHost
 				.newTabSpec(TAB_SHOP_CAR)
 				.setIndicator(
