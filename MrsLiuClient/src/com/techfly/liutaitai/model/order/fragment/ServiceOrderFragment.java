@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
 import com.techfly.liutaitai.model.order.adapter.ServiceAdapter;
@@ -31,6 +32,7 @@ import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.ShowUtils;
 import com.techfly.liutaitai.util.SmartToast;
@@ -45,6 +47,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 	private TextView mTextView;
 	private final int MSG_LIST=0x101;
 	private int mPage = 1;
+	private int mSize = 10;
 	private User mUser;
 	public Handler mOrderHandler=new Handler(){
 
@@ -75,6 +78,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 //        ManagerListener.newManagerListener().onRegisterRefreshListener(this);
     }
     
@@ -132,13 +136,25 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
     }
 	@Override
 	public void requestData() {
-		RequestParam param = new RequestParam();
-        HttpURL url = new HttpURL();
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_SERVICE_URL + mUser.getmId() + "/" + mPage);
-        param.setmHttpURL(url);
-        param.setmParserClassName(ServiceOrderParser.class.getName());
-        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
-    }
+        RequestParam param = new RequestParam();
+		HttpURL url = new HttpURL();
+		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_LIST_URL);
+		url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
+		.setmGetParamValues(mPage + "")
+		;
+		url.setmGetParamPrefix(JsonKey.BalanceKey.SIZE).setmGetParamValues(mSize + "");
+		param.setmIsLogin(true);
+//		param.setmId(mUser.getmId());
+//		param.setmToken(mUser.getmToken());
+		param.setmId("1");
+		param.setmToken("440a07c991c4bbae3bcd52746e6a9d32");
+		param.setmHttpURL(url);
+		param.setPostRequestMethod();
+		param.setmParserClassName(ServiceOrderParser.class.getName());
+		RequestManager
+				.getRequestData(getActivity(), createMyReqSuccessListener(),
+						createMyReqErrorListener(), param);
+	}
    
     private Response.Listener<Object> createMyReqSuccessListener() {
         return new Listener<Object>() {
