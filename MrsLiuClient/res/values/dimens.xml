@@ -34,5 +34,9 @@
     <dimen name="px_130">72.22dp</dimen>
     <dimen name="px_80">44.44dp</dimen>
     <dimen name="home_layout_height">60dip</dimen>
+    <dimen name="seek_bar_width">30dp</dimen>
+    <dimen name="seek_bar_dialog_height">90dp</dimen>
+    <dimen name="seek_bar_dialog_width">90dp</dimen>
+    <dimen name="search_view_margin_top">15dp</dimen>
 
 </resources>

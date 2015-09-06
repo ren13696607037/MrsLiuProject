@@ -13,7 +13,7 @@
     <string name="loading_fail_nodata">目前暂无数据</string>
     <string name="home_shopcar_tab">订单</string>
     <string name="home_tab">首页</string>
-    <string name="home_mall_tab">洗衣篮</string>
+    <string name="home_mall_tab">订单篮</string>
     
     <string name="pro_sale_tab">销量</string>
     <string name="pro_price_tab">价格</string>
@@ -30,6 +30,11 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
+    <string name="select_city_title_text">选择城市</string>
+    <string name="search_city_hint_text">请输入城市中文名或者拼音</string>
+    <string name="select_city_location">定位当前城市</string>
+    <string name="select_city_location_ing">定位中...</string>
+    <string name="select_city_location_disable">对不起，这个城市还没有开通服务</string>
     
     <string name="home_pcenter_tab">我的</string>
   
@@ -423,4 +428,11 @@
     <string name="life_helper_send_fail">发布失败</string>
     <string name="life_helper_send_success">发布成功</string>
     <string name="orders_detail_text8">共%1$s件</string>
+    
+    <string name="add_toshopcar_title">加入购物车</string>
+    <string name="add_toshopcar_message">正在加入购物车，请稍等&#8230;&#8230;&#8230;</string>
+    <string name="delete_toshopcar_title">删除</string>
+    <string name="delete_toshopcar_message">正在从购物车中移除选中的商品，请稍等&#8230;&#8230;&#8230;</string>
+    <string name="update_toshopcar_title">更新</string>
+    <string name="update_toshopcar_message">正在从购物车中更新商品数量，请稍等&#8230;&#8230;&#8230;</string>
 </resources>

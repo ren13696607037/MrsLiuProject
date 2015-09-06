@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 import android.text.TextUtils;
 
 import com.techfly.liutaitai.model.home.bean.ContactInfo;
+import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 
 
@@ -22,6 +23,8 @@ public class SharePreferenceUtils {
 	private static SharePreferenceUtils sharePreferenceUtils = null;
     private SharedPreferences mSharePreference = null;
     private Context mContext = null;
+    private static final String AREA_ID="area_id";
+    private static final String AREA_NAME="area_name";
 
     public static SharePreferenceUtils getInstance(Context context) {
         if (sharePreferenceUtils == null) {
@@ -135,5 +138,39 @@ public class SharePreferenceUtils {
         }
         return "";
     }
-    
+    public synchronized void saveArea(Area area){
+        if (mSharePreference != null && area != null) {
+            Editor editor = mSharePreference.edit();
+            editor.putString(AREA_ID, area.getmId());
+            editor.putString(AREA_NAME, area.getmName());
+            editor.commit();
+        }
+    }
+    public synchronized void clearArea() {
+        if (mSharePreference != null) {
+            Editor editor = mSharePreference.edit();
+            editor.remove(AREA_ID);
+            editor.remove(AREA_NAME);
+            editor.commit();
+        }
+    }
+
+    public synchronized Area getArea() {
+        if (mSharePreference != null) {
+            String id = mSharePreference.getString(AREA_ID, null);
+            String name = mSharePreference.getString(AREA_NAME, null);
+            if(!TextUtils.isEmpty(id)){
+                Area area = new Area();
+                area.setmId(id);
+                area.setmName(name);
+                return area;
+            }else{
+                Area area = new Area();
+                area.setmId("1");
+                area.setmName("安徽");
+                return area;
+            }
+        }
+        return null;
+    }
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white_bg_home"
+    android:orientation="vertical" >
+    <include layout="@layout/fragment_header"/>
+	    <com.techfly.liutaitai.util.view.SearchView
+    	android:id="@+id/filter_edit"
+    	android:layout_width="fill_parent"
+    	android:padding="5dp"
+    	android:layout_height="41dp"
+    	android:layout_marginLeft="@dimen/search_view_margin_top"
+    	android:layout_marginRight="@dimen/search_view_margin_top"
+    	android:layout_marginTop="@dimen/search_view_margin_top"
+    	android:hint="@string/search_city_hint_text"
+    	android:background="@drawable/frame"
+    	android:singleLine="true" />
+	    
+    <FrameLayout
+    	android:layout_marginTop="@dimen/search_view_margin_top"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/dialog"
+            android:layout_width="@dimen/seek_bar_dialog_width"
+            android:layout_height="@dimen/seek_bar_dialog_height"
+            android:layout_gravity="center"
+            android:background="@drawable/show_head_toast_bg"
+            android:gravity="center"
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/app_text_size_most"
+            android:visibility="invisible" />
+
+        <com.techfly.liutaitai.util.view.SideBar
+            android:id="@+id/sidrbar"
+            android:layout_width="@dimen/seek_bar_width"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right|center" />
+        <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical" >
+        
+        <TextView 
+        	    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        	    android:layout_marginTop="0dp"
+        	    android:textSize="@dimen/app_text_size_first"
+        	    android:textColor="@color/color_gray"
+        	    android:text="@string/select_city_location"
+        	    android:layout_marginLeft="12dp"
+        	/>
+         <TextView 
+         	    android:id="@+id/location_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginLeft="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textColor="@android:color/white"
+                android:background="@color/bg_header"
+                android:layout_marginTop="6dp"
+                android:textSize="@dimen/app_text_size_first"
+                android:text="@string/select_city_location_ing"
+            />
+        <ListView
+        	android:layout_marginTop="4dp"
+        	android:id="@+id/country_lvcountry"
+        	android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:divider="@null"
+            android:listSelector="@drawable/listview_item_click_select"
+        	android:scrollbars="none"
+         >
+        </ListView>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

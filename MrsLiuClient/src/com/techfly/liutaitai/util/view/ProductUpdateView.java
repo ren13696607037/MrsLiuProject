@@ -1,9 +1,9 @@
 package com.techfly.liutaitai.util.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -13,11 +13,22 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.bizz.shopcar.OnShopCarLisManager;
+import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
+import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
+import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 
 public class ProductUpdateView extends LinearLayout implements OnClickListener{
@@ -28,17 +39,17 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
     private Product mProduct;
     private int num;
     private int mUserId;
-    public interface ShopCallBack{
-       
-            void onFail(String message);
+    public interface ShopCarCallBack {
+        void onFail(String message);
 
-            void onSuccess();
+        void onSuccess();
 
-            void login();
-     
+        void login();
     }
+
     
-    private ShopCallBack mCallBack;
+    private ShopCarCallBack mCallBack;
+    private ProgressDialog mProgressDialog;
     
  
 
@@ -186,17 +197,81 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
      * @throws CallBackNullException
      * @throws ProductCountException
      */
-    public void onReqPullToShopCart(ShopCallBack callback) {
-        mCallBack = callback;
-        if (authLogin()) {
-            try {
-                mCallBack.onSuccess();
-                ShopCar.getShopCar().updateproduct(false, (Product) mProduct.clone(), true);
-            } catch (CloneNotSupportedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+    public void onReqPullToShopCart(ShopCarCallBack callBack) throws CallBackNullException, ProductCountException {
+        if (callBack == null) {
+            throw new CallBackNullException();
         }
+        mCallBack = callBack;
+        if (mProduct.getmAmount() > 0) {
+            if (authLogin()) {
+                requestData();
+            }
+        } else {
+            throw new ProductCountException();
+        }
+
     }
-  
+
+    /**
+     * 请求加入购物车
+     */
+    private void requestData() {
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        url.setmGetParamPrefix(RequestParamConfig.MEMBER_ID);
+        url.setmGetParamValues(mUserId + "");
+
+        url.setmGetParamPrefix(RequestParamConfig.GOODS_ID);
+        url.setmGetParamValues(mProduct.getmId());
+
+        url.setmGetParamPrefix(RequestParamConfig.STORE_ID);
+        url.setmGetParamValues(mProduct.getmBelongCategory());
+
+        url.setmGetParamPrefix(RequestParamConfig.NUM);
+        url.setmGetParamValues(mProduct.getmAmount() + "");
+
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ADD_TO_CART_REQUEST_URL);
+        param.setmHttpURL(url);
+        param.setmParserClassName(CommonParser.class.getName());
+        RequestManager.getRequestData(mContext, creatSuccessListener(), creatErrorListener(), param);//
+    }
+
+    private Response.Listener<Object> creatSuccessListener() {
+        return new Response.Listener<Object>() {
+
+            @Override
+            public void onResponse(Object obj) {
+                ResultInfo info = (ResultInfo) obj;
+                if (info.getmCode() == 0) {
+                    ShopCar.getShopCar().updateproduct(false, mProduct, true);
+                    if (mProgressDialog != null) {
+                        mProgressDialog.dismiss();
+                    }
+                    mCallBack.onSuccess();
+                } else {
+                    mCallBack.onFail("加入购物车失败");
+                }
+            }
+        };
+    }
+
+    private Response.ErrorListener creatErrorListener() {
+        return new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+                if (mProgressDialog != null) {
+                    mProgressDialog.dismiss();
+                }
+                mCallBack.onFail("加入购物车失败");
+            }
+        };
+    }
+
+    protected void showDialog() {
+        mProgressDialog = ProgressDialog.show(mContext, mContext.getString(R.string.add_toshopcar_title),
+                mContext.getString(R.string.add_toshopcar_message), false, false);
+
+    }
 }

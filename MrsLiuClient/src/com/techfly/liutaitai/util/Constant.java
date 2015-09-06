@@ -64,6 +64,12 @@ public class Constant {
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
+	
+
+    public static String UPDATE_TO_CART_REQUEST_URL="";
+    public static String ADD_TO_CART_REQUEST_URL="";
+    public static String DELETE_TO_CART_REQUEST_URL="";
+    public static String CITY_REQUEST_LIST_URL="";
 	public static final int PAY_TYPE_ORDER = 110; // 对已有订单的支付
 	public static final int PAY_TYPE_CREATE = 111; // 创建订单的支付
 
@@ -89,6 +95,15 @@ public class Constant {
 	public static int COMMON_PRO_ITEM_STYLE = 0X113;
 
 	public static int HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG = 0;// BACK iCON
+
+
+
+  
+
+
+
+
+   
 
 	public static final int LOGIN_INTENT = 0x801;
 	public static final int LOGIN_SUCCESS = 0x802;

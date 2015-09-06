@@ -12,5 +12,31 @@ public interface RequestParamConfig {
     String COMMODITY_ID = "commodityId";//idS
     String GOODS = "buyInfo";
     String VERSION = "code";
+
+    String MEMBER_ID = "member_id";
+    
+    String TRUE_NAME = "true_name";
+    
+    String ID_CARD = "IDCard";
+    
+    String IDENTITY = "identity";
+    
+    String GOODS_ID = "goods_id";
+    
+    String CARDS_ID = "goods_ids";
+    
+    String STORE_ID = "store_id";
+    
+    String BUNDLE_ID = "bl_id";
+    
+    String FLAG = "flag";
+    
+    String PLUS = "plus";
+    
+    String REDUCE = "reduce";
+    
+    String NUM = "num";
+    
+    String IF_CART = "ifcart";
    
 }

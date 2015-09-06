@@ -21,7 +21,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
+import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.Standard;
 import com.techfly.liutaitai.model.mall.bean.StandardClass;
@@ -40,10 +43,9 @@ import com.techfly.liutaitai.util.adapter.CommonAdapter;
 import com.techfly.liutaitai.util.adapter.ViewHolder;
 import com.techfly.liutaitai.util.view.GridViewForScrollView;
 import com.techfly.liutaitai.util.view.ProductUpdateView;
-import com.techfly.liutaitai.util.view.ProductUpdateView.ShopCallBack;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.techfly.liutaitai.util.view.ProductUpdateView.ShopCarCallBack;
 
-public class StandardActivity extends Activity implements ShopCallBack {
+public class StandardActivity extends Activity implements ShopCarCallBack {
 
 	private static final int REFRESH = 0x9;
 	private int mProductId = -1, mReqFlag = ProductInfoFragment.FLAG_NORMAL;
@@ -606,8 +608,14 @@ public class StandardActivity extends Activity implements ShopCallBack {
 						// Toast.LENGTH_SHORT).show();
 						break;
 					}
-					mProductUpdateView
-							.onReqPullToShopCart(StandardActivity.this);
+					try {
+                        mProductUpdateView
+                        		.onReqPullToShopCart(StandardActivity.this);
+                    } catch (CallBackNullException e) {
+                         
+                    } catch (ProductCountException e) {
+                          
+                    }
 					break;
 				case R.id.standard_shop_now:
 					getUnique();

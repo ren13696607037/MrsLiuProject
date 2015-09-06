@@ -34,4 +34,5 @@ public class IntentBundleKey {
     public static String IMAGE_PATH="image_path";
 	public static String URL = "url";
 	public static String PATH="path";
+	public static String LOCCITY="loc_city";
 }

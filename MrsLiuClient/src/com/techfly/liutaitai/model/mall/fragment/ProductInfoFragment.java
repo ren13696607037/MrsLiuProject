@@ -26,13 +26,14 @@ import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
+import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
 import com.techfly.liutaitai.model.mall.activities.StandardActivity;
 import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.parser.NewProductInfoParser;
 import com.techfly.liutaitai.model.mall.parser.ProductCollectParser;
 import com.techfly.liutaitai.model.mall.parser.ProductDeleteCollectParser;
-import com.techfly.liutaitai.model.mall.parser.ProductInfoParser;
 import com.techfly.liutaitai.model.pcenter.activities.RateListActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -40,7 +41,6 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
-import com.techfly.liutaitai.util.DensityUtils;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
@@ -51,11 +51,11 @@ import com.techfly.liutaitai.util.adapter.ViewHolder;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.ListViewForScrollView;
 import com.techfly.liutaitai.util.view.ProductUpdateView;
-import com.techfly.liutaitai.util.view.ProductUpdateView.ShopCallBack;
+import com.techfly.liutaitai.util.view.ProductUpdateView.ShopCarCallBack;
 import com.techfly.liutaitai.util.view.RollViewPager;
 import com.techfly.liutaitai.util.view.RollViewPager.OnPagerClickCallback;
 
-public class ProductInfoFragment extends CommonFragment implements ShopCallBack {
+public class ProductInfoFragment extends CommonFragment implements ShopCarCallBack {
 
 	private static final int FLAG_DATA = 1;
 	private static final int FLAG_COLLECT = 2;
@@ -384,8 +384,16 @@ public class ProductInfoFragment extends CommonFragment implements ShopCallBack 
 					} else {
 						mProduct.setmType(0);
 					}
-					mProductUpdateCount
-							.onReqPullToShopCart(ProductInfoFragment.this);
+					try {
+                        mProductUpdateCount
+                        		.onReqPullToShopCart(ProductInfoFragment.this);
+                    } catch (CallBackNullException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (ProductCountException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
 					break;
 				case R.id.product_info_shop_now:// 立即购买
 				    if(mProduct.getmStoreCount()<=0){
