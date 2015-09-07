@@ -35,4 +35,5 @@ public class IntentBundleKey {
 	public static String URL = "url";
 	public static String PATH="path";
 	public static String LOCCITY="loc_city";
+    public static String TYPE="type";
 }

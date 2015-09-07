@@ -63,7 +63,7 @@ public class Constant {
 	public static final String TECH_INFO_HEADER_URL = "master/modify";
 	public static final String TECH_INFO_CHANGE_URL = "master/modifyinfo";
 
-	public static final String PRODUCT_LIST = "goods/category/list";
+	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";

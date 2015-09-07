@@ -69,7 +69,7 @@ public class GanxiServiceAdapter extends BaseAdapter {
       
         ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
         holder.productName.setText(mList.get(position).getmName());
-        holder.productType.setText(mList.get(position).getmProductType());
+        holder.productType.setText(mList.get(position).getmDesc());
         holder.productMarketPrice.setText("￥"+mList.get(position).getmMarketPrice()+"元");
        
        
