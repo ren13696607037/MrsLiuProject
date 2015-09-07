@@ -7,18 +7,38 @@ import com.techfly.liutaitai.model.mall.bean.Product;
 
 public class MyOrder implements Serializable {
 	private static final long serialVersionUID = 1001L;
-	private String mId;
-	private String mNum;
-	private String mImg;
-	private String mTitle;
-	private String mTotalPrice;
-	private String mTime;
-	private int mState;
-	private ArrayList<Product> mList;
-	private String mPrice;
+	private String mId;//仅仅是个ID
+	private String mNum;//订单号
+	private String mImg;//图片？
+	private String mTitle;//i do not now what it is
+	private String mTotalPrice;//总价格
+	private String mTime;//应该是创建订单的时间
+	private int mState;//状态码
+	private ArrayList<Product> mList;//产品列表
+	private String mPrice;//
 	private String mExpCom;
 	private String mExpShortName;
 	private String mExpNo;
+	
+	private int mType;//订单类型，分类
+	private int mTotalCount;//产品总数量
+	
+
+	public int getmType() {
+		return mType;
+	}
+
+	public void setmType(int mType) {
+		this.mType = mType;
+	}
+
+	public int getmTotalCount() {
+		return mTotalCount;
+	}
+
+	public void setmTotalCount(int mTotalCount) {
+		this.mTotalCount = mTotalCount;
+	}
 
 	public String getmExpCom() {
 		return mExpCom;

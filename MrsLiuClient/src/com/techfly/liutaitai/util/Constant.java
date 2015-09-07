@@ -64,6 +64,8 @@ public class Constant {
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
+	
+	public static final String ORDER_BASKET_LIST = "order/list";
 
 	
 

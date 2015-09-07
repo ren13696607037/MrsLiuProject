@@ -4,6 +4,7 @@ public interface JsonKey {
 	static final String CODE = "code";
 	static final String MESSAGE = "message";
 	static final String DATA = "data";
+	static final String DATAS = "datas";
 
 	interface ProductCategory {
 		static final String GOODS_CLASS = "goods_class";
@@ -336,6 +337,26 @@ public interface JsonKey {
 		static final String IMAGE = "image";
 		static final String TYPE = "type";
 		static final String CITY = "city";
+	}
+	interface OrderBasketKey{
+		static final String ID = "id";
+		static final String UNIT = "unit";
+		static final String STATUS = "status";
+		static final String TIME = "serviceTime";
+		static final String PRODUCTS = "goods";
+		static final String TYPE = "type";
+		static final String ORDER_NUM = "orderId";
+		static final String TOTAL_COUNT = "totoal";
+		static final String TOTAL_PRICE = "totalPrice";
+	}
+	interface Product2Key{
+		static final String ID = "id";
+		static final String PRODUCT_ID = "id";
+		static final String UNIT = "unit";
+		static final String ORDER_NUM = "orderId";
+		static final String COUNT = "count";
+		static final String PRICE = "price";
+		static final String NAME = "goodsName";
 	}
 
 }
