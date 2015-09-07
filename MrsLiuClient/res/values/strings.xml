@@ -376,13 +376,8 @@
     <string name="setting_exit">退出当前账号</string>
     
     <string name="order_service_text">服务时间：%1$s</string>
-    <string name="order_service_text1">美甲师:</string>
-    <string name="order_service_text2">美容师:</string>
-    <string name="order_service_text3">美睫师:</string>
-    <string name="order_service_text4">化妆师:</string>
-    <string name="order_service_text5">保洁师:</string>
-    <string name="order_service_text6">保洁</string>
-    <string name="order_service_text7">化妆</string>
+    <string name="order_service_text1">美甲师:%1$s</string>
+    <string name="order_service_text3">美睫师:%1$s</string>
     <string name="order_service_state">待支付</string>
     <string name="order_service_state1">待接单</string>
     <string name="order_service_state2">待服务</string>
@@ -445,5 +440,7 @@
     <string name="tech_info_address">地址</string>
     <string name="tech_info_address_hint">请输入地址</string>
     <string name="tech_info_city">城市</string>
-
+    
+    <string name="illegal_phone">非法的电话号码</string>
+	<string name="service_no_content">您当前尚未预约~</string>
 </resources>

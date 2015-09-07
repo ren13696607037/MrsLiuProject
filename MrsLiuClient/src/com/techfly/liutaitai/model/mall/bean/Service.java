@@ -119,5 +119,14 @@ public class Service {
         this.mCash = mCash;
     }
 
-    private String mCash;// 代金券的数额
+    public String getmNum() {
+		return mNum;
+	}
+
+	public void setmNum(String mNum) {
+		this.mNum = mNum;
+	}
+
+	private String mCash;// 代金券的数额
+    private String mNum;//预约编号
 }

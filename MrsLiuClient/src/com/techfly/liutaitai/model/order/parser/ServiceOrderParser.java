@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.net.pscontrol.Parser;
+import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
 
 public class ServiceOrderParser implements Parser{
@@ -18,8 +20,9 @@ public class ServiceOrderParser implements Parser{
 		ArrayList<Service> list = new ArrayList<Service>();
 		if(object != null){
 			int code = object.optInt(JsonKey.CODE);
-			if(code == 10){
-				JSONArray array = object.optJSONArray(JsonKey.DATA);
+			if(code == 0){
+				JSONArray array = object.optJSONObject(JsonKey.DATA).optJSONArray(JsonKey.VoucherKey.DATAS);
+				AppLog.Loge("xll", array.toString());
 				if(array != null){
 					int size = array.length();
 					for(int i = 0; i < size; i++){
@@ -27,7 +30,7 @@ public class ServiceOrderParser implements Parser{
 						JSONObject obj = array.optJSONObject(i);
 						service.setmId(obj.optString(JsonKey.ServiceKey.ID));
 						service.setmCash(obj.optString(JsonKey.ServiceKey.DATE));
-						service.setmServiceIcon(obj.optString(JsonKey.ServiceKey.IMAGE));
+						service.setmServiceIcon(Constant.IMG_HEADER_URL + obj.optString(JsonKey.ServiceKey.IMAGE));
 						service.setmServiceName(obj.optString(JsonKey.ServiceKey.NAME));
 						service.setmServicePerson(obj.optString(JsonKey.ServiceKey.TECH));
 						service.setmServiceType(obj.optString(JsonKey.ServiceKey.TYPE));

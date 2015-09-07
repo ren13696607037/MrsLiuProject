@@ -4,11 +4,15 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     >
+    <include 
+        layout="@layout/fragment_header"
+        />
       <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/header_bar_height"
         >
          </com.techfly.liutaitai.util.view.LoadingLayout>
     <com.techfly.liutaitai.util.view.XListView 
@@ -17,6 +21,7 @@
     	android:layout_height="match_parent"
     	android:divider="@null"
     	android:dividerHeight="0dp"
+    	android:layout_marginTop="@dimen/header_bar_height"
         />
     <TextView 
         android:id="@+id/all_text"
