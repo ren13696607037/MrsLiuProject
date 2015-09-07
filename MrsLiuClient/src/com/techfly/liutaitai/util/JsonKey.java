@@ -276,31 +276,33 @@ public interface JsonKey {
 	}
 	interface ServiceKey{
 		static final String ID = "id";
-		static final String TIME = "time";
-		static final String TECH = "technician";
+		static final String TIME = "serviceTime";
+		static final String TECH = "master";
 		static final String PRICE = "price";
-		static final String NAME = "name";
-		static final String STATE = "state";
+		static final String NAME = "title";
+		static final String STATE = "status";
 		static final String IMAGE = "images";
 		static final String DATE = "date";
 		static final String TYPE = "type";
+		static final String RID = "rid";
 	}
 	interface ServiceDetailKey{
 		static final String ID = "id";
-		static final String TIME = "time";
-		static final String TECH = "technician";
-		static final String PRICE = "price";
-		static final String NAME = "name";
+		static final String TIME = "createTime";
+		static final String TECH = "master";
+		static final String PRICE = "money";
+		static final String NAME = "title";
 		static final String STATE = "state";
-		static final String IMAGE = "images";
+		static final String IMAGE = "image";
 		static final String DATE = "date";
 		static final String TYPE = "type";
-		static final String UNAME = "uname";
-		static final String NUMBER = "number";
-		static final String VOUCHER = "voucher";
+		static final String UNAME = "name";
+		static final String NUMBER = "mobile";
+		static final String VOUCHER = "vouchermoney";
 		static final String AMOUNT = "amount";
 		static final String ADDRESS = "address";
-		static final String ADDTIME = "addtime";
+		static final String ADDTIME = "serviceTime";
+		static final String SID = "sid";
 	}
 	interface BalanceKey{
 		static final String PAGE = "no";

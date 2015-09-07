@@ -56,14 +56,16 @@ public class Constant {
 	public static final String PASS_URL = "user/modifypwd";//修改密码
 	public static final String ORDER_SERVICE_URL = "commodity/bespeak/";//美甲等预约订单
 	public static final String ORDER_APPOINTMENT_URL = "";//洗衣预约订单
-	public static final String ORDER_SERVICE_DETAIL_URL = "commodity/bespeakdetails/";
+	public static final String ORDER_SERVICE_DETAIL_URL = "service/reservation";
 	public static final String USER_HEADER_URL = "uploadfile/pic/";
 	public static final String SERVICE_URL = "master/index";
 	public static final String TECH_INFO_URL = "master/mine";
 	public static final String TECH_INFO_HEADER_URL = "master/modify";
 	public static final String TECH_INFO_CHANGE_URL = "master/modifyinfo";
 	public static final String SERVICE_LIST_URL = "service/reservations";
-
+	public static final String SERVICE_CANCEL_URL = "service/cancelreservation";
+	public static final String SERVICE_DELETE_URL = "service/delreservation";
+	
 	public static final String PRODUCT_LIST = "goods/category/list";
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";

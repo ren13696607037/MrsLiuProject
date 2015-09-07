@@ -51,7 +51,6 @@ public class ServiceAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_order_service, null);
 			holder.mButton = (Button) convertView.findViewById(R.id.ios_btn);
 			holder.mButton2 = (Button) convertView.findViewById(R.id.ios_btn2);
-			holder.mDate = (TextView) convertView.findViewById(R.id.ios_date);
 			holder.mImageView = (ImageView) convertView.findViewById(R.id.ios_img);
 			holder.mName = (TextView) convertView.findViewById(R.id.ios_name);
 			holder.mPrice = (TextView) convertView.findViewById(R.id.ios_price);
@@ -64,47 +63,63 @@ public class ServiceAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
-		holder.mDate.setText(mContext.getString(R.string.order_service_text,mList.get(position).getmCash()));
 		holder.mName.setText(mList.get(position).getmServiceName());
 		holder.mPrice.setText("￥"+mList.get(position).getmServicePrice());
 		holder.mTime.setText(mList.get(position).getmServiceTime());
 		setType(mList.get(position).getmServiceType(), holder.mType, mList.get(position).getmServicePerson(), holder.mTech);
 		setState(mList.get(position).getmServiceStatus(), holder.mState, holder.mButton, holder.mButton2);
 		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.mImageView , ImageLoaderUtil.mOrderServiceIconLoaderOptions);
-		
+		holder.mButton.setOnClickListener(new ServiceClick(mContext, holder.mButton.getText().toString(), mList.get(position)));
+		holder.mButton2.setOnClickListener(new ServiceClick(mContext, holder.mButton2.getText().toString(), mList.get(position)));
 		return convertView;
 	}
 	private void setType(String type, TextView textView, String string, TextView textView2){
-		if("1".equals(type)){
+		if("0".equals(type)){
 			textView.setText(R.string.apply_text1);
 			textView.setBackgroundResource(R.drawable.order_service_manicure_bg);
-			textView2.setText(mContext.getString(R.string.order_service_text1) + string);
-		}else if("2".equals(type)){
-			textView.setText(R.string.apply_text2);
-			textView.setBackgroundResource(R.drawable.order_service_beauty_bg);
-			textView2.setText(mContext.getString(R.string.order_service_text2, string));
-		}else if("3".equals(type)){
+			textView2.setText(mContext.getString(R.string.order_service_text1, string));
+		}else if("1".equals(type)){
 			textView.setText(R.string.apply_text3);
 			textView.setBackgroundResource(R.drawable.order_service_eyelash_bg);
 			textView2.setText(mContext.getString(R.string.order_service_text3, string));
-		}else if("4".equals(type)){
-			textView.setText(R.string.order_service_text7);
-			textView.setBackgroundResource(R.drawable.order_service_makeup_bg);
-			textView2.setText(mContext.getString(R.string.order_service_text4, string));
-		}else if("5".equals(type)){
-			textView.setText(R.string.order_service_text6);
-			textView.setBackgroundResource(R.drawable.order_service_daily_bg);
-			textView2.setText(mContext.getString(R.string.order_service_text5, string));
 		}
-		//TODO 暂无提示
 	}
 	private void setState(String state, TextView textView, Button button, Button button2){
-		//TODO
+		button.setVisibility(View.VISIBLE);
+		button2.setVisibility(View.VISIBLE);
+		if("0".equals(state)){
+			textView.setText(R.string.order_service_state);
+			button.setText(R.string.order_service_btn1);
+			button2.setText(R.string.order_service_btn);
+		}else if("1".equals(state)){
+			textView.setText(R.string.order_service_state1);
+			button.setText(R.string.order_service_btn2);
+			button2.setVisibility(View.INVISIBLE);
+		}else if("2".equals(state)){
+			textView.setText(R.string.order_service_state2);
+			button.setText(R.string.order_service_btn3);
+			button2.setVisibility(View.INVISIBLE);
+		}else if("3".equals(state) || "4".equals(state)){
+			textView.setText(R.string.order_service_state3);
+			button.setText(R.string.order_service_btn3);
+			button2.setVisibility(View.INVISIBLE);
+		}else if("5".equals(state)){
+			textView.setText(R.string.order_service_state4);
+			button.setText(R.string.order_service_btn5);
+			button2.setText(R.string.order_service_btn4);
+		}else if("6".equals(state)){
+			textView.setText(R.string.order_service_state5);
+			button.setText(R.string.order_service_btn);
+			button2.setText(R.string.order_service_btn4);
+		}else if("-1".equals(state)){
+			textView.setText(R.string.order_service_state6);
+			button.setText(R.string.order_service_btn);
+			button2.setText(R.string.order_service_btn4);
+		}
 	}
 	
 	class ViewHolder{
 		private TextView mType;
-		private TextView mDate;
 		private TextView mTime;
 		private TextView mName;
 		private TextView mTech;

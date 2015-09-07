@@ -11,16 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
 import com.techfly.liutaitai.model.order.adapter.ServiceAdapter;
@@ -33,14 +30,14 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.ManagerListener;
+import com.techfly.liutaitai.util.ManagerListener.ServiceClickListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
-import com.techfly.liutaitai.util.ShowUtils;
-import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class ServiceOrderFragment extends CommonFragment implements IXListViewListener{
+public class ServiceOrderFragment extends CommonFragment implements IXListViewListener, ServiceClickListener{
 	private XListView mListView;
 	private ArrayList<Service> mList=new ArrayList<Service>();
 	private ServiceAdapter mAdapter;
@@ -49,6 +46,8 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 	private int mPage = 1;
 	private int mSize = 10;
 	private User mUser;
+	private int mType = 0;
+	private Service mService;
 	public Handler mOrderHandler=new Handler(){
 
 		@Override
@@ -79,7 +78,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
-//        ManagerListener.newManagerListener().onRegisterRefreshListener(this);
+        ManagerListener.newManagerListener().onRegisterServiceClickListener(this);
     }
     
 
@@ -93,7 +92,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        ManagerListener.newManagerListener().onUnRegisterRefreshListener(this);
+        ManagerListener.newManagerListener().onUnRegisterServiceClickListener(this);
     }
 
     @Override
@@ -114,6 +113,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
         onInitView(view);
     }
     private void onInitView(View view){
+    	
     	mListView=(XListView) view.findViewById(R.id.all_list);
     	mTextView=(TextView) view.findViewById(R.id.all_text);
     	mAdapter=new ServiceAdapter(getActivity(), mList);
@@ -138,11 +138,20 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 	public void requestData() {
         RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
-		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_LIST_URL);
-		url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
-		.setmGetParamValues(mPage + "")
-		;
-		url.setmGetParamPrefix(JsonKey.BalanceKey.SIZE).setmGetParamValues(mSize + "");
+		if(mType == 1){
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_DELETE_URL);
+			url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mService.getmId());
+		}else if(mType == 3){
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_CANCEL_URL);
+			url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mService.getmId());
+		}else{
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_LIST_URL);
+			url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
+			.setmGetParamValues(mPage + "")
+			;
+			url.setmGetParamPrefix(JsonKey.BalanceKey.SIZE).setmGetParamValues(mSize + "");	
+			param.setmParserClassName(ServiceOrderParser.class.getName());
+		}
 		param.setmIsLogin(true);
 //		param.setmId(mUser.getmId());
 //		param.setmToken(mUser.getmToken());
@@ -150,7 +159,6 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 		param.setmToken("440a07c991c4bbae3bcd52746e6a9d32");
 		param.setmHttpURL(url);
 		param.setPostRequestMethod();
-		param.setmParserClassName(ServiceOrderParser.class.getName());
 		RequestManager
 				.getRequestData(getActivity(), createMyReqSuccessListener(),
 						createMyReqErrorListener(), param);
@@ -223,15 +231,46 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 		
 	}
 
-//	@Override
-//	public void onRefreshListener() {
-//		if(mUser!=null){
-//        	startReqTask(OrderOldFragment.this);
-//        }else{
-//        	mListView.setVisibility(View.GONE);
-//    		mTextView.setVisibility(View.VISIBLE);
-//    		mTextView.setText(R.string.login_toast);
-//        }
-//	}
+	@Override
+	public void onServiceDeleteListener(Service service) {
+		mType = 1;
+		mService = service;
+	}
+
+	@Override
+	public void onServicePayListener(Service service) {
+		mType = 2;
+		
+	}
+
+	@Override
+	public void onServiceCancelListener(Service service) {
+		mType = 3;
+		mService = service;
+	}
+
+	@Override
+	public void onServiceAgainListener(Service service) {
+		mType = 4;
+		
+	}
+
+	@Override
+	public void onServiceRateListener(Service service) {
+		mType = 5;
+		
+	}
+
+	@Override
+	public void onServiceRefreshListener() {
+		if(mUser!=null){
+        	startReqTask(ServiceOrderFragment.this);
+        }else{
+        	mListView.setVisibility(View.GONE);
+    		mTextView.setVisibility(View.VISIBLE);
+    		mTextView.setText(R.string.service_no_content);
+        }
+	}
+
 
 }
