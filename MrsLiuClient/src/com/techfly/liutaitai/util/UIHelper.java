@@ -133,6 +133,23 @@ public class UIHelper {
                 type);
         context.startActivity(intent);
     }
-
+	/**
+     * 普通的跳转页面，无需携带任何参数
+     * @param fragment
+     * @param className
+     */
+    public static void toClassActivity(Fragment fragment,String className) {
+        Intent intent = null;
+        try {
+            intent = new Intent(fragment.getActivity(),Class.forName(className));
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if(intent!=null){
+            fragment.startActivityForResult(intent, 0);;
+        }
+        
+    }
 
 }

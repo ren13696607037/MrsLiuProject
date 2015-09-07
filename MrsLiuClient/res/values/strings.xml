@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
  	<string name="error_get_user_id">请先登录</string>
-    
     <string name="app_name">刘太太.生活</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -19,7 +17,7 @@
     <string name="pro_price_tab">价格</string>
     <string name="pro_shelves_tab">上架时间</string>
     
-      <!-- 刷新提示语 -->
+    <!-- 刷新提示语 -->
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="release_to_refresh">释放立即刷新</string>
     <string name="refreshing">正在刷新...</string>
@@ -378,13 +376,8 @@
     <string name="setting_exit">退出当前账号</string>
     
     <string name="order_service_text">服务时间：%1$s</string>
-    <string name="order_service_text1">美甲师:</string>
-    <string name="order_service_text2">美容师:</string>
-    <string name="order_service_text3">美睫师:</string>
-    <string name="order_service_text4">化妆师:</string>
-    <string name="order_service_text5">保洁师:</string>
-    <string name="order_service_text6">保洁</string>
-    <string name="order_service_text7">化妆</string>
+    <string name="order_service_text1">美甲师:%1$s</string>
+    <string name="order_service_text3">美睫师:%1$s</string>
     <string name="order_service_state">待支付</string>
     <string name="order_service_state1">待接单</string>
     <string name="order_service_state2">待服务</string>
@@ -439,7 +432,19 @@
 
     <string name="change_nick_text">此昵称非登录账号</string>
     <string name="change_nick_title">修改昵称</string>
+
     <!-- 订单篮 -->
     <string name="order_basket_empty">订单篮是空的</string>
 
+    <string name="sex_man">男</string>
+    <string name="sex_woman">女</string>
+    <string name="sex_other">保密</string>
+    <string name="tech_info_title">技师资料</string>
+    <string name="tech_info_sex">性别</string>
+    <string name="tech_info_address">地址</string>
+    <string name="tech_info_address_hint">请输入地址</string>
+    <string name="tech_info_city">城市</string>
+    
+    <string name="illegal_phone">非法的电话号码</string>
+	<string name="service_no_content">您当前尚未预约~</string>
 </resources>

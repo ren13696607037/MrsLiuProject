@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout
+              xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/product_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="12dp"
+                android:background="@color/background"
+                android:paddingTop="12dp" >
+                
+            <ImageView 
+                android:id="@+id/product_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/product_frame"
+                android:padding="0.5dp"
+                android:src="@drawable/ic_mall_focus"
+                android:layout_marginLeft="0dp"
+                android:scaleType="fitXY"
+                />
+                
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text="Sanyo/三洋DG-F306ssss洗衣机大床 大床大床"
+                    android:layout_marginLeft="6dp"
+                    android:maxLines="2"
+                    android:layout_toRightOf="@id/product_icon"
+                    android:textColor="#565656"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                 <TextView
+                    android:id="@+id/product_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_toRightOf="@id/product_icon"
+                    android:layout_below="@id/product_name"
+                    android:layout_marginLeft="6dp"
+                    android:text="衬衫 裙子"
+                    android:textColor="@color/color_gray2"
+                    android:textSize="@dimen/app_text_size_second" />
+              
+                
+                  <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_toRightOf="@id/product_icon"
+                    android:layout_below="@id/line"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="￥18/包"
+                    android:textColor="@color/color_dark_red"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                
+            </RelativeLayout>
+   

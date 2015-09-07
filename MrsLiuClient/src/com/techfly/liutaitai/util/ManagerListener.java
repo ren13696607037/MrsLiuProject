@@ -3,6 +3,7 @@ package com.techfly.liutaitai.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 
@@ -35,6 +36,16 @@ public class ManagerListener {
 		void onClickNotify(String time);
 	}
 	
+	public interface ServiceClickListener{
+		void onServiceDeleteListener(Service service);
+		void onServicePayListener(Service service);
+		void onServiceCancelListener(Service service);
+		void onServiceAgainListener(Service service);
+		void onServiceRateListener(Service service);
+		void onServiceRefreshListener();
+	}
+	
+	
 	private List<CityUpdateListener> mCityUpdateListeners=new ArrayList<CityUpdateListener>();
 	private List<AddressListener> mAddressListeners=new ArrayList<AddressListener>();
 	private List<OrderCancelListener> mCancelListeners=new ArrayList<OrderCancelListener>();
@@ -43,6 +54,7 @@ public class ManagerListener {
 	private List<OrderPayListener> mPayListeners=new ArrayList<OrderPayListener>();
 	private List<OrderRateListener> mRateListeners=new ArrayList<OrderRateListener>();
 	private List<spinnerClickListener> mSpinnerClickListener=new ArrayList<spinnerClickListener>();
+	private List<ServiceClickListener> mServiceClickListeners = new ArrayList<ManagerListener.ServiceClickListener>();
 	private static ManagerListener mListener;
 	private static Object object = new Object();
     private ManagerListener(){
@@ -139,6 +151,16 @@ public class ManagerListener {
     		mSpinnerClickListener.remove(spinnerClickListener);
     	}
     }
+    public void onRegisterServiceClickListener(ServiceClickListener serviceClickListener){
+    	if(!mServiceClickListeners.contains(serviceClickListener)){
+    		mServiceClickListeners.add(serviceClickListener);
+    	}
+    }
+    public void onUnRegisterServiceClickListener(ServiceClickListener serviceClickListener){
+    	if(mServiceClickListeners.contains(serviceClickListener)){
+    		mServiceClickListeners.remove(serviceClickListener);
+    	}
+    }
     public void notifySpinnerClickListener(String time){
     	int size=mSpinnerClickListener.size();
     	for(int i=0;i<size;i++){
@@ -198,6 +220,42 @@ public class ManagerListener {
     	int size=mLogiticsListeners.size();
     	for(int i=0;i<size;i++){
     		mLogiticsListeners.get(i).onOrderLogiticsListener(order);
+    	}
+    }
+    public void notifyServiceDeleteListener(Service service){
+    	int size = mServiceClickListeners.size();
+    	for(int i=0; i<size; i++){
+    		mServiceClickListeners.get(i).onServiceDeleteListener(service);
+    	}
+    }
+    public void notifyServicePayListener(Service service){
+    	int size = mServiceClickListeners.size();
+    	for(int i=0; i<size; i++){
+    		mServiceClickListeners.get(i).onServicePayListener(service);
+    	}
+    }
+    public void notifyServiceCancelListener(Service service){
+    	int size = mServiceClickListeners.size();
+    	for(int i=0; i<size; i++){
+    		mServiceClickListeners.get(i).onServiceCancelListener(service);
+    	}
+    }
+    public void notifyServiceAgainListener(Service service){
+    	int size = mServiceClickListeners.size();
+    	for(int i=0; i<size; i++){
+    		mServiceClickListeners.get(i).onServiceAgainListener(service);
+    	}
+    }
+    public void notifyServiceRateListener(Service service){
+    	int size = mServiceClickListeners.size();
+    	for(int i=0; i<size; i++){
+    		mServiceClickListeners.get(i).onServiceRateListener(service);
+    	}
+    }
+    public void notifyServiceRefreshListener(){
+    	int size = mServiceClickListeners.size();
+    	for(int i=0; i<size; i++){
+    		mServiceClickListeners.get(i).onServiceRefreshListener();
     	}
     }
     

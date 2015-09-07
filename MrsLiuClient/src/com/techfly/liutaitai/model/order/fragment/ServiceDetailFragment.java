@@ -1,6 +1,5 @@
 package com.techfly.liutaitai.model.order.fragment;
 
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
 import com.techfly.liutaitai.model.order.parser.ServiceDetailParser;
-import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -29,8 +27,8 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
-import com.techfly.liutaitai.util.view.ListViewForScrollView;
 
 public class ServiceDetailFragment extends CommonFragment {
 	private ServiceDetailActivity mActivity;
@@ -130,8 +128,15 @@ public class ServiceDetailFragment extends CommonFragment {
 	public void requestData() {
 		RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_SERVICE_DETAIL_URL + mId);
-        param.setmHttpURL(url);
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_SERVICE_DETAIL_URL);
+        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mId);
+        param.setmIsLogin(true);
+//		param.setmId(mUser.getmId());
+//		param.setmToken(mUser.getmToken());
+		param.setmId("1");
+		param.setmToken("440a07c991c4bbae3bcd52746e6a9d32");
+		param.setmHttpURL(url);
+		param.setPostRequestMethod();
         param.setmParserClassName(ServiceDetailParser.class.getName());
         RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
 	}

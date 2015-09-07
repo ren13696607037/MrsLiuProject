@@ -9,6 +9,20 @@ public class Technician {
 	private String mHeader;
 	private String mType;
 	private String mCity;
+	private String mCityName;
+	private String mAddress;
+	public String getmCityName() {
+		return mCityName;
+	}
+	public void setmCityName(String mCityName) {
+		this.mCityName = mCityName;
+	}
+	public String getmAddress() {
+		return mAddress;
+	}
+	public void setmAddress(String mAddress) {
+		this.mAddress = mAddress;
+	}
 	public int getmId() {
 		return mId;
 	}

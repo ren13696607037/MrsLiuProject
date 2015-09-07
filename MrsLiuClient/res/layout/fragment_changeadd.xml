@@ -141,7 +141,9 @@
                 android:singleLine="true"
                 android:textColor="@color/color_33"
                 android:textColorHint="@color/color_be"
-                android:textSize="@dimen/app_text_size_first" />
+                android:textSize="@dimen/app_text_size_first" 
+                android:gravity="center_vertical"
+                />
         </RelativeLayout>
 
         <RelativeLayout

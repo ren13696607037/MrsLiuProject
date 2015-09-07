@@ -16,8 +16,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -31,11 +35,13 @@ import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.update.UrlEncode;
 
 public class Utility {
+	private static Dialog mDialog;
 
 	/**
 	 * getScreen size
@@ -356,5 +362,24 @@ public class Utility {
   public static int getMinutes(long seconds){
 	  int minuteNum = (int) ((seconds/60)%60);
 	  return minuteNum;
+  }
+  public static void call(final Activity mActivity, final String phone) {
+      if (TextUtils.isEmpty(phone)) {
+          Toast.makeText(mActivity, R.string.illegal_phone,
+                  Toast.LENGTH_SHORT).show();
+          return;
+      }
+      mDialog= new Dialog(mActivity, R.style.MyDialog);
+  	mDialog=AlertDialogUtils.displayMyAlertChoice(mActivity, "提示", "确认拨打电话  " + phone + "  ？", "确认", new View.OnClickListener() {
+          
+          @Override
+          public void onClick(View arg0) {
+          	Intent intent = new Intent(Intent.ACTION_CALL, Uri
+                      .parse("tel:" + phone));
+              mActivity.startActivity(intent);
+              mDialog.dismiss();
+          }
+      }, "取消", null);
+  	mDialog.show();
   }
 }
