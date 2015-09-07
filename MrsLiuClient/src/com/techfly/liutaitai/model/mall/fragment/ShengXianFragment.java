@@ -47,9 +47,7 @@ import com.techfly.liutaitai.util.view.GridViewForScrollView;
 import com.techfly.liutaitai.util.view.PullToRefreshLayout;
 import com.techfly.liutaitai.util.view.PullToRefreshLayout.OnRefreshListener;
 
-public class ServiceListFragment extends CommonFragment implements OnClickListener, OnRefreshListener{
-
-  
+public class ShengXianFragment extends CommonFragment implements OnClickListener, OnRefreshListener{
     private TextView mSortTv1;
     private TextView mSortTv2;
   
@@ -438,6 +436,4 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
         getServiceList();
         
     }
-    
-    
 }

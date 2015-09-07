@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 
 import com.techfly.liutaitai.model.home.activities.SearchActivity;
 import com.techfly.liutaitai.model.mall.activities.CategoryInfoListActivity;
+import com.techfly.liutaitai.model.mall.activities.GanxiActivity;
 import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceListActivity;
@@ -133,6 +134,15 @@ public class UIHelper {
                 type);
         context.startActivity(intent);
     }
+	
+	public static void toGanxiListActivity(Fragment context,int type) {
+        Intent intent = new Intent(context.getActivity(),
+                GanxiActivity.class);
+        intent.putExtra("type",
+                type);
+        context.startActivity(intent);
+    }
+	
 	/**
      * 普通的跳转页面，无需携带任何参数
      * @param fragment

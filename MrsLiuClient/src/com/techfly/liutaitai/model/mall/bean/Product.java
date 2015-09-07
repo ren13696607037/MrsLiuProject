@@ -50,7 +50,7 @@ public class Product extends Persistence implements Cloneable,Serializable{
 	private ArrayList<Comments> mCommentsList;
 	private ArrayList<StandardClass> mStandardClassList;
 	private int mProductType;
-	
+	private String mDesc;
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
@@ -263,6 +263,14 @@ public class Product extends Persistence implements Cloneable,Serializable{
 
     public void setmType(int mType) {
         this.mType = mType;
+    }
+
+    public String getmDesc() {
+        return mDesc;
+    }
+
+    public void setmDesc(String mDesc) {
+        this.mDesc = mDesc;
     }
 
    

@@ -162,7 +162,7 @@ public interface JsonKey {
 		static final String NAME = "name";
 		static final String PRICE = "price";
 		static final String MARKET_PRICE = "marketPrice";
-		static final String ICON = "icon";
+		static final String ICON = "img";
 		static final String SALENUM = "salenum";
 	}
 

@@ -66,7 +66,7 @@ public class Constant {
 	public static final String SERVICE_CANCEL_URL = "service/cancelreservation";
 	public static final String SERVICE_DELETE_URL = "service/delreservation";
 	
-	public static final String PRODUCT_LIST = "goods/category/list";
+	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";

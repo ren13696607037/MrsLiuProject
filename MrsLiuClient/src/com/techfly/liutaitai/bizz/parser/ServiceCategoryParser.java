@@ -27,7 +27,7 @@ public class ServiceCategoryParser implements Parser{
         } catch (JSONException e) {
             AppLog.Logd("Fly", "JSONException"+e.getMessage());
         }
-        if(resultCode==10){
+        if(resultCode==0){
             JSONArray array = object.optJSONArray(JsonKey.DATA);
             if(array!=null){
                 for(int i=0;i<array.length();i++){
