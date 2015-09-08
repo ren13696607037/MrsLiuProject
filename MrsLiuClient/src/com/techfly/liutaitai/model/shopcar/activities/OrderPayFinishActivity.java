@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
-import com.techfly.liutaitai.model.pcenter.fragment.AboutUsFragment;
 import com.techfly.liutaitai.model.shopcar.fragment.FinishOrderFragment;
 
 public class OrderPayFinishActivity extends FragmentActivity{

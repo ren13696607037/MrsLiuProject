@@ -1,17 +1,14 @@
 package com.techfly.liutaitai.model.mall.adapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.bean.Category;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 
 public class OrderBastketAdapter extends BaseAdapter {

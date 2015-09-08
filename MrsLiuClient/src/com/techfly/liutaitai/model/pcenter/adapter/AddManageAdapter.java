@@ -2,10 +2,6 @@ package com.techfly.liutaitai.model.pcenter.adapter;
 
 import java.util.ArrayList;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
-import com.techfly.liutaitai.model.pcenter.fragment.AddressManageFragment;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
+import com.techfly.liutaitai.model.pcenter.fragment.AddressManageFragment;
 
 public class AddManageAdapter extends BaseAdapter {
 	private Context mContext;

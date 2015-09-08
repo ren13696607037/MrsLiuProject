@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.view.CircleFlowIndicator;
 import com.techfly.liutaitai.util.view.ViewFlow;
-import com.techfly.liutaitai.MainActivity;
 
 public class GuideFragment extends CommonFragment {
     private static final int GUIDES_PAGES = 2;

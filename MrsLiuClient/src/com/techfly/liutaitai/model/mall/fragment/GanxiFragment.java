@@ -152,7 +152,7 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
                Product pro = (Product) arg0.getItemAtPosition(arg2);
-               UIHelper.toSomeIdActivity(GanxiFragment.this, ProductInfoActivity.class.getName(), pro.getmId());
+               UIHelper.toSomeIdActivity(GanxiFragment.this, ProductInfoActivity.class.getName(), pro.getmId(),type);
             }
         });
     }

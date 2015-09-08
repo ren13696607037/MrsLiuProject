@@ -10,9 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.bean.MyCollect;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MyCollectAdapter extends BaseAdapter {
 	private Context mContext;

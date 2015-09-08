@@ -3,11 +3,6 @@ package com.techfly.liutaitai.util.view;
 
 import java.util.ArrayList;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.Area;
-import com.techfly.liutaitai.util.ManagerListener;
-
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,6 +18,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.bean.Area;
+import com.techfly.liutaitai.util.ManagerListener;
 
 public class ShowDialog extends Dialog{
 	private Context mContext;

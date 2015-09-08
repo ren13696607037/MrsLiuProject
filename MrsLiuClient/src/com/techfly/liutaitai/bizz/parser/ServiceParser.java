@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.model.mall.bean.Service;
-import com.techfly.liutaitai.model.mall.bean.SortRule;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;

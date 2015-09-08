@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import com.techfly.liutaitai.model.home.bean.ContactInfo;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.User;
-import com.techfly.liutaitai.util.JsonKey.UserKey;
 
 
 public class SharePreferenceUtils {

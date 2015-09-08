@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;

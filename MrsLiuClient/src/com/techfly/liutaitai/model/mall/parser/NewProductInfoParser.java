@@ -14,6 +14,7 @@ import com.techfly.liutaitai.model.mall.bean.StandardClass;
 import com.techfly.liutaitai.model.mall.bean.SubStandarrd;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
 
 public class NewProductInfoParser implements Parser {
@@ -31,24 +32,13 @@ public class NewProductInfoParser implements Parser {
 			if (resultCode == 0) {
 				JSONObject jsonObject = object.optJSONObject(JsonKey.DATA);
 				if (jsonObject != null) {
-					p.setmId(String.valueOf(jsonObject
-							.optInt(JsonKey.ProductInfo.ID)));
-					p.setmSN(jsonObject.optString(JsonKey.ProductInfo.SN));
-					p.setmName(jsonObject.optString(JsonKey.ProductInfo.NAME));
-					p.setmPrice((float) jsonObject
-							.optDouble(JsonKey.ProductInfo.PRICE));
-					p.setmMarketPrice((float) jsonObject
-							.optDouble(JsonKey.ProductInfo.MARKET_PRICE));
-					p.setmIsCollect(jsonObject
-							.optBoolean(JsonKey.ProductInfo.COLLECT));
-					p.setmImg(jsonObject.optString(JsonKey.ProductInfo.ICON));
-					p.setmStoreCount(jsonObject
-							.optInt(JsonKey.ProductInfo.STORE_COUNT));
-					p.setmRebate(jsonObject
-							.optDouble(JsonKey.ProductInfo.REBATE));
+					p.setmName(jsonObject.optString("title"));
+					p.setmDesc(jsonObject.optString("text"));
+					p.setmId(jsonObject.optString("id"));
+					p.setmPrice((float) jsonObject.optDouble("price"));
 					p.setmImgArray(parseImages(jsonObject));
 					JSONObject comment = jsonObject
-							.optJSONObject(JsonKey.ProductInfo.COMMENT);
+							.optJSONObject("reviews");
 					if (comment != null) {
 						p.setmCommentCount(comment
 								.optInt(JsonKey.ProductInfo.COMMENT_COUNT));
@@ -59,9 +49,7 @@ public class NewProductInfoParser implements Parser {
 					}
 
 					p.setmCommentsList(parseComments(comment));
-					p.setmStandardClassList(parseStandard(jsonObject));
-					p.setmType(jsonObject.optInt(JsonKey.ProductInfo.TYPE));
-
+					
 				}
 			}
 		}
@@ -146,7 +134,6 @@ public class NewProductInfoParser implements Parser {
 	}
 
 	private ArrayList<Comments> parseComments(JSONObject jsonObject) {
-		// TODO Auto-generated method stub
 		ArrayList<Comments> list = new ArrayList<Comments>();
 		JSONArray jsonArray = jsonObject
 				.optJSONArray(JsonKey.ProductInfo.COMMENT_COMMENTS);
@@ -177,16 +164,24 @@ public class NewProductInfoParser implements Parser {
 	}
 
 	private List<String> parseImages(JSONObject jsonObject) {
-		// TODO Auto-generated method stub
-		JSONArray mJsonArray = jsonObject
-				.optJSONArray(JsonKey.ProductInfo.IMAGES);
+		String str = jsonObject
+				.optString("imgs");
+		JSONObject obj =null;
 		ArrayList<String> list = new ArrayList<String>();
+        try {
+            obj = new JSONObject(str);
+        } catch (JSONException e) {
+        
+        }
+        if(obj==null){
+            return list;
+        }
+	    JSONArray mJsonArray = obj.optJSONArray("imgList");
 		if (mJsonArray != null) {
 			for (int i = 0; i < mJsonArray.length(); i++) {
-				JSONObject mJsonObject = mJsonArray.optJSONObject(i);
+				String mJsonObject = mJsonArray.optString(i);
 				if (mJsonObject != null) {
-					list.add(mJsonObject
-							.optString(JsonKey.ProductInfo.IMAGES_PATH));
+					list.add(Constant.YIHUIMALL_BASE_URL+mJsonObject);
 				}
 			}
 		}

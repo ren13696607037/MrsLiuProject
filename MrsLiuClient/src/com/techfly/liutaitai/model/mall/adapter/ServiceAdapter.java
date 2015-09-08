@@ -3,20 +3,16 @@ package com.techfly.liutaitai.model.mall.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.adapter.ProItemAdapter.ViewHolder;
 import com.techfly.liutaitai.model.mall.bean.Service;
-import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 
 public class ServiceAdapter extends BaseAdapter{

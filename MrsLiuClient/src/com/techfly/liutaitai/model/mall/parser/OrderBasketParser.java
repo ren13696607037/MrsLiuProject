@@ -6,9 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.techfly.liutaitai.model.mall.bean.Category;
-import com.techfly.liutaitai.model.mall.bean.SubCategory;
-import com.techfly.liutaitai.model.mall.bean.SubCategoryBanner;
 import com.techfly.liutaitai.model.mall.bean.help.ListOrder;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.net.pscontrol.Parser;

@@ -2,11 +2,6 @@ package com.techfly.liutaitai.model.order.adapter;
 
 import java.util.ArrayList;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.bean.Service;
-import com.techfly.liutaitai.util.ImageLoaderUtil;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.bean.Service;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 
 public class ServiceAdapter extends BaseAdapter {
 	private Context mContext;

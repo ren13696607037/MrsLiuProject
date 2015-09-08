@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
+import com.techfly.liutaitai.SplashActivity;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.GuideFragment;
-import com.techfly.liutaitai.SplashActivity;
 
 public class GuideActivity extends FragmentActivity{
     private GuideFragment mFragment;

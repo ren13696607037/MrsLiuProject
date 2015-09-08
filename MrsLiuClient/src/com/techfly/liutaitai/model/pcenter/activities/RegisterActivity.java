@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.techfly.liutaitai.model.pcenter.fragment.RegisterEmailFragment;
 import com.techfly.liutaitai.model.pcenter.fragment.RegisterFragment;
 import com.techfly.liutaitai.util.activities.BaseActivity;
 

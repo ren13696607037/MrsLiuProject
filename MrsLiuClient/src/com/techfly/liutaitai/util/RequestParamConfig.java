@@ -21,7 +21,7 @@ public interface RequestParamConfig {
     
     String IDENTITY = "identity";
     
-    String GOODS_ID = "goods_id";
+    String GOODS_ID = "id";
     
     String CARDS_ID = "goods_ids";
     
@@ -35,7 +35,7 @@ public interface RequestParamConfig {
     
     String REDUCE = "reduce";
     
-    String NUM = "num";
+    String NUM = "count";
     
     String IF_CART = "ifcart";
    

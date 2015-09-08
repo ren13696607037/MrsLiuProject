@@ -1,7 +1,5 @@
 package com.techfly.liutaitai.dialog;
 
-import com.techfly.liutaitai.R;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.KeyEvent;

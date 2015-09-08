@@ -2,10 +2,10 @@ package com.techfly.liutaitai.util;
 
 import android.graphics.Bitmap.Config;
 
-import com.techfly.liutaitai.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+import com.techfly.liutaitai.R;
 
 public class ImageLoaderUtil {
 

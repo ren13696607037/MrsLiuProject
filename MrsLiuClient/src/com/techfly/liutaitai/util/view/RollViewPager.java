@@ -14,9 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.ImageCacheUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class RollViewPager extends ViewPager{
 
