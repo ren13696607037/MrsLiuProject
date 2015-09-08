@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="@dimen/px_5"
-            android:textColor="@color/TextColorWhite"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/app_text_size_second" />
 
         <TextView
@@ -102,7 +102,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:padding="@dimen/px_15"
-            android:textColor="@color/TextColorWhite"
+            android:textColor="@android:color/white"
             android:background="@color/button_login"
             android:textSize="@dimen/app_text_size_first"
             android:text="取消订单" />
@@ -116,7 +116,7 @@
             android:background="@color/button_login"
             android:padding="@dimen/px_15"
             android:gravity="center"
-            android:textColor="@color/TextColorWhite"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/app_text_size_first"
             android:text="去付款" />
     </LinearLayout>

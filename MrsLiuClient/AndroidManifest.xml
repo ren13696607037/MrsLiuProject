@@ -140,6 +140,11 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
+            android:name=".model.mall.activities.OrderInfoActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
             android:name=".model.mall.activities.CategoryInfoListActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"

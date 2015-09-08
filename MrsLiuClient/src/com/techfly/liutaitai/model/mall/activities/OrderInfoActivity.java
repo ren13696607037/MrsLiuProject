@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.techfly.liutaitai.model.mall.fragment.OrderBastketFragment;
-import com.techfly.liutaitai.util.activities.BaseHomeActivity;
+import com.techfly.liutaitai.model.mall.fragment.OrderInfoFragment;
+import com.techfly.liutaitai.util.activities.BaseActivity;
 
-public class OrderBastketActivity extends BaseHomeActivity {
-	private OrderBastketFragment mFragment;
+public class OrderInfoActivity extends BaseActivity {
+
+	private OrderInfoFragment mFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +19,13 @@ public class OrderBastketActivity extends BaseHomeActivity {
 
 	private void initContent() {
 		if (mFragment == null) {
-			mFragment = (OrderBastketFragment) Fragment.instantiate(this,
-					OrderBastketFragment.class.getName());
+			mFragment = (OrderInfoFragment) Fragment.instantiate(this,
+					OrderInfoFragment.class.getName());
 			FragmentTransaction ft = getSupportFragmentManager()
 					.beginTransaction();
 			ft.add(android.R.id.content, mFragment);
 			ft.commit();
 		}
 	}
+
 }
