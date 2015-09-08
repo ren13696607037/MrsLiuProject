@@ -89,10 +89,11 @@ public class UIHelper {
 		context.startActivity(intent);
 	}
 
-	public static void toTakingOrderActivity(Context context, Product product) {
+	public static void toTakingOrderActivity(Context context, Product product,int type) {
 		Intent intent = new Intent(context, TakingOrderActivity.class);
 		intent.putExtra(IntentBundleKey.PRODUCT, product);
 		intent.putExtra(IntentBundleKey.IS_FROM_HOME_CART, false);
+		intent.putExtra(IntentBundleKey.TYPE, type);
 		context.startActivity(intent);
 	}
 	

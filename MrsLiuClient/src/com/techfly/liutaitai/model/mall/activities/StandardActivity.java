@@ -626,7 +626,7 @@ public class StandardActivity extends Activity implements ShopCarCallBack {
 						break;
 					}
 					if (authLogin()) {
-						UIHelper.toTakingOrderActivity(mContext, mProduct);
+//						UIHelper.toTakingOrderActivity(mContext, mProduct);
 					} else {
 						UIHelper.toLoginActivity(mContext);
 					}

@@ -308,13 +308,13 @@ public class ProductInfoFragment extends CommonFragment implements
                     }
                     break;
                 case R.id.product_info_shop_now:// 立即购买
-                    if (mProduct.getmStoreCount() <= 0) {
-                        showSmartToast(R.string.store_count_not_enough,
-                                Toast.LENGTH_LONG);
-                        break;
-                    }
+//                    if (mProduct.getmStoreCount() <= 0) {
+//                        showSmartToast(R.string.store_count_not_enough,
+//                                Toast.LENGTH_LONG);
+//                        break;
+//                    }
                     if (authLogin()) {
-                        UIHelper.toTakingOrderActivity(getActivity(), mProduct);
+                        UIHelper.toTakingOrderActivity(getActivity(), mProduct,type);
                     } else {
                         UIHelper.toLoginActivity(getActivity());
                     }
