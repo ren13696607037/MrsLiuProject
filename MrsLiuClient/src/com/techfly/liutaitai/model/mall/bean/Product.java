@@ -12,14 +12,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.techfly.liutaitai.dao.Persistence;
 
-public class Product extends Persistence implements Cloneable,Serializable{
+public class Product extends Persistence implements Cloneable, Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<String> mImgArray;// 图片数组
 	private float mMarketPrice;// 市场价
-	private String mSN;//商品货号
+	private String mSN;// 商品货号
 	private int mType;// 商品类型，团购商品，秒杀商品，还是正常商品
 	@Expose
 	@SerializedName("price")
@@ -41,9 +41,9 @@ public class Product extends Persistence implements Cloneable,Serializable{
 	private String mSale;
 	// 规格没有？
 	@Expose
-    @SerializedName("productId")
-	private int mProductId = -1;//用户所选择的商品货号
-	private int mStoreCount;//库存
+	@SerializedName("productId")
+	private int mProductId = -1;// 用户所选择的商品货号
+	private int mStoreCount;// 库存
 	private double mRebate;
 	private String mCommentReputably;// 商品评论好评率
 	private int mCommentRating;
@@ -51,6 +51,26 @@ public class Product extends Persistence implements Cloneable,Serializable{
 	private ArrayList<StandardClass> mStandardClassList;
 	private int mProductType;
 	private String mDesc;
+
+	private String mUnit;
+	private String mOrderNum;//订单号
+	
+
+	public String getmOrderNum() {
+		return mOrderNum;
+	}
+
+	public void setmOrderNum(String mOrderNum) {
+		this.mOrderNum = mOrderNum;
+	}
+
+	public String getmUnit() {
+		return mUnit;
+	}
+
+	public void setmUnit(String mUnit) {
+		this.mUnit = mUnit;
+	}
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
@@ -229,7 +249,8 @@ public class Product extends Persistence implements Cloneable,Serializable{
 		return mStandardClassList;
 	}
 
-	public void setmStandardClassList(ArrayList<StandardClass> mStandardClassList) {
+	public void setmStandardClassList(
+			ArrayList<StandardClass> mStandardClassList) {
 		this.mStandardClassList = mStandardClassList;
 	}
 
@@ -257,21 +278,20 @@ public class Product extends Persistence implements Cloneable,Serializable{
 		this.mProductType = mProductType;
 	}
 
-    public int getmType() {
-        return mType;
-    }
+	public int getmType() {
+		return mType;
+	}
 
-    public void setmType(int mType) {
-        this.mType = mType;
-    }
+	public void setmType(int mType) {
+		this.mType = mType;
+	}
 
-    public String getmDesc() {
-        return mDesc;
-    }
+	public String getmDesc() {
+		return mDesc;
+	}
 
-    public void setmDesc(String mDesc) {
-        this.mDesc = mDesc;
-    }
+	public void setmDesc(String mDesc) {
+		this.mDesc = mDesc;
+	}
 
-   
 }
