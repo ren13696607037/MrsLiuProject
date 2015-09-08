@@ -71,6 +71,7 @@ public interface JsonKey {
 		static final String ISDEFAULT = "isDefault";
 		static final String PROVINCE="province";
 		static final String AID = "aid";
+		static final String CNAME = "cname";
 	}
 
 	interface HomeKey {
