@@ -256,7 +256,7 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
         switch (arg0.getId()) {
         
         case R.id.makeup_service:
-             UIHelper.toGanxiListActivity(this,1);//生鲜
+             UIHelper.toShengxianListActivity(this,1);//生鲜
             break;
         case R.id.manicure_service:
             UIHelper.toGanxiListActivity(this,4);// 保养 奢侈品
@@ -272,7 +272,7 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
            UIHelper.toServiceListActivity(this,1);// 美婕
             break;      
        case R.id.   cleaning_service:
-           UIHelper.toGanxiListActivity(this,0);// 鲜花
+           UIHelper.toShengxianListActivity(this,2);// 鲜花
            break;   
        case R.id.city:
            UIHelper.toClassActivity(this, CitySelectActivity.class.getName());

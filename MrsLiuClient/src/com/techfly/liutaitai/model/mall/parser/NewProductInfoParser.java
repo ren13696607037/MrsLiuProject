@@ -20,7 +20,6 @@ public class NewProductInfoParser implements Parser {
 
 	@Override
 	public Object fromJson(JSONObject object) {
-		// TODO Auto-generated method stub
 		Product p = new Product();
 		if (object != null) {
 			int resultCode = -1;

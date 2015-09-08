@@ -376,7 +376,7 @@ public class HomeFragment extends CommonFragment implements View.OnClickListener
 							
 							@Override
 							public void onClick(View view) {
-								UIHelper.toProductInfoActivity(getActivity(), mdataHotGoods.get(0).getmCommodityId(),ProductInfoFragment.FLAG_NORMAL);
+//								UIHelper.toProductInfoActivity(getActivity(), mdataHotGoods.get(0).getmCommodityId(),ProductInfoFragment.FLAG_NORMAL);
 							}
 						});
 						
@@ -388,7 +388,7 @@ public class HomeFragment extends CommonFragment implements View.OnClickListener
 							
 							@Override
 							public void onClick(View view) {
-								UIHelper.toProductInfoActivity(getActivity(), mdataHotGoods.get(1).getmCommodityId(),ProductInfoFragment.FLAG_NORMAL);
+//								UIHelper.toProductInfoActivity(getActivity(), mdataHotGoods.get(1).getmCommodityId(),ProductInfoFragment.FLAG_NORMAL);
 							}
 						});
 						
@@ -400,7 +400,7 @@ public class HomeFragment extends CommonFragment implements View.OnClickListener
 							
 							@Override
 							public void onClick(View view) {
-								UIHelper.toProductInfoActivity(getActivity(), mdataHotGoods.get(2).getmCommodityId(),ProductInfoFragment.FLAG_NORMAL);
+//								UIHelper.toProductInfoActivity(getActivity(), mdataHotGoods.get(2).getmCommodityId(),ProductInfoFragment.FLAG_NORMAL);
 							}
 						});
 					}
@@ -449,7 +449,7 @@ public class HomeFragment extends CommonFragment implements View.OnClickListener
 			UIHelper.toSearchActivity(getActivity(),0);
 			break;
 		case R.id.advertise:
-			UIHelper.toProductInfoActivity(getActivity(), mdataAd.getmGoodsId(),ProductInfoFragment.FLAG_NORMAL);
+//			UIHelper.toProductInfoActivity(getActivity(), mdataAd.getmGoodsId(),ProductInfoFragment.FLAG_NORMAL);
 			break;
 		case R.id.more_group_buy:
 		    UIHelper.toTuangouInfoActivity(getActivity());

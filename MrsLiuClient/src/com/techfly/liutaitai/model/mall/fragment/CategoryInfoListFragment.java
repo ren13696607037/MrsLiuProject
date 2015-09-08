@@ -172,9 +172,9 @@ public class CategoryInfoListFragment extends CommonFragment {
 									.getmTargetId());
 				} else if (mSubCategoryBannerDatas.get(position)
 						.getmTargetType() == 2) {
-					UIHelper.toProductInfoActivity(getActivity(),
-							mSubCategoryBannerDatas.get(position)
-									.getmTargetId(),ProductInfoFragment.FLAG_NORMAL);
+//					UIHelper.toProductInfoActivity(getActivity(),
+//							mSubCategoryBannerDatas.get(position)
+//									.getmTargetId(),ProductInfoFragment.FLAG_NORMAL);
 				}
 			}
 		};

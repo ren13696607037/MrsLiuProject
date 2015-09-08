@@ -125,7 +125,7 @@ public class MyBrowserFragment extends CommonFragment implements IXListViewListe
             public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
                 // TODO Auto-generated method stub
                 Product pro =  (Product) arg0.getItemAtPosition(position);
-                UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(pro.getmId()),ProductInfoFragment.FLAG_NORMAL);
+//                UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(pro.getmId()),ProductInfoFragment.FLAG_NORMAL);
             }
         });
     }

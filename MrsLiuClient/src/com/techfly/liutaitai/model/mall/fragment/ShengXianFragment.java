@@ -27,6 +27,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.GanxiServiceParser;
 import com.techfly.liutaitai.bizz.parser.ServiceCategoryParser;
 import com.techfly.liutaitai.bizz.parser.ServiceParser;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter;
@@ -186,8 +187,11 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/categories?type="+type);
-       
+        if(type==1){
+            url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/categories?type=3");// 生鲜请求地址组装
+        }else{
+            url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/categories?type=4");// 组装鲜花请求地址
+        }
 //      url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
 //              JPushInterface.getRegistrationID(getActivity()));
         param.setmHttpURL(url);
@@ -230,9 +234,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
     private void getServiceList(){
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-      
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "service/list");
-       
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.PRODUCT_LIST);
 //      url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
 //              JPushInterface.getRegistrationID(getActivity()));
         String areaId =SharePreferenceUtils.getInstance(getActivity()).getArea().getmId();
@@ -243,7 +245,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 //        url.setmGetParamPrefix("cid").setmGetParamValues("10");
 //        url.setmGetParamPrefix("order").setmGetParamValues("10");
         param.setmHttpURL(url);
-        param.setmParserClassName(ServiceParser.class.getName());
+        param.setmParserClassName(GanxiServiceParser.class.getName());
         RequestManager
                 .getRequestData(getActivity(), createServiceReqSuccessListener(),
                         createMyReqErrorListener(), param);
@@ -356,10 +358,10 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 
     private void initTitleView() {
       setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-      if(type==0){
-          setTitleText("美甲");
-          }else if(type==1){
-          setTitleText("美婕");
+      if(type==1){
+          setTitleText("生鲜");
+          }else if(type==2){
+          setTitleText("鲜花");
       }
       
     }

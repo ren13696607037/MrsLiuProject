@@ -152,7 +152,7 @@ public class SearchFragment extends CommonFragment implements
 			public void onItemClick(AdapterView<?> parent, View convertview, int position,
 					long arg3) {
 				Product item = (Product) mProductListAdapter.getItem(position-1);
-				UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(item.getmId()),ProductInfoFragment.FLAG_NORMAL);
+//				UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(item.getmId()),ProductInfoFragment.FLAG_NORMAL);
 			}
 		});
 

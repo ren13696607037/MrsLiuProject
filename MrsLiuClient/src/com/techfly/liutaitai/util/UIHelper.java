@@ -10,6 +10,7 @@ import com.techfly.liutaitai.model.mall.activities.GanxiActivity;
 import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceListActivity;
+import com.techfly.liutaitai.model.mall.activities.ShengXianActivity;
 import com.techfly.liutaitai.model.mall.activities.TuanGouActivity;
 import com.techfly.liutaitai.model.mall.bean.Category;
 import com.techfly.liutaitai.model.mall.bean.Product;
@@ -58,7 +59,7 @@ public class UIHelper {
 		context.startActivity(intent);
 	}
 
-	public static void toPicAndTextActivity(Context context, int goodsId) {
+	public static void toPicAndTextActivity(Context context, String goodsId) {
 		Intent intent = new Intent(context, PicAndTextDetailActivity.class);
 		intent.putExtra(JsonKey.AdvertisementKey.GOODSID, goodsId);
 		context.startActivity(intent);
@@ -142,6 +143,18 @@ public class UIHelper {
                 type);
         context.startActivity(intent);
     }
+	/**
+	 * 到生鲜 鲜花页面
+	 * @param context
+	 * @param type
+	 */
+	public static void toShengxianListActivity(Fragment context,int type) {
+        Intent intent = new Intent(context.getActivity(),
+                ShengXianActivity.class);
+        intent.putExtra("type",
+                type);
+        context.startActivity(intent);
+    }
 	
 	/**
      * 普通的跳转页面，无需携带任何参数
@@ -161,5 +174,25 @@ public class UIHelper {
         }
         
     }
-
+    
+    /**
+     * 普通的跳转页面，无需携带任何参数
+     * @param fragment
+     * @param className
+     */
+    public static void  toSomeIdActivity(Fragment fragment,String className,String id) {
+        Intent intent = null;
+        try {
+            intent = new Intent(fragment.getActivity(),Class.forName(className));
+            intent.putExtra(IntentBundleKey.ID, id);
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if(intent!=null){
+            fragment.startActivityForResult(intent, 0);;
+        }
+        
+    }
+   
 }

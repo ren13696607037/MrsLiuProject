@@ -365,17 +365,13 @@ public class CitySelectFragment extends CommonFragment {
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ResultInfo info = (ResultInfo) object;
-                if(info.getmCode()==0){
-                    mCityList = (List<Area>) info.getObject();
+                    mCityList = (List<Area>) object;
                     mHandler.removeMessages(MESSAGE_CITY_REQUEST_FINISH);
                     mHandler.sendEmptyMessage(MESSAGE_CITY_REQUEST_FINISH);
                     AppLog.Logd(mCityList.size()+"");
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }
-              
-            }
         };
     }
     

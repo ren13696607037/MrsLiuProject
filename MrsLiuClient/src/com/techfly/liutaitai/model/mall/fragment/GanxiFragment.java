@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -15,10 +17,9 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
-import com.techfly.liutaitai.bizz.parser.CommonProListParser;
 import com.techfly.liutaitai.bizz.parser.GanxiServiceParser;
+import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.GanxiServiceAdapter;
-import com.techfly.liutaitai.model.mall.adapter.ProItemAdapter;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -27,6 +28,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
+import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 
@@ -144,6 +146,15 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
         mListView.setXListViewListener(this);
         mAdapter=new GanxiServiceAdapter(getActivity(), mList,Constant.TUANGOU_PRO_ITEM_STYLE);
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                    long arg3) {
+               Product pro = (Product) arg0.getItemAtPosition(arg2);
+               UIHelper.toSomeIdActivity(GanxiFragment.this, ProductInfoActivity.class.getName(), pro.getmId());
+            }
+        });
     }
 
     private void initTitleView(){

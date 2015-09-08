@@ -65,7 +65,7 @@ public class BannerAdapter extends PagerAdapter {
 				if(type == 1){
 					UIHelper.toSearchActivity(mContext, targetId);
 				}else if(type == 2){
-					UIHelper.toProductInfoActivity(mContext, targetId,ProductInfoFragment.FLAG_NORMAL);
+//					UIHelper.toProductInfoActivity(mContext, targetId,ProductInfoFragment.FLAG_NORMAL);
 				}
 			}
 		});

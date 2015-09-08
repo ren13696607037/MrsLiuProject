@@ -11,6 +11,7 @@ public class IntentBundleKey {
     public final static String PRODUCT_STOCK= "product_stock";
     public final static String PRODUCT_IMG_URL = "product_img_url";
     public final static String PRODUCT_ID = "product_id";
+    public final static String ID = "id";
     public final static String PRODUCT_TYPE = "product_type";
     public final static String PRODUCT_REQ_FLAG = "product_req_flag";
     public final static String PRODUCT_STANDARD = "product_standard";

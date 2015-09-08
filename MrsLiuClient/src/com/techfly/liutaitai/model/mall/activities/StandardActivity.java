@@ -48,7 +48,7 @@ import com.techfly.liutaitai.util.view.ProductUpdateView.ShopCarCallBack;
 public class StandardActivity extends Activity implements ShopCarCallBack {
 
 	private static final int REFRESH = 0x9;
-	private int mProductId = -1, mReqFlag = ProductInfoFragment.FLAG_NORMAL;
+	private int mProductId = -1, mReqFlag = 1;
 	private int mStock = -1;
 	private String mStandard;
 

@@ -375,7 +375,7 @@ public class OrderDetailFragment extends OrderPayFragment implements OrderCancel
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Product product=(Product) parent.getAdapter().getItem(position);
-		UIHelper.toProductInfoActivity(mActivity, Integer.valueOf(product.getmId()),ProductInfoFragment.FLAG_NORMAL);
+//		UIHelper.toProductInfoActivity(mActivity, Integer.valueOf(product.getmId()),ProductInfoFragment.FLAG_NORMAL);
 	}
 
 }

@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.text.TextUtils.TruncateAt;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,7 +19,6 @@ import com.techfly.liutaitai.model.home.bean.CategoryItem;
 import com.techfly.liutaitai.model.mall.fragment.ProductInfoFragment;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.UIHelper;
-import com.techfly.liutaitai.util.view.DrawableCenterTextView;
 
 public class HomeCategoryListAdapter extends CommonAdapter<Category> {
 
@@ -113,7 +109,7 @@ public class HomeCategoryListAdapter extends CommonAdapter<Category> {
 				
 				@Override
 				public void onClick(View view) {
-					UIHelper.toProductInfoActivity(mContext, item.getmCommodityShow().get(0).getmTargetId(),ProductInfoFragment.FLAG_NORMAL);;
+//					UIHelper.toProductInfoActivity(mContext, item.getmCommodityShow().get(0).getmTargetId(),ProductInfoFragment.FLAG_NORMAL);;
 				}
 			});
 			
@@ -131,7 +127,7 @@ public class HomeCategoryListAdapter extends CommonAdapter<Category> {
 				
 				@Override
 				public void onClick(View view) {
-					UIHelper.toProductInfoActivity(mContext, item.getmCommodityShow().get(1).getmTargetId(),ProductInfoFragment.FLAG_NORMAL);;
+//					UIHelper.toProductInfoActivity(mContext, item.getmCommodityShow().get(1).getmTargetId(),ProductInfoFragment.FLAG_NORMAL);;
 				}
 			});
 		}
