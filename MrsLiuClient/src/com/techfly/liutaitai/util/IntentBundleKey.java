@@ -37,4 +37,5 @@ public class IntentBundleKey {
 	public static String PATH="path";
 	public static String LOCCITY="loc_city";
     public static String TYPE="type";
+    public static String SERVICE_ID = "service_id";
 }

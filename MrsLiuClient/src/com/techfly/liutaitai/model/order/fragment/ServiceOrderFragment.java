@@ -113,7 +113,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
         onInitView(view);
     }
     private void onInitView(View view){
-    	setTitleText(R.string.order_service_title);
+    	setTitleText(R.string.order_appointment_title);
     	mListView=(XListView) view.findViewById(R.id.all_list);
     	mTextView=(TextView) view.findViewById(R.id.all_text);
     	mAdapter=new ServiceAdapter(getActivity(), mList);
