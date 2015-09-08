@@ -1,11 +1,5 @@
 package com.techfly.liutaitai.model.pcenter.adapter;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.util.ImageLoaderUtil;
-import com.techfly.liutaitai.util.Utility;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -15,6 +9,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.bean.Product;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
+import com.techfly.liutaitai.util.Utility;
 
 public class OrderProductAdapter extends BaseAdapter {
 	private Context mContext;

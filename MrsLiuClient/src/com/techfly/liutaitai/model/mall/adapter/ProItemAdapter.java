@@ -12,12 +12,12 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ProItemAdapter extends BaseAdapter {
 

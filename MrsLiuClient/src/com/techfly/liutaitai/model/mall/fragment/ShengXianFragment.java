@@ -29,10 +29,11 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.GanxiServiceParser;
 import com.techfly.liutaitai.bizz.parser.ServiceCategoryParser;
-import com.techfly.liutaitai.bizz.parser.ServiceParser;
+import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter2;
 import com.techfly.liutaitai.model.mall.adapter.ServiceAdapter;
+import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.mall.bean.SortRule;
 import com.techfly.liutaitai.net.HttpURL;
@@ -42,6 +43,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
+import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.GridViewForScrollView;
@@ -345,9 +347,8 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
-
-              mPage = 1;
-              getServiceList();
+                Product pro = (Product) arg0.getItemAtPosition(arg2);
+              UIHelper.toSomeIdActivity(ShengXianFragment.this, ProductInfoActivity.class.getName(), pro.getmId(),type);
 
             }
         });

@@ -1,12 +1,12 @@
 package com.techfly.liutaitai.model.order.adapter;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.bean.Service;
-import com.techfly.liutaitai.util.ManagerListener;
-
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.bean.Service;
+import com.techfly.liutaitai.util.ManagerListener;
 
 public class ServiceClick implements OnClickListener{
 	private Service mService;

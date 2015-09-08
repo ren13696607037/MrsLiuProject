@@ -1,19 +1,19 @@
 package com.techfly.liutaitai.model.order.fragment;
 
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.util.fragment.CommonFragment;
-import com.techfly.liutaitai.util.view.PagerAdapter;
-import com.techfly.liutaitai.util.view.ScrollTabView;
-import com.techfly.liutaitai.util.view.ScrollTabsAdapter;
-import com.techfly.liutaitai.util.view.TabAdapter;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.view.PagerAdapter;
+import com.techfly.liutaitai.util.view.ScrollTabView;
+import com.techfly.liutaitai.util.view.ScrollTabsAdapter;
+import com.techfly.liutaitai.util.view.TabAdapter;
 
 
 public class OrderFragment extends CommonFragment {

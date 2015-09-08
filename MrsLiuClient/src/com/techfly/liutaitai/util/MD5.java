@@ -6,8 +6,6 @@ import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import android.provider.SyncStateContract.Constants;
-
 public class MD5 {
     private static final String ALGORITHM = "MD5";
     private static final String MD5_ENCODE = "UTF-8";

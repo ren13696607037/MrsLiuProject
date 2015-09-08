@@ -2,9 +2,6 @@ package com.techfly.liutaitai.update;
 
 import java.io.File;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -19,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
@@ -31,10 +29,8 @@ import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.update.DownloadMgr.DownloadListener;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
-import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SmartToast;
-import com.techfly.liutaitai.MainActivity;
 
 /**
  * 

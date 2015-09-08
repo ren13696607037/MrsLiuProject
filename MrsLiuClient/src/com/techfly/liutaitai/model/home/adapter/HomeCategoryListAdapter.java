@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.home.bean.Category;
 import com.techfly.liutaitai.model.home.bean.CategoryItem;
-import com.techfly.liutaitai.model.mall.fragment.ProductInfoFragment;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.UIHelper;
 

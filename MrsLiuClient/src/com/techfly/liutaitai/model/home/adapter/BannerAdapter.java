@@ -4,23 +4,17 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.model.home.bean.Banner;
-import com.techfly.liutaitai.model.mall.fragment.ProductInfoFragment;
-import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.UIHelper;
-import com.techfly.liutaitai.util.Utility;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class BannerAdapter extends PagerAdapter {
 

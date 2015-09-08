@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.model.home.activities.SearchActivity;
 import com.techfly.liutaitai.model.mall.activities.CategoryInfoListActivity;
 import com.techfly.liutaitai.model.mall.activities.GanxiActivity;
@@ -21,7 +22,6 @@ import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.shopcar.activities.OrderPayFinishActivity;
 import com.techfly.liutaitai.model.shopcar.activities.ShopCarActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
-import com.techfly.liutaitai.MainActivity;
 
 /**
  * 
@@ -65,8 +65,9 @@ public class UIHelper {
 		context.startActivity(intent);
 	}
 
-	public static void toShopCarActivity(Context context) {
+	public static void toShopCarActivity(Context context,int type) {
 		Intent intent = new Intent(context, ShopCarActivity.class);
+		intent.putExtra(IntentBundleKey.TYPE, type);
 		intent.putExtra(IntentBundleKey.IS_FROM_HOME_CART, false);
 		context.startActivity(intent);
 	}
@@ -180,11 +181,12 @@ public class UIHelper {
      * @param fragment
      * @param className
      */
-    public static void  toSomeIdActivity(Fragment fragment,String className,String id) {
+    public static void  toSomeIdActivity(Fragment fragment,String className,String id,int type) {
         Intent intent = null;
         try {
             intent = new Intent(fragment.getActivity(),Class.forName(className));
             intent.putExtra(IntentBundleKey.ID, id);
+            intent.putExtra(IntentBundleKey.TYPE, type);
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

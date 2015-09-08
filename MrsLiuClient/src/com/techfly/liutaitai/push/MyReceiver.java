@@ -2,14 +2,14 @@ package com.techfly.liutaitai.push;
 
 
 
-import com.techfly.liutaitai.SplashActivity;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
+
+import com.techfly.liutaitai.SplashActivity;
 
 
 /**

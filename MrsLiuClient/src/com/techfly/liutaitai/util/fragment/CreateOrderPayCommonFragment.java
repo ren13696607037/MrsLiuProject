@@ -27,7 +27,6 @@ import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
-import com.techfly.liutaitai.util.UIHelper;
 
 public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
 

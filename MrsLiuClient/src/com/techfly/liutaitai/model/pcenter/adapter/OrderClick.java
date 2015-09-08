@@ -1,12 +1,12 @@
 package com.techfly.liutaitai.model.pcenter.adapter;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
-import com.techfly.liutaitai.util.ManagerListener;
-
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.util.ManagerListener;
 
 public class OrderClick implements OnClickListener{
 	private Context mContext;

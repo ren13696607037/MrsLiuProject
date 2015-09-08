@@ -8,11 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -25,6 +22,7 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.home.adapter.BannerAdapter;
 import com.techfly.liutaitai.model.home.adapter.CommonAdapter;
@@ -52,11 +50,9 @@ import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.GridViewForScrollView;
-import com.techfly.liutaitai.util.view.ListViewForScrollView;
 import com.techfly.liutaitai.util.view.LoadingLayout;
 import com.techfly.liutaitai.util.view.ViewPager;
 import com.techfly.liutaitai.util.view.ViewPagerWrapper;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class HomeFragment extends CommonFragment implements View.OnClickListener{
 

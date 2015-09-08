@@ -1,15 +1,14 @@
 package com.techfly.liutaitai;
 
 import android.app.Application;
-
 import cn.jpush.android.api.JPushInterface;
 
-import com.techfly.liutaitai.net.RequestManager;
-import com.techfly.liutaitai.util.Utility;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.techfly.liutaitai.net.RequestManager;
+import com.techfly.liutaitai.util.Utility;
 
 public class YiHuiApplication extends Application {
     @Override

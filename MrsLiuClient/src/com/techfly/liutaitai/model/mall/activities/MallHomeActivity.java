@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.techfly.liutaitai.model.mall.fragment.MallHomeFragment;
 import com.techfly.liutaitai.util.activities.BaseActivity;
-import com.techfly.liutaitai.util.activities.BaseHomeActivity;
 
 public class MallHomeActivity extends BaseActivity {
     private MallHomeFragment mFragment;

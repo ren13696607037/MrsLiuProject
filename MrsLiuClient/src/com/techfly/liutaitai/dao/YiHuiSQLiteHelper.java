@@ -1,9 +1,9 @@
 package com.techfly.liutaitai.dao;
-import com.techfly.liutaitai.util.AppLog;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.techfly.liutaitai.util.AppLog;
 
 public class YiHuiSQLiteHelper extends SQLiteOpenHelper {
     private static YiHuiSQLiteHelper sSingleton = null;

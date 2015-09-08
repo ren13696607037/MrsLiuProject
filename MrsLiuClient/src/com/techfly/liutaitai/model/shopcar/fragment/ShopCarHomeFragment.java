@@ -1,5 +1,6 @@
 package com.techfly.liutaitai.model.shopcar.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -30,6 +31,8 @@ import com.techfly.liutaitai.bizz.shopcar.OnShopCarLisManager;
 import com.techfly.liutaitai.bizz.shopcar.OnShopCarListener;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.bean.Product;
+import com.techfly.liutaitai.model.mall.parser.ShopCartParser;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.model.shopcar.adapter.ShopCarAdapter;
 import com.techfly.liutaitai.model.shopcar.adapter.ShopCarAdapter.EditCallBack;
@@ -41,6 +44,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class ShopCarHomeFragment extends CommonFragment implements OnClickListener,OnShopCarListener
@@ -52,30 +56,84 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
     private TextView mTotalPriceTv;
     private TextView mConfirmTv;
     private TextView mDelAllTv;
-    private List<Product> mProList;
+    private List<Product> mProList = new ArrayList<Product>();
     private boolean mIsHomeCart = true;
     private RelativeLayout mEditRelativeLayout;
     private RelativeLayout mFinishRelativeLayout;
     private TextView mCollectTv;
     private Dialog mDialog;
+    private int type;// 0 ,1 ,2 , 4分表表示 干洗,生鲜，鲜花，奢侈品
+    private boolean mReqFinish;
     @Override
     public void requestData() {
-        // TODO Auto-generated method stub
+       
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
         
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+                + Constant.SHOP_CARD_REQUEST_URL);
+        url.setmGetParamPrefix("city");
+        url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getArea().getmId());
+        url.setmGetParamPrefix("type");
+        url.setmGetParamValues(type+"");
+        param.setmHttpURL(url);
+        param.setmParserClassName(ShopCartParser.class.getName());
+        RequestManager.getRequestData(getActivity(), creatSuccessListener(),
+                creatErrorListener(), param);//
+    }
+    private Response.Listener<Object> creatSuccessListener() {
+        return new Response.Listener<Object>() {
+
+            @Override
+            public void onResponse(Object obj) {
+                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                mProList.clear();
+                mReqFinish = true;
+                if(ShopCar.getShopCar().getShopproductList()!=null &&ShopCar.getShopCar().getShopproductList().size()>0){
+                    mProList.addAll(ShopCar.getShopCar().getShopproductList());
+                    mAdapter = new ShopCarAdapter(getActivity(), mProList,ShopCarHomeFragment.this);
+                    mListView.setAdapter(mAdapter);
+                    onDispalyData();
+                }else{
+                    onDisplayNoData();
+                }
+            }
+        };
     }
 
+    private Response.ErrorListener creatErrorListener() {
+        return new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+
+            }
+        };
+    }
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
         mIsHomeCart = getActivity().getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_HOME_CART, true);
+        type = getActivity().getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         OnShopCarLisManager.getShopCarLisManager().onRegisterShopCarListener(this);
+        startReqTask(this);
     }
 
     @Override
@@ -100,7 +158,6 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
     }
     
     private void initView(View view) {
-        // TODO Auto-generated method stub
         mListView = (ListView) view.findViewById(R.id.listView);
         mCheckBox = (CheckBox) view.findViewById(R.id.product_all_checkbox);
         mCheckBox2 = (CheckBox) view.findViewById(R.id.product_all_checkbox2);
@@ -113,18 +170,13 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
         mCollectTv.setOnClickListener(this);
         mDelAllTv = (TextView) view.findViewById(R.id.del_all);
         mDelAllTv.setOnClickListener(this);
-        mAdapter = new ShopCarAdapter(getActivity(), null,this);
-        mListView.setAdapter(mAdapter);
         mEditRelativeLayout = (RelativeLayout) view.findViewById(R.id.editable_area);
         mFinishRelativeLayout = (RelativeLayout) view.findViewById(R.id.finish_area);
-        onUpdateData();
     }
     
     @Override
     public void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
-        onUpdateData();
     }
 
     private void onUpdateData(){
@@ -148,14 +200,14 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
     
     private void onDispalyData(){
         mListView.setVisibility(View.VISIBLE);
-        mAdapter.updateListView(mProList);
+        mAdapter.notifyDataSetChanged();
         mCheckBox.setClickable(true);
         mCheckBox2.setClickable(true);
         mConfirmTv.setClickable(true);
         mDelAllTv.setClickable(true);
         mDelAllTv.setText(getString(R.string.address_delete)+"("+ShopCar.getShopCar().getShopCheckedAmountSum()+")");
         if(ShopCar.getShopCar().getShopAmountSum()>0){
-            setTitleText(getString(R.string.home_shopcar_tab)+"("+ShopCar.getShopCar().getShopAmountSum()+")");
+            setTitleText("购物车("+ShopCar.getShopCar().getShopAmountSum()+")");
         }else{
             setTitleText(getString(R.string.home_shopcar_tab));
         }
@@ -264,14 +316,14 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
             break;
         case R.id.del_all:
             if(ShopCar.getShopCar().getShopCheckedAmountSum()>0){
-             mDialog =   AlertDialogUtils.displayMyAlertChoice(getActivity(), R.string.giveup, R.string.product_shop_del_confirm_message, R.string.confirm,
+             mDialog =   AlertDialogUtils.displayMyAlertChoice(getActivity(), R.string.delete_toshopcar_title, R.string.product_shop_del_confirm_message, R.string.confirm,
                         new OnClickListener() {
                             
                             @Override
                             public void onClick(View arg0) {
-                                ShopCar.getShopCar().delCartCheckedItem();
+//                                ShopCar.getShopCar().delCartCheckedItem();
+                                requestDeleteCart();
                                 mDialog.dismiss();
-                                
                             }
                         }
                         , R.string.giveup,  new OnClickListener() {
@@ -375,7 +427,10 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
 
     @Override
     public void notify(Bundle bundle) {
-        onUpdateData();
+        if(mReqFinish){
+            onUpdateData();
+        }
+        
     }
 
     @Override
@@ -405,5 +460,67 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
         break;
     }
     }
+    private  void requestDeleteCart(){
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.DELETE_TO_CART_REQUEST_URL);
+        
+      
     
+        StringBuffer buffer = new StringBuffer();
+        for(Product pro :ShopCar.getShopCar().getCheckShopproductList()){
+            url.setmGetParamPrefix("ids");
+            url.setmGetParamValues(pro.getmId());
+//            buffer.append(pro.getmId()+"");
+        }
+//        String ids = buffer.toString();
+//        AppLog.Logd("Fly", "ids===="+ids);
+//        ids = ids.substring(0,ids.length()-1);
+//        AppLog.Logd("Fly", "ids===="+ids);
+//        url.setmGetParamValuse(ids);
+        
+        param.setmHttpURL(url);
+        param.setmParserClassName(CommonParser.class.getName());
+        RequestManager.getRequestData(getActivity(), creatDelSuccessListener(), creatDelErrorListener(), param);//
+    }
+    
+    private Response.ErrorListener creatDelErrorListener() {
+        return new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+                
+                showSmartToast("删除失败", Toast.LENGTH_LONG);
+            }
+        };
+    }
+    private Response.Listener<Object> creatDelSuccessListener() {
+        return new Response.Listener<Object>() {
+
+            @Override
+            public void onResponse(Object obj) {
+               
+                ResultInfo info = (ResultInfo) obj;
+                if(info.getmCode()==0){
+                    ShopCar.getShopCar().delCartCheckedItem();
+                    OnShopCarLisManager.getShopCarLisManager().onNotifyShopCarChange(null);
+                }else{
+                    showSmartToast("删除失败", Toast.LENGTH_LONG);
+                }
+            
+            }
+        };
+    }
 }

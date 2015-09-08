@@ -12,22 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.bizz.parser.CityListParser;
-import com.techfly.liutaitai.bizz.parser.CityListsParser;
 import com.techfly.liutaitai.bizz.parser.ProvinceListParser;
 import com.techfly.liutaitai.model.pcenter.activities.CityListActivity;
 import com.techfly.liutaitai.model.pcenter.activities.ProvinceActivity;
-import com.techfly.liutaitai.model.pcenter.adapter.CityAdapter;
 import com.techfly.liutaitai.model.pcenter.adapter.ProvinceAdapter;
-import com.techfly.liutaitai.model.pcenter.bean.Area;
-import com.techfly.liutaitai.model.pcenter.bean.City;
 import com.techfly.liutaitai.model.pcenter.bean.Province;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -35,7 +29,6 @@ import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
-import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class ProvinceFragment extends CommonFragment {

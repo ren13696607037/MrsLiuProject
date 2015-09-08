@@ -2,7 +2,6 @@ package com.techfly.liutaitai.model.mall.bean.help;
 
 import java.util.ArrayList;
 
-import com.techfly.liutaitai.model.mall.bean.Category;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 
 public class ListOrder {

@@ -24,6 +24,7 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.bean.Product;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -46,6 +47,7 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
 	    private String mUserId;
 	    private ProgressDialog mProgressDialog;
 	    private boolean mIsAddOperation;
+        private User mUser;
 
 	    public ShopCartChangeView(Context context) {
 	        this(context, null);
@@ -63,7 +65,7 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
 	                R.styleable.productUpdateView);
 	        mIsWithDialog= a.getBoolean(0,true);
 	        a.recycle();
-	        
+	        mUser = SharePreferenceUtils.getInstance(mContext).getUser();
 	        LinearLayout convertView =
 	                      (LinearLayout) LayoutInflater.from(context).inflate(R.layout.shop_product_amount, null);
 	        mAddIcon = (ImageButton) convertView.findViewById(R.id.imgbtn_product_add);
@@ -145,11 +147,11 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
 	        switch (id) {
 	        case R.id.imgbtn_product_add:
 	        	 mIsAddOperation =true;
-	        	 if(mProduct.getmAmount()<mProduct.getmStoreCount()){
+//	        	 if(mProduct.getmAmount()<mProduct.getmStoreCount()){
 	        		 reqProCountChange();
-	        	 }else{
-	        		 SmartToast.showText(mContext, "库存不足");
-	        	 }
+//	        	 }else{
+//	        		 SmartToast.showText(mContext, "库存不足");
+//	        	 }
 	            break;
 	        case R.id.imgbtn_product_minus:
 	        	  mIsAddOperation =false;
@@ -197,14 +199,13 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
 		    showDialog();
 		    RequestParam param = new RequestParam();
 			HttpURL url = new HttpURL();
-			url.setmGetParamPrefix(RequestParamConfig.MEMBER_ID);
-			url.setmGetParamValues(mUserId+"");
-			
-			url.setmGetParamPrefix(RequestParamConfig.CARDS_ID);
-			url.setmGetParamValues(mProduct.getmId());
-			
-			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.DELETE_TO_CART_REQUEST_URL);
-			param.setmHttpURL(url);
+	        param.setmIsLogin(true);
+	        param.setmId(mUser.getmId());
+	        param.setmToken(mUser.getmToken());
+	        url.setmGetParamPrefix("ids");
+	        url.setmGetParamValues(mProduct.getmId()+ "");
+	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.DELETE_TO_CART_REQUEST_URL);
+	        param.setmHttpURL(url);
 			param.setmParserClassName(CommonParser.class.getName());
 			RequestManager.getRequestData(mContext, creatSuccessListener(), creatErrorListener(), param);// 
 	 }
@@ -214,19 +215,25 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
 		private void reqProCountChange() {
 			showUpdateDialog();
 			RequestParam param = new RequestParam();
-			HttpURL url = new HttpURL();
-			url.setmGetParamPrefix(RequestParamConfig.MEMBER_ID);
-			url.setmGetParamValues(mUserId+"");
-			
+			 param.setmIsLogin(true);
+             param.setmId(mUser.getmId());
+             param.setmToken(mUser.getmToken());
+			 HttpURL url = new HttpURL();
 			url.setmGetParamPrefix(RequestParamConfig.GOODS_ID);
 			url.setmGetParamValues(mProduct.getmId());
 			
-			url.setmGetParamPrefix(RequestParamConfig.FLAG);
+			url.setmGetParamPrefix(RequestParamConfig.NUM);
 			if(mIsAddOperation){
-				url.setmGetParamValues(RequestParamConfig.PLUS);
+			    url.setmGetParamValues(mProduct.getmAmount()+1+"");
 			}else{
-				url.setmGetParamValues(RequestParamConfig.REDUCE);
+			    url.setmGetParamValues(mProduct.getmAmount()-1+"");
 			}
+//			url.setmGetParamPrefix(RequestParamConfig.FLAG);
+//			if(mIsAddOperation){
+//				url.setmGetParamValues(RequestParamConfig.PLUS);
+//			}else{
+//				url.setmGetParamValues(RequestParamConfig.REDUCE);
+//			}
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.UPDATE_TO_CART_REQUEST_URL);
 			param.setmHttpURL(url);
 			param.setmParserClassName(CommonParser.class.getName());
@@ -297,5 +304,5 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
 		       mAddIcon.setClickable(true);
 		       mMinusIcon.setClickable(true);
 		}
-    
+		
 }

@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 
 public class ViewHolder {
 	

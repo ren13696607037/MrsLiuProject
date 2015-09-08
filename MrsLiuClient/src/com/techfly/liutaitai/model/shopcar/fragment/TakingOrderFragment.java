@@ -22,6 +22,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.BuyInfo;
 import com.techfly.liutaitai.bizz.parser.AddressManageParser;
@@ -43,7 +44,6 @@ import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment;
 import com.techfly.liutaitai.util.view.ListViewForScrollView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class TakingOrderFragment extends CreateOrderPayCommonFragment implements OnClickListener{
 

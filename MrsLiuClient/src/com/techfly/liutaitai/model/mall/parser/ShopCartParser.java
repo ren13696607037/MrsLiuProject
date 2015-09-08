@@ -1,4 +1,4 @@
-package com.techfly.liutaitai.bizz.parser;
+package com.techfly.liutaitai.model.mall.parser;
 
 import java.util.ArrayList;
 
@@ -7,17 +7,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.techfly.liutaitai.bean.ResultInfo;
-import com.techfly.liutaitai.model.mall.bean.SortRule;
+import com.techfly.liutaitai.bizz.shopcar.ShopCar;
+import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
 
-public class ServiceCategoryParser implements Parser{
+public class ShopCartParser implements Parser{
     @Override
     public Object fromJson(JSONObject object) {
         int  resultCode =-1;
         ResultInfo info = new ResultInfo();
-        ArrayList<SortRule> list = new ArrayList<SortRule>();
+        ArrayList<Product> list = new ArrayList<Product>();
         try {
            resultCode = object
                     .getInt(JsonKey.CODE);
@@ -27,20 +29,25 @@ public class ServiceCategoryParser implements Parser{
             AppLog.Logd("Fly", "JSONException"+e.getMessage());
         }
         if(resultCode==0){
-            JSONArray array = object.optJSONArray(JsonKey.DATA);
+            JSONObject objd = object.optJSONObject(JsonKey.DATA);
+            JSONArray array = objd.optJSONArray("cartList");
+            ShopCar.getShopCar().emptyproductes();
             if(array!=null){
                 for(int i=0;i<array.length();i++){
                     JSONObject obj = array.optJSONObject(i);
-                    SortRule rule = new SortRule();
-                    if(i==0){
-                        rule.setmIsSelect(true);  
-                    }
-                    rule.setmId(obj.optString("id"));
-                    rule.setmName(obj.optString("name"));
-                    list.add(rule);
+                    Product product = new Product();
+                    product.setmId(obj.optString("id"));
+                    product.setmName(obj.optString("title"));
+                    product.setmPrice((float) obj.optDouble(JsonKey.ProductKey.PRICE));
+                    product.setmMarketPrice((float) obj.optDouble(JsonKey.ProductKey.PRICE));
+                    product.setmImg(Constant.YIHUIMALL_BASE_URL+obj.optString(JsonKey.ProductKey.ICON));
+                    product.setmAmount(obj.optInt("count"));
+                    ShopCar.getShopCar().setLocalCartProduct(product, true);
+                    list.add(product);
                 }
             }
         }
+        
         info.setObject(list);
         return info;
     }
@@ -56,4 +63,5 @@ public class ServiceCategoryParser implements Parser{
         }
         return null;
     }
+
 }

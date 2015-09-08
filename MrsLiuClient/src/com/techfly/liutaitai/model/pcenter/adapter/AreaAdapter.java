@@ -2,16 +2,16 @@ package com.techfly.liutaitai.model.pcenter.adapter;
 
 import java.util.ArrayList;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.Area;
-import com.techfly.liutaitai.model.pcenter.bean.City;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.bean.Area;
+import com.techfly.liutaitai.model.pcenter.bean.City;
 
 
 public class AreaAdapter extends BaseExpandableListAdapter {

@@ -1,6 +1,7 @@
 package com.techfly.liutaitai.util;
 
 
+
 public class Constant {
 
 	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/liu/";
@@ -73,11 +74,10 @@ public class Constant {
 	
 	public static final String ORDER_BASKET_LIST = "order/list";
 
-	
-
-    public static String UPDATE_TO_CART_REQUEST_URL="";
-    public static String ADD_TO_CART_REQUEST_URL="";
-    public static String DELETE_TO_CART_REQUEST_URL="";
+    public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
+    public static String UPDATE_TO_CART_REQUEST_URL="product/editCartCount";
+    public static String ADD_TO_CART_REQUEST_URL="product/addCart";
+    public static String DELETE_TO_CART_REQUEST_URL="product/deleteUserCart";
     public static String CITY_REQUEST_LIST_URL="common/citys";
 
 	public static final String CHANGE_INFO_URL = "user/modifyprofile";
@@ -158,5 +158,6 @@ public class Constant {
 			"@yeah.net", "@sina.cn", "@sina.com", "@vip.qq.com",
 			"@vip.163.com", "@vip.sina.com", "@gmail.com", };
 	public static final String REFRESH_UPLOAD_GRIDVIEW_IMAGE = "refresh_upload_gridview_image";
+
 
 }

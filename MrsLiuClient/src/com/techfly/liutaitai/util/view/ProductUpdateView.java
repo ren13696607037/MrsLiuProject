@@ -39,6 +39,7 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
     private Product mProduct;
     private int num;
     private int mUserId;
+    private User mUser;
     public interface ShopCarCallBack {
         void onFail(String message);
 
@@ -178,6 +179,7 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
     private boolean authLogin() {
         User user = SharePreferenceUtils.getInstance(mContext).getUser();
         if (user != null && !TextUtils.isEmpty(user.getmId())) {
+            mUser = user;
             mUserId = Integer.parseInt(user.getmId());
             if(mUserId>0){
                 return true;
@@ -218,14 +220,16 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
     private void requestData() {
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-        url.setmGetParamPrefix(RequestParamConfig.MEMBER_ID);
-        url.setmGetParamValues(mUserId + "");
+        
+       
+        param.setmIsLogin(true);
+        param.setmId(mUser.getmId());
+        param.setmToken(mUser.getmToken());
+        url.setmGetParamPrefix("city");
+        url.setmGetParamValues(SharePreferenceUtils.getInstance(mContext).getArea().getmId());
 
         url.setmGetParamPrefix(RequestParamConfig.GOODS_ID);
         url.setmGetParamValues(mProduct.getmId());
-
-        url.setmGetParamPrefix(RequestParamConfig.STORE_ID);
-        url.setmGetParamValues(mProduct.getmBelongCategory());
 
         url.setmGetParamPrefix(RequestParamConfig.NUM);
         url.setmGetParamValues(mProduct.getmAmount() + "");

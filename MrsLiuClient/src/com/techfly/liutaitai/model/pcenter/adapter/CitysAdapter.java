@@ -10,7 +10,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.City;
 import com.techfly.liutaitai.model.pcenter.bean.Province;
 

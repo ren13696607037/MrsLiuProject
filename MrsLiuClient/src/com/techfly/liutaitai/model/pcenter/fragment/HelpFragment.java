@@ -3,15 +3,13 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.WebSettings.LayoutAlgorithm;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;

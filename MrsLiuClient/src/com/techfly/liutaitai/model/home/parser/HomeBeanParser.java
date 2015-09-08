@@ -19,7 +19,6 @@ import com.techfly.liutaitai.model.home.bean.SecKillItem;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.JsonKey;
-import com.techfly.liutaitai.util.SharePreferenceUtils;
 
 public class HomeBeanParser implements Parser {
 

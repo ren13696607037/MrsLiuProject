@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.bean.Service;
+import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 
-public class ServiceAdapter extends BaseAdapter{
-    private List<Service> mList;
+public class ShengXianServiceAdapter extends BaseAdapter{
+    private List<Product> mList;
     private Context mContext;
-    public ServiceAdapter(Context context,List<Service> list){
+    public ShengXianServiceAdapter(Context context,List<Product> list){
       mList = list;   
       mContext = context;
     }
@@ -30,7 +30,7 @@ public class ServiceAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-        return mList!=null?mList.get(position):new Service();
+        return mList!=null?mList.get(position):new Product();
     }
     @Override
     public long getItemId(int arg0) {
@@ -56,23 +56,23 @@ public class ServiceAdapter extends BaseAdapter{
             holder=(ViewHolder) convertView.getTag();
         }
      
-        ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
+        ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
         
-        holder.personNum.setText(mList.get(position).getmServicePerson()+"人体验");
+        holder.personNum.setText(mList.get(position).getmSale()+"人体验");
         
-        holder.serviceName.setText(mList.get(position).getmServiceName());
+        holder.serviceName.setText(mList.get(position).getmName());
         
-        holder.servicePrice.setText("￥"+mList.get(position).getmServicePrice());
+        holder.servicePrice.setText("￥"+mList.get(position).getmPrice());
         
         return convertView;
         
     }
 
-    public List<Service> getmList() {
+    public List<Product> getmList() {
         return mList;
     }
 
-    public void setmList(List<Service> mList) {
+    public void setmList(List<Product> mList) {
         this.mList = mList;
     }
     class ViewHolder{
@@ -82,4 +82,5 @@ public class ServiceAdapter extends BaseAdapter{
         private TextView servicePrice;
        
     }
+
 }

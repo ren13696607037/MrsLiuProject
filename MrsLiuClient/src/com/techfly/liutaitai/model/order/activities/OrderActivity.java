@@ -1,12 +1,12 @@
 package com.techfly.liutaitai.model.order.activities;
 
 
-import com.techfly.liutaitai.model.order.fragment.ServiceOrderFragment;
-import com.techfly.liutaitai.util.activities.BaseHomeActivity;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+
+import com.techfly.liutaitai.model.order.fragment.ServiceOrderFragment;
+import com.techfly.liutaitai.util.activities.BaseHomeActivity;
 
 
 public class OrderActivity extends BaseHomeActivity {

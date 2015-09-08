@@ -8,13 +8,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.TabSwitchListener;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
-import com.techfly.liutaitai.MainActivity;
-import com.techfly.liutaitai.TabSwitchListener;
 
 public class EmptyShopCarFragment extends CommonFragment implements OnClickListener{
     private Button mGoBtn;

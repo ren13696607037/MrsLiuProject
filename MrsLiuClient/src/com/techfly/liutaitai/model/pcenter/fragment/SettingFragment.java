@@ -16,7 +16,6 @@ import com.techfly.liutaitai.model.pcenter.activities.AboutUsActivity;
 import com.techfly.liutaitai.model.pcenter.activities.HelpActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SettingActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SuggestActivity;
-import com.techfly.liutaitai.update.UpdateMgr;
 import com.techfly.liutaitai.util.AlertDialogUtils;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.SharePreferenceUtils;

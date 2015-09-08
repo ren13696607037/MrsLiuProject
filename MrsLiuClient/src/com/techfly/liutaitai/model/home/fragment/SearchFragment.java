@@ -35,7 +35,6 @@ import com.techfly.liutaitai.model.home.adapter.ViewHolder;
 import com.techfly.liutaitai.model.home.bean.SearchHistory;
 import com.techfly.liutaitai.model.mall.adapter.ProItemAdapter;
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.mall.fragment.ProductInfoFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -43,7 +42,6 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
-import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 

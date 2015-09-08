@@ -2,9 +2,6 @@ package com.techfly.liutaitai.model.pcenter.adapter;
 
 import java.util.ArrayList;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.Content;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.bean.Content;
 
 public class LogListAdapter extends BaseAdapter {
 	private Context mContext;

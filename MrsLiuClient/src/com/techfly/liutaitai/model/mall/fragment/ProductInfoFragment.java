@@ -1,12 +1,10 @@
 package com.techfly.liutaitai.model.mall.fragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -28,11 +26,9 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
 import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
-import com.techfly.liutaitai.model.mall.activities.StandardActivity;
 import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.parser.NewProductInfoParser;
-import com.techfly.liutaitai.model.pcenter.activities.RateListActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -41,7 +37,6 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
-import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.adapter.CommonAdapter;
 import com.techfly.liutaitai.util.adapter.ViewHolder;
@@ -64,13 +59,9 @@ public class ProductInfoFragment extends CommonFragment implements
     private Context mContext;
 
     private RollViewPager mViewPager;
-    private TextView mPagerTitle;
     private LinearLayout mDotLinear;
     private RelativeLayout mPagerRelative;
     private ArrayList<View> dots; // 图片标题正文的那些点
-    private List<ImageView> imageViews; // 滑动的图片集合
-    private String[] titles;
-    private ArrayList<String> mTitles;
     public ArrayList<String> mImageUrls;
     // private ArrayList<HomePager> mPagerDatas;
 
@@ -79,34 +70,20 @@ public class ProductInfoFragment extends CommonFragment implements
     private TextView mShopNow;
     private TextView mProductName;
     private TextView mProductPrice;
-    private TextView mProductOldPrice;
-    private TextView mProductRebate;
-    private TextView mProductCollect;
-    private LinearLayout mProductCollectLinear;
-    private ImageView mProductCollectStar;
     private ProductUpdateView mProductUpdateCount;
-    private TextView mProductStoreCount;
-    private LinearLayout mProductStandardLinear;
-    private TextView mProductStandard;
-    private LinearLayout mProductListHeaderLinear;
-    private TextView mProductEvaCount;
-    private TextView mProductEvaPercent;
-    private View view1, view2, view3;
-
     private ListViewForScrollView mListView;
+    private TextView mPicAndTextDetail;
     private ArrayList<Comments> mArrayList = new ArrayList<Comments>();
     private CommonAdapter<Comments> mAdapter;
-
-    private TextView mPicAndTextDetail;
     private String mProductId = "1";
-    private String mStandard;
-    private boolean isSelectStandard = false;
+    private int type;
 
     @Override
     public void onAttach(Activity activity) {
         // TODO Auto-generated method stub
         super.onAttach(activity);
         mContext = activity;
+        type = activity.getIntent().getIntExtra(IntentBundleKey.TYPE,0);
     }
 
     @Override
@@ -122,14 +99,12 @@ public class ProductInfoFragment extends CommonFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         return inflater
                 .inflate(R.layout.fragment_productinfo, container, false);
     }
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
     }
 
@@ -184,40 +159,12 @@ public class ProductInfoFragment extends CommonFragment implements
         mProductName.setText("德芙巧克力");
         mProductPrice = (TextView) view.findViewById(R.id.product_info_price);
         mProductPrice.setText("￥54.00");
-        mProductOldPrice = (TextView) view
-                .findViewById(R.id.product_info_old_price);
-        mProductOldPrice.setText("￥88.00");
-        ;
-        mProductRebate = (TextView) view.findViewById(R.id.product_info_rebate);
-        mProductRebate.setText("折扣6.0折");
-        mProductCollect = (TextView) view
-                .findViewById(R.id.product_info_collect);
-        mProductCollect.setText("收藏");
-        mProductCollectLinear = (LinearLayout) view
-                .findViewById(R.id.product_info_collect_linear);
-        mProductCollectLinear.setOnClickListener(getClickListener());
-        mProductCollectStar = (ImageView) view
-                .findViewById(R.id.product_info_collect_star);
+     
 
         mProductUpdateCount = (ProductUpdateView) view
                 .findViewById(R.id.product_info_product_update_count);
 
-        mProductStoreCount = (TextView) view
-                .findViewById(R.id.product_info_store_count);
-        mProductStoreCount.setText("库存1005件");
-        mProductStandardLinear = (LinearLayout) view
-                .findViewById(R.id.product_info_linear_standard);
-        mProductStandardLinear.setOnClickListener(getClickListener());
-        // mProductStandardLinear.setVisibility(View.GONE);
-        mProductStandard = (TextView) view
-                .findViewById(R.id.product_info_standard);
-        mProductListHeaderLinear = (LinearLayout) view
-                .findViewById(R.id.product_info_linear_list_header);
-        mProductListHeaderLinear.setOnClickListener(getClickListener());
-        mProductEvaCount = (TextView) view
-                .findViewById(R.id.product_info_eva_count);
-        mProductEvaPercent = (TextView) view
-                .findViewById(R.id.product_info_eva_percent);
+     
 
         mListView = (ListViewForScrollView) view
                 .findViewById(R.id.product_info_listview);
@@ -243,9 +190,7 @@ public class ProductInfoFragment extends CommonFragment implements
                 .findViewById(R.id.product_info_text_and_pic_detail);
         mPicAndTextDetail.setOnClickListener(getClickListener());
 
-        view1 = (View) view.findViewById(R.id.product_info_view_1);
-        view2 = (View) view.findViewById(R.id.product_info_view_2);
-        view3 = (View) view.findViewById(R.id.product_info_view_3);
+       
 
     }
 
@@ -264,8 +209,6 @@ public class ProductInfoFragment extends CommonFragment implements
     }
 
     private void initPager(View view) {
-        // TODO Auto-generated method stub
-        mTitles = new ArrayList<String>();
         mImageUrls = new ArrayList<String>();
         mPagerRelative = (RelativeLayout) view
                 .findViewById(R.id.product_info_relative);
@@ -345,29 +288,22 @@ public class ProductInfoFragment extends CommonFragment implements
                 // TODO Auto-generated method stub
                 switch (v.getId()) {
                 case R.id.product_info_shop_car:
-                    UIHelper.toShopCarActivity(getActivity());
+                    UIHelper.toShopCarActivity(getActivity(),type);
                     break;
                 case R.id.product_info_shop_car_add:// 添加购物车
-                    if (mProduct.getmStoreCount() <= 0) {
-                        showSmartToast(R.string.store_count_not_enough,
-                                Toast.LENGTH_LONG);
-                        break;
-                    }
-                    if (mProductStandardLinear.getVisibility() == View.VISIBLE
-                            && mProduct.getmProductId() == -1) {
-                        SmartToast.makeText(getActivity(),
-                                R.string.standard_unselect, Toast.LENGTH_SHORT)
-                                .show();
-                        break;
-                    }
+//                    if (mProduct.getmStoreCount() <= 0) {
+//                        showSmartToast(R.string.store_count_not_enough,
+//                                Toast.LENGTH_LONG);
+//                        break;
+//                    }
                     try {
                         mProductUpdateCount
                                 .onReqPullToShopCart(ProductInfoFragment.this);
                     } catch (CallBackNullException e) {
-                        // TODO Auto-generated catch block
+                        
                         e.printStackTrace();
                     } catch (ProductCountException e) {
-                        // TODO Auto-generated catch block
+                    
                         e.printStackTrace();
                     }
                     break;
@@ -375,13 +311,6 @@ public class ProductInfoFragment extends CommonFragment implements
                     if (mProduct.getmStoreCount() <= 0) {
                         showSmartToast(R.string.store_count_not_enough,
                                 Toast.LENGTH_LONG);
-                        break;
-                    }
-                    if (mProductStandardLinear.getVisibility() == View.VISIBLE
-                            && mProduct.getmProductId() == -1) {
-                        SmartToast.makeText(getActivity(),
-                                R.string.standard_unselect, Toast.LENGTH_SHORT)
-                                .show();
                         break;
                     }
                     if (authLogin()) {
@@ -394,28 +323,6 @@ public class ProductInfoFragment extends CommonFragment implements
                 case R.id.product_info_text_and_pic_detail:
                     UIHelper.toPicAndTextActivity(getActivity(), mProductId);
                     break;
-                case R.id.product_info_linear_list_header:// 跳转到评论界面
-                    Intent intent = new Intent(getActivity(),
-                            RateListActivity.class);
-                    intent.putExtra(IntentBundleKey.PRODUCT_ID, mProduct);
-                    startActivity(intent);
-                    break;
-                case R.id.product_info_linear_standard:
-                    if (mProduct == null) {
-                        break;
-                    }
-                    Intent i = new Intent();
-                    i.setClass(getActivity(), StandardActivity.class);
-                    Bundle b = new Bundle();
-                    b.putSerializable(IntentBundleKey.PRODUCT, mProduct);
-                    i.putExtras(b);
-                    startActivityForResult(i,
-                            ProductInfoFragment.FLAG_GET_STANDARD);
-                    // StandardDialog sd = new
-                    // StandardDialog(ProductInfoFragment.this, mProduct);
-                    // sd.show();
-                    break;
-
                 default:
                     break;
                 }
@@ -427,7 +334,6 @@ public class ProductInfoFragment extends CommonFragment implements
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
-
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.GOODS_DETAIL);
@@ -475,104 +381,13 @@ public class ProductInfoFragment extends CommonFragment implements
                         mProductPrice
                                 .setText(getString(R.string.product_info_money)
                                         + p.getmPrice());
-                        mProductOldPrice
-                                .setText(getString(R.string.product_info_money)
-                                        + p.getmMarketPrice());
-                        mProductRebate
-                                .setText(getString(R.string.product_info_rebate_1)
-                                        + p.getmRebate()
-                                        + getString(R.string.product_info_rebate_2));
-                        mProductStoreCount
-                                .setText(getString(R.string.product_info_store_count_1)
-                                        + p.getmStoreCount()
-                                        + getString(R.string.product_info_store_count_2));
-                        mProductEvaCount
-                                .setText(getString(R.string.product_info_eva_count_1)
-                                        + p.getmCommentCount()
-                                        + getString(R.string.product_info_eva_count_2));
-                        mProductEvaPercent
-                                .setText(getString(R.string.product_info_eva_percent_1)
-                                        + p.getmCommentReputably());
-
-                        if (p.getmStandardClassList() == null
-                                || p.getmStandardClassList().size() == 0) {
-                            mProductStandardLinear.setVisibility(View.GONE);
-                        } else {
-                            mProductStandardLinear.setVisibility(View.VISIBLE);
-                        }
-
                         if (mArrayList != null && p.getmCommentsList() != null) {
                             mArrayList.addAll(p.getmCommentsList());
                         }
-                        if (mArrayList == null || mArrayList.size() == 0) {
-                            mProductListHeaderLinear.setVisibility(View.GONE);
-                            mListView.setVisibility(View.GONE);
-                            view1.setVisibility(View.GONE);
-                            view2.setVisibility(View.GONE);
-                            view3.setVisibility(View.GONE);
-                        } else {
-                            mProductListHeaderLinear
-                                    .setVisibility(View.VISIBLE);
-                            mListView.setVisibility(View.VISIBLE);
-                            view1.setVisibility(View.VISIBLE);
-                            view2.setVisibility(View.VISIBLE);
-                            view3.setVisibility(View.VISIBLE);
-                        }
-                        if (p.ismIsCollect()) {
-                            mProductCollectLinear
-                                    .setBackgroundResource(R.drawable.shape_collect_pressed);
-                            mProductCollect.setText("已收藏");
-                            mProductCollect.setTextColor(getResources()
-                                    .getColor(R.color.TextColorOrange));
-                            mProductCollectStar
-                                    .setImageResource(R.drawable.collect_focus);
-                        } else {
-                            mProductCollectLinear
-                                    .setBackgroundResource(R.drawable.shape_collect_normal);
-                            mProductCollect.setText("收藏");
-                            mProductCollect.setTextColor(getResources()
-                                    .getColor(R.color.color_blue));
-                            mProductCollectStar
-                                    .setImageResource(R.drawable.collect_nor);
-                        }
+                     
                     }
 
-                } else if (object instanceof Integer) {
-                    int code = (Integer) object;
-                    if (code == 0x111) {
-                        SmartToast.makeText(getActivity(),
-                                R.string.product_info_collect_success,
-                                Toast.LENGTH_SHORT).show();
-                        mProductCollectLinear
-                                .setBackgroundResource(R.drawable.shape_collect_pressed);
-                        mProductCollect.setText("已收藏");
-                        mProductCollect.setTextColor(getResources().getColor(
-                                R.color.TextColorOrange));
-                        mProductCollectStar
-                                .setImageResource(R.drawable.collect_focus);
-                        if (mProduct != null) {
-                            mProduct.setmIsCollect(true);
-                        }
-                    } else if (code == 0x112) {
-                        SmartToast.makeText(getActivity(),
-                                R.string.product_info_delete_collect_success,
-                                Toast.LENGTH_SHORT).show();
-                        mProductCollectLinear
-                                .setBackgroundResource(R.drawable.shape_collect_normal);
-                        mProductCollect.setText("收藏");
-                        mProductCollect.setTextColor(getResources().getColor(
-                                R.color.color_blue));
-                        mProductCollectStar
-                                .setImageResource(R.drawable.collect_nor);
-                        if (mProduct != null) {
-                            mProduct.setmIsCollect(false);
-                        }
-                    } else {
-                        SmartToast.makeText(getActivity(),
-                                R.string.product_info_error_collect,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
+                } 
 
             }
 
@@ -613,15 +428,6 @@ public class ProductInfoFragment extends CommonFragment implements
         if (requestCode == ProductInfoFragment.FLAG_GET_STANDARD) {
             if (resultCode == -1 || resultCode == 0) {
                 if (mProduct != null && data != null) {
-                    mStandard = "";
-                    mStandard = data
-                            .getStringExtra(IntentBundleKey.PRODUCT_STANDARD);
-                    if (!TextUtils.isEmpty(mStandard)) {
-                        mProduct.setmProductId(data.getIntExtra(
-                                IntentBundleKey.PRODUCT_ID, -1));
-                        mProductStandard.setText(mStandard.trim());
-                    }
-
                     mProductUpdateCount.setProductCount(data.getIntExtra(
                             IntentBundleKey.PRODUCT_COUNT, 1));
 

@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
 
-import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.activities.BaseActivity;

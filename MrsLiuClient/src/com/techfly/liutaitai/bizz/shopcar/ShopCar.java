@@ -34,7 +34,7 @@ public class ShopCar {
      * 清空 购物车
      */
     public void emptyproductes(){
-//        mShopCarImpl.emptyproductes();
+        mShopCarImpl.emptyproductes();
     }
     public void  getDbShopProList(Context context){
         mShopCarImpl.getDbShopProList(context);
@@ -163,6 +163,18 @@ public class ShopCar {
     }
     	return amount;
     }
-   
+    /**
+     * 设置购物车内容到本地保存
+     * @param product
+     * @param isAddNum
+     */
+    public void setLocalCartProduct(Product product,boolean isAddNum){
+        boolean isAddSuccess  = mShopCarImpl.addProduct(product);
+        if(isAddSuccess){
+            return;
+        }else{
+            mShopCarImpl.updateproduct(true,product, isAddNum);
+        }
+    }
    
 }

@@ -15,12 +15,12 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.OnShopCarLisManager;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
-import com.techfly.liutaitai.util.view.CartUpdateView;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.techfly.liutaitai.util.view.ShopCartChangeView;
 
 public class ShopCarAdapter extends BaseAdapter{
     public interface EditCallBack{
@@ -75,7 +75,7 @@ public class ShopCarAdapter extends BaseAdapter{
             holder.productCheckBox = (CheckBox) convertView.findViewById(R.id.product_checkbox);
             holder.productName = (TextView) convertView.findViewById(R.id.product_name);
             holder.productPrice = (TextView) convertView.findViewById(R.id.product_price);
-            holder.productUpdateView = (CartUpdateView) convertView.findViewById(R.id.product_update_view);
+            holder.productUpdateView = (ShopCartChangeView) convertView.findViewById(R.id.product_update_view);
             holder.productCategory = (TextView) convertView.findViewById(R.id.product_category);
             holder.productEdit =(TextView) convertView.findViewById(R.id.product_edit);
             holder.productMarketPrice = (TextView) convertView.findViewById(R.id.product_market_price);
@@ -134,7 +134,7 @@ public class ShopCarAdapter extends BaseAdapter{
         private TextView productMarketPrice;
         private TextView productCategory;
         private TextView productChaPrice;
-        private CartUpdateView productUpdateView;
+        private ShopCartChangeView productUpdateView;
         private TextView productEdit;
     }
     public void updateListView(List<Product> listItems) {

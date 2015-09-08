@@ -3,7 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+ <fragment
+        android:id="@+id/shop_car"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       class="com.techfly.liutaitai.model.shopcar.fragment.ShopCarHomeFragment" />
+    
     <fragment
         android:id="@+id/unlogin_shop_car"
         android:layout_width="match_parent"
@@ -16,10 +21,5 @@
         android:layout_height="match_parent"
        class="com.techfly.liutaitai.model.shopcar.fragment.EmptyShopCarFragment" />
     
-     <fragment
-        android:id="@+id/shop_car"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       class="com.techfly.liutaitai.model.shopcar.fragment.ShopCarHomeFragment" />
-
+    
 </LinearLayout>

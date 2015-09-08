@@ -2,13 +2,12 @@ package com.techfly.liutaitai.model.order.adapter;
 
 import java.util.ArrayList;
 
-import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.mall.bean.Service;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.techfly.liutaitai.model.mall.bean.Product;
 
 public class AppointmentAdapter extends BaseAdapter {
 	private Context mContext;
