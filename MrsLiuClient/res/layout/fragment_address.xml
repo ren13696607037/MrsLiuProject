@@ -56,8 +56,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/address_new"
-                android:divider="@color/color_gray"
-                android:dividerHeight="1dp" />
+                android:divider="@null"
+                android:dividerHeight="6dp" 
+                android:padding="@dimen/px_15"
+                />
         </RelativeLayout>
     </com.techfly.liutaitai.util.view.LoadingLayout>
 
