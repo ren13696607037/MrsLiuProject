@@ -365,5 +365,12 @@ public interface JsonKey {
 		static final String PRICE = "price";
 		static final String NAME = "goodsName";
 	}
+	
+	interface RateKey{
+		static final String TYPE = "type";
+		static final String CONTENT = "content";
+		static final String STARS = "stars";
+		static final String ID = "id";
+	}
 
 }

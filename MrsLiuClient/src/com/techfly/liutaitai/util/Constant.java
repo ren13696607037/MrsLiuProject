@@ -66,6 +66,7 @@ public class Constant {
 	public static final String SERVICE_LIST_URL = "service/reservations";
 	public static final String SERVICE_CANCEL_URL = "service/cancelreservation";
 	public static final String SERVICE_DELETE_URL = "service/delreservation";
+	public static final String SERVICE_RATE_URL = "common/review";
 	
 	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";

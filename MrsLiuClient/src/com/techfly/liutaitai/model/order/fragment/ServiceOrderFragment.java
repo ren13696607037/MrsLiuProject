@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.RateActivity;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
@@ -142,9 +143,11 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 		if(mType == 1){
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_DELETE_URL);
 			url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mService.getmId());
+			param.setmParserClassName(CommonParser.class.getName());
 		}else if(mType == 3){
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_CANCEL_URL);
 			url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mService.getmId());
+			param.setmParserClassName(CommonParser.class.getName());
 		}else{
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_LIST_URL);
 			url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
