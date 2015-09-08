@@ -435,7 +435,28 @@
 
     <!-- 订单篮 -->
     <string name="order_basket_empty">订单篮是空的</string>
-
+    
+    <!-- 订单状态 -->
+	<string name="order_state_1_">已取消</string>
+	<string name="order_state_0">待支付</string>
+	<string name="order_state_1">已下单</string>
+	<string name="order_state_2">已接单</string>
+	<string name="order_state_3">准备中</string>
+	<string name="order_state_4">配送中</string>
+	<string name="order_state_5">待评价</string>
+	<string name="order_state_6">已完成</string>
+	<string name="order_state_7">退款中</string>
+	<string name="order_state_8">线下支付</string>
+	<string name="order_state_9">已删除</string>
+	<string name="order_state_10">无法送达</string>
+	<!-- 订单操作 -->
+	<string name="order_text_0">取消订单</string>
+	<string name="order_text_1">去付款</string>
+	<string name="order_text_2">联系客服</string>
+	<string name="order_text_3">评价</string>
+	<string name="order_text_4">申请售后</string>
+	<string name="order_text_5">删除订单</string>
+	
     <string name="sex_man">男</string>
     <string name="sex_woman">女</string>
     <string name="sex_other">保密</string>
@@ -447,4 +468,5 @@
     
     <string name="illegal_phone">非法的电话号码</string>
 	<string name="service_no_content">您当前尚未预约~</string>
+	
 </resources>

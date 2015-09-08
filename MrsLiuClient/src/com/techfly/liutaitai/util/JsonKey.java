@@ -358,7 +358,7 @@ public interface JsonKey {
 	}
 	interface Product2Key{
 		static final String ID = "id";
-		static final String PRODUCT_ID = "id";
+		static final String PRODUCT_ID = "goods";
 		static final String UNIT = "unit";
 		static final String ORDER_NUM = "orderId";
 		static final String COUNT = "count";

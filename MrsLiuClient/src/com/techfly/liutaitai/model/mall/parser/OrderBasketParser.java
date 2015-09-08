@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.techfly.liutaitai.model.mall.bean.Category;
+import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.SubCategory;
 import com.techfly.liutaitai.model.mall.bean.SubCategoryBanner;
 import com.techfly.liutaitai.model.mall.bean.help.ListOrder;
@@ -41,6 +42,22 @@ public class OrderBasketParser implements Parser {
 
 								order.setmNum(mJsonObject
 										.optString(JsonKey.OrderBasketKey.ORDER_NUM));
+								order.setmUnit(mJsonObject
+										.optString(JsonKey.OrderBasketKey.UNIT));
+								order.setmState(mJsonObject
+										.optInt(JsonKey.OrderBasketKey.STATUS));
+								order.setmTime(mJsonObject
+										.optString(JsonKey.OrderBasketKey.TIME));
+								order.setmType(mJsonObject
+										.optInt(JsonKey.OrderBasketKey.TYPE));
+								order.setmNum(mJsonObject
+										.optString(JsonKey.OrderBasketKey.ORDER_NUM));
+								order.setmTotalCount(mJsonObject
+										.optInt(JsonKey.OrderBasketKey.TOTAL_COUNT));
+								order.setmTotalPrice(mJsonObject
+										.optString(JsonKey.OrderBasketKey.TOTAL_PRICE));
+								order.setmList(parseProducts(mJsonObject
+										.optJSONArray(JsonKey.OrderBasketKey.PRODUCTS)));
 
 								mArrayList.add(order);
 							}
@@ -52,6 +69,31 @@ public class OrderBasketParser implements Parser {
 		}
 		lc.setmArrayList(mArrayList);
 		return lc;
+	}
+
+	private ArrayList<Product> parseProducts(JSONArray optJSONArray) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		if (optJSONArray != null) {
+			for (int i = 0; i < optJSONArray.length(); i++) {
+				JSONObject jsonObject = optJSONArray.optJSONObject(i);
+				if (jsonObject != null) {
+					Product p = new Product();
+
+					p.setmId(jsonObject.optInt(JsonKey.Product2Key.PRODUCT_ID)
+							+ "");
+					p.setmUnit(jsonObject.optString(JsonKey.Product2Key.UNIT));
+					p.setmPrice((float) jsonObject
+							.optDouble(JsonKey.Product2Key.PRICE));
+					p.setmAmount(jsonObject.optInt(JsonKey.Product2Key.COUNT));
+					p.setmOrderNum(jsonObject
+							.optString(JsonKey.Product2Key.ORDER_NUM));
+					p.setmName(jsonObject.optString(JsonKey.Product2Key.NAME));
+
+					list.add(p);
+				}
+			}
+		}
+		return list;
 	}
 
 	@Override

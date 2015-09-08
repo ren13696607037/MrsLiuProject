@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.adapter.OrderBastketAdapter;
+import com.techfly.liutaitai.model.mall.bean.help.ListOrder;
 import com.techfly.liutaitai.model.mall.parser.OrderBasketParser;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -37,11 +40,32 @@ public class OrderBastketFragment extends CommonFragment implements
 	private XListView mListView;
 	private ArrayList<MyOrder> mDatas = new ArrayList<MyOrder>();
 	private OrderBastketAdapter mAdapter;
-	private int start = 0;// 开始和限制条数
+	private int start = 1;// 开始和限制条数
 	private boolean reqFinish = false;
 	private boolean isRefresh = false;
 
 	private User mUser;
+	
+	private Handler mHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			if (mDatas.size() == 0) {
+				mTvNoData.setVisibility(View.VISIBLE);
+				mTvNoData.setClickable(false);
+				mTvNoData
+						.setText("没有订单~");
+			} else {
+				mTvNoData.setVisibility(View.GONE);
+				if (msg.what == Constant.NOTIFY_LIST && mAdapter != null) {
+					mAdapter.notifyDataSetChanged();
+				}
+			}
+			
+			
+		}
+
+	};
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -90,6 +114,7 @@ public class OrderBastketFragment extends CommonFragment implements
 		mListView.setFooterDividersEnabled(true);
 		mListView.setPullLoadEnable(true);
 		mListView.setPullRefreshEnable(true);
+		mListView.setXListViewListener(this);
 		mAdapter = new OrderBastketAdapter(getActivity(), mDatas);
 		mListView.setAdapter(mAdapter);
 	}
@@ -105,6 +130,8 @@ public class OrderBastketFragment extends CommonFragment implements
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
 				+ Constant.ORDER_BASKET_LIST);
+		url.setmGetParamPrefix(Constant.PAGE).setmGetParamValues(start + "");
+		url.setmGetParamPrefix(Constant.SIZE).setmGetParamValues("10");
 		param.setmHttpURL(url);
 		param.setmIsLogin(true);
 		param.setmToken(mUser.getmToken());
@@ -121,8 +148,47 @@ public class OrderBastketFragment extends CommonFragment implements
 			@Override
 			public void onResponse(Object object) {
 				AppLog.Logd(object.toString());
+				if (getActivity() == null || isDetached()) {
+					return;
+				}
 				mLoadHandler.removeMessages(Constant.NET_SUCCESS);
 				mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+				onLoad();
+				if (object instanceof ListOrder) {
+					ListOrder lc = (ListOrder) object;
+					if (lc != null) {
+						ArrayList<MyOrder> list = lc.getmArrayList();
+						if (list.size() == 0 || list == null) {
+							
+							reqFinish = true;
+							mListView.setPullLoadEnable(false);
+							return;
+						}
+
+						if (list.size() != 10) {
+							reqFinish = true;
+							mListView.setPullLoadEnable(false);
+						} else {
+							reqFinish = false;
+							mListView.setPullLoadEnable(true);
+						}
+
+						if (isRefresh) {
+							mDatas.clear();
+							mDatas.addAll(list);
+							isRefresh = false;
+						} else {
+							mDatas.addAll(list);
+							isRefresh = false;
+						}
+						start ++;
+
+						mHandler.removeMessages(Constant.NOTIFY_LIST);
+						mHandler.sendEmptyMessage(Constant.NOTIFY_LIST);
+					}
+
+					
+				}
 
 			}
 
@@ -136,6 +202,7 @@ public class OrderBastketFragment extends CommonFragment implements
 				AppLog.Loge(" data failed to load" + error.getMessage());
 				mLoadHandler.removeMessages(Constant.NET_FAILURE);
 				mLoadHandler.sendEmptyMessage(Constant.NET_FAILURE);
+				onLoad();
 				showMessage(R.string.loading_fail);
 			}
 		};
@@ -143,13 +210,28 @@ public class OrderBastketFragment extends CommonFragment implements
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-
+		start = 1;
+		isRefresh = true;
+		reqFinish = false;
+		requestData();
 	}
 
 	@Override
 	public void onLoadMore() {
-		// TODO Auto-generated method stub
+		if (reqFinish) {
+			SmartToast.makeText(getActivity(), R.string.xlistview_no_more_data,
+					Toast.LENGTH_SHORT).show();
+			onLoad();
+		} else {
+			isRefresh = false;
+			requestData();
+		}
 
 	}
+
+	private void onLoad() {
+		mListView.stopRefresh();
+		mListView.stopLoadMore();
+	}
+
 }
