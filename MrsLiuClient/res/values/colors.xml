@@ -64,6 +64,8 @@
 
     <color name="TextColorOrange">#fa8c19</color>
 	<color name="TextColorBLACK">#666666</color>
+	<color name="TextColorGray">#B1B1B1</color>
+	<color name="TextColorWhite">#FFFFFF</color>
 	<color name="color_gray">#DFDFDF</color>
 	<color name="color_gray2">#B1B1B1</color>
 	

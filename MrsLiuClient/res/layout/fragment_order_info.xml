@@ -31,6 +31,67 @@
         android:layout_above="@id/order_info_bottom_view"
         android:layout_below="@id/order_info_header"
         android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/px_20" >
+
+            <TextView
+                android:id="@+id/order_info_tv_order_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/TextColorBLACK"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/order_info_tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/px_20"
+                android:textColor="@color/TextColorBLACK"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_hight"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_dash_line" />
+
+            <TextView
+                android:id="@+id/order_info_tv_customer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_20"
+                android:textColor="@color/TextColorBLACK"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/order_info_tv_customer_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/px_20"
+                android:textColor="@color/TextColorBLACK"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_hight"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_dash_line" />
+
+            <TextView
+                android:id="@+id/order_info_tv_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/px_20"
+                android:layout_marginTop="@dimen/px_20"
+                android:textColor="@color/TextColorBLACK"
+                android:textSize="@dimen/app_text_size_first" />
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>

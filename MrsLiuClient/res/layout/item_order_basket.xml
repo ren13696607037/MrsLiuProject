@@ -102,7 +102,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:padding="@dimen/px_15"
-            android:textColor="@android:color/white"
+            android:textColor="@color/TextColorWhite"
             android:background="@color/button_login"
             android:textSize="@dimen/app_text_size_first"
             android:text="取消订单" />
