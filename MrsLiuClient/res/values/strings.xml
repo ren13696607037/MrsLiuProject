@@ -469,5 +469,6 @@
     
     <string name="illegal_phone">非法的电话号码</string>
 	<string name="service_no_content">您当前尚未预约~</string>
-	
+	<string name="service_rate_text">服务评价</string>
+	<string name="service_rate_hint">亲请说点什么帮助我们变得更好吧~</string>
 </resources>

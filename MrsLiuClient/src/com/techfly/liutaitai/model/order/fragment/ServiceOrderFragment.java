@@ -19,6 +19,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.bean.Service;
+import com.techfly.liutaitai.model.order.activities.RateActivity;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
 import com.techfly.liutaitai.model.order.adapter.ServiceAdapter;
 import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
@@ -258,7 +259,9 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 	@Override
 	public void onServiceRateListener(Service service) {
 		mType = 5;
-		
+		Intent intent = new Intent(getActivity(), RateActivity.class);
+		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
+		startActivity(intent);
 	}
 
 	@Override

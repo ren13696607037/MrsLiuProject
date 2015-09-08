@@ -89,10 +89,11 @@
 	    android:id="@+id/ios_state"
 	    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/px_30"
+        android:padding="@dimen/px_15"
         android:textColor="@color/bg_header"
         android:textSize="@dimen/app_text_size_first"
         android:layout_below="@id/ios_img"
+        android:layout_margin="@dimen/px_15"
 	    />
 	<Button 
 	    android:id="@+id/ios_btn"
@@ -102,6 +103,13 @@
         android:textSize="@dimen/app_text_size_first"
         android:layout_below="@id/ios_img"
         android:layout_alignParentRight="true"
+        android:background="@drawable/button_order_yellow"
+        android:layout_alignTop="@id/ios_state"
+        android:layout_alignBottom="@id/ios_state"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_20"
+        android:layout_marginLeft="@dimen/px_15"
 	    />
 		<Button 
 	    android:id="@+id/ios_btn2"
@@ -111,5 +119,7 @@
         android:textSize="@dimen/app_text_size_first"
         android:layout_below="@id/ios_img"
         android:layout_toLeftOf="@id/ios_btn"
+        android:layout_alignTop="@id/ios_state"
+        android:layout_alignBottom="@id/ios_state"
 	    />
 </RelativeLayout>

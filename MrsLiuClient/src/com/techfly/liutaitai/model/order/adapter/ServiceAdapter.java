@@ -70,7 +70,8 @@ public class ServiceAdapter extends BaseAdapter {
 		setState(mList.get(position).getmServiceStatus(), holder.mState, holder.mButton, holder.mButton2);
 		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.mImageView , ImageLoaderUtil.mOrderServiceIconLoaderOptions);
 		holder.mButton.setOnClickListener(new ServiceClick(mContext, holder.mButton.getText().toString(), mList.get(position)));
-		holder.mButton2.setOnClickListener(new ServiceClick(mContext, holder.mButton2.getText().toString(), mList.get(position)));
+//		holder.mButton2.setOnClickListener(new ServiceClick(mContext, holder.mButton2.getText().toString(), mList.get(position)));
+		holder.mButton2.setOnClickListener(new ServiceClick(mContext, "去评价", mList.get(position)));
 		return convertView;
 	}
 	private void setType(String type, TextView textView, String string, TextView textView2){
