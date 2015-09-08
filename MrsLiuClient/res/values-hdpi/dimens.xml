@@ -41,5 +41,8 @@
     <dimen name="px_180">100dp</dimen>
     <dimen name="px_350">194.44dp</dimen>
     <dimen name="px_250">138.89dp</dimen>
+    
+    
+    <dimen name="divider_hight">1px</dimen>
 
 </resources>

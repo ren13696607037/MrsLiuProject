@@ -7,22 +7,30 @@ import com.techfly.liutaitai.model.mall.bean.Product;
 
 public class MyOrder implements Serializable {
 	private static final long serialVersionUID = 1001L;
-	private String mId;//仅仅是个ID
-	private String mNum;//订单号
-	private String mImg;//图片？
-	private String mTitle;//i do not now what it is
-	private String mTotalPrice;//总价格
-	private String mTime;//应该是创建订单的时间
-	private int mState;//状态码
-	private ArrayList<Product> mList;//产品列表
+	private String mId;// 仅仅是个ID
+	private String mNum;// 订单号
+	private String mImg;// 图片？
+	private String mTitle;// i do not now what it is
+	private String mTotalPrice;// 总价格
+	private String mTime;// 应该是创建订单的时间
+	private int mState;// 状态码
+	private ArrayList<Product> mList;// 产品列表
 	private String mPrice;//
 	private String mExpCom;
 	private String mExpShortName;
 	private String mExpNo;
-	
-	private int mType;//订单类型，分类
-	private int mTotalCount;//产品总数量
-	
+
+	private int mType;// 订单类型，分类  0 洗衣  1生鲜  2鲜花  4奢侈品
+	private int mTotalCount;// 产品总数量
+	private String mUnit;// 单位
+
+	public String getmUnit() {
+		return mUnit;
+	}
+
+	public void setmUnit(String mUnit) {
+		this.mUnit = mUnit;
+	}
 
 	public int getmType() {
 		return mType;

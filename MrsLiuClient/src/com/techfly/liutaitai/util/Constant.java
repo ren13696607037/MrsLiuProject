@@ -115,7 +115,9 @@ public class Constant {
 	public static int HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG = 0;// BACK iCON
 
 
-
+	public static final int NOTIFY_LIST = 0x126;
+	public static final String PAGE = "no";
+	public static final String SIZE = "size";
   
 
 

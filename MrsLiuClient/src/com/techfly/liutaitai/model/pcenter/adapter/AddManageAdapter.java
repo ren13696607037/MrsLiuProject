@@ -87,7 +87,7 @@ public class AddManageAdapter extends BaseAdapter {
 		if (!TextUtils.isEmpty(mList.get(arg0).getmDetail())
 				&& !"null".equals(mList.get(arg0).getmDetail())) {
 			address = holder.mTvAdd.getText().toString();
-			holder.mTvAdd.setText(address + "     " + mList.get(arg0).getmDetail());
+			holder.mTvAdd.setText(address + "  " + mList.get(arg0).getmDetail());
 		}
 		holder.mTvName.setText(mList.get(arg0).getmName());
 		holder.mTvPhone.setText(mList.get(arg0).getmPhone());

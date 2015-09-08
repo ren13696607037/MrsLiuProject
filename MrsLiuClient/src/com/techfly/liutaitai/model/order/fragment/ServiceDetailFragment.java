@@ -101,6 +101,9 @@ public class ServiceDetailFragment extends CommonFragment {
         onInitView(view);
     }
     private void onInitView(View view){
+    	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+    	setTitleText(R.string.service_detail_title);
+    	
     	mAddress = (TextView) view.findViewById(R.id.osd_address);
     	mButton = (Button) view.findViewById(R.id.osd_btn);
     	mButton2 = (Button) view.findViewById(R.id.osd_btn2);

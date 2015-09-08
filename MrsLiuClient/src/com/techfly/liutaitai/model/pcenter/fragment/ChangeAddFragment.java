@@ -71,7 +71,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 						// showSmartToast(R.string.addchange_success,
 						// Toast.LENGTH_SHORT);
 					}
-					// mActivity.setResult(Constant.CHANGE_ADD_SUCCESS);
+					 mActivity.setResult(Constant.ADDRESS_SUCCESS);
 					mActivity.finish();
 				} else {
 					showSmartToast(mInfo.getmMessage(), Toast.LENGTH_SHORT);
@@ -179,13 +179,17 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		});
 		if (mAddressManage == null) {
 			setTitleText(R.string.add_title);
+			mTvCity.setText(SharePreferenceUtils.getInstance(mActivity).getArea().getmName());
+			mCity = SharePreferenceUtils.getInstance(mActivity).getArea().getmId();
 		} else {
 			setTitleText(R.string.add_change_title);
 			mEtAddress.setText(mAddressManage.getmDetail());
 			mEtName.setText(mAddressManage.getmName());
 			mEtPhone.setText(mAddressManage.getmPhone());
 			mTvCity.setText(mAddressManage.getmCity());
+			mCity = mAddressManage.getmCityId();
 		}
+		
 	}
 
 	@Override
@@ -194,6 +198,9 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
 				+ Constant.CHANGE_ADDRESS_URL);
+		if(mAddressManage != null){
+			url.setmGetParamPrefix(JsonKey.AddressKey.AID).setmGetParamValues(mAddressManage.getmId());
+		}
 		url.setmGetParamPrefix(JsonKey.AddressKey.NAME).setmGetParamValues(
 				mEtName.getText().toString());
 		url.setmGetParamPrefix(JsonKey.AddressKey.MOBILE).setmGetParamValues(
