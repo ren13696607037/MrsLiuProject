@@ -196,7 +196,7 @@ public class OrderInfoFragment extends CommonFragment implements
 		mTvProductCount.setText("共" + mOrder.getmTotalCount()
 				+ mOrder.getmUnit());
 		mTvTime.setText("下单时间：" + mOrder.getmTime());
-		mTvTips.setText(mOrder.getmTips());
+		mTvTips.setText("备注：" + mOrder.getmTips());
 		mTvTotalMoney.setText("￥" + mOrder.getmTotalPrice());
 		if (mAdapter != null) {
 			mDatas.clear();
