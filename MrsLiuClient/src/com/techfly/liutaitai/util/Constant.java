@@ -73,7 +73,10 @@ public class Constant {
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
 	
-	public static final String ORDER_BASKET_LIST = "order/list";
+	public static final String ORDER_BASKET_LIST = "order/list";//订单篮订单列表
+	
+	public static final String ORDER_INFO = "order/detail";//订单篮订单详情
+	public static final String ORDER_INFO_ID = "orderid";
 
     public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
     public static String UPDATE_TO_CART_REQUEST_URL="product/editCartCount";

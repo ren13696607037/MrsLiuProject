@@ -457,6 +457,8 @@
 	<string name="order_text_3">评价</string>
 	<string name="order_text_4">申请售后</string>
 	<string name="order_text_5">删除订单</string>
+	<!-- 订单详情 -->
+	<string name="order_info">订单详情</string>
 	
     <string name="sex_man">男</string>
     <string name="sex_woman">女</string>

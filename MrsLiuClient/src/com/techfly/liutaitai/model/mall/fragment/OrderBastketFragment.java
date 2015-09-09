@@ -45,7 +45,7 @@ public class OrderBastketFragment extends CommonFragment implements
 	private boolean isRefresh = false;
 
 	private User mUser;
-	
+
 	private Handler mHandler = new Handler() {
 
 		@Override
@@ -53,16 +53,14 @@ public class OrderBastketFragment extends CommonFragment implements
 			if (mDatas.size() == 0) {
 				mTvNoData.setVisibility(View.VISIBLE);
 				mTvNoData.setClickable(false);
-				mTvNoData
-						.setText("没有订单~");
+				mTvNoData.setText("没有订单~");
 			} else {
 				mTvNoData.setVisibility(View.GONE);
 				if (msg.what == Constant.NOTIFY_LIST && mAdapter != null) {
 					mAdapter.notifyDataSetChanged();
 				}
 			}
-			
-			
+
 		}
 
 	};
@@ -115,7 +113,7 @@ public class OrderBastketFragment extends CommonFragment implements
 		mListView.setPullLoadEnable(true);
 		mListView.setPullRefreshEnable(true);
 		mListView.setXListViewListener(this);
-		mAdapter = new OrderBastketAdapter(getActivity(), mDatas);
+		mAdapter = new OrderBastketAdapter(getActivity(), mDatas, this);
 		mListView.setAdapter(mAdapter);
 	}
 
@@ -159,7 +157,7 @@ public class OrderBastketFragment extends CommonFragment implements
 					if (lc != null) {
 						ArrayList<MyOrder> list = lc.getmArrayList();
 						if (list.size() == 0 || list == null) {
-							
+
 							reqFinish = true;
 							mListView.setPullLoadEnable(false);
 							return;
@@ -181,13 +179,12 @@ public class OrderBastketFragment extends CommonFragment implements
 							mDatas.addAll(list);
 							isRefresh = false;
 						}
-						start ++;
+						start++;
 
 						mHandler.removeMessages(Constant.NOTIFY_LIST);
 						mHandler.sendEmptyMessage(Constant.NOTIFY_LIST);
 					}
 
-					
 				}
 
 			}

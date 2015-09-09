@@ -3,10 +3,12 @@ package com.techfly.liutaitai.model.mall.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
@@ -19,10 +21,13 @@ import com.techfly.liutaitai.util.view.ListViewForScrollView;
 public class OrderBastketAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<MyOrder> mDatas;
+	private Fragment mFragment;
 
-	public OrderBastketAdapter(Context context, ArrayList<MyOrder> datas) {
+	public OrderBastketAdapter(Context context, ArrayList<MyOrder> datas,
+			Fragment fragment) {
 		this.context = context;
 		this.mDatas = datas;
+		this.mFragment = fragment;
 	}
 
 	@Override
@@ -63,6 +68,8 @@ public class OrderBastketAdapter extends BaseAdapter {
 					.findViewById(R.id.order_basket_item_tv_bt1);
 			viewHolder.mTvBtn2 = (TextView) convertView
 					.findViewById(R.id.order_basket_item_tv_bt2);
+			viewHolder.mLlParent = (LinearLayout) convertView
+					.findViewById(R.id.order_basket_item_parent);
 
 			convertView.setTag(viewHolder);
 		} else {
@@ -100,7 +107,8 @@ public class OrderBastketAdapter extends BaseAdapter {
 			}
 		};
 		viewHolder.mListView.setAdapter(adapter);
-		viewHolder.mListView.setOnClickListener(new OrderBasketClick(context));
+		viewHolder.mLlParent.setOnClickListener(new OrderBasketClick(mFragment,
+				order.getmId()));
 
 		return convertView;
 	}
@@ -209,6 +217,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 
 	class ViewHolder {
 
+		private LinearLayout mLlParent;
 		private TextView mTvType;
 		private TextView mTvTime;
 		private ListViewForScrollView mListView;
