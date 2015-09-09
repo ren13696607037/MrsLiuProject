@@ -32,5 +32,6 @@
             android:scrollbars="none" >
         </com.techfly.liutaitai.util.view.XListView>
     </com.techfly.liutaitai.util.view.LoadingLayout>
+    
 
 </LinearLayout>

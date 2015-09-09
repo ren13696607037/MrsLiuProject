@@ -37,8 +37,9 @@ public class OrderBasketParser implements Parser {
 							if (mJsonObject != null) {
 								MyOrder order = new MyOrder();
 
-								order.setmNum(mJsonObject
-										.optString(JsonKey.OrderBasketKey.ORDER_NUM));
+								order.setmId(mJsonObject
+										.optInt(JsonKey.OrderBasketKey.ORDER_NUM)
+										+ "");
 								order.setmUnit(mJsonObject
 										.optString(JsonKey.OrderBasketKey.UNIT));
 								order.setmState(mJsonObject

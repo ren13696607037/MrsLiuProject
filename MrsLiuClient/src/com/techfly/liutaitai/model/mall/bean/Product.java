@@ -53,7 +53,7 @@ public class Product extends Persistence implements Cloneable, Serializable {
 	private String mDesc;
 
 	private String mUnit;
-	private String mOrderNum;//订单号
+	private String mOrderNum;//订单id,不是订单号
 	
 
 	public String getmOrderNum() {

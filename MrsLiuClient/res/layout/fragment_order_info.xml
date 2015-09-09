@@ -14,7 +14,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="@dimen/px_20" >
+
+        <TextView
+            android:id="@+id/order_info_tv_order_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/TextColorBLACK"
+            android:textSize="@dimen/app_text_size_first" />
+
+        <TextView
+            android:id="@+id/order_info_tv_btn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="@dimen/px_15"
+            android:textColor="@color/TextColorWhite"
+            android:textSize="@dimen/app_text_size_first" />
+
+        <TextView
+            android:id="@+id/order_info_tv_btn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="@dimen/px_15"
+            android:textColor="@color/TextColorWhite"
+            android:textSize="@dimen/app_text_size_first" />
     </LinearLayout>
 
     <View
@@ -91,6 +125,79 @@
                 android:layout_marginTop="@dimen/px_20"
                 android:textColor="@color/TextColorBLACK"
                 android:textSize="@dimen/app_text_size_first" />
+
+            <com.techfly.liutaitai.util.view.ListViewForScrollView
+                android:id="@+id/order_info_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/line_color"
+                android:dividerHeight="@dimen/divider_hight"
+                android:listSelector="#00000000" >
+            </com.techfly.liutaitai.util.view.ListViewForScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/px_20" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="使用代金券"
+                    android:textColor="@color/TextColorBLACK"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <TextView
+                    android:id="@+id/order_info_tv_offset_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:textColor="@color/TextColorOrange"
+                    android:textSize="@dimen/app_text_size_first" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_hight"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_dash_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/px_20" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="总数"
+                    android:textColor="@color/TextColorBLACK"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <TextView
+                    android:id="@+id/order_info_tv_product_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/TextColorBLACK"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <TextView
+                    android:id="@+id/order_info_tv_total_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/TextColorOrange"
+                    android:textSize="@dimen/app_text_size_first" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -8,6 +8,7 @@ import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.model.home.activities.SearchActivity;
 import com.techfly.liutaitai.model.mall.activities.CategoryInfoListActivity;
 import com.techfly.liutaitai.model.mall.activities.GanxiActivity;
+import com.techfly.liutaitai.model.mall.activities.OrderInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceListActivity;
@@ -65,7 +66,7 @@ public class UIHelper {
 		context.startActivity(intent);
 	}
 
-	public static void toShopCarActivity(Context context,int type) {
+	public static void toShopCarActivity(Context context, int type) {
 		Intent intent = new Intent(context, ShopCarActivity.class);
 		intent.putExtra(IntentBundleKey.TYPE, type);
 		intent.putExtra(IntentBundleKey.IS_FROM_HOME_CART, false);
@@ -89,14 +90,14 @@ public class UIHelper {
 		context.startActivity(intent);
 	}
 
-	public static void toTakingOrderActivity(Context context, Product product,int type) {
+	public static void toTakingOrderActivity(Context context, Product product,
+			int type) {
 		Intent intent = new Intent(context, TakingOrderActivity.class);
 		intent.putExtra(IntentBundleKey.PRODUCT, product);
 		intent.putExtra(IntentBundleKey.IS_FROM_HOME_CART, false);
 		intent.putExtra(IntentBundleKey.TYPE, type);
 		context.startActivity(intent);
 	}
-	
 
 	public static void toTuangouInfoActivity(Context context) {
 		Intent intent = new Intent(context, TuanGouActivity.class);
@@ -128,74 +129,85 @@ public class UIHelper {
 				Constant.ORDER_CITY_INTENT);
 		context.startActivityForResult(intent, Constant.ORDER_CITY_INTENT);
 	}
-	
-	
-	public static void toServiceListActivity(Fragment context,int type) {
-        Intent intent = new Intent(context.getActivity(),
-                ServiceListActivity.class);
-        intent.putExtra("type",
-                type);
-        context.startActivity(intent);
-    }
-	
-	public static void toGanxiListActivity(Fragment context,int type) {
-        Intent intent = new Intent(context.getActivity(),
-                GanxiActivity.class);
-        intent.putExtra("type",
-                type);
-        context.startActivity(intent);
-    }
+
+	public static void toServiceListActivity(Fragment context, int type) {
+		Intent intent = new Intent(context.getActivity(),
+				ServiceListActivity.class);
+		intent.putExtra("type", type);
+		context.startActivity(intent);
+	}
+
+	public static void toGanxiListActivity(Fragment context, int type) {
+		Intent intent = new Intent(context.getActivity(), GanxiActivity.class);
+		intent.putExtra("type", type);
+		context.startActivity(intent);
+	}
+
 	/**
 	 * 到生鲜 鲜花页面
+	 * 
 	 * @param context
 	 * @param type
 	 */
-	public static void toShengxianListActivity(Fragment context,int type) {
-        Intent intent = new Intent(context.getActivity(),
-                ShengXianActivity.class);
-        intent.putExtra("type",
-                type);
-        context.startActivity(intent);
-    }
-	
+	public static void toShengxianListActivity(Fragment context, int type) {
+		Intent intent = new Intent(context.getActivity(),
+				ShengXianActivity.class);
+		intent.putExtra("type", type);
+		context.startActivity(intent);
+	}
+
 	/**
-     * 普通的跳转页面，无需携带任何参数
-     * @param fragment
-     * @param className
-     */
-    public static void toClassActivity(Fragment fragment,String className) {
-        Intent intent = null;
-        try {
-            intent = new Intent(fragment.getActivity(),Class.forName(className));
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        if(intent!=null){
-            fragment.startActivityForResult(intent, 0);;
-        }
-        
-    }
-    
-    /**
-     * 普通的跳转页面，无需携带任何参数
-     * @param fragment
-     * @param className
-     */
-    public static void  toSomeIdActivity(Fragment fragment,String className,String id,int type) {
-        Intent intent = null;
-        try {
-            intent = new Intent(fragment.getActivity(),Class.forName(className));
-            intent.putExtra(IntentBundleKey.ID, id);
-            intent.putExtra(IntentBundleKey.TYPE, type);
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        if(intent!=null){
-            fragment.startActivityForResult(intent, 0);;
-        }
-        
-    }
-   
+	 * 普通的跳转页面，无需携带任何参数
+	 * 
+	 * @param fragment
+	 * @param className
+	 */
+	public static void toClassActivity(Fragment fragment, String className) {
+		Intent intent = null;
+		try {
+			intent = new Intent(fragment.getActivity(),
+					Class.forName(className));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (intent != null) {
+			fragment.startActivityForResult(intent, 0);
+			;
+		}
+
+	}
+
+	/**
+	 * 普通的跳转页面，无需携带任何参数
+	 * 
+	 * @param fragment
+	 * @param className
+	 */
+	public static void toSomeIdActivity(Fragment fragment, String className,
+			String id, int type) {
+		Intent intent = null;
+		try {
+			intent = new Intent(fragment.getActivity(),
+					Class.forName(className));
+			intent.putExtra(IntentBundleKey.ID, id);
+			intent.putExtra(IntentBundleKey.TYPE, type);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (intent != null) {
+			fragment.startActivityForResult(intent, 0);
+			;
+		}
+
+	}
+
+	public static void toOrderInfoActivity(Fragment context, String id) {
+		Intent intent = new Intent(context.getActivity(),
+				OrderInfoActivity.class);
+		intent.putExtra(IntentBundleKey.ORDER_ID, id);
+		context.startActivity(intent);
+	}
+
 }
