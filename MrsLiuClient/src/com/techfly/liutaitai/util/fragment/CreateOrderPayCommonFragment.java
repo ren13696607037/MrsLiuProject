@@ -1,5 +1,8 @@
 package com.techfly.liutaitai.util.fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.text.TextUtils;
@@ -17,6 +20,7 @@ import com.techfly.liutaitai.bizz.alipay.PaymentImpl;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.shopcar.OnShopCarLisManager;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -65,7 +69,7 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
         
     }
 
-    public abstract String onEncapleOrderInfo();
+    public abstract String onEncapleOrderInfo(HttpURL url);
     
     public abstract void onOrderCreateSuccess(String orderId,String money,String proName);
     
@@ -75,26 +79,35 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
            mPayMoney = price;
            mProductName = productName;
            mProductType = productType;
-           if(TextUtils.isEmpty(onEncapleOrderInfo())){
-               showSmartToast("请开发者组装订单信息 在 onEncapleOrderInfo 方法中", Toast.LENGTH_LONG);
-               return;
-           }
+//           if(TextUtils.isEmpty(onEncapleOrderInfo())){
+//               showSmartToast("请开发者组装订单信息 在 onEncapleOrderInfo 方法中", Toast.LENGTH_LONG);
+//               return;
+//           }
            if(mPayType !=Constant.PAY_TYPE_CREATE){
                onPay();
                return;
            }
            showDialog();
            RequestParam param = new RequestParam();
-           param.setPostRequestMethod();
+           User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+           int userId = 0;
+           if (user != null) {
+               userId = Integer.parseInt(user.getmId());
+           }
+           if (userId == 0) {
+               return;
+           }
+           param.setmIsLogin(true);
+           param.setmId(user .getmId());
+           param.setmToken(user .getmToken());
+//           param.setPostRequestMethod();
            HttpURL url = new HttpURL();
            if(productType==Constant.PRODUCT_TYPE_VIRTUAL){
                url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.ORDER_COMMIT_REQUEST_URL);
            }else{
                url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.ORDER_COMMIT_REQUEST_URL);
            }
-         
-           url.setmGetParamPrefix(RequestParamConfig.GOODS);
-           url.setmGetParamValues(onEncapleOrderInfo());
+           onEncapleOrderInfo(url);
            param.setmHttpURL(url);
            param.setmParserClassName(CommonParser.class.getName());
            RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
@@ -116,7 +129,13 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
                 if(object instanceof ResultInfo){
                  ResultInfo info =  (ResultInfo) object;
                     if(info.getmCode()==ResultCode.CODE_0){
-                         mOrderId = info.getmData();
+                        try {
+                            JSONObject obj = new JSONObject(info.getmData());
+                            mOrderId = obj.optString("orderNum");
+                        } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
                          if(mIsFromShopCar){
                              ShopCar.getShopCar().getShopproductList().removeAll(ShopCar.getShopCar().getCheckShopproductList());
                              OnShopCarLisManager.getShopCarLisManager().onNotifyShopCarChange(null);

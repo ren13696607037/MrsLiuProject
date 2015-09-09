@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
+import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment;
@@ -25,7 +26,7 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment impleme
     }
 
     @Override
-    public String onEncapleOrderInfo() {
+    public String onEncapleOrderInfo(HttpURL url) {
         // TODO Auto-generated method stub
         return null;
     }

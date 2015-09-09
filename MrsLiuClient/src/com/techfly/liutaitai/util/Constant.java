@@ -69,7 +69,7 @@ public class Constant {
 	public static final String SERVICE_RATE_URL = "common/review";
 	
 	public static final String PRODUCT_LIST = "product/productList";
-	public static final String ORDER_COMMIT_REQUEST_URL = "commodity/buy";
+	public static final String ORDER_COMMIT_REQUEST_URL = "product/addOrder";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
 	
@@ -80,7 +80,8 @@ public class Constant {
     public static String ADD_TO_CART_REQUEST_URL="product/addCart";
     public static String DELETE_TO_CART_REQUEST_URL="product/deleteUserCart";
     public static String CITY_REQUEST_LIST_URL="common/citys";
-
+    public static String CONFIRM_ORDER_REQUEST="product/firmOrder";
+    
 	public static final String CHANGE_INFO_URL = "user/modifyprofile";
 	public static final String BALANCE_HISTORY_URL = "user/moneyrecords";
 	public static final String BALANCE_URL = "";
@@ -114,6 +115,7 @@ public class Constant {
 	public static int COMMON_PRO_ITEM_STYLE = 0X113;
 
 	public static int HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG = 0;// BACK iCON
+ 
 
 
 	public static final int NOTIFY_LIST = 0x126;

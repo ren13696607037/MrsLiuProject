@@ -25,9 +25,12 @@ import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.BuyInfo;
+import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.AddressManageParser;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
+import com.techfly.liutaitai.model.mall.bean.ConfirmOrder;
 import com.techfly.liutaitai.model.mall.bean.Product;
+import com.techfly.liutaitai.model.mall.parser.ConfrimOrderParser;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
@@ -65,13 +68,17 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     private ListViewForScrollView mListView;
     private AddressManage mAddressManage;
     private Product mProduct;
-//    private RelativeLayout mWholeLayout;
+    private RelativeLayout mWholeLayout;
     private boolean mIsFirstTakingOrder;
     private RelativeLayout mAddressRelativeLayout;
+    private int type;
+    protected boolean mIsUseVoucher;
+    protected float mDeliverFee;
+    private String mVoucherId="0";
     @Override
     public void requestData() {
-        // TODO Auto-generated method stub
-        onAddressRequest();
+       
+       
     }
 
     @Override
@@ -79,31 +86,27 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
         // TODO Auto-generated method stub
         super.onAttach(activity);
         mIsFromShopCar = activity.getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_HOME_CART, true);
-       
+        type = activity.getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        onAddressRequest();
+        onConfirmOrder();
     }
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
-        // TODO Auto-generated method stub
         super.onDestroyView();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
         initTitleView();
         initView(view);
@@ -121,7 +124,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     }
    
     private void onDisplay() {
-//        mWholeLayout.setVisibility(View.VISIBLE);
+        mWholeLayout.setVisibility(View.VISIBLE);
         if(mAddressManage!=null&&!TextUtils.isEmpty(mAddressManage.getmDetail()) && !mAddressManage.getmDetail().equals("null")){
             mIsFirstTakingOrder = false;
             mAddressRelativeLayout.setVisibility(View.VISIBLE);
@@ -154,7 +157,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
           mTotalPriceTv.setText("￥"+    totalPrice+"");
           mActualPriceTv.setText("￥"+totalPrice+"");
         }
-        mDeleverFeeTv.setText("￥0");
+        mDeleverFeeTv.setText("￥"+mDeliverFee);
         
     }
 
@@ -175,8 +178,8 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
         mProImg = (ImageView) view.findViewById(R.id.product_icon);
         mProductInfoLayout = (RelativeLayout) view.findViewById(R.id.product_info);
         mListView = (ListViewForScrollView) view.findViewById(R.id.listview);
-//        mWholeLayout = (RelativeLayout) view.findViewById(R.id.layout);
-//        mWholeLayout.setVisibility(View.GONE);
+        mWholeLayout = (RelativeLayout) view.findViewById(R.id.layout);
+        mWholeLayout.setVisibility(View.GONE);
         mAddressRelativeLayout = (RelativeLayout) view.findViewById(R.id.address_info);
         
         mAddressRelativeLayout.setOnClickListener(this);
@@ -243,56 +246,60 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
         }
     }
    
-    /**
-     * 地址请求
-     */
-    private void onAddressRequest() {
-        // to do nothing
+    private void onConfirmOrder(){
         mLoadHandler.removeMessages(Constant.NET_LOAD);
         mLoadHandler.sendEmptyMessage(Constant.NET_LOAD);
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ADDRESS_URL);
-        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL)
-                .setmGetParamValues(
-                        SharePreferenceUtils.getInstance(getActivity())
-                                .getUser().getmId());
-        param.setmParserClassName(AddressManageParser.class.getName());
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.CONFIRM_ORDER_REQUEST);
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
+        url.setmGetParamPrefix("type")
+                .setmGetParamValues(type+"");
+        url.setmGetParamPrefix("total")
+        .setmGetParamValues(ShopCar.getShopCar().getTotalPrice()+"");
+        param.setmParserClassName(ConfrimOrderParser.class.getName());
         param.setmHttpURL(url);
-        RequestManager.getRequestData(getActivity(), creatReqSuccessListener(), createErrorListener(), param);
+        RequestManager.getRequestData(getActivity(), creatConfirmReqSuccessListener(), createErrorListener(), param);
     }
-
-    private Response.Listener<Object> creatReqSuccessListener() {
+    private Response.Listener<Object> creatConfirmReqSuccessListener() {
         return new Listener<Object>() {
-
             @Override
             public void onResponse(Object result) {
                 AppLog.Logd(result.toString());
                 AppLog.Loge(" data success to load" + result.toString());
                 if(getActivity()!=null&&!isDetached()){
-//                    mWholeLayout.setVisibility(View.VISIBLE);
-                    mLoadingLayout.setVisibility(View.GONE);
-                    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                    mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                    ArrayList<AddressManage> list = (ArrayList<AddressManage>) result;
-                    if(list==null || list.size()==0){
-                        mAddressManage = null;
-                    }else{
-                        for(AddressManage address: list){
-                            if(address.isDefault()){
-                                mAddressManage = address;
-                            }
-                        }
-                        if(mAddressManage ==null){
-                            mAddressManage = list.get(0);
-                        }
-                    }
-                    onDisplay();
+                    mWholeLayout.setVisibility(View.VISIBLE);
+                   ResultInfo info = (ResultInfo) result;
+                   if(info.getmCode()==0){
+                       mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                       mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                       ConfirmOrder confirm = (ConfirmOrder) info.getObject();
+                       if(!TextUtils.isEmpty(confirm.getAddress())){
+                           mAddressManage = confirm.getmAddressManage();
+                       }else{
+                           mAddressManage =null;
+                       }
+                       mIsUseVoucher = confirm.ismIsUseVoucher();
+                       mDeliverFee = confirm.getmDeliverFee();
+                       onDisplay();
+                   }
                 }
               
             }
         };
     }
+   
+ 
 
     private Response.ErrorListener createErrorListener() {
         return new ErrorListener() {
@@ -312,46 +319,51 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     }
 
     @Override
-    public String onEncapleOrderInfo() {
-        
-        String jsonString;
-        BuyInfo bInfo = new BuyInfo();
-        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
-        if(user!=null && Integer.parseInt(user.getmId())!=0){
-          bInfo.setUserId(Integer.parseInt(user.getmId()));
-        }
-        bInfo.setAddressId(Integer.parseInt(mAddressManage.getmId()));
-        bInfo.setDelivery(0);
-        if(!TextUtils.isEmpty(mEt.getText())){
-            bInfo.setMemo(mEt.getText().toString());
-        }else{
-            bInfo.setMemo("");
-        }
+    public String onEncapleOrderInfo(HttpURL url) {
         if(mIsFromShopCar){
-            bInfo.setType(0);
-            bInfo.setAllPrice(ShopCar.getShopCar().getTotalPrice());
-            bInfo.setCost(ShopCar.getShopCar().getTotalPrice());
-            bInfo.setProductList(ShopCar.getShopCar().getCheckShopproductList());
-        }else{
-            if(mProduct.getmType()!=0){
-                bInfo.setType(1);
-            }else{
-                bInfo.setType(0);
+            for(Product pro : ShopCar.getShopCar().getCheckShopproductList()){
+                url.setmGetParamPrefix("ids");
+                url.setmGetParamValues(pro.getmId());
             }
+            url.setmGetParamPrefix("total");
+            url.setmGetParamValues(ShopCar.getShopCar().getTotalPrice()+"");
+        }else{
+            url.setmGetParamPrefix("ids");
+            url.setmGetParamValues(mProduct.getmId());
+            
             float totalPrice =(mProduct.getmPrice()*mProduct.getmAmount());
             long l1 = Math.round(totalPrice * 100); // 四舍五入
             totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
-            bInfo.setCost(totalPrice);
-            bInfo.setAllPrice(totalPrice);
-            List<Product> list = new ArrayList<Product>();
-            list.add(mProduct);
-            bInfo.setProductList(list);
+            url.setmGetParamPrefix("total");
+            url.setmGetParamValues( totalPrice+"");
+            
         }
-      
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        jsonString = gson.toJson(bInfo);
-        AppLog.Logd("Fly", "jsonString==="+jsonString);
-        return jsonString;
+        url.setmGetParamPrefix("addressId");
+        url.setmGetParamValues(mAddressManage.getmId());
+        
+        
+        url.setmGetParamPrefix("freight");
+        url.setmGetParamValues("0");
+        
+        url.setmGetParamPrefix("voucherId");
+        if(!mIsUseVoucher){
+            url.setmGetParamValues("0");
+        }else{
+            url.setmGetParamValues(mVoucherId);
+        }
+        
+        url.setmGetParamPrefix("comment");
+        if(TextUtils.isEmpty(mEt.getText().toString())){
+            url.setmGetParamValues("");
+        }else{
+            url.setmGetParamValues(mEt.getText().toString());
+        }
+        
+        url.setmGetParamPrefix("type");
+        url.setmGetParamValues(type+"");
+    
+        
+        return "success";
         
     
     }
