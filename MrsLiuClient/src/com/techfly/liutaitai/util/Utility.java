@@ -363,7 +363,7 @@ public class Utility {
 	  int minuteNum = (int) ((seconds/60)%60);
 	  return minuteNum;
   }
-  public static void call(final Activity mActivity, final String phone) {
+  public static void call(final Context mActivity, final String phone) {
       if (TextUtils.isEmpty(phone)) {
           Toast.makeText(mActivity, R.string.illegal_phone,
                   Toast.LENGTH_SHORT).show();

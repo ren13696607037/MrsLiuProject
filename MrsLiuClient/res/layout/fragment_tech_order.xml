@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/write"
+    >
+    <include 
+        layout="@layout/fragment_header"
+        />
+    <com.techfly.liutaitai.util.tab.ScrollTabView
+          android:id="@+id/tech_order_tab_container"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+        >
+    </com.techfly.liutaitai.util.tab.ScrollTabView>
+    <com.techfly.liutaitai.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tech_order_viewpager"
+        android:layout_width="match_parent"
+	    android:layout_height="match_parent" 
+        />
+    </com.techfly.liutaitai.util.view.LoadingLayout>
+
+</LinearLayout>

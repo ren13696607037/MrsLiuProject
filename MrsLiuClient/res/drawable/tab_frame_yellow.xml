@@ -2,14 +2,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <!-- 边框颜色值 --><item>   
       <shape>   
-            <solid android:color="@color/gray_bg_dashed" />   
+            <solid android:color="@color/orange_bg_home_header" />   
       </shape>   
 </item>   
 <!-- 主体背景颜色值 -->  
 <item android:bottom="1dp" android:right="0dp" android:top="0dp" android:left="0dp">   
      <shape>   
-           <solid android:color="@color/orange_bg_home_header" />  
-     </shape>       
+           <solid android:color="@color/orange_bg_home_header" />
+     </shape> 
 </item>  
 
 </layer-list>

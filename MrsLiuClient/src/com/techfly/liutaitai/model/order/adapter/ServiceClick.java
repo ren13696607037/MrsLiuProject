@@ -6,7 +6,9 @@ import android.view.View.OnClickListener;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.bean.Service;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ManagerListener;
+import com.techfly.liutaitai.util.Utility;
 
 public class ServiceClick implements OnClickListener{
 	private Service mService;
@@ -28,7 +30,7 @@ public class ServiceClick implements OnClickListener{
 		}else if(mContext.getString(R.string.order_service_btn2).equals(mString)){
 			ManagerListener.newManagerListener().notifyServiceCancelListener(mService);
 		}else if(mContext.getString(R.string.order_service_btn3).equals(mString)){
-			//TODO 联系客服拨打电话
+			Utility.call(mContext, Constant.KEFU_PHONE);
 		}else if(mContext.getString(R.string.order_service_btn4).equals(mString)){
 			ManagerListener.newManagerListener().notifyServiceAgainListener(mService);
 		}else if(mContext.getString(R.string.order_service_btn5).equals(mString)){

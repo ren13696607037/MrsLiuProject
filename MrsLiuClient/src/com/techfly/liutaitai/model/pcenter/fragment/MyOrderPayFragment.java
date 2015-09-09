@@ -26,6 +26,7 @@ import com.techfly.liutaitai.bizz.parser.OrderListParser;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.MyOrderAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -45,13 +46,13 @@ import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderPayListener{
 	private TextView mTextView;
 	private XListView mListView;
-	private ArrayList<MyOrder> mList=new ArrayList<MyOrder>();
+	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
 	private MyOrderAdapter mAdapter;
 	private final int MSG_LIST=0x101;
 	private final int MSG_CANCEL=0x102;
 	private int mPage=0;
 	private int mSize=10;
-	private MyOrder mOrder;
+	private TechOrder mOrder;
 	private boolean isCancel=false;
 	private boolean isRefresh=true;
 	private ResultInfo mInfo;
@@ -205,7 +206,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ArrayList<MyOrder> list=(ArrayList<MyOrder>) object;
+                ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
                 if(isRefresh){
                 	mList.addAll(list);
                 }else{
@@ -288,8 +289,8 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 	}
 
 	@Override
-	public void onOrderPayListener(final MyOrder order) {
-	    onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmPrice(), order.getmTitle(),new PayCallBack() {
+	public void onOrderPayListener(final TechOrder order) {
+	    onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmServicePrice(), order.getmServiceName(),new PayCallBack() {
             
             @Override
             public void onPaySuccess() {
@@ -301,7 +302,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 	}
 
 	@Override
-	public void onOrderCancelListener(MyOrder order) {
+	public void onOrderCancelListener(TechOrder order) {
 		mOrder=order;
 		isCancel=true;
 		isRefresh=false;
