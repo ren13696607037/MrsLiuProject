@@ -65,9 +65,9 @@ public class MyOrderAdapter extends BaseAdapter {
 		}else{
 			holder=(ViewHolder) convertView.getTag();
 		}
-		holder.mTvNum.setText(mContext.getString(R.string.order_sn,mList.get(position).getmId()));
+		holder.mTvNum.setText(mContext.getString(R.string.tech_order_list_address,mList.get(position).getmCustomerAddress()));
 		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.mImageView,ImageLoaderUtil.mHallIconLoaderOptions);
-		holder.mTvPrice.setText(mContext.getString(R.string.order_detail_pay,mList.get(position).getmServicePrice()));
+		holder.mTvPrice.setText(mContext.getString(R.string.price,mList.get(position).getmServicePrice()));
 		holder.mTvTitle.setText(mList.get(position).getmServiceName());
 		setState(mList.get(position), holder.mTvState, holder.mButton, holder.mButton2);
 		holder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), holder.mButton.getText().toString()));
@@ -75,7 +75,7 @@ public class MyOrderAdapter extends BaseAdapter {
 //		if(position!=mList.size()-1){
 //			holder.mView.setVisibility(View.VISIBLE);
 //		}
-		holder.mTvTime.setText(mContext.getString(R.string.order_time,mList.get(position).getmCustomerTime()));
+		holder.mTvTime.setText(mContext.getString(R.string.tech_order_list_time,mList.get(position).getmCustomerTime()));
 //		holder.mLayout.setOnClickListener(new OrderClick(mContext, order, string));
 		return convertView;
 	}
@@ -96,22 +96,28 @@ public class MyOrderAdapter extends BaseAdapter {
 		button.setVisibility(View.VISIBLE);
 		button2.setVisibility(View.VISIBLE);
 		if(state==1){
-			textView.setText(R.string.state_paying);
+			textView.setText(R.string.tech_order_list_state);
 			button2.setVisibility(View.GONE);
 			button.setText(R.string.button_pay);
 		}else if(state==2){
-			textView.setText(R.string.state_delivery);
+			textView.setText(R.string.tech_order_list_state1);
 			button.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
 		}else if(state==3){
-			textView.setText(R.string.state_deliveryed);
+			textView.setText(R.string.tech_order_list_state2);
 			button2.setVisibility(View.GONE);
 			button.setText(R.string.button_deliveryed);
 		}else if(state==4){
-			textView.setText(R.string.state_finish);
+			textView.setText(R.string.tech_order_list_state3);
 			button.setText(R.string.button_rate);
 			button2.setText(R.string.order_delete);
-		}
+		}else if(state == 5 || state == 6){
+			textView.setText(R.string.tech_order_list_state4);
+			button.setText(R.string.button_rate);
+			button2.setText(R.string.order_delete);
+		}/*else if(){
+			
+		}*/
 	}
 
 }

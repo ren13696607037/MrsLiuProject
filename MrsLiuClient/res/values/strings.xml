@@ -474,4 +474,18 @@
 	<string name="service_rate_text">服务评价</string>
 	<string name="service_rate_hint">亲请说点什么帮助我们变得更好吧~</string>
 	<string name="myorder_title">技师订单</string>
+	
+	<string name="tech_order_list_time">服务时间：%1$s</string>
+	<string name="tech_order_list_address">服务地址：%1$s</string>
+	<string name="tech_order_list_state">待接单</string>
+	<string name="tech_order_list_state1">待服务</string>
+	<string name="tech_order_list_state2">进行中</string>
+	<string name="tech_order_list_state3">已完成</string>
+	<string name="tech_order_list_state4">已取消</string>
+	<string name="tech_order_list_btn">拒单</string>
+	<string name="tech_order_list_btn1">接单</string>
+	<string name="tech_order_list_btn2">联系客服</string>
+	<string name="tech_order_list_btn3">开始服务</string>
+	<string name="tech_order_list_btn4">完成服务</string>
+	<string name="tech_order_list_btn5">删除</string>
 </resources>

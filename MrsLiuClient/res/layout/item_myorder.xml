@@ -11,10 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/px_15"
         android:layout_marginLeft="@dimen/px_20"
-        android:layout_marginRight="@dimen/px_25"
         android:layout_marginTop="@dimen/px_15"
-        android:paddingBottom="@dimen/px_5"
-        android:paddingLeft="@dimen/px_10"
         android:paddingRight="@dimen/px_10"
         android:paddingTop="@dimen/px_5"
         android:textColor="@color/color_3d"
@@ -23,16 +20,17 @@
         android:id="@+id/iorder_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/px_10"
         android:layout_below="@id/iorder_time"
         android:textColor="@color/color_3d"
         android:textSize="@dimen/app_text_size_first" 
-        android:layout_marginRight="@dimen/px_25"
+        android:layout_marginLeft="@dimen/px_20"
+        android:paddingBottom="@dimen/px_15"
         />
 	<View 
 	    android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/color_be"
+        android:layout_below="@id/iorder_address"
 	    />
 	<ImageView 
 	    android:id="@+id/iorder_img"
@@ -49,7 +47,7 @@
 	    android:id="@+id/iorder_name"
 	    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/px_25"
+        android:layout_marginTop="@dimen/px_10"
         android:textColor="@color/color_3d"
         android:textSize="@dimen/app_text_size_first" 
         android:layout_alignTop="@id/iorder_img"
@@ -62,6 +60,8 @@
         android:textColor="@color/bg_header"
         android:textSize="@dimen/app_text_size_first"
         android:layout_below="@id/iorder_name"
+        android:layout_toRightOf="@id/iorder_img"
+        android:layout_marginTop="@dimen/px_10"
 	    />
 	<View 
 	    android:layout_width="match_parent"
