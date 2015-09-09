@@ -7,35 +7,36 @@
     <include layout="@layout/fragment_common" />
 
     <RelativeLayout
-        android:id="@+id/osd_buttom"
+        android:id="@+id/tsd_buttom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="@dimen/px_15" >
+        android:layout_alignParentBottom="true" 
+        android:paddingBottom="@dimen/px_15"
+        >
 
         <View
-            android:id="@+id/osd_line5"
+            android:id="@+id/tsd_line5"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_be" />
 
         <TextView
-            android:id="@+id/osd_state"
+            android:id="@+id/tsd_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/px_15"
             android:padding="@dimen/px_15"
+            android:layout_margin="@dimen/px_15"
             android:text="@string/order_service_state"
             android:textColor="@color/color_3d"
             android:textSize="@dimen/app_text_size_first" />
 
         <Button
-            android:id="@+id/osd_btn"
+            android:id="@+id/tsd_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/osd_state"
+            android:layout_alignBottom="@id/tsd_state"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/osd_state"
+            android:layout_alignTop="@id/tsd_state"
             android:layout_marginLeft="@dimen/px_15"
             android:layout_marginRight="@dimen/px_20"
             android:background="@drawable/button_order_yellow"
@@ -46,12 +47,12 @@
             android:paddingTop="@dimen/px_15" />
 
         <Button
-            android:id="@+id/osd_btn2"
+            android:id="@+id/tsd_btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/osd_state"
-            android:layout_alignTop="@id/osd_state"
-            android:layout_toLeftOf="@id/osd_btn"
+            android:layout_alignBottom="@id/tsd_state"
+            android:layout_alignTop="@id/tsd_state"
+            android:layout_toLeftOf="@id/tsd_btn"
             android:background="@drawable/button_order_blue"
             android:gravity="center"
             android:paddingBottom="@dimen/px_15"
@@ -63,7 +64,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/osd_buttom"
+        android:layout_above="@id/tsd_buttom"
         android:layout_marginTop="@dimen/header_bar_height" >
 
         <RelativeLayout
@@ -71,7 +72,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/osd_no"
+                android:id="@+id/tsd_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/px_28"
@@ -82,10 +83,10 @@
                 android:textSize="@dimen/app_text_size_first" />
 
             <TextView
-                android:id="@+id/osd_time"
+                android:id="@+id/tsd_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_no"
+                android:layout_below="@id/tsd_no"
                 android:layout_marginLeft="@dimen/px_28"
                 android:layout_marginRight="@dimen/px_28"
                 android:layout_marginTop="@dimen/px_10"
@@ -94,53 +95,78 @@
                 android:textSize="@dimen/app_text_size_first" />
 
             <View
-                android:id="@+id/osd_line"
+                android:id="@+id/tsd_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_time"
+                android:layout_below="@id/tsd_time"
                 android:layout_margin="@dimen/px_20"
                 android:background="@drawable/order_line" />
 
             <TextView
-                android:id="@+id/osd_name"
+                android:id="@+id/tsd_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_line"
+                android:layout_below="@id/tsd_line"
                 android:layout_marginLeft="@dimen/px_28"
                 android:layout_marginRight="@dimen/px_28"
                 android:text="@string/service_detail_text2"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
 
-            <TextView
-                android:id="@+id/osd_phone"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/tsd_phone_img"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_name"
-                android:layout_marginLeft="@dimen/px_28"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tsd_name"
                 android:layout_marginRight="@dimen/px_28"
-                android:layout_marginTop="@dimen/px_10"
+                android:src="@drawable/tech_service_phone" />
+
+            <TextView
+                android:id="@+id/tsd_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tsd_phone_img"
+                android:layout_alignParentLeft="true"
+                android:layout_alignTop="@id/tsd_phone_img"
+                android:layout_below="@id/tsd_name"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_toLeftOf="@id/tsd_phone_img"
+                android:gravity="bottom"
                 android:text="@string/service_detail_text3"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
 
-            <TextView
-                android:id="@+id/osd_address"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/tsd_address_img"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_phone"
-                android:layout_marginLeft="@dimen/px_28"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tsd_phone"
                 android:layout_marginRight="@dimen/px_28"
                 android:layout_marginTop="@dimen/px_10"
+                android:src="@drawable/tech_service_location" />
+
+            <TextView
+                android:id="@+id/tsd_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tsd_address_img"
+                android:layout_alignParentLeft="true"
+                android:layout_alignTop="@id/tsd_address_img"
+                android:layout_below="@id/tsd_phone"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_toLeftOf="@id/tsd_address_img"
+                android:gravity="center_vertical"
                 android:text="@string/service_detail_text4"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
 
             <TextView
-                android:id="@+id/osd_service_time"
+                android:id="@+id/tsd_service_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_address"
+                android:layout_below="@id/tsd_address"
                 android:layout_marginLeft="@dimen/px_28"
                 android:layout_marginRight="@dimen/px_28"
                 android:layout_marginTop="@dimen/px_10"
@@ -149,103 +175,103 @@
                 android:textSize="@dimen/app_text_size_first" />
 
             <View
-                android:id="@+id/osd_line1"
+                android:id="@+id/tsd_line1"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@id/osd_service_time"
+                android:layout_below="@id/tsd_service_time"
                 android:layout_marginTop="@dimen/px_30"
                 android:background="@color/color_be" />
 
             <ImageView
-                android:id="@+id/osd_img"
+                android:id="@+id/tsd_img"
                 android:layout_width="@dimen/px_121"
                 android:layout_height="@dimen/px_121"
-                android:layout_below="@id/osd_line1"
+                android:layout_below="@id/tsd_line1"
                 android:layout_margin="@dimen/px_20"
                 android:scaleType="centerCrop" />
 
             <TextView
-                android:id="@+id/osd_product_name"
+                android:id="@+id/tsd_product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/osd_img"
+                android:layout_alignTop="@id/tsd_img"
                 android:layout_marginLeft="@dimen/px_5"
                 android:layout_marginTop="@dimen/px_10"
-                android:layout_toRightOf="@id/osd_img"
+                android:layout_toRightOf="@id/tsd_img"
                 android:text="@string/service_detail_text8"
                 android:textColor="@color/color_3d"
                 android:textSize="@dimen/app_text_size_first" />
 
             <TextView
-                android:id="@+id/osd_product_price"
+                android:id="@+id/tsd_product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/osd_img"
+                android:layout_alignBottom="@id/tsd_img"
                 android:layout_marginBottom="@dimen/px_20"
                 android:layout_marginLeft="@dimen/px_5"
-                android:layout_toRightOf="@id/osd_img"
+                android:layout_toRightOf="@id/tsd_img"
                 android:text="@string/service_detail_text5"
                 android:textColor="@color/color_service_detail_red_color"
                 android:textSize="@dimen/app_text_size_first" />
 
             <View
-                android:id="@+id/osd_line2"
+                android:id="@+id/tsd_line2"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@id/osd_img"
+                android:layout_below="@id/tsd_img"
                 android:background="@color/color_be" />
 
             <TextView
-                android:id="@+id/osd_text"
+                android:id="@+id/tsd_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_line2"
+                android:layout_below="@id/tsd_line2"
                 android:layout_margin="@dimen/px_20"
                 android:text="@string/service_detail_text6"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
 
             <TextView
-                android:id="@+id/osd_voucher"
+                android:id="@+id/tsd_voucher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/osd_text"
+                android:layout_alignTop="@id/tsd_text"
                 android:layout_marginRight="@dimen/px_20"
                 android:text="@string/service_detail_text7"
                 android:textColor="@color/color_service_detail_red_color"
                 android:textSize="@dimen/app_text_size_first" />
 
             <View
-                android:id="@+id/osd_line3"
+                android:id="@+id/tsd_line3"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@id/osd_text"
+                android:layout_below="@id/tsd_text"
                 android:background="@color/color_be" />
 
             <TextView
-                android:id="@+id/osd_text1"
+                android:id="@+id/tsd_text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/osd_line3"
+                android:layout_below="@id/tsd_line3"
                 android:layout_margin="@dimen/px_20"
                 android:text="@string/service_detail_text8"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
 
             <TextView
-                android:id="@+id/osd_total"
+                android:id="@+id/tsd_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/osd_text1"
+                android:layout_alignTop="@id/tsd_text1"
                 android:layout_marginRight="@dimen/px_20"
                 android:text="@string/service_detail_text9"
                 android:textColor="@color/color_service_detail_red_color"
                 android:textSize="@dimen/app_text_size_first" />
 
             <View
-                android:id="@+id/osd_line4"
+                android:id="@+id/tsd_line4"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_below="@id/osd_text1"

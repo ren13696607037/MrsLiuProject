@@ -365,6 +365,21 @@ public interface JsonKey {
 		static final String PRICE = "price";
 		static final String NAME = "goodsName";
 	}
+	interface OrderInfoKey{
+		static final String TOTAL_COUNT = "total";
+		static final String TIME = "createTime";
+		static final String CUSTOMER_NAME = "username";
+		static final String CUSTOMER_ADDR = "address";
+		static final String OFFSET_VALUE = "voucher_money";
+		static final String PRODUCTS = "dtos";
+		static final String UNIT = "unit";
+		static final String ORDER_NUM = "orderNum";
+		static final String ORDER_ID = "orderid";
+		static final String TOTAL_PRICE = "price";
+		static final String COMMENT = "comment";
+		static final String STATE = "status";
+		static final String DELIVER_FEE = "freight";
+	}
 	
 	interface RateKey{
 		static final String TYPE = "type";

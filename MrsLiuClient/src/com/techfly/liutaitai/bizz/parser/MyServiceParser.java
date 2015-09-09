@@ -14,6 +14,7 @@ public class MyServiceParser implements Parser{
 
 	@Override
 	public Object fromJson(JSONObject object) {
+		AppLog.Loge("xll", object.toString());
 		MyService service = new MyService();
 		if(object != null){
 			JSONObject data = object.optJSONObject(JsonKey.DATA);

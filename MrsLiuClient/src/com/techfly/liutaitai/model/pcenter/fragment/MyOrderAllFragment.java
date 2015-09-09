@@ -23,11 +23,14 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.OrderListParser;
+import com.techfly.liutaitai.bizz.parser.TechOrderParser;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.activities.RateActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SearchLogisticsActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.MyOrderAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -50,18 +53,19 @@ import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderPayListener,OrderRateListener{
 	private TextView mTextView;
 	private XListView mListView;
-	private ArrayList<MyOrder> mList=new ArrayList<MyOrder>();
+	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
 	private MyOrderAdapter mAdapter;
 	private final int MSG_LIST=0x101;
 	private final int MSG_DLELTE=0x102;
 	private final int MSG_CANCEL=0x103;
-	private int mPage=0;
+	private int mPage=1;
 	private int mSize=10;
 	private boolean isCancel=false;
 	private boolean isDelete=false;
 	private boolean isRefresh=true;
 	private ResultInfo mInfo;
-	private MyOrder mOrder;
+	private TechOrder mOrder;
+	private User mUser;
 	public Handler mAllHandler=new Handler(){
 
 		@Override
@@ -114,6 +118,7 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderAllFragment.this);
         ManagerListener.newManagerListener().onRegisterOrderDeleteListener(this);
         ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
@@ -195,14 +200,15 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
 		}else{
 			RequestParam param = new RequestParam();
 	        HttpURL url = new HttpURL();
-	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.MYORDER_LIST_URL);
-	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.STATE).setmGetParamValues("3");
+	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_LIST_URL);
+	        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("0");
 	        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.PAGE).setmGetParamValues(mPage+"");
-//	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues("2");
+	        url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(mPage+"");
+	        param.setmIsLogin(true);
+			param.setmId(mUser.getmId());
+			param.setmToken(mUser.getmToken());
 	        param.setmHttpURL(url);
-	        param.setmParserClassName(OrderListParser.class.getName());
+	        param.setmParserClassName(TechOrderParser.class.getName());
 	        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
 		}
     }
@@ -267,7 +273,7 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ArrayList<MyOrder> list=(ArrayList<MyOrder>) object;
+                ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
                 if(isRefresh){
                 	mList.addAll(list);
                 }else{
@@ -350,15 +356,15 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
 	}
 
 	@Override
-	public void onOrderRateListener(MyOrder order) {
+	public void onOrderRateListener(TechOrder order) {
 		Intent intent=new Intent(getActivity(),RateActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order);
 		startActivity(intent);
 	}
 
 	@Override
-	public void onOrderPayListener(final MyOrder order) {
-		onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmPrice(), order.getmTitle(),new PayCallBack() {
+	public void onOrderPayListener(final TechOrder order) {
+		onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmServicePrice(), order.getmServiceName(),new PayCallBack() {
             
             @Override
             public void onPaySuccess() {
@@ -370,14 +376,14 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
 	}
 
 	@Override
-	public void onOrderLogiticsListener(MyOrder order) {
+	public void onOrderLogiticsListener(TechOrder order) {
 		Intent intent=new Intent(getActivity(),SearchLogisticsActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order);
 		startActivity(intent);
 	}
 
 	@Override
-	public void onOrderDeleteListener(MyOrder order) {
+	public void onOrderDeleteListener(TechOrder order) {
 		mOrder=order;
 		isDelete=true;
 		isRefresh=false;
@@ -405,7 +411,7 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
 	}
 
 	@Override
-	public void onOrderCancelListener(MyOrder order) {
+	public void onOrderCancelListener(TechOrder order) {
 		mOrder=order;
 		isCancel=true;
 		isRefresh=false;

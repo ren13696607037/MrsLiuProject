@@ -20,9 +20,55 @@ public class MyOrder implements Serializable {
 	private String mExpShortName;
 	private String mExpNo;
 
-	private int mType;// 订单类型，分类  0 洗衣  1生鲜  2鲜花  4奢侈品
+	private int mType;// 订单类型，分类 0 洗衣 1生鲜 2鲜花 4奢侈品
 	private int mTotalCount;// 产品总数量
 	private String mUnit;// 单位
+	private double mDeliverFee;// 运费
+	private String mCustomerName;// 客户姓名和电话
+	private String mCustomerAddr;// 配送地址
+	private double mOffsetValue;//抵价券金额
+	private String mTips;//备注
+	
+
+	public String getmTips() {
+		return mTips;
+	}
+
+	public void setmTips(String mTips) {
+		this.mTips = mTips;
+	}
+
+	public double getmOffsetValue() {
+		return mOffsetValue;
+	}
+
+	public void setmOffsetValue(double mOffsetValue) {
+		this.mOffsetValue = mOffsetValue;
+	}
+
+	public String getmCustomerName() {
+		return mCustomerName;
+	}
+
+	public void setmCustomerName(String mCustomerName) {
+		this.mCustomerName = mCustomerName;
+	}
+
+	public String getmCustomerAddr() {
+		return mCustomerAddr;
+	}
+
+	public void setmCustomerAddr(String mCustomerAddr) {
+		this.mCustomerAddr = mCustomerAddr;
+	}
+
+	public double getmDeliverFee() {
+		return mDeliverFee;
+	}
+
+	public void setmDeliverFee(double mDeliverFee) {
+		this.mDeliverFee = mDeliverFee;
+	}
 
 	public String getmUnit() {
 		return mUnit;

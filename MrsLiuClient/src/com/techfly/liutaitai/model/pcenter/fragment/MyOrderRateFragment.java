@@ -23,6 +23,7 @@ import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SearchLogisticsActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.MyOrderAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -40,7 +41,7 @@ import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 public class MyOrderRateFragment extends CommonFragment implements OnItemClickListener,IXListViewListener,OrderLogiticsListener{
 	private TextView mTextView;
 	private XListView mListView;
-	private ArrayList<MyOrder> mList=new ArrayList<MyOrder>();
+	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
 	private MyOrderAdapter mAdapter;
 	private final int MSG_LIST=0x101;
 	private int mPage=0;
@@ -136,7 +137,7 @@ public class MyOrderRateFragment extends CommonFragment implements OnItemClickLi
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ArrayList<MyOrder> list=(ArrayList<MyOrder>) object;
+                ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
                 mList.addAll(list);
                
                 if (list == null || list.size() == 0) {
@@ -222,7 +223,7 @@ public class MyOrderRateFragment extends CommonFragment implements OnItemClickLi
 	}
 
 	@Override
-	public void onOrderLogiticsListener(MyOrder order) {
+	public void onOrderLogiticsListener(TechOrder order) {
 		Intent intent=new Intent(getActivity(),SearchLogisticsActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order);
 		startActivity(intent);

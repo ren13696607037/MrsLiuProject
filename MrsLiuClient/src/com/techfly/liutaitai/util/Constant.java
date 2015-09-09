@@ -67,13 +67,18 @@ public class Constant {
 	public static final String SERVICE_CANCEL_URL = "service/cancelreservation";
 	public static final String SERVICE_DELETE_URL = "service/delreservation";
 	public static final String SERVICE_RATE_URL = "common/review";
+	public static final String TECH_ORDER_DETAIL_URL = "master/order";
+	public static final String TECH_ORDER_LIST_URL = "master/orders";
 	
 	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "product/addOrder";
 	public static final String ALIPAY_CALLBACK_URL = "alipayCallback";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "alipayCallback";
 	
-	public static final String ORDER_BASKET_LIST = "order/list";
+	public static final String ORDER_BASKET_LIST = "order/list";//订单篮订单列表
+	
+	public static final String ORDER_INFO = "order/detail";//订单篮订单详情
+	public static final String ORDER_INFO_ID = "orderid";
 
     public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
     public static String UPDATE_TO_CART_REQUEST_URL="product/editCartCount";
@@ -161,6 +166,7 @@ public class Constant {
 			"@yeah.net", "@sina.cn", "@sina.com", "@vip.qq.com",
 			"@vip.163.com", "@vip.sina.com", "@gmail.com", };
 	public static final String REFRESH_UPLOAD_GRIDVIEW_IMAGE = "refresh_upload_gridview_image";
-
+	
+	public static final String KEFU_PHONE = "4008275899";
 
 }

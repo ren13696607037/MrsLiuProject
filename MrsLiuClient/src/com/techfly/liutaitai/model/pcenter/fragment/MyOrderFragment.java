@@ -58,7 +58,7 @@ public class MyOrderFragment extends CommonFragment {
         onInitView(view);
     }
     private void onInitView(View view){
-//    	setTitleText(R.string.pcenter_order);
+    	setTitleText(R.string.myorder_title);
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	mViewPager=(ViewPager) view.findViewById(R.id.order_viewpager);
     	mTabView=(ScrollTabView) view.findViewById(R.id.order_tab_container);
@@ -68,9 +68,9 @@ public class MyOrderFragment extends CommonFragment {
     private void onInitTabConfig(){
     	mTabAdapter=new ScrollTabsAdapter(getActivity(), 4);
     	mTabAdapter.add(getActivity().getString(R.string.order_all));
-    	mTabAdapter.add(getActivity().getString(R.string.order_paying));
-    	mTabAdapter.add(getActivity().getString(R.string.order_delivery));
-    	mTabAdapter.add(getActivity().getString(R.string.order_deliveryed));
+    	mTabAdapter.add(getActivity().getString(R.string.service_text));
+    	mTabAdapter.add(getActivity().getString(R.string.service_text1));
+    	mTabAdapter.add(getActivity().getString(R.string.service_text2));
     	mTabView.setAdapter(mTabAdapter);
     }
     private void onInitViewPager(){
