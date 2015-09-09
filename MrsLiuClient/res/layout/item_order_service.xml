@@ -110,6 +110,9 @@
         android:paddingRight="@dimen/px_30"
         android:layout_marginRight="@dimen/px_20"
         android:layout_marginLeft="@dimen/px_15"
+        android:paddingTop="@dimen/px_15"
+        android:paddingBottom="@dimen/px_15"
+        android:gravity="center"
 	    />
 		<Button 
 	    android:id="@+id/ios_btn2"
@@ -121,5 +124,11 @@
         android:layout_toLeftOf="@id/ios_btn"
         android:layout_alignTop="@id/ios_state"
         android:layout_alignBottom="@id/ios_state"
+        android:background="@drawable/button_order_blue"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:gravity="center"
+        android:paddingTop="@dimen/px_15"
+        android:paddingBottom="@dimen/px_15"
 	    />
 </RelativeLayout>

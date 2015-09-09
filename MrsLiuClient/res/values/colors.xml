@@ -106,4 +106,7 @@
     <color name="order_basket_bg_type_1">#ffbc00</color>
     <color name="order_basket_bg_type_2">#00d69d</color>
     <color name="order_basket_bg_type_3">#ff6e6e</color>
+    
+    <color name="color_order_service_btn">#4dc5be</color>
+    <color name="color_order_service_btn1">#6BC5BF</color>
 </resources>
