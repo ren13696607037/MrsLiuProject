@@ -6,6 +6,7 @@ import java.util.List;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 
 
 public class ManagerListener {
@@ -18,19 +19,19 @@ public class ManagerListener {
 		void onDefaultListener(boolean b,String id);
 	}
 	public interface OrderPayListener{
-		void onOrderPayListener(MyOrder order);
+		void onOrderPayListener(TechOrder order);
 	}
 	public interface OrderDeleteListener{
-		void onOrderDeleteListener(MyOrder order);
+		void onOrderDeleteListener(TechOrder order);
 	}
 	public interface OrderCancelListener{
-		void onOrderCancelListener(MyOrder order);
+		void onOrderCancelListener(TechOrder order);
 	}
 	public interface OrderRateListener{
-		void onOrderRateListener(MyOrder order);
+		void onOrderRateListener(TechOrder order);
 	}
 	public interface OrderLogiticsListener{
-		void onOrderLogiticsListener(MyOrder order);
+		void onOrderLogiticsListener(TechOrder order);
 	}
 	public interface spinnerClickListener{
 		void onClickNotify(String time);
@@ -192,31 +193,31 @@ public class ManagerListener {
     		mAddressListeners.get(i).onDefaultListener(b,id);
     	}
     }
-    public void notifyOrderDeleteListener(MyOrder order){
+    public void notifyOrderDeleteListener(TechOrder order){
     	int size=mDeleteListeners.size();
     	for(int i=0;i<size;i++){
     		mDeleteListeners.get(i).onOrderDeleteListener(order);
     	}
     }
-    public void notifyOrderCancelListener(MyOrder order){
+    public void notifyOrderCancelListener(TechOrder order){
     	int size=mCancelListeners.size();
     	for(int i=0;i<size;i++){
     		mCancelListeners.get(i).onOrderCancelListener(order);
     	}
     }
-    public void notifyOrderPayListener(MyOrder order){
+    public void notifyOrderPayListener(TechOrder order){
     	int size=mPayListeners.size();
     	for(int i=0;i<size;i++){
     		mPayListeners.get(i).onOrderPayListener(order);
     	}
     }
-    public void notifyOrderRateListener(MyOrder order){
+    public void notifyOrderRateListener(TechOrder order){
     	int size=mRateListeners.size();
     	for(int i=0;i<size;i++){
     		mRateListeners.get(i).onOrderRateListener(order);
     	}
     }
-    public void notifyOrderLogiticsListener(MyOrder order){
+    public void notifyOrderLogiticsListener(TechOrder order){
     	int size=mLogiticsListeners.size();
     	for(int i=0;i<size;i++){
     		mLogiticsListeners.get(i).onOrderLogiticsListener(order);

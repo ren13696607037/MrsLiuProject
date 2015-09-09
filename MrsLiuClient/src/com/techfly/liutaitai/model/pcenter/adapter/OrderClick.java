@@ -6,13 +6,14 @@ import android.view.View.OnClickListener;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.util.ManagerListener;
 
 public class OrderClick implements OnClickListener{
 	private Context mContext;
-	private MyOrder mOrder;
+	private TechOrder mOrder;
 	private String mString;
-	public OrderClick(Context context,MyOrder order,String string){
+	public OrderClick(Context context,TechOrder order,String string){
 		this.mContext=context;
 		this.mOrder=order;
 		this.mString=string;

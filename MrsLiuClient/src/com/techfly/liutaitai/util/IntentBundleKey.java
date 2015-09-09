@@ -38,4 +38,5 @@ public class IntentBundleKey {
 	public static String LOCCITY="loc_city";
     public static String TYPE="type";
     public static String SERVICE_ID = "service_id";
+    public static String TECH_ORDER_DETAIL = "tech_order_detail";
 }

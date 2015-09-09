@@ -22,6 +22,7 @@ import com.techfly.liutaitai.bizz.parser.OrderListParser;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.MyOrderAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -37,7 +38,7 @@ import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 public class MyOrderDeliveryFragment extends CommonFragment implements OnItemClickListener,IXListViewListener{
 	private TextView mTextView;
 	private XListView mListView;
-	private ArrayList<MyOrder> mList=new ArrayList<MyOrder>();
+	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
 	private MyOrderAdapter mAdapter;
 	private final int MSG_LIST=0x101;
 	private int mPage=0;
@@ -134,7 +135,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ArrayList<MyOrder> list=(ArrayList<MyOrder>) object;
+                ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
                 mList.addAll(list);
                 if (list == null || list.size() == 0) {
                 	

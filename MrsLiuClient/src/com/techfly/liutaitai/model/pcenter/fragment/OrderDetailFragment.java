@@ -28,6 +28,7 @@ import com.techfly.liutaitai.model.pcenter.activities.SearchLogisticsActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.OrderClick;
 import com.techfly.liutaitai.model.pcenter.adapter.OrderProductAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -50,7 +51,7 @@ import com.techfly.liutaitai.util.view.ListViewForScrollView;
 public class OrderDetailFragment extends OrderPayFragment implements OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderPayListener,OrderRateListener,OnItemClickListener{
 	private OrderDetailActivity mActivity;
 	private ListViewForScrollView mListView;
-	private MyOrder mOrder;
+	private TechOrder mOrder;
 	private String mOrderId;
 	private OrderProductAdapter mAdapter;
 	private TextView mTvSn;
@@ -147,7 +148,7 @@ public class OrderDetailFragment extends OrderPayFragment implements OrderCancel
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                mOrder=(MyOrder) object;
+                mOrder=(TechOrder) object;
                 if(!isDetached()){
                 	mDetailHandler.removeMessages(MSG_DETAIL);
                 	mDetailHandler.sendEmptyMessage(MSG_DETAIL);
@@ -265,22 +266,22 @@ public class OrderDetailFragment extends OrderPayFragment implements OrderCancel
     	
     }
     private void setView(){
-    	mTvAddress.setText(mOrder.getmAddress().getmDetail());
-    	mTvFree.setText(mOrder.getmFree());
-    	mTvName.setText(mOrder.getmAddress().getmName());
-    	mTvNote.setText(getString(R.string.order_detail_note,mOrder.getmNote()));
-    	setState(mOrder, mTvState, mButton, mButton2);
-    	mTvPhone.setText(mOrder.getmAddress().getmPhone());
-    	mTvPrice.setText(mOrder.getmTotalPrice());
-    	mTvSn.setText(getString(R.string.order_sn,mOrder.getmId()));
-    	mTvTotal.setText(mOrder.getmTotalPrice());
-    	if(mOrder!=null){
-    		mAdapter=new OrderProductAdapter(mActivity, mOrder.getmList());
-    		mListView.setAdapter(mAdapter);
-    		mListView.setOnItemClickListener(this);
-    	}
-    	mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton.getText().toString()));
-    	mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2.getText().toString()));
+//    	mTvAddress.setText(mOrder.getmAddress().getmDetail());
+//    	mTvFree.setText(mOrder.getmFree());
+//    	mTvName.setText(mOrder.getmAddress().getmName());
+//    	mTvNote.setText(getString(R.string.order_detail_note,mOrder.getmNote()));
+//    	setState(mOrder, mTvState, mButton, mButton2);
+//    	mTvPhone.setText(mOrder.getmAddress().getmPhone());
+//    	mTvPrice.setText(mOrder.getmTotalPrice());
+//    	mTvSn.setText(getString(R.string.order_sn,mOrder.getmId()));
+//    	mTvTotal.setText(mOrder.getmTotalPrice());
+//    	if(mOrder!=null){
+//    		mAdapter=new OrderProductAdapter(mActivity, mOrder.getmList());
+//    		mListView.setAdapter(mAdapter);
+//    		mListView.setOnItemClickListener(this);
+//    	}
+//    	mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton.getText().toString()));
+//    	mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2.getText().toString()));
     }
     private void setState(MyOrder order,TextView textView,Button button,Button button2){
     	int state=order.getmState();
@@ -331,40 +332,40 @@ public class OrderDetailFragment extends OrderPayFragment implements OrderCancel
         super.onLowMemory();
     }
 	@Override
-	public void onOrderRateListener(MyOrder order) {
+	public void onOrderRateListener(TechOrder order) {
 		
 	}
 	@Override
-	public void onOrderPayListener(final MyOrder order) {
+	public void onOrderPayListener(final TechOrder order) {
 	   StringBuffer buffer = new StringBuffer();
-	   for(Product pro: order.getmList()){
-	     buffer.append(pro.getmName()+",");
-	   }
+//	   for(Product pro: order.getmList()){
+//	     buffer.append(pro.getmName()+",");
+//	   }
 	   String name = buffer.toString();
 	   name =name.substring(0, name.length()-1);
-       onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmTotalPrice(),name,new PayCallBack() {
-            
-            @Override
-            public void onPaySuccess() {
-                startReqTask(OrderDetailFragment.this);
-                UIHelper.toOrdeFinishActivity(OrderDetailFragment.this, order.getmId(),true);
-            }
-        });
+//       onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmTotalPrice(),name,new PayCallBack() {
+//            
+//            @Override
+//            public void onPaySuccess() {
+//                startReqTask(OrderDetailFragment.this);
+//                UIHelper.toOrdeFinishActivity(OrderDetailFragment.this, order.getmId(),true);
+//            }
+//        });
 	}
 	@Override
-	public void onOrderLogiticsListener(MyOrder order) {
+	public void onOrderLogiticsListener(TechOrder order) {
 		Intent intent=new Intent(getActivity(),SearchLogisticsActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order);
 		startActivity(intent);
 	}
 	@Override
-	public void onOrderDeleteListener(MyOrder order) {
+	public void onOrderDeleteListener(TechOrder order) {
 		mOrder=order;
 		isDelete=true;
 		startReqTask(OrderDetailFragment.this);
 	}
 	@Override
-	public void onOrderCancelListener(MyOrder order) {
+	public void onOrderCancelListener(TechOrder order) {
 		mOrder=order;
 		isCancel=true;
 		startReqTask(OrderDetailFragment.this);
