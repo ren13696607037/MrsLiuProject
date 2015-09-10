@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
@@ -28,11 +29,11 @@ import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
-public class TechAccountFragment extends CommonFragment{
+public class TechAccountFragment extends CommonFragment implements OnClickListener{
 	private TechAccountActivity mActivity;
-	private RadioButton mCard;
-	private RadioButton mAlipay;
-	private RadioButton mWeixin;
+	private CheckBox mCard;
+	private CheckBox mAlipay;
+	private CheckBox mWeixin;
 	private EditText mCardName;
 	private EditText mCardNumber;
 	private EditText mCardUserName;
@@ -85,14 +86,14 @@ public class TechAccountFragment extends CommonFragment{
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	setTitleText(R.string.tech_account_title);
     	
-    	mCard = (RadioButton) view.findViewById(R.id.tech_account_card);
+    	mCard = (CheckBox) view.findViewById(R.id.tech_account_card);
     	mCardName = (EditText) view.findViewById(R.id.tech_account_card_name);
     	mCardNumber = (EditText) view.findViewById(R.id.tech_account_card_number);
     	mCardUserName = (EditText) view.findViewById(R.id.tech_account_card_username);
-    	mAlipay = (RadioButton) view.findViewById(R.id.tech_account_alipay);
+    	mAlipay = (CheckBox) view.findViewById(R.id.tech_account_alipay);
     	mAlipayName = (EditText) view.findViewById(R.id.tech_account_alipay_name);
     	mAlipayUserName = (EditText) view.findViewById(R.id.tech_account_alipay_username);
-    	mWeixin = (RadioButton) view.findViewById(R.id.tech_account_weixin);
+    	mWeixin = (CheckBox) view.findViewById(R.id.tech_account_weixin);
     	mWeixinName = (EditText) view.findViewById(R.id.tech_account_weixin_name);
     	mWeixinUserName = (EditText) view.findViewById(R.id.tech_account_weixin_username);
     	mButton = (Button) view.findViewById(R.id.tech_account_btn);
@@ -101,14 +102,13 @@ public class TechAccountFragment extends CommonFragment{
 			
 			@Override
 			public void onClick(View v) {
-				if((mCard.isChecked() && mCardName.length() > 0 && mCardNumber.length() > 0 && mCardUserName.length() > 0)||
-						(mAlipay.isChecked() && mAlipayName.length() > 0 && mAlipayUserName.length() > 0) ||
-						(mWeixin.isChecked() && mWeixinName.length() > 0 && mWeixinUserName.length() > 0)
-						){
-					startReqTask(TechAccountFragment.this);
-				}
+				
 			}
 		});
+    	
+    	mCard.setOnClickListener(this);
+    	mWeixin.setOnClickListener(this);
+    	mAlipay.setOnClickListener(this);
     }
 
 	@Override
@@ -158,5 +158,77 @@ public class TechAccountFragment extends CommonFragment{
 				}
 			}
 		};
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.tech_account_btn:
+			if((mCard.isChecked() && mCardName.length() > 0 && mCardNumber.length() > 0 && mCardUserName.length() > 0)||
+					(mAlipay.isChecked() && mAlipayName.length() > 0 && mAlipayUserName.length() > 0) ||
+					(mWeixin.isChecked() && mWeixinName.length() > 0 && mWeixinUserName.length() > 0)
+					){
+				startReqTask(TechAccountFragment.this);
+			}
+			break;
+		case R.id.tech_account_alipay:
+			setCheck(2);
+			break;
+		case R.id.tech_account_card:
+			setCheck(1);
+			break;
+		case R.id.tech_account_weixin:
+			setCheck(3);
+			break;
+
+		default:
+			break;
+		}
+	}
+	private void setCheck(int type){
+		mAlipayName.setEnabled(true);
+		mAlipayUserName.setEnabled(true);
+		mWeixinName.setEnabled(true);
+		mWeixinUserName.setEnabled(true);
+		mCardName.setEnabled(true);
+		mCardUserName.setEnabled(true);
+		mCardNumber.setEnabled(true);
+		switch (type) {
+		case 1:
+			mCard.setChecked(true);
+			mWeixin.setChecked(false);
+			mAlipay.setChecked(false);
+			mAlipayName.setEnabled(false);
+			mAlipayUserName.setEnabled(false);
+			mWeixinName.setEnabled(false);
+			mWeixinUserName.setEnabled(false);
+			mCardName.requestFocus();
+			break;
+		case 2:
+			mCard.setChecked(false);
+			mWeixin.setChecked(false);
+			mAlipay.setChecked(true);
+			mWeixinName.setEnabled(false);
+			mWeixinUserName.setEnabled(false);
+			mCardName.setEnabled(false);
+			mCardUserName.setEnabled(false);
+			mCardNumber.setEnabled(false);
+			mAlipayName.requestFocus();
+			break;
+		case 3:
+			mCard.setChecked(false);
+			mWeixin.setChecked(true);
+			mAlipay.setChecked(false);
+			mAlipayName.setEnabled(false);
+			mAlipayUserName.setEnabled(false);
+			mCardName.setEnabled(false);
+			mCardUserName.setEnabled(false);
+			mCardNumber.setEnabled(false);
+			mWeixinName.requestFocus();
+	break;
+
+		default:
+			break;
+		}
 	}
 }
