@@ -97,27 +97,28 @@ public class MyOrderAdapter extends BaseAdapter {
 		button2.setVisibility(View.VISIBLE);
 		if(state==1){
 			textView.setText(R.string.tech_order_list_state);
-			button2.setVisibility(View.GONE);
-			button.setText(R.string.button_pay);
+			button2.setText(R.string.tech_order_list_btn);
+			button.setText(R.string.tech_order_list_btn1);
 		}else if(state==2){
 			textView.setText(R.string.tech_order_list_state1);
-			button.setVisibility(View.GONE);
-			button2.setVisibility(View.GONE);
+			button.setText(R.string.tech_order_list_btn3);
+			button2.setText(R.string.tech_order_list_btn2);
 		}else if(state==3){
 			textView.setText(R.string.tech_order_list_state2);
 			button2.setVisibility(View.GONE);
-			button.setText(R.string.button_deliveryed);
+			button.setText(R.string.tech_order_list_btn4);
 		}else if(state==4){
 			textView.setText(R.string.tech_order_list_state3);
-			button.setText(R.string.button_rate);
-			button2.setText(R.string.order_delete);
+			button.setText(R.string.tech_order_list_btn5);
+			button2.setVisibility(View.GONE);
 		}else if(state == 5 || state == 6){
 			textView.setText(R.string.tech_order_list_state4);
-			button.setText(R.string.button_rate);
-			button2.setText(R.string.order_delete);
-		}/*else if(){
-			
-		}*/
+			button.setText(R.string.tech_order_list_btn5);
+			button2.setVisibility(View.GONE);
+		}else if(state == 0){
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}
 	}
 
 }

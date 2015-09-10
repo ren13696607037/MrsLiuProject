@@ -29,9 +29,9 @@ public class TechOrderParser implements Parser{
 						JSONObject obj = array.optJSONObject(i);
 						service.setmId(obj.optString(JsonKey.ServiceKey.ID));
 						service.setmVoucher(obj.optString(JsonKey.ServiceDetailKey.VOUCHER));
-						service.setmServiceIcon(Constant.IMG_HEADER_URL + obj.optString(JsonKey.ServiceDetailKey.IMAGE));
+						service.setmServiceIcon(Constant.YIHUIMALL_BASE_URL + obj.optString(JsonKey.ServiceDetailKey.IMAGE));
 						service.setmServiceName(obj.optString(JsonKey.ServiceKey.NAME));
-						service.setmServicePrice(obj.optString(JsonKey.ServiceKey.PRICE));
+						service.setmServicePrice(obj.optString(JsonKey.ServiceDetailKey.PRICE));
 						service.setmServiceStatus(obj.optString(JsonKey.ServiceKey.STATE));
 						service.setmCustomerAddress(obj.optString(JsonKey.ServiceDetailKey.ADDRESS));
 						service.setmCustomerTime(obj.optString(JsonKey.ServiceDetailKey.ADDTIME));
