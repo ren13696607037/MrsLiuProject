@@ -160,11 +160,7 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".model.mall.activities.ProductListActivity"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
+     
           <activity
             android:name=".model.mall.activities.ProductListActivity2"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"

@@ -29,6 +29,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.ServiceCategoryParser;
 import com.techfly.liutaitai.bizz.parser.ServiceParser;
+import com.techfly.liutaitai.model.mall.activities.ServiceInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter2;
 import com.techfly.liutaitai.model.mall.adapter.ServiceAdapter;
@@ -41,6 +42,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
+import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.GridViewForScrollView;
@@ -345,9 +347,9 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
-
-               
-
+                
+               UIHelper.toClassActivity(ServiceListFragment.this, ServiceInfoActivity.class.getName());
+           
             }
         });
 

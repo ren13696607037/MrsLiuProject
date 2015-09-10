@@ -13,7 +13,6 @@ import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceListActivity;
 import com.techfly.liutaitai.model.mall.activities.ShengXianActivity;
-import com.techfly.liutaitai.model.mall.activities.TuanGouActivity;
 import com.techfly.liutaitai.model.mall.bean.Category;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
@@ -99,10 +98,7 @@ public class UIHelper {
 		context.startActivity(intent);
 	}
 
-	public static void toTuangouInfoActivity(Context context) {
-		Intent intent = new Intent(context, TuanGouActivity.class);
-		context.startActivity(intent);
-	}
+
 
 	public static void toLoginActivity(Context context) {
 		Intent intent = new Intent(context, LoginActivity.class);
