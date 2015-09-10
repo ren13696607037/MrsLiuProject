@@ -154,11 +154,7 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".model.mall.activities.TuanGouActivity"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
+      
         <activity
             android:name=".model.mall.activities.ProductInfoActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
@@ -174,21 +170,7 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".model.mall.activities.ProSaleListActivity"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".model.mall.activities.ProPriceListActivity"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".model.mall.activities.ProShelvesListActivity"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
+       
         <activity
             android:name=".model.mall.activities.PicAndTextDetailActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
@@ -211,6 +193,22 @@
             android:theme="@android:style/Theme.NoTitleBar" />
        <activity
             android:name=".model.mall.activities.ShengXianActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+       
+        <activity
+            android:name=".model.mall.activities.ProSaleListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.ProPriceListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.ServiceInfoActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
