@@ -9,15 +9,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
 import com.techfly.liutaitai.net.HttpURL;
@@ -25,17 +24,20 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
-import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
-import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
-public class ServiceInfoFragment extends CommonFragment{
+public class ServiceOrderFragment extends CommonFragment implements OnClickListener{
+
     private ImageView mImg;
     private TextView mNameTv;
     private TextView mPriceTv;
-    private TextView mServiceContentTv;
-    private TextView mDescTv;
+    private CheckBox mCheckBox;
+    private TextView mAddressTv;
+    private TextView mTimeTv;
+    private TextView mPhoneTv;
+    private TextView mVoucherTv;
+    private TextView mJishiTv;
     private Button mButton;
     private String mId;
     private ServiceInfo mInfo;
@@ -70,7 +72,7 @@ public class ServiceInfoFragment extends CommonFragment{
                 mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 mInfo   = (ServiceInfo) object;
-                onDisplayInfo();
+             
             }
             
         };
@@ -78,11 +80,7 @@ public class ServiceInfoFragment extends CommonFragment{
 
    
    private void onDisplayInfo(){
-       mDescTv.setText(mInfo.getmDesc());
-       ImageLoader.getInstance().displayImage(mInfo.getmImg(), mImg, ImageLoaderUtil.mHallIconLoaderOptions);
-       mNameTv.setText(mInfo.getmName());
-       mPriceTv.setText("￥"+mInfo.getmPrice()+"/"+mInfo.getmUnit());
-       mServiceContentTv.setText(mInfo.getmServiceConent());
+      
    }
     
     private Response.ErrorListener createMyReqErrorListener() {
@@ -124,7 +122,7 @@ public class ServiceInfoFragment extends CommonFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_service_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_service_order, container, false);
         return view;
     }
     @Override
@@ -149,18 +147,34 @@ public class ServiceInfoFragment extends CommonFragment{
     private void initView(View view) {
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
         setTitleText("服务详情");
-        mDescTv = (TextView) view.findViewById(R.id.desc);
         mImg = (ImageView) view.findViewById(R.id.img);
         mNameTv = (TextView) view.findViewById(R.id.name);
         mPriceTv = (TextView) view.findViewById(R.id.price);
-        mServiceContentTv = (TextView) view.findViewById(R.id.service_content);
+        
+        mAddressTv = (TextView) view.findViewById(R.id.address);
+        mAddressTv.setOnClickListener(this);
+        
+        mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
+        mCheckBox.setOnClickListener(this);
+        
+        mJishiTv = (TextView) view.findViewById(R.id.jishi);
+        mJishiTv.setOnClickListener(this);
+        
+        mPhoneTv = (TextView) view.findViewById(R.id.phone);
+        
+        mTimeTv = (TextView) view.findViewById(R.id.clock);
+        mTimeTv.setOnClickListener(this);
+        
+        mVoucherTv = (TextView) view.findViewById(R.id.voucher);
+        mVoucherTv.setOnClickListener(this);
+        
         mButton = (Button) view.findViewById(R.id.order);
         mButton.setOnClickListener(new OnClickListener() {
             
             @Override
             public void onClick(View view) {
                
-                UIHelper.toSomeIdActivity(ServiceInfoFragment.this,ServiceOrderActivity.class.getName(), mId, Integer.parseInt(mInfo.getmType()));
+          
             }
         });
         
@@ -173,5 +187,12 @@ public class ServiceInfoFragment extends CommonFragment{
       
         super.onSaveInstanceState(outState);
     }
+
+    @Override
+    public void onClick(View arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }

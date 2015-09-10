@@ -347,8 +347,8 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
-                
-               UIHelper.toClassActivity(ServiceListFragment.this, ServiceInfoActivity.class.getName());
+               Service service = (Service) arg0.getItemAtPosition(arg2);
+               UIHelper.toSomeIdActivity(ServiceListFragment.this, ServiceInfoActivity.class.getName(),service.getmId(),type);
            
             }
         });

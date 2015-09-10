@@ -49,6 +49,7 @@ public class Constant {
 	public static final String ADDRESS_DELETE_URL = "user/deladdress";
 	public static final String CHANGE_ADDRESS_URL = "user/doaddress";
 	public static final String GOODS_DETAIL = "product/detail";// 商品详情
+	public static final String SERVICE_DETAIL = "service/detail";// 服务详情
 	public static final String SECKILL_DETAIL = "seckill/detail";//  限时秒杀详情
 	public static final String TUANGOU_DETAIL = "tuangou/detail";// 团购商品详情
 	public static final String GOODS_COLLECT = "goods/collect";// 收藏

@@ -208,6 +208,35 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+        
+       <activity
+            android:name=".model.mall.activities.ServiceOrderActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        
+       <activity
+            android:name=".model.mall.activities.JishiListActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+       
+       <activity
+            android:name=".model.mall.activities.JishiInfoActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+       
+     <activity
+            android:name=".model.mall.activities.ServiceAddressActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+      <activity
+            android:name=".model.mall.activities.ServiceTimeActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />  
        
         <!-- 个人中心模块配置 -->
         <activity
