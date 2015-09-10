@@ -346,6 +346,8 @@ public interface JsonKey {
 		static final String CITYNAME = "cityname";
 		static final String MONEY = "money";
 		static final String BID = "bid";
+		static final String BANK = "bank";
+		static final String ACCOUNT = "account";
 	}
 	interface OrderBasketKey{
 		static final String ID = "id";

@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -101,6 +100,13 @@ public class Utility {
 		String str = "^1[3|4|5|8][0-9]\\d{8}$";
 		Pattern p = Pattern.compile(str);
 		Matcher m = p.matcher(strPhone);
+		return m.matches();
+	}
+	//判断是否为银行卡号
+	public static boolean isCard(String card){
+		String str = "[0-9]{19}";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(card);
 		return m.matches();
 	}
 
