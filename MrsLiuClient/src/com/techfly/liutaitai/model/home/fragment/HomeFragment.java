@@ -448,7 +448,7 @@ public class HomeFragment extends CommonFragment implements View.OnClickListener
 //			UIHelper.toProductInfoActivity(getActivity(), mdataAd.getmGoodsId(),ProductInfoFragment.FLAG_NORMAL);
 			break;
 		case R.id.more_group_buy:
-		    UIHelper.toTuangouInfoActivity(getActivity());
+//		    UIHelper.toTuangouInfoActivity(getActivity());
 		    break;
 		case R.id.refresh_text:
 		    startReqTask(HomeFragment.this);
