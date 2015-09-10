@@ -19,6 +19,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.MyServiceParser;
 import com.techfly.liutaitai.model.pcenter.activities.MyOrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyServiceActivity;
+import com.techfly.liutaitai.model.pcenter.activities.TechCashActivity;
 import com.techfly.liutaitai.model.pcenter.activities.TechnicianInfoActivity;
 import com.techfly.liutaitai.model.pcenter.bean.MyService;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -187,7 +188,7 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 			intent = new Intent(mActivity, MyOrderActivity.class);
 			break;
 		case R.id.service_apply:
-			
+			intent = new Intent(mActivity, TechCashActivity.class);
 			break;
 		case R.id.service_rate:
 			
