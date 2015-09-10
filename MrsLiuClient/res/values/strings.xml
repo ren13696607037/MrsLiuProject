@@ -488,4 +488,16 @@
 	<string name="tech_order_list_btn3">开始服务</string>
 	<string name="tech_order_list_btn4">完成服务</string>
 	<string name="tech_order_list_btn5">删除</string>
+	
+	<string name="tech_account_title">绑定账户</string>
+	<string name="tech_account_text">请选择以下账户（单选）:</string>
+	<string name="tech_account_text1">银行卡</string>
+	<string name="tech_account_text2">请填写银行支行名称</string>
+	<string name="tech_account_text3">请填写银行卡号</string>
+	<string name="tech_account_text4">请填写银行户主姓名</string>
+	<string name="tech_account_text5">支付宝</string>
+	<string name="tech_account_text6">请填写支付宝账号</string>
+	<string name="tech_account_text7">请填写姓名</string>
+	<string name="tech_account_text8">微信支付</string>
+	<string name="tech_account_text9">请填写微信账号</string>
 </resources>
