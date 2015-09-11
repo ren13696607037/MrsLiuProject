@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout
+              xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/product_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="12dp"
+                android:background="@color/background"
+                android:paddingTop="12dp" >
+                
+            <ImageView 
+                android:id="@+id/img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/product_frame"
+                android:padding="0.5dp"
+                android:src="@drawable/ic_mall_focus"
+                android:layout_marginLeft="0dp"
+                android:scaleType="fitXY"
+                />
+                
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="彤彤"
+                    android:layout_marginLeft="12dp"
+                    android:maxLines="2"
+                    android:layout_toRightOf="@id/img"
+                    android:textColor="#565656"
+                    android:textSize="@dimen/app_text_size_second" />
+                
+                 <TextView
+                    android:id="@+id/sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_toRightOf="@id/img"
+                    android:layout_below="@id/name"
+                    android:layout_marginLeft="12dp"
+                    android:text="性别：女"
+                    android:textColor="@color/color_gray2"
+                    android:textSize="@dimen/app_text_size_second" />
+              
+                
+                  <TextView
+                    android:id="@+id/service_times"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_toRightOf="@id/img"
+                    android:layout_below="@id/sex"
+                    android:layout_marginLeft="12dp"
+                    android:text="服务：56次"
+                    android:textColor="@color/color_gray2"
+                    android:textSize="@dimen/app_text_size_second" />
+                 <RatingBar
+                    android:id="@+id/rate_bar"
+                    style="@style/RatingBar"
+                    android:numStars="5"
+                    android:stepSize="0.5" 
+                    android:rating="4.5"
+                    android:layout_below="@id/sex"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+        ></RatingBar>
+                
+            </RelativeLayout>
+   

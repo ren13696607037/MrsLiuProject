@@ -8,17 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.bean.Jishi;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 
-public class ServiceAdapter extends BaseAdapter{
-    private List<Service> mList;
+public class JishiAdapter extends BaseAdapter{
+    private List<Jishi> mList;
     private Context mContext;
-    public ServiceAdapter(Context context,List<Service> list){
+    public JishiAdapter(Context context,List<Jishi> list){
       mList = list;   
       mContext = context;
     }
@@ -34,7 +36,6 @@ public class ServiceAdapter extends BaseAdapter{
     }
     @Override
     public long getItemId(int arg0) {
-     
         return 0;
     }
 
@@ -46,33 +47,29 @@ public class ServiceAdapter extends BaseAdapter{
         }
         if(convertView==null){
             holder=new ViewHolder();
-            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_service, null);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.service_img);
-            holder.personNum = (TextView) convertView.findViewById(R.id.service_person);
-            holder.serviceName = (TextView) convertView.findViewById(R.id.service_name);
-            holder.servicePrice = (TextView) convertView.findViewById(R.id.service_price);
+            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_jishi, null);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.img);
+            holder.personNum = (TextView) convertView.findViewById(R.id.service_times);
+            holder.serviceName = (TextView) convertView.findViewById(R.id.name);
+            holder.mSexTv =(TextView) convertView.findViewById(R.id.sex);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder) convertView.getTag();
         }
-     
-        ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
-        
-        holder.personNum.setText(mList.get(position).getmServicePerson()+"人体验");
-        
-        holder.serviceName.setText(mList.get(position).getmServiceName());
-        
-        holder.servicePrice.setText("￥"+mList.get(position).getmServicePrice());
-        
+        ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
+        holder.personNum.setText("服务:"+mList.get(position).getmServiceTime()+"次");
+        holder.mBar.setRating(mList.get(position).getmRating());
+        holder.mSexTv.setText("性别:"+mList.get(position).getmSex());
+        holder.serviceName.setText(mList.get(position).getmName());
         return convertView;
         
     }
 
-    public List<Service> getmList() {
+    public List<Jishi> getmList() {
         return mList;
     }
 
-    public void setmList(List<Service> mList) {
+    public void setmList(List<Jishi> mList) {
         this.mList = mList;
     }
     class ViewHolder{
@@ -80,6 +77,8 @@ public class ServiceAdapter extends BaseAdapter{
         private ImageView imageView;
         private TextView personNum;
         private TextView servicePrice;
+        private RatingBar mBar;
+        private TextView mSexTv;
        
     }
-}
+    }
