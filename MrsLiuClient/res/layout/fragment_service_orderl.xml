@@ -30,8 +30,8 @@
     	android:textColor="@color/button_login1"
     	android:textSize="@dimen/app_text_size_first"
     	android:layout_centerHorizontal="true"
-    	android:layout_marginTop="@dimen/px_50"
     	android:visibility="invisible"
+    	android:layout_centerInParent="true"
         />
    
 

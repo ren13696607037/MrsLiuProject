@@ -500,4 +500,11 @@
 	<string name="tech_account_text7">请填写姓名</string>
 	<string name="tech_account_text8">微信支付</string>
 	<string name="tech_account_text9">请填写微信账号</string>
+	
+	<string name="cash_card_text">银行支行名称：%1$s</string>
+	<string name="cash_card_text1">银行卡号：%1$s</string>
+	<string name="cash_card_text2">银行户主姓名：%1$s</string>
+	<string name="cash_alipay_text1">支付宝账号：%1$s</string>
+	<string name="cash_alipay_text2">姓名：%1$s</string>
+	<string name="cash_weixin_text1">微信账号：%1$s</string>
 </resources>

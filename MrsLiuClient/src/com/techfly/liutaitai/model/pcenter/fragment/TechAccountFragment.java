@@ -28,6 +28,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.Utility;
@@ -58,6 +59,7 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
+        mTechAccount = (TechAccount) mActivity.getIntent().getSerializableExtra(IntentBundleKey.TECH_CASH_ID);
     }
     
     @Override
@@ -108,6 +110,23 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
     	mCard.setOnClickListener(this);
     	mWeixin.setOnClickListener(this);
     	mAlipay.setOnClickListener(this);
+    	
+    	if(mTechAccount != null){
+    		if(Integer.valueOf(mTechAccount.getmType()) == 0){
+    			mCard.setChecked(true);
+    			mCardName.setText(mTechAccount.getmBank());
+    			mCardNumber.setText(mTechAccount.getmAccount());
+    			mCardUserName.setText(mTechAccount.getmName());
+    		}else if(Integer.valueOf(mTechAccount.getmType()) == 1){
+    			mAlipay.setChecked(true);
+    			mAlipayName.setText(mTechAccount.getmAccount());
+    			mAlipayUserName.setText(mTechAccount.getmName());
+    		}else if(Integer.valueOf(mTechAccount.getmType()) == 2){
+    			mWeixin.setChecked(true);
+    			mWeixinName.setText(mTechAccount.getmAccount());
+    			mWeixinUserName.setText(mTechAccount.getmName());
+    		}
+    	}
     }
 
 	@Override
@@ -218,6 +237,13 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
 		mCardName.setEnabled(true);
 		mCardUserName.setEnabled(true);
 		mCardNumber.setEnabled(true);
+		mCardName.setText("");
+		mCardNumber.setText("");
+		mCardUserName.setText("");
+		mAlipayName.setText("");
+		mAlipayUserName.setText("");
+		mWeixinName.setText("");
+		mWeixinUserName.setText("");
 		switch (type) {
 		case 1:
 			mCard.setChecked(true);

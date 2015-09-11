@@ -28,6 +28,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
@@ -189,6 +190,7 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 			break;
 		case R.id.service_apply:
 			intent = new Intent(mActivity, TechCashActivity.class);
+			intent.putExtra(IntentBundleKey.TECH_MONEY, mService.getmPrice());
 			break;
 		case R.id.service_rate:
 			

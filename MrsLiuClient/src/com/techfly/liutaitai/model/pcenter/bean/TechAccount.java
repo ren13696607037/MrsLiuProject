@@ -1,6 +1,8 @@
 package com.techfly.liutaitai.model.pcenter.bean;
 
-public class TechAccount {
+import java.io.Serializable;
+
+public class TechAccount implements Serializable{
 	private String mId;
 	private String mType;
 	private String mBank;

@@ -34,63 +34,104 @@
             android:layout_marginRight="@dimen/px_21"
             android:background="@color/color_cash_line" />
 
-        <TextView
-            android:id="@+id/cash_account"
+        <RelativeLayout
+            android:id="@+id/cash_rel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cash_text"
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
             android:layout_marginTop="@dimen/px_21"
-            android:background="@drawable/cash_frame"
-            android:gravity="center"
-            android:paddingBottom="@dimen/px_20"
-            android:paddingTop="@dimen/px_20"
-            android:text="@string/cash_text1"
-            android:textColor="@color/color_3d"
-            android:textSize="@dimen/app_text_size_first" />
-        <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pcenter_arrow"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/cash_account"
-            android:layout_alignBottom="@id/cash_account"
-            android:scaleType="centerInside"
-            android:layout_marginRight="@dimen/px_40"
-            />
+            android:background="@drawable/cash_frame" >
+
+            <TextView
+                android:id="@+id/cash_account_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/px_20"
+                android:paddingTop="@dimen/px_20"
+                android:text="@string/cash_text1"
+                android:textColor="@color/color_3d"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/cash_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/px_20"
+                android:paddingLeft="@dimen/px_20"
+                android:paddingTop="@dimen/px_20"
+                android:text="@string/cash_card_text"
+                android:textColor="@color/color_3d"
+                android:textSize="@dimen/app_text_size_first"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cash_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cash_bank"
+                android:paddingLeft="@dimen/px_20"
+                android:text="@string/cash_card_text1"
+                android:textColor="@color/color_3d"
+                android:textSize="@dimen/app_text_size_first"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cash_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cash_account"
+                android:paddingBottom="@dimen/px_20"
+                android:paddingLeft="@dimen/px_20"
+                android:paddingTop="@dimen/px_20"
+                android:text="@string/cash_card_text2"
+                android:textColor="@color/color_3d"
+                android:textSize="@dimen/app_text_size_first"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/px_40"
+                android:scaleType="centerInside"
+                android:src="@drawable/pcenter_arrow" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/cash_account"
+            android:layout_below="@id/cash_rel"
             android:layout_marginLeft="@dimen/px_21"
             android:layout_marginRight="@dimen/px_21"
             android:background="@color/color_cash_line" />
-        <Button 
+
+        <Button
             android:id="@+id/cash_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cash_account"
-            android:layout_marginTop="@dimen/px_110"
+            android:layout_below="@id/cash_rel"
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_110"
             android:background="@drawable/login_button_blue"
+            android:padding="@dimen/px_20"
             android:text="@string/cash_text2"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/app_text_size_first"
-            android:padding="@dimen/px_20"
-            />
-        <TextView 
+            android:textSize="@dimen/app_text_size_first" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cash_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/px_25"
             android:text="@string/cash_hint"
             android:textColor="@color/color_cash_hint"
-            android:textSize="@dimen/app_text_size_min"
-            android:layout_marginTop="@dimen/px_25"
-            android:layout_centerHorizontal="true"
-            />
+            android:textSize="@dimen/app_text_size_min" />
     </RelativeLayout>
 
 </RelativeLayout>
