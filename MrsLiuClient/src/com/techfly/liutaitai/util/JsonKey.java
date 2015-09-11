@@ -314,6 +314,7 @@ public interface JsonKey {
 		static final String MONEY = "money";
 		static final String TIME = "create_time";
 		static final String TYPE = "type";
+		static final String DESC = "description";
 	}
 	interface VoucherKey{
 		static final String PAGE = "no";

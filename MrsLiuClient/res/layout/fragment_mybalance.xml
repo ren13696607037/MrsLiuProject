@@ -43,6 +43,8 @@
         android:layout_width="match_parent"
     	android:layout_height="match_parent" 
     	android:layout_below="@id/mybalance_line"
+    	android:dividerHeight="@dimen/px_20"
+    	android:divider="@null"
         />
     <TextView 
         android:id="@+id/mybalance_no_content"

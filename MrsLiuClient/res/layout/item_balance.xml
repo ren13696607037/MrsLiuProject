@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content" 
+    android:descendantFocusability="blocksDescendants"
+    >
     <Button 
         android:id="@+id/ibalance_btn"
         android:layout_width="wrap_content"
@@ -11,6 +13,7 @@
     	android:textSize="@dimen/app_text_size_best"
     	android:layout_alignParentRight="true"
     	android:gravity="center"
+    	android:background="@drawable/balance_right"
         />
     <RelativeLayout 
         android:layout_width="match_parent"
@@ -19,9 +22,10 @@
     	android:layout_alignBottom="@id/ibalance_btn"
     	android:layout_alignTop="@id/ibalance_btn"
     	android:paddingTop="@dimen/px_15"
-    	android:paddingLeft="@dimen/px_25"
-    	android:paddingRight="@dimen/px_25"
+    	android:paddingLeft="@dimen/px_30"
+    	android:paddingRight="@dimen/px_30"
     	android:paddingBottom="@dimen/px_10"
+    	android:background="@drawable/balance_left"
         >
         <TextView 
             android:id="@+id/ibalance_name"
@@ -29,6 +33,7 @@
     		android:layout_height="wrap_content"
     		android:textColor="@android:color/white"
     		android:textSize="@dimen/app_text_size_best"
+    		android:layout_marginTop="@dimen/px_20"
             />
         <TextView 
             android:layout_width="wrap_content"
@@ -37,6 +42,8 @@
     		android:textColor="@android:color/white"
     		android:textSize="@dimen/app_text_size_first"
     		android:layout_toRightOf="@id/ibalance_name"
+    		android:layout_alignBottom="@id/ibalance_name"
+    		android:paddingBottom="@dimen/px_15"
             />
         <TextView 
             android:id="@+id/ibalance_send"
@@ -44,7 +51,14 @@
     		android:layout_height="wrap_content"
     		android:layout_below="@id/ibalance_name"
     		android:text="@string/balance_text3"
-    		android:textSize="@dimen/app_text_size_first"
+    		android:textSize="@dimen/app_text_size_second"
+    		android:background="@drawable/balance_text_white_frame"
+    		android:textColor="@color/color_balance_text"
+    		android:paddingTop="@dimen/px_5"
+    		android:paddingLeft="@dimen/px_30"
+    		android:paddingRight="@dimen/px_30"
+    		android:paddingBottom="@dimen/px_5"
+    		android:layout_marginTop="@dimen/px_20"
             />
         <TextView 
             android:id="@+id/ibalance_time"
@@ -54,6 +68,7 @@
     		android:text="@string/balance_text4"
     		android:textColor="@android:color/white"
     		android:textSize="@dimen/app_text_size_second"
+    		android:visibility="gone"
             />
     </RelativeLayout>
 

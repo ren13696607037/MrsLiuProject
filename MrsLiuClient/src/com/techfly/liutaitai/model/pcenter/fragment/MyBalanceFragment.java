@@ -3,10 +3,12 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.BalanceListParser;
+import com.techfly.liutaitai.model.pcenter.activities.BalanceHistoryActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyBalanceActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.BalanceAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;
@@ -100,9 +103,23 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
         onInitView(view);
     }
     private void onInitView(View view){
+    	setTitleText(R.string.pcenter_balance);
+    	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+    	
+    	setRightText(R.string.balance_text, new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mActivity, BalanceHistoryActivity.class);
+				startActivity(intent);
+			}
+		});
+    	
+    	
     	mPrice = (TextView) view.findViewById(R.id.mybalance_price);
     	mListView = (XListView) view.findViewById(R.id.mybalance_list);
-    	mAdapter = new BalanceAdapter(mActivity, mList);
+    	mTextView = (TextView) view.findViewById(R.id.mybalance_text);
+    	mAdapter = new BalanceAdapter(MyBalanceFragment.this, mList);
     	mListView.setAdapter(mAdapter);
     }
 
@@ -111,10 +128,10 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.BALANCE_URL);
-		url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
-				.setmGetParamValues(mPage + "")
-				;
-		url.setmGetParamPrefix(JsonKey.BalanceKey.SIZE).setmGetParamValues(mSize + "");
+//		url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
+//				.setmGetParamValues(mPage + "")
+//				;
+//		url.setmGetParamPrefix(JsonKey.BalanceKey.SIZE).setmGetParamValues(mSize + "");
 		param.setmIsLogin(true);
 		param.setmId(mUser.getmId());
 		param.setmToken(mUser.getmToken());

@@ -15,9 +15,10 @@ public class BalanceListParser implements Parser{
 
 	@Override
 	public Object fromJson(JSONObject object) {
+		AppLog.Loge("xll", object.toString());
 		ArrayList<Balance> list = new ArrayList<Balance>();
 		if(object != null){
-			JSONArray data = object.optJSONObject(JsonKey.DATA).optJSONArray(JsonKey.BalanceKey.DATAS);
+			JSONArray data = object.optJSONArray(JsonKey.DATA);
 			if(data != null){
 				int size = data.length();
 				for(int i = 0; i < size; i++){
@@ -25,6 +26,8 @@ public class BalanceListParser implements Parser{
 					JSONObject obj = data.optJSONObject(i);
 					balance.setmId(obj.optString(JsonKey.BalanceKey.ID));
 					balance.setmPrice(obj.optString(JsonKey.BalanceKey.MONEY));
+					balance.setmSend(obj.optString(JsonKey.BalanceKey.DESC));
+					list.add(balance);
 				}
 			}
 		}
