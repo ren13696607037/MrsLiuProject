@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:id="@+id/ibhistory_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_33"
+        android:text="@string/balance_history_text"
+        android:textSize="@dimen/app_text_size_second" 
+        android:padding="@dimen/px_10"
+        android:gravity="center"
+        android:ems="3"
+        />
+    <View 
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/color_be"
+        />
+    <TextView
+        android:id="@+id/ibhistory_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_33"
+        android:text="@string/balance_history_text"
+        android:textSize="@dimen/app_text_size_second" 
+        android:padding="@dimen/px_10"
+        android:gravity="center"
+        android:ems="8"
+        android:maxLines="8"
+        />
+    <View 
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/color_be"
+        />
+    <TextView
+        android:id="@+id/ibhistory_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_33"
+        android:text="@string/balance_history_text"
+        android:textSize="@dimen/app_text_size_second" 
+        android:padding="@dimen/px_10"
+        android:gravity="center"
+        />
+
+</LinearLayout>

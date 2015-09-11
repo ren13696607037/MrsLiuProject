@@ -5,28 +5,28 @@
     android:background="@color/background"
     >
     <include 
-        android:id="@+id/mybalance_header"
+        android:id="@+id/balance_history_header"
         layout="@layout/fragment_header"
         />
     <TextView 
-        android:id="@+id/mybalance_text"
+        android:id="@+id/balance_history_text"
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content" 
-    	android:text="@string/pcenter_balance"
+    	android:text="@string/balance_history_text"
     	android:textColor="@color/color_33"
     	android:textSize="@dimen/app_text_size_first"
-    	android:layout_below="@id/mybalance_header"
+    	android:layout_below="@id/balance_history_header"
     	android:padding="@dimen/px_20"
         />
     <TextView 
-        android:id="@+id/mybalance_price"
+        android:id="@+id/balance_history_price"
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content" 
     	android:text="@string/balance_text1"
     	android:textColor="@color/color_balance_red"
     	android:textSize="@dimen/app_text_size_first"
-    	android:layout_below="@id/mybalance_header"
-    	android:layout_toRightOf="@id/mybalance_text"
+    	android:layout_below="@id/balance_history_header"
+    	android:layout_toRightOf="@id/balance_history_text"
     	android:padding="@dimen/px_20"
         />
     <View 
@@ -35,20 +35,36 @@
     	android:layout_height="1dp" 
     	android:background="@color/color_be"
     	android:layout_marginTop="@dimen/px_10"
+    	android:layout_below="@id/balance_history_price"
+        />
+    <View 
+        android:id="@+id/mybalance_line1"
+        android:layout_width="match_parent"
+    	android:layout_height="@dimen/px_15" 
+    	android:background="@color/color_ea"
+    	android:layout_below="@id/mybalance_line"
+        />
+    <View 
+        android:id="@+id/mybalance_line2"
+        android:layout_width="match_parent"
+    	android:layout_height="1dp" 
+    	android:background="@color/color_be"
     	android:layout_marginBottom="@dimen/px_15"
-    	android:layout_below="@id/mybalance_price"
+    	android:layout_below="@id/mybalance_line1"
         />
     <com.techfly.liutaitai.util.view.XListView 
-        android:id="@+id/mybalance_list"
+        android:id="@+id/balance_history_list"
         android:layout_width="match_parent"
-    	android:layout_height="match_parent" 
-    	android:layout_below="@id/mybalance_line"
-    	android:dividerHeight="@dimen/px_20"
-    	android:divider="@null"
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@id/mybalance_line2"
+    	android:dividerHeight="1dp"
+    	android:background="@drawable/balance_history_bottom_left"
+    	android:divider="@color/color_be"
     	android:layout_margin="@dimen/px_20"
+    	android:scrollbars="none"
         />
     <TextView 
-        android:id="@+id/mybalance_no_content"
+        android:id="@+id/balance_history_no_content"
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content" 
     	android:text="@string/balance_no_content"

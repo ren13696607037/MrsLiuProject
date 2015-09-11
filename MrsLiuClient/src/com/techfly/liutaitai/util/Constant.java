@@ -93,7 +93,7 @@ public class Constant {
     
 	public static final String CHANGE_INFO_URL = "user/modifyprofile";
 	public static final String BALANCE_HISTORY_URL = "user/moneyrecords";
-	public static final String BALANCE_URL = "";
+	public static final String BALANCE_URL = "user/vouchercards";
 	public static final String VOUCHER_URL = "user/myvouchers";
 	public static final String CHANGE_NICK_URL = "user/modifynickname";
 	public static final String APPLY_URL = "master/apply";

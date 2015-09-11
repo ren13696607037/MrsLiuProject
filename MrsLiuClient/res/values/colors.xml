@@ -110,4 +110,6 @@
     <color name="color_order_service_btn">#4dc5be</color>
     <color name="color_order_service_btn1">#6BC5BF</color>
     <color name="color_tech_account_hint">#a3a3a3</color>
+    
+    <color name="color_balance_text">#fd9303</color>
 </resources>
