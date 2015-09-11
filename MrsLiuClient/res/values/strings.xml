@@ -330,6 +330,7 @@
 	<string name="balance_text4">有效期%1$s</string>
 	<string name="balance_text5">立即\n充值</string>
 	<string name="balance_no_content">暂无充值卡，敬请期待~</string>
+	<string name="balance_history_no_content">暂无记录~</string>
 	<!-- 我的现金券 -->
 	<string name="voucher_text">使用规则</string>
 	<string name="voucher_text1">现金券全场通用，每次仅可使用一张</string>
@@ -507,4 +508,12 @@
 	<string name="cash_alipay_text1">支付宝账号：%1$s</string>
 	<string name="cash_alipay_text2">姓名：%1$s</string>
 	<string name="cash_weixin_text1">微信账号：%1$s</string>
+	<string name="balance_history_text">当前余额：</string>
+	<string name="balance_history_text1">详情</string>
+	<string name="balance_history_text2">金额</string>
+	<string name="balance_history_text3">时间</string>
+	<string name="balance_history_text4">充值</string>
+	<string name="balance_history_text5">支付</string>
+	<string name="balance_history_text6">+%1$s</string>
+	<string name="balance_history_text7">-%1$s</string>
 </resources>
