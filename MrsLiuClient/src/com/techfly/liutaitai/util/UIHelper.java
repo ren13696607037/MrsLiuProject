@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 
 import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.model.home.activities.SearchActivity;
+import com.techfly.liutaitai.model.mall.activities.AfterSaleServiceActivity;
 import com.techfly.liutaitai.model.mall.activities.CategoryInfoListActivity;
 import com.techfly.liutaitai.model.mall.activities.GanxiActivity;
 import com.techfly.liutaitai.model.mall.activities.OrderInfoActivity;
@@ -97,8 +98,6 @@ public class UIHelper {
 		intent.putExtra(IntentBundleKey.TYPE, type);
 		context.startActivity(intent);
 	}
-
-
 
 	public static void toLoginActivity(Context context) {
 		Intent intent = new Intent(context, LoginActivity.class);
@@ -202,6 +201,13 @@ public class UIHelper {
 	public static void toOrderInfoActivity(Fragment context, String id) {
 		Intent intent = new Intent(context.getActivity(),
 				OrderInfoActivity.class);
+		intent.putExtra(IntentBundleKey.ORDER_ID, id);
+		context.startActivity(intent);
+	}
+
+	public static void toAfterActivity(Fragment context, String id) {
+		Intent intent = new Intent(context.getActivity(),
+				AfterSaleServiceActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, id);
 		context.startActivity(intent);
 	}

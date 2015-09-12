@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.techfly.liutaitai.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/after_et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/px_40"
+                    android:background="@drawable/shap_radio"
+                    android:gravity="top|left"
+                    android:hint="@string/after_hint"
+                    android:inputType="textCapCharacters"
+                    android:minLines="5"
+                    android:padding="@dimen/px_20"
+                    android:textColor="@color/TextColorBLACK"
+                    android:textSize="@dimen/app_text_size_first" />
+
+                <TextView
+                    android:id="@+id/after_commint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/px_40"
+                    android:background="@drawable/shap_radio"
+                    android:gravity="center"
+                    android:padding="@dimen/px_20"
+                    android:text="@string/commit"
+                    android:textColor="@color/TextColorBLACK"
+                    android:textSize="@dimen/app_text_size_first" />
+            </LinearLayout>
+        </ScrollView>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
+
+</LinearLayout>

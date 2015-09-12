@@ -3,7 +3,6 @@ package com.techfly.liutaitai.model.mall.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.OrderBasketClick;
 import com.techfly.liutaitai.model.mall.bean.Product;
+import com.techfly.liutaitai.model.mall.fragment.OrderBastketFragment;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.util.adapter.CommonAdapter;
 import com.techfly.liutaitai.util.view.ListViewForScrollView;
@@ -21,10 +21,10 @@ import com.techfly.liutaitai.util.view.ListViewForScrollView;
 public class OrderBastketAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<MyOrder> mDatas;
-	private Fragment mFragment;
+	private OrderBastketFragment mFragment;
 
 	public OrderBastketAdapter(Context context, ArrayList<MyOrder> datas,
-			Fragment fragment) {
+			OrderBastketFragment fragment) {
 		this.context = context;
 		this.mDatas = datas;
 		this.mFragment = fragment;
@@ -77,11 +77,14 @@ public class OrderBastketAdapter extends BaseAdapter {
 		}
 
 		MyOrder order = mDatas.get(position);
+		if(order == null)
+			return convertView;
+		
 		setState(viewHolder.mTvBtn1, viewHolder.mTvBtn2, viewHolder.mTvState,
 				order.getmState());
 		setType(viewHolder.mTvType, order.getmType());
-		viewHolder.mTvBtn1.setOnClickListener(new OrderBasketClick(context));
-		viewHolder.mTvBtn2.setOnClickListener(new OrderBasketClick(context));
+		viewHolder.mTvBtn1.setOnClickListener(new OrderBasketClick(mFragment,order.getmId() + ""));
+		viewHolder.mTvBtn2.setOnClickListener(new OrderBasketClick(mFragment,order.getmId() + ""));
 		viewHolder.mTvCount.setText("总数：" + order.getmTotalCount()
 				+ order.getmUnit());
 		viewHolder.mTvTime.setText(order.getmTime());

@@ -83,6 +83,12 @@ public class Constant {
 	
 	public static final String ORDER_INFO = "order/detail";//订单篮订单详情
 	public static final String ORDER_INFO_ID = "orderid";
+	public static final String CANCEL_ORDER = "order/cancelOrder";//取消订单
+	public static final String DELETE_ORDER = "order/deleteOrder";//删除订单
+	
+	public static final String AFTER_SALE_SERVICE = "order/orderReply";//申请售后
+	public static final String AFTER_SALE_SERVICE_CONTENT = "message";//申请售后
+	
 
     public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
     public static String UPDATE_TO_CART_REQUEST_URL="product/editCartCount";

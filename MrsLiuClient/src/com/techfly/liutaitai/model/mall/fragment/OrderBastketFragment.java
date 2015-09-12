@@ -231,4 +231,9 @@ public class OrderBastketFragment extends CommonFragment implements
 		mListView.stopLoadMore();
 	}
 
+	public void refreshList() {
+		startLoading(this);
+		onRefresh();
+	}
+
 }

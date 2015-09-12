@@ -507,4 +507,8 @@
 	<string name="cash_alipay_text1">支付宝账号：%1$s</string>
 	<string name="cash_alipay_text2">姓名：%1$s</string>
 	<string name="cash_weixin_text1">微信账号：%1$s</string>
+	<string name="service_phone">4008275899</string>
+	<string name="after_hint">简单描述下您的问题，客服会尽快与您联系~</string>
+	<string name="commit">提交</string>
+	<string name="after_sale_service">申请售后</string>
 </resources>
