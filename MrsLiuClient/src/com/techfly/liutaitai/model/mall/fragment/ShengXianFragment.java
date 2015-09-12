@@ -423,7 +423,6 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             }
 
             break;
-        case R.id.flag_img2:
         case R.id.sort2:
             if (mSortPop2 != null) {
                 if (mSortPop2.isShowing()) {

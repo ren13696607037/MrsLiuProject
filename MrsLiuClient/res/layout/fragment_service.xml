@@ -37,7 +37,6 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:drawablePadding="3dp"
                 android:drawableRight="@drawable/arrow_down"
                 android:gravity="center"
                 android:text="全部分类"
