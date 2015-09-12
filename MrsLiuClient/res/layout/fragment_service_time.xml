@@ -60,11 +60,29 @@
         android:layout_marginTop="10dp"
         android:horizontalSpacing="20dp"
         android:listSelector="@drawable/bcg_item_grid"
-        android:numColumns="4"
+        android:numColumns="3"
         android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="25dp"
         android:paddingRight="20dp"
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp"
+        android:background="@android:color/white"
         />
 
+    <TextView 
+          android:id="@+id/confirm"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="5dp"
+          android:text="确定"
+          android:background="@drawable/button_order_yellow"
+          android:textColor="@android:color/white"
+          android:textSize="@dimen/app_text_size_first"
+          android:gravity="center"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+        />
+    
 </LinearLayout>

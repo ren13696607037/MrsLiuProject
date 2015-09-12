@@ -25,7 +25,9 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.model.mall.adapter.JishiAdapter;
 import com.techfly.liutaitai.model.mall.bean.Jishi;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
+import com.techfly.liutaitai.model.mall.parser.JiShiParser;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -57,14 +59,26 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "service/masters");
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
         url.setmGetParamPrefix("type");
         url.setmGetParamValues(String.valueOf(type));
       
         url.setmGetParamPrefix("time");
         url.setmGetParamValues(time);
+        
         // url.setmBaseUrl("http://www.hylapp.com:10001/apis/goods/detail?pid=1533");
         param.setmHttpURL(url);
-        param.setmParserClassName(ServiceInfoParser.class.getName());
+        param.setmParserClassName(JiShiParser.class.getName());
         // param.setmParserClassName(ProductInfoParser.class.getName());
         RequestManager
                 .getRequestData(getActivity(), createMyReqSuccessListener(),
@@ -188,7 +202,7 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
     }
 
     private void initView(View view) {
-        mListView = (XListView) view.findViewById(R.id.xlistview);
+        mListView = (XListView) view.findViewById(R.id.listview);
         mListView.setPullLoadEnable(false);
         mListView.setPullRefreshEnable(false);
         mListView.setXListViewListener(this);

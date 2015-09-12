@@ -7,6 +7,7 @@ public class Jishi {
     private String mName;
     private float mRating;
     private String mServiceTime;
+    private int type;
 
     public String getmId() {
         return mId;
@@ -54,6 +55,16 @@ public class Jishi {
 
     public void setmServiceTime(String mServiceTime) {
         this.mServiceTime = mServiceTime;
+    }
+
+  
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
 }

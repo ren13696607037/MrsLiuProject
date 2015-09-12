@@ -23,12 +23,15 @@ import com.techfly.liutaitai.model.mall.activities.ServiceAddressActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceTimeActivity;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
+import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
+import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.DateUtils;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.UIHelper;
@@ -49,7 +52,12 @@ public class ServiceOrderFragment extends CommonFragment implements
     private Button mButton;
     private String mId;
     private ServiceInfo mInfo;
-
+    private long mSelectTimeMills =System.currentTimeMillis();
+    private int mVoucherId;
+    
+    private double mJingdu;// 经度
+    private double mWeidu;// 纬度
+    private AddressManage mAddressManage;
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
@@ -115,9 +123,22 @@ public class ServiceOrderFragment extends CommonFragment implements
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            mSelectTimeMills = data.getLongExtra("data", 0);
+            mTimeTv.setText(DateUtils.getTime(mSelectTimeMills, "yyyy-MM-dd HH:mm"));
+        }else if(requestCode == 101){
+            if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES)!=null){
+                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
+                mAddressTv.setText(mAddressManage.getmDetail());
+            }
+        }else if(requestCode == 99){
+          
+        }else{
+             // ji'shi
+        }
     }
+
+  
 
     @Override
     public void onDetach() {
@@ -208,12 +229,13 @@ public class ServiceOrderFragment extends CommonFragment implements
         switch (id) {
         case R.id.address:
             Intent intents = null;
-            intents = new Intent(getActivity(), ServiceAddressActivity.class);
+//            intents = new Intent(getActivity(), ServiceAddressActivity.class);
+            intents = new Intent(getActivity(), AddressManageActivity.class);
             this.startActivityForResult(intents, 99);
             break;
         case R.id.jishi:
             UIHelper.toSomeIdActivity(this, JishiListActivity.class.getName(),
-                    System.currentTimeMillis() + "",
+                    mSelectTimeMills+ "",
                     Integer.parseInt(mInfo.getmType()));
             break;
 

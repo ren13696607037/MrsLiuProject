@@ -52,6 +52,7 @@ public class JishiAdapter extends BaseAdapter{
             holder.personNum = (TextView) convertView.findViewById(R.id.service_times);
             holder.serviceName = (TextView) convertView.findViewById(R.id.name);
             holder.mSexTv =(TextView) convertView.findViewById(R.id.sex);
+            holder.mBar= (RatingBar) convertView.findViewById(R.id.rate_bar);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder) convertView.getTag();

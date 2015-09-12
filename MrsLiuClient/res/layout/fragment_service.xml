@@ -28,7 +28,7 @@
                 android:layout_height="26dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@color/color_black"
+                android:background="#dddddd"
                 android:gravity="center" />
 
             <TextView
@@ -38,9 +38,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:drawablePadding="3dp"
-                android:drawableRight="@drawable/arrow_right"
+                android:drawableRight="@drawable/arrow_down"
                 android:gravity="center"
                 android:text="全部分类"
+                android:drawablePadding="8dp"
                 android:textColor="@color/TextColorBLACK"
                 android:textSize="@dimen/app_text_size_second" />
         </RelativeLayout>
@@ -50,15 +51,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1" >
 
-            <View
-                android:id="@+id/flag_img2"
-                android:layout_width="1dp"
-                android:layout_height="26dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@color/TextColorBLACK"
-                android:gravity="center" />
-
             <TextView
                 android:id="@+id/sort2"
                 android:layout_width="wrap_content"
@@ -67,7 +59,9 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="全城"
-                android:textColor="@color/color_gray"
+                android:drawableRight="@drawable/arrow_down"
+                android:drawablePadding="8dp"
+                android:textColor="@color/TextColorBLACK"
                 android:textSize="@dimen/app_text_size_second" />
         </RelativeLayout>
     </LinearLayout>
