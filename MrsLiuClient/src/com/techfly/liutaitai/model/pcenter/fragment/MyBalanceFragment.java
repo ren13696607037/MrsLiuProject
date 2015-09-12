@@ -118,7 +118,7 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
     	
     	mPrice = (TextView) view.findViewById(R.id.mybalance_price);
     	mListView = (XListView) view.findViewById(R.id.mybalance_list);
-    	mTextView = (TextView) view.findViewById(R.id.mybalance_text);
+    	mTextView = (TextView) view.findViewById(R.id.mybalance_no_content);
     	mAdapter = new BalanceAdapter(MyBalanceFragment.this, mList);
     	mListView.setAdapter(mAdapter);
     }

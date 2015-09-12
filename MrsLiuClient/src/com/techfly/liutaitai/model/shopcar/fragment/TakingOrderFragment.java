@@ -114,12 +114,12 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	if(resultCode==Constant.ORDER_ADDRESS_SUCCESS||resultCode==Constant.ORDER_CITY_SUCCESS){
+//    	if(resultCode==Constant.ORDER_ADDRESS_SUCCESS||resultCode==Constant.ORDER_CITY_SUCCESS){
     		if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES)!=null){
                 mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
                 onDisplay();
             }
-    	}
+//    	}
             
     }
    

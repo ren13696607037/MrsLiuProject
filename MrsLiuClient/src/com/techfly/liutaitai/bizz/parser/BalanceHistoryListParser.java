@@ -11,13 +11,13 @@ import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.JsonKey;
 
-public class BalanceListParser implements Parser{
+public class BalanceHistoryListParser implements Parser{
 
 	@Override
 	public Object fromJson(JSONObject object) {
 		ArrayList<Balance> list = new ArrayList<Balance>();
 		if(object != null){
-			JSONArray data = object.optJSONArray(JsonKey.DATA);
+			JSONArray data = object.optJSONObject(JsonKey.DATA).optJSONArray(JsonKey.DATAS);
 			if(data != null){
 				int size = data.length();
 				for(int i = 0; i < size; i++){
@@ -25,7 +25,7 @@ public class BalanceListParser implements Parser{
 					JSONObject obj = data.optJSONObject(i);
 					balance.setmId(obj.optString(JsonKey.BalanceKey.ID));
 					balance.setmPrice(obj.optString(JsonKey.BalanceKey.MONEY));
-					balance.setmSend(obj.optString(JsonKey.BalanceKey.DESC));
+					balance.setmSend(obj.optString(JsonKey.BalanceKey.TYPE));
 					balance.setmTime(obj.optString(JsonKey.BalanceKey.TIME));
 					list.add(balance);
 				}

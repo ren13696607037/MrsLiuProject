@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_gray"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="可预约时间"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dip"
+        android:background="@drawable/border_bg"
+        android:padding="1sp" >
+
+        <ImageView
+            android:id="@+id/home_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/px_10"
+            android:layout_marginRight="@dimen/px_10"
+            android:src="@drawable/arrow_left" />
+
+        <ImageView
+            android:id="@+id/home_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/px_10"
+            android:layout_marginRight="@dimen/px_10"
+            android:src="@drawable/arrow_right" />
+
+        <com.techfly.liutaitai.util.view.HorizontalListView
+            android:id="@+id/home_list"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/home_right"
+            android:layout_toRightOf="@id/home_left" />
+    </RelativeLayout>
+  
+    <com.techfly.liutaitai.util.view.GridViewForScrollView 
+        android:id="@+id/home_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginTop="10dp"
+        android:horizontalSpacing="20dp"
+        android:listSelector="@drawable/bcg_item_grid"
+        android:numColumns="3"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="25dp"
+        android:paddingRight="20dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp"
+        android:background="@android:color/white"
+        />
+
+    <TextView 
+          android:id="@+id/confirm"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:padding="5dp"
+          android:text="确定"
+          android:background="@drawable/button_order_yellow"
+          android:textColor="@android:color/white"
+          android:textSize="@dimen/app_text_size_first"
+          android:gravity="center"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+        />
+    
+</LinearLayout>

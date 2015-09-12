@@ -20,6 +20,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -27,7 +28,9 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
+import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class ServiceInfoFragment extends CommonFragment{
@@ -159,7 +162,15 @@ public class ServiceInfoFragment extends CommonFragment{
             
             @Override
             public void onClick(View view) {
-               
+                User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+                int userId = 0;
+                if (user != null) {
+                    userId = Integer.parseInt(user.getmId());
+                }
+                if (userId == 0) {
+                    UIHelper.toLoginActivity(getActivity());
+                    return;
+                }
                 UIHelper.toSomeIdActivity(ServiceInfoFragment.this,ServiceOrderActivity.class.getName(), mId, Integer.parseInt(mInfo.getmType()));
             }
         });

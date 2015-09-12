@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
  	<string name="error_get_user_id">请先登录</string>
     <string name="app_name">刘太太.生活</string>
@@ -330,6 +330,7 @@
 	<string name="balance_text4">有效期%1$s</string>
 	<string name="balance_text5">立即\n充值</string>
 	<string name="balance_no_content">暂无充值卡，敬请期待~</string>
+	<string name="balance_history_no_content">暂无记录~</string>
 	<!-- 我的现金券 -->
 	<string name="voucher_text">使用规则</string>
 	<string name="voucher_text1">现金券全场通用，每次仅可使用一张</string>
@@ -507,8 +508,19 @@
 	<string name="cash_alipay_text1">支付宝账号：%1$s</string>
 	<string name="cash_alipay_text2">姓名：%1$s</string>
 	<string name="cash_weixin_text1">微信账号：%1$s</string>
+
 	<string name="service_phone">4008275899</string>
 	<string name="after_hint">简单描述下您的问题，客服会尽快与您联系~</string>
 	<string name="commit">提交</string>
 	<string name="after_sale_service">申请售后</string>
+
+	<string name="balance_history_text">当前余额：</string>
+	<string name="balance_history_text1">详情</string>
+	<string name="balance_history_text2">金额</string>
+	<string name="balance_history_text3">时间</string>
+	<string name="balance_history_text4">充值</string>
+	<string name="balance_history_text5">支付</string>
+	<string name="balance_history_text6">+%1$s</string>
+	<string name="balance_history_text7">-%1$s</string>
+
 </resources>

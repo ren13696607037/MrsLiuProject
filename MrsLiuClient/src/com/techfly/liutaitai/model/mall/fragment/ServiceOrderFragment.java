@@ -16,18 +16,29 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.activities.JishiListActivity;
+import com.techfly.liutaitai.model.mall.activities.ServiceAddressActivity;
+import com.techfly.liutaitai.model.mall.activities.ServiceTimeActivity;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
+import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
+import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
+import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.DateUtils;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
-public class ServiceOrderFragment extends CommonFragment implements OnClickListener{
+public class ServiceOrderFragment extends CommonFragment implements
+        OnClickListener {
 
     private ImageView mImg;
     private TextView mNameTv;
@@ -41,6 +52,12 @@ public class ServiceOrderFragment extends CommonFragment implements OnClickListe
     private Button mButton;
     private String mId;
     private ServiceInfo mInfo;
+    private long mSelectTimeMills =System.currentTimeMillis();
+    private int mVoucherId;
+    
+    private double mJingdu;// 经度
+    private double mWeidu;// 纬度
+    private AddressManage mAddressManage;
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
@@ -64,25 +81,27 @@ public class ServiceOrderFragment extends CommonFragment implements OnClickListe
     }
 
     private Response.Listener<Object> createMyReqSuccessListener() {
-        
+
         return new Listener<Object>() {
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
                 mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                mInfo   = (ServiceInfo) object;
-             
+                mInfo = (ServiceInfo) object;
+
             }
-            
+
         };
     }
 
-   
-   private void onDisplayInfo(){
-      
-   }
-    
+    private void onDisplayInfo() {
+        ImageLoader.getInstance().displayImage(mInfo.getmImg(), mImg,
+                ImageLoaderUtil.mHallIconLoaderOptions);
+        mNameTv.setText(mInfo.getmName());
+        mPriceTv.setText("￥" + mInfo.getmPrice() + "/" + mInfo.getmUnit());
+    }
+
     private Response.ErrorListener createMyReqErrorListener() {
         return new Response.ErrorListener() {
             @Override
@@ -97,102 +116,143 @@ public class ServiceOrderFragment extends CommonFragment implements OnClickListe
 
     @Override
     public void onAttach(Activity activity) {
-       
+
         super.onAttach(activity);
         mId = activity.getIntent().getStringExtra(IntentBundleKey.ID);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-       
-        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            mSelectTimeMills = data.getLongExtra("data", 0);
+            mTimeTv.setText(DateUtils.getTime(mSelectTimeMills, "yyyy-MM-dd HH:mm"));
+        }else if(requestCode == 101){
+            if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES)!=null){
+                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
+                mAddressTv.setText(mAddressManage.getmDetail());
+            }
+        }else if(requestCode == 99){
+          
+        }else{
+             // ji'shi
+        }
     }
+
+  
+
     @Override
     public void onDetach() {
-       
+
         super.onDetach();
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        
+
         super.onCreate(savedInstanceState);
-        
+
         startReqTask(this);
-        
+
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_service_order, container, false);
+        View view = inflater.inflate(R.layout.fragment_service_order,
+                container, false);
         return view;
     }
+
     @Override
     public void onDestroy() {
-     
+
         super.onDestroy();
     }
+
     @Override
     public void onDestroyView() {
-     
+
         super.onDestroyView();
-        
+
     }
-    
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
     }
-    
-    
+
     private void initView(View view) {
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
         setTitleText("服务详情");
         mImg = (ImageView) view.findViewById(R.id.img);
         mNameTv = (TextView) view.findViewById(R.id.name);
         mPriceTv = (TextView) view.findViewById(R.id.price);
-        
+
         mAddressTv = (TextView) view.findViewById(R.id.address);
         mAddressTv.setOnClickListener(this);
-        
+
         mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
         mCheckBox.setOnClickListener(this);
-        
+
         mJishiTv = (TextView) view.findViewById(R.id.jishi);
         mJishiTv.setOnClickListener(this);
-        
+
         mPhoneTv = (TextView) view.findViewById(R.id.phone);
-        
+
         mTimeTv = (TextView) view.findViewById(R.id.clock);
         mTimeTv.setOnClickListener(this);
-        
+
         mVoucherTv = (TextView) view.findViewById(R.id.voucher);
         mVoucherTv.setOnClickListener(this);
-        
+
         mButton = (Button) view.findViewById(R.id.order);
         mButton.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View view) {
-               
-          
+
             }
         });
-        
+
     }
-    
-    
-    
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
-      
+
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onClick(View arg0) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id) {
+        case R.id.address:
+            Intent intents = null;
+//            intents = new Intent(getActivity(), ServiceAddressActivity.class);
+            intents = new Intent(getActivity(), AddressManageActivity.class);
+            this.startActivityForResult(intents, 99);
+            break;
+        case R.id.jishi:
+            UIHelper.toSomeIdActivity(this, JishiListActivity.class.getName(),
+                    mSelectTimeMills+ "",
+                    Integer.parseInt(mInfo.getmType()));
+            break;
 
+        case R.id.clock:
+            Intent intent = null;
+            intent = new Intent(getActivity(), ServiceTimeActivity.class);
+            this.startActivityForResult(intent, 100);
+
+            break;
+        case R.id.voucher:
+            Intent intentss = null;
+            intentss = new Intent(getActivity(), MyVoucherActivity.class);
+            this.startActivityForResult(intentss, 101);
+            break;
+        default:
+            break;
+        }
+    }
 
 }

@@ -3,7 +3,6 @@ package com.techfly.liutaitai.model.mall.parser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
@@ -33,6 +32,7 @@ public class ServiceInfoParser implements Parser{
                     p.setmType(jsonObject.optString("type"));
                     p.setmServiceConent("耗时"+jsonObject.optString("minutes")+"分钟/售后"
                     +jsonObject.optString("servicedays")+"天");
+                    p.setmUnit(jsonObject.optString("unit"));
                 }
             }
         }

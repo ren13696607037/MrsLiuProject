@@ -242,6 +242,7 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+     
       <activity
             android:name=".model.mall.activities.ServiceTimeActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
@@ -351,6 +352,11 @@
             android:theme="@android:style/Theme.NoTitleBar" />
          <activity
             android:name=".model.pcenter.activities.MyBalanceActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+         <activity
+            android:name=".model.pcenter.activities.BalanceHistoryActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />

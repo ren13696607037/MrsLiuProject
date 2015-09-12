@@ -56,7 +56,6 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
     private TextView mSortTv2;
   
     private View mFlagImg1;
-    private View mFlagImg2;
   
     private int mPage = 1;
     
@@ -90,7 +89,6 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
 
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
             mPopAdapter1.updateListView(mSortRuleList);
         }
         
@@ -100,7 +98,6 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
      * 
      */
     private void initPopupWindow1() {
-        // TODO Auto-generated method stub
         Utility.getScreenSize(getActivity());
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         // 引入窗口配置文件
@@ -147,7 +144,7 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
     }
 
     /**
-     * 
+     * 设置下 pop up window 
      */
     private void initPopupWindow2() {
         // TODO Auto-generated method stub
@@ -285,16 +282,14 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
     }
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
         type =activity.getIntent().getIntExtra("type", 1);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-      
+        initSortRule2();
         startReqTask(this);
         
     }
@@ -324,18 +319,10 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
 
         mSortTv1 = (TextView) view.findViewById(R.id.sort1);
         mSortTv2 = (TextView) view.findViewById(R.id.sort2);
-    
-
         mFlagImg1 = view.findViewById(R.id.flag_img1);
-        mFlagImg2 = view.findViewById(R.id.flag_img2);
-     
-
         mSortTv1.setOnClickListener(this);
         mSortTv2.setOnClickListener(this);
-    
-
         mFlagImg1.setOnClickListener(this);
-        mFlagImg2.setOnClickListener(this);
       
         mPull = (PullToRefreshLayout) view.findViewById(R.id.layout_parts);
         mPull.setOnRefreshListener(this);
@@ -352,10 +339,37 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
            
             }
         });
-
+        initPopupWindow2();
     }
 
-   
+    private void initSortRule2(){
+        SortRule rule = new SortRule();
+        rule.setmId("");
+        rule.setmName("默认排序");
+        
+        SortRule rule1 = new SortRule();
+        rule1.setmId("");
+        rule1.setmName("按销量排序");
+        
+        SortRule rule2 = new SortRule();
+        rule2.setmId("");
+        rule2.setmName("按新品");
+        
+        SortRule rule3 = new SortRule();
+        rule3.setmId("");
+        rule3.setmName("价格由高到低");
+        
+        SortRule rule4 = new SortRule();
+        rule4.setmId("");
+        rule4.setmName("价格由低到高");
+        
+        mSortRuleList2.add(rule);
+        mSortRuleList2.add(rule1);
+        mSortRuleList2.add(rule2);
+        mSortRuleList2.add(rule3);
+        mSortRuleList2.add(rule4);
+        
+    }
 
     private void initTitleView() {
       setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
@@ -407,7 +421,6 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
             }
 
             break;
-        case R.id.flag_img2:
         case R.id.sort2:
             if (mSortPop2 != null) {
                 if (mSortPop2.isShowing()) {

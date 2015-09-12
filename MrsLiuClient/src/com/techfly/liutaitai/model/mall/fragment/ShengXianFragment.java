@@ -55,8 +55,6 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
     private TextView mSortTv2;
   
     private View mFlagImg1;
-    private View mFlagImg2;
-  
     private int mPage = 1;
     
     private PopupWindow mSortPop1;
@@ -77,10 +75,9 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
     private PopUpAdapter mPopAdapter2;
     
     private List<SortRule> mSortRuleList;
-    private List<SortRule> mSortRuleList2;
-    private String sellerSortRuleStr = "";// 商家所属分类
-    private String sellerSortRuleStr2 = "";// 商家所在地区
-  
+    private List<SortRule> mSortRuleList2 = new ArrayList<SortRule>();;
+    private String mCateID = "";// 商家所属分类
+ 
     List<Service> mList = new ArrayList<Service>();
     private PullToRefreshLayout mPull;
     private GridView mGrid;
@@ -95,6 +92,34 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         
     };
     
+    private void initSortRule2(){
+        SortRule rule = new SortRule();
+        rule.setmId("");
+        rule.setmName("默认排序");
+        
+        SortRule rule1 = new SortRule();
+        rule1.setmId("");
+        rule1.setmName("按销量排序");
+        
+        SortRule rule2 = new SortRule();
+        rule2.setmId("");
+        rule2.setmName("按新品");
+        
+        SortRule rule3 = new SortRule();
+        rule3.setmId("");
+        rule3.setmName("价格由高到低");
+        
+        SortRule rule4 = new SortRule();
+        rule4.setmId("");
+        rule4.setmName("价格由低到高");
+        
+        mSortRuleList2.add(rule);
+        mSortRuleList2.add(rule1);
+        mSortRuleList2.add(rule2);
+        mSortRuleList2.add(rule3);
+        mSortRuleList2.add(rule4);
+        
+    }
     /**
      * 
      */
@@ -116,7 +141,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                sellerSortRuleStr = mSortRuleList.get(position).getmId();
+                mCateID = mSortRuleList.get(position).getmId();
               
                 
                 for(int i =0;i<mSortRuleList.size();i++ ){
@@ -166,11 +191,14 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                sellerSortRuleStr2 = mSortRuleList2.get(position).getmId();
+                mSortId = mSortRuleList2.get(position).getmId();
                 mSortTv2.setText(mSortRuleList2.get(position).getmName());
-                requestData();
-                mLoadHandler
-                        .sendEmptyMessageDelayed(Constant.NET_SUCCESS, 5000);
+        
+          
+                mPage = 1;
+                mList.clear();
+                getServiceList();
+                
                 mSortPop2.dismiss();
             }
 
@@ -292,9 +320,9 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onCreate(savedInstanceState);
       
+        super.onCreate(savedInstanceState);
+        initSortRule2();
         startReqTask(this);
         
     }
@@ -303,11 +331,12 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
     public void onDestroy() {
        
         super.onDestroy();
+        
     }
 
     @Override
     public void onDestroyView() {
-        // TODO Auto-generated method stub
+        
         super.onDestroyView();
     }
 
@@ -324,19 +353,10 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 
         mSortTv1 = (TextView) view.findViewById(R.id.sort1);
         mSortTv2 = (TextView) view.findViewById(R.id.sort2);
-    
-
         mFlagImg1 = view.findViewById(R.id.flag_img1);
-        mFlagImg2 = view.findViewById(R.id.flag_img2);
-     
-
         mSortTv1.setOnClickListener(this);
         mSortTv2.setOnClickListener(this);
-    
-
         mFlagImg1.setOnClickListener(this);
-        mFlagImg2.setOnClickListener(this);
-      
         mPull = (PullToRefreshLayout) view.findViewById(R.id.layout_parts);
         mPull.setOnRefreshListener(this);
         mGrid = (GridView) view.findViewById(R.id.gridview_parts);
@@ -348,11 +368,10 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
                 Product pro = (Product) arg0.getItemAtPosition(arg2);
-              UIHelper.toSomeIdActivity(ShengXianFragment.this, ProductInfoActivity.class.getName(), pro.getmId(),type);
-
+                UIHelper.toSomeIdActivity(ShengXianFragment.this, ProductInfoActivity.class.getName(), pro.getmId(),type);
             }
         });
-
+        initPopupWindow2();
     }
 
    
@@ -376,19 +395,16 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        // TODO Auto-generated method stub
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onDetach() {
-        // TODO Auto-generated method stub
         super.onDetach();
     }
 
     @Override
     public void onLowMemory() {
-        // TODO Auto-generated method stub
         super.onLowMemory();
     }
 
@@ -407,7 +423,6 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             }
 
             break;
-        case R.id.flag_img2:
         case R.id.sort2:
             if (mSortPop2 != null) {
                 if (mSortPop2.isShowing()) {

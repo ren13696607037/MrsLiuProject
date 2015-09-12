@@ -14,7 +14,6 @@ public class SplashActivity extends BaseActivity {
     private static final long DELAY = 1000;
     private static final int MSG_HOME=0x101;
     private Handler mHandler = new Handler() {
-
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -23,9 +22,8 @@ public class SplashActivity extends BaseActivity {
             	break;
             }
         }
-
     };
-
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

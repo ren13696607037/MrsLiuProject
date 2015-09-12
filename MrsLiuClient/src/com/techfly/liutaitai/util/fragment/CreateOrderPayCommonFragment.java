@@ -168,9 +168,9 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
          order.setmAccountId(Keys.DEFAULT_SELLER);
          order.setmMerchantId(Keys.DEFAULT_PARTNER);
          if(mPayType ==Constant.PAY_TYPE_CREATE){
-               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_CALLBACK_URL);
+               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_CALLBACK_URL+"?orderId="+mOrderId+"&price="+mPayMoney+"&payType=1");
          }else{
-               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
+               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL+"?orderId="+mOrderId+"&price="+mPayMoney+"&payType=1");
          }
          order.setmOrderNo(mOrderId);
          order.setmProductPrice(mPayMoney);
@@ -224,7 +224,7 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
         PayOrder order = new PayOrder();
         order.setmAccountId(Keys.DEFAULT_SELLER);
         order.setmMerchantId(Keys.DEFAULT_PARTNER);
-        order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
+        order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL+"?orderId="+orderId+"&price="+payMoney+"&payType=1");
         order.setmOrderNo(orderId);
         order.setmProductPrice(payMoney);
         order.setmProductName(productName);
