@@ -1,6 +1,8 @@
 package com.techfly.liutaitai.model.pcenter.bean;
 
-public class Balance {
+import java.io.Serializable;
+
+public class Balance implements Serializable{
 	private String mId;
 	private String mPrice;
 	private String mSend;

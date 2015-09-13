@@ -522,5 +522,11 @@
 	<string name="balance_history_text5">支付</string>
 	<string name="balance_history_text6">+%1$s</string>
 	<string name="balance_history_text7">-%1$s</string>
+	
+	<string name="recharge_text">售价：</string>
+	<string name="recharge_text1">支付宝支付</string>
+	<string name="recharge_text2">微信支付</string>
+	<string name="recharge_text3">确认充值</string>
+	<string name="recharge_title">余额</string>
 
 </resources>
