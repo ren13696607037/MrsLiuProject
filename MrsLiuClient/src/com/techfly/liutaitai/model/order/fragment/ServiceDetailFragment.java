@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
+import com.techfly.liutaitai.model.order.adapter.ServiceClick;
 import com.techfly.liutaitai.model.order.parser.ServiceDetailParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -123,6 +124,9 @@ public class ServiceDetailFragment extends CommonFragment {
     	mVoucher = (TextView) view.findViewById(R.id.osd_voucher);
     	mServiceTime = (TextView) view.findViewById(R.id.osd_service_time);
     	mState = (TextView) view.findViewById(R.id.osd_state);
+    	
+    	mButton.setOnClickListener(new ServiceClick(mActivity, mButton.getText().toString(), mService));
+    	mButton2.setOnClickListener(new ServiceClick(mActivity, mButton2.getText().toString(), mService));
     }
     private void setData(){
     	mNo.setText(mActivity.getString(R.string.service_detail_text, mService.getmId()));
@@ -130,6 +134,13 @@ public class ServiceDetailFragment extends CommonFragment {
     	ImageLoader.getInstance().displayImage(mService.getmServiceIcon(), mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
     	mName.setText(mActivity.getString(R.string.service_detail_text2, mService.getmCustomerName()));
     	mPhone.setText(mActivity.getString(R.string.service_detail_text3, mService.getmCustomerPhone()));
+    	mTime.setText(mActivity.getString(R.string.order_service_text, mService.getmServiceTime()));
+    	mServiceTime.setText(mActivity.getString(R.string.service_detail_text1, mService.getmServicePerson()));
+    	mProName.setText(mService.getmServiceName());
+    	mPrice.setText(mActivity.getString(R.string.service_detail_text5, mService.getmServicePrice()));
+    	mVoucher.setText(mActivity.getString(R.string.service_detail_text7, mService.getmCash()));
+    	mTotal.setText(mActivity.getString(R.string.service_detail_text9, (Double.valueOf(mService.getmServicePrice())-Double.valueOf(mService.getmCash()))));
+    	setState(mService.getmServiceStatus(), mState, mButton, mButton2);
     }
 
 	@Override
@@ -178,5 +189,38 @@ public class ServiceDetailFragment extends CommonFragment {
             }
        };
     }
+    private void setState(String state, TextView textView, Button button, Button button2){
+		button.setVisibility(View.VISIBLE);
+		button2.setVisibility(View.VISIBLE);
+		if("0".equals(state)){
+			textView.setText(R.string.order_service_state);
+			button.setText(R.string.order_service_btn1);
+			button2.setText(R.string.order_service_btn);
+		}else if("1".equals(state)){
+			textView.setText(R.string.order_service_state1);
+			button.setText(R.string.order_service_btn2);
+			button2.setVisibility(View.INVISIBLE);
+		}else if("2".equals(state)){
+			textView.setText(R.string.order_service_state2);
+			button.setText(R.string.order_service_btn3);
+			button2.setVisibility(View.INVISIBLE);
+		}else if("3".equals(state) || "4".equals(state)){
+			textView.setText(R.string.order_service_state3);
+			button.setText(R.string.order_service_btn3);
+			button2.setVisibility(View.INVISIBLE);
+		}else if("5".equals(state)){
+			textView.setText(R.string.order_service_state4);
+			button.setText(R.string.order_service_btn5);
+			button2.setText(R.string.order_service_btn4);
+		}else if("6".equals(state)){
+			textView.setText(R.string.order_service_state5);
+			button.setText(R.string.order_service_btn);
+			button2.setText(R.string.order_service_btn4);
+		}else if("-1".equals(state)){
+			textView.setText(R.string.order_service_state6);
+			button.setText(R.string.order_service_btn);
+			button2.setText(R.string.order_service_btn4);
+		}
+	}
 
 }

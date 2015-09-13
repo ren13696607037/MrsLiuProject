@@ -16,13 +16,13 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;
 import com.techfly.liutaitai.model.pcenter.fragment.MyBalanceFragment;
+import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.IntentBundleKey;
 
 public class BalanceAdapter extends BaseAdapter {
 	private Context mContext;
 	private MyBalanceFragment mFragment;
 	private ArrayList<Balance> mList;
-	private int mPosition;
 	public BalanceAdapter(MyBalanceFragment context, ArrayList<Balance> list){
 		this.mFragment = context;
 		this.mList = list;
@@ -48,8 +48,7 @@ public class BalanceAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		mPosition = arg0;
+	public View getView(final int arg0, View arg1, ViewGroup arg2) {
 		ViewHolder holder;
 		if(arg1 == null){
 			holder = new ViewHolder();
@@ -70,7 +69,7 @@ public class BalanceAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(mFragment.getActivity(), RechargeActivity.class);
-				intent.putExtra(IntentBundleKey.BALANCE_PRICE, mList.get(mPosition));
+				intent.putExtra(IntentBundleKey.BALANCE_PRICE, mList.get(arg0));
 				mFragment.startActivity(intent);
 			}
 		});

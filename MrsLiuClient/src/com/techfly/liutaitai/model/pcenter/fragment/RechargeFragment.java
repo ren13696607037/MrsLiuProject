@@ -1,6 +1,5 @@
 package com.techfly.liutaitai.model.pcenter.fragment;
 
-import java.io.Console;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,13 +9,11 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.activities.BalanceHistoryActivity;
 import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -31,8 +28,8 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 	private TextView mPrice;
 	private RelativeLayout mAlipay;
 	private RelativeLayout mWeixin;
-	private CheckBox mCbAlipay;
-	private CheckBox mCbWeixin;
+	private ImageView mCbAlipay;
+	private ImageView mCbWeixin;
 	private Button mBtn;
 	private Balance mBalance;
 	@Override
@@ -82,8 +79,8 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
     	mPrice = (TextView) view.findViewById(R.id.recharge_price);
     	mAlipay = (RelativeLayout) view.findViewById(R.id.recharge_alipay);
     	mWeixin = (RelativeLayout) view.findViewById(R.id.recharge_weixin);
-    	mCbAlipay = (CheckBox) view.findViewById(R.id.recharge_cb_alipay);
-    	mCbWeixin = (CheckBox) view.findViewById(R.id.recharge_cb_weixin);
+    	mCbAlipay = (ImageView) view.findViewById(R.id.recharge_cb_alipay);
+    	mCbWeixin = (ImageView) view.findViewById(R.id.recharge_cb_weixin);
     	mBtn = (Button) view.findViewById(R.id.recharge_btn);
     	
     	mBtn.setOnClickListener(this);
@@ -92,6 +89,7 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
     	
     	
     	mPrice.setText(mBalance.getmPrice());
+    	
     }
 
 	@Override
@@ -103,15 +101,15 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.recharge_alipay:
-			mCbAlipay.setChecked(true);
-			mCbWeixin.setChecked(false);
+			mCbAlipay.setImageResource(R.drawable.address_default);
+			mCbWeixin.setImageResource(R.drawable.address_undefault);
 			break;
 		case R.id.recharge_weixin:
-			mCbAlipay.setChecked(true);
-			mCbWeixin.setChecked(false);
+			mCbWeixin.setImageResource(R.drawable.address_default);
+			mCbAlipay.setImageResource(R.drawable.address_undefault);
 			break;
 		case R.id.recharge_btn:
-			
+			startReqTask(RechargeFragment.this);
 			break;
 
 		default:
