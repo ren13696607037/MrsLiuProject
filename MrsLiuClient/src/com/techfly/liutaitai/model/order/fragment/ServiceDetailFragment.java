@@ -150,10 +150,10 @@ public class ServiceDetailFragment extends CommonFragment {
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_SERVICE_DETAIL_URL);
         url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mId);
         param.setmIsLogin(true);
-//		param.setmId(mUser.getmId());
-//		param.setmToken(mUser.getmToken());
-		param.setmId("1");
-		param.setmToken("440a07c991c4bbae3bcd52746e6a9d32");
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+//		param.setmId("1");
+//		param.setmToken("440a07c991c4bbae3bcd52746e6a9d32");
 		param.setmHttpURL(url);
 		param.setPostRequestMethod();
         param.setmParserClassName(ServiceDetailParser.class.getName());
@@ -190,17 +190,21 @@ public class ServiceDetailFragment extends CommonFragment {
        };
     }
     private void setState(String state, TextView textView, Button button, Button button2){
+    	AppLog.Loge("xll", "service detail state is in");
 		button.setVisibility(View.VISIBLE);
 		button2.setVisibility(View.VISIBLE);
 		if("0".equals(state)){
+			AppLog.Loge("xll", "service detail state is in" + state);
 			textView.setText(R.string.order_service_state);
 			button.setText(R.string.order_service_btn1);
 			button2.setText(R.string.order_service_btn);
 		}else if("1".equals(state)){
+			AppLog.Loge("xll", "service detail state is in" + state);
 			textView.setText(R.string.order_service_state1);
 			button.setText(R.string.order_service_btn2);
 			button2.setVisibility(View.INVISIBLE);
 		}else if("2".equals(state)){
+			AppLog.Loge("xll", "service detail state is in" + state);
 			textView.setText(R.string.order_service_state2);
 			button.setText(R.string.order_service_btn3);
 			button2.setVisibility(View.INVISIBLE);
@@ -209,17 +213,24 @@ public class ServiceDetailFragment extends CommonFragment {
 			button.setText(R.string.order_service_btn3);
 			button2.setVisibility(View.INVISIBLE);
 		}else if("5".equals(state)){
+			AppLog.Loge("xll", "service detail state is in" + state);
 			textView.setText(R.string.order_service_state4);
 			button.setText(R.string.order_service_btn5);
 			button2.setText(R.string.order_service_btn4);
 		}else if("6".equals(state)){
+			AppLog.Loge("xll", "service detail state is in" + state);
 			textView.setText(R.string.order_service_state5);
 			button.setText(R.string.order_service_btn);
 			button2.setText(R.string.order_service_btn4);
 		}else if("-1".equals(state)){
+			AppLog.Loge("xll", "service detail state is in" + state);
 			textView.setText(R.string.order_service_state6);
 			button.setText(R.string.order_service_btn);
 			button2.setText(R.string.order_service_btn4);
+		}else{
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			AppLog.Loge("xll", "service detail state is in why?????" );
 		}
 	}
 

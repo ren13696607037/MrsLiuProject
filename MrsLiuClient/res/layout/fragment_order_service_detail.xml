@@ -43,7 +43,9 @@
             android:paddingBottom="@dimen/px_15"
             android:paddingLeft="@dimen/px_30"
             android:paddingRight="@dimen/px_30"
-            android:paddingTop="@dimen/px_15" />
+            android:paddingTop="@dimen/px_15"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first" />
 
         <Button
             android:id="@+id/osd_btn2"
@@ -57,7 +59,9 @@
             android:paddingBottom="@dimen/px_15"
             android:paddingLeft="@dimen/px_30"
             android:paddingRight="@dimen/px_30"
-            android:paddingTop="@dimen/px_15" />
+            android:paddingTop="@dimen/px_15"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first" />
     </RelativeLayout>
 
     <ScrollView

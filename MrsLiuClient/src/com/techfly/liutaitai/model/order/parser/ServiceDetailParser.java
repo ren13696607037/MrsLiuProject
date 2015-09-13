@@ -31,7 +31,7 @@ public class ServiceDetailParser implements Parser{
 					service.setmServicePrice(obj.optString(JsonKey.ServiceDetailKey.PRICE));
 					service.setmServiceType(obj.optString(JsonKey.ServiceDetailKey.TYPE));
 					service.setmServiceTime(obj.optString(JsonKey.ServiceDetailKey.TIME));
-					service.setmServiceStatus(obj.optString(JsonKey.ServiceDetailKey.STATE));
+					service.setmServiceStatus(obj.optString(JsonKey.ServiceKey.STATE));
 					service.setmServicePerson(obj.optString(JsonKey.ServiceDetailKey.ADDTIME));
 				}
 			}else{
