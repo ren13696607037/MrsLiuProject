@@ -84,14 +84,38 @@ public class OrderBastketFragment extends CommonFragment implements
 		return inflater.inflate(R.layout.fragment_order_basket, container,
 				false);
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		if (SharePreferenceUtils.getInstance(getActivity()).getUser() == null) {
+			mDatas.clear();
+			mTvNoData.setVisibility(View.VISIBLE);
+			mTvNoData.setText("请先登录");
+			return;
+		}
+
+		User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+
+		if (mUser != null && user != null) {
+			if (!mUser.getmId().equals(user.getmId())) {
+				mUser = user;
+				mTvNoData.setVisibility(View.GONE);
+				refreshList();
+				return;
+			}
+		}
+
+		if (mUser == null && user != null) {
+			mUser = user;
+		}
+
 		if (mDatas.size() == 0) {
 			mTvNoData.setVisibility(View.GONE);
 			refreshList();
 		}
+
 	}
 
 	@Override
@@ -257,7 +281,5 @@ public class OrderBastketFragment extends CommonFragment implements
 		startLoading(this);
 		onRefresh();
 	}
-
-	
 
 }
