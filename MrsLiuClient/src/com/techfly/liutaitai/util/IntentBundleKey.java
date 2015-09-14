@@ -42,4 +42,7 @@ public class IntentBundleKey {
     public static String TECH_ORDER_DETAIL = "tech_order_detail";
     public static String TECH_MONEY = "tech_money";
     public static String TECH_CASH_ID = "tech_cash_id";
+    public static String BALANCE_PRICE = "balance_price";
+    public static String USER_NAME = "user_name";
+    public static String USER_PASS = "user_pass";
 }

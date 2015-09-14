@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
@@ -48,6 +49,7 @@ public class RateListAdapter extends BaseAdapter {
 			holder.mTvContent=(TextView) convertView.findViewById(R.id.iratelist_content);
 			holder.mTvName=(TextView) convertView.findViewById(R.id.iratelist_name);
 			holder.mTvTime=(TextView) convertView.findViewById(R.id.iratelist_time);
+			holder.mRatingBar=(RatingBar) convertView.findViewById(R.id.iratelist__bar);
 			convertView.setTag(holder);
 		}else{
 			holder=(ViewHolder) convertView.getTag();
@@ -55,12 +57,14 @@ public class RateListAdapter extends BaseAdapter {
 		holder.mTvContent.setText(mList.get(position).getmContent());
 		holder.mTvTime.setText(mList.get(position).getmTime());
 		holder.mTvName.setText(mList.get(position).getmName());
+		holder.mRatingBar.setRating(Float.valueOf(mList.get(position).getmScore()));
 		return convertView;
 	}
 	class ViewHolder{
 		private TextView mTvName;
 		private TextView mTvTime;
 		private TextView mTvContent;
+		private RatingBar mRatingBar;
 	}
 
 }

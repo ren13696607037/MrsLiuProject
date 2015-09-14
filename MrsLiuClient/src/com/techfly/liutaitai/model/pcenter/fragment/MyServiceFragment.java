@@ -19,6 +19,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.MyServiceParser;
 import com.techfly.liutaitai.model.pcenter.activities.MyOrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyServiceActivity;
+import com.techfly.liutaitai.model.pcenter.activities.RateListActivity;
 import com.techfly.liutaitai.model.pcenter.activities.TechCashActivity;
 import com.techfly.liutaitai.model.pcenter.activities.TechnicianInfoActivity;
 import com.techfly.liutaitai.model.pcenter.bean.MyService;
@@ -193,7 +194,7 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 			intent.putExtra(IntentBundleKey.TECH_MONEY, mService.getmPrice());
 			break;
 		case R.id.service_rate:
-			
+			intent = new Intent(mActivity, RateListActivity.class);
 			break;
 		case R.id.service_servicing:
 			intent = new Intent(mActivity, MyOrderActivity.class);

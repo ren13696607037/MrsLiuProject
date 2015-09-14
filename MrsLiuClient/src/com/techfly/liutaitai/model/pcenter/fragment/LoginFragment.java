@@ -30,6 +30,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.MD5;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
@@ -47,7 +48,7 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 	private EditText mPass;
 	private Button mButton;
 	private Button mRegister;
-	private int mExtra;
+	private int mExtra = 0;
 
 	private Handler loginHandler = new Handler() {
 
@@ -56,10 +57,10 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 			switch (msg.what) {
 			case MSG_LOGIN:
 				if (mUser.getmPhone() != null) {
-					Toast.makeText(getActivity(), R.string.login_success,
-							Toast.LENGTH_SHORT).show();
-//					AppManager.getAppManager().finishActivity(
-//							TakeFirstOrderVerifyActivity.class);
+					if(mExtra == 0){
+						Toast.makeText(getActivity(), R.string.login_success,
+								Toast.LENGTH_SHORT).show();
+					}
 					SharePreferenceUtils.getInstance(mActivity).saveUser(
 							mUser);
 					mActivity.setResult(Constant.LOGIN_SUCCESS);
@@ -131,12 +132,12 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 		mButton = (Button) view.findViewById(R.id.login_button);
 		mRegister = (Button) view.findViewById(R.id.register_button);
 //		mLayout = (LinearLayout) view.findViewById(R.id.login_about);
-//		mTvForget = (TextView) view.findViewById(R.id.login_forget);
+		mTvForget = (TextView) view.findViewById(R.id.login_forget);
 
 		mButton.setOnClickListener(this);
 		mRegister.setOnClickListener(this);
 //		mLayout.setOnClickListener(this);
-//		mTvForget.setOnClickListener(this);
+		mTvForget.setOnClickListener(this);
 	}
 
 	@Override
@@ -194,9 +195,11 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-//		case R.id.login_about:
-//
-//			break;
+		case R.id.login_forget:
+			Intent intent = new Intent(getActivity(), RegisterActivity.class);
+			intent.putExtra(IntentBundleKey.TYPE, Constant.FORGET_INTENT);
+			startActivityForResult(intent, Constant.FORGET_INTENT);
+			break;
 		case R.id.login_button:
 			if (mPhone.length() != 0 && mPass.length() != 0) {
 				if (Utility.isPhone(mPhone.getText().toString())) {
@@ -222,9 +225,15 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 	}
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		mExtra = 1;
 		if(resultCode == Constant.REGISTER_SUCCESS){
-			mActivity.setResult(Constant.LOGIN_SUCCESS);
-			mActivity.finish();
+			mPass.setText(data.getStringExtra(IntentBundleKey.USER_PASS));
+			mPhone.setText(data.getStringExtra(IntentBundleKey.USER_NAME));
+			startReqTask(LoginFragment.this);
+		}else if(resultCode == Constant.FORGET_SUCCESS){
+			mPass.setText(data.getStringExtra(IntentBundleKey.USER_PASS));
+			mPhone.setText(data.getStringExtra(IntentBundleKey.USER_NAME));
+			startReqTask(LoginFragment.this);
 		}
 	}
 

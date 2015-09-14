@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.RateActivity;
@@ -25,6 +28,7 @@ import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
 import com.techfly.liutaitai.model.order.adapter.ServiceAdapter;
 import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.model.pcenter.fragment.MyOrderAllFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -157,10 +161,10 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 			param.setmParserClassName(ServiceOrderParser.class.getName());
 		}
 		param.setmIsLogin(true);
-//		param.setmId(mUser.getmId());
-//		param.setmToken(mUser.getmToken());
-		param.setmId("1");
-		param.setmToken("440a07c991c4bbae3bcd52746e6a9d32");
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+//		param.setmId("1");
+//		param.setmToken("440a07c991c4bbae3bcd52746e6a9d32");
 		param.setmHttpURL(url);
 		param.setPostRequestMethod();
 		RequestManager
@@ -173,14 +177,43 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ArrayList<Service> list=(ArrayList<Service>) object;
-                mList.clear();
-                mList.addAll(list);
                 if(!isDetached()){
-                	mOrderHandler.removeMessages(MSG_LIST);
-                	mOrderHandler.sendEmptyMessage(MSG_LIST);
-                	mListView.stopLoadMore();
-                	mListView.stopRefresh();
+                	if(object instanceof ResultInfo){
+                		ResultInfo info = (ResultInfo) object;
+                		if(mType == 1){
+                			if(info.getmCode()==0){
+            					showSmartToast(R.string.delete_success, Toast.LENGTH_SHORT);
+            					mType = 0;
+            					startReqTask(ServiceOrderFragment.this);
+            				}else{
+            					if(info.getmMessage()!=null&&!TextUtils.isEmpty(info.getmMessage())&&!"null".equals(info.getmMessage())){
+            						showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
+            					}else{
+            						showSmartToast(R.string.delete_error, Toast.LENGTH_SHORT);
+            					}
+            				}
+                		}else if(mType == 3){
+                			if(info.getmCode()==0){
+            					showSmartToast(R.string.cancel_success, Toast.LENGTH_SHORT);
+            					mType = 0;
+            					startReqTask(ServiceOrderFragment.this);
+            				}else{
+            					if(info.getmMessage()!=null&&!TextUtils.isEmpty(info.getmMessage())&&!"null".equals(info.getmMessage())){
+            						showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
+            					}else{
+            						showSmartToast(R.string.cancel_error, Toast.LENGTH_SHORT);
+            					}
+            				}
+                		}
+                	}else if(object instanceof ArrayList){
+                		ArrayList<Service> list=(ArrayList<Service>) object;
+                        mList.clear();
+                        mList.addAll(list);
+                    	mOrderHandler.removeMessages(MSG_LIST);
+                    	mOrderHandler.sendEmptyMessage(MSG_LIST);
+                    	mListView.stopLoadMore();
+                    	mListView.stopRefresh();
+                	}
                 	mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }
@@ -239,6 +272,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 	public void onServiceDeleteListener(Service service) {
 		mType = 1;
 		mService = service;
+		startReqTask(ServiceOrderFragment.this);
 	}
 
 	@Override
@@ -251,6 +285,7 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 	public void onServiceCancelListener(Service service) {
 		mType = 3;
 		mService = service;
+		startReqTask(ServiceOrderFragment.this);
 	}
 
 	@Override

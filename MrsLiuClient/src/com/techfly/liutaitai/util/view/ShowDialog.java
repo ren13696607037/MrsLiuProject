@@ -60,6 +60,7 @@ public class ShowDialog extends Dialog{
 					long arg3) {
 				Area area = (Area) arg0.getAdapter().getItem(arg2);
 				ManagerListener.newManagerListener().notifyUpdateList(area);
+				dismiss();
 			}
 		});
 	}

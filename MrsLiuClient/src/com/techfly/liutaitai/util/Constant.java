@@ -73,6 +73,9 @@ public class Constant {
 	public static final String TECH_ACCOUNT_URL = "master/binding";
 	public static final String TECH_CASH_URL = "master/cash";
 	public static final String TECH_CASH_INFO_URL = "master/bindinginfo";
+	public static final String TECH_RATE_LIST_URL = "common/reviews";
+	public static final String FORGET_URL = "user/forgotpwd";
+	public static final String USER_INFO_URL = "user/info";
 	
 	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "product/addOrder";

@@ -25,6 +25,7 @@ public class LoginParser implements Parser {
 				user.setmNick(obj.optString(JsonKey.UserKey.NICK));
 				user.setmType(obj.optString(JsonKey.UserKey.TYPE));
 				user.setmToken(obj.optString(JsonKey.UserKey.TOKEN));
+				user.setmMoney(obj.optString(JsonKey.UserKey.MONEY));
 				user.setmMessage(object.optString(JsonKey.MESSAGE));
 			} else {
 				user.setmMessage(object.optString(JsonKey.MESSAGE));
