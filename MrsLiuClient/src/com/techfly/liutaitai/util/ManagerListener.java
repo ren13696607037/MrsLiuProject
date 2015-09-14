@@ -18,20 +18,23 @@ public class ManagerListener {
 		void onSelectListener(int type,String id);
 		void onDefaultListener(boolean b,String id);
 	}
-	public interface OrderPayListener{
+	public interface OrderPayListener{//技师联系客服
 		void onOrderPayListener(TechOrder order);
 	}
-	public interface OrderDeleteListener{
+	public interface OrderDeleteListener{//技师删除订单
 		void onOrderDeleteListener(TechOrder order);
 	}
-	public interface OrderCancelListener{
+	public interface OrderCancelListener{//技师拒单
 		void onOrderCancelListener(TechOrder order);
 	}
-	public interface OrderRateListener{
+	public interface OrderRateListener{//技师完成服务
 		void onOrderRateListener(TechOrder order);
 	}
-	public interface OrderLogiticsListener{
+	public interface OrderLogiticsListener{//技师开始服务
 		void onOrderLogiticsListener(TechOrder order);
+	}
+	public interface OrderTakeListener{//技师接单
+		void onOrderTakeListener(TechOrder order);
 	}
 	public interface spinnerClickListener{
 		void onClickNotify(String time);
@@ -54,6 +57,7 @@ public class ManagerListener {
 	private List<OrderLogiticsListener> mLogiticsListeners=new ArrayList<OrderLogiticsListener>();
 	private List<OrderPayListener> mPayListeners=new ArrayList<OrderPayListener>();
 	private List<OrderRateListener> mRateListeners=new ArrayList<OrderRateListener>();
+	private List<OrderTakeListener> mTakeListeners=new ArrayList<OrderTakeListener>();
 	private List<spinnerClickListener> mSpinnerClickListener=new ArrayList<spinnerClickListener>();
 	private List<ServiceClickListener> mServiceClickListeners = new ArrayList<ManagerListener.ServiceClickListener>();
 	private static ManagerListener mListener;
@@ -142,6 +146,16 @@ public class ManagerListener {
     		mDeleteListeners.remove(deleteListener);
     	}
     }
+    public void onRegisterOrderTakeListener(OrderTakeListener takeListener){
+    	if(!mTakeListeners.contains(takeListener)){
+    		mTakeListeners.add(takeListener);
+    	}
+    }
+    public void onUnRegisterOrderTakeListener(OrderTakeListener takeListener){
+    	if(mTakeListeners.contains(takeListener)){
+    		mTakeListeners.remove(takeListener);
+    	}
+    }
     public void onRegisterSpinnerClickListener(spinnerClickListener spinnerClickListener){
     	if(!mSpinnerClickListener.contains(spinnerClickListener)){
     		mSpinnerClickListener.add(spinnerClickListener);
@@ -221,6 +235,12 @@ public class ManagerListener {
     	int size=mLogiticsListeners.size();
     	for(int i=0;i<size;i++){
     		mLogiticsListeners.get(i).onOrderLogiticsListener(order);
+    	}
+    }
+    public void notifyOrderTakeListener(TechOrder order){
+    	int size=mTakeListeners.size();
+    	for(int i=0;i<size;i++){
+    		mTakeListeners.get(i).onOrderTakeListener(order);
     	}
     }
     public void notifyServiceDeleteListener(Service service){

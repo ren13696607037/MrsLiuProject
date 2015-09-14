@@ -80,9 +80,9 @@ public class MyOrderFragment extends CommonFragment {
     	PagerAdapter pagerAdapter=new PagerAdapter(
 				getActivity().getSupportFragmentManager());
     	pagerAdapter.addFragment(new MyOrderAllFragment());
-    	pagerAdapter.addFragment(new MyOrderPayFragment());
-    	pagerAdapter.addFragment(new MyOrderDeliveryFragment());
-    	pagerAdapter.addFragment(new MyOrderRateFragment());
+    	pagerAdapter.addFragment(new MyOrderPayFragment());//带接单
+    	pagerAdapter.addFragment(new MyOrderDeliveryFragment());//带服务
+    	pagerAdapter.addFragment(new MyOrderRateFragment());//进行中
     	mViewPager.setAdapter(pagerAdapter);
     	mTabView.setViewPager(mViewPager);
     	if(mPosition != 0){
