@@ -190,7 +190,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
 			
 			@Override
 			public void run() {
-				mPage = 0;
+				mPage = 1;
 				mList.clear();
 				requestData();
 			}
@@ -212,7 +212,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		MyOrder order=(MyOrder) parent.getAdapter().getItem(position);
+		TechOrder order=(TechOrder) parent.getAdapter().getItem(position);
 		Intent intent=new Intent(getActivity(),OrderDetailActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order.getmId());
 		startActivityForResult(intent, Constant.DETAIL_INTENT);

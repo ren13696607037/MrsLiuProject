@@ -72,6 +72,11 @@ public class Constant {
 	public static final String SERVICE_RATE_URL = "common/review";
 	public static final String TECH_ORDER_DETAIL_URL = "master/order";
 	public static final String TECH_ORDER_LIST_URL = "master/orders";
+	public static final String TECH_ORDER_TAKE_URL = "master/take";
+	public static final String TECH_ORDER_REFRSE_URL = "master/refuse";
+	public static final String TECH_ORDER_DONE_URL = "master/done";
+	public static final String TECH_ORDER_START_URL = "master/start";
+	public static final String TECH_ORDER_REMOVE_URL = "master/removeorder";
 	public static final String TECH_ACCOUNT_URL = "master/binding";
 	public static final String TECH_CASH_URL = "master/cash";
 	public static final String TECH_CASH_INFO_URL = "master/bindinginfo";

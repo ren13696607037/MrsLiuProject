@@ -44,6 +44,7 @@ import com.techfly.liutaitai.util.ManagerListener.OrderDeleteListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderLogiticsListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderPayListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderRateListener;
+import com.techfly.liutaitai.util.ManagerListener.OrderTakeListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -52,7 +53,7 @@ import com.techfly.liutaitai.util.fragment.OrderPayFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderRateListener{
+public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderRateListener,OrderPayListener,OrderTakeListener{
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
@@ -62,12 +63,11 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	private final int MSG_CANCEL=0x103;
 	private int mPage=1;
 	private int mSize=10;
-	private boolean isCancel=false;
-	private boolean isDelete=false;
 	private boolean isRefresh=true;
 	private ResultInfo mInfo;
 	private TechOrder mOrder;
 	private User mUser;
+	private int mType;
 	public Handler mAllHandler=new Handler(){
 
 		@Override
@@ -82,7 +82,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 			case MSG_DLELTE:
 				if(mInfo.getmCode()==0){
 					showSmartToast(R.string.delete_success, Toast.LENGTH_SHORT);
-					isDelete=false;
 					startReqTask(MyOrderAllFragment.this);
 				}else{
 					if(mInfo.getmMessage()!=null&&!TextUtils.isEmpty(mInfo.getmMessage())&&!"null".equals(mInfo.getmMessage())){
@@ -95,8 +94,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 			case MSG_CANCEL:
 				if(mInfo.getmCode()==0){
 					showSmartToast(R.string.cancel_success, Toast.LENGTH_SHORT);
-					isCancel=false;
-					isDelete=false;
 					startReqTask(MyOrderAllFragment.this);
 				}else{
 					if(mInfo.getmMessage()!=null&&!TextUtils.isEmpty(mInfo.getmMessage())&&!"null".equals(mInfo.getmMessage())){
@@ -126,6 +123,8 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
         ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
         ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
         ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
     }
     
 
@@ -143,6 +142,8 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
         ManagerListener.newManagerListener().onUnRegisterOrderLogiticsListener(this);
         ManagerListener.newManagerListener().onUnRegisterOrderRateListener(this);
         ManagerListener.newManagerListener().onUnRegisterOrderCancelListener(this);
+        ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
+        ManagerListener.newManagerListener().onUnRegisterOrderTakeListener(this);
     }
 
     @Override
@@ -177,41 +178,42 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 
 	@Override
 	public void requestData() {
-		if(isDelete){
-			RequestParam param = new RequestParam();
-	        HttpURL url = new HttpURL();
-	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_DELETE_URL);
-	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.ID).setmGetParamValues(mOrder.getmId());
-//	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues("6533");
-	        param.setmHttpURL(url);
+		RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+		if(mType == 3){
+	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_REMOVE_URL);
+	        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
 	        param.setmParserClassName(CommonParser.class.getName());
-	        RequestManager.getRequestData(getActivity(), createReqSuccessListener(), createReqErrorListener(), param);
-		}else if(isCancel){
-			RequestParam param = new RequestParam();
-	        HttpURL url = new HttpURL();
-	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_CANCEL_URL);
-	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.ID).setmGetParamValues(mOrder.getmId());
-	        param.setmHttpURL(url);
+		}else if(mType == 4){
+	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_REFRSE_URL);
+	        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
 	        param.setmParserClassName(CommonParser.class.getName());
-	        RequestManager.getRequestData(getActivity(), createCancelReqSuccessListener(), createCancelReqErrorListener(), param);
-	       
+		}else if(mType == 1){
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_DONE_URL);
+	        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
+	        //TODO 上传图片
+	        param.setmParserClassName(CommonParser.class.getName());
+		}else if(mType == 2){
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_START_URL);
+	        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
+	        param.setmParserClassName(CommonParser.class.getName());
+		}else if(mType == 5){
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_TAKE_URL);
+	        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
+	        param.setmParserClassName(CommonParser.class.getName());
 		}else{
-			RequestParam param = new RequestParam();
-	        HttpURL url = new HttpURL();
 	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_LIST_URL);
 	        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("0");
 	        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
 	        url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(mPage+"");
-	        param.setmIsLogin(true);
-			param.setmId(mUser.getmId());
-			param.setmToken(mUser.getmToken());
-			param.setPostRequestMethod();
-	        param.setmHttpURL(url);
 	        param.setmParserClassName(TechOrderParser.class.getName());
-	        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
 		}
+		param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		param.setPostRequestMethod();
+        param.setmHttpURL(url);
+        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
     }
 	private Response.Listener<Object> createCancelReqSuccessListener() {
         return new Listener<Object>() {
@@ -274,29 +276,50 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
-                if(isRefresh){
-                	mList.addAll(list);
-                }else{
-                	mList.clear();
-                	mList.addAll(list);
-                }
-                if (list == null || list.size() == 0) {
-                	
-				} else if (list.size() < 10) {
-					mListView.setVisibility(View.VISIBLE);
-				    mTextView.setVisibility(View.GONE);
-					mListView.setPullLoadEnable(false);
-				} else {
-					mListView.setVisibility(View.VISIBLE);
-					mTextView.setVisibility(View.GONE);
-					mListView.setPullLoadEnable(true);
-				}
-				mListView.stopLoadMore();
-				mListView.stopRefresh();
                 if(!isDetached()){
-                	mAllHandler.removeMessages(MSG_LIST);
-                	mAllHandler.sendEmptyMessage(MSG_LIST);
+                	if(object instanceof ArrayList){
+                		ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
+                        if(isRefresh){
+                        	mList.addAll(list);
+                        }else{
+                        	mList.clear();
+                        	mList.addAll(list);
+                        }
+                        if (list == null || list.size() == 0) {
+                        	
+        				} else if (list.size() < 10) {
+        					mListView.setVisibility(View.VISIBLE);
+        				    mTextView.setVisibility(View.GONE);
+        					mListView.setPullLoadEnable(false);
+        				} else {
+        					mListView.setVisibility(View.VISIBLE);
+        					mTextView.setVisibility(View.GONE);
+        					mListView.setPullLoadEnable(true);
+        				}
+        				mListView.stopLoadMore();
+        				mListView.stopRefresh();
+                    	mAllHandler.removeMessages(MSG_LIST);
+                    	mAllHandler.sendEmptyMessage(MSG_LIST);
+                	}else if(object instanceof ResultInfo){
+                		ResultInfo info = (ResultInfo) object;
+                		if(mType == 1){
+                			if(info.getmCode() == 0){
+                				mType = 0;
+                				startReqTask(MyOrderAllFragment.this);
+                			}
+                		}else if(mType == 2){
+                			if(info.getmCode() == 0){
+                				mType = 0;
+                				startReqTask(MyOrderAllFragment.this);
+                			}
+                		}else if(mType == 3){
+                			
+                		}else if(mType == 4){
+                			
+                		}else if(mType == 5){
+                			
+                		}
+                	}
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }
@@ -328,7 +351,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 			
 			@Override
 			public void run() {
-				mPage = 0;
+				mPage = 1;
 				mList.clear();
 				requestData();
 			}
@@ -350,30 +373,35 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		MyOrder order=(MyOrder) parent.getAdapter().getItem(position);
+		TechOrder order=(TechOrder) parent.getAdapter().getItem(position);
 		Intent intent=new Intent(getActivity(),OrderDetailActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order.getmId());
 		startActivityForResult(intent, Constant.DETAIL_INTENT);
 	}
 
 	@Override
-	public void onOrderRateListener(TechOrder order) {
+	public void onOrderRateListener(TechOrder order) {//技师完成服务
+		mType = 1;
 		Intent intent=new Intent(getActivity(),RateActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order);
 		startActivity(intent);
 	}
 
 	@Override
-	public void onOrderLogiticsListener(TechOrder order) {
-		Intent intent=new Intent(getActivity(),SearchLogisticsActivity.class);
-		intent.putExtra(IntentBundleKey.ORDER_ID, order);
-		startActivity(intent);
+	public void onOrderLogiticsListener(TechOrder order) {//技师开始服务
+		mType = 2;
+		mOrder=order;
+		isRefresh=false;
+		startReqTask(MyOrderAllFragment.this);
+//		Intent intent=new Intent(getActivity(),SearchLogisticsActivity.class);
+//		intent.putExtra(IntentBundleKey.ORDER_ID, order);
+//		startActivity(intent);
 	}
 
 	@Override
 	public void onOrderDeleteListener(TechOrder order) {
+		mType = 3;
 		mOrder=order;
-		isDelete=true;
 		isRefresh=false;
 		startReqTask(MyOrderAllFragment.this);
 	}
@@ -382,7 +410,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode==Constant.DETAIL_SUCCESS){
 			isRefresh=false;
-			isDelete=false;
 			startReqTask(MyOrderAllFragment.this);
 		}
 	}
@@ -391,7 +418,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 		super.onResume();
 		if(mList.size()==0){
 			isRefresh=false;
-			isDelete=false;
 			startReqTask(MyOrderAllFragment.this);
 		}else{
 			
@@ -401,9 +427,8 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	@Override
 	public void onOrderCancelListener(TechOrder order) {
 		mOrder=order;
-		isCancel=true;
 		isRefresh=false;
-		isDelete=false;
+		mType = 4;
 		startReqTask(MyOrderAllFragment.this);
 	}
 
@@ -418,6 +443,19 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 			String proName) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void onOrderPayListener(TechOrder order) {//技师联系客服
+		mType = 6;
+		mOrder = order;
+	}
+
+	@Override
+	public void onOrderTakeListener(TechOrder order) {
+		mType = 5;
+		mOrder = order;
+		startReqTask(MyOrderAllFragment.this);
 	}
 
 

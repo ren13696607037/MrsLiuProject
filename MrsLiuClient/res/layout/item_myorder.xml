@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:descendantFocusability="blocksDescendants"
-    >
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants" >
 
     <TextView
         android:id="@+id/iorder_time"
@@ -16,107 +15,120 @@
         android:paddingTop="@dimen/px_5"
         android:textColor="@color/color_3d"
         android:textSize="@dimen/app_text_size_first" />
-    <TextView 
+
+    <TextView
         android:id="@+id/iorder_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iorder_time"
-        android:textColor="@color/color_3d"
-        android:textSize="@dimen/app_text_size_first" 
         android:layout_marginLeft="@dimen/px_20"
         android:paddingBottom="@dimen/px_15"
-        />
-	<View 
-	    android:layout_width="match_parent"
+        android:textColor="@color/color_3d"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/color_be"
         android:layout_below="@id/iorder_address"
-	    />
-	<ImageView 
-	    android:id="@+id/iorder_img"
-	    android:layout_width="@dimen/px_121"
+        android:background="@color/color_be" />
+
+    <ImageView
+        android:id="@+id/iorder_img"
+        android:layout_width="@dimen/px_121"
         android:layout_height="@dimen/px_121"
-        android:scaleType="centerCrop"
         android:layout_below="@id/iorder_address"
-        android:layout_marginTop="@dimen/px_28"
+        android:layout_marginBottom="@dimen/px_28"
         android:layout_marginLeft="@dimen/px_25"
         android:layout_marginRight="@dimen/px_35"
-        android:layout_marginBottom="@dimen/px_28"
-	    />
-	<TextView 
-	    android:id="@+id/iorder_name"
-	    android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/px_28"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/iorder_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/px_10"
-        android:textColor="@color/color_3d"
-        android:textSize="@dimen/app_text_size_first" 
         android:layout_alignTop="@id/iorder_img"
-        android:layout_toRightOf="@id/iorder_img"
-	    />
-	<TextView 
-	    android:id="@+id/iorder_price"
-	    android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/bg_header"
-        android:textSize="@dimen/app_text_size_first"
-        android:layout_below="@id/iorder_name"
-        android:layout_toRightOf="@id/iorder_img"
         android:layout_marginTop="@dimen/px_10"
-	    />
-	<View 
-	    android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_be"
-        android:layout_below="@id/iorder_img"
-	    />
-	<TextView 
-	    android:id="@+id/iorder_state"
-	    android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/iorder_img"
+        android:textColor="@color/color_3d"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <TextView
+        android:id="@+id/iorder_price"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/px_15"
+        android:layout_below="@id/iorder_name"
+        android:layout_marginTop="@dimen/px_10"
+        android:layout_toRightOf="@id/iorder_img"
         android:textColor="@color/bg_header"
-        android:textSize="@dimen/app_text_size_first"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/iorder_img"
+        android:background="@color/color_be" />
+
+    <TextView
+        android:id="@+id/iorder_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/iorder_img"
         android:layout_margin="@dimen/px_15"
-	    />
-	<Button 
-	    android:id="@+id/iorder_btn"
-	    android:layout_width="wrap_content"
+        android:padding="@dimen/px_15"
+        android:textColor="@color/bg_header"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <Button
+        android:id="@+id/iorder_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/app_text_size_first"
-        android:layout_below="@id/iorder_img"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/button_order_yellow"
-        android:layout_alignTop="@id/iorder_state"
         android:layout_alignBottom="@id/iorder_state"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/iorder_state"
+        android:layout_below="@id/iorder_img"
+        android:layout_marginLeft="@dimen/px_15"
+        android:layout_marginRight="@dimen/px_20"
+        android:background="@drawable/button_order_yellow"
+        android:gravity="center"
+        android:paddingBottom="@dimen/px_15"
         android:paddingLeft="@dimen/px_30"
         android:paddingRight="@dimen/px_30"
-        android:layout_marginRight="@dimen/px_20"
-        android:layout_marginLeft="@dimen/px_15"
         android:paddingTop="@dimen/px_15"
-        android:paddingBottom="@dimen/px_15"
-        android:gravity="center"
-	    />
-		<Button 
-	    android:id="@+id/iorder_btn2"
-	    android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/app_text_size_first"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <Button
+        android:id="@+id/iorder_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iorder_state"
+        android:layout_alignTop="@id/iorder_state"
         android:layout_below="@id/iorder_img"
         android:layout_toLeftOf="@id/iorder_btn"
-        android:layout_alignTop="@id/iorder_state"
-        android:layout_alignBottom="@id/iorder_state"
         android:background="@drawable/button_order_blue"
+        android:gravity="center"
+        android:paddingBottom="@dimen/px_15"
         android:paddingLeft="@dimen/px_30"
         android:paddingRight="@dimen/px_30"
-        android:gravity="center"
         android:paddingTop="@dimen/px_15"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <TextView
+        android:id="@+id/iorder_time_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iorder_state"
+        android:layout_alignTop="@id/iorder_state"
+        android:layout_below="@id/iorder_img"
+        android:layout_toLeftOf="@id/iorder_btn"
+        android:gravity="center"
         android:paddingBottom="@dimen/px_15"
-	    />
-		<TextView 
-		    android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-		    />
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_15"
+        android:textColor="@color/color_33"
+        android:textSize="@dimen/app_text_size_first" />
+
 </RelativeLayout>

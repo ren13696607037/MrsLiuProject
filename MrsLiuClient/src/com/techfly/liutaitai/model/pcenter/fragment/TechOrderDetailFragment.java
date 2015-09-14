@@ -22,7 +22,10 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.TechOrderDetailParser;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
+import com.techfly.liutaitai.model.order.adapter.ServiceClick;
 import com.techfly.liutaitai.model.order.parser.ServiceDetailParser;
+import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
+import com.techfly.liutaitai.model.pcenter.adapter.OrderClick;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -37,7 +40,7 @@ import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class TechOrderDetailFragment extends CommonFragment implements OnClickListener{
-	private ServiceDetailActivity mActivity;
+	private OrderDetailActivity mActivity;
 	private TextView mNo;
 	private TextView mTime;
 	private TextView mName;
@@ -57,6 +60,7 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 	private ImageView mIvPhone;
 	private ImageView mIvAddress;
 	private User mUser;
+	private TextView mTimeStart;
 	private final int MSG_DATA = 0x101;
 	private Handler mServiceDetailHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -69,13 +73,13 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mActivity = (ServiceDetailActivity) activity;
+        mActivity = (OrderDetailActivity) activity;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_SERVICE);
+        mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_ID);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
         startReqTask(TechOrderDetailFragment.this);
     }
@@ -130,6 +134,7 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
     	mState = (TextView) view.findViewById(R.id.tsd_state);
     	mIvAddress = (ImageView) view.findViewById(R.id.tsd_address_img);
     	mIvPhone = (ImageView) view.findViewById(R.id.tsd_phone_img);
+    	mTimeStart = (TextView) view.findViewById(R.id.tsd_time_start);
     	
     	mIvAddress.setOnClickListener(this);
     	mIvPhone.setOnClickListener(this);
@@ -138,11 +143,51 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
     	
     }
     private void setData(){
-    	mNo.setText(mActivity.getString(R.string.service_detail_text, mOrder.getmId()));
+    	AppLog.Loge("xll", "tech order detail is set data but why??");
+    	mNo.setText(mActivity.getString(R.string.service_detail_text, mOrder.getmOrderNo()));
     	mAddress.setText(mActivity.getString(R.string.service_detail_text4, mOrder.getmCustomerAddress()));
     	ImageLoader.getInstance().displayImage(mOrder.getmServiceIcon(), mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
     	mName.setText(mActivity.getString(R.string.service_detail_text2, mOrder.getmCustomerName()));
     	mPhone.setText(mActivity.getString(R.string.service_detail_text3, mOrder.getmCustomerPhone()));
+    	mTime.setText(mActivity.getString(R.string.order_service_text, mOrder.getmCustomerTime()));
+    	mServiceTime.setText(mActivity.getString(R.string.service_detail_text1, mOrder.getmOrderTime()));
+    	mProName.setText(mOrder.getmServiceName());
+    	mTotal.setText(mActivity.getString(R.string.service_detail_text9, mOrder.getmServicePrice()));
+    	mVoucher.setText(mActivity.getString(R.string.service_detail_text7, mOrder.getmVoucher()));
+    	mPrice.setText(mActivity.getString(R.string.service_detail_text5, (float)Math.round((Float.valueOf(mOrder.getmServicePrice())+Float.valueOf(mOrder.getmVoucher()))*100)/100));
+    	setState(mOrder, mState, mButton, mButton2);
+    	mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton.getText().toString()));
+    	mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2.getText().toString()));
+    }
+    private void setState(TechOrder order,TextView textView,Button button,Button button2){
+		int state=Integer.valueOf(order.getmServiceStatus());
+		button.setVisibility(View.VISIBLE);
+		button2.setVisibility(View.VISIBLE);
+		if(state==1){
+			textView.setText(R.string.tech_order_list_state);
+			button2.setText(R.string.tech_order_list_btn);
+			button.setText(R.string.tech_order_list_btn1);
+		}else if(state==2){
+			textView.setText(R.string.tech_order_list_state1);
+			button.setText(R.string.tech_order_list_btn3);
+			button2.setText(R.string.tech_order_list_btn2);
+		}else if(state==3){
+			textView.setText(R.string.tech_order_list_state2);
+			button2.setVisibility(View.GONE);
+			button.setText(R.string.tech_order_list_btn4);
+		}else if(state==4){
+			textView.setText(R.string.tech_order_list_state3);
+			button.setText(R.string.tech_order_list_btn5);
+			button2.setVisibility(View.GONE);
+		}else if(state == 5 || state == 6){
+			textView.setText(R.string.tech_order_list_state4);
+			button.setText(R.string.tech_order_list_btn5);
+			button2.setVisibility(View.GONE);
+		}else if(state == 0){
+			textView.setText(R.string.order_service_state);
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}
     }
 
 	@Override
@@ -166,7 +211,7 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
             	mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 AppLog.Logd(object.toString());
-                if(object instanceof Service){
+                if(object instanceof TechOrder){
                 	mOrder = (TechOrder) object;
                     if(!isDetached()){
                     	mServiceDetailHandler.removeMessages(MSG_DATA);
