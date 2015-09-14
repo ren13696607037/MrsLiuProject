@@ -124,9 +124,11 @@ public class ServiceOrderFragment extends CommonFragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 100) {
-            mSelectTimeMills = data.getLongExtra("data", 0);
-            mTimeTv.setText(DateUtils.getTime(mSelectTimeMills, "yyyy-MM-dd HH:mm"));
-        }else if(requestCode == 101){
+            if(data!=null){
+                mSelectTimeMills = data.getLongExtra("data", 0);
+                mTimeTv.setText(DateUtils.getTime(mSelectTimeMills, "yyyy-MM-dd HH:mm"));
+            }
+        }else if(requestCode == Constant.ORDER_CITY_INTENT){
             if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES)!=null){
                 mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
                 mAddressTv.setText(mAddressManage.getmDetail());
@@ -228,10 +230,7 @@ public class ServiceOrderFragment extends CommonFragment implements
         int id = view.getId();
         switch (id) {
         case R.id.address:
-            Intent intents = null;
-//            intents = new Intent(getActivity(), ServiceAddressActivity.class);
-            intents = new Intent(getActivity(), AddressManageActivity.class);
-            this.startActivityForResult(intents, 99);
+            UIHelper.toAddressManageActivity(this);// 跳到地址管理页面
             break;
         case R.id.jishi:
             UIHelper.toSomeIdActivity(this, JishiListActivity.class.getName(),

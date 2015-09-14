@@ -27,12 +27,12 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
-import com.techfly.liutaitai.bizz.parser.GanxiServiceParser;
 import com.techfly.liutaitai.bizz.parser.ServiceCategoryParser;
+import com.techfly.liutaitai.bizz.parser.ShengxianServiceParser;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter2;
-import com.techfly.liutaitai.model.mall.adapter.ServiceAdapter;
+import com.techfly.liutaitai.model.mall.adapter.ShengXianServiceAdapter;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.mall.bean.SortRule;
@@ -53,24 +53,15 @@ import com.techfly.liutaitai.util.view.PullToRefreshLayout.OnRefreshListener;
 public class ShengXianFragment extends CommonFragment implements OnClickListener, OnRefreshListener{
     private TextView mSortTv1;
     private TextView mSortTv2;
-  
     private View mFlagImg1;
     private int mPage = 1;
-    
     private PopupWindow mSortPop1;
-    
-    private ServiceAdapter mAdapter;
-    
+    private ShengXianServiceAdapter mAdapter;
     private PopupWindow mSortPop2;
-   
-
     private GridViewForScrollView mPopList1;
     private ListView mPopList2;
-   
     private int type;
     private String mSortId;
-   
-
     private PopUpAdapter2 mPopAdapter1;
     private PopUpAdapter mPopAdapter2;
     
@@ -78,7 +69,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
     private List<SortRule> mSortRuleList2 = new ArrayList<SortRule>();;
     private String mCateID = "";// 商家所属分类
  
-    List<Service> mList = new ArrayList<Service>();
+    List<Product> mList = new ArrayList<Product>();
     private PullToRefreshLayout mPull;
     private GridView mGrid;
     
@@ -180,7 +171,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         // 引入窗口配置文件
         View view = inflater.inflate(R.layout.service_popupwindow, null);
         // 创建PopupWindow对象
-        mSortPop2 = new PopupWindow(view, Constant.SCREEN_WIDTH / 3 - 60,
+        mSortPop2 = new PopupWindow(view, Constant.SCREEN_WIDTH ,
                 LayoutParams.WRAP_CONTENT, false);
         // 需要设置一下此参数，点击外边可消失
         mPopList2 = (ListView) view.findViewById(R.id.listview);
@@ -239,7 +230,9 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                     ResultInfo result = (ResultInfo) object;
                     mSortRuleList = (List<SortRule>) result.getObject();
                     initPopupWindow1();
-                    mSortId =  mSortRuleList.get(0).getmId();
+                    if(mSortRuleList!=null&&mSortRuleList.size()>0){
+                        mSortId =  mSortRuleList.get(0).getmId(); 
+                    }
                     getServiceList();
                 }
             }
@@ -275,7 +268,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 //        url.setmGetParamPrefix("cid").setmGetParamValues("10");
 //        url.setmGetParamPrefix("order").setmGetParamValues("10");
         param.setmHttpURL(url);
-        param.setmParserClassName(GanxiServiceParser.class.getName());
+        param.setmParserClassName(ShengxianServiceParser.class.getName());
         RequestManager
                 .getRequestData(getActivity(), createServiceReqSuccessListener(),
                         createMyReqErrorListener(), param);
@@ -291,8 +284,8 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                     mPull.refreshFinish(PullToRefreshLayout.SUCCEED);
                    ResultInfo result = (ResultInfo) object;
                    if(result.getmCode()==0){
-                       List<Service> list = new ArrayList<Service>();
-                       list = (List<Service>) result.getObject();
+                       List<Product> list = new ArrayList<Product>();
+                       list = (List<Product>) result.getObject();
                        if(list.size()>=10){
                            mPull.setPullRefreshEnable(true);
                            mPull.setPullLoadEnable(true);
@@ -360,7 +353,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         mPull = (PullToRefreshLayout) view.findViewById(R.id.layout_parts);
         mPull.setOnRefreshListener(this);
         mGrid = (GridView) view.findViewById(R.id.gridview_parts);
-        mAdapter = new ServiceAdapter(getActivity(), mList);
+        mAdapter = new ShengXianServiceAdapter(getActivity(), mList);
         mGrid.setAdapter(mAdapter);
         mGrid.setOnItemClickListener(new OnItemClickListener() {
 

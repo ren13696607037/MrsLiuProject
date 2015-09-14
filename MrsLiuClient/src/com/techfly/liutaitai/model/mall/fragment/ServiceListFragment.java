@@ -77,7 +77,7 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
     private PopUpAdapter mPopAdapter2;
     
     private List<SortRule> mSortRuleList;
-    private List<SortRule> mSortRuleList2;
+    private List<SortRule> mSortRuleList2 = new ArrayList<SortRule>();
     private String sellerSortRuleStr = "";// 商家所属分类
     private String sellerSortRuleStr2 = "";// 商家所在地区
   
@@ -153,7 +153,7 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
         // 引入窗口配置文件
         View view = inflater.inflate(R.layout.service_popupwindow, null);
         // 创建PopupWindow对象
-        mSortPop2 = new PopupWindow(view, Constant.SCREEN_WIDTH / 3 - 60,
+        mSortPop2 = new PopupWindow(view, Constant.SCREEN_WIDTH,
                 LayoutParams.WRAP_CONTENT, false);
         // 需要设置一下此参数，点击外边可消失
         mPopList2 = (ListView) view.findViewById(R.id.listview);
@@ -206,7 +206,9 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
                     ResultInfo result = (ResultInfo) object;
                     mSortRuleList = (List<SortRule>) result.getObject();
                     initPopupWindow1();
-                    mSortId =  mSortRuleList.get(0).getmId();
+                    if( mSortRuleList!=null&&mSortRuleList.size()>0){
+                        mSortId =  mSortRuleList.get(0).getmId();
+                    }
                     getServiceList();
                 }
             }

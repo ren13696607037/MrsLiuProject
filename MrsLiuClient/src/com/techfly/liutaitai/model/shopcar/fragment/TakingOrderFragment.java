@@ -1,8 +1,5 @@
 package com.techfly.liutaitai.model.shopcar.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.bean.BuyInfo;
 import com.techfly.liutaitai.bean.ResultInfo;
-import com.techfly.liutaitai.bizz.parser.AddressManageParser;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.bean.ConfirmOrder;
 import com.techfly.liutaitai.model.mall.bean.Product;
@@ -42,7 +35,6 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
-import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment;
