@@ -181,7 +181,7 @@ public class NewProductInfoParser implements Parser {
 			for (int i = 0; i < mJsonArray.length(); i++) {
 				String mJsonObject = mJsonArray.optString(i);
 				if (mJsonObject != null) {
-					list.add(Constant.YIHUIMALL_BASE_URL+mJsonObject);
+					list.add(Constant.IMG_URL+mJsonObject);
 				}
 			}
 		}

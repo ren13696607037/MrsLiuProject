@@ -9,7 +9,7 @@ public class Constant {
 	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/liu/";
 //	public static final String YIHUIMALL_BASE_URL = "http://192.168.0.212:8080/yhmall-api/";
 	public static final String IMG_HEADER_URL = "http://121.43.158.189/liu";
-
+	public static final String IMG_URL = "http://121.43.158.189/liuTai";
 
 	public static final String PRODUCT_CATEGORY = "goods/category/root";
 	public static final String PRODUCT_GROUP = "yiqituan";

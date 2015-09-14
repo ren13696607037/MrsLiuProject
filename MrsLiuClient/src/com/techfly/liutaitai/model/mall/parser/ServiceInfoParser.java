@@ -27,7 +27,7 @@ public class ServiceInfoParser implements Parser{
                             .optInt(JsonKey.ProductInfo.ID)));
                     p.setmName("title");
                     p.setmDesc(jsonObject.optString("descri"));
-                    p.setmImg(Constant.YIHUIMALL_BASE_URL+jsonObject.optString("image"));
+                    p.setmImg(Constant.IMG_URL+jsonObject.optString("image"));
                     p.setmPrice(jsonObject.optString("price"));
                     p.setmType(jsonObject.optString("type"));
                     p.setmServiceConent("耗时"+jsonObject.optString("minutes")+"分钟/售后"
