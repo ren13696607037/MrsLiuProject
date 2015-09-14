@@ -57,7 +57,7 @@ public class RateListAdapter extends BaseAdapter {
 		holder.mTvContent.setText(mList.get(position).getmContent());
 		holder.mTvTime.setText(mList.get(position).getmTime());
 		holder.mTvName.setText(mList.get(position).getmName());
-		holder.mRatingBar.setRating(Float.valueOf(mList.get(position).getmScore())/2);
+		holder.mRatingBar.setRating(Float.valueOf(mList.get(position).getmScore()));
 		return convertView;
 	}
 	class ViewHolder{

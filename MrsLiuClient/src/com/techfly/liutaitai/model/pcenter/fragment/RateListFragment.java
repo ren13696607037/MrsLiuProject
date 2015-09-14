@@ -128,9 +128,6 @@ public class RateListFragment extends CommonFragment implements IXListViewListen
 		mListView.setPullRefreshEnable(false);
 		mListView.setPullLoadEnable(false);
     	
-    	mBar.setFocusable(false);
-    	mBar.setEnabled(false);
-    	
     	mAdapter=new RateListAdapter(mActivity, mList);
     	mListView.setAdapter(mAdapter);
     	

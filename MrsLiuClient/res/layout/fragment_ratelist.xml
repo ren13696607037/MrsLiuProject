@@ -21,9 +21,10 @@
                android:layout_width="wrap_content"
            	   android:layout_height="wrap_content"
            	   style="@style/RatingBar"
-           	   android:layout_margin="@dimen/px_30"
+           	   android:layout_marginTop="@dimen/px_30"
+           	   android:layout_marginBottom="@dimen/px_30"
            	   android:isIndicator="true"
-           	   android:paddingLeft="@dimen/px_30"
+           	   android:layout_marginLeft="@dimen/px_60"
            	   android:paddingBottom="@dimen/px_5"
                />
            <TextView 
@@ -48,14 +49,21 @@
            	   android:layout_alignBottom="@id/list_bar"
            	   android:layout_toRightOf="@id/list_text"
                />
+           <View 
+               android:layout_width="match_parent"
+           	   android:layout_height="0.5dp"
+           	   android:background="@color/color_be"
+           	   android:layout_below="@id/list_bar"
+               />
            <com.techfly.liutaitai.util.view.XListView 
                android:id="@+id/list_rate"
                android:layout_width="match_parent"
            	   android:layout_height="match_parent"
            	   android:layout_below="@id/list_bar"
            	   android:scrollbars="none"
-           	   android:divider="@color/button_login1"
+           	   android:divider="@drawable/rate_line"
            	   android:dividerHeight="1dp"
+           	   android:padding="@dimen/px_20"
                />
            <TextView 
                android:id="@+id/rate_no_content"

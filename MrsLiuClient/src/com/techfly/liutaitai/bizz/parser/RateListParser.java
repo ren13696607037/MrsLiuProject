@@ -33,6 +33,7 @@ public class RateListParser implements Parser {
 						rate.setmContent(obj.optString(JsonKey.RateKey.CONTENT));
 						rate.setmName(obj.optString(JsonKey.RateKey.MOBILE));
 						rate.setmTime(obj.optString(JsonKey.RateKey.TIME));
+						rate.setmScore(obj.optString(JsonKey.RateKey.STARS));
 						list.add(rate);
 					}
 				}
