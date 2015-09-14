@@ -52,7 +52,7 @@ import com.techfly.liutaitai.util.fragment.OrderPayFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderPayListener,OrderRateListener{
+public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderRateListener{
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
@@ -124,7 +124,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
         startReqTask(MyOrderAllFragment.this);
         ManagerListener.newManagerListener().onRegisterOrderDeleteListener(this);
         ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
         ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
         ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
     }
@@ -142,7 +141,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
         super.onDestroy();
         ManagerListener.newManagerListener().onUnRegisterOrderDeleteListener(this);
         ManagerListener.newManagerListener().onUnRegisterOrderLogiticsListener(this);
-        ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
         ManagerListener.newManagerListener().onUnRegisterOrderRateListener(this);
         ManagerListener.newManagerListener().onUnRegisterOrderCancelListener(this);
     }
@@ -363,14 +361,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 		Intent intent=new Intent(getActivity(),RateActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, order);
 		startActivity(intent);
-	}
-
-	@Override
-	public void onOrderPayListener(final TechOrder order) {
-		float totalPrice =Float.valueOf(order.getmServicePrice()) - Float.valueOf(order.getmVoucher());
-        long   l1   =   Math.round(totalPrice*100);   //四舍五入   
-        totalPrice   =   (float) (l1/100.00);               //注意：使用   100.0   而不是   100   
-        onCommitOrder(Constant.PRODUCT_TYPE_ENTITY ,Constant.PAY_TYPE_CREATE,totalPrice+"",order.getmServiceName());   
 	}
 
 	@Override
