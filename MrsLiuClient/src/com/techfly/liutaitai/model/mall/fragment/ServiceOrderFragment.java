@@ -12,20 +12,24 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.activities.JishiListActivity;
-import com.techfly.liutaitai.model.mall.activities.ServiceAddressActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceTimeActivity;
+import com.techfly.liutaitai.model.mall.bean.Jishi;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
+import com.techfly.liutaitai.model.mall.parser.JiShiInfoParser;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
-import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -34,6 +38,7 @@ import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.DateUtils;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
@@ -52,18 +57,21 @@ public class ServiceOrderFragment extends CommonFragment implements
     private Button mButton;
     private String mId;
     private ServiceInfo mInfo;
-    private long mSelectTimeMills =System.currentTimeMillis();
+    private long mSelectTimeMills = 0;
     private int mVoucherId;
-    
+    private String mOrderId;
     private double mJingdu;// 经度
     private double mWeidu;// 纬度
     private AddressManage mAddressManage;
+    private Jishi mJishi;
+
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_DETAIL);
+
         url.setmGetParamPrefix1("sid");
         url.setmGetParamValues1(String.valueOf(mId));
         if (!TextUtils.isEmpty(mId)) {
@@ -77,7 +85,88 @@ public class ServiceOrderFragment extends CommonFragment implements
         RequestManager
                 .getRequestData(getActivity(), createMyReqSuccessListener(),
                         createMyReqErrorListener(), param);
+    }
 
+    private boolean onJudgeReq() {
+        if (mAddressManage == null) {
+            showSmartToast("请选择服务地点", Toast.LENGTH_LONG);
+            return false;
+        }
+        if (mJishi == null) {
+            showSmartToast("请选择技师", Toast.LENGTH_LONG);
+            return false;
+        }
+        if (mSelectTimeMills == 0) {
+            showSmartToast("请选择服务时间", Toast.LENGTH_LONG);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 请求预约
+     */
+    private void onReqOrder() {
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user.getmId());
+        param.setmToken(user.getmToken());
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "service/addreservation");// 生鲜请求地址组装
+        url.setmGetParamPrefix("sid");
+        url.setmGetParamValues(mInfo.getmId());
+
+        url.setmGetParamPrefix("type");
+        url.setmGetParamValues(mInfo.getmType());
+
+        url.setmGetParamPrefix("time");
+        url.setmGetParamValues(mSelectTimeMills + "");
+
+        url.setmGetParamPrefix("address");
+        url.setmGetParamValues(mAddressManage.getmCity() + "  "
+                + mAddressManage.getmDetail());
+
+        url.setmGetParamPrefix("mid");
+        url.setmGetParamValues(mJishi.getmId());
+
+        url.setmGetParamPrefix("mobile");
+        url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity())
+                .getUser().getmPhone());
+
+        url.setmGetParamPrefix("lng");
+        url.setmGetParamValues("37.1569");
+
+        url.setmGetParamPrefix("lat");
+        url.setmGetParamValues("116.2564");
+
+        // url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
+        // JPushInterface.getRegistrationID(getActivity()));
+        param.setmHttpURL(url);
+        param.setmParserClassName(CommonParser.class.getName());
+        RequestManager.getRequestData(getActivity(),
+                createOrderReqSuccessListener(), createMyReqErrorListener(),
+                param);
+
+    }
+
+    private Response.Listener<Object> createOrderReqSuccessListener() {
+
+        return new Listener<Object>() {
+            @Override
+            public void onResponse(Object object) {
+                ResultInfo info = (ResultInfo) object;
+                mOrderId = info.getmData();
+            }
+
+        };
     }
 
     private Response.Listener<Object> createMyReqSuccessListener() {
@@ -124,23 +213,30 @@ public class ServiceOrderFragment extends CommonFragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 100) {
-            if(data!=null){
+            if (data != null) {
                 mSelectTimeMills = data.getLongExtra("data", 0);
-                mTimeTv.setText(DateUtils.getTime(mSelectTimeMills, "yyyy-MM-dd HH:mm"));
+                mTimeTv.setText(DateUtils.getTime(mSelectTimeMills,
+                        "yyyy-MM-dd HH:mm"));
             }
-        }else if(requestCode == Constant.ORDER_CITY_INTENT){
-            if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES)!=null){
-                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
-                mAddressTv.setText(mAddressManage.getmDetail());
+        } else if (requestCode == Constant.ORDER_CITY_INTENT) {
+            if (data != null
+                    && data.getSerializableExtra(IntentBundleKey.ADDRESS_EXTRA) != null) {
+                mAddressManage = (AddressManage) data
+                        .getSerializableExtra(IntentBundleKey.ADDRESS_EXTRA);
+                mAddressTv.setText(mAddressManage.getmCity()
+                        + mAddressManage.getmDetail());
             }
-        }else if(requestCode == 99){
-          
-        }else{
-             // ji'shi
+        } else if (requestCode == 101) {
+            // voucher
+        } else {
+            // ji'shi
+            if (data != null) {
+                mJishi = (Jishi) data.getSerializableExtra("data");
+                mJishiTv.setText(mJishi.getmName());
+            }
+
         }
     }
-
-  
 
     @Override
     public void onDetach() {
@@ -201,7 +297,8 @@ public class ServiceOrderFragment extends CommonFragment implements
         mJishiTv.setOnClickListener(this);
 
         mPhoneTv = (TextView) view.findViewById(R.id.phone);
-
+        mPhoneTv.setText(SharePreferenceUtils.getInstance(getActivity())
+                .getUser().getmPhone());
         mTimeTv = (TextView) view.findViewById(R.id.clock);
         mTimeTv.setOnClickListener(this);
 
@@ -213,7 +310,9 @@ public class ServiceOrderFragment extends CommonFragment implements
 
             @Override
             public void onClick(View view) {
-
+                if (onJudgeReq()) {
+                    onReqOrder();
+                }
             }
         });
 
@@ -234,8 +333,7 @@ public class ServiceOrderFragment extends CommonFragment implements
             break;
         case R.id.jishi:
             UIHelper.toSomeIdActivity(this, JishiListActivity.class.getName(),
-                    mSelectTimeMills+ "",
-                    Integer.parseInt(mInfo.getmType()));
+                    mSelectTimeMills + "", Integer.parseInt(mInfo.getmType()));
             break;
 
         case R.id.clock:

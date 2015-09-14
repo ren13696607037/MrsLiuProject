@@ -22,6 +22,7 @@ import com.android.volley.Response.Listener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.model.mall.activities.JishiInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.JishiAdapter;
 import com.techfly.liutaitai.model.mall.bean.Jishi;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
@@ -42,17 +43,19 @@ import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class JiShiListFragment extends CommonFragment implements OnClickListener,IXListViewListener{
+public class JiShiListFragment extends CommonFragment implements
+        OnClickListener, IXListViewListener {
     private JishiAdapter mAdapter;
     private List<Jishi> mList = new ArrayList<Jishi>();
     private XListView mListView;
     private boolean mIsRefresh;
     private boolean mIsLoadAll;
-   
+
     private int mPage = 1;;
     private int type;
     private String time;
-    
+    private Jishi mJishi;
+
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
@@ -68,14 +71,14 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
             return;
         }
         param.setmIsLogin(true);
-        param.setmId(user .getmId());
-        param.setmToken(user .getmToken());
+        param.setmId(user.getmId());
+        param.setmToken(user.getmToken());
         url.setmGetParamPrefix("type");
         url.setmGetParamValues(String.valueOf(type));
-      
+
         url.setmGetParamPrefix("time");
         url.setmGetParamValues(time);
-        
+
         // url.setmBaseUrl("http://www.hylapp.com:10001/apis/goods/detail?pid=1533");
         param.setmHttpURL(url);
         param.setmParserClassName(JiShiParser.class.getName());
@@ -87,7 +90,7 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
     }
 
     private Response.Listener<Object> createMyReqSuccessListener() {
-        
+
         return new Listener<Object>() {
             @Override
             public void onResponse(Object object) {
@@ -97,12 +100,11 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 if (getActivity() != null && !isDetached()) {
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                    mLoadHandler.sendEmptyMessageDelayed(
-                            Constant.NET_SUCCESS, 0);// 停止加载框
+                    mLoadHandler.sendEmptyMessageDelayed(Constant.NET_SUCCESS,
+                            0);// 停止加载框
                     if (resultInfo != null
                             && resultInfo.getmCode() == ResultCode.SUCCESS) {
-                        List<Jishi> list = (List<Jishi>) resultInfo
-                                .getObject();
+                        List<Jishi> list = (List<Jishi>) resultInfo.getObject();
                         mListView.stopLoadMore();
                         mListView.stopRefresh();
                         if (list.size() == 0) {
@@ -138,21 +140,18 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
                         if (mList.size() == 0) {
                             // 没有筛选的职位
                             onDispalyEmpty();
-                        }else{
+                        } else {
                             showSmartToast(resultInfo.getmMessage(),
                                     Toast.LENGTH_LONG);
                         }
-                      
+
                     }
                 }
             }
-            
+
         };
     }
 
-   
-  
-    
     private Response.ErrorListener createMyReqErrorListener() {
         return new Response.ErrorListener() {
             @Override
@@ -164,8 +163,7 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
             }
         };
     }
-    
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -213,30 +211,29 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
-
-               
-
+                mJishi = (Jishi) arg0.getItemAtPosition(arg2);
+                UIHelper.toSomeIdActivity(JiShiListFragment.this,
+                        JishiInfoActivity.class.getName(),    mJishi.getmId()  + "",
+                        0);
             }
         });
-     
-
     }
 
     private void onDispalyData() {
         mListView.setVisibility(View.VISIBLE);
-    
+
     }
 
     private void onDispalyEmpty() {
         mListView.setVisibility(View.GONE);
-   
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_jishi_list,
-                container, false);
+        View view = inflater.inflate(R.layout.fragment_jishi_list, container,
+                false);
         return view;
     }
 
@@ -255,7 +252,6 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
         super.onLowMemory();
     }
 
-    
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -264,11 +260,16 @@ public class JiShiListFragment extends CommonFragment implements OnClickListener
             break;
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-    
+        if(resultCode==100){
+            getActivity().setResult(0, new Intent().putExtra("data", mJishi));
+            getActivity().finish();     
+        }
+        }
+      
+
     @Override
     public void onRefresh() {
         mList.clear();

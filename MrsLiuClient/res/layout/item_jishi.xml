@@ -7,7 +7,7 @@
                 android:paddingBottom="12dp"
                 android:paddingLeft="4dp"
                 android:paddingRight="12dp"
-                android:background="@color/background"
+                android:descendantFocusability="blocksDescendants"
                 android:paddingTop="12dp" >
                 
             <ImageView 

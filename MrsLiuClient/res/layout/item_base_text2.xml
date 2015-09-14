@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
+    android:layout_height="match_parent" >
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:background="@drawable/jishi_time_bg1"
+    	android:text="11"
+    	android:layout_centerInParent="true"
+    	android:textColor="#565656"
+    	android:textSize="@dimen/app_text_size_first"
+    	android:gravity="center"
+        />
+   
+
+</RelativeLayout>

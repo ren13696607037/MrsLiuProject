@@ -107,8 +107,8 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //    	if(resultCode==Constant.ORDER_ADDRESS_SUCCESS||resultCode==Constant.ORDER_CITY_SUCCESS){
-    		if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES)!=null){
-                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_VALUES);
+    		if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_EXTRA)!=null){
+                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_EXTRA);
                 onDisplay();
             }
 //    	}
@@ -121,7 +121,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
             mIsFirstTakingOrder = false;
             mAddressRelativeLayout.setVisibility(View.VISIBLE);
             mPhone.setText(mAddressManage.getmPhone());
-            mAddress.setText(mAddressManage.getmDetail());
+            mAddress.setText(mAddressManage.getmCity()+mAddressManage.getmDetail());
             mNickName.setText(mAddressManage.getmName());
         }else{
             mIsFirstTakingOrder = true;

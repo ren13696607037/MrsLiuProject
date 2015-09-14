@@ -76,8 +76,8 @@ public class Constant {
 	
 	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "product/addOrder";
-	public static final String ALIPAY_CALLBACK_URL = "product/pay";
-	public static final String ALIPAY_ORDER_CALLBACK_URL = "product/pay";
+	public static final String ALIPAY_CALLBACK_URL = "common/payNotify";
+	public static final String ALIPAY_ORDER_CALLBACK_URL = "common/payNotify";
 	
 	public static final String ORDER_BASKET_LIST = "order/list";//订单篮订单列表
 	
