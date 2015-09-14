@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.OrderInfoClick;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.parser.OrderInfoParser;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
@@ -32,8 +33,7 @@ import com.techfly.liutaitai.util.adapter.ViewHolder;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.ListViewForScrollView;
 
-public class OrderInfoFragment extends CommonFragment implements
-		OnClickListener {
+public class OrderInfoFragment extends CommonFragment {
 
 	private TextView mTvState;
 	private TextView mTvBtn1;
@@ -92,8 +92,6 @@ public class OrderInfoFragment extends CommonFragment implements
 	private void initViews(View view) {
 		mTvBtn1 = (TextView) view.findViewById(R.id.order_info_tv_btn1);
 		mTvBtn2 = (TextView) view.findViewById(R.id.order_info_tv_btn2);
-		mTvBtn1.setOnClickListener(this);
-		mTvBtn2.setOnClickListener(this);
 
 		mTvState = (TextView) view.findViewById(R.id.order_info_tv_order_state);
 
@@ -185,16 +183,23 @@ public class OrderInfoFragment extends CommonFragment implements
 	}
 
 	protected void initData() {
-		if (mOrder == null) {
-			return;
-		}
+
+		mTvBtn1.setOnClickListener(new OrderInfoClick(this, mOrder.getmId(),
+				mOrder));
+		mTvBtn2.setOnClickListener(new OrderInfoClick(this, mOrder.getmId(),
+				mOrder));
 		setState(mOrder.getmState());
+
 		mTvCustomerName.setText("收货人：" + mOrder.getmCustomerName());
 		mTvCustomerAddr.setText("收货地址：" + mOrder.getmCustomerAddr());
 		mTvOffsetValue.setText("-￥" + mOrder.getmOffsetValue());
 		mTvOrderNum.setText("订单编号：" + mOrder.getmNum());
-		mTvProductCount.setText("共" + mOrder.getmTotalCount()
-				+ mOrder.getmUnit());
+		String unit = "份";
+		if (!TextUtils.isEmpty(mOrder.getmUnit())) {
+			unit = mOrder.getmUnit();
+		}
+
+		mTvProductCount.setText("共" + mOrder.getmTotalCount() + unit);
 		mTvTime.setText("下单时间：" + mOrder.getmTime());
 		mTvTips.setText("备注：" + mOrder.getmTips());
 		mTvTotalMoney.setText("￥" + mOrder.getmTotalPrice());
@@ -293,8 +298,7 @@ public class OrderInfoFragment extends CommonFragment implements
 		};
 	}
 
-	@Override
-	public void onClick(View v) {
-
+	public void refreshData() {
+		startReqTask(this);
 	}
 }

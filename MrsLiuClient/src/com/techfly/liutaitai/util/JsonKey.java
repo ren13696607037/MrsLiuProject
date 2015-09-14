@@ -357,7 +357,8 @@ public interface JsonKey {
 		static final String TIME = "serviceTime";
 		static final String PRODUCTS = "goods";
 		static final String TYPE = "type";
-		static final String ORDER_NUM = "orderId";
+		static final String ORDER_ID = "orderId";
+		static final String ORDER_NUM = "ordernum";
 		static final String TOTAL_COUNT = "totoal";
 		static final String TOTAL_PRICE = "totalPrice";
 	}

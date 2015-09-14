@@ -112,6 +112,8 @@ public class OrderBastketAdapter extends BaseAdapter {
 			}
 		};
 		viewHolder.mListView.setAdapter(adapter);
+		viewHolder.mListView.setOnItemClickListener(new OrderBasketClick(
+				mFragment, order.getmId(), order));
 		viewHolder.mLlParent.setOnClickListener(new OrderBasketClick(mFragment,
 				order.getmId(), order));
 
@@ -122,19 +124,19 @@ public class OrderBastketAdapter extends BaseAdapter {
 		switch (type) {
 		case 0:
 			mTvType.setText("干洗");
-			mTvType.setBackgroundResource(R.color.order_basket_bg_type_0);
+			mTvType.setBackgroundResource(R.drawable.order_type_color_1);
 			break;
 		case 1:
 			mTvType.setText("生鲜");
-			mTvType.setBackgroundResource(R.color.order_basket_bg_type_1);
+			mTvType.setBackgroundResource(R.drawable.order_type_color_2);
 			break;
 		case 2:
 			mTvType.setText("鲜花");
-			mTvType.setBackgroundResource(R.color.order_basket_bg_type_2);
+			mTvType.setBackgroundResource(R.drawable.order_type_color_3);
 			break;
 		case 3:
 			mTvType.setText("奢侈品保养");
-			mTvType.setBackgroundResource(R.color.order_basket_bg_type_3);
+			mTvType.setBackgroundResource(R.drawable.order_type_color_4);
 			break;
 
 		default:

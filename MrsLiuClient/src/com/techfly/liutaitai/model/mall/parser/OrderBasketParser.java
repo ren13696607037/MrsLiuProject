@@ -38,8 +38,10 @@ public class OrderBasketParser implements Parser {
 								MyOrder order = new MyOrder();
 
 								order.setmId(mJsonObject
-										.optInt(JsonKey.OrderBasketKey.ORDER_NUM)
+										.optInt(JsonKey.OrderBasketKey.ORDER_ID)
 										+ "");
+								order.setmNum(mJsonObject
+										.optString(JsonKey.OrderBasketKey.ORDER_NUM));
 								order.setmUnit(mJsonObject
 										.optString(JsonKey.OrderBasketKey.UNIT));
 								order.setmState(mJsonObject
@@ -72,7 +74,8 @@ public class OrderBasketParser implements Parser {
 	private ArrayList<Product> parseProducts(JSONArray optJSONArray) {
 		ArrayList<Product> list = new ArrayList<Product>();
 		if (optJSONArray != null) {
-			for (int i = 0; i < optJSONArray.length(); i++) {
+			int count = optJSONArray.length() > 3 ? 3 : optJSONArray.length();
+			for (int i = 0; i < count; i++) {
 				JSONObject jsonObject = optJSONArray.optJSONObject(i);
 				if (jsonObject != null) {
 					Product p = new Product();

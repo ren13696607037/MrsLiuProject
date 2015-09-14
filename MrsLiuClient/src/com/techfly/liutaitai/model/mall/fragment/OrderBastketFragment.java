@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,6 +84,15 @@ public class OrderBastketFragment extends CommonFragment implements
 		return inflater.inflate(R.layout.fragment_order_basket, container,
 				false);
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (mDatas.size() == 0) {
+			mTvNoData.setVisibility(View.GONE);
+			refreshList();
+		}
+	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -106,6 +116,16 @@ public class OrderBastketFragment extends CommonFragment implements
 
 	private void initView(View view) {
 		mTvNoData = (TextView) view.findViewById(R.id.order_basket_no_data);
+		mTvNoData.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mTvNoData.setVisibility(View.GONE);
+				startLoading(OrderBastketFragment.this);
+				onRefresh();
+
+			}
+		});
 
 		mListView = (XListView) view.findViewById(R.id.order_basket_list);
 		mListView.setHeaderDividersEnabled(false);
@@ -160,6 +180,8 @@ public class OrderBastketFragment extends CommonFragment implements
 
 							reqFinish = true;
 							mListView.setPullLoadEnable(false);
+							mHandler.removeMessages(Constant.NOTIFY_LIST);
+							mHandler.sendEmptyMessage(Constant.NOTIFY_LIST);
 							return;
 						}
 
@@ -235,5 +257,7 @@ public class OrderBastketFragment extends CommonFragment implements
 		startLoading(this);
 		onRefresh();
 	}
+
+	
 
 }

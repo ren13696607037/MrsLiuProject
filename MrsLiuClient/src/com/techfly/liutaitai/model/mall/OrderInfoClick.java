@@ -6,21 +6,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
-import com.techfly.liutaitai.model.mall.fragment.OrderBastketFragment;
+import com.techfly.liutaitai.model.mall.fragment.OrderInfoFragment;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -31,61 +28,48 @@ import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.UIHelper;
 
-public class OrderBasketClick implements OnClickListener, OnItemClickListener {
+public class OrderInfoClick implements OnClickListener {
 
-	private Context mContext;
-	private OrderBastketFragment mFragment;
+	private OrderInfoFragment mFragment;
 	private String mId;
 	private MyOrder mOrder;
 
-	public OrderBasketClick(Context mContext) {
-		this.mContext = mContext;
-	}
-
-	public OrderBasketClick(OrderBastketFragment fragment, String id,
-			MyOrder order) {
-		this.mFragment = fragment;
-		this.mId = id;
-		this.mOrder = order;
+	public OrderInfoClick(OrderInfoFragment mFragment, String mId,
+			MyOrder mOrder) {
+		super();
+		this.mFragment = mFragment;
+		this.mId = mId;
+		this.mOrder = mOrder;
 	}
 
 	@Override
 	public void onClick(View v) {
+		TextView tv = (TextView) v;
 
-		switch (v.getId()) {
-		case R.id.order_basket_item_tv_bt1:
-			clickBtn1((TextView) v);
-			break;
-		case R.id.order_basket_item_tv_bt2:
-			clickBtn2((TextView) v);
-			break;
-		case R.id.order_basket_item_parent:
-			UIHelper.toOrderInfoActivity(mFragment, mId);
-			break;
-
-		default:
-			break;
-		}
-
-	}
-
-	private void clickBtn2(TextView v) {
-		if (v.getText().toString()
+		if (tv.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_1))) {
 			// 付款
 			SmartToast.makeText(mFragment.getActivity(), "去付钱了骚年",
 					Toast.LENGTH_SHORT).show();
-		} else if (v.getText().toString()
+		} else if (tv.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_2))) {
 			contactService();// 联系客服
-		} else if (v.getText().toString()
+		} else if (tv.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_4))) {
 			// 申请售后
 			UIHelper.toAfterActivity(mFragment, mId);
-		} else if (v.getText().toString()
+		} else if (tv.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_5))) {
 			// 删除订单
 			deleteOrder();
+		} else if (tv.getText().toString()
+				.equals(mFragment.getString(R.string.order_text_0))) {
+			cancelOrder();// 取消订单
+		} else if (tv.getText().toString()
+				.equals(mFragment.getString(R.string.order_text_3))) {
+			// 去评价
+
+			UIHelper.toOrderEvaActivity(mFragment, mOrder);
 		}
 
 	}
@@ -103,11 +87,39 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 				.getUser().getmId());
 		param.setPostRequestMethod();
 		param.setmParserClassName(CommonParser.class.getName());
-		RequestManager
-				.getRequestData(mFragment.getActivity(),
-						createMyReqSuccessListener(),
-						createMyReqErrorListener(), param);
+		RequestManager.getRequestData(mFragment.getActivity(),
+				createDeleteReqSuccessListener(), createMyReqErrorListener(),
+				param);
 
+	}
+
+	private Response.Listener<Object> createDeleteReqSuccessListener() {
+		return new Listener<Object>() {
+			@Override
+			public void onResponse(Object object) {
+				AppLog.Logd(object.toString());
+				if (mFragment.getActivity() == null || mFragment.isDetached()) {
+					return;
+				}
+
+				if (object instanceof ResultInfo) {
+					ResultInfo ri = (ResultInfo) object;
+					if (ri != null) {
+						if (ri.getmCode() == 0) {
+							SmartToast.makeText(mFragment.getActivity(),
+									"操作成功", Toast.LENGTH_SHORT).show();
+							mFragment.getActivity().finish();
+						} else {
+							SmartToast.makeText(mFragment.getActivity(),
+									"操作失败", Toast.LENGTH_SHORT).show();
+						}
+					}
+
+				}
+
+			}
+
+		};
 	}
 
 	private void contactService() {
@@ -135,18 +147,6 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 				});
 		builder.create().show();
 
-	}
-
-	private void clickBtn1(TextView v) {
-		if (v.getText().toString()
-				.equals(mFragment.getString(R.string.order_text_0))) {
-			cancelOrder();// 取消订单
-		} else if (v.getText().toString()
-				.equals(mFragment.getString(R.string.order_text_3))) {
-			// 去评价
-
-			UIHelper.toOrderEvaActivity(mFragment, mOrder);
-		}
 	}
 
 	private void cancelOrder() {
@@ -185,7 +185,7 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 							SmartToast.makeText(mFragment.getActivity(),
 									"操作成功", Toast.LENGTH_SHORT).show();
 							// 之后的一些操作,例如刷新列表
-							mFragment.refreshList();
+							mFragment.refreshData();
 						} else {
 							SmartToast.makeText(mFragment.getActivity(),
 									"操作失败", Toast.LENGTH_SHORT).show();
@@ -208,13 +208,6 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 						R.string.loading_fail, Toast.LENGTH_SHORT).show();
 			}
 		};
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		UIHelper.toOrderInfoActivity(mFragment, mId);
-
 	}
 
 }
