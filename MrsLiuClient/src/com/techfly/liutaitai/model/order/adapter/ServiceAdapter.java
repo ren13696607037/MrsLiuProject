@@ -3,6 +3,7 @@ package com.techfly.liutaitai.model.order.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,9 @@ public class ServiceAdapter extends BaseAdapter {
 		
 		holder.mName.setText(mList.get(position).getmServiceName());
 		holder.mPrice.setText("￥"+mList.get(position).getmServicePrice());
-		holder.mTime.setText(mList.get(position).getmServiceTime());
+		if(mList.get(position).getmServiceTime() != null && !TextUtils.isEmpty(mList.get(position).getmServiceTime()) && !"".equals(mList.get(position).getmServiceTime())){
+			holder.mTime.setText(mContext.getString(R.string.order_service_text, mList.get(position).getmServiceTime()));
+		}
 		setType(mList.get(position).getmServiceType(), holder.mType, mList.get(position).getmServicePerson(), holder.mTech);
 		setState(mList.get(position).getmServiceStatus(), holder.mState, holder.mButton, holder.mButton2);
 		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.mImageView , ImageLoaderUtil.mOrderServiceIconLoaderOptions);

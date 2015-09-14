@@ -37,6 +37,7 @@
 	    android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/color_be"
+        android:layout_below="@id/ios_type"
 	    />
 	<ImageView 
 	    android:id="@+id/ios_img"
