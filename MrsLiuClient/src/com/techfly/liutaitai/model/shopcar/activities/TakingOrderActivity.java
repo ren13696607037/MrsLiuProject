@@ -5,7 +5,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
+import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 
 public class TakingOrderActivity extends FragmentActivity{
     private Fragment mTakeOrderFragment;
@@ -50,13 +62,59 @@ public class TakingOrderActivity extends FragmentActivity{
         ft.hide(mOrderCreateFragment);
         ft.show(mOrderFinishFragment);
         ft.commitAllowingStateLoss();
+        onRequestPaySuccess();
+        
     }
+ 
     public void showTakingOrderFragment(){
         FragmentTransaction ft =   getSupportFragmentManager().beginTransaction();
         ft.show(mTakeOrderFragment);
         ft.commitAllowingStateLoss();
     }
 
-   
+    
+    private void onRequestPaySuccess() {
+        RequestParam param = new RequestParam();
+        User user = SharePreferenceUtils.getInstance(this).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
+//        param.setPostRequestMethod();
+        HttpURL url = new HttpURL();
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+"common/payData");
+        url.setmGetParamPrefix("type");
+        url.setmGetParamValues("1");
+        
+        url.setmGetParamPrefix("id");
+        url.setmGetParamValues(mBundle.getString(IntentBundleKey.ORDER_ID, ""));
+        param.setmParserClassName(CommonParser.class.getName());
+        param.setmHttpURL(url);
+        RequestManager.getRequestData(this, createSuccessReqSuccessListener(), createMyReqErrorListener(), param);
+    }
+    private Response.Listener<Object> createSuccessReqSuccessListener() {
+        return new Listener<Object>() {
+            @Override
+            public void onResponse(Object object) {
+                AppLog.Logd("Fly", object.toString());
+            }
+            };
+        }
+    
+    private Response.ErrorListener createMyReqErrorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+              
+            
+            }
+        };
+    }
   
 }

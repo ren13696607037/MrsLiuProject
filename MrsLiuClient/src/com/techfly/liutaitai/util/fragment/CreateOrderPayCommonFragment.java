@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -28,7 +27,6 @@ import com.techfly.liutaitai.net.ResultCode;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
-import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 
@@ -102,8 +100,8 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
            param.setmToken(user .getmToken());
 //           param.setPostRequestMethod();
            HttpURL url = new HttpURL();
-           if(productType==Constant.PRODUCT_TYPE_VIRTUAL){
-               url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.ORDER_COMMIT_REQUEST_URL);
+           if(productType==Constant.PRODUCT_TYPE_SERVICE){
+               url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.SERVICE_ORDER_COMMIT_REQUEST_URL);
            }else{
                url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.ORDER_COMMIT_REQUEST_URL);
            }
@@ -129,17 +127,21 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
                 if(object instanceof ResultInfo){
                  ResultInfo info =  (ResultInfo) object;
                     if(info.getmCode()==ResultCode.CODE_0){
-                        try {
-                            JSONObject obj = new JSONObject(info.getmData());
-                            mOrderId = obj.optString("orderNum");
-                        } catch (JSONException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                        if(mProductType==Constant.PRODUCT_TYPE_SERVICE){
+                            mOrderId = info.getmData();
+                        }else{
+                            try {
+                                JSONObject obj = new JSONObject(info.getmData());
+                                mOrderId = obj.optString("orderNum");
+                            } catch (JSONException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                             if(mIsFromShopCar){
+                                 ShopCar.getShopCar().getShopproductList().removeAll(ShopCar.getShopCar().getCheckShopproductList());
+                                 OnShopCarLisManager.getShopCarLisManager().onNotifyShopCarChange(null);
+                             }
                         }
-                         if(mIsFromShopCar){
-                             ShopCar.getShopCar().getShopproductList().removeAll(ShopCar.getShopCar().getCheckShopproductList());
-                             OnShopCarLisManager.getShopCarLisManager().onNotifyShopCarChange(null);
-                         }
                         onOrderCreateSuccess(mOrderId,mPayMoney,mProductName);
                      }else{
                          showSmartToast(info.getmMessage()+"", Toast.LENGTH_LONG);
@@ -168,9 +170,9 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
          order.setmAccountId(Keys.DEFAULT_SELLER);
          order.setmMerchantId(Keys.DEFAULT_PARTNER);
          if(mPayType ==Constant.PAY_TYPE_CREATE){
-               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_CALLBACK_URL+"?orderId="+mOrderId+"&price="+mPayMoney+"&payType=1");
+               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_CALLBACK_URL);
          }else{
-               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL+"?orderId="+mOrderId+"&price="+mPayMoney+"&payType=1");
+               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
          }
          order.setmOrderNo(mOrderId);
          order.setmProductPrice(mPayMoney);
@@ -199,7 +201,7 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
                  if(getActivity()!=null && !isDetached()){
                      SmartToast.showText(getActivity(), R.string.alipay_success_promt);
                  }
-                 if(mProductType==Constant.PRODUCT_TYPE_VIRTUAL){
+                 if(mProductType==Constant.PRODUCT_TYPE_SERVICE){
                      return;
                  }else{
                       getActivity().finish();
@@ -210,7 +212,6 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
              
              @Override
              public void onCancel() {
-                 // TODO Auto-generated method stub
                  if(getActivity()!=null && !isDetached()){
                      SmartToast.showText(getActivity(), R.string.alipay_cancel_promt);
                  }
@@ -240,7 +241,6 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
             
             @Override
             public void onError(String message) {
-                // TODO Auto-generated method stub
                 if(getActivity()!=null && !isDetached()){
                     SmartToast.showText(getActivity(), message);
                 }
@@ -249,7 +249,6 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
             
             @Override
             public void onComplete() {
-                // TODO Auto-generated method stub
                 if(getActivity()!=null && !isDetached()){
                     SmartToast.showText(getActivity(), R.string.alipay_success_promt);
                 }
@@ -258,6 +257,7 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
                 }
             }
             
+          
             @Override
             public void onCancel() {
                 // TODO Auto-generated method stub

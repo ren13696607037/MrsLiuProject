@@ -81,6 +81,7 @@ public class Constant {
 	
 	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "product/addOrder";
+	public static final String SERVICE_ORDER_COMMIT_REQUEST_URL = "service/addreservation";
 	public static final String ALIPAY_CALLBACK_URL = "common/payNotify";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "common/payNotify";
 	
@@ -116,7 +117,7 @@ public class Constant {
 	public static final int PAY_TYPE_CREATE = 111; // 创建订单的支付
 
 	public static final int PRODUCT_TYPE_ENTITY = 210; // 对已有订单的支付
-	public static final int PRODUCT_TYPE_VIRTUAL = 111; // 创建订单的支付
+	public static final int PRODUCT_TYPE_SERVICE = 111; // 创建订单的支付
 
 	public static int DEFAULT_SIZE = 10;
 	public static int RESULT_CODE = 0;

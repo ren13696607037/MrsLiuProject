@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.util.Constant;
@@ -97,19 +98,40 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment impleme
        int id = view.getId();
        switch (id) {
     case R.id.order_pay:
-       TakingOrderActivity ac = (TakingOrderActivity) getActivity();
-       final Bundle bundle = ac.getBundleInfo();
-       String orderId = bundle.getString(IntentBundleKey.ORDER_ID, "");
-       String payMoney =bundle.getString(IntentBundleKey.ORDER_MONEY, "");
-       String productName =bundle.getString(IntentBundleKey.ORDER_PRODUCT, "");
-       onPay(orderId, payMoney, productName, new PayCallBack() {
-        
-        @Override
-        public void onPaySuccess() {
-          TakingOrderActivity activity=  (TakingOrderActivity) getActivity();
-          activity.showOrderFinishFragment(bundle);
+        if(getActivity() instanceof ServiceOrderActivity){
+            ServiceOrderActivity ac = ( ServiceOrderActivity) getActivity();
+            final Bundle bundle = ac.getBundleInfo();
+            String orderId = bundle.getString(IntentBundleKey.ORDER_ID, "");
+            String payMoney =bundle.getString(IntentBundleKey.ORDER_MONEY, "");
+            String productName =bundle.getString(IntentBundleKey.ORDER_PRODUCT, "");
+            onPay(orderId, payMoney, productName, new PayCallBack() {
+             
+             @Override
+             public void onPaySuccess() {
+                 ServiceOrderActivity activity=  (ServiceOrderActivity) getActivity();
+                 activity.showOrderFinishFragment(bundle);
+             }
+         });
+           
+        }else{
+            TakingOrderActivity ac = (TakingOrderActivity) getActivity();
+            final Bundle bundle = ac.getBundleInfo();
+            String orderId = bundle.getString(IntentBundleKey.ORDER_ID, "");
+            String payMoney =bundle.getString(IntentBundleKey.ORDER_MONEY, "");
+            String productName =bundle.getString(IntentBundleKey.ORDER_PRODUCT, "");
+            onPay(orderId, payMoney, productName, new PayCallBack() {
+             
+             @Override
+             public void onPaySuccess() {
+               TakingOrderActivity activity=  (TakingOrderActivity) getActivity();
+               activity.showOrderFinishFragment(bundle);
+             }
+         });
         }
-    });
+        
+    
+       
+     
       
         break;
     default:

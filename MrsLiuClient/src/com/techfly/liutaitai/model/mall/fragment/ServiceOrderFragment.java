@@ -22,6 +22,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.activities.JishiListActivity;
+import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceTimeActivity;
 import com.techfly.liutaitai.model.mall.bean.Jishi;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
@@ -30,6 +31,7 @@ import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
 import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -41,8 +43,9 @@ import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment;
 
-public class ServiceOrderFragment extends CommonFragment implements
+public class ServiceOrderFragment extends CreateOrderPayCommonFragment implements
         OnClickListener {
 
     private ImageView mImg;
@@ -103,59 +106,7 @@ public class ServiceOrderFragment extends CommonFragment implements
         return true;
     }
 
-    /**
-     * 请求预约
-     */
-    private void onReqOrder() {
-        RequestParam param = new RequestParam();
-        HttpURL url = new HttpURL();
-        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
-        int userId = 0;
-        if (user != null) {
-            userId = Integer.parseInt(user.getmId());
-        }
-        if (userId == 0) {
-            return;
-        }
-        param.setmIsLogin(true);
-        param.setmId(user.getmId());
-        param.setmToken(user.getmToken());
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "service/addreservation");// 生鲜请求地址组装
-        url.setmGetParamPrefix("sid");
-        url.setmGetParamValues(mInfo.getmId());
-
-        url.setmGetParamPrefix("type");
-        url.setmGetParamValues(mInfo.getmType());
-
-        url.setmGetParamPrefix("time");
-        url.setmGetParamValues(mSelectTimeMills + "");
-
-        url.setmGetParamPrefix("address");
-        url.setmGetParamValues(mAddressManage.getmCity() + "  "
-                + mAddressManage.getmDetail());
-
-        url.setmGetParamPrefix("mid");
-        url.setmGetParamValues(mJishi.getmId());
-
-        url.setmGetParamPrefix("mobile");
-        url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity())
-                .getUser().getmPhone());
-
-        url.setmGetParamPrefix("lng");
-        url.setmGetParamValues("37.1569");
-
-        url.setmGetParamPrefix("lat");
-        url.setmGetParamValues("116.2564");
-
-        // url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
-        // JPushInterface.getRegistrationID(getActivity()));
-        param.setmHttpURL(url);
-        param.setmParserClassName(CommonParser.class.getName());
-        RequestManager.getRequestData(getActivity(),
-                createOrderReqSuccessListener(), createMyReqErrorListener(),
-                param);
-
-    }
+   
 
     private Response.Listener<Object> createOrderReqSuccessListener() {
 
@@ -311,7 +262,7 @@ public class ServiceOrderFragment extends CommonFragment implements
             @Override
             public void onClick(View view) {
                 if (onJudgeReq()) {
-                    onReqOrder();
+                    onCommitOrder(Constant.PRODUCT_TYPE_SERVICE, Constant.PAY_TYPE_CREATE,mInfo.getmPrice()+"",mInfo.getmName());
                 }
             }
         });
@@ -350,6 +301,49 @@ public class ServiceOrderFragment extends CommonFragment implements
         default:
             break;
         }
+    }
+
+    @Override
+    public String onEncapleOrderInfo(HttpURL url) {
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "service/addreservation");// 生鲜请求地址组装
+        url.setmGetParamPrefix("sid");
+        url.setmGetParamValues(mInfo.getmId());
+
+        url.setmGetParamPrefix("type");
+        url.setmGetParamValues(mInfo.getmType());
+
+        url.setmGetParamPrefix("time");
+        url.setmGetParamValues(mSelectTimeMills + "");
+
+        url.setmGetParamPrefix("address");
+        url.setmGetParamValues(mAddressManage.getmCity() + "  "
+                + mAddressManage.getmDetail());
+
+        url.setmGetParamPrefix("mid");
+        url.setmGetParamValues(mJishi.getmId());
+
+        url.setmGetParamPrefix("mobile");
+        url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity())
+                .getUser().getmPhone());
+
+        url.setmGetParamPrefix("lng");
+        url.setmGetParamValues("37.1569");
+
+        url.setmGetParamPrefix("lat");
+        url.setmGetParamValues("116.2564");
+        return "success";
+    }
+
+    @Override
+    public void onOrderCreateSuccess(String orderId, String money,
+            String proName) {
+        ServiceOrderActivity activity =(ServiceOrderActivity) getActivity();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBundleKey.ORDER_ID, orderId);
+        bundle.putString(IntentBundleKey.ORDER_MONEY, money);
+        bundle.putString(IntentBundleKey.ORDER_PRODUCT, proName);
+        activity.showOrderCreateFragment(bundle);
+        
     }
 
 }
