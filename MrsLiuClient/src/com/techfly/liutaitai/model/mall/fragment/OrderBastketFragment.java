@@ -124,7 +124,7 @@ public class OrderBastketFragment extends CommonFragment implements
 		initHeader(view);
 		initView(view);
 		// requestData();
-		startReqTask(this);
+//		startReqTask(this);
 	}
 
 	private void initHeader(View view) {
@@ -153,7 +153,7 @@ public class OrderBastketFragment extends CommonFragment implements
 
 		mListView = (XListView) view.findViewById(R.id.order_basket_list);
 		mListView.setHeaderDividersEnabled(false);
-		mListView.setFooterDividersEnabled(true);
+		mListView.setFooterDividersEnabled(false);
 		mListView.setPullLoadEnable(true);
 		mListView.setPullRefreshEnable(true);
 		mListView.setXListViewListener(this);
