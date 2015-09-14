@@ -169,9 +169,24 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 		ImageLoader.getInstance().displayImage(mService.getmTechnician().getmHeader(), mHeader);
 		mName.setText(mService.getmTechnician().getmName());
 		mPrice.setText(mService.getmPrice());
-		mTakingNum.setText(mService.getmOrderNum());
-		mServicingNum.setText(mService.getmServiceingNum());
-		mContinueNum.setText(mService.getmOrderingNum());
+		if("0".equals(mService.getmOrderNum())){
+			mTakingNum.setVisibility(View.INVISIBLE);
+		}else{
+			mTakingNum.setVisibility(View.VISIBLE);
+			mTakingNum.setText(mService.getmOrderNum());
+		}
+		if("0".equals(mService.getmServiceingNum())){
+			mServicingNum.setVisibility(View.INVISIBLE);
+		}else{
+			mServicingNum.setVisibility(View.VISIBLE);
+			mServicingNum.setText(mService.getmServiceingNum());
+		}
+		if("0".equals(mService.getmOrderingNum())){
+			mContinueNum.setVisibility(View.INVISIBLE);
+		}else{
+			mContinueNum.setVisibility(View.VISIBLE);
+			mContinueNum.setText(mService.getmOrderingNum());
+		}
 		mSex.setText(mService.getmType());
 		mCount.setText(getString(R.string.service_count, mService.getmTechnician().getmTimes()));
 	}
@@ -185,6 +200,7 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 			break;
 		case R.id.service_continue:
 			intent = new Intent(mActivity, MyOrderActivity.class);
+			intent.putExtra(IntentBundleKey.ORDER_ID, 3);
 			break;
 		case R.id.service_all:
 			intent = new Intent(mActivity, MyOrderActivity.class);
@@ -198,9 +214,11 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 			break;
 		case R.id.service_servicing:
 			intent = new Intent(mActivity, MyOrderActivity.class);
+			intent.putExtra(IntentBundleKey.ORDER_ID, 2);
 			break;
 		case R.id.service_taking:
 			intent = new Intent(mActivity, MyOrderActivity.class);
+			intent.putExtra(IntentBundleKey.ORDER_ID, 1);
 			break;
 
 		default:

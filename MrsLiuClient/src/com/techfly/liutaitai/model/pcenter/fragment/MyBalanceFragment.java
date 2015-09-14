@@ -17,6 +17,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.BalanceListParser;
+import com.techfly.liutaitai.bizz.parser.LoginParser;
 import com.techfly.liutaitai.model.pcenter.activities.BalanceHistoryActivity;
 import com.techfly.liutaitai.model.pcenter.activities.MyBalanceActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.BalanceAdapter;
@@ -111,7 +112,7 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(mActivity, BalanceHistoryActivity.class);
-				startActivity(intent);
+				MyBalanceFragment.this.startActivityForResult(intent, Constant.BALANCE_INTENT);
 			}
 		});
     	
@@ -121,23 +122,28 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
     	mTextView = (TextView) view.findViewById(R.id.mybalance_no_content);
     	mAdapter = new BalanceAdapter(MyBalanceFragment.this, mList);
     	mListView.setAdapter(mAdapter);
+    	mListView.setPullLoadEnable(false);
+    	mListView.setPullRefreshEnable(false);
+    	
+    	mPrice.setText(getString(R.string.balance_text1, mUser.getmMoney()));
     }
 
 	@Override
 	public void requestData() {
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
-		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.BALANCE_URL);
-//		url.setmGetParamPrefix(JsonKey.BalanceKey.PAGE)
-//				.setmGetParamValues(mPage + "")
-//				;
-//		url.setmGetParamPrefix(JsonKey.BalanceKey.SIZE).setmGetParamValues(mSize + "");
+		if(isRefresh){
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.USER_INFO_URL);
+			param.setmParserClassName(LoginParser.class.getName());
+		}else{
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.BALANCE_URL);
+			param.setmParserClassName(BalanceListParser.class.getName());
+		}
 		param.setmIsLogin(true);
 		param.setmId(mUser.getmId());
 		param.setmToken(mUser.getmToken());
 		param.setmHttpURL(url);
 		param.setPostRequestMethod();
-		param.setmParserClassName(BalanceListParser.class.getName());
 		RequestManager
 				.getRequestData(getActivity(), createMyReqSuccessListener(),
 						createMyReqErrorListener(), param);
@@ -149,29 +155,36 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 			@Override
 			public void onResponse(Object object) {
 				AppLog.Loge("xll", object.toString());
-				ArrayList<Balance> list = (ArrayList<Balance>) object;
-				if(isRefresh){
-					mList.addAll(list);
-				}else{
-					mList.clear();
-					mList.addAll(list);
-				}
-				if (list == null || list.size() == 0) {
-
-				} else if (list.size() < 10) {
-					mListView.setVisibility(View.VISIBLE);
-					mTextView.setVisibility(View.GONE);
-					mListView.setPullLoadEnable(false);
-				} else {
-					mListView.setVisibility(View.VISIBLE);
-					mTextView.setVisibility(View.GONE);
-					mListView.setPullLoadEnable(true);
-				}
+//				ArrayList<Balance> list = (ArrayList<Balance>) object;
+//				if(isRefresh){
+//					mList.addAll(list);
+//				}else{
+//					mList.clear();
+//					mList.addAll(list);
+//				}
+//				if (list == null || list.size() == 0) {
+//
+//				} else if (list.size() < 10) {
+//					mListView.setVisibility(View.VISIBLE);
+//					mTextView.setVisibility(View.GONE);
+//					mListView.setPullLoadEnable(false);
+//				} else {
+//					mListView.setVisibility(View.VISIBLE);
+//					mTextView.setVisibility(View.GONE);
+//					mListView.setPullLoadEnable(true);
+//				}
 				mListView.stopLoadMore();
 				mListView.stopRefresh();
 				if (!isDetached()) {
-					mBalanceHandler.removeMessages(MSG_LIST);
-					mBalanceHandler.sendEmptyMessage(MSG_LIST);
+					if(object instanceof ArrayList){
+						mList = (ArrayList<Balance>) object;
+						mBalanceHandler.removeMessages(MSG_LIST);
+						mBalanceHandler.sendEmptyMessage(MSG_LIST);
+					}else{
+						mUser = (User) object;
+						SharePreferenceUtils.getInstance(mActivity).saveUser(mUser);
+						mPrice.setText(getString(R.string.balance_text1, mUser.getmMoney()));
+					}
 					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
 					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
 				}
@@ -210,7 +223,7 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 
 			@Override
 			public void run() {
-				isRefresh = true;
+//				isRefresh = true;
 				mPage += mSize;
 				requestData();
 			}
@@ -220,6 +233,13 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 		mListView.setVisibility(View.GONE);
 		mTextView.setVisibility(View.VISIBLE);
 		mTextView.setText(R.string.balance_no_content);
+	}
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == Constant.BALANCE_SUCCESS){
+			isRefresh = true;
+			startReqTask(MyBalanceFragment.this);
+		}
 	}
 
 }

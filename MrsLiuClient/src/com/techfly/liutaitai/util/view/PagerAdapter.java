@@ -30,7 +30,7 @@ public class PagerAdapter extends FragmentPagerAdapter{
 		// TODO Auto-generated method stub
 		return mFragments.get(position);
 	}
-
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub

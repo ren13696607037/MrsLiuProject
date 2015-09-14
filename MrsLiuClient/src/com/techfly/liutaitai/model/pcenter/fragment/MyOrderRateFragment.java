@@ -19,11 +19,13 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.OrderListParser;
+import com.techfly.liutaitai.bizz.parser.TechOrderParser;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SearchLogisticsActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.MyOrderAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -44,8 +46,9 @@ public class MyOrderRateFragment extends CommonFragment implements OnItemClickLi
 	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
 	private MyOrderAdapter mAdapter;
 	private final int MSG_LIST=0x101;
-	private int mPage=0;
+	private int mPage=1;
 	private int mSize=10;
+	private User mUser;
 	public Handler mRateHandler=new Handler(){
 
 		@Override
@@ -71,6 +74,7 @@ public class MyOrderRateFragment extends CommonFragment implements OnItemClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderRateFragment.this);
         ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
     }
@@ -121,15 +125,18 @@ public class MyOrderRateFragment extends CommonFragment implements OnItemClickLi
 
 	@Override
 	public void requestData() {
-			RequestParam param = new RequestParam();
-	        HttpURL url = new HttpURL();
-	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.MYORDER_LIST_URL);
-	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.STATE).setmGetParamValues("2");
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.PAGE).setmGetParamValues(mPage+"");
-	        param.setmHttpURL(url);
-	        param.setmParserClassName(OrderListParser.class.getName());
+		RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_LIST_URL);
+        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("3");
+        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
+        url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(mPage+"");
+        param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		param.setPostRequestMethod();
+		param.setmHttpURL(url);
+        param.setmParserClassName(TechOrderParser.class.getName());
 	        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
     }
     private Response.Listener<Object> createMyReqSuccessListener() {

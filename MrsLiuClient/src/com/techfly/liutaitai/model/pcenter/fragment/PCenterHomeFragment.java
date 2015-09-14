@@ -113,7 +113,9 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
-        startReqTask(PCenterHomeFragment.this);
+        if(mUser != null){
+        	startReqTask(PCenterHomeFragment.this);
+        }
     }
 
     @Override
@@ -172,6 +174,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	if(mUser==null){
     		mTop.setVisibility(View.GONE);
         	mWelcome.setVisibility(View.VISIBLE);
+        	mService.setVisibility(View.INVISIBLE);
     	}else{
     		mTop.setVisibility(View.VISIBLE);
     		mWelcome.setVisibility(View.GONE);
@@ -273,7 +276,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 				|| resultCode == Constant.LOGIN_SUCCESS
 				|| resultCode == Constant.REGISTER_SUCCESS) {
 			mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
-			startReqTask(PCenterHomeFragment.this);
+			setView();
 		}
 	}
 	
