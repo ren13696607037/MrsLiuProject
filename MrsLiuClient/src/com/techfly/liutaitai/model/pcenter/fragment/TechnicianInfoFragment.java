@@ -373,10 +373,10 @@ public class TechnicianInfoFragment extends CommonFragment implements CityUpdate
 	public void onUpdateListener(Area area) {
 		mCity.setText(area.getmName());
 		mCityId = area.getmId();
-		mDialog.dismiss();
 	}
 	
 	private void setData(){
+		mCityId = mTechnician.getmCity();
 		mName.setText(mTechnician.getmName());
 		mAddress.setText(mTechnician.getmAddress());
 		mCity.setText(mTechnician.getmCityName());

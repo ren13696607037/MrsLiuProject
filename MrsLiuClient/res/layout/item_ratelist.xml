@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:background="@color/background"
-    android:paddingBottom="@dimen/px_20"
-    >
-    <TextView 
+    android:paddingBottom="@dimen/px_20" >
+
+    <TextView
         android:id="@+id/iratelist_name"
         android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" 
-    	android:textColor="@color/button_login1"
-    	android:textSize="@dimen/app_text_size_first"
-    	android:layout_marginTop="@dimen/px_15"
-    	android:layout_marginLeft="@dimen/px_30"
-        />
-    <TextView 
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px_20"
+        android:layout_marginTop="@dimen/px_15"
+        android:textColor="@color/color_33"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <TextView
         android:id="@+id/iratelist_time"
         android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" 
-    	android:textColor="@color/button_login1"
-    	android:textSize="@dimen/app_text_size_second"
-    	android:layout_alignBottom="@id/iratelist_name"
-    	android:layout_alignParentRight="true"
-    	android:layout_marginRight="@dimen/px_30"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iratelist_name"
+        android:layout_marginLeft="@dimen/px_20"
+        android:layout_marginRight="@dimen/px_20"
+        android:layout_toRightOf="@id/iratelist_name"
+        android:textColor="@color/color_rate_item_text"
+        android:textSize="@dimen/app_text_size_second" />
+
+    <RatingBar
+        android:id="@+id/iratelist__bar"
+        style="@style/RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iratelist_name"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_30" 
+        android:isIndicator="true"
         />
-    <TextView 
+
+    <TextView
         android:id="@+id/iratelist_content"
         android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" 
-    	android:textColor="@color/TextColorBLACK_NORMAL"
-    	android:textSize="@dimen/app_text_size_first"
-    	android:layout_marginTop="@dimen/px_10"
-    	android:layout_marginLeft="@dimen/px_30"
-    	android:layout_below="@id/iratelist_name"
-        />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iratelist_name"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_10"
+        android:textColor="@color/color_3d"
+        android:textSize="@dimen/app_text_size_first" />
 
 </RelativeLayout>

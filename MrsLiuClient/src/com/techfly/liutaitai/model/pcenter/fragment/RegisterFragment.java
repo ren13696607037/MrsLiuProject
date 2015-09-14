@@ -2,6 +2,7 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,6 +30,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.MD5;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
@@ -49,6 +51,7 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
     private ProgressBar mProgressBar;
     private int mProgress;
     private String mToken;
+    private int mExtra = 0;
     private Handler mRegisterHandler = new Handler() {
 
         @Override
@@ -125,6 +128,7 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mExtra = getActivity().getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
     }
     
 
@@ -158,7 +162,6 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
         onInitView(view);
     }
     private void onInitView(View view){
-    	setTitleText(R.string.welcome_reg);
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     	mEtCode = (EditText) view.findViewById(R.id.register_code);
         mEtPass = (EditText) view.findViewById(R.id.register_pass);
@@ -168,22 +171,40 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
         mButton.setOnClickListener(this);
         mTvCode.setOnClickListener(this);
         mProgressBar = (ProgressBar) view.findViewById(R.id.code_progress);
+        if(mExtra != 0){
+    		setTitleText(R.string.login_forget);
+    		mEtPass.setHint(R.string.pass_hint);
+    		mButton.setText(R.string.submit);
+    	}else{
+    		setTitleText(R.string.welcome_reg);
+    	}
     }
 	@Override
 	public void requestData() {
+		RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
 		if (mIsCode) {
-            RequestParam param = new RequestParam();
-            HttpURL url = new HttpURL();
             url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SMSCODE_URL);
             url.setmGetParamPrefix(JsonKey.UserKey.NAME).setmGetParamValues(mEtPhone.getText().toString());
-            url.setmGetParamPrefix(JsonKey.UserKey.TYPE).setmGetParamValues("1");//TODO
+            if(mExtra != 0){
+            	url.setmGetParamPrefix(JsonKey.UserKey.TYPE).setmGetParamValues("0");
+            }else{
+            	url.setmGetParamPrefix(JsonKey.UserKey.TYPE).setmGetParamValues("1");
+            }
             param.setmHttpURL(url);
 //            param.setPostRequestMethod();
             param.setmParserClassName(CommonParser.class.getName());
             RequestManager.getRequestData(getActivity(), createReqSuccessListener(), createReqErrorListener(), param);
-        } else{
-            RequestParam param = new RequestParam();
-            HttpURL url = new HttpURL();
+        }else if(mExtra != 0){
+        	url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.FORGET_URL);
+        	url.setmGetParamPrefix(JsonKey.UserKey.NAME).setmGetParamValues(mEtPhone.getText().toString());
+        	url.setmGetParamPrefix(JsonKey.UserKey.NPASS).setmGetParamValues(MD5.getDigest(mEtPass.getText().toString()));
+        	url.setmGetParamPrefix(JsonKey.CODE).setmGetParamValues(mEtCode.getText().toString());
+        	param.setPostRequestMethod();
+            param.setmHttpURL(url);
+            param.setmParserClassName(CommonParser.class.getName());
+            RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
+        }else{
             url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL +Constant.REGISTER_URL);
             url.setmGetParamPrefix(JsonKey.UserKey.NAME).setmGetParamValues(mEtPhone.getText().toString()).setmGetParamPrefix(JsonKey.UserKey.PASS)
                     .setmGetParamValues(MD5.getDigest(mEtPass.getText().toString()));
@@ -192,7 +213,7 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             url.setmGetParamPrefix(JsonKey.UserKey.ROLE).setmGetParamValues("0");
             param.setPostRequestMethod();
             param.setmHttpURL(url);
-            param.setmParserClassName(RegisterParser.class.getName());
+            param.setmParserClassName(CommonParser.class.getName());
             RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
         } 
 	}
@@ -201,11 +222,46 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                mUser = (User) object;
                 if (!isDetached()) {
-                    timeHandler.sendEmptyMessage(2);
-                    mRegisterHandler.removeMessages(0);
-                    mRegisterHandler.sendEmptyMessage(0);
+                	if(object instanceof ResultInfo){
+                		ResultInfo info = (ResultInfo) object;
+                		if(mExtra != 0){
+                			if(info.getmCode() == 0){
+                        		SmartToast.makeText(getActivity(), R.string.submit_success, Toast.LENGTH_SHORT).show();
+                        		Intent intent = new Intent();
+                        		intent.putExtra(IntentBundleKey.USER_NAME, mEtPhone.getText().toString());
+                        		intent.putExtra(IntentBundleKey.USER_PASS, mEtPass.getText().toString());
+                                getActivity().setResult(Constant.FORGET_SUCCESS, intent);
+                                getActivity().finish();
+                    		}else{
+                    			if(!TextUtils.isEmpty(info.getmData()) && !"null".equals(info.getmData())){
+                                	SmartToast.makeText(getActivity(), info.getmData(), Toast.LENGTH_SHORT).show();
+                                }else {
+                                	SmartToast.makeText(getActivity(), R.string.submit_fail, Toast.LENGTH_SHORT).show();
+                                }
+                    		}
+                		}else{
+                			if(info.getmCode() == 0){
+                        		SmartToast.makeText(getActivity(), R.string.register_success, Toast.LENGTH_SHORT).show();
+                        		Intent intent = new Intent();
+                        		intent.putExtra(IntentBundleKey.USER_NAME, mEtPhone.getText().toString());
+                        		intent.putExtra(IntentBundleKey.USER_PASS, mEtPass.getText().toString());
+                                getActivity().setResult(Constant.REGISTER_SUCCESS, intent);
+                                getActivity().finish();
+                    		}else{
+                    			if(!TextUtils.isEmpty(info.getmData()) && !"null".equals(info.getmData())){
+                                	SmartToast.makeText(getActivity(), info.getmData(), Toast.LENGTH_SHORT).show();
+                                }else {
+                                	SmartToast.makeText(getActivity(), R.string.register_error, Toast.LENGTH_SHORT).show();
+                                }
+                    		}
+                		}
+                	}else {
+                		mUser = (User) object;
+                        timeHandler.sendEmptyMessage(2);
+                        mRegisterHandler.removeMessages(0);
+                        mRegisterHandler.sendEmptyMessage(0);
+                	}
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }

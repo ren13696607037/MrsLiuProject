@@ -107,6 +107,14 @@
             android:layout_marginLeft="@dimen/px_40"
             android:layout_marginRight="@dimen/px_40"
             android:background="@drawable/add_frame_bottom" >
+            <ImageView
+                android:id="@+id/changeadd_city_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/px_15"
+                android:src="@drawable/address_city_down" />
 
             <ImageView
                 android:id="@+id/changeadd_img3"
@@ -136,6 +144,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/px_28"
                 android:layout_toRightOf="@id/changeadd_img3"
+                android:layout_toLeftOf="@id/changeadd_city_img"
                 android:background="@null"
                 android:hint="@string/changeadd_text2"
                 android:singleLine="true"

@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.techfly.liutaitai.model.pcenter.bean.Rate;
+import com.techfly.liutaitai.model.pcenter.bean.RequestRate;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.JsonKey;
@@ -15,23 +16,30 @@ public class RateListParser implements Parser {
 
 	@Override
 	public Object fromJson(JSONObject object) {
+		RequestRate requestRate = new RequestRate();
 		ArrayList<Rate> list=new ArrayList<Rate>();
 		if (object != null) {
-			JSONArray array = object.optJSONArray(JsonKey.DATA);
-			if (array!=null) {
-				int size=array.length();
-				for(int i=0;i<size;i++){
-					JSONObject data=array.optJSONObject(i);
-					Rate rate=new Rate();
-					rate.setmId(data.optString(JsonKey.MyOrderKey.GOODID));
-					rate.setmContent(data.optString(JsonKey.MyOrderKey.RATECONTENT));
-					rate.setmName(data.optString(JsonKey.MyOrderKey.RATENAME));
-					rate.setmTime(data.optString(JsonKey.MyOrderKey.TIME));
-					list.add(rate);
+			JSONObject data = object.optJSONObject(JsonKey.DATA);
+			if (data!=null) {
+				requestRate.setmAverge(data.optString(JsonKey.RateKey.AVERGE));
+				requestRate.setmCount(data.optString(JsonKey.RateKey.COUNT));
+				JSONArray array = data.optJSONArray(JsonKey.RateKey.REVIEWS);
+				if(array != null){
+					int size=array.length();
+					for(int i=0;i<size;i++){
+						JSONObject obj=array.optJSONObject(i);
+						Rate rate=new Rate();
+						rate.setmId(obj.optString(JsonKey.RateKey.ID));
+						rate.setmContent(obj.optString(JsonKey.RateKey.CONTENT));
+						rate.setmName(obj.optString(JsonKey.RateKey.MOBILE));
+						rate.setmTime(obj.optString(JsonKey.RateKey.TIME));
+						list.add(rate);
+					}
 				}
+				requestRate.setmRates(list);
 			}
 		}
-		return list;
+		return requestRate;
 	}
 
 	@Override

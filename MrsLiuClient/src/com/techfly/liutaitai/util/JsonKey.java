@@ -391,6 +391,11 @@ public interface JsonKey {
 		static final String CONTENT = "content";
 		static final String STARS = "stars";
 		static final String ID = "id";
+		static final String REVIEWS = "reviews";
+		static final String TIME = "time";
+		static final String MOBILE = "mobile";
+		static final String COUNT = "counts";
+		static final String AVERGE = "averge";
 	}
 
 }

@@ -297,7 +297,8 @@
 	<string name="app_toast">app上暂无此功能~</string>
 	<!-- 评论 -->
 	<string name="rate_title">用户评论</string>
-	<string name="list_text">好评率%1$s</string>
+	<string name="list_text">%1$s分</string>
+	<string name="list_text1">%1$s人评价</string>
 	<string name="rate">评论</string>
 	<string name="rate_text">成交时间 %1$s</string>
 	<string name="rate_text1">非常满意</string>

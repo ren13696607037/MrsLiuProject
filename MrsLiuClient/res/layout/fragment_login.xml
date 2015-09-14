@@ -89,6 +89,19 @@
                 android:textColorHint="@color/color_be"
                 android:textSize="@dimen/app_text_size_first" />
         </LinearLayout>
+        <TextView 
+            android:id="@+id/login_forget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_forget"
+            android:textColor="@color/bg_header"
+            android:textSize="@dimen/app_text_size_first"
+            android:gravity="right"
+            android:layout_marginLeft="@dimen/px_25"
+            android:layout_marginRight="@dimen/px_25"
+            android:padding="@dimen/px_15"
+            android:layout_marginTop="@dimen/px_10"
+            />
 
         <Button
             android:id="@+id/login_button"
