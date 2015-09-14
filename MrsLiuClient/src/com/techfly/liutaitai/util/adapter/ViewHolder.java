@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -60,6 +61,12 @@ public class ViewHolder {
 	public ViewHolder setText(int viewId,String text){
 		TextView view = getView(viewId);
 		view.setText(text);
+		return this;
+	};
+	
+	public ViewHolder setRating(int viewId, float score) {
+		RatingBar bar = getView(viewId);
+		bar.setRating(score);
 		return this;
 	};
 	

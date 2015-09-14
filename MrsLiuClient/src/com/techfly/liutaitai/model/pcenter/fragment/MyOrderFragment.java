@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.PagerAdapter;
 import com.techfly.liutaitai.util.view.ScrollTabView;
@@ -19,6 +20,7 @@ public class MyOrderFragment extends CommonFragment {
 	private ViewPager mViewPager;
 	private ScrollTabView mTabView;
 	private TabAdapter mTabAdapter;
+	private int mPosition;
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -28,6 +30,7 @@ public class MyOrderFragment extends CommonFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPosition = getActivity().getIntent().getIntExtra(IntentBundleKey.ORDER_ID, 0);
     }
     
     @Override
@@ -82,6 +85,10 @@ public class MyOrderFragment extends CommonFragment {
     	pagerAdapter.addFragment(new MyOrderRateFragment());
     	mViewPager.setAdapter(pagerAdapter);
     	mTabView.setViewPager(mViewPager);
+    	if(mPosition != 0){
+    		mTabView.selectedTab(mPosition);
+    		mViewPager.setCurrentItem(mPosition);
+    	}
     }
 	@Override
 	public void requestData() {

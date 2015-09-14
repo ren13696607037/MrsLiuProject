@@ -207,7 +207,6 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
-//							setView();
 						}
 					}
 				});

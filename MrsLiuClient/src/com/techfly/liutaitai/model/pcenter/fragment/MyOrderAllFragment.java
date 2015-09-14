@@ -207,6 +207,7 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
 	        param.setmIsLogin(true);
 			param.setmId(mUser.getmId());
 			param.setmToken(mUser.getmToken());
+			param.setPostRequestMethod();
 	        param.setmHttpURL(url);
 	        param.setmParserClassName(TechOrderParser.class.getName());
 	        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);

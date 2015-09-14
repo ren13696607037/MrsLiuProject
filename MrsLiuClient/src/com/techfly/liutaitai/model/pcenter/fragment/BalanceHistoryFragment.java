@@ -115,6 +115,7 @@ public class BalanceHistoryFragment extends CommonFragment {
     	mAdapter = new BalanceHistoryAdapter(mActivity, mList);
     	mListView.setAdapter(mAdapter);
     	
+    	mPrice.setText(getString(R.string.balance_text1, mUser.getmMoney()));
     }
 
 	@Override

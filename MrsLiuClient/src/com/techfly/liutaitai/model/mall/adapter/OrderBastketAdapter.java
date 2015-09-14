@@ -77,14 +77,16 @@ public class OrderBastketAdapter extends BaseAdapter {
 		}
 
 		MyOrder order = mDatas.get(position);
-		if(order == null)
+		if (order == null)
 			return convertView;
-		
+
 		setState(viewHolder.mTvBtn1, viewHolder.mTvBtn2, viewHolder.mTvState,
 				order.getmState());
 		setType(viewHolder.mTvType, order.getmType());
-		viewHolder.mTvBtn1.setOnClickListener(new OrderBasketClick(mFragment,order.getmId() + ""));
-		viewHolder.mTvBtn2.setOnClickListener(new OrderBasketClick(mFragment,order.getmId() + ""));
+		viewHolder.mTvBtn1.setOnClickListener(new OrderBasketClick(mFragment,
+				order.getmId() + "", order));
+		viewHolder.mTvBtn2.setOnClickListener(new OrderBasketClick(mFragment,
+				order.getmId() + "", order));
 		viewHolder.mTvCount.setText("总数：" + order.getmTotalCount()
 				+ order.getmUnit());
 		viewHolder.mTvTime.setText(order.getmTime());
@@ -111,7 +113,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 		};
 		viewHolder.mListView.setAdapter(adapter);
 		viewHolder.mLlParent.setOnClickListener(new OrderBasketClick(mFragment,
-				order.getmId()));
+				order.getmId(), order));
 
 		return convertView;
 	}

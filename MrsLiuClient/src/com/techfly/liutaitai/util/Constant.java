@@ -1,5 +1,7 @@
 package com.techfly.liutaitai.util;
 
+import android.R.integer;
+
 
 
 public class Constant {
@@ -73,6 +75,9 @@ public class Constant {
 	public static final String TECH_ACCOUNT_URL = "master/binding";
 	public static final String TECH_CASH_URL = "master/cash";
 	public static final String TECH_CASH_INFO_URL = "master/bindinginfo";
+	public static final String TECH_RATE_LIST_URL = "common/reviews";
+	public static final String FORGET_URL = "user/forgotpwd";
+	public static final String USER_INFO_URL = "user/info";
 	
 	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "product/addOrder";
@@ -88,6 +93,8 @@ public class Constant {
 	
 	public static final String AFTER_SALE_SERVICE = "order/orderReply";//申请售后
 	public static final String AFTER_SALE_SERVICE_CONTENT = "message";//申请售后
+	public static final String ORDER_EVA = "common/reviewgoods";//订单评价
+	public static final String ORDER_EVA_CONTENT = "msg";//订单评价
 	
 
     public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
@@ -166,6 +173,8 @@ public class Constant {
 	public static final int PRO_SUCCESS = 822;
 	public static final int EXIT_INTENT = 823;
 	public static final int EXIT_SUCCESS = 824;
+	public static final int BALANCE_INTENT = 825;
+	public static final int BALANCE_SUCCESS = BALANCE_INTENT + 1;
 
 	public static final int PRODUCT_SALE_REQ = 1;// 按销量请求
 	public static final int PRODUCT_PRICE_REQ = 2;// 按价格请求

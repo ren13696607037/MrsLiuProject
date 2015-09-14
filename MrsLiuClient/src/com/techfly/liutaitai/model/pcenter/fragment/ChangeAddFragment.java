@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 	private EditText mEtAddress;
 	private Button mButton;
 	private String mExtra;
+	private ImageView mCityImageView;
 	private AddressManage mAddressManage = null;
 	private ResultInfo mInfo;
 	private User mUser;
@@ -71,7 +73,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 						// showSmartToast(R.string.addchange_success,
 						// Toast.LENGTH_SHORT);
 					}
-					 mActivity.setResult(Constant.ADDRESS_SUCCESS);
+					mActivity.setResult(Constant.ADDRESS_SUCCESS);
 					mActivity.finish();
 				} else {
 					showSmartToast(mInfo.getmMessage(), Toast.LENGTH_SHORT);
@@ -101,7 +103,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 				this);
 		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 		mExtra = mActivity.getIntent().getStringExtra(
-				IntentBundleKey.CHANGEADD_ID);
+				IntentBundleKey.ADDRESS_EXTRA);
 		mAddressManage = (AddressManage) mActivity.getIntent()
 				.getSerializableExtra(IntentBundleKey.CHANGEADD_ID);
 		getCitys();
@@ -190,6 +192,8 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 			mCity = mAddressManage.getmCityId();
 		}
 		
+		mCityImageView = (ImageView) view.findViewById(R.id.changeadd_city_img);
+		
 	}
 
 	@Override
@@ -266,6 +270,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		mDialog = new ShowDialog(mActivity, mCitys);
 		mDialog.show();
 		mDialog.setCanceledOnTouchOutside(true);
+		mCityImageView.setImageResource(R.drawable.address_city_up);
 	}
 
 
@@ -274,6 +279,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		mTvCity.setText(area.getmName());
 		mCity = area.getmId();
 		mDialog.dismiss();
+		mCityImageView.setImageResource(R.drawable.address_city_down);
 	}
 
 }

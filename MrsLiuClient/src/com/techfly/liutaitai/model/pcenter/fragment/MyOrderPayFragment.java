@@ -23,10 +23,12 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.OrderListParser;
+import com.techfly.liutaitai.bizz.parser.TechOrderParser;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.MyOrderAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -50,13 +52,13 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 	private MyOrderAdapter mAdapter;
 	private final int MSG_LIST=0x101;
 	private final int MSG_CANCEL=0x102;
-	private int mPage=0;
+	private int mPage=1;
 	private int mSize=10;
 	private TechOrder mOrder;
 	private boolean isCancel=false;
 	private boolean isRefresh=true;
 	private ResultInfo mInfo;
-	
+	private User mUser;
  	public Handler mPayHandler=new Handler(){
 
 		@Override
@@ -96,6 +98,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderPayFragment.this);
         ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
         ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
@@ -161,13 +164,16 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 		}else{
 			RequestParam param = new RequestParam();
 	        HttpURL url = new HttpURL();
-	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.MYORDER_LIST_URL);
-	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.STATE).setmGetParamValues("0");
+	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_LIST_URL);
+	        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("1");
 	        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.PAGE).setmGetParamValues(mPage+"");
-	        param.setmHttpURL(url);
-	        param.setmParserClassName(OrderListParser.class.getName());
+	        url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(mPage+"");
+	        param.setmIsLogin(true);
+			param.setmId(mUser.getmId());
+			param.setmToken(mUser.getmToken());
+			param.setPostRequestMethod();
+			param.setmHttpURL(url);
+	        param.setmParserClassName(TechOrderParser.class.getName());
 	        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
 	       
 		}

@@ -112,4 +112,5 @@
     <color name="color_tech_account_hint">#a3a3a3</color>
     
     <color name="color_balance_text">#fd9303</color>
+    <color name="color_rate_item_text">#b3b3b3</color>
 </resources>

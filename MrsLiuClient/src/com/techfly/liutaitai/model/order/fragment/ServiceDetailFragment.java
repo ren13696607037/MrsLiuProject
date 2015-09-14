@@ -137,9 +137,9 @@ public class ServiceDetailFragment extends CommonFragment {
     	mTime.setText(mActivity.getString(R.string.order_service_text, mService.getmServiceTime()));
     	mServiceTime.setText(mActivity.getString(R.string.service_detail_text1, mService.getmServicePerson()));
     	mProName.setText(mService.getmServiceName());
-    	mPrice.setText(mActivity.getString(R.string.service_detail_text5, mService.getmServicePrice()));
+    	mTotal.setText(mActivity.getString(R.string.service_detail_text5, mService.getmServicePrice()));
     	mVoucher.setText(mActivity.getString(R.string.service_detail_text7, mService.getmCash()));
-    	mTotal.setText(mActivity.getString(R.string.service_detail_text9, (Double.valueOf(mService.getmServicePrice())-Double.valueOf(mService.getmCash()))));
+    	mPrice.setText(mActivity.getString(R.string.service_detail_text9, (float)Math.round((Float.valueOf(mService.getmServicePrice())+Float.valueOf(mService.getmCash()))*100)/100));
     	setState(mService.getmServiceStatus(), mState, mButton, mButton2);
     }
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
  	<string name="error_get_user_id">请先登录</string>
     <string name="app_name">刘太太.生活</string>
@@ -164,10 +164,10 @@
     <string name="order_detail_free">运费</string>
     <string name="order_detail_pay">实付款：￥%1$s</string>
     <string name="order_detail_note">备注：</string>
-    <string name="order_pay_text">亲~暂时没有未付款订单</string>
+    <string name="order_pay_text">亲~暂时待接单的订单</string>
     <string name="order_all_text">亲~暂时没有订单</string>
-    <string name="order_delivery_text">亲~暂时没有未发货订单</string>
-    <string name="order_deliveryed_text">亲~暂时没有已发货订单</string>
+    <string name="order_delivery_text">亲~暂时没有待服务的订单</string>
+    <string name="order_deliveryed_text">亲~暂时没有进行中的订单</string>
     <string name="rate_no_text">该商品还没有评论~</string>
     <string name="button_pay">去支付</string>
     <string name="button_deliveryed">查看物流</string>
@@ -297,7 +297,8 @@
 	<string name="app_toast">app上暂无此功能~</string>
 	<!-- 评论 -->
 	<string name="rate_title">用户评论</string>
-	<string name="list_text">好评率%1$s</string>
+	<string name="list_text">%1$s分</string>
+	<string name="list_text1">%1$s人评价</string>
 	<string name="rate">评论</string>
 	<string name="rate_text">成交时间 %1$s</string>
 	<string name="rate_text1">非常满意</string>
@@ -528,5 +529,9 @@
 	<string name="recharge_text2">微信支付</string>
 	<string name="recharge_text3">确认充值</string>
 	<string name="recharge_title">余额</string>
+	
+	<string name="order_eva">评价</string>
+	<string name="order_eva_text">商品评价：</string>
+	<string name="order_eva_hint">商品是否满意，评价一下吧~</string>
 
 </resources>

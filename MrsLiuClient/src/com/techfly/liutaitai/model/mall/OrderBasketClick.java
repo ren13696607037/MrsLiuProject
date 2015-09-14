@@ -19,6 +19,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.fragment.OrderBastketFragment;
+import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -33,14 +34,17 @@ public class OrderBasketClick implements OnClickListener {
 	private Context mContext;
 	private OrderBastketFragment mFragment;
 	private String mId;
+	private MyOrder mOrder;
 
 	public OrderBasketClick(Context mContext) {
 		this.mContext = mContext;
 	}
 
-	public OrderBasketClick(OrderBastketFragment fragment, String id) {
+	public OrderBasketClick(OrderBastketFragment fragment, String id,
+			MyOrder order) {
 		this.mFragment = fragment;
 		this.mId = id;
+		this.mOrder = order;
 	}
 
 	@Override
@@ -136,6 +140,8 @@ public class OrderBasketClick implements OnClickListener {
 		} else if (v.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_3))) {
 			// 去评价
+
+			UIHelper.toOrderEvaActivity(mFragment, mOrder);
 		}
 	}
 
