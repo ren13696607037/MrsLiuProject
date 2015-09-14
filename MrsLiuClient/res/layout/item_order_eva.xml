@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="@dimen/px_20" >
+
+    <TextView
+        android:id="@+id/order_eva_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textColor="@color/TextColorBLACK"
+        android:textSize="@dimen/app_text_size_first" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/order_eva_text"
+            android:textColor="@color/TextColorBLACK"
+            android:textSize="@dimen/app_text_size_first" />
+
+        <RatingBar
+            android:id="@+id/order_eva_item_bar"
+            style="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1" >
+        </RatingBar>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/order_eva_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shap_radio"
+        android:gravity="top|left"
+        android:hint="@string/order_eva_hint"
+        android:minLines="3"
+        android:padding="@dimen/px_20"
+        android:textColor="@color/TextColorBLACK"
+        android:textSize="@dimen/app_text_size_first" />
+
+</LinearLayout>

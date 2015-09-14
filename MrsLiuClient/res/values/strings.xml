@@ -521,6 +521,10 @@
 	<string name="balance_history_text4">充值</string>
 	<string name="balance_history_text5">支付</string>
 	<string name="balance_history_text6">+%1$s</string>
-	<string name="balance_history_text7">-%1$s</string>
-
+	<string name="balance_history_text7">-%1$s</string>
+	<string name="order_eva">评价</string>
+
+	<string name="order_eva_text">商品评价：</string>
+
+	<string name="order_eva_hint">商品是否满意，评价一下吧~</string>
 </resources>

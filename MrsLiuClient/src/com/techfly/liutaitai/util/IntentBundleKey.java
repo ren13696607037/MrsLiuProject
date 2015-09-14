@@ -21,6 +21,7 @@ public class IntentBundleKey {
     public final static String PROVINCE="province";
     public final static String ADDRESS="address";
     public static final String ADDRESS_VALUES = "address_values";
+	public final static String ORDER="order";
 	public final static String ORDER_ID="order_id";
 	public final static String ORDER_MONEY="order_money";
 	public final static String ORDER_PRODUCT="order_product";

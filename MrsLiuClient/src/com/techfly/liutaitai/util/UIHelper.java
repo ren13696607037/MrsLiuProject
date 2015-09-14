@@ -9,6 +9,7 @@ import com.techfly.liutaitai.model.home.activities.SearchActivity;
 import com.techfly.liutaitai.model.mall.activities.AfterSaleServiceActivity;
 import com.techfly.liutaitai.model.mall.activities.CategoryInfoListActivity;
 import com.techfly.liutaitai.model.mall.activities.GanxiActivity;
+import com.techfly.liutaitai.model.mall.activities.OrderEvaActivity;
 import com.techfly.liutaitai.model.mall.activities.OrderInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
@@ -20,6 +21,7 @@ import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.ChangeAddressActivity;
 import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
+import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.shopcar.activities.OrderPayFinishActivity;
 import com.techfly.liutaitai.model.shopcar.activities.ShopCarActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
@@ -209,6 +211,13 @@ public class UIHelper {
 		Intent intent = new Intent(context.getActivity(),
 				AfterSaleServiceActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, id);
+		context.startActivity(intent);
+	}
+
+	public static void toOrderEvaActivity(Fragment context, MyOrder order) {
+		Intent intent = new Intent(context.getActivity(),
+				OrderEvaActivity.class);
+		intent.putExtra(IntentBundleKey.ORDER, order);
 		context.startActivity(intent);
 	}
 
