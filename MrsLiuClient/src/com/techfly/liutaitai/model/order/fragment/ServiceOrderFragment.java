@@ -29,6 +29,7 @@ import com.techfly.liutaitai.model.order.adapter.ServiceAdapter;
 import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.model.pcenter.fragment.MyOrderAllFragment;
+import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -40,10 +41,12 @@ import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.ManagerListener.ServiceClickListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment;
+import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment.PayCallBack;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class ServiceOrderFragment extends CommonFragment implements IXListViewListener, ServiceClickListener{
+public class ServiceOrderFragment extends CreateOrderPayCommonFragment implements IXListViewListener, ServiceClickListener{
 	private XListView mListView;
 	private ArrayList<Service> mList=new ArrayList<Service>();
 	private ServiceAdapter mAdapter;
@@ -278,7 +281,13 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
 	@Override
 	public void onServicePayListener(Service service) {
 		mType = 2;
-		
+        onPay(service.getmId(), service.getmServicePrice(), service.getmServiceName(), new PayCallBack() {
+            
+            @Override
+            public void onPaySuccess() {
+              
+            }
+        });
 	}
 
 	@Override
@@ -311,6 +320,17 @@ public class ServiceOrderFragment extends CommonFragment implements IXListViewLi
     		mTextView.setVisibility(View.VISIBLE);
     		mTextView.setText(R.string.service_no_content);
         }
+	}
+
+	@Override
+	public String onEncapleOrderInfo(HttpURL url) {
+		return null;
+	}
+
+	@Override
+	public void onOrderCreateSuccess(String orderId, String money,
+			String proName) {
+		
 	}
 
 

@@ -46,11 +46,13 @@ import com.techfly.liutaitai.util.ManagerListener.OrderPayListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderRateListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
+import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment;
 import com.techfly.liutaitai.util.fragment.OrderPayFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderPayListener,OrderRateListener{
+public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderPayListener,OrderRateListener{
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
@@ -365,15 +367,10 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
 
 	@Override
 	public void onOrderPayListener(final TechOrder order) {
-		onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmServicePrice(), order.getmServiceName(),new PayCallBack() {
-            
-            @Override
-            public void onPaySuccess() {
-                mList.clear();mPage=0;
-                startReqTask(MyOrderAllFragment.this);
-                UIHelper.toOrdeFinishActivity(MyOrderAllFragment.this, order.getmId(),false);
-            }
-        });
+		float totalPrice =Float.valueOf(order.getmServicePrice()) - Float.valueOf(order.getmVoucher());
+        long   l1   =   Math.round(totalPrice*100);   //四舍五入   
+        totalPrice   =   (float) (l1/100.00);               //注意：使用   100.0   而不是   100   
+        onCommitOrder(Constant.PRODUCT_TYPE_ENTITY ,Constant.PAY_TYPE_CREATE,totalPrice+"",order.getmServiceName());   
 	}
 
 	@Override
@@ -419,5 +416,19 @@ public class MyOrderAllFragment extends OrderPayFragment implements OnItemClickL
 		isDelete=false;
 		startReqTask(MyOrderAllFragment.this);
 	}
+
+	@Override
+	public String onEncapleOrderInfo(HttpURL url) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onOrderCreateSuccess(String orderId, String money,
+			String proName) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
