@@ -10,6 +10,7 @@ import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.model.shopcar.fragment.CreateOrderSucFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -21,7 +22,7 @@ import com.techfly.liutaitai.util.activities.BaseActivity;
 
 public class ServiceOrderActivity extends BaseActivity{
     private Fragment mTakeOrderFragment;
-    private Fragment mOrderCreateFragment;
+    private CreateOrderSucFragment mOrderCreateFragment;
     private Fragment mOrderFinishFragment;
     private Bundle mBundle;
     public Bundle getBundleInfo(){
@@ -41,13 +42,14 @@ public class ServiceOrderActivity extends BaseActivity{
     
     private void onInitContent() {
         mTakeOrderFragment = getSupportFragmentManager().findFragmentById(R.id.taking_order);
-        mOrderCreateFragment = getSupportFragmentManager().findFragmentById(R.id.order_create);
+        mOrderCreateFragment = (CreateOrderSucFragment) getSupportFragmentManager().findFragmentById(R.id.order_create);
         mOrderFinishFragment = getSupportFragmentManager().findFragmentById(R.id.order_finish);
         showTakingOrderFragment();
     }
     
     public void showOrderCreateFragment(Bundle bundle){
         mBundle =bundle;
+        mOrderCreateFragment.onShowDisplay(mBundle);
         FragmentTransaction ft =   getSupportFragmentManager().beginTransaction();
         ft.hide(mTakeOrderFragment);
         ft.show(mOrderCreateFragment);
@@ -62,7 +64,10 @@ public class ServiceOrderActivity extends BaseActivity{
         ft.hide(mOrderCreateFragment);
         ft.show(mOrderFinishFragment);
         ft.commitAllowingStateLoss();
-        onRequestPaySuccess();
+        if(mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)==Constant.PAY_ALIPAY
+                || mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)==Constant.PAY_WENXIN ){
+                 onRequestPaySuccess();
+             }
     }
     public void showTakingOrderFragment(){
         FragmentTransaction ft =   getSupportFragmentManager().beginTransaction();
@@ -87,7 +92,7 @@ public class ServiceOrderActivity extends BaseActivity{
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+"common/payData");
         url.setmGetParamPrefix("type");
-        url.setmGetParamValues("1");
+        url.setmGetParamValues(mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)+"");
         
         url.setmGetParamPrefix("id");
         url.setmGetParamValues(mBundle.getString(IntentBundleKey.ORDER_ID, ""));

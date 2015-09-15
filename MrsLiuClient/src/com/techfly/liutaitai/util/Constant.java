@@ -152,9 +152,10 @@ public class Constant {
   
 
 
-
-
-   
+	public static final int PAY_BALANCE = 0x1561;
+	public static final int PAY_ALIPAY = 0x1562;
+	public static final int PAY_WENXIN = 0x1563;
+	public static final int PAY_OFFLINE = 0x1564;
 
 	public static final int LOGIN_INTENT = 0x801;
 	public static final int LOGIN_SUCCESS = 0x802;
