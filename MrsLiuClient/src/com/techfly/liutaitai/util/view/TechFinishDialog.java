@@ -59,6 +59,7 @@ public class TechFinishDialog extends Dialog{
 			ImageLoader.getInstance().displayImage(mUrl, mImageView);
 			mButton2.setText(R.string.submit);
 		}else{
+			mButton2.setText(R.string.life_helper_image_photo);
 			mButton.setVisibility(View.VISIBLE);
 			mImageView.setVisibility(View.GONE);
 		}

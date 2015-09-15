@@ -127,6 +127,15 @@ public class Service {
 		this.mNum = mNum;
 	}
 
+	public String getmTechId() {
+		return mTechId;
+	}
+
+	public void setmTechId(String mTechId) {
+		this.mTechId = mTechId;
+	}
+
 	private String mCash;// 代金券的数额
     private String mNum;//预约编号
+    private String mTechId;
 }

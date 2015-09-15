@@ -1,11 +1,9 @@
 package com.techfly.liutaitai.model.order.fragment;
 
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,9 +19,7 @@ import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
-import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.RateActivity;
-import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -32,7 +28,6 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
-import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
@@ -43,6 +38,7 @@ public class RateFragment extends CommonFragment {
 	private RateActivity mActivity;
 	private String mServiceId;
 	private User mUser;
+	private String mTechId;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -55,6 +51,7 @@ public class RateFragment extends CommonFragment {
 		super.onCreate(savedInstanceState);
 		mServiceId = mActivity.getIntent().getStringExtra(
 				IntentBundleKey.SERVICE_ID);
+		mTechId = mActivity.getIntent().getStringExtra(IntentBundleKey.TECH_ID);
 		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 	}
 
@@ -96,7 +93,9 @@ public class RateFragment extends CommonFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				startReqTask(RateFragment.this);
+				if(mTechId != null && !TextUtils.isEmpty(mTechId) && mServiceId != null && !TextUtils.isEmpty(mServiceId)){
+					startReqTask(RateFragment.this);
+				}
 			}
 		});
 
@@ -108,12 +107,13 @@ public class RateFragment extends CommonFragment {
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_RATE_URL);
 		url.setmGetParamPrefix(JsonKey.RateKey.ID).setmGetParamValues(
-				mServiceId);
+				mTechId);
 		url.setmGetParamPrefix(JsonKey.RateKey.CONTENT).setmGetParamValues(
 				mContenText.getText().toString());
 		url.setmGetParamPrefix(JsonKey.RateKey.STARS).setmGetParamValues(
 				(int) mRatingBar.getRating() + "");
 		url.setmGetParamPrefix(JsonKey.RateKey.TYPE).setmGetParamValues("1");
+		url.setmGetParamPrefix(JsonKey.RateKey.ORDERID).setmGetParamValues(mServiceId);
 		param.setmParserClassName(CommonParser.class.getName());
 		param.setmIsLogin(true);
 		param.setmId(mUser.getmId());

@@ -33,6 +33,7 @@ public class ServiceDetailParser implements Parser{
 					service.setmServiceTime(obj.optString(JsonKey.ServiceDetailKey.TIME));
 					service.setmServiceStatus(obj.optString(JsonKey.ServiceKey.STATE));
 					service.setmServicePerson(obj.optString(JsonKey.ServiceDetailKey.ADDTIME));
+					service.setmTechId(obj.optString(JsonKey.ServiceDetailKey.MID));
 				}
 			}else{
 				return object.optString(JsonKey.MESSAGE);

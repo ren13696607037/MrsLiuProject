@@ -61,7 +61,7 @@ public class MyCollectAdapter extends BaseAdapter {
 		ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
 		holder.mTvPrice.setText(mContext.getString(R.string.collect_price,mList.get(position).getmPrice()));
 		holder.mTvTitle.setText(mList.get(position).getmName());
-//		holder.mTvNum.setText(mList.get(position).getmAmount() + "");
+		holder.mTvNum.setText(mList.get(position).getmAmount() + "");
 		return convertView;
 	}
 	class ViewHolder{

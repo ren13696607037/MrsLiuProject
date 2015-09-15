@@ -68,6 +68,7 @@ import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.ManagerListener.TechFinishDialogListener;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.ManagerListener.OrderLogiticsListener;
+import com.techfly.liutaitai.util.ManagerListener.OrderPayListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderRateListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -76,7 +77,7 @@ import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
 public class MyOrderRateFragment extends CommonFragment implements
-		OnItemClickListener, IXListViewListener, OrderRateListener ,TechFinishDialogListener{
+		OnItemClickListener, IXListViewListener, OrderRateListener ,TechFinishDialogListener,OrderPayListener{
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList = new ArrayList<TechOrder>();
@@ -144,6 +145,8 @@ public class MyOrderRateFragment extends CommonFragment implements
 		mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 		startReqTask(MyOrderRateFragment.this);
 		ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
+		ManagerListener.newManagerListener().onRegisterTechFinishDialogListener(this);
+		ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
 	}
 
 	@Override
@@ -159,6 +162,8 @@ public class MyOrderRateFragment extends CommonFragment implements
 		super.onDestroy();
 		ManagerListener.newManagerListener()
 				.onUnRegisterOrderRateListener(this);
+		ManagerListener.newManagerListener().onUnRegisterTechFinishDialogListener(this);
+		ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
 	}
 
 	@Override
@@ -339,6 +344,13 @@ public class MyOrderRateFragment extends CommonFragment implements
 			mDialog.setCanceledOnTouchOutside(true);
 		}
 	}
+	@Override
+	public void onOrderPayListener(TechOrder order) {
+		mType = 0;
+		mOrder = order;
+		isRefresh = false;
+		startReqTask(MyOrderRateFragment.this);
+	}
 
 	private void toDone() {
 		RequestParams params = new RequestParams();
@@ -382,8 +394,8 @@ public class MyOrderRateFragment extends CommonFragment implements
 														getString(R.string.life_helper_send_success),
 														Toast.LENGTH_LONG)
 												.show();
-										mType = 0;
-										startReqTask(MyOrderRateFragment.this);
+										SharePreferenceUtils.getInstance(getActivity()).clearTechTime();
+										ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
 									} else {
 										SmartToast.makeText(getActivity(),
 												obj.optString(JsonKey.MESSAGE),
@@ -413,11 +425,6 @@ public class MyOrderRateFragment extends CommonFragment implements
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Constant.DETAIL_SUCCESS) {
-			mType = 0;
-			isRefresh = false;
-			startReqTask(MyOrderRateFragment.this);
-		}
 		super.onActivityResult(requestCode, resultCode, data);
 		String path = null;
 		Uri mImageUri = null;
@@ -487,6 +494,11 @@ public class MyOrderRateFragment extends CommonFragment implements
 			default:
 				break;
 			}
+		}
+		if (resultCode == Constant.DETAIL_SUCCESS) {
+			mType = 0;
+			isRefresh = false;
+			startReqTask(MyOrderRateFragment.this);
 		}
 	}
 
@@ -641,6 +653,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 
 	@Override
 	public void onPhoto() {
+		AppLog.Loge("xll", "photo is in");
 		Intent getImage = new Intent(
 				Intent.ACTION_GET_CONTENT);
 		getImage.setType("image/*");

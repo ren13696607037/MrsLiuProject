@@ -311,6 +311,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 		mType = 5;
 		Intent intent = new Intent(getActivity(), RateActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
+		intent.putExtra(IntentBundleKey.TECH_ID, service.getmTechId());
 		startActivityForResult(intent, Constant.RATE_INTENT);
 	}
 

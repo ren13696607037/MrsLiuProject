@@ -36,12 +36,13 @@ import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderLogiticsListener;
+import com.techfly.liutaitai.util.ManagerListener.OrderPayListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyOrderDeliveryFragment extends CommonFragment implements OnItemClickListener,IXListViewListener,OrderLogiticsListener{
+public class MyOrderDeliveryFragment extends CommonFragment implements OnItemClickListener,IXListViewListener,OrderLogiticsListener,OrderPayListener{
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
@@ -80,6 +81,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderDeliveryFragment.this);
     }
@@ -96,6 +98,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
     public void onDestroy() {
         super.onDestroy();
         ManagerListener.newManagerListener().onUnRegisterOrderLogiticsListener(this);
+        ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
     }
 
     @Override
@@ -160,9 +163,10 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
                 	if(object instanceof ResultInfo){
                 		ResultInfo info = (ResultInfo) object;
                 		if(info.getmCode() == 0){
-            				mType = 0;
-            				isRefresh = false;
-            				startReqTask(MyOrderDeliveryFragment.this);
+                			if(mType == 2){
+                				SharePreferenceUtils.getInstance(getActivity()).saveTechTime(System.currentTimeMillis());
+                			}
+                			ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
             			}
                     }else if(object instanceof ArrayList){
                     	ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
@@ -270,6 +274,13 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
 	public void onOrderLogiticsListener(TechOrder order) {
 		mType = 2;
 		mOrder=order;
+		isRefresh = false;
+		startReqTask(MyOrderDeliveryFragment.this);
+	}
+	@Override
+	public void onOrderPayListener(TechOrder order) {
+		mType = 0;
+		mOrder = order;
 		isRefresh = false;
 		startReqTask(MyOrderDeliveryFragment.this);
 	}

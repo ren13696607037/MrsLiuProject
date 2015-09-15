@@ -327,6 +327,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 		mType = 5;
 		Intent intent = new Intent(getActivity(), RateActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
+		intent.putExtra(IntentBundleKey.TECH_ID, service.getmTechId());
 		startActivity(intent);
 	}
 

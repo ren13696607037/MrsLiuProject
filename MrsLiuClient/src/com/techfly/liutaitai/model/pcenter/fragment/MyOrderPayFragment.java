@@ -36,13 +36,14 @@ import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderCancelListener;
+import com.techfly.liutaitai.util.ManagerListener.OrderPayListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderTakeListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.OrderPayFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderTakeListener{
+public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderTakeListener,OrderPayListener{
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
@@ -98,6 +99,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
         startReqTask(MyOrderPayFragment.this);
         ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
         ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
     }
     
 
@@ -113,6 +115,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
         super.onDestroy();
         ManagerListener.newManagerListener().onUnRegisterOrderCancelListener(this);
         ManagerListener.newManagerListener().onUnRegisterOrderTakeListener(this);
+        ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
     }
 
     @Override
@@ -159,7 +162,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 	        param.setmParserClassName(CommonParser.class.getName());
 		}else{
 	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_LIST_URL);
-	        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("0");
+	        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("1");
 	        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
 	        url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(mPage+"");
 	        param.setmParserClassName(TechOrderParser.class.getName());
@@ -205,15 +208,11 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
                 		ResultInfo info = (ResultInfo) object;
                 		if(mType == 3){
                 			if(info.getmCode() == 0){
-                				mType = 0;
-                				isRefresh = false;
-                				startReqTask(MyOrderPayFragment.this);
+                				ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
                 			}
                 		}else if(mType == 5){
                 			if(info.getmCode() == 0){
-                				mType = 0;
-                				isRefresh = false;
-                				startReqTask(MyOrderPayFragment.this);
+                				ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
                 			}
                 		}
                 	}
@@ -307,6 +306,14 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 	@Override
 	public void onOrderTakeListener(TechOrder order) {
 		mType = 5;
+		mOrder = order;
+		isRefresh = false;
+		startReqTask(MyOrderPayFragment.this);
+	}
+
+	@Override
+	public void onOrderPayListener(TechOrder order) {
+		mType = 0;
 		mOrder = order;
 		isRefresh = false;
 		startReqTask(MyOrderPayFragment.this);

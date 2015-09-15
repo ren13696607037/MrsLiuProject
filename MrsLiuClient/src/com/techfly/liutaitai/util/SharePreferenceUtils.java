@@ -29,6 +29,7 @@ public class SharePreferenceUtils {
     private Context mContext = null;
     private static final String AREA_ID="area_id";
     private static final String AREA_NAME="area_name";
+    private static final String TECH_START_TIME = "tech_start_time";
 
     public static SharePreferenceUtils getInstance(Context context) {
         if (sharePreferenceUtils == null) {
@@ -192,5 +193,29 @@ public class SharePreferenceUtils {
             }
         }
         return null;
+    }
+    public synchronized void saveTechTime(long time){
+        if (mSharePreference != null && time != 0L) {
+            Editor editor = mSharePreference.edit();
+            editor.putLong(TECH_START_TIME, time);
+            editor.commit();
+        }
+    }
+    public synchronized void clearTechTime() {
+        if (mSharePreference != null) {
+            Editor editor = mSharePreference.edit();
+            editor.remove(TECH_START_TIME);
+            editor.commit();
+        }
+    }
+
+    public synchronized long getTechTime() {
+        if (mSharePreference != null) {
+            long time = mSharePreference.getLong(TECH_START_TIME, 0L);
+            if(time != 0L){
+            	return time;
+            }
+        }
+        return 0L;
     }
 }

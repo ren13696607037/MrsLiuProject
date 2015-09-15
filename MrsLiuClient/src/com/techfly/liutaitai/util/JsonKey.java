@@ -305,6 +305,7 @@ public interface JsonKey {
 		static final String ADDRESS = "address";
 		static final String ADDTIME = "serviceTime";
 		static final String SID = "sid";
+		static final String MID = "mid";
 	}
 	interface BalanceKey{
 		static final String PAGE = "no";
@@ -397,6 +398,7 @@ public interface JsonKey {
 		static final String MOBILE = "mobile";
 		static final String COUNT = "counts";
 		static final String AVERGE = "averge";
+		static final String ORDERID = "orderid";
 	}
 	
 	interface CollectKey{
@@ -405,6 +407,7 @@ public interface JsonKey {
 		static final String TITLE = "title";
 		static final String PRICE = "price";
 		static final String SID = "sid";
+		static final String TIMES = "times";
 	}
 
 }

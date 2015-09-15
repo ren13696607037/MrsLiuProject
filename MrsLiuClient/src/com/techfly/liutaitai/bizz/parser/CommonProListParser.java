@@ -36,7 +36,7 @@ public class CommonProListParser implements Parser {
                     product.setmId(obj.optString(JsonKey.CollectKey.ID));
                     product.setmName(obj.optString(JsonKey.CollectKey.TITLE));
                     product.setmPrice((float) obj.optDouble(JsonKey.CollectKey.PRICE));
-//                    product.setmAmount(obj.optInt(JsonKey.p))
+                    product.setmAmount(obj.optInt(JsonKey.CollectKey.TIMES));
                     product.setmImg(Constant.YIHUIMALL_BASE_URL+obj.optString(JsonKey.CollectKey.IMAGE));
                     list.add(product);
                 }

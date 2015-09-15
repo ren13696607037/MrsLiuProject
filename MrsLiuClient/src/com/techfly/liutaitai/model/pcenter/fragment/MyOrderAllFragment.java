@@ -372,33 +372,23 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
                 		ResultInfo info = (ResultInfo) object;
                 		if(mType == 1){
                 			if(info.getmCode() == 0){
-                				mType = 0;
-                				isRefresh = false;
-                				startReqTask(MyOrderAllFragment.this);
+                				ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
                 			}
                 		}else if(mType == 2){
                 			if(info.getmCode() == 0){
-                				mType = 0;
-                				isRefresh = false;
-                				startReqTask(MyOrderAllFragment.this);
+                				ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
                 			}
                 		}else if(mType == 3){
                 			if(info.getmCode() == 0){
-                				mType = 0;
-                				isRefresh = false;
-                				startReqTask(MyOrderAllFragment.this);
+                				ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
                 			}
                 		}else if(mType == 4){
                 			if(info.getmCode() == 0){
-                				mType = 0;
-                				isRefresh = false;
-                				startReqTask(MyOrderAllFragment.this);
+                				ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
                 			}
                 		}else if(mType == 5){
                 			if(info.getmCode() == 0){
-                				mType = 0;
-                				isRefresh = false;
-                				startReqTask(MyOrderAllFragment.this);
+                				ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
                 			}
                 		}
                 	}
@@ -529,9 +519,11 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	}
 
 	@Override
-	public void onOrderPayListener(TechOrder order) {//技师联系客服
-		mType = 6;
+	public void onOrderPayListener(TechOrder order) {//刷新
+		mType = 0;
 		mOrder = order;
+		isRefresh=false;
+		startReqTask(MyOrderAllFragment.this);
 	}
 
 	@Override
