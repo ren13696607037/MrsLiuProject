@@ -3,6 +3,7 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +27,7 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.CommonProListParser;
 import com.techfly.liutaitai.bizz.parser.TechOrderParser;
+import com.techfly.liutaitai.model.mall.activities.ServiceInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.ProItemAdapter;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.pcenter.adapter.MyCollectAdapter;
@@ -35,6 +37,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
@@ -119,9 +122,11 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-                // TODO Auto-generated method stub
                 Product pro =  (Product) arg0.getItemAtPosition(position);
 //                UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(pro.getmId()),ProductInfoFragment.FLAG_NORMAL);
+                Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
+				intent.putExtra(IntentBundleKey.ORDER_ID, pro.getmOrderNum());
+				startActivity(intent);
             }
         });
     	mListView.setOnItemLongClickListener(new OnItemLongClickListener() {

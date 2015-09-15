@@ -33,6 +33,7 @@ public class CommonProListParser implements Parser {
                 for(int i=0;i<array.length();i++){
                     JSONObject obj = array.optJSONObject(i);
                     Product product = new Product();
+                    product.setmOrderNum(obj.optString(JsonKey.CollectKey.SID));
                     product.setmId(obj.optString(JsonKey.CollectKey.ID));
                     product.setmName(obj.optString(JsonKey.CollectKey.TITLE));
                     product.setmPrice((float) obj.optDouble(JsonKey.CollectKey.PRICE));

@@ -1,6 +1,5 @@
 package com.techfly.liutaitai.model.pcenter.fragment;
 
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -84,7 +83,10 @@ import com.techfly.liutaitai.util.ManagerListener.TechFinishDialogListener;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.TechFinishDialog;
 
-public class TechOrderDetailFragment extends CommonFragment implements OnClickListener,OrderCancelListener,OrderDeleteListener,OrderLogiticsListener,OrderRateListener,OrderPayListener,OrderTakeListener,TechFinishDialogListener{
+public class TechOrderDetailFragment extends CommonFragment implements
+		OnClickListener, OrderCancelListener, OrderDeleteListener,
+		OrderLogiticsListener, OrderRateListener, OrderPayListener,
+		OrderTakeListener, TechFinishDialogListener {
 	private OrderDetailActivity mActivity;
 	private TextView mNo;
 	private TextView mTime;
@@ -109,33 +111,53 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 	private final int MSG_DATA = 0x101;
 	private final int MSG_UPDATE_TIME = 0x901;
 	private int MSG_TOTAL_TIME;
-	private Handler mServiceDetailHandler = new Handler(){
+	private Handler mServiceDetailHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			if(msg.what == MSG_DATA){
+			if (msg.what == MSG_DATA) {
 				setData();
 			}
 		};
 	};
 	public Handler timeHandler = new Handler() {
 
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-            case MSG_UPDATE_TIME:
-                MSG_TOTAL_TIME++;
-                Message message = obtainMessage();
-                message.what = MSG_UPDATE_TIME;
-                sendMessageDelayed(message, 1000);
-                
-                break;
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case MSG_UPDATE_TIME:
+				MSG_TOTAL_TIME += 1000;
+				if (MSG_TOTAL_TIME / 1000 / 60 > 60) {
+					mTimeStart.setText(MSG_TOTAL_TIME / 1000 / 60 / 60 + "时"
+							+ MSG_TOTAL_TIME / 1000 / 60 + "分" + MSG_TOTAL_TIME
+							/ 1000 % 60 + "秒");
+				} else {
+					mTimeStart.setText(MSG_TOTAL_TIME / 1000 / 60 + "分"
+							+ MSG_TOTAL_TIME / 1000 % 60 + "秒");
+				}
+				break;
 
-            default:
-                break;
-            }
-        }
+			default:
+				break;
+			}
+		}
 
-    };
-    private int mType;
+	};
+	Runnable runnable = new Runnable() {
+
+		@Override
+		public void run() {
+			while (true) {
+				try {
+					Thread.sleep(1000);
+					Message message = new Message();
+					message.what = MSG_UPDATE_TIME;
+					timeHandler.sendMessage(message);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	};
+	private int mType;
 	private TechFinishDialog mDialog;
 	private static final int TAKE_BIG_PICTURE = 0x901;
 	private static final int TAKE_BIG_LOCAL_PICTURE = TAKE_BIG_PICTURE + 1;
@@ -150,203 +172,245 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 			if (intent.getBooleanExtra(IntentBundleKey.REDIRECT_TYPE, false)
 					&& null != intent
 							.getStringExtra(IntentBundleKey.IMAGE_PATH)) {
-				AppLog.Loge("xll", intent
-						.getStringExtra(IntentBundleKey.IMAGE_PATH));
+				AppLog.Loge("xll",
+						intent.getStringExtra(IntentBundleKey.IMAGE_PATH));
 				mSelectItems = intent
 						.getStringExtra(IntentBundleKey.IMAGE_PATH);
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
-				mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+				mDialog = new TechFinishDialog(getActivity(), "file:///"
+						+ mSelectItems);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
 		}
 	};
-	
+
 	@Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mActivity = (OrderDetailActivity) activity;
-    }
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mActivity = (OrderDetailActivity) activity;
+	}
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_ID);
-        mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
-        startReqTask(TechOrderDetailFragment.this);
-        ManagerListener.newManagerListener().onRegisterOrderDeleteListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
-        ManagerListener.newManagerListener().onRegisterTechFinishDialogListener(this);
-    }
-    
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		new Thread(runnable).start();
+		mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_ID);
+		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
+		startReqTask(TechOrderDetailFragment.this);
+		ManagerListener.newManagerListener()
+				.onRegisterOrderDeleteListener(this);
+		ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(
+				this);
+		ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
+		ManagerListener.newManagerListener()
+				.onRegisterOrderCancelListener(this);
+		ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
+		ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
+		ManagerListener.newManagerListener()
+				.onRegisterTechFinishDialogListener(this);
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tech_service_detail, container, false);
-        return view;
-    }
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_tech_service_detail,
+				container, false);
+		return view;
+	}
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ManagerListener.newManagerListener().onUnRegisterOrderDeleteListener(this);
-        ManagerListener.newManagerListener().onUnRegisterOrderLogiticsListener(this);
-        ManagerListener.newManagerListener().onUnRegisterOrderRateListener(this);
-        ManagerListener.newManagerListener().onUnRegisterOrderCancelListener(this);
-        ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
-        ManagerListener.newManagerListener().onUnRegisterOrderTakeListener(this);
-        ManagerListener.newManagerListener().onUnRegisterTechFinishDialogListener(this);
-    }
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		ManagerListener.newManagerListener().onUnRegisterOrderDeleteListener(
+				this);
+		ManagerListener.newManagerListener().onUnRegisterOrderLogiticsListener(
+				this);
+		ManagerListener.newManagerListener()
+				.onUnRegisterOrderRateListener(this);
+		ManagerListener.newManagerListener().onUnRegisterOrderCancelListener(
+				this);
+		ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
+		ManagerListener.newManagerListener()
+				.onUnRegisterOrderTakeListener(this);
+		ManagerListener.newManagerListener()
+				.onUnRegisterTechFinishDialogListener(this);
+	}
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-    
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putString("WORKAROUND_FOR_BUG_19917_KEY",
-                "WORKAROUND_FOR_BUG_19917_VALUE");
-        super.onSaveInstanceState(outState);
-    }
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+	}
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        onInitView(view);
-    }
-    private void onInitView(View view){
-    	IntentFilter intentFilter = new IntentFilter(
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putString("WORKAROUND_FOR_BUG_19917_KEY",
+				"WORKAROUND_FOR_BUG_19917_VALUE");
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		onInitView(view);
+	}
+
+	private void onInitView(View view) {
+		IntentFilter intentFilter = new IntentFilter(
 				Constant.REFRESH_UPLOAD_GRIDVIEW_IMAGE);
 		getActivity().registerReceiver(mImageWallChangeBroadcastReceiver,
 				intentFilter);
-    	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-    	setTitleText(R.string.service_detail_title);
-    	
-    	mAddress = (TextView) view.findViewById(R.id.tsd_address);
-    	mButton = (Button) view.findViewById(R.id.tsd_btn);
-    	mButton2 = (Button) view.findViewById(R.id.tsd_btn2);
-    	mImageView = (ImageView) view.findViewById(R.id.tsd_img);
-    	mName = (TextView) view.findViewById(R.id.tsd_name);
-    	mNo = (TextView) view.findViewById(R.id.tsd_no);
-    	mPhone = (TextView) view.findViewById(R.id.tsd_phone);
-    	mPrice = (TextView) view.findViewById(R.id.tsd_product_price);
-    	mProName = (TextView) view.findViewById(R.id.tsd_product_name);
-    	mTime = (TextView) view.findViewById(R.id.tsd_time);
-    	mTotal = (TextView) view.findViewById(R.id.tsd_total);
-    	mVoucher = (TextView) view.findViewById(R.id.tsd_voucher);
-    	mServiceTime = (TextView) view.findViewById(R.id.tsd_service_time);
-    	mState = (TextView) view.findViewById(R.id.tsd_state);
-    	mIvAddress = (ImageView) view.findViewById(R.id.tsd_address_img);
-    	mIvPhone = (ImageView) view.findViewById(R.id.tsd_phone_img);
-    	mTimeStart = (TextView) view.findViewById(R.id.tsd_time_start);
-    	
-    	mIvAddress.setOnClickListener(this);
-    	mIvPhone.setOnClickListener(this);
-    	mButton.setOnClickListener(this);
-    	mButton2.setOnClickListener(this);
-    	
-    }
-    private void setData(){
-    	AppLog.Loge("xll", "tech order detail is set data but why??");
-    	mNo.setText(mActivity.getString(R.string.service_detail_text, mOrder.getmId()));
-    	mAddress.setText(mActivity.getString(R.string.service_detail_text4, mOrder.getmCustomerAddress()));
-    	ImageLoader.getInstance().displayImage(mOrder.getmServiceIcon(), mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
-    	mName.setText(mActivity.getString(R.string.service_detail_text2, mOrder.getmCustomerName()));
-    	mPhone.setText(mActivity.getString(R.string.service_detail_text3, mOrder.getmCustomerPhone()));
-    	mTime.setText(mActivity.getString(R.string.order_service_text, mOrder.getmCustomerTime()));
-    	mServiceTime.setText(mActivity.getString(R.string.service_detail_text1, mOrder.getmOrderTime()));
-    	mProName.setText(mOrder.getmServiceName());
-    	mTotal.setText(mActivity.getString(R.string.service_detail_text9, mOrder.getmServicePrice()));
-    	mVoucher.setText(mActivity.getString(R.string.service_detail_text7, mOrder.getmVoucher()));
-    	mPrice.setText(mActivity.getString(R.string.service_detail_text5, (float)Math.round((Float.valueOf(mOrder.getmServicePrice())+Float.valueOf(mOrder.getmVoucher()))*100)/100));
-    	setState(mOrder, mState, mButton, mButton2);
-    	mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton.getText().toString()));
-    	mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2.getText().toString()));
-    	
-//    	MSG_TOTAL_TIME = (int)(System.currentTimeMillis() - SharePreferenceUtils.getInstance(mActivity).getTechTime());
-//    	Message message = new Message();
-//        message.what = MSG_UPDATE_TIME;
-//        timeHandler.sendMessage(message);
-    }
-    private void setState(TechOrder order,TextView textView,Button button,Button button2){
-		int state=Integer.valueOf(order.getmServiceStatus());
+		setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+		setTitleText(R.string.service_detail_title);
+
+		mAddress = (TextView) view.findViewById(R.id.tsd_address);
+		mButton = (Button) view.findViewById(R.id.tsd_btn);
+		mButton2 = (Button) view.findViewById(R.id.tsd_btn2);
+		mImageView = (ImageView) view.findViewById(R.id.tsd_img);
+		mName = (TextView) view.findViewById(R.id.tsd_name);
+		mNo = (TextView) view.findViewById(R.id.tsd_no);
+		mPhone = (TextView) view.findViewById(R.id.tsd_phone);
+		mPrice = (TextView) view.findViewById(R.id.tsd_product_price);
+		mProName = (TextView) view.findViewById(R.id.tsd_product_name);
+		mTime = (TextView) view.findViewById(R.id.tsd_time);
+		mTotal = (TextView) view.findViewById(R.id.tsd_total);
+		mVoucher = (TextView) view.findViewById(R.id.tsd_voucher);
+		mServiceTime = (TextView) view.findViewById(R.id.tsd_service_time);
+		mState = (TextView) view.findViewById(R.id.tsd_state);
+		mIvAddress = (ImageView) view.findViewById(R.id.tsd_address_img);
+		mIvPhone = (ImageView) view.findViewById(R.id.tsd_phone_img);
+		mTimeStart = (TextView) view.findViewById(R.id.tsd_time_start);
+
+		mIvAddress.setOnClickListener(this);
+		mIvPhone.setOnClickListener(this);
+		mButton.setOnClickListener(this);
+		mButton2.setOnClickListener(this);
+
+	}
+
+	private void setData() {
+		AppLog.Loge("xll", "tech order detail is set data but why??");
+		mNo.setText(mActivity.getString(R.string.service_detail_text,
+				mOrder.getmId()));
+		mAddress.setText(mActivity.getString(R.string.service_detail_text4,
+				mOrder.getmCustomerAddress()));
+		ImageLoader.getInstance().displayImage(mOrder.getmServiceIcon(),
+				mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
+		mName.setText(mActivity.getString(R.string.service_detail_text2,
+				mOrder.getmCustomerName()));
+		mPhone.setText(mActivity.getString(R.string.service_detail_text3,
+				mOrder.getmCustomerPhone()));
+		mTime.setText(mActivity.getString(R.string.order_service_text,
+				mOrder.getmCustomerTime()));
+		mServiceTime.setText(mActivity.getString(R.string.service_detail_text1,
+				mOrder.getmOrderTime()));
+		mProName.setText(mOrder.getmServiceName());
+		mTotal.setText(mActivity.getString(R.string.service_detail_text9,
+				mOrder.getmServicePrice()));
+		mVoucher.setText(mActivity.getString(R.string.service_detail_text7,
+				mOrder.getmVoucher()));
+		mPrice.setText(mActivity
+				.getString(R.string.service_detail_text5,
+						(float) Math.round((Float.valueOf(mOrder
+								.getmServicePrice()) + Float.valueOf(mOrder
+								.getmVoucher())) * 100) / 100));
+		setState(mOrder, mState, mButton, mButton2);
+		mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton
+				.getText().toString()));
+		mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2
+				.getText().toString()));
+
+		MSG_TOTAL_TIME = (int) (System.currentTimeMillis() - SharePreferenceUtils
+				.getInstance(mActivity).getTechTime());
+	}
+
+	private void setState(TechOrder order, TextView textView, Button button,
+			Button button2) {
+		int state = Integer.valueOf(order.getmServiceStatus());
 		button.setVisibility(View.VISIBLE);
 		button2.setVisibility(View.VISIBLE);
-		if(state==1){
+		if (state == 1) {
 			textView.setText(R.string.tech_order_list_state);
 			button2.setText(R.string.tech_order_list_btn);
 			button.setText(R.string.tech_order_list_btn1);
-		}else if(state==2){
+		} else if (state == 2) {
 			textView.setText(R.string.tech_order_list_state1);
 			button.setText(R.string.tech_order_list_btn3);
 			button2.setText(R.string.tech_order_list_btn2);
-		}else if(state==3){
+		} else if (state == 3) {
 			textView.setText(R.string.tech_order_list_state2);
 			button2.setVisibility(View.GONE);
 			button.setText(R.string.tech_order_list_btn4);
-		}else if(state==4){
+		} else if (state == 4) {
 			textView.setText(R.string.tech_order_list_state3);
 			button.setText(R.string.tech_order_list_btn5);
 			button2.setVisibility(View.GONE);
-		}else if(state == 5 || state == 6){
+		} else if (state == 5 || state == 6) {
 			textView.setText(R.string.tech_order_list_state4);
 			button.setText(R.string.tech_order_list_btn5);
 			button2.setVisibility(View.GONE);
-		}else if(state == 0){
+		} else if (state == 0) {
 			textView.setText(R.string.order_service_state);
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
 		}
-    }
+	}
 
 	@Override
 	public void requestData() {
-		if(mType == 1){
+		if (mType == 1) {
 			toDone();
-		}else{
+		} else {
 			RequestParam param = new RequestParam();
-	        HttpURL url = new HttpURL();
-			if(mType == 3){
-		        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_REMOVE_URL);
-		        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
-		        param.setmParserClassName(CommonParser.class.getName());
-			}else if(mType == 4){
-		        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_REFRSE_URL);
-		        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
-		        param.setmParserClassName(CommonParser.class.getName());
-			}else if(mType == 2){
-				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_START_URL);
-		        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
-		        param.setmParserClassName(CommonParser.class.getName());
-			}else if(mType == 5){
-				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_TAKE_URL);
-		        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
-		        param.setmParserClassName(CommonParser.class.getName());
-			}else{
-				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_DETAIL_URL);
-		        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mId);
-		        param.setmParserClassName(TechOrderDetailParser.class.getName());
+			HttpURL url = new HttpURL();
+			if (mType == 3) {
+				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+						+ Constant.TECH_ORDER_REMOVE_URL);
+				url.setmGetParamPrefix(JsonKey.ServiceKey.RID)
+						.setmGetParamValues(mOrder.getmId());
+				param.setmParserClassName(CommonParser.class.getName());
+			} else if (mType == 4) {
+				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+						+ Constant.TECH_ORDER_REFRSE_URL);
+				url.setmGetParamPrefix(JsonKey.ServiceKey.RID)
+						.setmGetParamValues(mOrder.getmId());
+				param.setmParserClassName(CommonParser.class.getName());
+			} else if (mType == 2) {
+				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+						+ Constant.TECH_ORDER_START_URL);
+				url.setmGetParamPrefix(JsonKey.ServiceKey.RID)
+						.setmGetParamValues(mOrder.getmId());
+				param.setmParserClassName(CommonParser.class.getName());
+			} else if (mType == 5) {
+				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+						+ Constant.TECH_ORDER_TAKE_URL);
+				url.setmGetParamPrefix(JsonKey.ServiceKey.RID)
+						.setmGetParamValues(mOrder.getmId());
+				param.setmParserClassName(CommonParser.class.getName());
+			} else {
+				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+						+ Constant.TECH_ORDER_DETAIL_URL);
+				url.setmGetParamPrefix(JsonKey.ServiceKey.RID)
+						.setmGetParamValues(mId);
+				param.setmParserClassName(TechOrderDetailParser.class.getName());
 			}
 			param.setmIsLogin(true);
 			param.setmId(mUser.getmId());
 			param.setmToken(mUser.getmToken());
 			param.setPostRequestMethod();
-	        param.setmHttpURL(url);
-	        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
+			param.setmHttpURL(url);
+			RequestManager.getRequestData(getActivity(),
+					createMyReqSuccessListener(), createMyReqErrorListener(),
+					param);
 		}
 	}
-	private void toDone(){
+
+	private void toDone() {
 		RequestParams params = new RequestParams();
 		params.addHeader("enctype", "multipart/form-data");
 		params.addHeader("lt-token", mUser.getmToken());
-		params.addHeader("lt-id", mUser.getmId());  
+		params.addHeader("lt-id", mUser.getmId());
 		params.addBodyParameter("img", new File(mSelectItems));
 		params.addBodyParameter(JsonKey.ServiceKey.RID, mOrder.getmId());
 		HttpUtils http = new HttpUtils();
@@ -392,7 +456,7 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 												Toast.LENGTH_LONG).show();
 									}
 								}
-								
+
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
@@ -400,70 +464,71 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 					}
 				});
 	}
+
 	private Response.Listener<Object> createMyReqSuccessListener() {
-        return new Listener<Object>() {
-            @Override
-            public void onResponse(Object object) {
-            	mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                AppLog.Logd(object.toString());
-                if(object instanceof TechOrder){
-                	mOrder = (TechOrder) object;
-                    if(!isDetached()){
-                    	mServiceDetailHandler.removeMessages(MSG_DATA);
-                    	mServiceDetailHandler.sendEmptyMessage(MSG_DATA);
-                    }
-                }else if(object instanceof ResultInfo){
-            		ResultInfo info = (ResultInfo) object;
-            		if(mType == 1){
-            			if(info.getmCode() == 0){
-            				mType = 0;
-            				startReqTask(TechOrderDetailFragment.this);
-            			}
-            		}else if(mType == 2){
-            			if(info.getmCode() == 0){
-            				mType = 0;
-            				startReqTask(TechOrderDetailFragment.this);
-            			}
-            		}else if(mType == 3){
-            			if(info.getmCode() == 0){
-            				mType = 0;
-            				startReqTask(TechOrderDetailFragment.this);
-            			}
-            		}else if(mType == 4){
-            			if(info.getmCode() == 0){
-            				mType = 0;
-            				startReqTask(TechOrderDetailFragment.this);
-            			}
-            		}else if(mType == 5){
-            			if(info.getmCode() == 0){
-            				mType = 0;
-            				startReqTask(TechOrderDetailFragment.this);
-            			}
-            		}
-            	}
-            }
-        };
-    }
+		return new Listener<Object>() {
+			@Override
+			public void onResponse(Object object) {
+				mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+				mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+				AppLog.Logd(object.toString());
+				if (object instanceof TechOrder) {
+					mOrder = (TechOrder) object;
+					if (!isDetached()) {
+						mServiceDetailHandler.removeMessages(MSG_DATA);
+						mServiceDetailHandler.sendEmptyMessage(MSG_DATA);
+					}
+				} else if (object instanceof ResultInfo) {
+					ResultInfo info = (ResultInfo) object;
+					if (mType == 1) {
+						if (info.getmCode() == 0) {
+							mType = 0;
+							startReqTask(TechOrderDetailFragment.this);
+						}
+					} else if (mType == 2) {
+						if (info.getmCode() == 0) {
+							mType = 0;
+							startReqTask(TechOrderDetailFragment.this);
+						}
+					} else if (mType == 3) {
+						if (info.getmCode() == 0) {
+							mType = 0;
+							startReqTask(TechOrderDetailFragment.this);
+						}
+					} else if (mType == 4) {
+						if (info.getmCode() == 0) {
+							mType = 0;
+							startReqTask(TechOrderDetailFragment.this);
+						}
+					} else if (mType == 5) {
+						if (info.getmCode() == 0) {
+							mType = 0;
+							startReqTask(TechOrderDetailFragment.this);
+						}
+					}
+				}
+			}
+		};
+	}
 
-    private Response.ErrorListener createMyReqErrorListener() {
-       return new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                AppLog.Loge(" data failed to load"+error.getMessage());
-            }
-       };
-    }
-
-	@Override
-	public void onClick(View v) {
-		
+	private Response.ErrorListener createMyReqErrorListener() {
+		return new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+				mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+				AppLog.Loge(" data failed to load" + error.getMessage());
+			}
+		};
 	}
 
 	@Override
-	public void onOrderRateListener(TechOrder order) {//技师完成服务
+	public void onClick(View v) {
+
+	}
+
+	@Override
+	public void onOrderRateListener(TechOrder order) {// 技师完成服务
 		mType = 1;
 		mOrder = order;
 		if (!Utility.isSDCardExist(getActivity())) {
@@ -479,26 +544,28 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 	}
 
 	@Override
-	public void onOrderLogiticsListener(TechOrder order) {//技师开始服务
+	public void onOrderLogiticsListener(TechOrder order) {// 技师开始服务
 		mType = 2;
-		mOrder=order;
+		mOrder = order;
 		startReqTask(TechOrderDetailFragment.this);
 	}
 
 	@Override
 	public void onOrderDeleteListener(TechOrder order) {
 		mType = 3;
-		mOrder=order;
+		mOrder = order;
 		startReqTask(TechOrderDetailFragment.this);
 	}
+
 	@Override
 	public void onOrderCancelListener(TechOrder order) {
-		mOrder=order;
+		mOrder = order;
 		mType = 4;
 		startReqTask(TechOrderDetailFragment.this);
 	}
+
 	@Override
-	public void onOrderPayListener(TechOrder order) {//技师联系客服
+	public void onOrderPayListener(TechOrder order) {// 技师联系客服
 		mType = 6;
 		mOrder = order;
 	}
@@ -509,6 +576,7 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 		mOrder = order;
 		startReqTask(TechOrderDetailFragment.this);
 	}
+
 	private void goCamera() {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		mPhotoPath = Uri.fromFile(FileTool.createTempFile(
@@ -525,8 +593,8 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Constant.LOGIN_SUCCESS) {
-//			setView();
-//			ManagerListener.newManagerListener().notifyRefreshListener();
+			// setView();
+			// ManagerListener.newManagerListener().notifyRefreshListener();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 		String path = null;
@@ -543,13 +611,13 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 						new String[] { "image/jpeg", "image/png" },
 						MediaStore.Images.Media.DATE_MODIFIED);
 				mCursor.moveToFirst();
-				if (mCursor.getColumnIndex(MediaStore.Images.Media.DATA) !=-1) {
-						try {
-							path = mCursor.getString(mCursor
-									.getColumnIndex(MediaStore.Images.Media.DATA));
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+				if (mCursor.getColumnIndex(MediaStore.Images.Media.DATA) != -1) {
+					try {
+						path = mCursor.getString(mCursor
+								.getColumnIndex(MediaStore.Images.Media.DATA));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -588,7 +656,8 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 					mSelectItems = path;
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
-					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+					mDialog = new TechFinishDialog(getActivity(), "file:///"
+							+ mSelectItems);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}
@@ -751,16 +820,14 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 
 	@Override
 	public void onPhoto() {
-		Intent getImage = new Intent(
-				Intent.ACTION_GET_CONTENT);
+		Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);
 		getImage.setType("image/*");
-		startActivityForResult(getImage,
-				TAKE_BIG_PICTURE);
+		startActivityForResult(getImage, TAKE_BIG_PICTURE);
 	}
 
 	@Override
 	public void onSubmit(String url) {
-		if(url != null){
+		if (url != null) {
 			startReqTask(TechOrderDetailFragment.this);
 		}
 	}
