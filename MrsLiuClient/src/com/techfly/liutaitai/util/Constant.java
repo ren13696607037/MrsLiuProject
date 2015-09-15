@@ -181,6 +181,8 @@ public class Constant {
 	public static final int EXIT_SUCCESS = 824;
 	public static final int BALANCE_INTENT = 825;
 	public static final int BALANCE_SUCCESS = BALANCE_INTENT + 1;
+	public static final int RATE_INTENT = 827;
+	public static final int RATE_SUCCESS = RATE_INTENT + 1;
 
 	public static final int PRODUCT_SALE_REQ = 1;// 按销量请求
 	public static final int PRODUCT_PRICE_REQ = 2;// 按价格请求

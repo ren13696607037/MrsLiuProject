@@ -112,15 +112,15 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
     		mCashAccountText.setVisibility(View.INVISIBLE);
     		mCashAccount.setVisibility(View.VISIBLE);
     		mCashName.setVisibility(View.VISIBLE);
-    		if(Integer.valueOf(mTechAccount.getmType()) == 0){
+    		if(mTechAccount.getmType() != null && Integer.valueOf(mTechAccount.getmType()) == 0){
     			mCashBank.setVisibility(View.VISIBLE);
     			mCashBank.setText(getString(R.string.cash_card_text, mTechAccount.getmBank()));
     			mCashAccount.setText(getString(R.string.cash_card_text1, mTechAccount.getmAccount()));
     			mCashName.setText(getString(R.string.cash_card_text2, mTechAccount.getmName()));
-    		}else if(Integer.valueOf(mTechAccount.getmType()) == 1){
+    		}else if(mTechAccount.getmType() != null &&Integer.valueOf(mTechAccount.getmType()) == 1){
     			mCashAccount.setText(getString(R.string.cash_alipay_text1, mTechAccount.getmAccount()));
     			mCashName.setText(getString(R.string.cash_alipay_text2, mTechAccount.getmName()));
-    		}else if(Integer.valueOf(mTechAccount.getmType()) == 2){
+    		}else if(mTechAccount.getmType() != null &&Integer.valueOf(mTechAccount.getmType()) == 2){
     			mCashAccount.setText(getString(R.string.cash_weixin_text1, mTechAccount.getmAccount()));
     			mCashName.setText(getString(R.string.cash_alipay_text2, mTechAccount.getmName()));
     		}

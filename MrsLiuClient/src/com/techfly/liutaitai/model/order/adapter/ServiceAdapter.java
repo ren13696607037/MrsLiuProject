@@ -102,11 +102,11 @@ public class ServiceAdapter extends BaseAdapter {
 			textView.setText(R.string.order_service_state2);
 			button.setText(R.string.order_service_btn3);
 			button2.setVisibility(View.INVISIBLE);
-		}else if("3".equals(state) || "4".equals(state)){
+		}else if("3".equals(state)){
 			textView.setText(R.string.order_service_state3);
 			button.setText(R.string.order_service_btn3);
 			button2.setVisibility(View.INVISIBLE);
-		}else if("5".equals(state)){
+		}else if("5".equals(state) || "4".equals(state)){
 			textView.setText(R.string.order_service_state4);
 			button.setText(R.string.order_service_btn5);
 			button2.setText(R.string.order_service_btn4);
