@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,6 +63,8 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 	private User mUser;
 	private TextView mTimeStart;
 	private final int MSG_DATA = 0x101;
+	private final int MSG_UPDATE_TIME = 0x901;
+	private int MSG_TOTAL_TIME;
 	private Handler mServiceDetailHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			if(msg.what == MSG_DATA){
@@ -69,6 +72,22 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 			}
 		};
 	};
+	public Handler timeHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+            case MSG_UPDATE_TIME:
+                MSG_TOTAL_TIME++;
+                
+                break;
+
+            default:
+                break;
+            }
+        }
+
+    };
 	
 	@Override
     public void onAttach(Activity activity) {
@@ -144,7 +163,7 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
     }
     private void setData(){
     	AppLog.Loge("xll", "tech order detail is set data but why??");
-    	mNo.setText(mActivity.getString(R.string.service_detail_text, mOrder.getmOrderNo()));
+    	mNo.setText(mActivity.getString(R.string.service_detail_text, mOrder.getmId()));
     	mAddress.setText(mActivity.getString(R.string.service_detail_text4, mOrder.getmCustomerAddress()));
     	ImageLoader.getInstance().displayImage(mOrder.getmServiceIcon(), mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
     	mName.setText(mActivity.getString(R.string.service_detail_text2, mOrder.getmCustomerName()));
@@ -237,7 +256,6 @@ public class TechOrderDetailFragment extends CommonFragment implements OnClickLi
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		
 	}
 
