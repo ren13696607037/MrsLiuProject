@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:padding="@dimen/px_20"
+    >
+    <ImageView 
+        android:id="@+id/icollect_img"
+        android:layout_width="@dimen/px_121"
+    	android:layout_height="@dimen/px_121" 
+    	android:scaleType="centerCrop"
+    	android:layout_centerVertical="true"
+    	android:layout_marginRight="@dimen/px_35"
+        />
+    <TextView 
+        android:id="@+id/icollect_title"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:textColor="@color/color_3d"
+    	android:textSize="@dimen/app_text_size_first"
+    	android:layout_toRightOf="@id/icollect_img"
+    	android:layout_marginTop="@dimen/px_15"
+        />
+    <TextView 
+        android:id="@+id/icollect_price"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:textColor="#e7391c"
+    	android:textSize="@dimen/app_text_size_first"
+    	android:layout_toRightOf="@id/icollect_img"
+    	android:layout_below="@id/icollect_title"
+    	android:layout_marginTop="@dimen/px_15"
+        />
+    <TextView 
+        android:id="@+id/icollect_num"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:textColor="#929292"
+    	android:textSize="@dimen/app_text_size_second"
+    	android:layout_toRightOf="@id/icollect_price"
+    	android:layout_alignBottom="@id/icollect_price"
+        />
+    
+    
+
+</RelativeLayout>

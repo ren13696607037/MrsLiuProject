@@ -73,6 +73,10 @@
         android:id="@+id/voucher_list"
         android:layout_width="match_parent"
 	    android:layout_height="match_parent"
+	    android:padding="@dimen/px_20"
+	    android:scrollbars="none"
+	    android:divider="@null"
+	    android:dividerHeight="@dimen/px_15"
         />
     <TextView 
             android:id="@+id/voucher_hint"

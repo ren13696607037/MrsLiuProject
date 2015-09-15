@@ -308,11 +308,12 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 		mType = 5;
 		Intent intent = new Intent(getActivity(), RateActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
-		startActivity(intent);
+		startActivityForResult(intent, Constant.RATE_INTENT);
 	}
 
 	@Override
 	public void onServiceRefreshListener() {
+		mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 		if(mUser!=null){
         	startReqTask(ServiceOrderFragment.this);
         }else{
@@ -332,6 +333,19 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 			String proName) {
 		
 	}
-
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == Constant.RATE_SUCCESS){
+			mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
+			if(mUser!=null){
+	        	startReqTask(ServiceOrderFragment.this);
+	        }else{
+	        	mListView.setVisibility(View.GONE);
+	    		mTextView.setVisibility(View.VISIBLE);
+	    		mTextView.setText(R.string.service_no_content);
+	        }
+		}
+	}
 
 }

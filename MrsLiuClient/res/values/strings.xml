@@ -538,5 +538,6 @@
 	<string name="order_eva">评价</string>
 	<string name="order_eva_text">商品评价：</string>
 	<string name="order_eva_hint">商品是否满意，评价一下吧~</string>
+	<string name="dialog_tech_finish_text">完成服务需要上传作品图片</string>
 
 </resources>
