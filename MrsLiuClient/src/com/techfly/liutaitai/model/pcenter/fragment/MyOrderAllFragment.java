@@ -373,26 +373,31 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
                 		if(mType == 1){
                 			if(info.getmCode() == 0){
                 				mType = 0;
+                				isRefresh = false;
                 				startReqTask(MyOrderAllFragment.this);
                 			}
                 		}else if(mType == 2){
                 			if(info.getmCode() == 0){
                 				mType = 0;
+                				isRefresh = false;
                 				startReqTask(MyOrderAllFragment.this);
                 			}
                 		}else if(mType == 3){
                 			if(info.getmCode() == 0){
                 				mType = 0;
+                				isRefresh = false;
                 				startReqTask(MyOrderAllFragment.this);
                 			}
                 		}else if(mType == 4){
                 			if(info.getmCode() == 0){
                 				mType = 0;
+                				isRefresh = false;
                 				startReqTask(MyOrderAllFragment.this);
                 			}
                 		}else if(mType == 5){
                 			if(info.getmCode() == 0){
                 				mType = 0;
+                				isRefresh = false;
                 				startReqTask(MyOrderAllFragment.this);
                 			}
                 		}
@@ -428,6 +433,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 			
 			@Override
 			public void run() {
+				isRefresh = false;
 				mPage = 1;
 				mList.clear();
 				requestData();
@@ -441,6 +447,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 			
 			@Override
 			public void run() {
+				isRefresh = true;
 				mPage += 1;
 				requestData();
 			}
@@ -497,8 +504,6 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 		if(mList.size()==0){
 			isRefresh=false;
 			startReqTask(MyOrderAllFragment.this);
-		}else{
-			
 		}
 	}
 
@@ -533,6 +538,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	public void onOrderTakeListener(TechOrder order) {
 		mType = 5;
 		mOrder = order;
+		isRefresh=false;
 		startReqTask(MyOrderAllFragment.this);
 	}
 	private void goCamera() {
@@ -787,6 +793,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	@Override
 	public void onSubmit(String url) {
 		if(url != null){
+			isRefresh=false;
 			startReqTask(MyOrderAllFragment.this);
 		}
 	}

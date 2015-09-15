@@ -46,4 +46,5 @@ public class IntentBundleKey {
     public static String BALANCE_PRICE = "balance_price";
     public static String USER_NAME = "user_name";
     public static String USER_PASS = "user_pass";
+    public static String VOUCHER_EXTRA = "voucher_extra";
 }

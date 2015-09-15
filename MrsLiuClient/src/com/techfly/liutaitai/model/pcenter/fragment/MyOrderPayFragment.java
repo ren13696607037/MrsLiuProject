@@ -22,11 +22,9 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
-import com.techfly.liutaitai.bizz.parser.OrderListParser;
 import com.techfly.liutaitai.bizz.parser.TechOrderParser;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.MyOrderAdapter;
-import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -38,14 +36,13 @@ import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderCancelListener;
-import com.techfly.liutaitai.util.ManagerListener.OrderPayListener;
+import com.techfly.liutaitai.util.ManagerListener.OrderTakeListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
-import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.OrderPayFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderPayListener{
+public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickListener,IXListViewListener,OrderCancelListener,OrderTakeListener{
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList=new ArrayList<TechOrder>();
@@ -55,7 +52,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 	private int mPage=1;
 	private int mSize=10;
 	private TechOrder mOrder;
-	private boolean isCancel=false;
+	private int mType;
 	private boolean isRefresh=true;
 	private ResultInfo mInfo;
 	private User mUser;
@@ -73,7 +70,6 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 			case MSG_CANCEL:
 				if(mInfo.getmCode()==0){
 					showSmartToast(R.string.cancel_success, Toast.LENGTH_SHORT);
-					isCancel=false;
 					startReqTask(MyOrderPayFragment.this);
 				}else{
 					if(mInfo.getmMessage()!=null&&!TextUtils.isEmpty(mInfo.getmMessage())&&!"null".equals(mInfo.getmMessage())){
@@ -101,7 +97,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderPayFragment.this);
         ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
     }
     
 
@@ -116,7 +112,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
     public void onDestroy() {
         super.onDestroy();
         ManagerListener.newManagerListener().onUnRegisterOrderCancelListener(this);
-        ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
+        ManagerListener.newManagerListener().onUnRegisterOrderTakeListener(this);
     }
 
     @Override
@@ -151,90 +147,76 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 
 	@Override
 	public void requestData() {
-		if(isCancel){
-			RequestParam param = new RequestParam();
-	        HttpURL url = new HttpURL();
-	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_CANCEL_URL);
-	        url.setmGetParamPrefix(JsonKey.UserKey.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
-	        url.setmGetParamPrefix(JsonKey.MyOrderKey.ID).setmGetParamValues(mOrder.getmId());
-	        param.setmHttpURL(url);
+		RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+		if(mType == 3){
+	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_REMOVE_URL);
+	        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
 	        param.setmParserClassName(CommonParser.class.getName());
-	        RequestManager.getRequestData(getActivity(), createReqSuccessListener(), createReqErrorListener(), param);
-	       
+		}else if(mType == 5){
+			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_TAKE_URL);
+	        url.setmGetParamPrefix(JsonKey.ServiceKey.RID).setmGetParamValues(mOrder.getmId());
+	        param.setmParserClassName(CommonParser.class.getName());
 		}else{
-			RequestParam param = new RequestParam();
-	        HttpURL url = new HttpURL();
 	        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_ORDER_LIST_URL);
-	        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("1");
+	        url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE).setmGetParamValues("0");
 	        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
 	        url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(mPage+"");
-	        param.setmIsLogin(true);
-			param.setmId(mUser.getmId());
-			param.setmToken(mUser.getmToken());
-			param.setPostRequestMethod();
-			param.setmHttpURL(url);
 	        param.setmParserClassName(TechOrderParser.class.getName());
-	        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
-	       
 		}
+		param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		param.setPostRequestMethod();
+        param.setmHttpURL(url);
+        RequestManager.getRequestData(getActivity(), createMyReqSuccessListener(), createMyReqErrorListener(), param);
 		
     }
-	private Response.Listener<Object> createReqSuccessListener() {
+	private Response.Listener<Object> createMyReqSuccessListener() {
         return new Listener<Object>() {
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                mInfo=(ResultInfo) object;
                 if(!isDetached()){
-                	mPayHandler.removeMessages(MSG_CANCEL);
-                	mPayHandler.sendEmptyMessage(MSG_CANCEL);
-                    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                    mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                }
-            }
-        };
-    }
-
-    private Response.ErrorListener createReqErrorListener() {
-       return new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                AppLog.Loge(" data failed to load"+error.getMessage());
-                if(!isDetached()){
-                    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                    mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                }
-            }
-       };
-    }
-    private Response.Listener<Object> createMyReqSuccessListener() {
-        return new Listener<Object>() {
-            @Override
-            public void onResponse(Object object) {
-                AppLog.Logd(object.toString());
-                ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
-                if(isRefresh){
-                	mList.addAll(list);
-                }else{
-                	mList.clear();
-                	mList.addAll(list);
-                }
-                if (list == null || list.size() == 0) {
-                	
-				} else if (list.size() < 10) {
-					mListView.setVisibility(View.VISIBLE);
-				    mTextView.setVisibility(View.GONE);
-					mListView.setPullLoadEnable(false);
-				} else {
-					mListView.setVisibility(View.VISIBLE);
-					mTextView.setVisibility(View.GONE);
-					mListView.setPullLoadEnable(true);
-				}
-				mListView.stopLoadMore();
-				mListView.stopRefresh();
-                if(!isDetached()){
-                	mPayHandler.removeMessages(MSG_LIST);
-                	mPayHandler.sendEmptyMessage(MSG_LIST);
+                	if(object instanceof ArrayList){
+                		ArrayList<TechOrder> list=(ArrayList<TechOrder>) object;
+                        if(isRefresh){
+                        	mList.addAll(list);
+                        }else{
+                        	mList.clear();
+                        	mList.addAll(list);
+                        }
+                        if (list == null || list.size() == 0) {
+                        	
+        				} else if (list.size() < 10) {
+        					mListView.setVisibility(View.VISIBLE);
+        				    mTextView.setVisibility(View.GONE);
+        					mListView.setPullLoadEnable(false);
+        				} else {
+        					mListView.setVisibility(View.VISIBLE);
+        					mTextView.setVisibility(View.GONE);
+        					mListView.setPullLoadEnable(true);
+        				}
+        				mListView.stopLoadMore();
+        				mListView.stopRefresh();
+                    	mPayHandler.removeMessages(MSG_LIST);
+                    	mPayHandler.sendEmptyMessage(MSG_LIST);
+                	}else if(object instanceof ResultInfo){
+                		ResultInfo info = (ResultInfo) object;
+                		if(mType == 3){
+                			if(info.getmCode() == 0){
+                				mType = 0;
+                				isRefresh = false;
+                				startReqTask(MyOrderPayFragment.this);
+                			}
+                		}else if(mType == 5){
+                			if(info.getmCode() == 0){
+                				mType = 0;
+                				isRefresh = false;
+                				startReqTask(MyOrderPayFragment.this);
+                			}
+                		}
+                	}
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 }
@@ -266,6 +248,8 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 			
 			@Override
 			public void run() {
+				mType = 0;
+				isRefresh = false;
 				mPage = 1;
 				mList.clear();
 				requestData();
@@ -279,6 +263,8 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 			
 			@Override
 			public void run() {
+				mType = 0;
+				isRefresh = true;
 				mPage += 1;
 				requestData();
 			}
@@ -295,30 +281,16 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 	}
 
 	@Override
-	public void onOrderPayListener(final TechOrder order) {
-	    onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,order.getmId(), order.getmServicePrice(), order.getmServiceName(),new PayCallBack() {
-            
-            @Override
-            public void onPaySuccess() {
-                mList.clear();mPage=0;
-                startReqTask(MyOrderPayFragment.this);
-                UIHelper.toOrdeFinishActivity(MyOrderPayFragment.this, order.getmId(),false);
-            }
-        });
-	}
-
-	@Override
 	public void onOrderCancelListener(TechOrder order) {
-		mOrder=order;
-		isCancel=true;
-		isRefresh=false;
+		mType = 3;
+		mOrder = order;
 		startReqTask(MyOrderPayFragment.this);
 	}
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode==Constant.DETAIL_SUCCESS){
 			isRefresh=false;
-			isCancel=false;
+			mType = 0;
 			startReqTask(MyOrderPayFragment.this);
 		}
 	}
@@ -327,9 +299,17 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
 		super.onResume();
 		if(mList.size()==0){
 			isRefresh=false;
-			isCancel=false;
+			mType = 0;
 			startReqTask(MyOrderPayFragment.this);
 		}
+	}
+
+	@Override
+	public void onOrderTakeListener(TechOrder order) {
+		mType = 5;
+		mOrder = order;
+		isRefresh = false;
+		startReqTask(MyOrderPayFragment.this);
 	}
 
 }
