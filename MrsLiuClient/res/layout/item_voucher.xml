@@ -10,7 +10,8 @@
 	    android:layout_height="wrap_content" 
 	    android:background="@drawable/voucher_left"
 	    android:paddingTop="@dimen/px_20"
-	    android:paddingLeft="@dimen/px_50"
+	    android:paddingLeft="@dimen/px_30"
+	    android:layout_weight="1"
         >
         <TextView 
             android:id="@+id/ivoucher_price"
@@ -35,6 +36,7 @@
 	    android:layout_height="wrap_content" 
 	    android:background="@drawable/voucher_right"
 	    android:padding="@dimen/px_30"
+	    android:layout_weight="2"
         >
         <TextView 
             android:id="@+id/ivoucher_text"
@@ -44,9 +46,9 @@
 	    	android:background="@drawable/voucher_in"
 	    	android:text="@string/voucher_text5"
 	    	android:textSize="@dimen/app_text_size_min"
-	    	android:textColor="@color/TextColorBLACK"
+	    	android:textColor="#7e330e"
 	    	android:padding="@dimen/px_10"
-	    	android:layout_marginBottom="@dimen/px_15"
+	    	android:layout_marginBottom="@dimen/px_10"
 	    	android:gravity="center"
             />
         <TextView 

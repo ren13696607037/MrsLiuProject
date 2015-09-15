@@ -398,5 +398,13 @@ public interface JsonKey {
 		static final String COUNT = "counts";
 		static final String AVERGE = "averge";
 	}
+	
+	interface CollectKey{
+		static final String ID = "id";
+		static final String IMAGE = "image";
+		static final String TITLE = "title";
+		static final String PRICE = "price";
+		static final String SID = "sid";
+	}
 
 }

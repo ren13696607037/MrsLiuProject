@@ -105,6 +105,9 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
     	mListView = (XListView) view.findViewById(R.id.voucher_list);
     	mHint = (TextView) view.findViewById(R.id.voucher_hint);
     	
+    	mAdapter = new VoucherAdapter(mActivity, mList);
+    	mListView.setAdapter(mAdapter);
+    	
     }
 
 	@Override
@@ -186,7 +189,7 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
 
 			@Override
 			public void run() {
-				mPage = 0;
+				mPage = 1;
 				mList.clear();
 				requestData();
 			}
