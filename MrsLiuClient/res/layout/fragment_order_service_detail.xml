@@ -167,6 +167,13 @@
                 android:layout_below="@id/osd_line1"
                 android:layout_margin="@dimen/px_20"
                 android:scaleType="centerCrop" />
+            <View
+                android:id="@+id/osd_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/osd_img"
+                android:layout_alignBottom="@id/osd_img"
+                />
 
             <TextView
                 android:id="@+id/osd_product_name"

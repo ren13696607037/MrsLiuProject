@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.RateActivity;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
@@ -300,7 +301,9 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 	@Override
 	public void onServiceAgainListener(Service service) {
 		mType = 4;
-		
+		Intent intent = new Intent(getActivity(), ServiceOrderActivity.class);
+		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmNum());
+		startActivity(intent);
 	}
 
 	@Override

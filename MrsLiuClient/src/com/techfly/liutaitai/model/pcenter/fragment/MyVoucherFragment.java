@@ -3,11 +3,14 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -24,6 +27,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -58,6 +62,7 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
 			}
 		};
 	};
+	private int mExtra;
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -68,6 +73,7 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
+        mExtra = mActivity.getIntent().getIntExtra(IntentBundleKey.VOUCHER_EXTRA, 0);
         startReqTask(this);
     }
     
@@ -107,6 +113,18 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
     	
     	mAdapter = new VoucherAdapter(mActivity, mList);
     	mListView.setAdapter(mAdapter);
+    	
+    	if(mExtra != 0){
+    		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					Voucher voucher = (Voucher) parent.getAdapter().getItem(position);
+					mActivity.setResult(102, new Intent().putExtra(IntentBundleKey.VOUCHER_EXTRA, voucher.getmId()));
+				}
+			});
+    	}
     	
     }
 
