@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.ManagerListener;
 
@@ -53,7 +54,13 @@ public class TechFinishDialog extends Dialog{
 		mImageView = (ImageView) findViewById(R.id.finish_img);
 		
 		if(mUrl != null){
-			
+			mButton.setVisibility(View.GONE);
+			mImageView.setVisibility(View.VISIBLE);
+			ImageLoader.getInstance().displayImage(mUrl, mImageView);
+			mButton2.setText(R.string.submit);
+		}else{
+			mButton.setVisibility(View.VISIBLE);
+			mImageView.setVisibility(View.GONE);
 		}
 		
 		mButton.setOnClickListener(new View.OnClickListener() {
