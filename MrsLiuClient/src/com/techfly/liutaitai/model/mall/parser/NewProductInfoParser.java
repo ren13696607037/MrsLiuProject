@@ -36,6 +36,7 @@ public class NewProductInfoParser implements Parser {
 					p.setmDesc(jsonObject.optString("text"));
 					p.setmId(jsonObject.optString("id"));
 					p.setmPrice((float) jsonObject.optDouble("price"));
+					p.setmImg(Constant.IMG_URL+jsonObject.optString("img"));
 					p.setmImgArray(parseImages(jsonObject));
 					JSONObject comment = jsonObject
 							.optJSONObject("reviews");

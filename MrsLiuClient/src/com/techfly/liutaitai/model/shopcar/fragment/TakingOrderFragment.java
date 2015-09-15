@@ -323,6 +323,9 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
             url.setmGetParamPrefix("ids");
             url.setmGetParamValues(mProduct.getmId());
             
+            url.setmGetParamPrefix("count");
+            url.setmGetParamValues(mProduct.getmAmount()+"");
+            
             float totalPrice =(mProduct.getmPrice()*mProduct.getmAmount());
             long l1 = Math.round(totalPrice * 100); // 四舍五入
             totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
@@ -335,7 +338,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
         
         
         url.setmGetParamPrefix("freight");
-        url.setmGetParamValues("0");
+        url.setmGetParamValues(mDeliverFee+"");
         
         url.setmGetParamPrefix("voucherId");
         if(!mIsUseVoucher){
