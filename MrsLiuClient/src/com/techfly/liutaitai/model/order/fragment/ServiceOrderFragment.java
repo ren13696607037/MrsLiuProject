@@ -281,7 +281,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 	@Override
 	public void onServicePayListener(Service service) {
 		mType = 2;
-        onPay(service.getmId(), service.getmServicePrice(), service.getmServiceName(), new PayCallBack() {
+        onPay(Constant.PAY_ALIPAY,service.getmId(), service.getmServicePrice(), service.getmServiceName(), new PayCallBack() {
             
             @Override
             public void onPaySuccess() {

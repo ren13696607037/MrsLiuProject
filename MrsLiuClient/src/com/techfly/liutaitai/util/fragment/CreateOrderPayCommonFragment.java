@@ -17,6 +17,7 @@ import com.techfly.liutaitai.bizz.alipay.Keys;
 import com.techfly.liutaitai.bizz.alipay.PayOrder;
 import com.techfly.liutaitai.bizz.alipay.PaymentImpl;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.bizz.paymanage.PayImplFactory;
 import com.techfly.liutaitai.bizz.shopcar.OnShopCarLisManager;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -36,8 +37,8 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
     private String mOrderId;
     private String mPayMoney;
     private String mProductName;
-    private int mPayType;
     private int mProductType;
+    private int mPayMethod;// 余额支付，支付宝支付，微信支付
     protected boolean mIsFromShopCar;
    
     public interface PayCallBack{
@@ -56,14 +57,13 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
     
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
         mIsFromShopCar = activity.getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_HOME_CART, true);
     }
 
     @Override
     public void requestData() {
-        // TODO Auto-generated method stub
+        
         
     }
 
@@ -73,18 +73,9 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
     
     protected void onCommitOrder(int productType,int payType,String price,String productName) {
            AppLog.Logd("Fly", "Taking Order request data");
-           mPayType = payType;
            mPayMoney = price;
            mProductName = productName;
            mProductType = productType;
-//           if(TextUtils.isEmpty(onEncapleOrderInfo())){
-//               showSmartToast("请开发者组装订单信息 在 onEncapleOrderInfo 方法中", Toast.LENGTH_LONG);
-//               return;
-//           }
-           if(mPayType !=Constant.PAY_TYPE_CREATE){
-               onPay();
-               return;
-           }
            showDialog();
            RequestParam param = new RequestParam();
            User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
@@ -134,7 +125,6 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
                                 JSONObject obj = new JSONObject(info.getmData());
                                 mOrderId = obj.optString("orderNum");
                             } catch (JSONException e) {
-                                // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
                              if(mIsFromShopCar){
@@ -164,109 +154,11 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
             }
         };
     }
-    private void onPay() {
-         IPayment pay = new PaymentImpl();
-         PayOrder order = new PayOrder();
-         order.setmAccountId(Keys.DEFAULT_SELLER);
-         order.setmMerchantId(Keys.DEFAULT_PARTNER);
-         if(mPayType ==Constant.PAY_TYPE_CREATE){
-               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_CALLBACK_URL);
-         }else{
-               order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
-         }
-         order.setmOrderNo(mOrderId);
-         order.setmProductPrice(mPayMoney);
-         order.setmProductName(mProductName);
-         String username = SharePreferenceUtils.getInstance(getActivity()).getUser().getmNick();
-         order.setmProductDesc(username+"购买"+mProductName);
-         pay.onPay(getActivity(), order,new IPayment.PayCallBack() {
-             @Override
-             public void onFail(String message) {
-                 if(getActivity()!=null && !isDetached()){
-                     SmartToast.showText(getActivity(), message);
-                 }
-             }
-             
-             @Override
-             public void onError(String message) {
-                 // TODO Auto-generated method stub
-                 if(getActivity()!=null && !isDetached()){
-                     SmartToast.showText(getActivity(), message);
-                 }
-             }
-             
-             @Override
-             public void onComplete() {
-                 // TODO Auto-generated method stub
-                 if(getActivity()!=null && !isDetached()){
-                     SmartToast.showText(getActivity(), R.string.alipay_success_promt);
-                 }
-                 if(mProductType==Constant.PRODUCT_TYPE_SERVICE){
-                     return;
-                 }else{
-                      getActivity().finish();
-                 }
-               
-                 
-             }
-             
-             @Override
-             public void onCancel() {
-                 if(getActivity()!=null && !isDetached()){
-                     SmartToast.showText(getActivity(), R.string.alipay_cancel_promt);
-                 }
-             }
-         });
-        
-    }
     
-     protected void onPay(String orderId,String payMoney,String productName,final PayCallBack callback) {
-        IPayment pay = new PaymentImpl();
-        PayOrder order = new PayOrder();
-        order.setmAccountId(Keys.DEFAULT_SELLER);
-        order.setmMerchantId(Keys.DEFAULT_PARTNER);
-        order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL+"?orderId="+orderId+"&price="+payMoney+"&payType=1");
-        order.setmOrderNo(orderId);
-        order.setmProductPrice(payMoney);
-        order.setmProductName(productName);
-        String username = SharePreferenceUtils.getInstance(getActivity()).getUser().getmNick();
-        order.setmProductDesc(username+"购买"+productName);
-        pay.onPay(getActivity(), order,new IPayment.PayCallBack() {
-            @Override
-            public void onFail(String message) {
-                if(getActivity()!=null && !isDetached()){
-                    SmartToast.showText(getActivity(), message);
-                }
-            }
-            
-            @Override
-            public void onError(String message) {
-                if(getActivity()!=null && !isDetached()){
-                    SmartToast.showText(getActivity(), message);
-                }
-               
-            }
-            
-            @Override
-            public void onComplete() {
-                if(getActivity()!=null && !isDetached()){
-                    SmartToast.showText(getActivity(), R.string.alipay_success_promt);
-                }
-                if(callback!=null){
-                    callback.onPaySuccess();
-                }
-            }
-            
-          
-            @Override
-            public void onCancel() {
-                // TODO Auto-generated method stub
-                if(getActivity()!=null && !isDetached()){
-                    SmartToast.showText(getActivity(), R.string.alipay_cancel_promt);
-                }
-            }
-        });
-        
+    
+     protected void onPay(int payMethod,String orderId,String payMoney,String productName,final PayCallBack callback) {
+        mPayMethod =payMethod;
+        PayImplFactory.getInstance().getPayImpl(mPayMethod).onPay(getActivity(), orderId, payMoney, productName, callback);
     }
     
 }

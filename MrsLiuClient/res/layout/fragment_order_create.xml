@@ -1,91 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
     android:background="@color/background"
-    >
-    <include 
-        layout="@layout/fragment_header"
-        />
-    <TextView 
-    	
-    	android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    	android:layout_gravity="center_horizontal"
-    	android:layout_marginTop="22dp"
-    	android:text="@string/submit_success"
-    	android:textColor="@color/TextColorBLACK_NORMAL"
-    	android:textSize="@dimen/app_text_size_first"
-    	/>
-    <TextView 
-        
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:text="@string/pay_prompt"
-        android:textColor="@color/gray_bg_dashed"
-        android:textSize="@dimen/app_text_size_min"
-        />
-    <ImageView 
-    	android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/list_line"
-        android:layout_marginTop="22dp"
-    	/>
-    <LinearLayout 
-    	 android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="12dp"
-    	android:orientation="horizontal"
-    	android:paddingLeft="16dp"
-    	android:paddingRight="16dp"
-    	>
-    	  <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/detail_text"
-        android:textColor="@color/TextColorBLACK_NORMAL"
-        android:textSize="@dimen/app_text_size_min"
-        />
-    <TextView 
-        android:id="@+id/pay_method"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:gravity="right"
-        android:text="@string/detail_text1"
-        android:textColor="@color/orange_bg_home_header"
-        android:textSize="@dimen/app_text_size_min"
-        />
-    	
-    </LinearLayout>
-  
-    <ImageView 
-        android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/list_line"
-        android:layout_marginTop="12dp"
-        />
-      <TextView 
-        android:id="@+id/order_pay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="22dp"
-        android:text="@string/pay_now"
-        android:textSize="@dimen/app_text_size_first"
-        android:background="@drawable/shop_car_delete"
-        />
+    android:scrollbars="none" >
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <include layout="@layout/fragment_header" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/pay_order_frame"
+            android:orientation="vertical"
+            android:padding="6dp" >
+
+            <TextView
+                android:id="@+id/submit_order_success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/submit_order_success"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/pay_prompt"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/list_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:padding="8dp" >
+
+            <ImageView
+                android:id="@+id/recharge_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/recharge_balance" />
+
+            <TextView
+                android:id="@+id/recharge_balance_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/recharge_balance"
+                android:text="@string/recharge_text4"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recharge_balance_title"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/recharge_balance"
+                android:gravity="right"
+                android:text="@string/cash_balance_text1"
+                android:textColor="@color/orange_bg_home_header"
+                android:textSize="@dimen/app_text_size_second" />
+
+            <CheckBox
+                android:id="@+id/check_box"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/list_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:padding="8dp" >
+
+            <ImageView
+                android:id="@+id/recharge_alipay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/recharge_alipay" />
+
+            <TextView
+                android:id="@+id/recharge_alipay_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/recharge_alipay"
+                android:text="@string/recharge_text1"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <CheckBox
+                android:id="@+id/check_box_alipay"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:checked="false" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/list_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:padding="8dp" >
+
+            <ImageView
+                android:id="@+id/recharge_wenxin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/recharge_weixin" />
+
+            <TextView
+                android:id="@+id/recharge_wenxin_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/recharge_wenxin"
+                android:text="@string/recharge_text2"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <CheckBox
+                android:id="@+id/check_box_wenxin"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:checked="false" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/list_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:padding="8dp" >
+
+            <ImageView
+                android:id="@+id/recharge_offline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/recharge_offline" />
+
+            <TextView
+                android:id="@+id/recharge_offline_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/recharge_offline"
+                android:text="@string/recharge_text5"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <CheckBox
+                android:id="@+id/check_box_offline"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:checked="false" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/list_line" />
+
+        <TextView
+            android:id="@+id/order_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/shop_car_delete"
+            android:gravity="center"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:text="@string/confirm"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first" />
+    </LinearLayout>
+
+</ScrollView>

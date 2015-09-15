@@ -376,7 +376,6 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
           }else if(type==2){
           setTitleText("鲜花");
       }
-      
     }
 
     @Override
