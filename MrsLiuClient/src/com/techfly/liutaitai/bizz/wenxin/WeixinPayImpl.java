@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
@@ -20,6 +21,9 @@ import android.util.Xml;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.alipay.IPayment;
 import com.techfly.liutaitai.bizz.alipay.PayOrder;
+import com.techfly.liutaitai.bizz.wenxin.wxapi.WXPayEntryActivity;
+import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
+import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.util.AppLog;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -32,14 +36,15 @@ public class WeixinPayImpl implements IPayment{
     IWXAPI msgApi;
     private Context mContext;
     private PayOrder mPayOrder;
+    private ProgressDialog dialog;
     @Override
     public void onPay(Context context, PayOrder order, PayCallBack payCallBack) {
         mPayOrder  = order;
         mContext = context;
         msgApi = WXAPIFactory.createWXAPI(context, null);
+        msgApi.registerApp(Keys.APP_ID);
         req = new PayReq();
         sb=new StringBuffer();
-        msgApi.registerApp(Keys.APP_ID);
         GetPrepayIdTask getPrepayId = new GetPrepayIdTask();
         getPrepayId.execute();
         
@@ -63,6 +68,7 @@ public class WeixinPayImpl implements IPayment{
 
        String packageSign = MD5.getMessageDigest(sb.toString().getBytes()).toUpperCase();
        Log.e("orion",packageSign);
+       AppLog.Loge("Fly", "packageSign====="+packageSign);
        return packageSign;
    }
    private String genAppSign(List<NameValuePair> params) {
@@ -80,6 +86,7 @@ public class WeixinPayImpl implements IPayment{
        this.sb.append("sign str\n"+sb.toString()+"\n\n");
        String appSign = MD5.getMessageDigest(sb.toString().getBytes()).toUpperCase();
        Log.e("orion",appSign);
+       AppLog.Loge("Fly", "genAppSign=====appSign ===="+appSign );
        return appSign;
    }
    private String toXml(List<NameValuePair> params) {
@@ -93,25 +100,32 @@ public class WeixinPayImpl implements IPayment{
            sb.append("</"+params.get(i).getName()+">");
        }
        sb.append("</xml>");
-       AppLog.Loge("Fly",sb.toString());
+
+       Log.e("orion",sb.toString());
+       AppLog.Loge("Fly", " toXml====="+sb.toString());
        return sb.toString();
    }
 
    private class GetPrepayIdTask extends AsyncTask<Void, Void, Map<String,String>> {
-       private ProgressDialog dialog;
+
        @Override
        protected void onPreExecute() {
-           dialog = ProgressDialog.show(mContext, mContext.getString(R.string.app_tip),mContext. getString(R.string.getting_prepayid));
+           dialog = ProgressDialog.show(mContext, mContext.getString(R.string.app_tip), mContext.getString(R.string.getting_prepayid));
+           if(mContext instanceof TakingOrderActivity){
+               TakingOrderActivity ac = (TakingOrderActivity) mContext;
+               ac.setDialog(dialog);
+           }else{
+               ServiceOrderActivity ac = ( ServiceOrderActivity ) mContext;
+               ac.setDialog(dialog);
+           }
        }
 
        @Override
        protected void onPostExecute(Map<String,String> result) {
-           if (dialog != null) {
-               dialog.dismiss();
-           }
            sb.append("prepay_id\n"+result.get("prepay_id")+"\n\n");
            resultunifiedorder=result;
-           AppLog.Loge("Fly",sb.toString());
+           AppLog.Loge("Fly", " prepay_id====="+result.get("prepay_id"));
+           AppLog.Loge("Fly", "  resultunifiedorder====="+ resultunifiedorder);
            genPayReq();
            sendPayReq();
        }
@@ -126,13 +140,12 @@ public class WeixinPayImpl implements IPayment{
 
            String url = String.format("https://api.mch.weixin.qq.com/pay/unifiedorder");
            String entity = genProductArgs();
-           AppLog.Loge("Fly","genProductArgs=="+entity);
-          
+
+           Log.e("orion",entity);
 
            byte[] buf = Util.httpPost(url, entity);
 
            String content = new String(buf);
-           AppLog.Loge("Fly","Util.httpPost(url, entity)==="+ content);
            Log.e("orion", content);
            Map<String,String> xml=decodeXml(content);
 
@@ -154,6 +167,7 @@ public class WeixinPayImpl implements IPayment{
                String nodeName=parser.getName();
                switch (event) {
                    case XmlPullParser.START_DOCUMENT:
+
                        break;
                    case XmlPullParser.START_TAG:
 
@@ -170,7 +184,6 @@ public class WeixinPayImpl implements IPayment{
 
            return xml;
        } catch (Exception e) {
-           AppLog.Loge("Fly",e.toString());
            Log.e("orion",e.toString());
        }
        return null;
@@ -186,6 +199,14 @@ public class WeixinPayImpl implements IPayment{
    private long genTimeStamp() {
        return System.currentTimeMillis() / 1000;
    }
+   
+
+
+   private String genOutTradNo() {
+       Random random = new Random();
+       return MD5.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
+   }
+   
 
   //
    private String genProductArgs() {
@@ -193,16 +214,18 @@ public class WeixinPayImpl implements IPayment{
 
        try {
            String  nonceStr = genNonceStr();
+
+
            xml.append("</xml>");
            List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
            packageParams.add(new BasicNameValuePair("appid", Keys.APP_ID));
-           packageParams.add(new BasicNameValuePair("body", "ssssss"));
+           packageParams.add(new BasicNameValuePair("body", mPayOrder.getmProductName()));
            packageParams.add(new BasicNameValuePair("mch_id", Keys.MCH_ID));
            packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
            packageParams.add(new BasicNameValuePair("notify_url", mPayOrder.getmNotifyUrl()));
-           packageParams.add(new BasicNameValuePair("out_trade_no",mPayOrder.getmOrderNo()));
+           packageParams.add(new BasicNameValuePair("out_trade_no",genOutTradNo()));
            packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
-           packageParams.add(new BasicNameValuePair("total_fee", "5"));
+           packageParams.add(new BasicNameValuePair("total_fee", (int)(Float.parseFloat(mPayOrder.getmProductPrice())*100)+""));
            packageParams.add(new BasicNameValuePair("trade_type", "APP"));
 
 
@@ -210,9 +233,8 @@ public class WeixinPayImpl implements IPayment{
            packageParams.add(new BasicNameValuePair("sign", sign));
 
 
-          String xmlstring =toXml(packageParams);
-
-           return xmlstring;
+           String xmlstring =toXml(packageParams);
+           return new String(xmlstring.toString().getBytes(), "ISO8859-1");//这句加上就可以了吧xml转码下
 
        } catch (Exception e) {
            Log.e("Fly", "genProductArgs fail, ex = " + e.getMessage());
@@ -226,7 +248,6 @@ public class WeixinPayImpl implements IPayment{
        req.appId = Keys.APP_ID;
        req.partnerId = Keys.MCH_ID;
        req.prepayId = resultunifiedorder.get("prepay_id");
-       AppLog.Logd("Fly", " req.prepayId==="+ req.prepayId);
        req.packageValue = "Sign=WXPay";
        req.nonceStr = genNonceStr();
        req.timeStamp = String.valueOf(genTimeStamp());
@@ -239,18 +260,23 @@ public class WeixinPayImpl implements IPayment{
        signParams.add(new BasicNameValuePair("partnerid", req.partnerId));
        signParams.add(new BasicNameValuePair("prepayid", req.prepayId));
        signParams.add(new BasicNameValuePair("timestamp", req.timeStamp));
-
+      
        req.sign = genAppSign(signParams);
 
        sb.append("sign\n"+req.sign+"\n\n");
-
-       AppLog.Loge("Fly","signParams.toString()==="+signParams.toString());
+       AppLog.Loge("Fly", " genPayReq====="+sb.toString());
        Log.e("orion", signParams.toString());
 
    }
    private void sendPayReq() {
+       
+
        msgApi.registerApp(Keys.APP_ID);
        msgApi.sendReq(req);
+//     if (dialog != null) {
+//     dialog.dismiss();
+// }
+//       msgApi.handleIntent(new Intent(), new WXPayEntryActivity());
    }
 
 

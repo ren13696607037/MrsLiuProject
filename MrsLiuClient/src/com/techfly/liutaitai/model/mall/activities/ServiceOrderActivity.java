@@ -1,5 +1,6 @@
 package com.techfly.liutaitai.model.mall.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +26,7 @@ public class ServiceOrderActivity extends BaseActivity{
     private CreateOrderSucFragment mOrderCreateFragment;
     private Fragment mOrderFinishFragment;
     private Bundle mBundle;
+    private ProgressDialog mDialog;
     public Bundle getBundleInfo(){
         return mBundle;
     }
@@ -118,5 +120,24 @@ public class ServiceOrderActivity extends BaseActivity{
             }
         };
     }
-   
+    public void setDialog(ProgressDialog dialog) {
+        mDialog = dialog;
+        
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mDialog!=null){
+            mDialog .dismiss();
+            mDialog =null;
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mDialog!=null){
+            mDialog .dismiss();
+            mDialog =null;
+        }
+    }
 }

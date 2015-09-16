@@ -40,7 +40,7 @@
             <com.techfly.liutaitai.util.view.ViewPagerWrapper
                 android:id="@+id/vpWrapper"
                 android:layout_width="match_parent"
-                android:layout_height="144dp" />
+                android:layout_height="166dp" />
             
    </LinearLayout>
   

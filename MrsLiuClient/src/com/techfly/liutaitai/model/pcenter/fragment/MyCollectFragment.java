@@ -125,7 +125,7 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
                 Product pro =  (Product) arg0.getItemAtPosition(position);
 //                UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(pro.getmId()),ProductInfoFragment.FLAG_NORMAL);
                 Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
-				intent.putExtra(IntentBundleKey.ORDER_ID, pro.getmOrderNum());
+				intent.putExtra(IntentBundleKey.ID, pro.getmOrderNum());
 				startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.techfly.liutaitai.model.shopcar.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +26,23 @@ public class TakingOrderActivity extends FragmentActivity{
     private CreateOrderSucFragment mOrderCreateFragment;
     private Fragment mOrderFinishFragment;
     private Bundle mBundle;
+    private ProgressDialog mDialog;
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mDialog!=null){
+            mDialog .dismiss();
+            mDialog =null;
+        }
+    }
+    @Override
+    protected void onPause() {
+        if(mDialog!=null){
+            mDialog .dismiss();
+            mDialog =null;
+        }
+        super.onPause();
+    }
     public Bundle getBundleInfo(){
         return mBundle;
     }
@@ -68,7 +86,6 @@ public class TakingOrderActivity extends FragmentActivity{
            || mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)==Constant.PAY_WENXIN ){
             onRequestPaySuccess();
         }
-       
         
     }
  
@@ -121,6 +138,10 @@ public class TakingOrderActivity extends FragmentActivity{
             
             }
         };
+    }
+    public void setDialog(ProgressDialog dialog) {
+        mDialog = dialog;
+        
     }
   
 }
