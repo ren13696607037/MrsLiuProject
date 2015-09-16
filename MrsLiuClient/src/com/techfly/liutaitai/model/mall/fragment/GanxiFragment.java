@@ -3,6 +3,7 @@ package com.techfly.liutaitai.model.mall.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -152,7 +153,15 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
                Product pro = (Product) arg0.getItemAtPosition(arg2);
-               UIHelper.toSomeIdActivity(GanxiFragment.this, ProductInfoActivity.class.getName(), pro.getmId(),type);
+                Intent intent = null;
+                intent = new Intent(getActivity(),
+                        ProductInfoActivity.class);
+                intent.putExtra(IntentBundleKey.ID, pro.getmId());
+                intent.putExtra(IntentBundleKey.TYPE, type);
+                intent.putExtra(IntentBundleKey.IMAGE_PATH, pro.getmImg());
+                startActivityForResult(intent, 0);
+               
+              
             }
         });
     }

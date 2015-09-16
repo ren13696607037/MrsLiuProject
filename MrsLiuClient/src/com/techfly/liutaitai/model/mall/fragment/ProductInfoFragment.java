@@ -77,6 +77,7 @@ public class ProductInfoFragment extends CommonFragment implements
     private CommonAdapter<Comments> mAdapter;
     private String mProductId = "1";
     private int type;
+    private String mProImg;
 
     @Override
     public void onAttach(Activity activity) {
@@ -93,6 +94,7 @@ public class ProductInfoFragment extends CommonFragment implements
         mFragment = this;
         Intent intent = getActivity().getIntent();
         mProductId = intent.getStringExtra(IntentBundleKey.ID);
+        mProImg= intent.getStringExtra(IntentBundleKey.IMAGE_PATH);
 
     }
 
@@ -364,6 +366,7 @@ public class ProductInfoFragment extends CommonFragment implements
                     Product p = (Product) object;
                     if (p != null) {
                         mProduct = p;
+                        mProduct .setmImg(mProImg);
                         mShopCar.setEnabled(true);
                         mShopNow.setEnabled(true);
                         mAddShopCar.setEnabled(true);

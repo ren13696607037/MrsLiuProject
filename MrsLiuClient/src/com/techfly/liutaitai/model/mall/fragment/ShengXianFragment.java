@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
@@ -361,7 +363,13 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
                 Product pro = (Product) arg0.getItemAtPosition(arg2);
-                UIHelper.toSomeIdActivity(ShengXianFragment.this, ProductInfoActivity.class.getName(), pro.getmId(),type);
+                Intent intent = null;
+                intent = new Intent(getActivity(),
+                        ProductInfoActivity.class);
+                intent.putExtra(IntentBundleKey.ID, pro.getmId());
+                intent.putExtra(IntentBundleKey.TYPE, type);
+                intent.putExtra(IntentBundleKey.IMAGE_PATH, pro.getmImg());
+                startActivityForResult(intent, 0);
             }
         });
         initPopupWindow2();

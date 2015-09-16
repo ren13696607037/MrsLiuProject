@@ -67,7 +67,7 @@ public class CitySelectFragment extends CommonFragment {
     private String mLongitude;
     private String mLocCity;
     private TextView mLocCityTv;
-    private boolean mIsFromMainActivity = false;
+    private boolean mIsFromMainActivity = true;
     public BDLocationListener myListener = new MyLocationListener();
     private Handler mHandler = new Handler(){
         
@@ -93,7 +93,7 @@ public class CitySelectFragment extends CommonFragment {
         super.onAttach(activity);
         Utility.getScreenSize(activity);
         mActivity=(CitySelectActivity)activity;
-        mIsFromMainActivity = mActivity.getIntent().getBooleanExtra(IntentBundleKey.REDIRECT_TYPE, false);
+        mIsFromMainActivity = mActivity.getIntent().getBooleanExtra(IntentBundleKey.REDIRECT_TYPE, true);
   
     }
     
