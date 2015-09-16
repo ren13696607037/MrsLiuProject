@@ -39,13 +39,15 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
+import com.techfly.liutaitai.util.ManagerListener.CollectListener;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
-public class MyCollectFragment extends CommonFragment implements IXListViewListener{
+public class MyCollectFragment extends CommonFragment implements IXListViewListener, CollectListener{
 	private XListView mListView;
 	private ArrayList<Product> mList =new ArrayList<Product>();
 	private MyCollectAdapter mAdapter;
@@ -75,6 +77,7 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        ManagerListener.newManagerListener().onRegisterCollectListener(this);
         startReqTask(this);
     }
     
@@ -89,6 +92,7 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ManagerListener.newManagerListener().onUnRegisterCollectListener(this);
     }
 
     @Override
@@ -123,7 +127,6 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
                 Product pro =  (Product) arg0.getItemAtPosition(position);
-//                UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(pro.getmId()),ProductInfoFragment.FLAG_NORMAL);
                 Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
 				intent.putExtra(IntentBundleKey.ID, pro.getmOrderNum());
 				startActivity(intent);
@@ -134,36 +137,50 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
-				return false;
+				Product pro =  (Product) parent.getItemAtPosition(position);
+				ManagerListener.newManagerListener().notifyCancelCollectListener(pro);
+				return true;
 			}
 		});
     }
 
-    protected void deleteChoosePro() {
-        StringBuffer buffer = new StringBuffer();
-        for(Product product:mList){
-            if(product.ismIsCheck()){
-                buffer.append(product.getmId()+",");
+    private Response.Listener<Object> createCollectSuccessListener() {
+        return new Listener<Object>() {
+
+            @Override
+            public void onResponse(Object result) {
+                AppLog.Logd(result.toString());
+                AppLog.Loge(" data success to load" + result.toString());
+                if(getActivity()!=null&&!isDetached()){
+                    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                    mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                    ResultInfo rInfo = (ResultInfo) result;
+                    if(rInfo.getmCode()==Constant.RESULT_CODE){
+                        showSmartToast(R.string.collect_cancel_success, Toast.LENGTH_SHORT);
+                        mList.clear();
+                        startReqTask(MyCollectFragment.this);
+                    }else{
+                        showSmartToast(rInfo.getmMessage(), Toast.LENGTH_LONG);
+                    }
+                }
             }
-        }
-        if(!TextUtils.isEmpty(buffer.toString())){
-            String ids = buffer.toString();
-            ids = ids.substring(0, buffer.length()-1);
-            RequestParam param = new RequestParam();
-            HttpURL url = new HttpURL();
-            url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.PRODUCT_CANCEL_COLLECT );
-//            url.setmGetParamPrefix(RequestParamConfig.PRINCIPAL).setmGetParamValues("5149");
-            url.setmGetParamPrefix(RequestParamConfig.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
-            url.setmGetParamPrefix(RequestParamConfig.COMMODITY_ID ).setmGetParamValues(ids);
-            param.setmParserClassName(CommonParser.class.getName());
-            param.setmHttpURL(url);
-            RequestManager.getRequestData(getActivity(), creatReqSuccessListener(), createErrorListener(), param);
-        }else{
-          showSmartToast("请选择要取消收藏的商品", Toast.LENGTH_LONG);
-        }
-        
-        
+        };
+    }
+
+    private Response.ErrorListener createCollectErrorListener() {
+        return new ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+                if (getActivity() == null || isDetached()) {
+                    return;
+                }
+                mLoadHandler.removeMessages(Constant.NET_FAILURE);
+                mLoadHandler.sendEmptyMessage(Constant.NET_FAILURE);
+               
+            }
+
+        };
     }
 
     protected void updateCollectEdit() {
@@ -248,19 +265,37 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
     public void onRefresh() {
         mList.clear();
         requestData();
-        
-      
-        
     }
 
     @Override
     public void onLoadMore() {
-        // TODO Auto-generated method stub
         
     }
     private void setNoData(){
 		mListView.setVisibility(View.GONE);
 		mEmptyTv.setVisibility(View.VISIBLE);
 		mEmptyTv.setText(getResources().getString(R.string.collect_no_content));
+	}
+
+	@Override
+	public void cancelCollect(Product product) {
+		RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.COLLECT_SERVICE_URL);
+        url.setmGetParamPrefix(JsonKey.ServiceDetailKey.SID).setmGetParamValues(product.getmOrderNum());
+        param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		param.setPostRequestMethod();
+        param.setmHttpURL(url);
+        param.setmParserClassName(CommonParser.class.getName());
+        param.setmHttpURL(url);
+        RequestManager.getRequestData(getActivity(), createCollectSuccessListener(), createCollectErrorListener(), param);
+	}
+
+	@Override
+	public void collect(Product product) {
+		mList.clear();
+		requestData();
 	}
 }

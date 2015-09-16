@@ -9,6 +9,7 @@ public class ServiceInfo {
     private String mPrice;
     private String mUnit;
     private String mType;
+    private boolean isCollect;
 
     public String getmPrice() {
         return mPrice;
@@ -73,4 +74,12 @@ public class ServiceInfo {
     public void setmType(String mType) {
         this.mType = mType;
     }
+
+	public boolean isCollect() {
+		return isCollect;
+	}
+
+	public void setCollect(boolean isCollect) {
+		this.isCollect = isCollect;
+	}
 }

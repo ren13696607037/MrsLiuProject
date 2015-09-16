@@ -542,5 +542,7 @@
 	<string name="order_eva_hint">商品是否满意，评价一下吧~</string>
 	<string name="dialog_tech_finish_text">完成服务需要上传作品图片</string>
 	<string name="collect_num_text">%1$s人做过</string>
+	<string name="collect_cancel_success">取消收藏成功~</string>
+	<string name="collect_success">收藏成功~</string>
 
 </resources>

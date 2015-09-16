@@ -33,6 +33,7 @@ public class ServiceInfoParser implements Parser{
                     p.setmServiceConent("耗时"+jsonObject.optString("minutes")+"分钟/售后"
                     +jsonObject.optString("servicedays")+"天");
                     p.setmUnit(jsonObject.optString("unit"));
+                    p.setCollect(jsonObject.optInt("collected") == 0 ? false : true);
                 }
             }
         }

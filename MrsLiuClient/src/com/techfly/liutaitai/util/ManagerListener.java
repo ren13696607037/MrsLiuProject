@@ -3,6 +3,7 @@ package com.techfly.liutaitai.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
@@ -53,6 +54,10 @@ public class ManagerListener {
 		void onPhoto();
 		void onSubmit(String url);
 	}
+	public interface CollectListener{
+		void cancelCollect(Product product);
+		void collect(Product product);
+	}
 	
 	
 	private List<CityUpdateListener> mCityUpdateListeners=new ArrayList<CityUpdateListener>();
@@ -66,6 +71,7 @@ public class ManagerListener {
 	private List<spinnerClickListener> mSpinnerClickListener=new ArrayList<spinnerClickListener>();
 	private List<ServiceClickListener> mServiceClickListeners = new ArrayList<ManagerListener.ServiceClickListener>();
 	private List<TechFinishDialogListener> mDialogListeners = new ArrayList<ManagerListener.TechFinishDialogListener>();
+	private List<CollectListener> mCollectListeners = new ArrayList<ManagerListener.CollectListener>();
 	private static ManagerListener mListener;
 	private static Object object = new Object();
     private ManagerListener(){
@@ -81,6 +87,16 @@ public class ManagerListener {
             }
         }
         return mListener;
+    }
+    public void onRegisterCollectListener(CollectListener collectListener){
+    	if(!mCollectListeners.contains(collectListener)){
+    		mCollectListeners.add(collectListener);
+    	}
+    }
+    public void onUnRegisterCollectListener(CollectListener collectListener){
+    	if(mCollectListeners.contains(collectListener)){
+    		mCollectListeners.remove(collectListener);
+    	}
     }
     public void onRegisterTechFinishDialogListener(TechFinishDialogListener dialogListener){
     	if(!mDialogListeners.contains(dialogListener)){
@@ -311,6 +327,18 @@ public class ManagerListener {
     	int size = mDialogListeners.size();
     	for(int i=0;i<size;i++){
     		mDialogListeners.get(i).onSubmit(url);
+    	}
+    }
+    public void notifyCollectListener(Product product){
+    	int size = mCollectListeners.size();
+    	for(int i=0;i<size;i++){
+    		mCollectListeners.get(i).collect(product);
+    	}
+    }
+    public void notifyCancelCollectListener(Product product){
+    	int size = mCollectListeners.size();
+    	for(int i=0;i<size;i++){
+    		mCollectListeners.get(i).cancelCollect(product);
     	}
     }
     
