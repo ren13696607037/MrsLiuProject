@@ -115,7 +115,7 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/app_text_size_first" />
 
-    <TextView
+    <com.techfly.liutaitai.util.view.StartTimeText
         android:id="@+id/iorder_time_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,6 +129,7 @@
         android:paddingRight="@dimen/px_30"
         android:paddingTop="@dimen/px_15"
         android:textColor="@color/color_33"
-        android:textSize="@dimen/app_text_size_first" />
+        android:textSize="@dimen/app_text_size_first"
+        />
 
 </RelativeLayout>

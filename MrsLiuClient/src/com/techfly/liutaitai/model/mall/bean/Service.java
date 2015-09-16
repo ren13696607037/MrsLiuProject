@@ -135,7 +135,16 @@ public class Service {
 		this.mTechId = mTechId;
 	}
 
+	public String getmAliNo() {
+		return mAliNo;
+	}
+
+	public void setmAliNo(String mAliNo) {
+		this.mAliNo = mAliNo;
+	}
+
 	private String mCash;// 代金券的数额
     private String mNum;//预约编号
     private String mTechId;
+    private String mAliNo;
 }

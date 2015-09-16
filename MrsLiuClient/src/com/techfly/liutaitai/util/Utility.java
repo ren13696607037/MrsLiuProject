@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,7 +50,8 @@ public class Utility {
 	 */
 	public static void getScreenSize(Context context) {
 		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager mWm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		WindowManager mWm = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
 		mWm.getDefaultDisplay().getMetrics(dm);
 		Constant.SCREEN_WIDTH = dm.widthPixels;
 		Constant.SCREEN_HEIGHT = dm.heightPixels;
@@ -85,8 +87,11 @@ public class Utility {
 
 	public static boolean isInternetWorkValid(Context context) {
 		if (context != null) {
-			ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-			if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected()) {
+			ConnectivityManager conMgr = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			if (conMgr.getActiveNetworkInfo() != null
+					&& conMgr.getActiveNetworkInfo().isAvailable()
+					&& conMgr.getActiveNetworkInfo().isConnected()) {
 				return true;
 			} else {
 				return false;
@@ -102,8 +107,9 @@ public class Utility {
 		Matcher m = p.matcher(strPhone);
 		return m.matches();
 	}
-	//判断是否为银行卡号
-	public static boolean isCard(String card){
+
+	// 判断是否为银行卡号
+	public static boolean isCard(String card) {
 		String str = "[0-9]{19}";
 		Pattern p = Pattern.compile(str);
 		Matcher m = p.matcher(card);
@@ -132,7 +138,8 @@ public class Utility {
 	}
 
 	public static boolean isSDCardExist(Context context) {
-		return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+		return Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED);
 	}
 
 	public static String readTextFile(InputStream inputStream) {
@@ -172,33 +179,38 @@ public class Utility {
 
 	}
 
-	public static long getContentLength(final Map<String, List<String>> resProperty) {
+	public static long getContentLength(
+			final Map<String, List<String>> resProperty) {
 		if (null != resProperty) {
-			List<String> contentLengthProperty = resProperty.get("Content-Length");
+			List<String> contentLengthProperty = resProperty
+					.get("Content-Length");
 			long resFileSize = 0;
-			if (contentLengthProperty != null && contentLengthProperty.size() > 0) {
+			if (contentLengthProperty != null
+					&& contentLengthProperty.size() > 0) {
 				resFileSize = Long.parseLong(contentLengthProperty.get(0));
 				return resFileSize;
 			}
 		}
 		return -1;
 	}
-	public static Map<String, List<String>> executeHttpHeadRequest(final String urlStr) {
-        try {
-            String newUrl = UrlEncode.encodeUTF8(urlStr);
-            URL url = new URL(newUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(15 * 1000);
-            conn.setRequestMethod("HEAD");
-            conn.connect();
-            Map<String, List<String>> headers = conn.getHeaderFields();
-            conn.disconnect();
-            return headers;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
+	public static Map<String, List<String>> executeHttpHeadRequest(
+			final String urlStr) {
+		try {
+			String newUrl = UrlEncode.encodeUTF8(urlStr);
+			URL url = new URL(newUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(15 * 1000);
+			conn.setRequestMethod("HEAD");
+			conn.connect();
+			Map<String, List<String>> headers = conn.getHeaderFields();
+			conn.disconnect();
+			return headers;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/*
 	 * public static void resizeViewHeight(final View calculatedview, final View
@@ -214,22 +226,25 @@ public class Utility {
 	 * }); }
 	 */
 
-	public static void resizeViewHeight(final View calculatedview, final View resizedView, final float scale) {
-		resizedView.getViewTreeObserver().addOnPreDrawListener(new OnPreDrawListener() {
+	public static void resizeViewHeight(final View calculatedview,
+			final View resizedView, final float scale) {
+		resizedView.getViewTreeObserver().addOnPreDrawListener(
+				new OnPreDrawListener() {
 
-			@Override
-			public boolean onPreDraw() {
-				int width = resizedView.getMeasuredWidth();
-				int height = (int) (width * scale);
-				AppLog.Logd("width:" + width + ",height:" + height);
-				ViewGroup.LayoutParams params = resizedView.getLayoutParams();
-				resizedView.setLayoutParams(params);
-				resizedView.getViewTreeObserver().removeOnPreDrawListener(this);
-				return true;
-			}
-		});
+					@Override
+					public boolean onPreDraw() {
+						int width = resizedView.getMeasuredWidth();
+						int height = (int) (width * scale);
+						AppLog.Logd("width:" + width + ",height:" + height);
+						ViewGroup.LayoutParams params = resizedView
+								.getLayoutParams();
+						resizedView.setLayoutParams(params);
+						resizedView.getViewTreeObserver()
+								.removeOnPreDrawListener(this);
+						return true;
+					}
+				});
 	}
-
 
 	public static String List2String(ArrayList<String> list) {
 		String string = "";
@@ -265,37 +280,38 @@ public class Utility {
 			}
 		}
 	}
-	
-	public static String convertStreamToString(InputStream is) {      
-        /*  
-          * To convert the InputStream to String we use the BufferedReader.readLine()  
-          * method. We iterate until the BufferedReader return null which means  
-          * there's no more data to read. Each line will appended to a StringBuilder  
-          * and returned as String.  
-          */     
-		if(is==null){
+
+	public static String convertStreamToString(InputStream is) {
+		/*
+		 * To convert the InputStream to String we use the
+		 * BufferedReader.readLine() method. We iterate until the BufferedReader
+		 * return null which means there's no more data to read. Each line will
+		 * appended to a StringBuilder and returned as String.
+		 */
+		if (is == null) {
 			return "";
 		}
-         BufferedReader reader = new BufferedReader(new InputStreamReader(is));      
-         StringBuilder sb = new StringBuilder();      
-     
-         String line = null;      
-        try {      
-            while ((line = reader.readLine()) != null) {      
-                 sb.append(line + "\n");      
-             }      
-         } catch (IOException e) {      
-             e.printStackTrace();      
-         } finally {      
-            try {      
-                 is.close();      
-             } catch (IOException e) {      
-                 e.printStackTrace();      
-             }      
-         }      
-     
-        return sb.toString();      
-     }
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuilder sb = new StringBuilder();
+
+		String line = null;
+		try {
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return sb.toString();
+	}
+
 	public static int dip2px(Context context, float dpValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (dpValue * scale + 0.5f);
@@ -305,8 +321,11 @@ public class Utility {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (pxValue / scale + 0.5f);
 	}
-	public static void setText(Context context, TextView textView, String string, int format) {
-		if (string != null && !"null".equals(string) && !TextUtils.isEmpty(string)) {
+
+	public static void setText(Context context, TextView textView,
+			String string, int format) {
+		if (string != null && !"null".equals(string)
+				&& !TextUtils.isEmpty(string)) {
 			if (format != -1) {
 				textView.setText(context.getString(format, string));
 			} else {
@@ -314,37 +333,44 @@ public class Utility {
 			}
 		} else {
 			if (format != -1) {
-				textView.setText(context.getString(format, context.getString(R.string.unknown)));
+				textView.setText(context.getString(format,
+						context.getString(R.string.unknown)));
 			} else {
 				textView.setText(R.string.unknown);
 			}
 		}
 	}
-	
-	public static void setListViewHeightBasedOnChildren(ListView listView) {  
-        ListAdapter listAdapter = listView.getAdapter();   
-        if (listAdapter == null) {
-            return;  
-        }  
-  
-        int totalHeight = 0;  
-        for (int i = 0; i < listAdapter.getCount(); i++) {  
-            View listItem = listAdapter.getView(i, null, listView);  
-            listItem.measure(0, 0);  
-            totalHeight += listItem.getMeasuredHeight();  
-        }  
-  
-        ViewGroup.LayoutParams params = listView.getLayoutParams();  
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() ));  
-        listView.setLayoutParams(params);  
-    }  
-	public static SpannableString setText(Context context,String text,int start,int end){
-		SpannableString ss = new SpannableString(text);  
-        //用颜色标记文本
-        ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.color_blue)), start, end,  
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return ss;
+
+	public static void setListViewHeightBasedOnChildren(ListView listView) {
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null) {
+			return;
+		}
+
+		int totalHeight = 0;
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+		params.height = totalHeight
+				+ (listView.getDividerHeight() * (listAdapter.getCount()));
+		listView.setLayoutParams(params);
 	}
+
+	public static SpannableString setText(Context context, String text,
+			int start, int end) {
+		SpannableString ss = new SpannableString(text);
+		// 用颜色标记文本
+		ss.setSpan(
+				new ForegroundColorSpan(context.getResources().getColor(
+						R.color.color_blue)), start, end,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		return ss;
+	}
+
 	public static final String getSimpDate() {
 		String curTime = "";
 		SimpleDateFormat formatter;
@@ -353,39 +379,52 @@ public class Utility {
 		currentDate = Calendar.getInstance().getTime();
 		curTime = formatter.format(currentDate);
 		return curTime;
-		}
+	}
 
-  public static int getSeconds(long seconds){
-	  int secondNum = (int) (seconds % 60);
-	  return secondNum;
-  }
-  
-  public static int getHours(long seconds){
-	  int hourNum = (int) (seconds/3600);
-	  return hourNum;
-  }
-  
-  public static int getMinutes(long seconds){
-	  int minuteNum = (int) ((seconds/60)%60);
-	  return minuteNum;
-  }
-  public static void call(final Context mActivity, final String phone) {
-      if (TextUtils.isEmpty(phone)) {
-          Toast.makeText(mActivity, R.string.illegal_phone,
-                  Toast.LENGTH_SHORT).show();
-          return;
-      }
-      mDialog= new Dialog(mActivity, R.style.MyDialog);
-  	mDialog=AlertDialogUtils.displayMyAlertChoice(mActivity, "提示", "确认拨打电话  " + phone + "  ？", "确认", new View.OnClickListener() {
-          
-          @Override
-          public void onClick(View arg0) {
-          	Intent intent = new Intent(Intent.ACTION_CALL, Uri
-                      .parse("tel:" + phone));
-              mActivity.startActivity(intent);
-              mDialog.dismiss();
-          }
-      }, "取消", null);
-  	mDialog.show();
-  }
+	public static int getSeconds(long seconds) {
+		int secondNum = (int) (seconds % 60);
+		return secondNum;
+	}
+
+	public static int getHours(long seconds) {
+		int hourNum = (int) (seconds / 3600);
+		return hourNum;
+	}
+
+	public static int getMinutes(long seconds) {
+		int minuteNum = (int) ((seconds / 60) % 60);
+		return minuteNum;
+	}
+
+	public static void call(final Context mActivity, final String phone) {
+		if (TextUtils.isEmpty(phone)) {
+			Toast.makeText(mActivity, R.string.illegal_phone,
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		mDialog = new Dialog(mActivity, R.style.MyDialog);
+		mDialog = AlertDialogUtils.displayMyAlertChoice(mActivity, "提示",
+				"确认拨打电话  " + phone + "  ？", "确认", new View.OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						Intent intent = new Intent(Intent.ACTION_CALL, Uri
+								.parse("tel:" + phone));
+						mActivity.startActivity(intent);
+						mDialog.dismiss();
+					}
+				}, "取消", null);
+		mDialog.show();
+	}
+
+	public static long Date2Millis(String date) {
+		Calendar calendar = Calendar.getInstance();
+		try {
+			calendar.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm")
+					.parse(date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return calendar.getTimeInMillis();
+	}
 }

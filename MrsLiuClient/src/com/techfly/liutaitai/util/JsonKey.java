@@ -287,6 +287,8 @@ public interface JsonKey {
 		static final String DATE = "date";
 		static final String TYPE = "type";
 		static final String RID = "rid";
+		static final String ALINO = "alipayno";
+		static final String TOTALMONEY = "totalMoney";
 	}
 	interface ServiceDetailKey{
 		static final String ID = "id";
@@ -306,6 +308,7 @@ public interface JsonKey {
 		static final String ADDTIME = "serviceTime";
 		static final String SID = "sid";
 		static final String MID = "mid";
+		static final String STARTTIME = "startTime";
 	}
 	interface BalanceKey{
 		static final String PAGE = "no";

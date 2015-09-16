@@ -164,6 +164,10 @@ public class MyOrderRateFragment extends CommonFragment implements
 				.onUnRegisterOrderRateListener(this);
 		ManagerListener.newManagerListener().onUnRegisterTechFinishDialogListener(this);
 		ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
+		if(mAdapter != null){
+        	mAdapter.toFinish();
+        	mAdapter = null;
+        }
 	}
 
 	@Override

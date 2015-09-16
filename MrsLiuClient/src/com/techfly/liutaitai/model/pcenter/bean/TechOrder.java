@@ -26,6 +26,7 @@ public class TechOrder implements Serializable{
     private String mCustomerTime;//服务时间
     
     private String mVoucher;//抵用卷价格
+    private String mStartTime;
 
 	public String getmId() {
 		return mId;
@@ -133,6 +134,14 @@ public class TechOrder implements Serializable{
 				+ ", mCustomerPhone=" + mCustomerPhone + ", mCustomerAddress="
 				+ mCustomerAddress + ", mCustomerTime=" + mCustomerTime
 				+ ", mVoucher=" + mVoucher + "]";
+	}
+
+	public String getmStartTime() {
+		return mStartTime;
+	}
+
+	public void setmStartTime(String mStartTime) {
+		this.mStartTime = mStartTime;
 	}
     
 }

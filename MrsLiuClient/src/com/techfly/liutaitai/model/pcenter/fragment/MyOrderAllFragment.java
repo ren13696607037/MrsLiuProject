@@ -206,6 +206,10 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
         ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
         ManagerListener.newManagerListener().onUnRegisterOrderTakeListener(this);
         ManagerListener.newManagerListener().onUnRegisterTechFinishDialogListener(this);
+        if(mAdapter != null){
+        	mAdapter.toFinish();
+        	mAdapter = null;
+        }
     }
 
     @Override

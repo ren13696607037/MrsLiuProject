@@ -34,9 +34,10 @@ public class ServiceOrderParser implements Parser{
 						service.setmServicePerson(obj.optString(JsonKey.ServiceKey.TECH));
 						service.setmServiceType(obj.optString(JsonKey.ServiceKey.TYPE));
 						service.setmServiceTime(obj.optString(JsonKey.ServiceKey.TIME));
-						service.setmServicePrice(obj.optString(JsonKey.ServiceKey.PRICE));
+						service.setmServicePrice(obj.optString(JsonKey.ServiceKey.TOTALMONEY));
 						service.setmServiceStatus(obj.optString(JsonKey.ServiceKey.STATE));
 						service.setmTechId(obj.optString(JsonKey.ServiceDetailKey.MID));
+						service.setmAliNo(obj.optString(JsonKey.ServiceKey.ALINO));
 						list.add(service);
 					}
 				}

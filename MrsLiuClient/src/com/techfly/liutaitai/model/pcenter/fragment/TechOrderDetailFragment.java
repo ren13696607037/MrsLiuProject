@@ -81,6 +81,7 @@ import com.techfly.liutaitai.util.ManagerListener.OrderRateListener;
 import com.techfly.liutaitai.util.ManagerListener.OrderTakeListener;
 import com.techfly.liutaitai.util.ManagerListener.TechFinishDialogListener;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.view.StartTimeText;
 import com.techfly.liutaitai.util.view.TechFinishDialog;
 
 public class TechOrderDetailFragment extends CommonFragment implements
@@ -107,10 +108,8 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	private ImageView mIvPhone;
 	private ImageView mIvAddress;
 	private User mUser;
-	private TextView mTimeStart;
+	private StartTimeText mTimeStart;
 	private final int MSG_DATA = 0x101;
-	private final int MSG_UPDATE_TIME = 0x901;
-	private int MSG_TOTAL_TIME;
 	private Handler mServiceDetailHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			if (msg.what == MSG_DATA) {
@@ -118,45 +117,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			}
 		};
 	};
-	public Handler timeHandler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case MSG_UPDATE_TIME:
-				MSG_TOTAL_TIME += 1000;
-				if (MSG_TOTAL_TIME / 1000 / 60 > 60) {
-					mTimeStart.setText(MSG_TOTAL_TIME / 1000 / 60 / 60 + "时"
-							+ MSG_TOTAL_TIME / 1000 / 60 + "分" + MSG_TOTAL_TIME
-							/ 1000 % 60 + "秒");
-				} else {
-					mTimeStart.setText(MSG_TOTAL_TIME / 1000 / 60 + "分"
-							+ MSG_TOTAL_TIME / 1000 % 60 + "秒");
-				}
-				break;
-
-			default:
-				break;
-			}
-		}
-
-	};
-	Runnable runnable = new Runnable() {
-
-		@Override
-		public void run() {
-			while (true) {
-				try {
-					Thread.sleep(1000);
-					Message message = new Message();
-					message.what = MSG_UPDATE_TIME;
-					timeHandler.sendMessage(message);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	};
+	
 	private int mType;
 	private TechFinishDialog mDialog;
 	private static final int TAKE_BIG_PICTURE = 0x901;
@@ -172,8 +133,6 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			if (intent.getBooleanExtra(IntentBundleKey.REDIRECT_TYPE, false)
 					&& null != intent
 							.getStringExtra(IntentBundleKey.IMAGE_PATH)) {
-				AppLog.Loge("xll",
-						intent.getStringExtra(IntentBundleKey.IMAGE_PATH));
 				mSelectItems = intent
 						.getStringExtra(IntentBundleKey.IMAGE_PATH);
 			}
@@ -195,7 +154,6 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		new Thread(runnable).start();
 		mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_ID);
 		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 		startReqTask(TechOrderDetailFragment.this);
@@ -236,6 +194,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				.onUnRegisterOrderTakeListener(this);
 		ManagerListener.newManagerListener()
 				.onUnRegisterTechFinishDialogListener(this);
+		mTimeStart.toFinishHandler();
 	}
 
 	@Override
@@ -280,7 +239,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mState = (TextView) view.findViewById(R.id.tsd_state);
 		mIvAddress = (ImageView) view.findViewById(R.id.tsd_address_img);
 		mIvPhone = (ImageView) view.findViewById(R.id.tsd_phone_img);
-		mTimeStart = (TextView) view.findViewById(R.id.tsd_time_start);
+		mTimeStart = (StartTimeText) view.findViewById(R.id.tsd_time_start);
 
 		mIvAddress.setOnClickListener(this);
 		mIvPhone.setOnClickListener(this);
@@ -320,13 +279,13 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				.getText().toString()));
 		mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2
 				.getText().toString()));
-
-		MSG_TOTAL_TIME = (int) (System.currentTimeMillis() - SharePreferenceUtils
-				.getInstance(mActivity).getTechTime());
+		mTimeStart.toStart((int) (System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())));
 	}
+	
 
 	private void setState(TechOrder order, TextView textView, Button button,
 			Button button2) {
+		mTimeStart.setVisibility(View.GONE);
 		int state = Integer.valueOf(order.getmServiceStatus());
 		button.setVisibility(View.VISIBLE);
 		button2.setVisibility(View.VISIBLE);
@@ -339,6 +298,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			button.setText(R.string.tech_order_list_btn3);
 			button2.setText(R.string.tech_order_list_btn2);
 		} else if (state == 3) {
+			mTimeStart.setVisibility(View.VISIBLE);
 			textView.setText(R.string.tech_order_list_state2);
 			button2.setVisibility(View.GONE);
 			button.setText(R.string.tech_order_list_btn4);
@@ -352,6 +312,9 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			button2.setVisibility(View.GONE);
 		} else if (state == 0) {
 			textView.setText(R.string.order_service_state);
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else {
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
 		}

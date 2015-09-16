@@ -304,8 +304,14 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 
 	@Override
 	public void onServicePayListener(Service service) {
-		// TODO Auto-generated method stub
-		
+		Intent intent = new Intent(getActivity(),ServiceOrderActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBundleKey.ORDER_ID,service.getmAliNo());// 支付订单号 例如 5666995444RSFR
+        bundle.putString(IntentBundleKey.ORDER_MONEY, service.getmServicePrice());// 支付的钱
+        bundle.putString(IntentBundleKey.ORDER_PRODUCT, service.getmServiceName());// 商品名称
+        intent.putExtra(IntentBundleKey.DATA, bundle);
+        intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
+         startActivity(intent);
 	}
 
 	@Override

@@ -1,8 +1,11 @@
 package com.techfly.liutaitai.model.pcenter.adapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +20,20 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
+import com.techfly.liutaitai.util.ManagerListener;
+import com.techfly.liutaitai.util.Utility;
+import com.techfly.liutaitai.util.view.StartTimeText;
 
 public class MyOrderAdapter extends BaseAdapter {
 	private Context mContext;
+	private ViewHolder mHolder;
 	private ArrayList<TechOrder> mList;
+	private int mTime;
 	public MyOrderAdapter(Context context,ArrayList<TechOrder> list){
 		this.mContext=context;
 		this.mList=list;
 	}
+	
 	public void updateList(ArrayList<TechOrder> list){
 		this.mList=list;
 		notifyDataSetChanged();
@@ -47,35 +56,38 @@ public class MyOrderAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder;
 		if(convertView==null){
-			holder=new ViewHolder();
+			mHolder=new ViewHolder();
 			convertView=LayoutInflater.from(mContext).inflate(R.layout.item_myorder, null);
-			holder.mTvNum=(TextView) convertView.findViewById(R.id.iorder_address);
-			holder.mImageView=(ImageView) convertView.findViewById(R.id.iorder_img);
-			holder.mTvPrice=(TextView) convertView.findViewById(R.id.iorder_price);
-			holder.mTvTitle=(TextView) convertView.findViewById(R.id.iorder_name);
-			holder.mTvState=(TextView) convertView.findViewById(R.id.iorder_state);
-			holder.mButton=(Button) convertView.findViewById(R.id.iorder_btn);
-			holder.mButton2=(Button) convertView.findViewById(R.id.iorder_btn2);
+			mHolder.mTvNum=(TextView) convertView.findViewById(R.id.iorder_address);
+			mHolder.mImageView=(ImageView) convertView.findViewById(R.id.iorder_img);
+			mHolder.mTvPrice=(TextView) convertView.findViewById(R.id.iorder_price);
+			mHolder.mTvTitle=(TextView) convertView.findViewById(R.id.iorder_name);
+			mHolder.mTvState=(TextView) convertView.findViewById(R.id.iorder_state);
+			mHolder.mButton=(Button) convertView.findViewById(R.id.iorder_btn);
+			mHolder.mButton2=(Button) convertView.findViewById(R.id.iorder_btn2);
 //			holder.mView=convertView.findViewById(R.id.iorder_view);
-			holder.mTvTime=(TextView) convertView.findViewById(R.id.iorder_time);
+			mHolder.mTvTime=(TextView) convertView.findViewById(R.id.iorder_time);
+			mHolder.mStartTime = (StartTimeText) convertView.findViewById(R.id.iorder_time_start);
 //			holder.mLayout=(RelativeLayout) convertView.findViewById(R.id.iorder_product);
-			convertView.setTag(holder);
+			convertView.setTag(mHolder);
 		}else{
-			holder=(ViewHolder) convertView.getTag();
+			mHolder=(ViewHolder) convertView.getTag();
 		}
-		holder.mTvNum.setText(mContext.getString(R.string.tech_order_list_address,mList.get(position).getmCustomerAddress()));
-		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.mImageView,ImageLoaderUtil.mHallIconLoaderOptions);
-		holder.mTvPrice.setText(mContext.getString(R.string.price,mList.get(position).getmServicePrice()));
-		holder.mTvTitle.setText(mList.get(position).getmServiceName());
-		setState(mList.get(position), holder.mTvState, holder.mButton, holder.mButton2);
-		holder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), holder.mButton.getText().toString()));
-		holder.mButton2.setOnClickListener(new OrderClick(mContext, mList.get(position), holder.mButton2.getText().toString()));
+		mHolder.mTvNum.setText(mContext.getString(R.string.tech_order_list_address,mList.get(position).getmCustomerAddress()));
+		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), mHolder.mImageView,ImageLoaderUtil.mHallIconLoaderOptions);
+		mHolder.mTvPrice.setText(mContext.getString(R.string.price,mList.get(position).getmServicePrice()));
+		mHolder.mTvTitle.setText(mList.get(position).getmServiceName());
+		if(mList.get(position).getmStartTime() != null){
+			mTime = (int) (System.currentTimeMillis() - Utility.Date2Millis(mList.get(position).getmStartTime()));
+		}
+		setState(mList.get(position), mHolder.mTvState, mHolder.mButton, mHolder.mButton2,mHolder.mStartTime);
+		mHolder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton.getText().toString()));
+		mHolder.mButton2.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton2.getText().toString()));
 //		if(position!=mList.size()-1){
 //			holder.mView.setVisibility(View.VISIBLE);
 //		}
-		holder.mTvTime.setText(mContext.getString(R.string.tech_order_list_time,mList.get(position).getmCustomerTime()));
+		mHolder.mTvTime.setText(mContext.getString(R.string.tech_order_list_time,mList.get(position).getmCustomerTime()));
 //		holder.mLayout.setOnClickListener(new OrderClick(mContext, order, string));
 		return convertView;
 	}
@@ -90,8 +102,10 @@ public class MyOrderAdapter extends BaseAdapter {
 		private View mView;
 		private RelativeLayout mLayout;
 		private TextView mTvTime;
+		private StartTimeText mStartTime;
 	}
-	private void setState(TechOrder order,TextView textView,Button button,Button button2){
+	private void setState(TechOrder order,TextView textView,Button button,Button button2,StartTimeText time){
+		time.setVisibility(View.GONE);
 		int state=Integer.valueOf(order.getmServiceStatus());
 		button.setVisibility(View.VISIBLE);
 		button2.setVisibility(View.VISIBLE);
@@ -107,6 +121,8 @@ public class MyOrderAdapter extends BaseAdapter {
 			textView.setText(R.string.tech_order_list_state2);
 			button2.setVisibility(View.GONE);
 			button.setText(R.string.tech_order_list_btn4);
+			time.setVisibility(View.VISIBLE);
+			time.toStart(mTime);
 		}else if(state==4){
 			textView.setText(R.string.tech_order_list_state3);
 			button.setText(R.string.tech_order_list_btn5);
@@ -123,6 +139,9 @@ public class MyOrderAdapter extends BaseAdapter {
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
 		}
+	}
+	public void toFinish(){
+		mHolder.mStartTime.toFinishHandler();
 	}
 
 }
