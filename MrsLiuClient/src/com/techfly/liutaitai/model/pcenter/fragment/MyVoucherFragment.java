@@ -122,6 +122,7 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
 						int position, long id) {
 					Voucher voucher = (Voucher) parent.getAdapter().getItem(position);
 					mActivity.setResult(102, new Intent().putExtra(IntentBundleKey.VOUCHER_EXTRA, voucher.getmId()));
+					mActivity.finish();
 				}
 			});
     	}
