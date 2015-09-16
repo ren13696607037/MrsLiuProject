@@ -121,7 +121,10 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 					Voucher voucher = (Voucher) parent.getAdapter().getItem(position);
-					mActivity.setResult(102, new Intent().putExtra(IntentBundleKey.VOUCHER_EXTRA, voucher.getmId()));
+					Intent intent = new Intent();
+					intent.putExtra(IntentBundleKey.VOUCHER_EXTRA, voucher.getmId());
+					intent.putExtra(IntentBundleKey.VOUCHER_MONEY, Float.valueOf(voucher.getmPrice()));
+					mActivity.setResult(102, intent);
 					mActivity.finish();
 				}
 			});
