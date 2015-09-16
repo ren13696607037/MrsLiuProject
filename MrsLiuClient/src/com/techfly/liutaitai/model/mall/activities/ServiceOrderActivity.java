@@ -1,6 +1,7 @@
 package com.techfly.liutaitai.model.mall.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,7 @@ import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.model.shopcar.fragment.CreateOrderSucFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -27,6 +29,7 @@ public class ServiceOrderActivity extends BaseActivity{
     private Fragment mOrderFinishFragment;
     private Bundle mBundle;
     private ProgressDialog mDialog;
+    private boolean mIsFromOrder = false;
     public Bundle getBundleInfo(){
         return mBundle;
     }
@@ -34,6 +37,7 @@ public class ServiceOrderActivity extends BaseActivity{
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_service_order);
+        mIsFromOrder = getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_ORDER, false);
         onInitContent();
     }
     
@@ -46,7 +50,12 @@ public class ServiceOrderActivity extends BaseActivity{
         mTakeOrderFragment = getSupportFragmentManager().findFragmentById(R.id.taking_order);
         mOrderCreateFragment = (CreateOrderSucFragment) getSupportFragmentManager().findFragmentById(R.id.order_create);
         mOrderFinishFragment = getSupportFragmentManager().findFragmentById(R.id.order_finish);
-        showTakingOrderFragment();
+        if(mIsFromOrder){
+            mBundle = getIntent().getBundleExtra(IntentBundleKey.DATA);
+            showOrderCreateFragment(mBundle);
+        }else{
+            showTakingOrderFragment();
+        }
     }
     
     public void showOrderCreateFragment(Bundle bundle){
