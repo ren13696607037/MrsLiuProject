@@ -67,6 +67,8 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
     private double mWeidu;// 纬度
     private AddressManage mAddressManage;
     private Jishi mJishi;
+    private boolean mIsYujia;
+    private float mVoucherMoney;
 
     @Override
     public void requestData() {
@@ -103,6 +105,11 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             showSmartToast("请选择服务时间", Toast.LENGTH_LONG);
             return false;
         }
+        if(Float.parseFloat(mInfo.getmPrice())>mVoucherMoney){
+            mInfo.setmPrice((Float.parseFloat(mInfo.getmPrice())-mVoucherMoney)+"");
+        }else{
+            mInfo.setmPrice(1+"");
+        }
         return true;
     }
 
@@ -129,7 +136,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
                 mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 mInfo = (ServiceInfo) object;
-
+                onDisplayInfo();
             }
 
         };
@@ -180,7 +187,11 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
         } else if (requestCode == 101) {
             if (data != null) {
                 mVoucherId =data.getIntExtra(IntentBundleKey.VOUCHER_EXTRA,0);
-                mVoucherTv.setText(  mVoucherId);
+                mVoucherMoney = data.getFloatExtra(IntentBundleKey.VOUCHER_MONEY,0);
+                if( mVoucherMoney!=0){
+                    mVoucherTv.setText( "￥"+ mVoucherMoney+"");
+                }
+             
             }
        
             // voucher
@@ -248,7 +259,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 
         mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
         mCheckBox.setOnClickListener(this);
-
+        mCheckBox.setChecked(mIsYujia);
         mJishiTv = (TextView) view.findViewById(R.id.jishi);
         mJishiTv.setOnClickListener(this);
 
@@ -304,6 +315,10 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             intentss.putExtra(IntentBundleKey.VOUCHER_EXTRA, 8);
             this.startActivityForResult(intentss, 101);
             break;
+        case R.id.check_box:
+           
+            mIsYujia = !mIsYujia;
+            mCheckBox.setChecked(mIsYujia);
         default:
             break;
         }
@@ -331,7 +346,13 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
         url.setmGetParamPrefix("mobile");
         url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity())
                 .getUser().getmPhone());
-
+        
+        url.setmGetParamPrefix("clean");
+        url.setmGetParamValues(mIsYujia?"1":"0");
+        if(mVoucherId!=0){
+            url.setmGetParamPrefix("vocher");
+            url.setmGetParamValues(mVoucherId+"");
+        }
         url.setmGetParamPrefix("lng");
         url.setmGetParamValues("37.1569");
 
