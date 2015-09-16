@@ -12,8 +12,11 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bizz.paymanage.PayImplFactory;
+import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -21,6 +24,7 @@ import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment.PayCallBack;
 
 public class RechargeFragment extends CommonFragment implements OnClickListener{
 	private RechargeActivity mActivity;
@@ -32,6 +36,7 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 	private ImageView mCbWeixin;
 	private Button mBtn;
 	private Balance mBalance;
+	private int mType = Constant.PAY_ALIPAY;
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -101,15 +106,23 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.recharge_alipay:
+			mType = Constant.PAY_ALIPAY;
 			mCbAlipay.setImageResource(R.drawable.address_default);
 			mCbWeixin.setImageResource(R.drawable.address_undefault);
 			break;
 		case R.id.recharge_weixin:
+			mType = Constant.PAY_WENXIN;
 			mCbWeixin.setImageResource(R.drawable.address_default);
 			mCbAlipay.setImageResource(R.drawable.address_undefault);
 			break;
 		case R.id.recharge_btn:
-			startReqTask(RechargeFragment.this);
+			PayImplFactory.getInstance().getPayImpl(mType).onPay(getActivity(), mBalance.getmId(), mBalance.getmPrice(), "充值", new PayCallBack() {
+	             
+	             @Override
+	             public void onPaySuccess() {
+	                 showSmartToast("充值成功", Toast.LENGTH_SHORT);
+	             }
+	         }); 
 			break;
 
 		default:

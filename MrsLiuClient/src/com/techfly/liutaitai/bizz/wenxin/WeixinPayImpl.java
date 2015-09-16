@@ -23,6 +23,7 @@ import com.techfly.liutaitai.bizz.alipay.IPayment;
 import com.techfly.liutaitai.bizz.alipay.PayOrder;
 import com.techfly.liutaitai.bizz.wenxin.wxapi.WXPayEntryActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
+import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.util.AppLog;
 import com.tencent.mm.sdk.modelpay.PayReq;
@@ -114,6 +115,9 @@ public class WeixinPayImpl implements IPayment{
            if(mContext instanceof TakingOrderActivity){
                TakingOrderActivity ac = (TakingOrderActivity) mContext;
                ac.setDialog(dialog);
+           }else if(mContext instanceof RechargeActivity){
+        	   RechargeActivity activity = (RechargeActivity) mContext;
+        	   activity.setDialog(dialog);
            }else{
                ServiceOrderActivity ac = ( ServiceOrderActivity ) mContext;
                ac.setDialog(dialog);
