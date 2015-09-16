@@ -5,6 +5,7 @@ package com.techfly.liutaitai.util;
 public class IntentBundleKey {
 	public final static String CATEGORY = "category";
     public final static String IS_FROM_HOME_CART = "from_where";
+    public final static String IS_FROM_ORDER = "from_order";
     public final static String PRODUCT_NAME = "product_name";
     public final static String PRODUCT_PRICE = "product_price";
     public final static String PRODUCT_COUNT= "product_count";
@@ -28,6 +29,7 @@ public class IntentBundleKey {
 	public final static String ORDER_PRODUCT="order_product";
 	public final static String ADDRESS_EXTRA="address_extra";
     public static final String ORDER_DETAIL = "is_from_order_detail";
+    public static final String DATA = "data";
     public static String CHANGEADD_ID = "changeadd_id";
     public static String ORDER_SERVICE = "order_service";
     

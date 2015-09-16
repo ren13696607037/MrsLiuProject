@@ -37,6 +37,7 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment impleme
     private int mPayMethod =Constant.PAY_BALANCE;
     private String mMoney;
     
+    
     @Override
     public void requestData() {
        

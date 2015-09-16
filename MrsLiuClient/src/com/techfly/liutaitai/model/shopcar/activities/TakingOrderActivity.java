@@ -27,6 +27,7 @@ public class TakingOrderActivity extends FragmentActivity{
     private Fragment mOrderFinishFragment;
     private Bundle mBundle;
     private ProgressDialog mDialog;
+    private boolean mIsFromOrder =false;
     @Override
     protected void onStop() {
         super.onStop();
@@ -50,6 +51,7 @@ public class TakingOrderActivity extends FragmentActivity{
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_taking_order);
+        mIsFromOrder  = getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_ORDER, false);
         onInitContent();
     }
     
@@ -62,7 +64,12 @@ public class TakingOrderActivity extends FragmentActivity{
         mTakeOrderFragment = getSupportFragmentManager().findFragmentById(R.id.taking_order);
         mOrderCreateFragment = (CreateOrderSucFragment) getSupportFragmentManager().findFragmentById(R.id.order_create);
         mOrderFinishFragment = getSupportFragmentManager().findFragmentById(R.id.order_finish);
-        showTakingOrderFragment();
+        if(mIsFromOrder){
+            mBundle = getIntent().getBundleExtra(IntentBundleKey.DATA);
+            showOrderCreateFragment(mBundle);
+        }else{
+            showTakingOrderFragment();
+        }
     }
     
     public void showOrderCreateFragment(Bundle bundle){
