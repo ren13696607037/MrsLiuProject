@@ -1,12 +1,14 @@
 package com.techfly.liutaitai.model.mall;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -20,13 +22,16 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.fragment.OrderBastketFragment;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.UIHelper;
@@ -72,9 +77,35 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 	private void clickBtn2(TextView v) {
 		if (v.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_1))) {
+			ArrayList<Product> list = mOrder.getmList();
+			if (list == null || list.size() == 0) {
+				SmartToast.makeText(mFragment.getActivity(), "订单没有商品~",
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+			String name = "";
+			for (int i = 0; i < list.size(); i++) {
+				if (i == list.size() - 1) {
+					name = name + list.get(i).getmName();
+				} else {
+					name = name + list.get(i).getmName() + ",";
+				}
+
+			}
 			// 付款
-			SmartToast.makeText(mFragment.getActivity(), "去付钱了骚年",
-					Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(mFragment.getActivity(),
+					TakingOrderActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString(IntentBundleKey.ORDER_ID, mOrder.getmNum());// 支付订单号
+																			// 例如
+			// 5666995444RSFR
+			bundle.putString(IntentBundleKey.ORDER_MONEY,
+					mOrder.getmTotalPrice());// 支付的钱
+			bundle.putString(IntentBundleKey.ORDER_PRODUCT, name);// 商品名称
+			intent.putExtra(IntentBundleKey.DATA, bundle);
+			intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
+
+			mFragment.startActivity(intent);
 		} else if (v.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_2))) {
 			contactService();// 联系客服

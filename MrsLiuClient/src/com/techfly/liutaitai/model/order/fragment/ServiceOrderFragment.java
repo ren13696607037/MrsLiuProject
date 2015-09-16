@@ -31,6 +31,7 @@ import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.model.pcenter.fragment.MyOrderAllFragment;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
+import com.techfly.liutaitai.model.shopcar.fragment.CreateOrderSucFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -282,13 +283,8 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 	@Override
 	public void onServicePayListener(Service service) {
 		mType = 2;
-        onPay(Constant.PAY_ALIPAY,service.getmId(), service.getmServicePrice(), service.getmServiceName(), new PayCallBack() {
-            
-            @Override
-            public void onPaySuccess() {
-              
-            }
-        });
+        Intent intent = new Intent(getActivity(), CreateOrderSucFragment.class);
+        startActivity(intent);
 	}
 
 	@Override

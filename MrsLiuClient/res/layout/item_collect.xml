@@ -39,6 +39,7 @@
     	android:textSize="@dimen/app_text_size_second"
     	android:layout_toRightOf="@id/icollect_price"
     	android:layout_alignBottom="@id/icollect_price"
+    	android:layout_marginLeft="@dimen/px_30"
         />
     
     
