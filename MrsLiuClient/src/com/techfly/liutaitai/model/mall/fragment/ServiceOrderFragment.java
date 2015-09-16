@@ -108,7 +108,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
         if(Float.parseFloat(mInfo.getmPrice())>mVoucherMoney){
             mInfo.setmPrice((Float.parseFloat(mInfo.getmPrice())-mVoucherMoney)+"");
         }else{
-            mInfo.setmPrice(1+"");
+            mInfo.setmPrice("0.01");
         }
         return true;
     }
