@@ -226,7 +226,7 @@ public class ProductInfoFragment extends CommonFragment implements
 
             @Override
             public void onPagerClick(int position) {
-                UIHelper.toPicAndTextActivity(getActivity(), mProductId);
+//                UIHelper.toPicAndTextActivity(getActivity(), mProductId);
             }
         });
     }

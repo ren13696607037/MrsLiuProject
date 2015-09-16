@@ -132,7 +132,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
             mAdapter = new OrderProAdapter(getActivity(), ShopCar.getShopCar().getCheckShopproductList());
             mListView.setAdapter(mAdapter);
             mTotalPriceTv.setText("￥"+ShopCar.getShopCar().getTotalPrice()+"");
-            mActualPriceTv.setText("￥"+ShopCar.getShopCar().getTotalPrice()+"");
+            mActualPriceTv.setText("￥"+(ShopCar.getShopCar().getTotalPrice()+mDeliverFee));
         }else{
           mProductInfoLayout.setVisibility(View.VISIBLE);
           mProduct = (Product) getActivity().getIntent().getSerializableExtra(IntentBundleKey.PRODUCT);
@@ -147,7 +147,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
           long l1 = Math.round(totalPrice * 100); // 四舍五入
           totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
           mTotalPriceTv.setText("￥"+    totalPrice+"");
-          mActualPriceTv.setText("￥"+totalPrice+"");
+          mActualPriceTv.setText("￥"+(totalPrice+mDeliverFee));
         }
         mDeleverFeeTv.setText("￥"+mDeliverFee);
         
@@ -221,9 +221,9 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
                    for(Product product: ShopCar.getShopCar().getCheckShopproductList()){
                        buffer.append(product.getmName()+" ");
                    }
-                   onCommitOrder(Constant.PRODUCT_TYPE_ENTITY ,Constant.PAY_TYPE_CREATE,ShopCar.getShopCar().getTotalPrice()+"",buffer.toString());   
+                   onCommitOrder(Constant.PRODUCT_TYPE_ENTITY ,Constant.PAY_TYPE_CREATE,ShopCar.getShopCar().getTotalPrice()+mDeliverFee+"",buffer.toString());   
                }else{
-                       float totalPrice =(float) (mProduct.getmPrice()*mProduct.getmAmount());
+                       float totalPrice =(float) (mProduct.getmPrice()*mProduct.getmAmount())+mDeliverFee;
                        long   l1   =   Math.round(totalPrice*100);   //四舍五入   
                        totalPrice   =   (float) (l1/100.00);               //注意：使用   100.0   而不是   100   
                        onCommitOrder(Constant.PRODUCT_TYPE_ENTITY ,Constant.PAY_TYPE_CREATE,totalPrice+"",mProduct.getmName());   

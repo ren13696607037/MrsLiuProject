@@ -29,7 +29,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
-import com.techfly.liutaitai.util.UIHelper;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 
@@ -48,11 +48,8 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.PRODUCT_LIST);
         url.setmGetParamPrefix("type").setmGetParamValues(type+"");
-        url.setmGetParamPrefix("city").setmGetParamValues("1");
+        url.setmGetParamPrefix("city").setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getArea().getmId());
         url.setmGetParamPrefix(RequestParamConfig.PAGE).setmGetParamValues(mPage+"");
-//        url.setmGetParamPrefix(RequestParamConfig.SORT).setmGetParamValues(mSort  +"");
-//        url.setmGetParamPrefix("cate").setmGetParamValues("1");
-        
         param.setmParserClassName(GanxiServiceParser.class.getName());
         param.setmHttpURL(url);
         RequestManager.getRequestData(getActivity(), creatReqSuccessListener(), createErrorListener(), param);

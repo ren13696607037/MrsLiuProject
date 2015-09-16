@@ -178,6 +178,11 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
                         + mAddressManage.getmDetail());
             }
         } else if (requestCode == 101) {
+            if (data != null) {
+                mVoucherId =data.getIntExtra(IntentBundleKey.VOUCHER_EXTRA,0);
+                mVoucherTv.setText(  mVoucherId);
+            }
+       
             // voucher
         } else {
             // ji'shi
@@ -296,6 +301,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
         case R.id.voucher:
             Intent intentss = null;
             intentss = new Intent(getActivity(), MyVoucherActivity.class);
+            intentss.putExtra(IntentBundleKey.VOUCHER_EXTRA, 8);
             this.startActivityForResult(intentss, 101);
             break;
         default:

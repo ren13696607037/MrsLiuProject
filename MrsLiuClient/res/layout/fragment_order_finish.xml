@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/order_song_prompt"
         android:textColor="@color/gray_bg_dashed"
-        android:textSize="@dimen/app_text_size_min"
+        android:textSize="@dimen/app_text_size_second"
         />
 
       <TextView 

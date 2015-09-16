@@ -177,7 +177,7 @@
     <string name="detail_text">支付方式</string>
     <string name="detail_text1">支付宝支付</string>
     <string name="pay_prompt">请选择下列支付方式</string>
-    <string name="order_song_prompt">我们将尽快把商品送到你面前</string>
+    <string name="order_song_prompt">请及时关注订单的状态</string>
     <string name="pay_now">立即支付</string>
     <string name="order_status_title">订单状态</string>
     <string name="order_pay_title">在线下单</string>
@@ -185,8 +185,8 @@
     <string name="detail_text3">实付款：</string>
     <string name="unknown">未知</string>
     <string name="order_detail_title">订单信息</string>
-    <string name="order_go_detail">查看订单</string>
-    <string name="order_finish_txt">订单完成！</string>
+    <string name="order_go_detail">知道了</string>
+    <string name="order_finish_txt">订单支付成功！</string>
     <string name="log_title">订单跟踪</string>
     <string name="log_text">货运方式：%1$s</string>
     <string name="log_text1">承运人：%1$s</string>

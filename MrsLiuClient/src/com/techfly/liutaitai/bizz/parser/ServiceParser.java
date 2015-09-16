@@ -36,8 +36,8 @@ public class ServiceParser implements Parser {
                     Service service = new Service();
                     service.setmId(obj.optString("id"));
                     service.setmServiceName(obj.optString("title"));
-                    service.setmServiceIcon(Constant.IMG_URL +obj.optString("images"));
-                    service.setmServicePerson(obj.optString("time"));
+                    service.setmServiceIcon(Constant.IMG_URL +obj.optString("image"));
+                    service.setmServicePerson(obj.optString("times"));
                     service.setmServicePrice(obj.optString("price"));
                     list.add(service);
                 }

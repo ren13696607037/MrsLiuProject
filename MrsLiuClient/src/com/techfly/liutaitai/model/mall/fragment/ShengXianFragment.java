@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,14 +64,13 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
     private GridViewForScrollView mPopList1;
     private ListView mPopList2;
     private int type;
-    private String mSortId;
+    private String mSortId="0";
     private PopUpAdapter2 mPopAdapter1;
     private PopUpAdapter mPopAdapter2;
     
-    private List<SortRule> mSortRuleList;
+    private List<SortRule> mSortRuleList= new ArrayList<SortRule>();;
     private List<SortRule> mSortRuleList2 = new ArrayList<SortRule>();;
     private String mCateID = "";// 商家所属分类
- 
     List<Product> mList = new ArrayList<Product>();
     private PullToRefreshLayout mPull;
     private GridView mGrid;
@@ -84,26 +84,25 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         }
         
     };
-    
     private void initSortRule2(){
         SortRule rule = new SortRule();
-        rule.setmId("");
+        rule.setmId("0");
         rule.setmName("默认排序");
         
         SortRule rule1 = new SortRule();
-        rule1.setmId("");
+        rule1.setmId("1");
         rule1.setmName("按销量排序");
         
         SortRule rule2 = new SortRule();
-        rule2.setmId("");
+        rule2.setmId("2");
         rule2.setmName("按新品");
         
         SortRule rule3 = new SortRule();
-        rule3.setmId("");
+        rule3.setmId("4");
         rule3.setmName("价格由高到低");
         
         SortRule rule4 = new SortRule();
-        rule4.setmId("");
+        rule4.setmId("3");
         rule4.setmName("价格由低到高");
         
         mSortRuleList2.add(rule);
@@ -135,8 +134,6 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 mCateID = mSortRuleList.get(position).getmId();
-              
-                
                 for(int i =0;i<mSortRuleList.size();i++ ){
                     if(i==position){
                         mSortRuleList.get(i).setmIsSelect(true);
@@ -144,14 +141,12 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                         mSortRuleList.get(i).setmIsSelect(false);
                     }
                 }
-                mSortId =mSortRuleList.get(position).getmId();
                 mSortTv1.setText(mSortRuleList.get(position).getmName());
                 
                 mHander.sendEmptyMessageDelayed(0, 2000);
                 mPage = 1;
                 mList.clear();
                 getServiceList();
-                
                 mSortPop1.dismiss();
             }
 
@@ -186,12 +181,9 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                     int position, long id) {
                 mSortId = mSortRuleList2.get(position).getmId();
                 mSortTv2.setText(mSortRuleList2.get(position).getmName());
-        
-          
                 mPage = 1;
                 mList.clear();
                 getServiceList();
-                
                 mSortPop2.dismiss();
             }
 
@@ -230,7 +222,12 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                 AppLog.Logd(object.toString());
                 if (!isDetached()) {
                     ResultInfo result = (ResultInfo) object;
+                    mSortRuleList.clear();
                     mSortRuleList = (List<SortRule>) result.getObject();
+                    SortRule rule = new SortRule();
+                    rule.setmId(null);
+                    rule.setmName("全部分类");
+                    mSortRuleList.add(0, rule);
                     initPopupWindow1();
                     if(mSortRuleList!=null&&mSortRuleList.size()>0){
                         mSortId =  mSortRuleList.get(0).getmId(); 
@@ -267,8 +264,10 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         url.setmGetParamPrefix("city").setmGetParamValues(areaId);
         url.setmGetParamPrefix(RequestParamConfig.PAGE).setmGetParamValues(mPage+"");
         url.setmGetParamPrefix("size").setmGetParamValues("10");
-//        url.setmGetParamPrefix("cid").setmGetParamValues("10");
-//        url.setmGetParamPrefix("order").setmGetParamValues("10");
+        url.setmGetParamPrefix(RequestParamConfig.SORT).setmGetParamValues(mSortId  +"");
+        if(!TextUtils.isEmpty(mCateID)){
+            url.setmGetParamPrefix("cate").setmGetParamValues(mCateID);
+        }
         param.setmHttpURL(url);
         param.setmParserClassName(ShengxianServiceParser.class.getName());
         RequestManager

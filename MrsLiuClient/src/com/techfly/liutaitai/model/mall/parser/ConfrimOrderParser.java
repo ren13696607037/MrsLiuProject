@@ -38,6 +38,7 @@ public class ConfrimOrderParser implements Parser{
                 add.setmDetail(objd2.optString("address"));
                 add.setmId(objd2.optString("id"));
                 add.setmName(objd2.optString("name"));
+                add.setmCity(objd2.optString("city"));
                 add.setmPhone(objd2.optString("mobile"));
                 confirm.setAddress(objd2.optString("address"));
                 confirm.setAddressId(objd2.optString("id"));

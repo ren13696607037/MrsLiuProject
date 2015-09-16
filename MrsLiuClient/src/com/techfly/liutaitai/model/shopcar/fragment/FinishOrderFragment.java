@@ -92,18 +92,19 @@ public class FinishOrderFragment extends CommonFragment implements OnClickListen
        int id = view.getId();
        switch (id) {
     case R.id.order_go_detail:
-        if(getActivity() instanceof TakingOrderActivity){
-            TakingOrderActivity ac = (TakingOrderActivity) getActivity();
-            final Bundle bundle = ac.getBundleInfo();
-            UIHelper.toOrderDetailActivity(FinishOrderFragment.this, bundle.getString(IntentBundleKey.ORDER_ID));;
-        }else{
-            if(!getActivity().getIntent().getBooleanExtra(IntentBundleKey.ORDER_DETAIL, false)){
-                UIHelper.toOrderDetailActivity(FinishOrderFragment.this, getActivity().getIntent().getStringExtra(IntentBundleKey.ORDER_ID));;
-            }else{
-                getActivity().finish();
-            }
-           
-        }
+        getActivity().finish();
+//        if(getActivity() instanceof TakingOrderActivity){
+//            TakingOrderActivity ac = (TakingOrderActivity) getActivity();
+//            final Bundle bundle = ac.getBundleInfo();
+//            UIHelper.toOrderDetailActivity(FinishOrderFragment.this, bundle.getString(IntentBundleKey.ORDER_ID));;
+//        }else{
+//            if(!getActivity().getIntent().getBooleanExtra(IntentBundleKey.ORDER_DETAIL, false)){
+//                UIHelper.toOrderDetailActivity(FinishOrderFragment.this, getActivity().getIntent().getStringExtra(IntentBundleKey.ORDER_ID));;
+//            }else{
+//                getActivity().finish();
+//            }
+//           
+//        }
       
         break;
     default:
