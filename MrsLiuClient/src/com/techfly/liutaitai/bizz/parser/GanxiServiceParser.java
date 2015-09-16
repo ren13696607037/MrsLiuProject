@@ -39,7 +39,7 @@ public class GanxiServiceParser implements Parser {
                     product.setmPrice((float) obj.optDouble(JsonKey.ProductKey.PRICE));
                     product.setmMarketPrice((float) obj.optDouble(JsonKey.ProductKey.PRICE));
                     product.setmSale(obj.optString(JsonKey.ProductKey.SALENUM));
-                    product.setmImg(Constant.YIHUIMALL_BASE_URL+obj.optString(JsonKey.ProductKey.ICON));
+                    product.setmImg(Constant.IMG_URL +obj.optString(JsonKey.ProductKey.ICON));
                     product.setmDesc(obj.optString("text"));;
                     list.add(product);
                 }

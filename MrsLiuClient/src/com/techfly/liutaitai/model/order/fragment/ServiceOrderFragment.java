@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.RateActivity;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
@@ -281,7 +282,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 	@Override
 	public void onServicePayListener(Service service) {
 		mType = 2;
-        onPay(service.getmId(), service.getmServicePrice(), service.getmServiceName(), new PayCallBack() {
+        onPay(Constant.PAY_ALIPAY,service.getmId(), service.getmServicePrice(), service.getmServiceName(), new PayCallBack() {
             
             @Override
             public void onPaySuccess() {
@@ -300,7 +301,9 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 	@Override
 	public void onServiceAgainListener(Service service) {
 		mType = 4;
-		
+		Intent intent = new Intent(getActivity(), ServiceOrderActivity.class);
+		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmNum());
+		startActivity(intent);
 	}
 
 	@Override
@@ -308,11 +311,13 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 		mType = 5;
 		Intent intent = new Intent(getActivity(), RateActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
-		startActivity(intent);
+		intent.putExtra(IntentBundleKey.TECH_ID, service.getmTechId());
+		startActivityForResult(intent, Constant.RATE_INTENT);
 	}
 
 	@Override
 	public void onServiceRefreshListener() {
+		mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 		if(mUser!=null){
         	startReqTask(ServiceOrderFragment.this);
         }else{
@@ -332,6 +337,19 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 			String proName) {
 		
 	}
-
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == Constant.RATE_SUCCESS){
+			mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
+			if(mUser!=null){
+	        	startReqTask(ServiceOrderFragment.this);
+	        }else{
+	        	mListView.setVisibility(View.GONE);
+	    		mTextView.setVisibility(View.VISIBLE);
+	    		mTextView.setText(R.string.service_no_content);
+	        }
+		}
+	}
 
 }

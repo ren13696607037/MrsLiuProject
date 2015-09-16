@@ -61,8 +61,7 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
-        startReqTask(this);
+        
     }
     
     @Override
@@ -227,6 +226,12 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 		if(intent != null){
 			startActivity(intent);
 		}
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
+        startReqTask(this);
 	}
 
 }

@@ -18,20 +18,23 @@ public class ManagerListener {
 		void onSelectListener(int type,String id);
 		void onDefaultListener(boolean b,String id);
 	}
-	public interface OrderPayListener{
+	public interface OrderPayListener{//技师联系客服
 		void onOrderPayListener(TechOrder order);
 	}
-	public interface OrderDeleteListener{
+	public interface OrderDeleteListener{//技师删除订单
 		void onOrderDeleteListener(TechOrder order);
 	}
-	public interface OrderCancelListener{
+	public interface OrderCancelListener{//技师拒单
 		void onOrderCancelListener(TechOrder order);
 	}
-	public interface OrderRateListener{
+	public interface OrderRateListener{//技师完成服务
 		void onOrderRateListener(TechOrder order);
 	}
-	public interface OrderLogiticsListener{
+	public interface OrderLogiticsListener{//技师开始服务
 		void onOrderLogiticsListener(TechOrder order);
+	}
+	public interface OrderTakeListener{//技师接单
+		void onOrderTakeListener(TechOrder order);
 	}
 	public interface spinnerClickListener{
 		void onClickNotify(String time);
@@ -45,6 +48,11 @@ public class ManagerListener {
 		void onServiceRateListener(Service service);
 		void onServiceRefreshListener();
 	}
+	public interface TechFinishDialogListener{
+		void onCamera();
+		void onPhoto();
+		void onSubmit(String url);
+	}
 	
 	
 	private List<CityUpdateListener> mCityUpdateListeners=new ArrayList<CityUpdateListener>();
@@ -54,8 +62,10 @@ public class ManagerListener {
 	private List<OrderLogiticsListener> mLogiticsListeners=new ArrayList<OrderLogiticsListener>();
 	private List<OrderPayListener> mPayListeners=new ArrayList<OrderPayListener>();
 	private List<OrderRateListener> mRateListeners=new ArrayList<OrderRateListener>();
+	private List<OrderTakeListener> mTakeListeners=new ArrayList<OrderTakeListener>();
 	private List<spinnerClickListener> mSpinnerClickListener=new ArrayList<spinnerClickListener>();
 	private List<ServiceClickListener> mServiceClickListeners = new ArrayList<ManagerListener.ServiceClickListener>();
+	private List<TechFinishDialogListener> mDialogListeners = new ArrayList<ManagerListener.TechFinishDialogListener>();
 	private static ManagerListener mListener;
 	private static Object object = new Object();
     private ManagerListener(){
@@ -71,6 +81,16 @@ public class ManagerListener {
             }
         }
         return mListener;
+    }
+    public void onRegisterTechFinishDialogListener(TechFinishDialogListener dialogListener){
+    	if(!mDialogListeners.contains(dialogListener)){
+    		mDialogListeners.add(dialogListener);
+    	}
+    }
+    public void onUnRegisterTechFinishDialogListener(TechFinishDialogListener dialogListener){
+    	if(mDialogListeners.contains(dialogListener)){
+    		mDialogListeners.remove(dialogListener);
+    	}
     }
     public void onRegisterCityUpdateListener(CityUpdateListener cityUpdateListener){
     	if(!mCityUpdateListeners.contains(cityUpdateListener)){
@@ -140,6 +160,16 @@ public class ManagerListener {
     public void onUnRegisterOrderDeleteListener(OrderDeleteListener deleteListener){
     	if(mDeleteListeners.contains(deleteListener)){
     		mDeleteListeners.remove(deleteListener);
+    	}
+    }
+    public void onRegisterOrderTakeListener(OrderTakeListener takeListener){
+    	if(!mTakeListeners.contains(takeListener)){
+    		mTakeListeners.add(takeListener);
+    	}
+    }
+    public void onUnRegisterOrderTakeListener(OrderTakeListener takeListener){
+    	if(mTakeListeners.contains(takeListener)){
+    		mTakeListeners.remove(takeListener);
     	}
     }
     public void onRegisterSpinnerClickListener(spinnerClickListener spinnerClickListener){
@@ -223,6 +253,12 @@ public class ManagerListener {
     		mLogiticsListeners.get(i).onOrderLogiticsListener(order);
     	}
     }
+    public void notifyOrderTakeListener(TechOrder order){
+    	int size=mTakeListeners.size();
+    	for(int i=0;i<size;i++){
+    		mTakeListeners.get(i).onOrderTakeListener(order);
+    	}
+    }
     public void notifyServiceDeleteListener(Service service){
     	int size = mServiceClickListeners.size();
     	for(int i=0; i<size; i++){
@@ -257,6 +293,24 @@ public class ManagerListener {
     	int size = mServiceClickListeners.size();
     	for(int i=0; i<size; i++){
     		mServiceClickListeners.get(i).onServiceRefreshListener();
+    	}
+    }
+    public void notifyDialogCameraListener(){
+    	int size = mDialogListeners.size();
+    	for(int i=0;i<size;i++){
+    		mDialogListeners.get(i).onCamera();
+    	}
+    }
+    public void notifyDialogPhotoListener(){
+    	int size = mDialogListeners.size();
+    	for(int i=0;i<size;i++){
+    		mDialogListeners.get(i).onPhoto();
+    	}
+    }
+    public void notifyDialogSubmitListener(String url){
+    	int size = mDialogListeners.size();
+    	for(int i=0;i<size;i++){
+    		mDialogListeners.get(i).onSubmit(url);
     	}
     }
     

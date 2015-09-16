@@ -81,6 +81,11 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
     	mShare = (RelativeLayout) view.findViewById(R.id.setting_share);
     	mExit = (Button) view.findViewById(R.id.setting_exit);
     	
+    	if(mPreferenceUtils.getUser() == null){
+    		mExit.setVisibility(View.INVISIBLE);
+    	}else{
+    		mExit.setVisibility(View.VISIBLE);
+    	}
     	mExit.setOnClickListener(this);
     	mAbout.setOnClickListener(this);
     	mHelp.setOnClickListener(this);

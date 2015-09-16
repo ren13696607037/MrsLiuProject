@@ -119,6 +119,9 @@ public class MyOrderAdapter extends BaseAdapter {
 			textView.setText(R.string.order_service_state);
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
+		}else{
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
 		}
 	}
 

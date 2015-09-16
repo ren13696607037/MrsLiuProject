@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +22,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.model.mall.activities.ServiceInfoActivity;
+import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.order.activities.RateActivity;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
@@ -61,6 +64,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 	private int mType = 0;
 	private String mId;
 	private User mUser;
+	private View mServiewView;
 	private final int MSG_DATA = 0x101;
 	private Handler mServiceDetailHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -134,6 +138,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     	mVoucher = (TextView) view.findViewById(R.id.osd_voucher);
     	mServiceTime = (TextView) view.findViewById(R.id.osd_service_time);
     	mState = (TextView) view.findViewById(R.id.osd_state);
+    	mServiewView = view.findViewById(R.id.osd_view);
     	
     }
     private void setData(){
@@ -151,6 +156,15 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     	setState(mService.getmServiceStatus(), mState, mButton, mButton2);
     	mButton.setOnClickListener(new ServiceClick(mActivity, mButton.getText().toString(), mService));
     	mButton2.setOnClickListener(new ServiceClick(mActivity, mButton2.getText().toString(), mService));
+    	mServiewView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mActivity, ServiceInfoActivity.class);
+				intent.putExtra(IntentBundleKey.ORDER_ID, mService.getmNum());
+				startActivity(intent);
+			}
+		});
     }
 
 	@Override
@@ -303,8 +317,9 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 
 	@Override
 	public void onServiceAgainListener(Service service) {
-		// TODO Auto-generated method stub
-		
+		Intent intent = new Intent(getActivity(), ServiceOrderActivity.class);
+		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmNum());
+		startActivity(intent);
 	}
 
 	@Override
@@ -312,6 +327,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 		mType = 5;
 		Intent intent = new Intent(getActivity(), RateActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
+		intent.putExtra(IntentBundleKey.TECH_ID, service.getmTechId());
 		startActivity(intent);
 	}
 

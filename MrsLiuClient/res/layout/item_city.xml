@@ -7,17 +7,16 @@
 
     <TextView
         android:id="@+id/catalog"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1.0"
         android:textSize="@dimen/app_text_size_first"
-        android:textColor="@android:color/white"
+        android:textColor="@color/bg_header"
         android:paddingLeft="15dip"
+        android:background="@color/white_bg_home"
         android:paddingRight="15dp"
-        android:layout_marginLeft="18dp"
         android:paddingTop="5dip"
         android:paddingBottom="5dip"
-        android:background="@color/bg_header"
      />
     <ImageView 
         android:layout_width="fill_parent"
@@ -29,10 +28,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="18dp"
+         android:paddingLeft="15dip"
         android:gravity="center_vertical"
         android:layout_weight="1.0"
-        android:textColor="@color/color_gray"
+        android:textColor="#565656"
+        android:background="@android:color/white"
         android:paddingTop="10dip"
         android:paddingBottom="10dip"
         />

@@ -36,30 +36,26 @@ public class ImageLoaderUtil {
 			.bitmapConfig(Config.RGB_565)
 			.showImageOnFail(R.drawable.ic_hall_no_url).cacheInMemory(true)
 			.cacheOnDisk(true).displayer(new SimpleBitmapDisplayer()).build();
+	
 	public static DisplayImageOptions mOrderServiceIconLoaderOptions = new DisplayImageOptions.Builder()
 	.showImageForEmptyUri(R.drawable.ic_hall_no_url)
 	.showImageOnLoading(R.drawable.ic_hall_no_url)
 	.bitmapConfig(Config.RGB_565)
 	.showImageOnFail(R.drawable.ic_hall_no_url).cacheInMemory(true)
 	.cacheOnDisk(true).displayer(new RoundedBitmapDisplayer(10)).build();
+	
+     public static DisplayImageOptions mBannerLoaderOptions = new DisplayImageOptions.Builder()
+       .showImageForEmptyUri(R.drawable.banner_default)
+       .showImageOnLoading(R.drawable.banner_default)
+       .bitmapConfig(Config.RGB_565)
+       .showImageOnFail(R.drawable.banner_default).cacheInMemory(true)
+       .cacheOnDisk(true).displayer(new SimpleBitmapDisplayer()).build();
+     
+     public static DisplayImageOptions mDetailsLoaderOptions = new DisplayImageOptions.Builder()
+     .showImageForEmptyUri(R.drawable.service_details_default)
+     .showImageOnLoading(R.drawable.service_details_default)
+     .bitmapConfig(Config.RGB_565)
+     .showImageOnFail(R.drawable.service_details_default).cacheInMemory(true)
+     .cacheOnDisk(true).displayer(new SimpleBitmapDisplayer()).build();
 
-	/*
-	 * public static DisplayImageOptions mCollectCaterOptions=new
-	 * DisplayImageOptions
-	 * .Builder().showImageForEmptyUri(R.drawable.collect_cater_img)
-	 * .showImageOnLoading
-	 * (R.drawable.collect_cater_img).bitmapConfig(Config.RGB_565
-	 * ).showImageOnFail(R.drawable.collect_cater_img)
-	 * .cacheInMemory(true).cacheOnDisk(true).displayer(new
-	 * SimpleBitmapDisplayer()).build();
-	 * 
-	 * public static DisplayImageOptions mHomeproductCateLoaderOptions = new
-	 * DisplayImageOptions
-	 * .Builder().showImageForEmptyUri(R.drawable.ic_hall_no_url)
-	 * .showImageOnLoading
-	 * (R.drawable.ic_hall_no_url).bitmapConfig(Config.RGB_565
-	 * ).showImageOnFail(R.drawable.ic_hall_no_url)
-	 * .cacheInMemory(true).cacheOnDisk(true).displayer(new
-	 * RoundedBitmapDisplayer(15)).build();
-	 */
 }

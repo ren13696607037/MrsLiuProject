@@ -82,7 +82,7 @@ public class ServiceInfoFragment extends CommonFragment{
    
    private void onDisplayInfo(){
        mDescTv.setText(mInfo.getmDesc());
-       ImageLoader.getInstance().displayImage(mInfo.getmImg(), mImg, ImageLoaderUtil.mHallIconLoaderOptions);
+       ImageLoader.getInstance().displayImage(mInfo.getmImg(), mImg, ImageLoaderUtil.mDetailsLoaderOptions);
        mNameTv.setText(mInfo.getmName());
        mPriceTv.setText("￥"+mInfo.getmPrice()+"/"+mInfo.getmUnit());
        mServiceContentTv.setText(mInfo.getmServiceConent());

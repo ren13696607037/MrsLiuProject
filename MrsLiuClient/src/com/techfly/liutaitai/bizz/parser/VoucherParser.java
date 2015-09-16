@@ -24,13 +24,23 @@ public class VoucherParser implements Parser{
 					JSONObject obj = data.optJSONObject(i);
 					Voucher voucher = new Voucher();
 					voucher.setmId(obj.optString(JsonKey.VoucherKey.ID));
-					voucher.setmNeed(obj.optString(JsonKey.VoucherKey.NEED));
-					voucher.setmPrice(obj.optString(JsonKey.VoucherKey.MONEY));
+					String need = obj.optString(JsonKey.VoucherKey.NEED);
+					if(need.contains(".")){
+						voucher.setmNeed(need.split("\\.")[0]);
+					}else{
+						voucher.setmNeed(need);
+					}
+					String money = obj.optString(JsonKey.VoucherKey.MONEY);
+					if(money.contains(".")){
+						voucher.setmPrice(money.split("\\.")[0]);
+					}else{
+						voucher.setmPrice(money);
+					}
 					list.add(voucher);
 				}
 			}
 		}
-		return null;
+		return list;
 	}
 
 	@Override

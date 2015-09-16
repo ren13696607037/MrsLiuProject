@@ -10,6 +10,7 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
 
 public class CommonProListParser implements Parser {
@@ -27,17 +28,17 @@ public class CommonProListParser implements Parser {
             AppLog.Logd("Fly", "JSONException"+e.getMessage());
         }
         if(resultCode==0){
-            JSONArray array = object.optJSONArray(JsonKey.DATA);
+            JSONArray array = object.optJSONObject(JsonKey.DATA).optJSONArray(JsonKey.DATAS);
             if(array!=null){
                 for(int i=0;i<array.length();i++){
                     JSONObject obj = array.optJSONObject(i);
                     Product product = new Product();
-                    product.setmId(obj.optString(JsonKey.ProductKey.ID));
-                    product.setmName(obj.optString(JsonKey.ProductKey.NAME));
-                    product.setmPrice((float) obj.optDouble(JsonKey.ProductKey.PRICE));
-                    product.setmMarketPrice((float) obj.optDouble(JsonKey.ProductKey.MARKET_PRICE));
-                    product.setmSale(obj.optString(JsonKey.ProductKey.SALENUM));
-                    product.setmImg(obj.optString(JsonKey.ProductKey.ICON));
+                    product.setmOrderNum(obj.optString(JsonKey.CollectKey.SID));
+                    product.setmId(obj.optString(JsonKey.CollectKey.ID));
+                    product.setmName(obj.optString(JsonKey.CollectKey.TITLE));
+                    product.setmPrice((float) obj.optDouble(JsonKey.CollectKey.PRICE));
+                    product.setmAmount(obj.optInt(JsonKey.CollectKey.TIMES));
+                    product.setmImg(Constant.YIHUIMALL_BASE_URL+obj.optString(JsonKey.CollectKey.IMAGE));
                     list.add(product);
                 }
             }

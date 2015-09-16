@@ -3,6 +3,7 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +26,19 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.CommonProListParser;
+import com.techfly.liutaitai.bizz.parser.TechOrderParser;
+import com.techfly.liutaitai.model.mall.activities.ServiceInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.ProItemAdapter;
 import com.techfly.liutaitai.model.mall.bean.Product;
+import com.techfly.liutaitai.model.pcenter.adapter.MyCollectAdapter;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -40,16 +48,17 @@ import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 public class MyCollectFragment extends CommonFragment implements IXListViewListener{
 	private XListView mListView;
 	private ArrayList<Product> mList =new ArrayList<Product>();
-	private ProItemAdapter mAdapter;
+	private MyCollectAdapter mAdapter;
 	private TextView mEmptyTv;
 	private int mPage = 1;
 	private int mSize = 10;
 	private TextView mTextView;
+	private User mUser;
 	private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
         	mListView.setVisibility(View.VISIBLE);
-			mTextView.setVisibility(View.GONE);
+        	mEmptyTv.setVisibility(View.GONE);
 			if(mList.size()==0){
 				setNoData();
 			}
@@ -65,6 +74,7 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(this);
     }
     
@@ -101,38 +111,33 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
     private void onInitView(View view){
     	setTitleText(R.string.pcenter_collect);
     	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-    	setRightText(R.string.editable_txt,new OnClickListener() {
-    	        
-    	        @Override
-    	        public void onClick(View view) {
-    	            // TODO Auto-generated method stub 
-    	           TextView tv = (TextView) view;
-    	           if(tv.getText().toString().equals(getString(R.string.editable_txt))){
-    	               setRightText(getString(R.string.address_delete));
-    	               updateCollectEdit();
-    	           }else{
-    	             
-    	               deleteChoosePro();
-    	           }
-    	      
-    	        }
-    	    });
     	mListView=(XListView) view.findViewById(R.id.collect_list);
     	mListView.setPullLoadEnable(false);
     	mListView.setPullRefreshEnable(true);
     	mEmptyTv = (TextView) view.findViewById(R.id.empty);
-        mAdapter=new ProItemAdapter(getActivity(), mList,Constant.COLLECT_PRO_ITEM_STYLE);
+        mAdapter=new MyCollectAdapter(getActivity(), mList);
         mListView.setAdapter(mAdapter);
         mListView.setXListViewListener(this);
     	mListView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-                // TODO Auto-generated method stub
                 Product pro =  (Product) arg0.getItemAtPosition(position);
 //                UIHelper.toProductInfoActivity(getActivity(), Integer.parseInt(pro.getmId()),ProductInfoFragment.FLAG_NORMAL);
+                Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
+				intent.putExtra(IntentBundleKey.ID, pro.getmOrderNum());
+				startActivity(intent);
             }
         });
+    	mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				return false;
+			}
+		});
     }
 
     protected void deleteChoosePro() {
@@ -174,8 +179,13 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.PRODUCT_COLLECT);
-//        url.setmGetParamPrefix(RequestParamConfig.PRINCIPAL).setmGetParamValues("5149");
-        url.setmGetParamPrefix(RequestParamConfig.PRINCIPAL).setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getUser().getmId());
+        url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(mSize+"");
+        url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(mPage+"");
+        param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		param.setPostRequestMethod();
+        param.setmHttpURL(url);
         param.setmParserClassName(CommonProListParser.class.getName());
         param.setmHttpURL(url);
         RequestManager.getRequestData(getActivity(), creatReqSuccessListener(), createErrorListener(), param);
@@ -250,7 +260,7 @@ public class MyCollectFragment extends CommonFragment implements IXListViewListe
     }
     private void setNoData(){
 		mListView.setVisibility(View.GONE);
-        mTextView.setVisibility(View.VISIBLE);
-        mTextView.setText(getResources().getString(R.string.collect_no_content));
+		mEmptyTv.setVisibility(View.VISIBLE);
+		mEmptyTv.setText(getResources().getString(R.string.collect_no_content));
 	}
 }

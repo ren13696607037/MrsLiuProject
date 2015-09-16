@@ -9,7 +9,7 @@ public class Constant {
 	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/liu/";
 //	public static final String YIHUIMALL_BASE_URL = "http://192.168.0.212:8080/yhmall-api/";
 	public static final String IMG_HEADER_URL = "http://121.43.158.189/liu";
-
+	public static final String IMG_URL = "http://121.43.158.189/liuTai";
 
 	public static final String PRODUCT_CATEGORY = "goods/category/root";
 	public static final String PRODUCT_GROUP = "yiqituan";
@@ -72,6 +72,11 @@ public class Constant {
 	public static final String SERVICE_RATE_URL = "common/review";
 	public static final String TECH_ORDER_DETAIL_URL = "master/order";
 	public static final String TECH_ORDER_LIST_URL = "master/orders";
+	public static final String TECH_ORDER_TAKE_URL = "master/take";
+	public static final String TECH_ORDER_REFRSE_URL = "master/refuse";
+	public static final String TECH_ORDER_DONE_URL = "master/done";
+	public static final String TECH_ORDER_START_URL = "master/start";
+	public static final String TECH_ORDER_REMOVE_URL = "master/removeorder";
 	public static final String TECH_ACCOUNT_URL = "master/binding";
 	public static final String TECH_CASH_URL = "master/cash";
 	public static final String TECH_CASH_INFO_URL = "master/bindinginfo";
@@ -147,9 +152,10 @@ public class Constant {
   
 
 
-
-
-   
+	public static final int PAY_BALANCE = 0x1561;
+	public static final int PAY_ALIPAY = 0x1562;
+	public static final int PAY_WENXIN = 0x1563;
+	public static final int PAY_OFFLINE = 0x1564;
 
 	public static final int LOGIN_INTENT = 0x801;
 	public static final int LOGIN_SUCCESS = 0x802;
@@ -176,6 +182,8 @@ public class Constant {
 	public static final int EXIT_SUCCESS = 824;
 	public static final int BALANCE_INTENT = 825;
 	public static final int BALANCE_SUCCESS = BALANCE_INTENT + 1;
+	public static final int RATE_INTENT = 827;
+	public static final int RATE_SUCCESS = RATE_INTENT + 1;
 
 	public static final int PRODUCT_SALE_REQ = 1;// 按销量请求
 	public static final int PRODUCT_PRICE_REQ = 2;// 按价格请求

@@ -13,6 +13,7 @@ import com.techfly.liutaitai.model.mall.bean.Standard;
 import com.techfly.liutaitai.model.mall.bean.StandardClass;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
 
 public class ProductInfoParser implements Parser {
@@ -159,7 +160,7 @@ public class ProductInfoParser implements Parser {
 			for (int i = 0; i < mJsonArray.length(); i++) {
 				JSONObject mJsonObject = mJsonArray.optJSONObject(i);
 				if (mJsonObject != null) {
-					list.add(mJsonObject
+					list.add(Constant.IMG_URL+mJsonObject
 							.optString(JsonKey.ProductInfo.IMAGES_PATH));
 				}
 			}

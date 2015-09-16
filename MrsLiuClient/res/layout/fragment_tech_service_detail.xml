@@ -44,7 +44,10 @@
             android:paddingBottom="@dimen/px_15"
             android:paddingLeft="@dimen/px_30"
             android:paddingRight="@dimen/px_30"
-            android:paddingTop="@dimen/px_15" />
+            android:paddingTop="@dimen/px_15" 
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first"
+            />
 
         <Button
             android:id="@+id/tsd_btn2"
@@ -58,7 +61,24 @@
             android:paddingBottom="@dimen/px_15"
             android:paddingLeft="@dimen/px_30"
             android:paddingRight="@dimen/px_30"
-            android:paddingTop="@dimen/px_15" />
+            android:paddingTop="@dimen/px_15" 
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/app_text_size_first"
+            />
+        <TextView
+        android:id="@+id/tsd_time_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tsd_state"
+        android:layout_alignTop="@id/tsd_state"
+        android:layout_toLeftOf="@id/tsd_btn"
+        android:gravity="center"
+        android:paddingBottom="@dimen/px_15"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_15"
+        android:textColor="@color/color_33"
+        android:textSize="@dimen/app_text_size_first" />
     </RelativeLayout>
 
     <ScrollView

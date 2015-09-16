@@ -29,7 +29,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:textColor="#565656"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
                 <TextView
                     android:id="@+id/actual_price"
                     android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/actual_price_prifix"
                     android:textColor="#FF602B"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
                 <TextView
                     android:id="@+id/commit_order"
                     android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                     android:textColor="#565656"
                     android:drawablePadding="12dp"
                     android:gravity="center"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
               
                 <TextView
                     android:id="@+id/address"
@@ -95,7 +95,7 @@
                     android:layout_marginTop="6dp"
                     android:text="收货地址：政务区蔚蓝商务港B座1406室"
                     android:textColor="#565656"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
                 <ImageView 
                 	android:id="@+id/arrow_right"
                 	android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
                     android:drawablePadding="12dp"
                     android:drawableLeft="@drawable/address_phone"
                     android:gravity="center"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
                 
             </RelativeLayout>
 			<com.techfly.liutaitai.util.view.ListViewForScrollView 
@@ -154,7 +154,7 @@
                     android:layout_alignParentRight="true"
                     android:text="￥1399.00"
                     android:textColor="#FF602B"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
                 <TextView
                     android:id="@+id/product_count"
                     android:layout_width="wrap_content"
@@ -164,7 +164,7 @@
                     android:text="x1"
                     android:textColor="#565656"
                     android:layout_marginBottom="10dp"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
 				
 				<TextView
 					android:id="@+id/product_name"
@@ -177,7 +177,7 @@
 					android:layout_marginLeft="6dp"
 					android:layout_toLeftOf="@id/product_price"
 					android:textColor="#565656"
-					android:textSize="@dimen/app_text_size_second" />
+					android:textSize="@dimen/app_text_size_first" />
 				
 				
 			</RelativeLayout>
@@ -194,38 +194,19 @@
 				android:paddingRight="12dp"
 				android:paddingTop="6dp" >
 				
-				<TextView 
-					   android:id="@+id/pay_method_prefix"
-					   android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-					   android:layout_alignParentLeft="true"
-					   android:text="支付方式"
-					   android:textColor="#565656"
-					
-					/>
-				<TextView 
-                       android:id="@+id/pay_method"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_alignParentRight="true"
-                       android:text="支付宝"
-                       android:textColor="#565656"
-                    />
 				
 				<TextView
                     android:id="@+id/note_prifix"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pay_method"
                     android:layout_marginTop="12dp"
                     android:text="备注："
                     android:textColor="#565656"
-                    android:textSize="@dimen/app_text_size_second" />
+                    android:textSize="@dimen/app_text_size_first" />
                 <EditText
                 	android:id="@+id/note"
                 	android:layout_width="match_parent"
                 	android:layout_height="wrap_content"
-                	android:layout_below="@id/pay_method"
                 	android:layout_marginTop="6dp"
                 	android:layout_toRightOf="@id/note_prifix"
                 	android:hint="您还有什么吩咐请告诉我们~"
@@ -234,7 +215,7 @@
                 	android:textColor="#565656"
                 	android:imeOptions="actionNone"
                 	android:background="@null"
-                	android:textSize="@dimen/app_text_size_second" />
+                	android:textSize="@dimen/app_text_size_first" />
 				<TextView
 					android:id="@+id/total_price_prifix"
 					android:layout_width="wrap_content"
@@ -243,7 +224,7 @@
 					android:layout_marginTop="12dp"
 					android:layout_below="@id/note"
 					android:textColor="#565656"
-					android:textSize="@dimen/app_text_size_second" />
+					android:textSize="@dimen/app_text_size_first" />
 				<TextView
 					android:id="@+id/total_price"
 					android:layout_width="wrap_content"
@@ -253,7 +234,7 @@
 					android:text="￥1399.00"
 					android:layout_marginTop="12dp"
 					android:textColor="#FF602B"
-					android:textSize="@dimen/app_text_size_second" />
+					android:textSize="@dimen/app_text_size_first" />
 				<TextView
 					android:id="@+id/deliver_price_prifix"
 					android:layout_width="wrap_content"
@@ -262,7 +243,7 @@
 					android:layout_marginTop="12dp"
 					android:text="运费："
 					android:textColor="#565656"
-					android:textSize="@dimen/app_text_size_second" />
+					android:textSize="@dimen/app_text_size_first" />
 				<TextView
 					android:id="@+id/deliver_price"
 					android:layout_width="wrap_content"
@@ -272,7 +253,7 @@
 				    android:layout_alignParentRight="true"
 					android:text="￥0.00"
 					android:textColor="#FF602B"
-					android:textSize="@dimen/app_text_size_second" />
+					android:textSize="@dimen/app_text_size_first" />
 				
 				
 			</RelativeLayout>
