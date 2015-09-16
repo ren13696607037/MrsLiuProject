@@ -134,8 +134,8 @@ public class OrderBastketAdapter extends BaseAdapter {
 			mTvType.setText("鲜花");
 			mTvType.setBackgroundResource(R.drawable.order_type_color_3);
 			break;
-		case 3:
-			mTvType.setText("奢侈品保养");
+		case 4:
+			mTvType.setText("奢侈品");
 			mTvType.setBackgroundResource(R.drawable.order_type_color_4);
 			break;
 

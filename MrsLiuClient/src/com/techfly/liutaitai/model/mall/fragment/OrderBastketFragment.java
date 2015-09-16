@@ -114,8 +114,14 @@ public class OrderBastketFragment extends CommonFragment implements
 		if (mDatas.size() == 0) {
 			mTvNoData.setVisibility(View.GONE);
 			refreshList();
+			return;
 		}
 
+		if(Constant.isShouldRefresh){
+			refreshList();
+			Constant.isShouldRefresh = false;
+		}
+		
 	}
 
 	@Override

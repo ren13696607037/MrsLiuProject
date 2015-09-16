@@ -2,12 +2,11 @@ package com.techfly.liutaitai.util;
 
 import android.R.integer;
 
-
-
 public class Constant {
 
 	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/liu/";
-//	public static final String YIHUIMALL_BASE_URL = "http://192.168.0.212:8080/yhmall-api/";
+	// public static final String YIHUIMALL_BASE_URL =
+	// "http://192.168.0.212:8080/yhmall-api/";
 	public static final String IMG_HEADER_URL = "http://121.43.158.189/liu";
 	public static final String IMG_URL = "http://121.43.158.189/liuTai";
 
@@ -28,7 +27,7 @@ public class Constant {
 	public static final String ZTO_URL = "http://api.zto.cn/json.aspx?Userid=wuyicheng&Pwd=WUYICHENG007&SrtjobNo=";
 	public static final String YTO_URL = "http://58.32.246.70:8088/MarketingInterface/";
 	public static final String YTO_JAVA_URL = "api-transffer/yto";
-	public static final String LOGOUT_URL="auth/logout";
+	public static final String LOGOUT_URL = "auth/logout";
 
 	// 启动整合接口
 	public static final String SYSTEM_URL = "system";
@@ -52,14 +51,14 @@ public class Constant {
 	public static final String CHANGE_ADDRESS_URL = "user/doaddress";
 	public static final String GOODS_DETAIL = "product/detail";// 商品详情
 	public static final String SERVICE_DETAIL = "service/detail";// 服务详情
-	public static final String SECKILL_DETAIL = "seckill/detail";//  限时秒杀详情
+	public static final String SECKILL_DETAIL = "seckill/detail";// 限时秒杀详情
 	public static final String TUANGOU_DETAIL = "tuangou/detail";// 团购商品详情
 	public static final String GOODS_COLLECT = "goods/collect";// 收藏
 	public static final String GOODS_UNCOLLECT = "goods/collect/delete";// 取消收藏
 	public static final String GOODS_PIC_TEXT = "goods/detail/";// 取消收藏
-	public static final String PASS_URL = "user/modifypwd";//修改密码
-	public static final String ORDER_SERVICE_URL = "commodity/bespeak/";//美甲等预约订单
-	public static final String ORDER_APPOINTMENT_URL = "";//洗衣预约订单
+	public static final String PASS_URL = "user/modifypwd";// 修改密码
+	public static final String ORDER_SERVICE_URL = "commodity/bespeak/";// 美甲等预约订单
+	public static final String ORDER_APPOINTMENT_URL = "";// 洗衣预约订单
 	public static final String ORDER_SERVICE_DETAIL_URL = "service/reservation";
 	public static final String USER_HEADER_URL = "uploadfile/pic/";
 	public static final String SERVICE_URL = "master/index";
@@ -83,40 +82,38 @@ public class Constant {
 	public static final String TECH_RATE_LIST_URL = "common/reviews";
 	public static final String FORGET_URL = "user/forgotpwd";
 	public static final String USER_INFO_URL = "user/info";
-	
+
 	public static final String PRODUCT_LIST = "product/productList";
 	public static final String ORDER_COMMIT_REQUEST_URL = "product/addOrder";
 	public static final String SERVICE_ORDER_COMMIT_REQUEST_URL = "service/addreservation";
 	public static final String ALIPAY_CALLBACK_URL = "common/payNotify";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "common/payNotify";
-	
-	public static final String ORDER_BASKET_LIST = "order/list";//订单篮订单列表
-	
-	public static final String ORDER_INFO = "order/detail";//订单篮订单详情
-	public static final String ORDER_INFO_ID = "orderid";
-	public static final String CANCEL_ORDER = "order/cancelOrder";//取消订单
-	public static final String DELETE_ORDER = "order/deleteOrder";//删除订单
-	
-	public static final String AFTER_SALE_SERVICE = "order/orderReply";//申请售后
-	public static final String AFTER_SALE_SERVICE_CONTENT = "message";//申请售后
-	public static final String ORDER_EVA = "common/reviewgoods";//订单评价
-	public static final String ORDER_EVA_CONTENT = "msg";//订单评价
-	
 
-    public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
-    public static String UPDATE_TO_CART_REQUEST_URL="product/editCartCount";
-    public static String ADD_TO_CART_REQUEST_URL="product/addCart";
-    public static String DELETE_TO_CART_REQUEST_URL="product/deleteUserCart";
-    public static String CITY_REQUEST_LIST_URL="common/citys";
-    public static String CONFIRM_ORDER_REQUEST="product/firmOrder";
-    
+	public static final String ORDER_BASKET_LIST = "order/list";// 订单篮订单列表
+
+	public static final String ORDER_INFO = "order/detail";// 订单篮订单详情
+	public static final String ORDER_INFO_ID = "orderid";
+	public static final String CANCEL_ORDER = "order/cancelOrder";// 取消订单
+	public static final String DELETE_ORDER = "order/deleteOrder";// 删除订单
+
+	public static final String AFTER_SALE_SERVICE = "order/orderReply";// 申请售后
+	public static final String AFTER_SALE_SERVICE_CONTENT = "message";// 申请售后
+	public static final String ORDER_EVA = "common/reviewgoods";// 订单评价
+	public static final String ORDER_EVA_CONTENT = "msg";// 订单评价
+
+	public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
+	public static String UPDATE_TO_CART_REQUEST_URL = "product/editCartCount";
+	public static String ADD_TO_CART_REQUEST_URL = "product/addCart";
+	public static String DELETE_TO_CART_REQUEST_URL = "product/deleteUserCart";
+	public static String CITY_REQUEST_LIST_URL = "common/citys";
+	public static String CONFIRM_ORDER_REQUEST = "product/firmOrder";
+
 	public static final String CHANGE_INFO_URL = "user/modifyprofile";
 	public static final String BALANCE_HISTORY_URL = "user/moneyrecords";
 	public static final String BALANCE_URL = "user/vouchercards";
 	public static final String VOUCHER_URL = "user/myvouchers";
 	public static final String CHANGE_NICK_URL = "user/modifynickname";
 	public static final String APPLY_URL = "master/apply";
-	
 
 	public static final int PAY_TYPE_ORDER = 110; // 对已有订单的支付
 	public static final int PAY_TYPE_CREATE = 111; // 创建订单的支付
@@ -143,14 +140,10 @@ public class Constant {
 	public static int COMMON_PRO_ITEM_STYLE = 0X113;
 
 	public static int HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG = 0;// BACK iCON
- 
-
 
 	public static final int NOTIFY_LIST = 0x126;
 	public static final String PAGE = "no";
 	public static final String SIZE = "size";
-  
-
 
 	public static final int PAY_BALANCE = 0x1561;
 	public static final int PAY_ALIPAY = 0x1562;
@@ -194,7 +187,8 @@ public class Constant {
 			"@yeah.net", "@sina.cn", "@sina.com", "@vip.qq.com",
 			"@vip.163.com", "@vip.sina.com", "@gmail.com", };
 	public static final String REFRESH_UPLOAD_GRIDVIEW_IMAGE = "refresh_upload_gridview_image";
-	
+
 	public static final String KEFU_PHONE = "4008275899";
+	public static boolean isShouldRefresh = false;
 
 }

@@ -33,7 +33,7 @@ public class TakingOrderActivity extends FragmentActivity{
         super.onStop();
         if(mDialog!=null){
             mDialog .dismiss();
-            mDialog =null;
+            mDialog = null;
         }
     }
     @Override

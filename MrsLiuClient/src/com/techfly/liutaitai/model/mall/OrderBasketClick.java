@@ -104,8 +104,8 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 			bundle.putString(IntentBundleKey.ORDER_PRODUCT, name);// 商品名称
 			intent.putExtra(IntentBundleKey.DATA, bundle);
 			intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
-
 			mFragment.startActivity(intent);
+			Constant.isShouldRefresh = true;
 		} else if (v.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_2))) {
 			contactService();// 联系客服

@@ -301,4 +301,15 @@ public class OrderInfoFragment extends CommonFragment {
 	public void refreshData() {
 		startReqTask(this);
 	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		if (Constant.isShouldRefresh) {
+			startReqTask(this);
+			Constant.isShouldRefresh = false;
+
+		}
+	}
 }
