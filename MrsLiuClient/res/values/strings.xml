@@ -443,8 +443,8 @@
 	<string name="order_state_1_">已取消</string>
 	<string name="order_state_0">待支付</string>
 	<string name="order_state_1">已下单</string>
-	<string name="order_state_2">已接单</string>
-	<string name="order_state_3">准备中</string>
+	<string name="order_state_2">准备中</string>
+	<string name="order_state_3">已接单</string>
 	<string name="order_state_4">配送中</string>
 	<string name="order_state_5">待评价</string>
 	<string name="order_state_6">已完成</string>

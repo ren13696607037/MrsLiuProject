@@ -38,7 +38,7 @@
                     android:layout_marginLeft="@dimen/px_30"
                     android:layout_marginRight="@dimen/px_30"
                     android:layout_marginTop="@dimen/px_10"
-                    android:background="@drawable/button_login"
+                    android:background="@drawable/login_button_white"
                     android:paddingBottom="@dimen/px_10"
                     android:paddingLeft="@dimen/px_30"
                     android:paddingRight="@dimen/px_30"
