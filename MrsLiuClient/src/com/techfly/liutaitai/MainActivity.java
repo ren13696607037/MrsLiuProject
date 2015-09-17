@@ -86,7 +86,6 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack {
 
             } else if (tabId.equals(TAB_PCENTER)) {
                 AppLog.Logd("switch to TAB_MANGOCATE initCateTabs");
-
             }
         }
     };

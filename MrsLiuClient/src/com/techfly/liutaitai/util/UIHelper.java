@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.model.home.activities.SearchActivity;
 import com.techfly.liutaitai.model.mall.activities.AfterSaleServiceActivity;
-import com.techfly.liutaitai.model.mall.activities.CategoryInfoListActivity;
 import com.techfly.liutaitai.model.mall.activities.GanxiActivity;
 import com.techfly.liutaitai.model.mall.activities.OrderEvaActivity;
 import com.techfly.liutaitai.model.mall.activities.OrderInfoActivity;
@@ -15,7 +14,6 @@ import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceListActivity;
 import com.techfly.liutaitai.model.mall.activities.ShengXianActivity;
-import com.techfly.liutaitai.model.mall.bean.Category;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.ChangeAddressActivity;
@@ -33,20 +31,7 @@ import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
  */
 public class UIHelper {
 
-	/**
-	 * ��ת����������
-	 * 
-	 * @param context
-	 * @param title
-	 *            ��������
-	 * @param id
-	 *            ����id
-	 */
-	public static void showCategorySecond(Context context, Category mCategory) {
-		Intent intent = new Intent(context, CategoryInfoListActivity.class)
-				.putExtra(IntentBundleKey.CATEGORY, mCategory);
-		context.startActivity(intent);
-	}
+
 
 	public static void toSearchActivity(Context context, int fid) {
 		Intent intent = new Intent(context, SearchActivity.class);

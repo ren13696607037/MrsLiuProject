@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -262,7 +263,7 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
         mCityTv = (TextView) view.findViewById(R.id.city);
         mCityTv .setOnClickListener(this);
     
-        
+        view.findViewById(R.id. phone).setOnClickListener(this);;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -312,7 +313,11 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
            break;   
        case R.id.city:
            UIHelper.toClassActivity(this, CitySelectActivity.class.getName());
-           
+       case R.id.phone:
+           Intent intent = new Intent(Intent.ACTION_DIAL, Uri
+                   .parse("tel:" + getActivity().getString(R.string.common_phone_dial_num)));
+           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+           getActivity().startActivity(intent);
            break;
         default:
             break;

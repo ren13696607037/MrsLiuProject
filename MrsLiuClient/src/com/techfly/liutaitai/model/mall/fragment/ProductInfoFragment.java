@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
 import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
+import com.techfly.liutaitai.model.mall.activities.ProductCommentActivity;
 import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.parser.NewProductInfoParser;
@@ -70,6 +72,7 @@ public class ProductInfoFragment extends CommonFragment implements
     private TextView mShopNow;
     private TextView mProductName;
     private TextView mProductPrice;
+    private TextView mDescTv;
     private ProductUpdateView mProductUpdateCount;
     private ListViewForScrollView mListView;
     private TextView mPicAndTextDetail;
@@ -161,7 +164,8 @@ public class ProductInfoFragment extends CommonFragment implements
         mProductName.setText("德芙巧克力");
         mProductPrice = (TextView) view.findViewById(R.id.product_info_price);
         mProductPrice.setText("￥54.00");
-     
+        mDescTv = (TextView) view .findViewById(R.id.product_info_desc);
+        
 
         mProductUpdateCount = (ProductUpdateView) view
                 .findViewById(R.id.product_info_product_update_count);
@@ -173,15 +177,14 @@ public class ProductInfoFragment extends CommonFragment implements
         // mListView.setHeaderDividersEnabled(true);
         // mListView.setFooterDividersEnabled(true);
         mAdapter = new CommonAdapter<Comments>(getActivity(), mArrayList,
-                R.layout.item_product_info) {
-
+                R.layout.item_ratelist) {
             @Override
             public void convert(ViewHolder holder, Comments item, int position) {
-                // TODO Auto-generated method stub
-                holder.setText(R.id.product_info_item_name, item.getmName());
-                holder.setText(R.id.product_info_item__time, item.getmTime());
-                holder.setText(R.id.product_info_item__content,
+                holder.setText(R.id.iratelist_name, item.getmName());
+                holder.setText(R.id.iratelist_time, item.getmTime());
+                holder.setText(R.id.iratelist_content,
                         item.getmContent());
+                holder.setRating(R.id.iratelist__bar,Float.parseFloat(item.getmStarScore()));
 
             }
         };
@@ -191,7 +194,8 @@ public class ProductInfoFragment extends CommonFragment implements
         mPicAndTextDetail = (TextView) view
                 .findViewById(R.id.product_info_text_and_pic_detail);
         mPicAndTextDetail.setOnClickListener(getClickListener());
-
+        view
+        .findViewById(R.id.product_info_comment).setOnClickListener(getClickListener());;
        
 
     }
@@ -290,7 +294,11 @@ public class ProductInfoFragment extends CommonFragment implements
                 // TODO Auto-generated method stub
                 switch (v.getId()) {
                 case R.id.product_info_shop_car:
-                    UIHelper.toShopCarActivity(getActivity(),type);
+                    if (authLogin()) {
+                        UIHelper.toShopCarActivity(getActivity(),type);
+                    } else {
+                        UIHelper.toLoginActivity(getActivity());
+                    }
                     break;
                 case R.id.product_info_shop_car_add:// 添加购物车
 //                    if (mProduct.getmStoreCount() <= 0) {
@@ -323,7 +331,15 @@ public class ProductInfoFragment extends CommonFragment implements
                     break;
                 case R.id.product_info_product_name:
                 case R.id.product_info_text_and_pic_detail:
-                    UIHelper.toPicAndTextActivity(getActivity(), mProductId);
+                    UIHelper.toPicAndTextActivity(getActivity(), mProduct.getmDesc());
+                    break;
+                case R.id.product_info_comment:
+                    if(mArrayList.size()>0){
+                        UIHelper.toSomeIdActivity(ProductInfoFragment.this,ProductCommentActivity.class.getName(),mId,type);
+                    }else{
+                        showSmartToast("还没有商品的评论", Toast.LENGTH_LONG);
+                    }
+                 
                     break;
                 default:
                     break;
@@ -384,7 +400,9 @@ public class ProductInfoFragment extends CommonFragment implements
                         mProductPrice
                                 .setText(getString(R.string.product_info_money)
                                         + p.getmPrice());
+                        mDescTv.setText(Html.fromHtml(p.getmContent()));
                         if (mArrayList != null && p.getmCommentsList() != null) {
+                            mArrayList.clear();
                             mArrayList.addAll(p.getmCommentsList());
                         }
                      
