@@ -51,6 +51,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.CircleImageView;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.FileTool;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
@@ -147,7 +148,7 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
     	mRlNick.setOnClickListener(this);
     	mCircleImageView.setOnClickListener(this);
     	
-    	ImageLoader.getInstance().displayImage(mUser.getmImage(), mCircleImageView);
+    	ImageLoader.getInstance().displayImage(mUser.getmImage(), mCircleImageView,ImageLoaderUtil.mUserIconLoaderOptions);
     }
 
 	@Override

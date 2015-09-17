@@ -23,7 +23,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -50,11 +49,6 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.TechOrderDetailParser;
-import com.techfly.liutaitai.bizz.parser.TechOrderParser;
-import com.techfly.liutaitai.model.mall.bean.Service;
-import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
-import com.techfly.liutaitai.model.order.adapter.ServiceClick;
-import com.techfly.liutaitai.model.order.parser.ServiceDetailParser;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.OrderClick;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
@@ -73,21 +67,13 @@ import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.Utility;
-import com.techfly.liutaitai.util.ManagerListener.OrderCancelListener;
-import com.techfly.liutaitai.util.ManagerListener.OrderDeleteListener;
-import com.techfly.liutaitai.util.ManagerListener.OrderLogiticsListener;
-import com.techfly.liutaitai.util.ManagerListener.OrderPayListener;
-import com.techfly.liutaitai.util.ManagerListener.OrderRateListener;
-import com.techfly.liutaitai.util.ManagerListener.OrderTakeListener;
-import com.techfly.liutaitai.util.ManagerListener.TechFinishDialogListener;
+import com.techfly.liutaitai.util.ManagerListener.OrderDetailListener;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.StartTimeText;
 import com.techfly.liutaitai.util.view.TechFinishDialog;
 
 public class TechOrderDetailFragment extends CommonFragment implements
-		OnClickListener, OrderCancelListener, OrderDeleteListener,
-		OrderLogiticsListener, OrderRateListener, OrderPayListener,
-		OrderTakeListener, TechFinishDialogListener {
+		OnClickListener, OrderDetailListener{
 	private OrderDetailActivity mActivity;
 	private TextView mNo;
 	private TextView mTime;
@@ -138,7 +124,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
 				mDialog = new TechFinishDialog(getActivity(), "file:///"
-						+ mSelectItems);
+						+ mSelectItems,1);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -157,17 +143,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_ID);
 		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 		startReqTask(TechOrderDetailFragment.this);
-		ManagerListener.newManagerListener()
-				.onRegisterOrderDeleteListener(this);
-		ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(
-				this);
-		ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
-		ManagerListener.newManagerListener()
-				.onRegisterOrderCancelListener(this);
-		ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
-		ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
-		ManagerListener.newManagerListener()
-				.onRegisterTechFinishDialogListener(this);
+		ManagerListener.newManagerListener().onRegisterOrderDetailListener(this);
 	}
 
 	@Override
@@ -181,19 +157,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		ManagerListener.newManagerListener().onUnRegisterOrderDeleteListener(
-				this);
-		ManagerListener.newManagerListener().onUnRegisterOrderLogiticsListener(
-				this);
-		ManagerListener.newManagerListener()
-				.onUnRegisterOrderRateListener(this);
-		ManagerListener.newManagerListener().onUnRegisterOrderCancelListener(
-				this);
-		ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
-		ManagerListener.newManagerListener()
-				.onUnRegisterOrderTakeListener(this);
-		ManagerListener.newManagerListener()
-				.onUnRegisterTechFinishDialogListener(this);
+		ManagerListener.newManagerListener().onUnRegisterOrderDetailListener(this);
 		mTimeStart.toFinishHandler();
 	}
 
@@ -276,10 +240,10 @@ public class TechOrderDetailFragment extends CommonFragment implements
 								.getmVoucher())) * 100) / 100));
 		setState(mOrder, mState, mButton, mButton2);
 		mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton
-				.getText().toString()));
+				.getText().toString(),1));
 		mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2
-				.getText().toString()));
-		mTimeStart.toStart((int) (System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())));
+				.getText().toString(),1));
+		mTimeStart.toStart(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())-60*1000);
 	}
 	
 
@@ -412,6 +376,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 														Toast.LENGTH_LONG)
 												.show();
 										mType = 0;
+										ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
 										startReqTask(TechOrderDetailFragment.this);
 									} else {
 										SmartToast.makeText(getActivity(),
@@ -443,31 +408,10 @@ public class TechOrderDetailFragment extends CommonFragment implements
 					}
 				} else if (object instanceof ResultInfo) {
 					ResultInfo info = (ResultInfo) object;
-					if (mType == 1) {
-						if (info.getmCode() == 0) {
-							mType = 0;
-							startReqTask(TechOrderDetailFragment.this);
-						}
-					} else if (mType == 2) {
-						if (info.getmCode() == 0) {
-							mType = 0;
-							startReqTask(TechOrderDetailFragment.this);
-						}
-					} else if (mType == 3) {
-						if (info.getmCode() == 0) {
-							mType = 0;
-							startReqTask(TechOrderDetailFragment.this);
-						}
-					} else if (mType == 4) {
-						if (info.getmCode() == 0) {
-							mType = 0;
-							startReqTask(TechOrderDetailFragment.this);
-						}
-					} else if (mType == 5) {
-						if (info.getmCode() == 0) {
-							mType = 0;
-							startReqTask(TechOrderDetailFragment.this);
-						}
+					if(info.getmCode() == 0){
+						ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
+						mType = 0;
+						startReqTask(TechOrderDetailFragment.this);
 					}
 				}
 			}
@@ -491,7 +435,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	}
 
 	@Override
-	public void onOrderRateListener(TechOrder order) {// 技师完成服务
+	public void onOrderDetailRateListener(TechOrder order) {// 技师完成服务
 		mType = 1;
 		mOrder = order;
 		if (!Utility.isSDCardExist(getActivity())) {
@@ -500,41 +444,41 @@ public class TechOrderDetailFragment extends CommonFragment implements
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null);
+			mDialog = new TechFinishDialog(getActivity(), null,1);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
 	}
 
 	@Override
-	public void onOrderLogiticsListener(TechOrder order) {// 技师开始服务
+	public void onOrderDetailLogiticsListener(TechOrder order) {// 技师开始服务
 		mType = 2;
 		mOrder = order;
 		startReqTask(TechOrderDetailFragment.this);
 	}
 
 	@Override
-	public void onOrderDeleteListener(TechOrder order) {
+	public void onOrderDetailDeleteListener(TechOrder order) {
 		mType = 3;
 		mOrder = order;
 		startReqTask(TechOrderDetailFragment.this);
 	}
 
 	@Override
-	public void onOrderCancelListener(TechOrder order) {
+	public void onOrderDetailCancelListener(TechOrder order) {
 		mOrder = order;
 		mType = 4;
 		startReqTask(TechOrderDetailFragment.this);
 	}
 
 	@Override
-	public void onOrderPayListener(TechOrder order) {// 技师联系客服
+	public void onOrderDetailPayListener(TechOrder order) {// 技师联系客服
 		mType = 6;
 		mOrder = order;
 	}
 
 	@Override
-	public void onOrderTakeListener(TechOrder order) {
+	public void onOrderDetailTakeListener(TechOrder order) {
 		mType = 5;
 		mOrder = order;
 		startReqTask(TechOrderDetailFragment.this);
@@ -620,7 +564,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
 					mDialog = new TechFinishDialog(getActivity(), "file:///"
-							+ mSelectItems);
+							+ mSelectItems,1);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}
@@ -777,19 +721,19 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	}
 
 	@Override
-	public void onCamera() {
+	public void onDetailCamera() {
 		goCamera();
 	}
 
 	@Override
-	public void onPhoto() {
+	public void onDetailPhoto() {
 		Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);
 		getImage.setType("image/*");
 		startActivityForResult(getImage, TAKE_BIG_PICTURE);
 	}
 
 	@Override
-	public void onSubmit(String url) {
+	public void onDetailSubmit(String url) {
 		if (url != null) {
 			startReqTask(TechOrderDetailFragment.this);
 		}

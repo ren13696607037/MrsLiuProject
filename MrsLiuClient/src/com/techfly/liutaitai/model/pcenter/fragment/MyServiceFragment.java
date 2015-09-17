@@ -29,6 +29,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -165,7 +166,7 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 		};
 	}
 	private void setData(){
-		ImageLoader.getInstance().displayImage(mService.getmTechnician().getmHeader(), mHeader);
+		ImageLoader.getInstance().displayImage(mService.getmTechnician().getmHeader(), mHeader,ImageLoaderUtil.mUserIconLoaderOptions);
 		mName.setText(mService.getmTechnician().getmName());
 		mPrice.setText(mService.getmPrice());
 		if("0".equals(mService.getmOrderNum())){

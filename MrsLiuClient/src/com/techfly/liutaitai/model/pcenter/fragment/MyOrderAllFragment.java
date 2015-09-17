@@ -9,6 +9,7 @@ import java.util.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -122,7 +123,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 						.getStringExtra(IntentBundleKey.IMAGE_PATH);
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
-				mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+				mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems,0);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -137,7 +138,9 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 				if(mList.size()==0){
 					setNoData();
 				}
-				mAdapter.updateList(mList);
+				if(mAdapter != null){
+					mAdapter.updateList(mList);
+				}
 				break;
 			case MSG_DLELTE:
 				if(mInfo.getmCode()==0){
@@ -329,6 +332,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 														Toast.LENGTH_LONG)
 												.show();
 										mType = 0;
+										ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
 										startReqTask(MyOrderAllFragment.this);
 									} else {
 										SmartToast.makeText(getActivity(),
@@ -469,7 +473,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null);
+			mDialog = new TechFinishDialog(getActivity(), null,0);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
@@ -618,7 +622,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 					mSelectItems = path;
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
-					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems,0);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}

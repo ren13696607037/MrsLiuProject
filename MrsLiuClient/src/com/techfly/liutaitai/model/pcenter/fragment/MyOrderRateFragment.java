@@ -110,7 +110,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
 				mDialog = new TechFinishDialog(getActivity(), "file:///"
-						+ mSelectItems);
+						+ mSelectItems,0);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -345,7 +345,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null);
+			mDialog = new TechFinishDialog(getActivity(), null,0);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
@@ -400,7 +400,8 @@ public class MyOrderRateFragment extends CommonFragment implements
 														getString(R.string.life_helper_send_success),
 														Toast.LENGTH_LONG)
 												.show();
-										SharePreferenceUtils.getInstance(getActivity()).clearTechTime();
+										mType = 0 ;
+										startReqTask(MyOrderRateFragment.this);
 										ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
 									} else {
 										SmartToast.makeText(getActivity(),
@@ -491,7 +492,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 					mSelectItems = path;
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
-					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems,0);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}
@@ -654,6 +655,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 
 	@Override
 	public void onCamera() {
+		AppLog.Loge("xll", "Camera is in");
 		goCamera();
 	}
 

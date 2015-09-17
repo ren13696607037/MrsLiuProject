@@ -2,7 +2,7 @@ package com.techfly.liutaitai.util.view;
 
 import java.util.Date;
 
-
+import android.R.integer;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
@@ -10,9 +10,9 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class StartTimeText extends TextView{
-	private final int MSG_UPDATE_TIME = 0x901;
-	private int MSG_TOTAL_TIME;
+public class StartTimeText extends TextView {
+	private final int MSG_UPDATE_TIME = 123;
+	private long MSG_TOTAL_TIME;
 	public Handler timeHandler = new Handler() {
 
 		@Override
@@ -28,16 +28,23 @@ public class StartTimeText extends TextView{
 		}
 
 	};
-	private void setTime(){
-		MSG_TOTAL_TIME += 1000;
-		Date date = new Date(Long.valueOf(MSG_TOTAL_TIME + ""));
-		int min = MSG_TOTAL_TIME / 1000 / 60;
-		if(min > 60){
-			this.setText(String.format("%1$d时%2$02d分%3$02d秒",date.getHours(), date.getMinutes(),date.getSeconds()));
-		}else{
-			this.setText(String.format("%1$02d分%2$02d秒",date.getMinutes(),date.getSeconds()));
+
+	private void setTime() {
+		if (MSG_TOTAL_TIME < 0) {
+			MSG_TOTAL_TIME = 0;
 		}
+		Date date = new Date(MSG_TOTAL_TIME);
+		long min = MSG_TOTAL_TIME / 1000 / 60;
+		if (min > 60) {
+			this.setText(String.format("%1$d时%2$02d分%3$02d秒", date.getHours(),
+					date.getMinutes(), date.getSeconds()));
+		} else {
+			this.setText(String.format("%1$02d分%2$02d秒", date.getMinutes(),
+					date.getSeconds()));
+		}
+		MSG_TOTAL_TIME += 1000;
 	}
+
 	Runnable runnable = new Runnable() {
 
 		@Override
@@ -54,36 +61,39 @@ public class StartTimeText extends TextView{
 			}
 		}
 	};
-	public StartTimeText(Context context){
+
+	public StartTimeText(Context context) {
 		super(context);
 	}
 
 	public StartTimeText(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		new Thread(runnable).start();
-		
+
 	}
-	public void toStart(int time){
+
+	public void toStart(long time) {
 		MSG_TOTAL_TIME = time;
 	}
+
 	@Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-    }
+	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+	}
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-    }
+	@Override
+	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+		super.onLayout(changed, l, t, r, b);
+	}
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-    
-    public void toFinishHandler(){
-    	Thread.currentThread().interrupt();
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	}
+
+	public void toFinishHandler() {
+		Thread.currentThread().interrupt();
 		timeHandler.removeCallbacks(runnable);
-    }
+	}
 
 }
