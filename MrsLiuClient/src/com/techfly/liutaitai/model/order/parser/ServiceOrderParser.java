@@ -38,6 +38,7 @@ public class ServiceOrderParser implements Parser{
 						service.setmServiceStatus(obj.optString(JsonKey.ServiceKey.STATE));
 						service.setmTechId(obj.optString(JsonKey.ServiceDetailKey.MID));
 						service.setmAliNo(obj.optString(JsonKey.ServiceKey.ALINO));
+						service.setmNum(obj.optString(JsonKey.ServiceDetailKey.SID));				
 						list.add(service);
 					}
 				}

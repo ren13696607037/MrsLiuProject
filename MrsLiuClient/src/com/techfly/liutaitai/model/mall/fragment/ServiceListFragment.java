@@ -202,7 +202,8 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
                     mSortRuleList.clear();
                     mSortRuleList = (List<SortRule>) result.getObject();
                     SortRule rule = new SortRule();
-                    rule.setmId(null);
+                    rule.setmId("0");
+                    rule.setmIsSelect(true);
                     rule.setmName("全部分类");
                     mSortRuleList.add(0, rule);
                     initPopupWindow1();

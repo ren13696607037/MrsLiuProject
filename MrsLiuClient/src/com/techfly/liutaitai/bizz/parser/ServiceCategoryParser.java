@@ -32,9 +32,6 @@ public class ServiceCategoryParser implements Parser{
                 for(int i=0;i<array.length();i++){
                     JSONObject obj = array.optJSONObject(i);
                     SortRule rule = new SortRule();
-                    if(i==0){
-                        rule.setmIsSelect(true);  
-                    }
                     rule.setmId(obj.optString("id"));
                     rule.setmName(obj.optString("name"));
                     list.add(rule);
