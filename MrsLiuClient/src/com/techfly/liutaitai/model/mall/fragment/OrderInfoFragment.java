@@ -120,7 +120,8 @@ public class OrderInfoFragment extends CommonFragment {
 			public void convert(ViewHolder holder, Product item, int position) {
 				holder.setText(R.id.item_order_basket_item_tv_name,
 						item.getmName());
-				holder.setImageResource(item.getmImg(),
+				holder.setImageResource(
+						Constant.IMG_URL + item.getmImg(),
 						R.id.item_order_basket_item_iv);
 				holder.setText(R.id.item_order_basket_item_tv_price,
 						"￥" + item.getmPrice());

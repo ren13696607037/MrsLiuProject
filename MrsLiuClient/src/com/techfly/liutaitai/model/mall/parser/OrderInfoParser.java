@@ -65,6 +65,7 @@ public class OrderInfoParser implements Parser {
 				JSONObject jsonObject = optJSONArray.optJSONObject(i);
 				if (jsonObject != null) {
 					Product p = new Product();
+					p.setmImg(jsonObject.optString(JsonKey.Product2Key.ICON));
 					p.setmId(jsonObject
 							.optString(JsonKey.Product2Key.PRODUCT_ID));
 					p.setmUnit(jsonObject.optString(JsonKey.Product2Key.UNIT));
