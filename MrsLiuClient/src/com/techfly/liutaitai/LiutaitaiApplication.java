@@ -10,7 +10,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.util.Utility;
 
-public class YiHuiApplication extends Application {
+public class LiutaitaiApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
