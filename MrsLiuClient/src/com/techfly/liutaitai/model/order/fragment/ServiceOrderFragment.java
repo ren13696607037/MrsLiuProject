@@ -28,6 +28,7 @@ import com.techfly.liutaitai.model.order.activities.RateActivity;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
 import com.techfly.liutaitai.model.order.adapter.ServiceAdapter;
 import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
+import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.model.pcenter.fragment.MyOrderAllFragment;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
@@ -60,6 +61,7 @@ public class ServiceOrderFragment extends CommonFragment implements
 	private User mUser;
 	private int mType = 0;
 	private Service mService;
+	private boolean isRefresh=true;
 	public Handler mOrderHandler = new Handler() {
 
 		@Override
@@ -236,8 +238,23 @@ public class ServiceOrderFragment extends CommonFragment implements
 						}
 					} else if (object instanceof ArrayList) {
 						ArrayList<Service> list = (ArrayList<Service>) object;
-						mList.clear();
-						mList.addAll(list);
+                        if(isRefresh){
+                        	mList.addAll(list);
+                        }else{
+                        	mList.clear();
+                        	mList.addAll(list);
+                        }
+                        if (list == null || list.size() == 0) {
+                        	
+        				} else if (list.size() < 10) {
+        					mListView.setVisibility(View.VISIBLE);
+        				    mTextView.setVisibility(View.GONE);
+        					mListView.setPullLoadEnable(false);
+        				} else {
+        					mListView.setVisibility(View.VISIBLE);
+        					mTextView.setVisibility(View.GONE);
+        					mListView.setPullLoadEnable(true);
+        				}
 						mOrderHandler.removeMessages(MSG_LIST);
 						mOrderHandler.sendEmptyMessage(MSG_LIST);
 						mListView.stopLoadMore();
@@ -274,7 +291,11 @@ public class ServiceOrderFragment extends CommonFragment implements
 		super.onResume();
 		mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 		if (mUser != null) {
-			startReqTask(ServiceOrderFragment.this);
+			if(mList.size() == 0){
+				mList.clear();
+				mPage = 1;
+				startReqTask(ServiceOrderFragment.this);
+			}
 		} else {
 			mListView.setVisibility(View.GONE);
 			mTextView.setVisibility(View.VISIBLE);
@@ -288,6 +309,9 @@ public class ServiceOrderFragment extends CommonFragment implements
 
 			@Override
 			public void run() {
+				isRefresh = false;
+				mPage = 1;
+				mList.clear();
 				startReqTask(ServiceOrderFragment.this);
 			}
 		}, 1000);
@@ -295,11 +319,20 @@ public class ServiceOrderFragment extends CommonFragment implements
 
 	@Override
 	public void onLoadMore() {
-
+		mOrderHandler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				isRefresh = true;
+				mPage += 1;
+				requestData();
+			}
+		}, 0);
 	}
 
 	@Override
 	public void onServiceDeleteListener(Service service) {
+		isRefresh=false;
 		mType = 1;
 		mService = service;
 		startReqTask(ServiceOrderFragment.this);
@@ -307,6 +340,7 @@ public class ServiceOrderFragment extends CommonFragment implements
 
 	@Override
 	public void onServicePayListener(Service service) {
+		isRefresh=false;
 		mType = 2;
 		Intent intent = new Intent(getActivity(), ServiceOrderActivity.class);
 		Bundle bundle = new Bundle();
@@ -324,6 +358,7 @@ public class ServiceOrderFragment extends CommonFragment implements
 
 	@Override
 	public void onServiceCancelListener(Service service) {
+		isRefresh=false;
 		mType = 3;
 		mService = service;
 		startReqTask(ServiceOrderFragment.this);
@@ -331,6 +366,7 @@ public class ServiceOrderFragment extends CommonFragment implements
 
 	@Override
 	public void onServiceAgainListener(Service service) {
+		isRefresh=false;
 		mType = 4;
 		Intent intent = new Intent(getActivity(), ServiceOrderActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmNum());
@@ -339,6 +375,7 @@ public class ServiceOrderFragment extends CommonFragment implements
 
 	@Override
 	public void onServiceRateListener(Service service) {
+		isRefresh=false;
 		mType = 5;
 		Intent intent = new Intent(getActivity(), RateActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
@@ -350,6 +387,9 @@ public class ServiceOrderFragment extends CommonFragment implements
 	public void onServiceRefreshListener() {
 		mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 		if (mUser != null) {
+			isRefresh=true;
+			mList.clear();
+			mPage = 1;
 			startReqTask(ServiceOrderFragment.this);
 		} else {
 			mListView.setVisibility(View.GONE);
