@@ -122,22 +122,22 @@ public class ProductInfoFragment extends CommonFragment implements
     private void initHeader() {
         // TODO Auto-generated method stub
         setTitleText(R.string.product_info);
-        setRightMoreIcon(R.drawable.share, new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "分享易汇");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, SharePreferenceUtils
-                        .getInstance(getActivity()).getShareContent()
-                        + SharePreferenceUtils.getInstance(getActivity())
-                                .getShareUrl());
-                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(Intent.createChooser(shareIntent, "分享易汇"));
-            }
-        });
+//        setRightMoreIcon(R.drawable.share, new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//                shareIntent.setType("text/plain");
+//                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "分享易汇");
+//                shareIntent.putExtra(Intent.EXTRA_TEXT, SharePreferenceUtils
+//                        .getInstance(getActivity()).getShareContent()
+//                        + SharePreferenceUtils.getInstance(getActivity())
+//                                .getShareUrl());
+//                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(Intent.createChooser(shareIntent, "分享易汇"));
+//            }
+//        });
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     }
 

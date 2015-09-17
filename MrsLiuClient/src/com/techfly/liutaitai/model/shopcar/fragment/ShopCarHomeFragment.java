@@ -181,12 +181,12 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
 
     private void onUpdateData(){
         mProList = ShopCar.getShopCar().getShopproductList();
+        setTitleText(getString(R.string.shopcar)+"("+ShopCar.getShopCar().getShopAmountSum()+")");
         if(mProList==null || mProList.size()==0){
             onDisplayNoData();
         }else{
             onDispalyData();
         }
-       
     }
     
     private void onDisplayNoData() {
@@ -230,7 +230,7 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
       }else{
           setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
       }
-       setTitleText(getString(R.string.home_shopcar_tab)+"("+ShopCar.getShopCar().getShopAmountSum()+")");
+       setTitleText(getString(R.string.shopcar)+"("+ShopCar.getShopCar().getShopAmountSum()+")");
        setRightText(R.string.editable_all,new OnClickListener() {
         
         @Override
