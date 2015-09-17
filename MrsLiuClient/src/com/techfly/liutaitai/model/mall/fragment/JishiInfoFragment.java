@@ -95,9 +95,14 @@ public class JishiInfoFragment extends CommonFragment {
 
     private void onDisplayInfo() {
         mList.clear();
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.setTime(new Date());
+        c.set(java.util.Calendar.HOUR_OF_DAY, 0);
+        c.set(java.util.Calendar.MINUTE, 0);
+        c.set(java.util.Calendar.SECOND, 0);
         for(int i=1;i<=7;i++){
             TimeBean time1 = new TimeBean();
-            long timeMill2 = new Date().getTime() + i * 24 * 60 * 60 * 1000;
+            long timeMill2 = c.getTimeInMillis()+ i * 24 * 60 * 60 * 1000;
             time1.setMisSelect(true);
             time1.setTime(DateUtils.getTime(timeMill2, TIME_FORMAT1));
             time1.setTimeMill(timeMill2);
@@ -120,8 +125,14 @@ public class JishiInfoFragment extends CommonFragment {
     private void initTimeList(TimeBean date) {
         TimeBean time1 = new TimeBean();
         time1.setMisSelect(true);
-        time1.setTime("9:00");
-        time1.setTimeMill(DateUtils.currentMills(date.getTimeMill(),time1.getTime()));
+        if(date.getTimeMill()-new Date().getTime()<24 * 60 * 60 * 1000){
+            time1.setTime("今天");
+        }else if(date.getTimeMill()-new Date().getTime()<2*24 * 60 * 60 * 1000){
+            time1.setTime("明天");
+        }else{
+        	time1.setTime(DateUtils.getTime(date.getTimeMill(), "MM.dd"));
+        }
+        time1.setTimeMill(DateUtils.currentMills(date.getTimeMill(),"9:00"));
         time1.setTimeMill2(time1.getTimeMill()+30*60*1000);
         mList.add(time1);
         for(int i=1;i<=10;i++){
