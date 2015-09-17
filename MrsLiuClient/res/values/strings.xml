@@ -441,7 +441,8 @@
 
     <!-- 订单篮 -->
     <string name="order_basket_empty">订单篮是空的</string>
-    
+    <string name="order_read">查看我的预约</string>
+    <string name="order_basket_read">查看我的订单</string>
     <!-- 订单状态 -->
 	<string name="order_state_1_">已取消</string>
 	<string name="order_state_0">待支付</string>

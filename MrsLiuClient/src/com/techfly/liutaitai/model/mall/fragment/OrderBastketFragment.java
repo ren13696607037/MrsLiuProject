@@ -27,6 +27,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -66,9 +67,12 @@ public class OrderBastketFragment extends CommonFragment implements
 
 	};
 
+    private boolean mIsFromOrder;
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mIsFromOrder = activity.getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_ORDER,false);
 
 	}
 
@@ -135,6 +139,9 @@ public class OrderBastketFragment extends CommonFragment implements
 
 	private void initHeader(View view) {
 		setTitleText(R.string.category_title);
+		if(mIsFromOrder){
+		    setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+		}
 		// setRightMoreIcon(R.drawable.search, new OnClickListener() {
 		//
 		// @Override

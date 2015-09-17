@@ -303,4 +303,5 @@ public class Product extends Persistence implements Cloneable, Serializable {
         this.mContent = mContent;
     }
 
+
 }

@@ -82,19 +82,16 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // TODO Auto-generated method stub
         super.onDraw(canvas);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        // TODO Auto-generated method stub
         super.onLayout(changed, l, t, r, b);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // TODO Auto-generated method stub
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

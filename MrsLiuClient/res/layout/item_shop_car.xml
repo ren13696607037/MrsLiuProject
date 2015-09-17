@@ -88,7 +88,6 @@
         android:textSize="@dimen/app_text_size_second"
         android:text="Sanyo/三洋DG-F60311G 6公斤滚筒全自动洗衣"
         android:maxLines="3"
-          android:visibility="gone"
         android:layout_marginTop="1dp"/>
     
    <TextView

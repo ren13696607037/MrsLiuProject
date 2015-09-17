@@ -75,10 +75,13 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
         mIsFromShopCar = activity.getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_HOME_CART, true);
         type = activity.getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
+        if(!mIsFromShopCar){
+            mProduct = (Product) getActivity().getIntent().getSerializableExtra(IntentBundleKey.PRODUCT);
+        }
+     
     }
 
     @Override
@@ -138,8 +141,8 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
             mActualPriceTv.setText("￥"+totalPrice);
         }else{
           mProductInfoLayout.setVisibility(View.VISIBLE);
-          mProduct = (Product) getActivity().getIntent().getSerializableExtra(IntentBundleKey.PRODUCT);
          
+          mProduct = (Product) getActivity().getIntent().getSerializableExtra(IntentBundleKey.PRODUCT);
           mProductNameTv.setText(mProduct.getmName());
           mProPriceTv.setText("￥"+mProduct.getmPrice()+"");
           mProCountTv.setText("x"+mProduct.getmAmount()+"");
@@ -151,7 +154,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
           totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
           
           float ActualPrice =(mProduct.getmPrice()*mProduct.getmAmount())+mDeliverFee;
-          long l2 = Math.round(totalPrice * 100); // 四舍五入
+          long l2 = Math.round(ActualPrice * 100); // 四舍五入
           ActualPrice = (float) (l2 / 100.00); // 注意：使用 100.0 而不是 100
           mTotalPriceTv.setText("￥"+    totalPrice+"");
           mActualPriceTv.setText("￥"+ActualPrice);
