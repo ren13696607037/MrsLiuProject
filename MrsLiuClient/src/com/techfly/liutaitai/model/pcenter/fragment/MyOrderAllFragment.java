@@ -102,6 +102,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	private TechOrder mOrder;
 	private User mUser;
 	private int mType;
+	private int mIndex = 0;
 	private TechFinishDialog mDialog;
 	private static final int TAKE_BIG_PICTURE = 0x901;
 	private static final int TAKE_BIG_LOCAL_PICTURE = TAKE_BIG_PICTURE + 1;
@@ -122,7 +123,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 						.getStringExtra(IntentBundleKey.IMAGE_PATH);
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
-				mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+				mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems,mIndex);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -179,13 +180,13 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderAllFragment.this);
-        ManagerListener.newManagerListener().onRegisterOrderDeleteListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderDeleteListener(this,mIndex);
+        ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this,mIndex);
+        ManagerListener.newManagerListener().onRegisterOrderRateListener(this,mIndex);
+        ManagerListener.newManagerListener().onRegisterOrderCancelListener(this,mIndex);
         ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
-        ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
-        ManagerListener.newManagerListener().onRegisterTechFinishDialogListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderTakeListener(this,mIndex);
+        ManagerListener.newManagerListener().onRegisterTechFinishDialogListener(this,mIndex);
     }
     
 
@@ -238,7 +239,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
     	mListView=(XListView) view.findViewById(R.id.all_list);
     	mTextView=(TextView) view.findViewById(R.id.all_text);
     	mTextView.setText(R.string.order_pay_text);
-    	mAdapter=new MyOrderAdapter(getActivity(), mList);
+    	mAdapter=new MyOrderAdapter(getActivity(), mList,mIndex);
     	mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		mListView.setXListViewListener(this);
@@ -469,7 +470,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null);
+			mDialog = new TechFinishDialog(getActivity(), null,mIndex);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
@@ -618,7 +619,7 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 					mSelectItems = path;
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
-					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems,mIndex);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}

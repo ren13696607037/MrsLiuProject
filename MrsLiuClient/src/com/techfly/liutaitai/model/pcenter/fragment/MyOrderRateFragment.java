@@ -110,7 +110,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
 				mDialog = new TechFinishDialog(getActivity(), "file:///"
-						+ mSelectItems);
+						+ mSelectItems,3);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -144,8 +144,8 @@ public class MyOrderRateFragment extends CommonFragment implements
 		super.onCreate(savedInstanceState);
 		mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 		startReqTask(MyOrderRateFragment.this);
-		ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
-		ManagerListener.newManagerListener().onRegisterTechFinishDialogListener(this);
+		ManagerListener.newManagerListener().onRegisterOrderRateListener(this,3);
+		ManagerListener.newManagerListener().onRegisterTechFinishDialogListener(this,3);
 		ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
 	}
 
@@ -196,7 +196,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 		mListView = (XListView) view.findViewById(R.id.rate_list);
 		mTextView = (TextView) view.findViewById(R.id.rate_text);
 		mTextView.setText(R.string.order_pay_text);
-		mAdapter = new MyOrderAdapter(getActivity(), mList);
+		mAdapter = new MyOrderAdapter(getActivity(), mList,3);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		mListView.setXListViewListener(this);
@@ -345,7 +345,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null);
+			mDialog = new TechFinishDialog(getActivity(), null,3);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
@@ -491,7 +491,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 					mSelectItems = path;
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
-					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems);
+					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems,3);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}

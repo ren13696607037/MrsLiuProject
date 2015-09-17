@@ -24,15 +24,17 @@ public class TechFinishDialog extends Dialog{
 	private Button mButton2;
 	private ImageView mImageView;
 	private String mUrl = null;
+	private int mIndex = -1;
 	
 
 	public TechFinishDialog(Context context, int theme) {
 		super(context, R.style.loading_dialog);
 	}
-	public TechFinishDialog(Context context,String url){
+	public TechFinishDialog(Context context,String url,int index){
 		super(context);
 		this.mContext=context;
 		this.mUrl = url; 
+		this.mIndex = index;
 	}
 	
 	@Override
@@ -68,7 +70,7 @@ public class TechFinishDialog extends Dialog{
 			
 			@Override
 			public void onClick(View v) {
-				ManagerListener.newManagerListener().notifyDialogCameraListener();
+				ManagerListener.newManagerListener().notifyDialogCameraListener(mIndex);
 				dismiss();
 			}
 		});
@@ -77,10 +79,10 @@ public class TechFinishDialog extends Dialog{
 			@Override
 			public void onClick(View v) {
 				if(mButton2.getText().toString().equals(mContext.getString(R.string.submit))){
-					ManagerListener.newManagerListener().notifyDialogSubmitListener(mUrl);
+					ManagerListener.newManagerListener().notifyDialogSubmitListener(mUrl,mIndex);
 					dismiss();
 				}else{
-					ManagerListener.newManagerListener().notifyDialogPhotoListener();
+					ManagerListener.newManagerListener().notifyDialogPhotoListener(mIndex);
 					dismiss();
 				}
 			}

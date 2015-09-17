@@ -6,7 +6,6 @@ import java.util.List;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
-import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 
 
@@ -98,9 +97,9 @@ public class ManagerListener {
     		mCollectListeners.remove(collectListener);
     	}
     }
-    public void onRegisterTechFinishDialogListener(TechFinishDialogListener dialogListener){
+    public void onRegisterTechFinishDialogListener(TechFinishDialogListener dialogListener, int index){
     	if(!mDialogListeners.contains(dialogListener)){
-    		mDialogListeners.add(dialogListener);
+    		mDialogListeners.add(index,dialogListener);
     	}
     }
     public void onUnRegisterTechFinishDialogListener(TechFinishDialogListener dialogListener){
@@ -128,9 +127,9 @@ public class ManagerListener {
     		mAddressListeners.remove(addressListener);
     	}
     }
-    public void onRegisterOrderLogiticsListener(OrderLogiticsListener logiticsListener){
+    public void onRegisterOrderLogiticsListener(OrderLogiticsListener logiticsListener, int index){
     	if(!mLogiticsListeners.contains(logiticsListener)){
-    		mLogiticsListeners.add(logiticsListener);
+    		mLogiticsListeners.add(index,logiticsListener);
     	}
     }
     public void onUnRegisterOrderLogiticsListener(OrderLogiticsListener logiticsListener){
@@ -148,9 +147,9 @@ public class ManagerListener {
     		mPayListeners.remove(payListener);
     	}
     }
-    public void onRegisterOrderRateListener(OrderRateListener rateListener){
+    public void onRegisterOrderRateListener(OrderRateListener rateListener, int index){
     	if(!mRateListeners.contains(rateListener)){
-    		mRateListeners.add(rateListener);
+    		mRateListeners.add(index,rateListener);
     	}
     }
     public void onUnRegisterOrderRateListener(OrderRateListener rateListener){
@@ -158,9 +157,9 @@ public class ManagerListener {
     		mRateListeners.remove(rateListener);
     	}
     }
-    public void onRegisterOrderCancelListener(OrderCancelListener cancelListener){
+    public void onRegisterOrderCancelListener(OrderCancelListener cancelListener, int index){
     	if(!mCancelListeners.contains(cancelListener)){
-    		mCancelListeners.add(cancelListener);
+    		mCancelListeners.add(index,cancelListener);
     	}
     }
     public void onUnRegisterOrderCancelListener(OrderCancelListener cancelListener){
@@ -168,9 +167,9 @@ public class ManagerListener {
     		mCancelListeners.remove(cancelListener);
     	}
     }
-    public void onRegisterOrderDeleteListener(OrderDeleteListener deleteListener){
+    public void onRegisterOrderDeleteListener(OrderDeleteListener deleteListener, int index){
     	if(!mDeleteListeners.contains(deleteListener)){
-    		mDeleteListeners.add(deleteListener);
+    		mDeleteListeners.add(index,deleteListener);
     	}
     }
     public void onUnRegisterOrderDeleteListener(OrderDeleteListener deleteListener){
@@ -178,9 +177,9 @@ public class ManagerListener {
     		mDeleteListeners.remove(deleteListener);
     	}
     }
-    public void onRegisterOrderTakeListener(OrderTakeListener takeListener){
+    public void onRegisterOrderTakeListener(OrderTakeListener takeListener, int index){
     	if(!mTakeListeners.contains(takeListener)){
-    		mTakeListeners.add(takeListener);
+    		mTakeListeners.add(index,takeListener);
     	}
     }
     public void onUnRegisterOrderTakeListener(OrderTakeListener takeListener){
@@ -239,17 +238,23 @@ public class ManagerListener {
     		mAddressListeners.get(i).onDefaultListener(b,id);
     	}
     }
-    public void notifyOrderDeleteListener(TechOrder order){
-    	int size=mDeleteListeners.size();
-    	for(int i=0;i<size;i++){
-    		mDeleteListeners.get(i).onOrderDeleteListener(order);
-    	}
+//    public void notifyOrderDeleteListener(TechOrder order){
+//    	int size=mDeleteListeners.size();
+//    	for(int i=0;i<size;i++){
+//    		mDeleteListeners.get(i).onOrderDeleteListener(order);
+//    	}
+//    }
+    public void notifyOrderDeleteListener(TechOrder order, int index){
+    	mDeleteListeners.get(index).onOrderDeleteListener(order);
     }
-    public void notifyOrderCancelListener(TechOrder order){
-    	int size=mCancelListeners.size();
-    	for(int i=0;i<size;i++){
-    		mCancelListeners.get(i).onOrderCancelListener(order);
-    	}
+//    public void notifyOrderCancelListener(TechOrder order){
+//    	int size=mCancelListeners.size();
+//    	for(int i=0;i<size;i++){
+//    		mCancelListeners.get(i).onOrderCancelListener(order);
+//    	}
+//    }
+    public void notifyOrderCancelListener(TechOrder order, int index){
+    	mCancelListeners.get(index).onOrderCancelListener(order);
     }
     public void notifyOrderPayListener(TechOrder order){
     	int size=mPayListeners.size();
@@ -257,23 +262,26 @@ public class ManagerListener {
     		mPayListeners.get(i).onOrderPayListener(order);
     	}
     }
-    public void notifyOrderRateListener(TechOrder order){
-    	int size=mRateListeners.size();
-    	for(int i=0;i<size;i++){
-    		mRateListeners.get(i).onOrderRateListener(order);
-    	}
+    public void notifyOrderRateListener(TechOrder order, int index){
+    	mRateListeners.get(index).onOrderRateListener(order);
     }
-    public void notifyOrderLogiticsListener(TechOrder order){
-    	int size=mLogiticsListeners.size();
-    	for(int i=0;i<size;i++){
-    		mLogiticsListeners.get(i).onOrderLogiticsListener(order);
-    	}
+//    public void notifyOrderLogiticsListener(TechOrder order){
+//    	int size=mLogiticsListeners.size();
+//    	for(int i=0;i<size;i++){
+//    		mLogiticsListeners.get(i).onOrderLogiticsListener(order);
+//    	}
+//    }
+    public void notifyOrderLogiticsListener(TechOrder order, int index){
+    	mLogiticsListeners.get(index).onOrderLogiticsListener(order);
     }
-    public void notifyOrderTakeListener(TechOrder order){
-    	int size=mTakeListeners.size();
-    	for(int i=0;i<size;i++){
-    		mTakeListeners.get(i).onOrderTakeListener(order);
-    	}
+//    public void notifyOrderTakeListener(TechOrder order){
+//    	int size=mTakeListeners.size();
+//    	for(int i=0;i<size;i++){
+//    		mTakeListeners.get(i).onOrderTakeListener(order);
+//    	}
+//    }
+    public void notifyOrderTakeListener(TechOrder order, int index){
+    	mTakeListeners.get(index).onOrderTakeListener(order);
     }
     public void notifyServiceDeleteListener(Service service){
     	int size = mServiceClickListeners.size();
@@ -311,23 +319,14 @@ public class ManagerListener {
     		mServiceClickListeners.get(i).onServiceRefreshListener();
     	}
     }
-    public void notifyDialogCameraListener(){
-    	int size = mDialogListeners.size();
-    	for(int i=0;i<size;i++){
-    		mDialogListeners.get(i).onCamera();
-    	}
+    public void notifyDialogCameraListener(int index){
+    	mDialogListeners.get(index).onCamera();
     }
-    public void notifyDialogPhotoListener(){
-    	int size = mDialogListeners.size();
-    	for(int i=0;i<size;i++){
-    		mDialogListeners.get(i).onPhoto();
-    	}
+    public void notifyDialogPhotoListener(int index){
+    	mDialogListeners.get(index).onPhoto();
     }
-    public void notifyDialogSubmitListener(String url){
-    	int size = mDialogListeners.size();
-    	for(int i=0;i<size;i++){
-    		mDialogListeners.get(i).onSubmit(url);
-    	}
+    public void notifyDialogSubmitListener(String url,int index){
+    	mDialogListeners.get(index).onSubmit(url);
     }
     public void notifyCollectListener(Product product){
     	int size = mCollectListeners.size();

@@ -80,7 +80,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(this,2);
         ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderDeliveryFragment.this);
@@ -123,7 +123,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements OnItemCli
     	mListView=(XListView) view.findViewById(R.id.deliver_list);
     	mTextView=(TextView) view.findViewById(R.id.delivery_text);
     	mTextView.setText(R.string.order_pay_text);
-    	mAdapter=new MyOrderAdapter(getActivity(), mList);
+    	mAdapter=new MyOrderAdapter(getActivity(), mList,2);
     	mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		mListView.setXListViewListener(this);

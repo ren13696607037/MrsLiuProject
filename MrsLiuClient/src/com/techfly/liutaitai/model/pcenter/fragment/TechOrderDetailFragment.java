@@ -138,7 +138,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
 				mDialog = new TechFinishDialog(getActivity(), "file:///"
-						+ mSelectItems);
+						+ mSelectItems,4);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -158,16 +158,16 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 		startReqTask(TechOrderDetailFragment.this);
 		ManagerListener.newManagerListener()
-				.onRegisterOrderDeleteListener(this);
+				.onRegisterOrderDeleteListener(this,4);
 		ManagerListener.newManagerListener().onRegisterOrderLogiticsListener(
-				this);
-		ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
+				this,4);
+		ManagerListener.newManagerListener().onRegisterOrderRateListener(this,4);
 		ManagerListener.newManagerListener()
-				.onRegisterOrderCancelListener(this);
+				.onRegisterOrderCancelListener(this,4);
 		ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
-		ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
+		ManagerListener.newManagerListener().onRegisterOrderTakeListener(this,4);
 		ManagerListener.newManagerListener()
-				.onRegisterTechFinishDialogListener(this);
+				.onRegisterTechFinishDialogListener(this,4);
 	}
 
 	@Override
@@ -276,9 +276,9 @@ public class TechOrderDetailFragment extends CommonFragment implements
 								.getmVoucher())) * 100) / 100));
 		setState(mOrder, mState, mButton, mButton2);
 		mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton
-				.getText().toString()));
+				.getText().toString(),4));
 		mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2
-				.getText().toString()));
+				.getText().toString(),4));
 		mTimeStart.toStart((int) (System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())));
 	}
 	
@@ -450,8 +450,9 @@ public class TechOrderDetailFragment extends CommonFragment implements
 						}
 					} else if (mType == 2) {
 						if (info.getmCode() == 0) {
-							mType = 0;
-							startReqTask(TechOrderDetailFragment.this);
+							showSmartToast("服务已开始", Toast.LENGTH_SHORT);
+							ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
+							mActivity.finish();
 						}
 					} else if (mType == 3) {
 						if (info.getmCode() == 0) {
@@ -500,7 +501,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null);
+			mDialog = new TechFinishDialog(getActivity(), null,4);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
@@ -620,7 +621,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
 					mDialog = new TechFinishDialog(getActivity(), "file:///"
-							+ mSelectItems);
+							+ mSelectItems,4);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}

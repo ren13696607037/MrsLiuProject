@@ -29,9 +29,11 @@ public class MyOrderAdapter extends BaseAdapter {
 	private ViewHolder mHolder;
 	private ArrayList<TechOrder> mList;
 	private int mTime;
-	public MyOrderAdapter(Context context,ArrayList<TechOrder> list){
+	private int mIndex;
+	public MyOrderAdapter(Context context,ArrayList<TechOrder> list,int index){
 		this.mContext=context;
 		this.mList=list;
+		this.mIndex = index;
 	}
 	
 	public void updateList(ArrayList<TechOrder> list){
@@ -82,8 +84,8 @@ public class MyOrderAdapter extends BaseAdapter {
 			mTime = (int) (System.currentTimeMillis() - Utility.Date2Millis(mList.get(position).getmStartTime()));
 		}
 		setState(mList.get(position), mHolder.mTvState, mHolder.mButton, mHolder.mButton2,mHolder.mStartTime);
-		mHolder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton.getText().toString()));
-		mHolder.mButton2.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton2.getText().toString()));
+		mHolder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton.getText().toString(),mIndex));
+		mHolder.mButton2.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton2.getText().toString(),mIndex));
 //		if(position!=mList.size()-1){
 //			holder.mView.setVisibility(View.VISIBLE);
 //		}
