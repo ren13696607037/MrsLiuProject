@@ -237,6 +237,9 @@ public class OrderInfoFragment extends CommonFragment {
 			break;
 		case 2:
 			mTvState.setText(R.string.order_state_2);
+			mTvBtn1.setVisibility(View.INVISIBLE);
+			mTvBtn2.setVisibility(View.VISIBLE);
+			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 3:
 			mTvState.setText(R.string.order_state_3);
@@ -270,7 +273,11 @@ public class OrderInfoFragment extends CommonFragment {
 			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 8:
-			mTvState.setText(R.string.order_state_8);
+			mTvState.setText(R.string.order_state_1);
+			mTvBtn1.setVisibility(View.VISIBLE);
+			mTvBtn2.setVisibility(View.VISIBLE);
+			mTvBtn1.setText(R.string.order_text_0);
+			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 9:
 			mTvState.setText(R.string.order_state_9);
