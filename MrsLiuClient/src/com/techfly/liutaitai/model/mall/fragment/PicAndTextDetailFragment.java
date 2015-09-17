@@ -8,12 +8,11 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -34,9 +33,9 @@ public class PicAndTextDetailFragment extends CommonFragment {
 
 	private CommonFragment mFragment;
 
-	private WebView mWebView;
+	private TextView mWebView;
 	private LinearLayout mGroup;
-	private int mPid = -1;
+	private String mDesc = "暂无";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class PicAndTextDetailFragment extends CommonFragment {
 		super.onCreate(savedInstanceState);
 		mFragment = this;
 		Intent intent = getActivity().getIntent();
-		mPid = intent.getIntExtra(JsonKey.AdvertisementKey.GOODSID, -1);
+		mDesc = intent.getStringExtra(JsonKey.AdvertisementKey.GOODSID);
 	}
 
 	@Override
@@ -58,14 +57,14 @@ public class PicAndTextDetailFragment extends CommonFragment {
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		if (mWebView != null) {
-			 mWebView.getSettings().setLoadWithOverviewMode(false);
-		     mWebView.getSettings().setUseWideViewPort(false);
-		     mWebView.getSettings().setJavaScriptEnabled(false);
-		     mWebView.getSettings().setSupportZoom(false);
-		     mWebView.getSettings().setBuiltInZoomControls(false);
-		     mWebView.destroy();
-		}
+//		if (mWebView != null) {
+//			 mWebView.getSettings().setLoadWithOverviewMode(false);
+//		     mWebView.getSettings().setUseWideViewPort(false);
+//		     mWebView.getSettings().setJavaScriptEnabled(false);
+//		     mWebView.getSettings().setSupportZoom(false);
+//		     mWebView.getSettings().setBuiltInZoomControls(false);
+//		     mWebView.destroy();
+//		}
 	}
 
 	@Override
@@ -74,26 +73,26 @@ public class PicAndTextDetailFragment extends CommonFragment {
 		super.onViewCreated(view, savedInstanceState);
 		initHeader();
 		initViews(view);
-		startReqTask(this);
+//		startReqTask(this);
 	}
 
 	private void initHeader() {
 		// TODO Auto-generated method stub
 		setTitleText(R.string.pic_and_text);
 		setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-		setRightMoreIcon(R.drawable.share, new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent shareIntent = new Intent(Intent.ACTION_SEND);
-				shareIntent.setType("text/plain");
-				shareIntent.putExtra(Intent.EXTRA_SUBJECT, "分享易汇");
-				shareIntent.putExtra(Intent.EXTRA_TEXT, "分享易汇的内容");
-				shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(Intent.createChooser(shareIntent, "分享易汇"));
-			}
-		});
+//		setRightMoreIcon(R.drawable.share, new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//				shareIntent.setType("text/plain");
+//				shareIntent.putExtra(Intent.EXTRA_SUBJECT, "分享易汇");
+//				shareIntent.putExtra(Intent.EXTRA_TEXT, "分享易汇的内容");
+//				shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//				startActivity(Intent.createChooser(shareIntent, "分享易汇"));
+//			}
+//		});
 	}
 
 	@SuppressWarnings("deprecation")
@@ -101,17 +100,20 @@ public class PicAndTextDetailFragment extends CommonFragment {
 	private void initViews(View view) {
 		// TODO Auto-generated method stub
 		mGroup = (LinearLayout) view.findViewById(R.id.pic_text_group);
-		mWebView = (WebView) view.findViewById(R.id.pic_text_webview);
-		mWebView.setWebViewClient(getClient());
-		mWebView.getSettings().setLoadWithOverviewMode(true);
-		mWebView.getSettings().setUseWideViewPort(true);
-		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.getSettings().setSupportZoom(false);
-		mWebView.getSettings().setBuiltInZoomControls(false);
-		mWebView.getSettings()
-				.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 可能的话不要超过屏幕宽度
-		mWebView.setInitialScale(150);
-
+		mWebView = (TextView) view.findViewById(R.id.pic_text_webview);
+//		mWebView.setWebViewClient(getClient());
+//		mWebView.getSettings().setLoadWithOverviewMode(true);
+//		mWebView.getSettings().setUseWideViewPort(true);
+//		mWebView.getSettings().setJavaScriptEnabled(true);
+//		mWebView.getSettings().setSupportZoom(false);
+//		mWebView.getSettings().setBuiltInZoomControls(false);
+//		mWebView.getSettings()
+//				.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 可能的话不要超过屏幕宽度
+//		mWebView.setInitialScale(150);
+//		AppLog.Logd("Fly", "mDesc==="+mDesc);
+//		mWebView.getSettings().setDefaultTextEncodingName("UTF-8");  
+//		mWebView.loadData(Html.fromHtml(mDesc).toString(), "text/html", "UTF-8");
+		mWebView.setText(Html.fromHtml(mDesc));
 	}
 
 	private WebViewClient getClient() {
@@ -142,7 +144,7 @@ public class PicAndTextDetailFragment extends CommonFragment {
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.GOODS_PIC_TEXT
-				+ mPid);
+				+ mDesc);
 		param.setmHttpURL(url);
 		param.setmParserClassName(PicTextDetailParser.class.getName());
 		RequestManager
@@ -160,8 +162,8 @@ public class PicAndTextDetailFragment extends CommonFragment {
 					String html = (String) object;
 					if (!TextUtils.isEmpty(html)) {
 						Html.fromHtml(html).toString();
-						mWebView.loadDataWithBaseURL(null, html, "text/html",
-								"UTF-8", null);
+//						mWebView.loadDataWithBaseURL(null, html, "text/html",
+//								"UTF-8", null);
 					} else {
 						SmartToast.makeText(getActivity(), "未能获取到正确数据",
 								Toast.LENGTH_SHORT).show();

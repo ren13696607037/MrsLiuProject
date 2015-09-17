@@ -55,7 +55,6 @@ import com.techfly.liutaitai.util.view.ViewPager;
 import com.techfly.liutaitai.util.view.ViewPagerWrapper;
 
 public class HomeFragment extends CommonFragment implements View.OnClickListener{
-
 	private TextView mSearchText;
 	private ViewPagerWrapper mViewPagerWrapper;
 	private GridViewForScrollView mGridView;

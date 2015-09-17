@@ -165,7 +165,6 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 
 	@Override
 	public void requestData() {
-		AppLog.Loge("xll", "is in????");
 		RequestParams params = new RequestParams();
 		params.addHeader("enctype", "multipart/form-data");
 		params.addHeader("lt-token", mUser.getmToken());

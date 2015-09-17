@@ -20,18 +20,14 @@ import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
-import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.activities.JishiListActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceTimeActivity;
 import com.techfly.liutaitai.model.mall.bean.Jishi;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
-import com.techfly.liutaitai.model.mall.parser.JiShiInfoParser;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
 import com.techfly.liutaitai.model.pcenter.activities.MyVoucherActivity;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
-import com.techfly.liutaitai.model.pcenter.bean.User;
-import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -42,7 +38,6 @@ import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
-import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.fragment.CreateOrderPayCommonFragment;
 
 public class ServiceOrderFragment extends CreateOrderPayCommonFragment implements
@@ -69,6 +64,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
     private Jishi mJishi;
     private boolean mIsYujia;
     private float mVoucherMoney;
+    private int mType;
 
     @Override
     public void requestData() {
@@ -166,6 +162,8 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 
         super.onAttach(activity);
         mId = activity.getIntent().getStringExtra(IntentBundleKey.ID);
+        mType = activity.getIntent().getIntExtra(IntentBundleKey.TYPE,0);
+        
     }
 
     @Override
@@ -256,7 +254,12 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
 
         mAddressTv = (TextView) view.findViewById(R.id.address);
         mAddressTv.setOnClickListener(this);
-
+        if(mType==1){
+            view.findViewById(R.id.yujia).setVisibility(View.GONE);
+            view.findViewById(R.id.line1).setVisibility(View.GONE);
+        }
+       
+    
         mCheckBox = (CheckBox) view.findViewById(R.id.checkbox);
         mCheckBox.setOnClickListener(this);
         mCheckBox.setChecked(mIsYujia);

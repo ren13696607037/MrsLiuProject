@@ -26,7 +26,7 @@ public class TechOrderDetailParser implements Parser{
 					service.setmCustomerAddress(obj.optString(JsonKey.ServiceDetailKey.ADDRESS));
 					service.setmCustomerName(obj.optString(JsonKey.ServiceDetailKey.UNAME));
 					service.setmCustomerPhone(obj.optString(JsonKey.ServiceDetailKey.NUMBER));
-					service.setmServiceIcon(Constant.IMG_HEADER_URL + obj.optString(JsonKey.ServiceDetailKey.IMAGE));
+					service.setmServiceIcon(Constant.IMG_URL + obj.optString(JsonKey.ServiceDetailKey.IMAGE));
 					service.setmServiceName(obj.optString(JsonKey.ServiceDetailKey.NAME));
 					service.setmServicePrice(obj.optString(JsonKey.ServiceDetailKey.PRICE));
 					service.setmOrderTime(obj.optString(JsonKey.ServiceDetailKey.TIME));

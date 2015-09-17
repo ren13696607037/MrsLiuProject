@@ -27,6 +27,7 @@ public class Product extends Persistence implements Cloneable, Serializable {
 	@Expose
 	@SerializedName("quantity")
 	private int mAmount = 1;// 购买商品的数量
+	private String mContent;
 	private String mName;// 商品名
 	private int mCommentCount;// 商品评论数
 	private Map<String, String> mIntroduceMap;// 商品属性 和商品属性值对应关系
@@ -293,5 +294,13 @@ public class Product extends Persistence implements Cloneable, Serializable {
 	public void setmDesc(String mDesc) {
 		this.mDesc = mDesc;
 	}
+
+    public String getmContent() {
+        return mContent;
+    }
+
+    public void setmContent(String mContent) {
+        this.mContent = mContent;
+    }
 
 }

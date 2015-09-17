@@ -247,7 +247,6 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
             public void onResponse(Object obj) {
                 ResultInfo info = (ResultInfo) obj;
                 if (info.getmCode() == 0) {
-                    ShopCar.getShopCar().updateproduct(false, mProduct, true);
                     if (mProgressDialog != null) {
                         mProgressDialog.dismiss();
                     }

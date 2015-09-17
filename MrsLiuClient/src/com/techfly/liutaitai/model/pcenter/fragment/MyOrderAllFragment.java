@@ -249,7 +249,9 @@ public class MyOrderAllFragment extends CreateOrderPayCommonFragment implements 
 	@Override
 	public void requestData() {
 		if(mType == 1){
-			toDone();
+			if(mSelectItems != null){
+				toDone();
+			}
 		}else{
 			RequestParam param = new RequestParam();
 	        HttpURL url = new HttpURL();

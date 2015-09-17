@@ -418,7 +418,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                 if (mSortPop1.isShowing()) {
                     mSortPop1.dismiss();
                 } else {
-                    mSortPop1.showAsDropDown(mSortTv1);
+                    mSortPop1.showAsDropDown(mSortTv1,0,10);
                 }
             }
 
@@ -428,7 +428,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                 if (mSortPop2.isShowing()) {
                     mSortPop2.dismiss();
                 } else {
-                    mSortPop2.showAsDropDown(mSortTv2);
+                    mSortPop2.showAsDropDown(mSortTv2,0,10);
                 }
             }
             break;

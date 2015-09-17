@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -93,15 +94,26 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
                 ResultInfo resultInfo = (ResultInfo) object;
                 try {
 					JSONArray array = new JSONArray( resultInfo .getmData());
-					  for(int i=0 ;i<array.length();i++){
-						  JSONObject  obj = array.optJSONObject(i);
-						  Banner banner = new Banner();
-			              banner.setmImage("http://121.43.158.189/liuTai"+obj.optString("img"));
-			               banner.setmId(obj.optInt("id"));
-			               mdataBanner.add(banner);
-		                }
-				        mBannerAdapter = new BannerAdapter(getActivity(), mdataBanner);
-				        mViewPagerWrapper.setAdapter(mBannerAdapter);
+					if(array!=null&&array.length()>=1){
+					    mdataBanner.clear();
+					    for(int i=0 ;i<array.length();i++){
+	                          JSONObject  obj = array.optJSONObject(i);
+	                          Banner banner = new Banner();
+	                          banner.setmImage("http://121.43.158.189/liuTai"+obj.optString("img"));
+	                          banner.setmId(obj.optInt("id"));
+	                          mdataBanner.add(banner);
+	                        }
+	                      if(mdataBanner.size()>0 ){
+	                          if(mBannerAdapter==null){
+	                                mBannerAdapter = new BannerAdapter(getActivity(), mdataBanner);
+	                                mViewPagerWrapper.setAdapter(mBannerAdapter);
+	                          }else{
+	                                mBannerAdapter .notifyDataSetChanged();
+	                          }
+	                      }
+					}
+					 
+				      
 				} catch (JSONException e) {
 					
 				}
@@ -262,7 +274,7 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
         mCityTv = (TextView) view.findViewById(R.id.city);
         mCityTv .setOnClickListener(this);
     
-        
+        view.findViewById(R.id. phone).setOnClickListener(this);;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -312,7 +324,12 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
            break;   
        case R.id.city:
            UIHelper.toClassActivity(this, CitySelectActivity.class.getName());
-           
+           break;
+       case R.id.phone:
+           Intent intent = new Intent(Intent.ACTION_DIAL, Uri
+                   .parse("tel:" + getActivity().getString(R.string.common_phone_dial_num)));
+           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+           getActivity().startActivity(intent);
            break;
         default:
             break;
@@ -328,6 +345,7 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
         if(data!=null){
             String city = data.getStringExtra(IntentBundleKey.LOCCITY);
             mCityTv.setText(city);
+            requestData();
         }
     }
     

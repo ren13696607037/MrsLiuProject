@@ -29,7 +29,7 @@ public class ServiceOrderParser implements Parser{
 						JSONObject obj = array.optJSONObject(i);
 						service.setmId(obj.optString(JsonKey.ServiceKey.ID));
 						service.setmCash(obj.optString(JsonKey.ServiceKey.DATE));
-						service.setmServiceIcon(Constant.YIHUIMALL_BASE_URL + obj.optString(JsonKey.ServiceKey.IMAGE));
+						service.setmServiceIcon(Constant.IMG_URL + obj.optString(JsonKey.ServiceDetailKey.IMAGE));
 						service.setmServiceName(obj.optString(JsonKey.ServiceKey.NAME));
 						service.setmServicePerson(obj.optString(JsonKey.ServiceKey.TECH));
 						service.setmServiceType(obj.optString(JsonKey.ServiceKey.TYPE));

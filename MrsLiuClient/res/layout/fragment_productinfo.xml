@@ -190,17 +190,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:textColor="#ADADAD"
-                            android:textSize="@dimen/app_text_size_second" />
-                  
+                            android:textColor="#565656"
+                            android:layout_marginTop="5dp"
+                            android:paddingLeft="@dimen/px_20"
+                            android:paddingRight="@dimen/px_20"
+                            android:paddingBottom="@dimen/px_10"
+                            android:paddingTop="@dimen/px_10"
+                            android:lineSpacingExtra="1.5dp"
+                            android:lineSpacingMultiplier="1.2"
+                            android:textSize="@dimen/app_text_size_first" />
                     <View
                         android:id="@+id/product_info_view_3"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/color_gray" />
-
-                  
-
 
                     <TextView
                         android:id="@+id/product_info_text_and_pic_detail"
