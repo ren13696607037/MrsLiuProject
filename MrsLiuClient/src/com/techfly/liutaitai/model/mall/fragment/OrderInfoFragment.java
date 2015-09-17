@@ -50,6 +50,7 @@ public class OrderInfoFragment extends CommonFragment {
 	private TextView mTvOffsetValue;
 	private TextView mTvProductCount;
 	private TextView mTvTotalMoney;
+	private TextView mTvDeliverFee;
 
 	private User mUser;
 	private String orderId;
@@ -110,6 +111,7 @@ public class OrderInfoFragment extends CommonFragment {
 				.findViewById(R.id.order_info_tv_product_count);
 		mTvTotalMoney = (TextView) view
 				.findViewById(R.id.order_info_tv_total_money);
+		mTvDeliverFee = (TextView)view.findViewById(R.id.order_info_tv_deliver_fee);
 
 		mListView = (ListViewForScrollView) view
 				.findViewById(R.id.order_info_list);
@@ -194,6 +196,7 @@ public class OrderInfoFragment extends CommonFragment {
 		mTvCustomerName.setText("收货人：" + mOrder.getmCustomerName());
 		mTvCustomerAddr.setText("收货地址：" + mOrder.getmCustomerAddr());
 		mTvOffsetValue.setText("-￥" + mOrder.getmOffsetValue());
+		mTvDeliverFee.setText("-￥" + mOrder.getmDeliverFee());
 		mTvOrderNum.setText("订单编号：" + mOrder.getmNum());
 		String unit = "份";
 		if (!TextUtils.isEmpty(mOrder.getmUnit())) {

@@ -44,7 +44,7 @@
                     android:paddingRight="@dimen/px_30"
                     android:paddingTop="@dimen/px_10"
                     android:text="@string/commit"
-                    android:textColor="@color/write"
+                    android:textColor="@color/TextColorOrange"
                     android:textSize="@dimen/app_text_size_first" />
             </LinearLayout>
 
