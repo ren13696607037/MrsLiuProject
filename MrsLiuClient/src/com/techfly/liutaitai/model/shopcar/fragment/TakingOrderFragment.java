@@ -131,8 +131,11 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
             mProductInfoLayout.setVisibility(View.GONE);
             mAdapter = new OrderProAdapter(getActivity(), ShopCar.getShopCar().getCheckShopproductList());
             mListView.setAdapter(mAdapter);
+            float totalPrice =ShopCar.getShopCar().getTotalPrice()+mDeliverFee;
+            long l1 = Math.round(totalPrice * 100); // 四舍五入
+            totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
             mTotalPriceTv.setText("￥"+ShopCar.getShopCar().getTotalPrice()+"");
-            mActualPriceTv.setText("￥"+(ShopCar.getShopCar().getTotalPrice()+mDeliverFee));
+            mActualPriceTv.setText("￥"+totalPrice);
         }else{
           mProductInfoLayout.setVisibility(View.VISIBLE);
           mProduct = (Product) getActivity().getIntent().getSerializableExtra(IntentBundleKey.PRODUCT);
@@ -146,8 +149,12 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
           float totalPrice =(mProduct.getmPrice()*mProduct.getmAmount());
           long l1 = Math.round(totalPrice * 100); // 四舍五入
           totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
+          
+          float ActualPrice =(mProduct.getmPrice()*mProduct.getmAmount())+mDeliverFee;
+          long l2 = Math.round(totalPrice * 100); // 四舍五入
+          ActualPrice = (float) (l2 / 100.00); // 注意：使用 100.0 而不是 100
           mTotalPriceTv.setText("￥"+    totalPrice+"");
-          mActualPriceTv.setText("￥"+(totalPrice+mDeliverFee));
+          mActualPriceTv.setText("￥"+ActualPrice);
         }
         mDeleverFeeTv.setText("￥"+mDeliverFee);
         
@@ -257,8 +264,16 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
         param.setmToken(user .getmToken());
         url.setmGetParamPrefix("type")
                 .setmGetParamValues(type+"");
-        url.setmGetParamPrefix("total")
-        .setmGetParamValues(ShopCar.getShopCar().getTotalPrice()+"");
+        url.setmGetParamPrefix("total");
+        if(mIsFromShopCar){
+            url.setmGetParamValues(ShopCar.getShopCar().getTotalPrice()+"");
+        }else{
+            float totalPrice =(mProduct.getmPrice()*mProduct.getmAmount());
+            long l1 = Math.round(totalPrice * 100); // 四舍五入
+            totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
+            url.setmGetParamValues(totalPrice+"");
+        }
+
         param.setmParserClassName(ConfrimOrderParser.class.getName());
         param.setmHttpURL(url);
         RequestManager.getRequestData(getActivity(), creatConfirmReqSuccessListener(), createErrorListener(), param);

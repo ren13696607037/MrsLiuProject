@@ -25,7 +25,7 @@ public class ServiceInfoParser implements Parser{
                 if (jsonObject != null) {
                     p.setmId(String.valueOf(jsonObject
                             .optInt(JsonKey.ProductInfo.ID)));
-                    p.setmName("title");
+                    p.setmName(jsonObject.optString("title"));
                     p.setmDesc(jsonObject.optString("descri"));
                     p.setmImg(Constant.IMG_URL+jsonObject.optString("image"));
                     p.setmPrice(jsonObject.optString("price"));

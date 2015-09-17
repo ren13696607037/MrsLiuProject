@@ -41,7 +41,14 @@ public class JiShiParser implements Parser{
                     product.setmImg(Constant.YIHUIMALL_BASE_URL+obj.optString("image"));
                     product.setmRating((float) obj.optDouble("stars"));
                     product.setmServiceTime(obj.optString("times"));
-                    product.setmSex(obj.optString("gender"));
+                    if(obj.optString("gender").equals("0")){
+                        product.setmSex("男");
+                    }else if(obj.optString("gender").equals("1")){
+                        product.setmSex("女");
+                    }else{
+                        product.setmSex("未知");
+                    }
+                   
                     product.setType(obj.optInt("type"));
                     list.add(product);
                 }

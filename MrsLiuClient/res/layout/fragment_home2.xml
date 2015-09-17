@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:weightSum="3" >
 
@@ -59,12 +59,12 @@
             android:orientation="horizontal"
             android:layout_marginRight="3dp"
             android:layout_marginLeft="3dp"
-            android:weightSum="2" >
+            android:weightSum="3" >
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:id="@+id/laundry_service"
                 android:background="#19d1d1"
                 android:gravity="center"
@@ -90,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="6dp"
                 android:background="#ff6e6e"
                 android:gravity="center"
                 android:orientation="vertical" >
@@ -116,7 +116,7 @@
             android:layout_marginRight="3dp"
             android:layout_marginLeft="3dp"
             android:orientation="horizontal"
-            android:weightSum="2" >
+            android:weightSum="3" >
 
             <LinearLayout
                 android:id="@+id/beauty_service"
@@ -138,7 +138,17 @@
                     />  
                 
             </LinearLayout>
-
+ <LinearLayout
+             
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:orientation="vertical" >
+             
+                
+            </LinearLayout>
             
 
             <LinearLayout
@@ -146,7 +156,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="6dp"
                 android:background="#b46dca"
                 android:gravity="center"
                 android:orientation="vertical" >
@@ -172,7 +182,7 @@
             android:layout_marginLeft="3dp"
             android:layout_marginTop="6dp"
             android:orientation="horizontal"
-            android:weightSum="2" >
+            android:weightSum="3" >
 
             <LinearLayout
                 android:id="@+id/makeup_service"
@@ -200,7 +210,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="6dp"
                 android:background="#00d69d"
                 android:gravity="center"
                 android:orientation="vertical" >
@@ -215,7 +225,26 @@
                         android:gravity="center"
                     />      
             </LinearLayout>
-
+      <LinearLayout
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="6dp"
+                android:background="#027FDC"
+                android:gravity="center"
+                android:orientation="vertical" >
+                  <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="客服热线\n400-827-5699"
+                        android:drawableTop="@drawable/tag7"
+                        android:drawablePadding="8dp"
+                        android:layout_gravity="center|center_vertical"
+                        android:gravity="center"
+                    />      
+            </LinearLayout>
            
         </LinearLayout>
     </LinearLayout>

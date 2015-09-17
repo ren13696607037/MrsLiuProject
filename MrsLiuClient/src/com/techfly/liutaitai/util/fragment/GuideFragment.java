@@ -16,11 +16,11 @@ import com.techfly.liutaitai.util.view.CircleFlowIndicator;
 import com.techfly.liutaitai.util.view.ViewFlow;
 
 public class GuideFragment extends CommonFragment {
-    private static final int GUIDES_PAGES = 2;
+    private static final int GUIDES_PAGES = 3;
     private ViewFlow mViewFlow;
     private CircleFlowIndicator mIndic;
     private BaseAdapter mAdapter;
-    private Integer[] COACHING_IDS={R.drawable.guide_page1,R.drawable.guide_page2};
+    private Integer[] COACHING_IDS={R.drawable.guide_page1,R.drawable.guide_page2,R.drawable.guide_page3};
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_guide_layout, null);

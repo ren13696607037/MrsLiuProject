@@ -545,5 +545,7 @@
 	<string name="collect_num_text">%1$s人做过</string>
 	<string name="collect_cancel_success">取消收藏成功~</string>
 	<string name="collect_success">收藏成功~</string>
+	
+	<string name="common_phone_dial_num">4008275699</string>
 
 </resources>

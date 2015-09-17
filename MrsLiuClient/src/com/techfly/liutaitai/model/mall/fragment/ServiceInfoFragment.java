@@ -1,6 +1,5 @@
 package com.techfly.liutaitai.model.mall.fragment;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
 import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
-import com.techfly.liutaitai.model.pcenter.fragment.MyCollectFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -37,10 +35,9 @@ import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.ManagerListener;
+import com.techfly.liutaitai.util.ManagerListener.CollectListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
-import com.techfly.liutaitai.util.Utility;
-import com.techfly.liutaitai.util.ManagerListener.CollectListener;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class ServiceInfoFragment extends CommonFragment implements CollectListener{
