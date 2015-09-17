@@ -171,7 +171,6 @@
                 android:id="@+id/tsd_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tsd_address_img"
                 android:layout_alignParentLeft="true"
                 android:layout_alignTop="@id/tsd_address_img"
                 android:layout_below="@id/tsd_phone"
