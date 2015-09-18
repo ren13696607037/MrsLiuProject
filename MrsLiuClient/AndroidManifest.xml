@@ -55,7 +55,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="com.techfly.liutaitai.bizz.wenxin.wxapi.WXPayEntryActivity"
+            android:name="com.techfly.liutaitai.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
 
@@ -185,6 +185,16 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.MyOrderActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.mall.activities.MyYuYueActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" /> 
         <activity
             android:name=".model.mall.activities.ProductInfoActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"

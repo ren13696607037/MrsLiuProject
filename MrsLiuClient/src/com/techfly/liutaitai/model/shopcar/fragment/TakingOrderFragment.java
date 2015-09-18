@@ -60,7 +60,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     private ListViewForScrollView mListView;
     private AddressManage mAddressManage;
     private Product mProduct;
-    private RelativeLayout mWholeLayout;
+//    private RelativeLayout mWholeLayout;
     private boolean mIsFirstTakingOrder;
     private RelativeLayout mAddressRelativeLayout;
     private int type;
@@ -119,7 +119,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
     }
    
     private void onDisplay() {
-        mWholeLayout.setVisibility(View.VISIBLE);
+//        mWholeLayout.setVisibility(View.VISIBLE);
         if(mAddressManage!=null&&!TextUtils.isEmpty(mAddressManage.getmDetail()) && !mAddressManage.getmDetail().equals("null")){
             mIsFirstTakingOrder = false;
             mAddressRelativeLayout.setVisibility(View.VISIBLE);
@@ -180,8 +180,8 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
         mProImg = (ImageView) view.findViewById(R.id.product_icon);
         mProductInfoLayout = (RelativeLayout) view.findViewById(R.id.product_info);
         mListView = (ListViewForScrollView) view.findViewById(R.id.listview);
-        mWholeLayout = (RelativeLayout) view.findViewById(R.id.layout);
-        mWholeLayout.setVisibility(View.GONE);
+//        mWholeLayout = (RelativeLayout) view.findViewById(R.id.layout);
+//        mWholeLayout.setVisibility(View.GONE);
         mAddressRelativeLayout = (RelativeLayout) view.findViewById(R.id.address_info);
         
         mAddressRelativeLayout.setOnClickListener(this);
@@ -288,7 +288,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
                 AppLog.Logd(result.toString());
                 AppLog.Loge(" data success to load" + result.toString());
                 if(getActivity()!=null&&!isDetached()){
-                   mWholeLayout.setVisibility(View.VISIBLE);
+//                   mWholeLayout.setVisibility(View.VISIBLE);
                    ResultInfo info = (ResultInfo) result;
                    if(info.getmCode()==0){
                        mLoadHandler.removeMessages(Constant.NET_SUCCESS);

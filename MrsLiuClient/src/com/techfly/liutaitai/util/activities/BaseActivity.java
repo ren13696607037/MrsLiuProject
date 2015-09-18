@@ -8,7 +8,6 @@ import com.techfly.liutaitai.util.AppManager;
 public class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		AppManager.getAppManager().addActivity(this);
 	}

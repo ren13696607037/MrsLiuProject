@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
@@ -21,7 +20,6 @@ import android.util.Xml;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.alipay.IPayment;
 import com.techfly.liutaitai.bizz.alipay.PayOrder;
-import com.techfly.liutaitai.bizz.wenxin.wxapi.WXPayEntryActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;

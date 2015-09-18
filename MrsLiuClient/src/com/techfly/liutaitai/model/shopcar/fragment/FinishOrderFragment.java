@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.activities.MyOrderActivity;
+import com.techfly.liutaitai.model.mall.activities.MyYuYueActivity;
 import com.techfly.liutaitai.model.mall.activities.OrderBastketActivity;
 import com.techfly.liutaitai.model.order.activities.OrderActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
@@ -32,32 +34,27 @@ public class FinishOrderFragment extends CommonFragment implements OnClickListen
     
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
       
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
-        // TODO Auto-generated method stub
         super.onDestroyView();
     }
    
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
         initTitleView();
         initView(view);
@@ -100,12 +97,12 @@ public class FinishOrderFragment extends CommonFragment implements OnClickListen
        switch (id) {
     case R.id.order_go_detail:
         if(getActivity() instanceof TakingOrderActivity){
-          Intent intent = new Intent(getActivity(),OrderBastketActivity.class);
+          Intent intent = new Intent(getActivity(),MyOrderActivity.class);
           intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
           startActivity(intent);
           getActivity().finish();
         }else{
-            Intent intent = new Intent(getActivity(),OrderActivity.class);
+            Intent intent = new Intent(getActivity(),MyYuYueActivity.class);
             intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
             startActivity(intent);
             getActivity().finish();

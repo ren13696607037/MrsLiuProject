@@ -71,6 +71,9 @@ public class JiShiListFragment extends CommonFragment implements
 
         url.setmGetParamPrefix("time");
         url.setmGetParamValues(time);
+        
+        url.setmGetParamPrefix("city");
+        url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getArea().getmId());
 
         // url.setmBaseUrl("http://www.hylapp.com:10001/apis/goods/detail?pid=1533");
         param.setmHttpURL(url);

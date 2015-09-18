@@ -1,18 +1,16 @@
 package com.techfly.liutaitai.model.mall.activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
-import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.model.shopcar.fragment.CreateOrderSucFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -75,10 +73,11 @@ public class ServiceOrderActivity extends BaseActivity{
         ft.hide(mOrderCreateFragment);
         ft.show(mOrderFinishFragment);
         ft.commitAllowingStateLoss();
-        if(mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)==Constant.PAY_ALIPAY
-                || mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)==Constant.PAY_WENXIN ){
-                 onRequestPaySuccess();
-             }
+        if(mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)==Constant.PAY_ALIPAY){
+            onRequestPaySuccess(2);
+        }else if(mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)==Constant.PAY_WENXIN ){
+            onRequestPaySuccess(1);
+        }
     }
     public void showTakingOrderFragment(){
         FragmentTransaction ft =   getSupportFragmentManager().beginTransaction();
@@ -86,7 +85,7 @@ public class ServiceOrderActivity extends BaseActivity{
         ft.commitAllowingStateLoss();
     }
     
-    private void onRequestPaySuccess() {
+    private void onRequestPaySuccess(int type) {
         RequestParam param = new RequestParam();
         User user = SharePreferenceUtils.getInstance(this).getUser();
         int userId = 0;
@@ -103,7 +102,7 @@ public class ServiceOrderActivity extends BaseActivity{
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+"common/payData");
         url.setmGetParamPrefix("type");
-        url.setmGetParamValues(mBundle.getInt(IntentBundleKey.ORDER_PAY_METHOD, 0)+"");
+        url.setmGetParamValues(type+"");
         
         url.setmGetParamPrefix("id");
         url.setmGetParamValues(mBundle.getString(IntentBundleKey.ORDER_ID, ""));
