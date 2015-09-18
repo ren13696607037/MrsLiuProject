@@ -10,6 +10,9 @@ import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
 
 import com.techfly.liutaitai.SplashActivity;
+import com.techfly.liutaitai.model.pcenter.activities.MyOrderActivity;
+import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.Utility;
 
 
 /**
@@ -45,11 +48,11 @@ public class MyReceiver extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
             Log.d(TAG, bundle.toString());
         	//打开自定义的Activity
-        	Intent i = new Intent(context, SplashActivity.class);
-//        	i.putExtra(IntentBundleKey.PUSH, 1);
+        	Intent i = new Intent(context, MyOrderActivity.class);
+        	i.putExtra(IntentBundleKey.PUSH, 1);
+        	i.putExtra(IntentBundleKey.ORDER_ID, 1);
         	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
         	context.startActivity(i);
-        	
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..

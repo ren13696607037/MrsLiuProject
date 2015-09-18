@@ -51,4 +51,5 @@ public class IntentBundleKey {
     public static String VOUCHER_EXTRA = "voucher_extra";
     public static String VOUCHER_MONEY= "voucher_money";
     public static String TECH_ID = "tech_id";
+    public static String PUSH = "push";
 }
