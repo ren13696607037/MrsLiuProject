@@ -97,8 +97,8 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         startReqTask(MyOrderPayFragment.this);
-        ManagerListener.newManagerListener().onRegisterOrderCancelListener(this,1);
-        ManagerListener.newManagerListener().onRegisterOrderTakeListener(this,1);
+        ManagerListener.newManagerListener().onRegisterOrderCancelListener(this);
+        ManagerListener.newManagerListener().onRegisterOrderTakeListener(this);
         ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
     }
     
@@ -140,7 +140,7 @@ public class MyOrderPayFragment extends OrderPayFragment implements OnItemClickL
     	mListView=(XListView) view.findViewById(R.id.pay_list);
     	mTextView=(TextView) view.findViewById(R.id.pay_text);
     	mTextView.setText(R.string.order_pay_text);
-    	mAdapter=new MyOrderAdapter(getActivity(), mList,1);
+    	mAdapter=new MyOrderAdapter(getActivity(), mList);
     	mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		mListView.setXListViewListener(this);
