@@ -191,6 +191,7 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 										mUser.setmImage("file:///"
 												+ new File(mSelectItems)
 														.getPath());
+										ImageLoader.getInstance().displayImage(mUser.getmImage(), mCircleImageView,ImageLoaderUtil.mUserIconLoaderOptions);
 										SmartToast
 												.makeText(
 														getActivity(),

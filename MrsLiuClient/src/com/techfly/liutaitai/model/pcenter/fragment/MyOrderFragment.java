@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.techfly.liutaitai.MainActivity;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.PagerAdapter;
 import com.techfly.liutaitai.util.view.ScrollTabView;
@@ -17,6 +19,7 @@ import com.techfly.liutaitai.util.view.ScrollTabsAdapter;
 import com.techfly.liutaitai.util.view.TabAdapter;
 
 public class MyOrderFragment extends CommonFragment {
+	private int mPush;
 	private ViewPager mViewPager;
 	private ScrollTabView mTabView;
 	private TabAdapter mTabAdapter;
@@ -30,6 +33,7 @@ public class MyOrderFragment extends CommonFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPush = getActivity().getIntent().getIntExtra(IntentBundleKey.PUSH, -1);
         mPosition = getActivity().getIntent().getIntExtra(IntentBundleKey.ORDER_ID, 0);
     }
     
@@ -62,7 +66,23 @@ public class MyOrderFragment extends CommonFragment {
     }
     private void onInitView(View view){
     	setTitleText(R.string.myorder_title);
-    	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+    	setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG,new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				if(mPush!=-1){
+					if(!Utility.getActivityName(getActivity())){
+						getActivity().finish();
+					}else{
+						Bundle bundle=new Bundle();
+						bundle.putInt(IntentBundleKey.PUSH, mPush);
+						Utility.go2Activity(getActivity(),MainActivity.class,bundle);
+					}
+				}else{
+					getActivity().finish();
+				}
+			}
+		});
     	mViewPager=(ViewPager) view.findViewById(R.id.order_viewpager);
     	mTabView=(ScrollTabView) view.findViewById(R.id.order_tab_container);
     	onInitTabConfig();

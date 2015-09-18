@@ -77,7 +77,8 @@ import com.techfly.liutaitai.util.view.XListView;
 import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
 public class MyOrderRateFragment extends CommonFragment implements
-		OnItemClickListener, IXListViewListener, OrderRateListener ,TechFinishDialogListener,OrderPayListener{
+		OnItemClickListener, IXListViewListener, OrderRateListener,
+		TechFinishDialogListener, OrderPayListener {
 	private TextView mTextView;
 	private XListView mListView;
 	private ArrayList<TechOrder> mList = new ArrayList<TechOrder>();
@@ -87,8 +88,9 @@ public class MyOrderRateFragment extends CommonFragment implements
 	private int mSize = 10;
 	private User mUser;
 	private int mType;
-	private boolean isRefresh=true;
+	private boolean isRefresh = true;
 	private TechOrder mOrder;
+	private View mView;
 	private TechFinishDialog mDialog;
 	private static final int TAKE_BIG_PICTURE = 0x901;
 	private static final int TAKE_BIG_LOCAL_PICTURE = TAKE_BIG_PICTURE + 1;
@@ -110,7 +112,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
 				mDialog = new TechFinishDialog(getActivity(), "file:///"
-						+ mSelectItems,0);
+						+ mSelectItems, 0);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -145,16 +147,17 @@ public class MyOrderRateFragment extends CommonFragment implements
 		mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
 		startReqTask(MyOrderRateFragment.this);
 		ManagerListener.newManagerListener().onRegisterOrderRateListener(this);
-		ManagerListener.newManagerListener().onRegisterTechFinishDialogListener(this);
+		ManagerListener.newManagerListener()
+				.onRegisterTechFinishDialogListener(this);
 		ManagerListener.newManagerListener().onRegisterOrderPayListener(this);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_orderrate, container,
+		mView = inflater.inflate(R.layout.fragment_orderrate, container,
 				false);
-		return view;
+		return mView;
 	}
 
 	@Override
@@ -162,12 +165,13 @@ public class MyOrderRateFragment extends CommonFragment implements
 		super.onDestroy();
 		ManagerListener.newManagerListener()
 				.onUnRegisterOrderRateListener(this);
-		ManagerListener.newManagerListener().onUnRegisterTechFinishDialogListener(this);
+		ManagerListener.newManagerListener()
+				.onUnRegisterTechFinishDialogListener(this);
 		ManagerListener.newManagerListener().onUnRegisterOrderPayListener(this);
-		if(mAdapter != null){
-        	mAdapter.toFinish();
-        	mAdapter = null;
-        }
+		if (mAdapter != null) {
+			mAdapter.toFinish();
+			mAdapter = null;
+		}
 	}
 
 	@Override
@@ -206,30 +210,36 @@ public class MyOrderRateFragment extends CommonFragment implements
 
 	@Override
 	public void requestData() {
-		if (mType == 1) {
-			if(mSelectItems != null){
-				toDone();
+		if (mUser != null) {
+			if (mType == 1) {
+				if (mSelectItems != null) {
+					toDone();
+				}
+			} else {
+				RequestParam param = new RequestParam();
+				HttpURL url = new HttpURL();
+				url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+						+ Constant.TECH_ORDER_LIST_URL);
+				url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE)
+						.setmGetParamValues("3");
+				url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE)
+						.setmGetParamValues(mSize + "");
+				url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE)
+						.setmGetParamValues(mPage + "");
+				param.setmIsLogin(true);
+				param.setmId(mUser.getmId());
+				param.setmToken(mUser.getmToken());
+				param.setPostRequestMethod();
+				param.setmHttpURL(url);
+				param.setmParserClassName(TechOrderParser.class.getName());
+				RequestManager.getRequestData(getActivity(),
+						createMyReqSuccessListener(),
+						createMyReqErrorListener(), param);
 			}
 		} else {
-			RequestParam param = new RequestParam();
-			HttpURL url = new HttpURL();
-			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
-					+ Constant.TECH_ORDER_LIST_URL);
-			url.setmGetParamPrefix(JsonKey.TechnicianKey.TYPE)
-					.setmGetParamValues("3");
-			url.setmGetParamPrefix(JsonKey.MyOrderKey.SIZE).setmGetParamValues(
-					mSize + "");
-			url.setmGetParamPrefix(JsonKey.VoucherKey.PAGE).setmGetParamValues(
-					mPage + "");
-			param.setmIsLogin(true);
-			param.setmId(mUser.getmId());
-			param.setmToken(mUser.getmToken());
-			param.setPostRequestMethod();
-			param.setmHttpURL(url);
-			param.setmParserClassName(TechOrderParser.class.getName());
-			RequestManager.getRequestData(getActivity(),
-					createMyReqSuccessListener(), createMyReqErrorListener(),
-					param);
+			showSmartToast(R.string.login_toast, Toast.LENGTH_SHORT);
+			mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+			mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
 		}
 	}
 
@@ -239,12 +249,12 @@ public class MyOrderRateFragment extends CommonFragment implements
 			public void onResponse(Object object) {
 				AppLog.Logd(object.toString());
 				ArrayList<TechOrder> list = (ArrayList<TechOrder>) object;
-				if(isRefresh){
-                	mList.addAll(list);
-                }else{
-                	mList.clear();
-                	mList.addAll(list);
-                }
+				if (isRefresh) {
+					mList.addAll(list);
+				} else {
+					mList.clear();
+					mList.addAll(list);
+				}
 
 				if (list == null || list.size() == 0) {
 
@@ -325,7 +335,6 @@ public class MyOrderRateFragment extends CommonFragment implements
 		startActivityForResult(intent, Constant.DETAIL_INTENT);
 	}
 
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -345,11 +354,12 @@ public class MyOrderRateFragment extends CommonFragment implements
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null,0);
+			mDialog = new TechFinishDialog(getActivity(), null, 0);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
 	}
+
 	@Override
 	public void onOrderPayListener(TechOrder order) {
 		mType = 0;
@@ -400,9 +410,10 @@ public class MyOrderRateFragment extends CommonFragment implements
 														getString(R.string.life_helper_send_success),
 														Toast.LENGTH_LONG)
 												.show();
-										mType = 0 ;
+										mType = 0;
 										startReqTask(MyOrderRateFragment.this);
-										ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
+										ManagerListener.newManagerListener()
+												.notifyOrderPayListener(mOrder);
 									} else {
 										SmartToast.makeText(getActivity(),
 												obj.optString(JsonKey.MESSAGE),
@@ -417,6 +428,7 @@ public class MyOrderRateFragment extends CommonFragment implements
 					}
 				});
 	}
+
 	private void goCamera() {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		mPhotoPath = Uri.fromFile(FileTool.createTempFile(
@@ -447,13 +459,13 @@ public class MyOrderRateFragment extends CommonFragment implements
 						new String[] { "image/jpeg", "image/png" },
 						MediaStore.Images.Media.DATE_MODIFIED);
 				mCursor.moveToFirst();
-				if (mCursor.getColumnIndex(MediaStore.Images.Media.DATA) !=-1) {
-						try {
-							path = mCursor.getString(mCursor
-									.getColumnIndex(MediaStore.Images.Media.DATA));
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+				if (mCursor.getColumnIndex(MediaStore.Images.Media.DATA) != -1) {
+					try {
+						path = mCursor.getString(mCursor
+								.getColumnIndex(MediaStore.Images.Media.DATA));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -492,7 +504,8 @@ public class MyOrderRateFragment extends CommonFragment implements
 					mSelectItems = path;
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
-					mDialog = new TechFinishDialog(getActivity(), "file:///"+mSelectItems,0);
+					mDialog = new TechFinishDialog(getActivity(), "file:///"
+							+ mSelectItems, 0);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}
@@ -662,16 +675,14 @@ public class MyOrderRateFragment extends CommonFragment implements
 	@Override
 	public void onPhoto() {
 		AppLog.Loge("xll", "photo is in");
-		Intent getImage = new Intent(
-				Intent.ACTION_GET_CONTENT);
+		Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);
 		getImage.setType("image/*");
-		startActivityForResult(getImage,
-				TAKE_BIG_PICTURE);
+		startActivityForResult(getImage, TAKE_BIG_PICTURE);
 	}
 
 	@Override
 	public void onSubmit(String url) {
-		if(url != null){
+		if (url != null) {
 			startReqTask(MyOrderRateFragment.this);
 		}
 	}

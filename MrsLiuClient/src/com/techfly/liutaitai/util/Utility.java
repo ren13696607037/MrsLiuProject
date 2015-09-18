@@ -17,11 +17,15 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -427,4 +431,27 @@ public class Utility {
 		}
 		return calendar.getTimeInMillis();
 	}
+	public static boolean getActivityName(Activity activity){
+    	String name=null;
+    	ActivityManager manager = (ActivityManager)activity.getSystemService(Context.ACTIVITY_SERVICE) ;
+	     List<RunningTaskInfo> runningTaskInfos = manager.getRunningTasks(1) ;
+	     if(runningTaskInfos!=null){
+	    	 name=runningTaskInfos.get(0).baseActivity.toString();
+	    	 AppLog.Loge("xll", name+"-=-=-="+activity.getLocalClassName());
+	    	 if(name.contains(activity.getLocalClassName())){
+	    		 return true;
+	    	 }
+	     }
+	     return false;
+    }
+	
+	public static void go2Activity(Activity activity,Class<?> activity2,Bundle bundle){
+    	Intent intent=null;
+    	intent=new Intent(activity,activity2);
+    	if(bundle!=null){
+    		intent.putExtras(bundle);
+    	}
+    	activity.startActivity(intent);
+    	activity.finish();
+    }
 }
