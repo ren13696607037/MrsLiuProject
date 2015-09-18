@@ -105,11 +105,10 @@
                         android:layout_toRightOf="@id/service_text"
                         android:background="@drawable/service_num"
                         android:gravity="center"
-                        android:paddingTop="@dimen/px_5"
-                        android:paddingLeft="@dimen/px_15"
-                        android:paddingBottom="@dimen/px_5"
-                        android:paddingRight="@dimen/px_15"
+                        android:padding="@dimen/px_5"
                         android:text="1"
+                        android:maxEms="2"
+                        android:ems="2"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/app_text_size_second" />
                 </RelativeLayout>
@@ -146,11 +145,10 @@
                         android:layout_toRightOf="@id/service_text1"
                         android:background="@drawable/service_num"
                         android:gravity="center"
-                        android:paddingTop="@dimen/px_5"
-                        android:paddingLeft="@dimen/px_15"
-                        android:paddingBottom="@dimen/px_5"
-                        android:paddingRight="@dimen/px_15"
+                        android:padding="@dimen/px_5"
                         android:text="1"
+                        android:maxEms="2"
+                        android:ems="2"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/app_text_size_second" />
                 </RelativeLayout>
@@ -187,11 +185,10 @@
                         android:layout_toRightOf="@id/service_text2"
                         android:background="@drawable/service_num"
                         android:gravity="center"
-                        android:paddingTop="@dimen/px_5"
-                        android:paddingLeft="@dimen/px_15"
-                        android:paddingBottom="@dimen/px_5"
-                        android:paddingRight="@dimen/px_15"
+                        android:padding="@dimen/px_5"
                         android:text="1"
+                        android:maxEms="2"
+                        android:ems="2"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/app_text_size_second" />
                 </RelativeLayout>

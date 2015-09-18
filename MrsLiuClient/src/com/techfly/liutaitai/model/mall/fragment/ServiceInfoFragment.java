@@ -38,9 +38,11 @@ import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.ManagerListener.CollectListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
+import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
-public class ServiceInfoFragment extends CommonFragment implements CollectListener{
+public class ServiceInfoFragment extends CommonFragment implements
+        CollectListener {
     private ImageView mImg;
     private TextView mNameTv;
     private TextView mPriceTv;
@@ -50,6 +52,7 @@ public class ServiceInfoFragment extends CommonFragment implements CollectListen
     private String mId;
     private ServiceInfo mInfo;
     private User mUser;
+
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
@@ -58,9 +61,15 @@ public class ServiceInfoFragment extends CommonFragment implements CollectListen
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_DETAIL);
         url.setmGetParamPrefix1("sid");
         url.setmGetParamValues1(String.valueOf(mId));
-        if (!TextUtils.isEmpty(mId)) {
-            url.setmGetParamPrefix2("principal");
-            url.setmGetParamValues2(mId);
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId != 0) {
+            param.setmIsLogin(true);
+            param.setmId(user .getmId());
+            param.setmToken(user .getmToken());
         }
         // url.setmBaseUrl("http://www.hylapp.com:10001/apis/goods/detail?pid=1533");
         param.setmHttpURL(url);
@@ -73,29 +82,75 @@ public class ServiceInfoFragment extends CommonFragment implements CollectListen
     }
 
     private Response.Listener<Object> createMyReqSuccessListener() {
-        
+
         return new Listener<Object>() {
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
                 mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                mInfo   = (ServiceInfo) object;
+                mInfo = (ServiceInfo) object;
                 onDisplayInfo();
             }
-            
+
         };
     }
 
-   
-   private void onDisplayInfo(){
-       mDescTv.setText(mInfo.getmDesc());
-       ImageLoader.getInstance().displayImage(mInfo.getmImg(), mImg, ImageLoaderUtil.mDetailsLoaderOptions);
-       mNameTv.setText(mInfo.getmName());
-       mPriceTv.setText("￥"+mInfo.getmPrice()+"/"+mInfo.getmUnit());
-       mServiceContentTv.setText(mInfo.getmServiceConent());
-   }
-    
+    private void onDisplayInfo() {
+        mDescTv.setText(mInfo.getmDesc());
+        ImageLoader.getInstance().displayImage(mInfo.getmImg(), mImg,
+                ImageLoaderUtil.mDetailsLoaderOptions);
+        mNameTv.setText(mInfo.getmName());
+        mPriceTv.setText("￥" + mInfo.getmPrice() + "/" + mInfo.getmUnit());
+        mServiceContentTv.setText(mInfo.getmServiceConent());
+        if (mInfo.isCollect()) {
+            setRightMoreIcon(R.drawable.ic_collected, new OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    User user = SharePreferenceUtils.getInstance(getActivity())
+                            .getUser();
+                    int userId = 0;
+                    if (user != null) {
+                        userId = Integer.parseInt(user.getmId());
+                    }
+                    if (userId == 0) {
+                        UIHelper.toLoginActivity(getActivity());
+                        return;
+                    }
+                    Product product = new Product();
+                    product.setmId(mInfo.getmId());
+                    ManagerListener.newManagerListener()
+                            .notifyCancelCollectListener(product);
+
+                }
+            });
+        } else {
+            setRightMoreIcon(R.drawable.ic_not_collect, new OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    User user = SharePreferenceUtils.getInstance(getActivity())
+                            .getUser();
+                    int userId = 0;
+                    if (user != null) {
+                        userId = Integer.parseInt(user.getmId());
+                    }
+                    if (userId == 0) {
+                        UIHelper.toLoginActivity(getActivity());
+                        return;
+                    }
+                    Product product = new Product();
+                    product.setmId(mInfo.getmId());
+                    ManagerListener.newManagerListener().notifyCollectListener(
+                            product);
+
+                }
+            });
+        }
+
+    }
+
     private Response.ErrorListener createMyReqErrorListener() {
         return new Response.ErrorListener() {
             @Override
@@ -110,70 +165,63 @@ public class ServiceInfoFragment extends CommonFragment implements CollectListen
 
     @Override
     public void onAttach(Activity activity) {
-       
+
         super.onAttach(activity);
         mId = activity.getIntent().getStringExtra(IntentBundleKey.ID);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-       
+
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     @Override
     public void onDetach() {
-       
+
         super.onDetach();
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        
+
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
         ManagerListener.newManagerListener().onRegisterCollectListener(this);
         startReqTask(this);
-        
+
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_service_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_service_info, container,
+                false);
         return view;
     }
+
     @Override
     public void onDestroy() {
-    	super.onDestroy();
-    	ManagerListener.newManagerListener().onUnRegisterCollectListener(this);
+        super.onDestroy();
+        ManagerListener.newManagerListener().onUnRegisterCollectListener(this);
     }
+
     @Override
     public void onDestroyView() {
-     
+
         super.onDestroyView();
-        
+
     }
-    
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
     }
-    
-    
+
     private void initView(View view) {
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
         setTitleText("服务详情");
-        setRightMoreIcon(R.drawable.address_add, new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				Product product = new Product();
-				product.setmId(mInfo.getmId());
-				if(mInfo.isCollect()){
-					ManagerListener.newManagerListener().notifyCancelCollectListener(product);
-				}else{
-					ManagerListener.newManagerListener().notifyCollectListener(product);
-				}
-			}
-		});
         mDescTv = (TextView) view.findViewById(R.id.desc);
         mImg = (ImageView) view.findViewById(R.id.img);
         mNameTv = (TextView) view.findViewById(R.id.name);
@@ -181,10 +229,11 @@ public class ServiceInfoFragment extends CommonFragment implements CollectListen
         mServiceContentTv = (TextView) view.findViewById(R.id.service_content);
         mButton = (Button) view.findViewById(R.id.order);
         mButton.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View view) {
-                User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+                User user = SharePreferenceUtils.getInstance(getActivity())
+                        .getUser();
                 int userId = 0;
                 if (user != null) {
                     userId = Integer.parseInt(user.getmId());
@@ -193,53 +242,105 @@ public class ServiceInfoFragment extends CommonFragment implements CollectListen
                     UIHelper.toLoginActivity(getActivity());
                     return;
                 }
-                UIHelper.toSomeIdActivity(ServiceInfoFragment.this,ServiceOrderActivity.class.getName(), mId, Integer.parseInt(mInfo.getmType()));
+                UIHelper.toSomeIdActivity(ServiceInfoFragment.this,
+                        ServiceOrderActivity.class.getName(), mId,
+                        Integer.parseInt(mInfo.getmType()));
             }
         });
-        
+
     }
-    
-    
-    
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
-      
+
         super.onSaveInstanceState(outState);
     }
 
-	@Override
-	public void cancelCollect(Product product) {
-		RequestParam param = new RequestParam();
+    @Override
+    public void cancelCollect(Product product) {
+        RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.COLLECT_SERVICE_URL);
-        url.setmGetParamPrefix(JsonKey.ServiceDetailKey.SID).setmGetParamValues(product.getmId());
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+                + Constant.COLLECT_SERVICE_URL);
+        url.setmGetParamPrefix(JsonKey.ServiceDetailKey.SID)
+                .setmGetParamValues(product.getmId());
         param.setmIsLogin(true);
-		param.setmId(mUser.getmId());
-		param.setmToken(mUser.getmToken());
-		param.setPostRequestMethod();
+        param.setmId(mUser.getmId());
+        param.setmToken(mUser.getmToken());
+        param.setPostRequestMethod();
         param.setmHttpURL(url);
         param.setmParserClassName(CommonParser.class.getName());
         param.setmHttpURL(url);
-        RequestManager.getRequestData(getActivity(), createCollectSuccessListener(0), createCollectErrorListener(), param);
-	}
-	private Response.Listener<Object> createCollectSuccessListener(final int type) {
+        RequestManager.getRequestData(getActivity(),
+                createCollectSuccessListener(0), createCollectErrorListener(),
+                param);
+    }
+
+    private Response.Listener<Object> createCollectSuccessListener(
+            final int type) {
         return new Listener<Object>() {
 
             @Override
             public void onResponse(Object result) {
                 AppLog.Logd(result.toString());
                 AppLog.Loge(" data success to load" + result.toString());
-                if(getActivity()!=null&&!isDetached()){
+                if (getActivity() != null && !isDetached()) {
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                     ResultInfo rInfo = (ResultInfo) result;
-                    if(rInfo.getmCode()==Constant.RESULT_CODE){
-                    	if(type == 0){
-                    		showSmartToast(R.string.collect_cancel_success, Toast.LENGTH_SHORT);
-                    	}else{
-                    		showSmartToast(R.string.collect_success, Toast.LENGTH_SHORT);
-                    	}
-                    }else{
+                    if (rInfo.getmCode() == Constant.RESULT_CODE) {
+                        if (type == 0) {
+                            setRightMoreIcon(R.drawable.ic_not_collect, new OnClickListener() {
+
+                                @Override
+                                public void onClick(View arg0) {
+                                    User user = SharePreferenceUtils.getInstance(getActivity())
+                                            .getUser();
+                                 
+                                    int userId = 0;
+                                    if (user != null) {
+                                        userId = Integer.parseInt(user.getmId());
+                                    }
+                                    if (userId == 0) {
+                                        UIHelper.toLoginActivity(getActivity());
+                                        return;
+                                    }
+                                    Product product = new Product();
+                                    product.setmId(mInfo.getmId());
+                                    ManagerListener.newManagerListener()
+                                            .notifyCollectListener(product);
+
+                                }
+                            });
+                            showSmartToast(R.string.collect_cancel_success,
+                                    Toast.LENGTH_SHORT);
+                        } else {
+                            
+                            setRightMoreIcon(R.drawable.ic_collected, new OnClickListener() {
+
+                                @Override
+                                public void onClick(View arg0) {
+                                    User user = SharePreferenceUtils.getInstance(getActivity())
+                                            .getUser();
+                                    int userId = 0;
+                                    if (user != null) {
+                                        userId = Integer.parseInt(user.getmId());
+                                    }
+                                    if (userId == 0) {
+                                        UIHelper.toLoginActivity(getActivity());
+                                        return;
+                                    }
+                                    Product product = new Product();
+                                    product.setmId(mInfo.getmId());
+                                    ManagerListener.newManagerListener()
+                                            .notifyCancelCollectListener(product);
+
+                                }
+                            });
+                            showSmartToast(R.string.collect_success,
+                                    Toast.LENGTH_SHORT);
+                        }
+                    } else {
                         showSmartToast(rInfo.getmMessage(), Toast.LENGTH_LONG);
                     }
                 }
@@ -257,26 +358,30 @@ public class ServiceInfoFragment extends CommonFragment implements CollectListen
                 }
                 mLoadHandler.removeMessages(Constant.NET_FAILURE);
                 mLoadHandler.sendEmptyMessage(Constant.NET_FAILURE);
-               
+
             }
 
         };
     }
 
-	@Override
-	public void collect(Product product) {
-		RequestParam param = new RequestParam();
+    @Override
+    public void collect(Product product) {
+        RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.COLLECT_SERVICE_URL);
-        url.setmGetParamPrefix(JsonKey.ServiceDetailKey.SID).setmGetParamValues(product.getmId());
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+                + Constant.COLLECT_SERVICE_URL);
+        url.setmGetParamPrefix(JsonKey.ServiceDetailKey.SID)
+                .setmGetParamValues(product.getmId());
         param.setmIsLogin(true);
-		param.setmId(mUser.getmId());
-		param.setmToken(mUser.getmToken());
-		param.setPostRequestMethod();
+        param.setmId(mUser.getmId());
+        param.setmToken(mUser.getmToken());
+        param.setPostRequestMethod();
         param.setmHttpURL(url);
         param.setmParserClassName(CommonParser.class.getName());
         param.setmHttpURL(url);
-        RequestManager.getRequestData(getActivity(), createCollectSuccessListener(1), createCollectErrorListener(), param);
-	}
+        RequestManager.getRequestData(getActivity(),
+                createCollectSuccessListener(1), createCollectErrorListener(),
+                param);
+    }
 
 }

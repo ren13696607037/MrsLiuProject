@@ -191,5 +191,6 @@ public class Constant {
 
 	public static final String KEFU_PHONE = "4008275899";
 	public static boolean isShouldRefresh = false;
+	
 
 }

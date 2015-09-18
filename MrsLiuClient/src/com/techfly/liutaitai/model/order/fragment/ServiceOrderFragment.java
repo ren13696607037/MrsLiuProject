@@ -82,10 +82,12 @@ public class ServiceOrderFragment extends CommonFragment implements
 		}
 
 	};
+    private boolean mIsFromOrder;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mIsFromOrder = activity.getIntent().getBooleanExtra(IntentBundleKey.IS_FROM_ORDER, false);
 	}
 
 	@Override
@@ -130,6 +132,9 @@ public class ServiceOrderFragment extends CommonFragment implements
 	}
 
 	private void onInitView(View view) {
+	    if(mIsFromOrder){
+	        setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+	    }
 		setTitleText(R.string.order_appointment_title);
 		mListView = (XListView) view.findViewById(R.id.all_list);
 		mTextView = (TextView) view.findViewById(R.id.all_text);

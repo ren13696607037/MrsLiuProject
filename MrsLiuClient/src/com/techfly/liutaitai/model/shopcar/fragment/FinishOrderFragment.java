@@ -1,6 +1,7 @@
 package com.techfly.liutaitai.model.shopcar.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.activities.OrderBastketActivity;
+import com.techfly.liutaitai.model.order.activities.OrderActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
-import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class FinishOrderFragment extends CommonFragment implements OnClickListener{
@@ -62,6 +64,11 @@ public class FinishOrderFragment extends CommonFragment implements OnClickListen
     }
     private void initView(View view) {
         mGoOrderTv = (TextView) view.findViewById(R.id.order_go_detail);
+        if(getActivity() instanceof TakingOrderActivity){
+            mGoOrderTv.setText(getString(R.string.order_basket_read));
+        }else{
+            mGoOrderTv.setText(getString(R.string.order_read));
+        }
         mGoOrderTv.setOnClickListener(this);
     }
     private void initTitleView(){
@@ -92,19 +99,17 @@ public class FinishOrderFragment extends CommonFragment implements OnClickListen
        int id = view.getId();
        switch (id) {
     case R.id.order_go_detail:
-        getActivity().finish();
-//        if(getActivity() instanceof TakingOrderActivity){
-//            TakingOrderActivity ac = (TakingOrderActivity) getActivity();
-//            final Bundle bundle = ac.getBundleInfo();
-//            UIHelper.toOrderDetailActivity(FinishOrderFragment.this, bundle.getString(IntentBundleKey.ORDER_ID));;
-//        }else{
-//            if(!getActivity().getIntent().getBooleanExtra(IntentBundleKey.ORDER_DETAIL, false)){
-//                UIHelper.toOrderDetailActivity(FinishOrderFragment.this, getActivity().getIntent().getStringExtra(IntentBundleKey.ORDER_ID));;
-//            }else{
-//                getActivity().finish();
-//            }
-//           
-//        }
+        if(getActivity() instanceof TakingOrderActivity){
+          Intent intent = new Intent(getActivity(),OrderBastketActivity.class);
+          intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
+          startActivity(intent);
+          getActivity().finish();
+        }else{
+            Intent intent = new Intent(getActivity(),OrderActivity.class);
+            intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
+            startActivity(intent);
+            getActivity().finish();
+        }
       
         break;
     default:

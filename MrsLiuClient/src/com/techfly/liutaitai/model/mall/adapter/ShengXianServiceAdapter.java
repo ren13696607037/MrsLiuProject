@@ -58,11 +58,12 @@ public class ShengXianServiceAdapter extends BaseAdapter{
      
         ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
         
-        holder.personNum.setText(mList.get(position).getmSale()+"人体验");
+        holder.personNum.setText(mList.get(position).getmSale()+"人购买");
         
         holder.serviceName.setText(mList.get(position).getmName());
         
         holder.servicePrice.setText("￥"+mList.get(position).getmPrice());
+        
         
         return convertView;
         

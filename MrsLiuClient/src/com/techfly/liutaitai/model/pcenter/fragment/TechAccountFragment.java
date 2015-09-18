@@ -111,7 +111,7 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
     	mWeixin.setOnClickListener(this);
     	mAlipay.setOnClickListener(this);
     	
-    	if(mTechAccount != null){
+    	if(mTechAccount != null && mTechAccount.getmType() != null){
     		if(Integer.valueOf(mTechAccount.getmType()) == 0){
     			mCard.setChecked(true);
     			mCardName.setText(mTechAccount.getmBank());

@@ -50,6 +50,7 @@ public class OrderInfoFragment extends CommonFragment {
 	private TextView mTvOffsetValue;
 	private TextView mTvProductCount;
 	private TextView mTvTotalMoney;
+	private TextView mTvDeliverFee;
 
 	private User mUser;
 	private String orderId;
@@ -110,6 +111,7 @@ public class OrderInfoFragment extends CommonFragment {
 				.findViewById(R.id.order_info_tv_product_count);
 		mTvTotalMoney = (TextView) view
 				.findViewById(R.id.order_info_tv_total_money);
+		mTvDeliverFee = (TextView)view.findViewById(R.id.order_info_tv_deliver_fee);
 
 		mListView = (ListViewForScrollView) view
 				.findViewById(R.id.order_info_list);
@@ -194,6 +196,7 @@ public class OrderInfoFragment extends CommonFragment {
 		mTvCustomerName.setText("收货人：" + mOrder.getmCustomerName());
 		mTvCustomerAddr.setText("收货地址：" + mOrder.getmCustomerAddr());
 		mTvOffsetValue.setText("-￥" + mOrder.getmOffsetValue());
+		mTvDeliverFee.setText("-￥" + mOrder.getmDeliverFee());
 		mTvOrderNum.setText("订单编号：" + mOrder.getmNum());
 		String unit = "份";
 		if (!TextUtils.isEmpty(mOrder.getmUnit())) {
@@ -237,6 +240,9 @@ public class OrderInfoFragment extends CommonFragment {
 			break;
 		case 2:
 			mTvState.setText(R.string.order_state_2);
+			mTvBtn1.setVisibility(View.INVISIBLE);
+			mTvBtn2.setVisibility(View.VISIBLE);
+			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 3:
 			mTvState.setText(R.string.order_state_3);
@@ -270,7 +276,11 @@ public class OrderInfoFragment extends CommonFragment {
 			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 8:
-			mTvState.setText(R.string.order_state_8);
+			mTvState.setText(R.string.order_state_1);
+			mTvBtn1.setVisibility(View.VISIBLE);
+			mTvBtn2.setVisibility(View.VISIBLE);
+			mTvBtn1.setText(R.string.order_text_0);
+			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 9:
 			mTvState.setText(R.string.order_state_9);

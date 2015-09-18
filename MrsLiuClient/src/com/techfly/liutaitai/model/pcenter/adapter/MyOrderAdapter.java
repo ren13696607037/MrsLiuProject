@@ -28,12 +28,10 @@ public class MyOrderAdapter extends BaseAdapter {
 	private Context mContext;
 	private ViewHolder mHolder;
 	private ArrayList<TechOrder> mList;
-	private int mTime;
-	private int mIndex;
-	public MyOrderAdapter(Context context,ArrayList<TechOrder> list,int index){
+	private long mTime;
+	public MyOrderAdapter(Context context,ArrayList<TechOrder> list){
 		this.mContext=context;
 		this.mList=list;
-		this.mIndex = index;
 	}
 	
 	public void updateList(ArrayList<TechOrder> list){
@@ -81,11 +79,11 @@ public class MyOrderAdapter extends BaseAdapter {
 		mHolder.mTvPrice.setText(mContext.getString(R.string.price,mList.get(position).getmServicePrice()));
 		mHolder.mTvTitle.setText(mList.get(position).getmServiceName());
 		if(mList.get(position).getmStartTime() != null){
-			mTime = (int) (System.currentTimeMillis() - Utility.Date2Millis(mList.get(position).getmStartTime()));
+			mTime = System.currentTimeMillis() - Utility.Date2Millis(mList.get(position).getmStartTime())-60*1000;
 		}
 		setState(mList.get(position), mHolder.mTvState, mHolder.mButton, mHolder.mButton2,mHolder.mStartTime);
-		mHolder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton.getText().toString(),mIndex));
-		mHolder.mButton2.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton2.getText().toString(),mIndex));
+		mHolder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton.getText().toString(),0));
+		mHolder.mButton2.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton2.getText().toString(),0));
 //		if(position!=mList.size()-1){
 //			holder.mView.setVisibility(View.VISIBLE);
 //		}
@@ -143,7 +141,9 @@ public class MyOrderAdapter extends BaseAdapter {
 		}
 	}
 	public void toFinish(){
-		mHolder.mStartTime.toFinishHandler();
+		if(mHolder != null && mHolder.mStartTime != null){
+			mHolder.mStartTime.toFinishHandler();
+		}
 	}
 
 }

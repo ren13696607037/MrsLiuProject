@@ -2,6 +2,7 @@ package com.techfly.liutaitai.util.view;
 
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,14 +19,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.util.ManagerListener;
 
-public class TechFinishDialog extends Dialog{
+public class TechFinishDialog extends AlertDialog{
 	private Context mContext;
 	private Button mButton;
 	private Button mButton2;
 	private ImageView mImageView;
 	private String mUrl = null;
-	private int mIndex = -1;
-	
+	private int mIndex;
 
 	public TechFinishDialog(Context context, int theme) {
 		super(context, R.style.loading_dialog);
@@ -70,7 +70,11 @@ public class TechFinishDialog extends Dialog{
 			
 			@Override
 			public void onClick(View v) {
-				ManagerListener.newManagerListener().notifyDialogCameraListener(mIndex);
+				if(mIndex == 0){
+					ManagerListener.newManagerListener().notifyDialogCameraListener();
+				}else if(mIndex == 1){
+					ManagerListener.newManagerListener().notifyDetailDialogCameraListener();
+				}
 				dismiss();
 			}
 		});
@@ -79,10 +83,19 @@ public class TechFinishDialog extends Dialog{
 			@Override
 			public void onClick(View v) {
 				if(mButton2.getText().toString().equals(mContext.getString(R.string.submit))){
-					ManagerListener.newManagerListener().notifyDialogSubmitListener(mUrl,mIndex);
+					if(mIndex == 0){
+						ManagerListener.newManagerListener().notifyDialogSubmitListener(mUrl);
+					}else if(mIndex == 1){
+						ManagerListener.newManagerListener().notifyDetailDialogSubmitListener(mUrl);
+					}
 					dismiss();
 				}else{
-					ManagerListener.newManagerListener().notifyDialogPhotoListener(mIndex);
+					if(mIndex == 0){
+						ManagerListener.newManagerListener().notifyDialogPhotoListener();
+					}else if(mIndex == 1){
+						ManagerListener.newManagerListener().notifyDetailDialogPhotoListener();
+					}
+					
 					dismiss();
 				}
 			}

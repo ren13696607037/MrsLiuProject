@@ -243,7 +243,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="12dp"
                             android:id="@+id/jishi"
-                            android:text="系统推荐美甲师"
+                            android:text="系统推荐技师"
                             android:drawableEnd="@drawable/arrow_right"
                             android:textColor="@color/color_black"
                             android:textSize="@dimen/app_text_size_first"

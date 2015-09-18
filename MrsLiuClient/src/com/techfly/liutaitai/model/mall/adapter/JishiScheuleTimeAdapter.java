@@ -41,7 +41,7 @@ public class JishiScheuleTimeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int arg0, View convertView, ViewGroup arg2) {
+    public View getView(int position, View convertView, ViewGroup arg2) {
         ViewHolder holder;
         if(mList.size()==0){
             return convertView;
@@ -54,7 +54,25 @@ public class JishiScheuleTimeAdapter extends BaseAdapter {
         }else{
             holder=(ViewHolder) convertView.getTag();
         }
-        holder.time.setText(mList.get(arg0).getTime());
+        if(position%11==0){
+        	   holder.time.setBackgroundDrawable(null);
+//        	   holder.time.setTextSize(10);
+        }else{
+        	if(mListPoints!=null){
+        		for(TimePoints points:mListPoints){
+        			      if(mList.get(position).getTimeMill()==points.getmTimeMills()){
+        			    	  if(points.ismIsWholeHours()){
+        			    		   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2); 
+        			    	  }else{
+        			    		   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2); 
+        			    	  }
+        			      }
+        		}
+        	}else{
+        		   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2);
+        	}
+        }
+        holder.time.setText(mList.get(position).getTime());
        return convertView;
     }
     class ViewHolder{

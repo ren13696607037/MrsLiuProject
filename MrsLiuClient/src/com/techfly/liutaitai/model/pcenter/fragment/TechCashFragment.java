@@ -108,7 +108,8 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
     }
     
     private void setData(){
-    	if(mTechAccount != null){
+    	if(mTechAccount != null && mTechAccount.getmId() != null){
+    		AppLog.Loge("xll", "why?????");
     		mCashAccountText.setVisibility(View.INVISIBLE);
     		mCashAccount.setVisibility(View.VISIBLE);
     		mCashName.setVisibility(View.VISIBLE);
@@ -124,6 +125,11 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
     			mCashAccount.setText(getString(R.string.cash_weixin_text1, mTechAccount.getmAccount()));
     			mCashName.setText(getString(R.string.cash_alipay_text2, mTechAccount.getmName()));
     		}
+    	}else{
+    		AppLog.Loge("xll", "adjkfjslkd?????");
+    		mCashAccountText.setVisibility(View.VISIBLE);
+    		mCashAccount.setVisibility(View.GONE);
+    		mCashName.setVisibility(View.GONE);
     	}
     }
 
@@ -200,7 +206,9 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.cash_rel:
 			Intent intent = new Intent(mActivity, TechAccountActivity.class);
-			intent.putExtra(IntentBundleKey.TECH_CASH_ID, mTechAccount);
+			if(mTechAccount != null){
+				intent.putExtra(IntentBundleKey.TECH_CASH_ID, mTechAccount);
+			}
 			startActivity(intent);
 			break;
 		case R.id.cash_btn:

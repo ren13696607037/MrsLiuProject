@@ -33,7 +33,13 @@ public class JiShiInfoParser implements Parser{
                     product.setmImg(Constant.YIHUIMALL_BASE_URL+jsonObject.optString("image"));
                     product.setmRating((float) jsonObject.optDouble("stars"));
                     product.setmServiceTime(jsonObject.optString("times"));
-                    product.setmSex(jsonObject.optString("gender"));
+                    if(jsonObject.optString("gender").equals("0")){
+                        product.setmSex("男");
+                    }else if(jsonObject.optString("gender").equals("1")){
+                        product.setmSex("女");
+                    }else{
+                        product.setmSex("未知");
+                    }
                     product.setType(jsonObject.optInt("type"));
                     List<TimePoints> list = new ArrayList<TimePoints>();
                     JSONArray  array = jsonObject.optJSONArray("points");

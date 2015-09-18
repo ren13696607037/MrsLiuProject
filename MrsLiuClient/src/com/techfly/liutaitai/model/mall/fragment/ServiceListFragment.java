@@ -175,15 +175,17 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
 
     }
 
-   
 
     @Override
     public void requestData() {
 
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/categories?type="+type);
-       
+        if(type==0){
+            url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/categories?type=1");
+        }else{
+            url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/categories?type=2");
+        }
 //      url.setmGetParamPrefix(JsonKey.UserKey.PUSH).setmGetParamValues(
 //              JPushInterface.getRegistrationID(getActivity()));
         param.setmHttpURL(url);
@@ -381,7 +383,7 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
       if(type==0){
           setTitleText("美甲");
           }else if(type==1){
-          setTitleText("美婕");
+          setTitleText("美睫");
       }
       
     }

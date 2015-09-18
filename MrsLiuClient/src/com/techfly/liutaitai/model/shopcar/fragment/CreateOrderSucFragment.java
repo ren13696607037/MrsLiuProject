@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
@@ -37,6 +38,7 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment
 	private CheckBox mOfflineCB;
 	private int mPayMethod = Constant.PAY_BALANCE;
 	private String mMoney;
+    protected double mBalance;
 
 	@Override
 	public void requestData() {
@@ -72,6 +74,11 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment
 					User user = (User) object;
 					mBalanceTv.setText(getString(R.string.cash_balance_text1,
 							user.getmMoney()));
+					try {
+                        mBalance = Float.parseFloat(user.getmMoney());
+                    } catch (Exception e) {
+                        mBalance = 0.0;
+                    }
 					return;
 				}
 
@@ -175,11 +182,18 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment
 		switch (id) {
 		case R.id.order_pay:
 			if (getActivity() instanceof ServiceOrderActivity) {
+			    
 				ServiceOrderActivity ac = (ServiceOrderActivity) getActivity();
 				final Bundle bundle = ac.getBundleInfo();
 				String orderId = bundle.getString(IntentBundleKey.ORDER_ID, "");
 				String payMoney = bundle.getString(IntentBundleKey.ORDER_MONEY,
-						"");
+						"0.0");
+				if(mPayMethod == Constant.PAY_BALANCE){
+		                if(mBalance<Float.parseFloat(payMoney)){
+		                    showSmartToast("余额不足", Toast.LENGTH_LONG);
+		                    return;
+		                }
+		            }
 				String productName = bundle.getString(
 						IntentBundleKey.ORDER_PRODUCT, "");
 				bundle.putInt(IntentBundleKey.ORDER_PAY_METHOD, mPayMethod);
@@ -198,7 +212,13 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment
 				final Bundle bundle = ac.getBundleInfo();
 				String orderId = bundle.getString(IntentBundleKey.ORDER_ID, "");
 				String payMoney = bundle.getString(IntentBundleKey.ORDER_MONEY,
-						"");
+						"0.0");
+				if(mPayMethod == Constant.PAY_BALANCE){
+                    if(mBalance<Float.parseFloat(payMoney)){
+                        showSmartToast("余额不足", Toast.LENGTH_LONG);
+                        return;
+                    }
+                }
 				String productName = bundle.getString(
 						IntentBundleKey.ORDER_PRODUCT, "");
 				bundle.putInt(IntentBundleKey.ORDER_PAY_METHOD, mPayMethod);
