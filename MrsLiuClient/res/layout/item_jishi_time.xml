@@ -4,9 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" 
     android:background="@android:color/white"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
     >
     <TextView 
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/date"
@@ -24,12 +26,7 @@
         android:horizontalSpacing="6dp"
         android:listSelector="@drawable/bcg_item_grid"
         android:numColumns="11"
-        android:paddingLeft="10dp"
-        android:paddingTop="15dp"
-        android:layout_marginBottom="-110dp"
-        android:paddingRight="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp"
         android:background="@android:color/white"
         />
   </LinearLayout>

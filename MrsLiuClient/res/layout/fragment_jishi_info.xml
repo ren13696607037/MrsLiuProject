@@ -100,9 +100,8 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         android:listSelector="@drawable/bcg_item_grid"
-        android:paddingLeft="10dp"
+        android:divider="@null"
         android:paddingTop="15dp"
-        android:paddingRight="10dp"
         android:scrollbars="none"
         android:background="@android:color/white"
         />

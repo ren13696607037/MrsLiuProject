@@ -3,6 +3,7 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -73,7 +74,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 						// showSmartToast(R.string.addchange_success,
 						// Toast.LENGTH_SHORT);
 					}
-					mActivity.setResult(Constant.ADDRESS_SUCCESS);
+					mActivity.setResult(Constant.ADDRESS_SUCCESS, new Intent().putExtra(IntentBundleKey.ADDRESS_EXTRA, new AddressManage()));
 					mActivity.finish();
 				} else {
 					showSmartToast(mInfo.getmMessage(), Toast.LENGTH_SHORT);

@@ -14,68 +14,78 @@ import com.techfly.liutaitai.model.mall.adapter.JishiScheuleTimeAdapter.ViewHold
 import com.techfly.liutaitai.model.mall.bean.TimeBean;
 import com.techfly.liutaitai.model.mall.bean.TimePoints;
 
-public class JishiScheuleSubTimeAdapter extends BaseAdapter{
+public class JishiScheuleSubTimeAdapter extends BaseAdapter {
     private List<TimeBean> mList;
     private List<TimePoints> mListPoints;
     private Context mContext;
-    public JishiScheuleSubTimeAdapter(Context context,List<TimeBean> list,List<TimePoints> time){
-        mList = list;   
+
+    public JishiScheuleSubTimeAdapter(Context context, List<TimeBean> list,
+            List<TimePoints> time) {
+        mList = list;
         mContext = context;
         mListPoints = time;
-      }
-      
+    }
+
     @Override
     public int getCount() {
-        return mList!=null?mList.size():0;
+        return mList != null ? mList.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return mList!=null?mList.get(position):new TimeBean();
+        return mList != null ? mList.get(position) : new TimeBean();
     }
 
     @Override
     public long getItemId(int arg0) {
-     
+
         return 0;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup arg2) {
         ViewHolder holder;
-        if(mList.size()==0){
+        if (mList.size() == 0) {
             return convertView;
         }
-        if(convertView==null){
-            holder=new ViewHolder();
-            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_base_text2, null);
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = LayoutInflater.from(mContext).inflate(
+                    R.layout.item_base_text2, null);
             holder.time = (TextView) convertView.findViewById(R.id.text);
             convertView.setTag(holder);
-        }else{
-            holder=(ViewHolder) convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
-        if(position%11==0){
-               holder.time.setBackgroundDrawable(null);
-//             holder.time.setTextSize(10);
-        }else{
-            if(mListPoints!=null){
-                for(TimePoints points:mListPoints){
-                          if(mList.get(position).getTimeMill()==points.getmTimeMills()){
-                              if(points.ismIsWholeHours()){
-                                   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2); 
-                              }else{
-                                   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2); 
-                              }
-                          }
+        holder.time.setBackgroundResource(R.drawable.jishi_time_bg2);
+        if (mListPoints != null) {
+            for (TimePoints points : mListPoints) {
+                if (mList.get(position).getTimeMill() == points.getmTimeMills()) {
+                    if (points.ismIsWholeHours()) {
+                        holder.time
+                                .setBackgroundResource(R.drawable.jishi_time_bg1);
+                        holder.time.setTextColor(mContext.getResources().getColor(android.R.color.white));
+                    } else {
+                        holder.time
+                                .setBackgroundResource(R.drawable.jishi_time_bg3);
+                    }
+                }else if(mList.get(position).getTimeMill2() == points.getmTimeMills()){
+                    if (points.ismIsWholeHours()) {
+                        holder.time
+                                .setBackgroundResource(R.drawable.jishi_time_bg1);
+                        holder.time.setTextColor(mContext.getResources().getColor(android.R.color.white));
+                    } else {
+                        holder.time
+                                .setBackgroundResource(R.drawable.jishi_time_bg4);
+                    }
                 }
-            }else{
-                   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2);
             }
-        }
+        } 
         holder.time.setText(mList.get(position).getTime());
-       return convertView;
+        return convertView;
     }
-    class ViewHolder{
+
+    class ViewHolder {
         private TextView time;
     }
 }

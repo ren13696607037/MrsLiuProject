@@ -52,7 +52,7 @@ public class JiShiInfoParser implements Parser{
                             list.add(points);
                         }
                     }
-                     
+                    product.setmList(list);
                 }
             }
         }

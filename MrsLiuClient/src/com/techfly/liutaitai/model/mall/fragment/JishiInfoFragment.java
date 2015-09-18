@@ -36,7 +36,6 @@ import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
-import com.techfly.liutaitai.util.view.GridViewForScrollView;
 import com.techfly.liutaitai.util.view.ListViewForScrollView;
 
 public class JishiInfoFragment extends CommonFragment {
@@ -102,7 +101,7 @@ public class JishiInfoFragment extends CommonFragment {
         c.set(java.util.Calendar.HOUR_OF_DAY, 0);
         c.set(java.util.Calendar.MINUTE, 0);
         c.set(java.util.Calendar.SECOND, 0);
-        for(int i=1;i<=7;i++){
+        for(int i=0;i<=6;i++){
             TimeBean time1 = new TimeBean();
             long timeMill2 = c.getTimeInMillis()+ i * 24 * 60 * 60 * 1000;
             time1.setMisSelect(true);
@@ -110,8 +109,6 @@ public class JishiInfoFragment extends CommonFragment {
             time1.setTimeMill(timeMill2);
             initTimeList(time1);
         }
-      
-    
         mName.setText(mInfo.getmName());
         mSex.setText("性别：" + mInfo.getmSex());
         mServiceTime.setText("服务：" + mInfo.getmServiceTime() + "次");
@@ -129,9 +126,9 @@ public class JishiInfoFragment extends CommonFragment {
         List<TimeBean> time = new ArrayList<TimeBean>();
         TimeBean time1 = new TimeBean();
         time1.setMisSelect(true);
-        if(date.getTimeMill()-new Date().getTime()<24 * 60 * 60 * 1000){
+        if(date.getTimeMill()-new Date().getTime()<0){
             scheuleTime.setmDate("今天");
-        }else if(date.getTimeMill()-new Date().getTime()<2*24 * 60 * 60 * 1000){
+        }else if(date.getTimeMill()-new Date().getTime()<24 * 60 * 60 * 1000){
             scheuleTime.setmDate("明天");
         }else{
             scheuleTime.setmDate(DateUtils.getTime(date.getTimeMill(), "MM.dd"));
@@ -142,8 +139,8 @@ public class JishiInfoFragment extends CommonFragment {
             TimeBean time2 = new TimeBean();
             time2.setTime(DateUtils.getTime(time1.getTimeMill()+i*60*60*1000, "HH"));
             time2.setTimeMill(time1.getTimeMill()+i*60*60*1000);
-            time2.setTimeMill2(time1.getTimeMill()+i*90*60*1000);
-            time.add(time1); 
+            time2.setTimeMill2(time1.getTimeMill()+i*60*60*1000+30*60*1000);
+            time.add(time2); 
         }
         scheuleTime.setList(time);
         mList.add(scheuleTime);

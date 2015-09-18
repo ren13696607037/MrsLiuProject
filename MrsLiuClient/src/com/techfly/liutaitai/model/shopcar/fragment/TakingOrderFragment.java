@@ -105,14 +105,14 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
         super.onViewCreated(view, savedInstanceState);
         initTitleView();
         initView(view);
-      
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //    	if(resultCode==Constant.ORDER_ADDRESS_SUCCESS||resultCode==Constant.ORDER_CITY_SUCCESS){
     		if(data!=null&&data.getSerializableExtra(IntentBundleKey.ADDRESS_EXTRA)!=null){
-                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_EXTRA);
-                onDisplay();
+//                mAddressManage = (AddressManage) data.getSerializableExtra(IntentBundleKey.ADDRESS_EXTRA);
+//                onDisplay();
+    		    onConfirmOrder();
             }
 //    	}
             
@@ -288,7 +288,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
                 AppLog.Logd(result.toString());
                 AppLog.Loge(" data success to load" + result.toString());
                 if(getActivity()!=null&&!isDetached()){
-                    mWholeLayout.setVisibility(View.VISIBLE);
+                   mWholeLayout.setVisibility(View.VISIBLE);
                    ResultInfo info = (ResultInfo) result;
                    if(info.getmCode()==0){
                        mLoadHandler.removeMessages(Constant.NET_SUCCESS);
