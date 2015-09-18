@@ -49,7 +49,6 @@ public class Product extends Persistence implements Cloneable, Serializable {
 	private String mCommentReputably;// 商品评论好评率
 	private int mCommentRating;
 	private ArrayList<Comments> mCommentsList;
-	private ArrayList<StandardClass> mStandardClassList;
 	private int mProductType;
 	private String mDesc;
 
@@ -246,14 +245,7 @@ public class Product extends Persistence implements Cloneable, Serializable {
 		this.mCommentRating = mCommentRating;
 	}
 
-	public ArrayList<StandardClass> getmStandardClassList() {
-		return mStandardClassList;
-	}
 
-	public void setmStandardClassList(
-			ArrayList<StandardClass> mStandardClassList) {
-		this.mStandardClassList = mStandardClassList;
-	}
 
 	public String getmSN() {
 		return mSN;

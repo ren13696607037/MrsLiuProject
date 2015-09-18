@@ -9,9 +9,6 @@ import org.json.JSONObject;
 
 import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.mall.bean.Standard;
-import com.techfly.liutaitai.model.mall.bean.StandardClass;
-import com.techfly.liutaitai.model.mall.bean.SubStandarrd;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;

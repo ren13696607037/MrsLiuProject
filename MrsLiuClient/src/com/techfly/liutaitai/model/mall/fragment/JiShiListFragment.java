@@ -6,28 +6,23 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.model.mall.activities.JishiInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.JishiAdapter;
 import com.techfly.liutaitai.model.mall.bean.Jishi;
-import com.techfly.liutaitai.model.mall.bean.ServiceInfo;
 import com.techfly.liutaitai.model.mall.parser.JiShiParser;
-import com.techfly.liutaitai.model.mall.parser.ServiceInfoParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -35,7 +30,6 @@ import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.net.ResultCode;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
-import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
@@ -58,7 +52,6 @@ public class JiShiListFragment extends CommonFragment implements
 
     @Override
     public void requestData() {
-        // TODO Auto-generated method stub
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "service/masters");
