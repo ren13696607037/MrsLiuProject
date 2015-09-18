@@ -9,8 +9,6 @@ import org.json.JSONObject;
 
 import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.mall.bean.Standard;
-import com.techfly.liutaitai.model.mall.bean.StandardClass;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
@@ -58,8 +56,7 @@ public class ProductInfoParser implements Parser {
 					}
 
 					p.setmCommentsList(parseComments(comment));
-					p.setmStandardClassList(parseStandard(jsonObject));
-
+				
 				}
 			}
 		}
@@ -69,43 +66,7 @@ public class ProductInfoParser implements Parser {
 	
 	
 
-	private ArrayList<StandardClass> parseStandard(JSONObject jsonObject) {
-		// TODO Auto-generated method stub
-		ArrayList<StandardClass> list = new ArrayList<StandardClass>();
-		JSONArray standardArray = jsonObject.optJSONArray(JsonKey.ProductInfo.STANDARD);
-		if(standardArray != null){
-			for (int i = 0; i < standardArray.length(); i++) {
-				JSONObject standardClass = standardArray.optJSONObject(i);
-				if(standardClass != null){
-					StandardClass sc = new StandardClass();
-					sc.setmClassName(standardClass.optString(JsonKey.ProductInfo.STANDARD_CLASS));
-					sc.setmArrayList(parseItem(standardClass,i));
-					list.add(sc);
-				}
-			}
-		}
-		return list;
-	}
-
-	private ArrayList<Standard> parseItem(JSONObject standardClass, int i2) {
-		// TODO Auto-generated method stub
-		ArrayList<Standard> list = new ArrayList<Standard>();
-		JSONArray itemArray = standardClass.optJSONArray(JsonKey.ProductInfo.STANDARD_ITEM);
-		if(itemArray != null){
-			for (int i = 0; i < itemArray.length(); i++) {
-				JSONObject standard = itemArray.optJSONObject(i);
-				if(standard != null){
-					Standard s = new Standard();
-					s.setmValue(standard.optString(JsonKey.ProductInfo.STANDARD_VALUE));
-					s.setHave(true);
-					s.setmGoodsIdList(parseNum(standard));
-					s.setmLinearIndex(i2);
-					list.add(s);
-				}
-			}
-		}
-		return list;
-	}
+	
 
 	private ArrayList<String> parseNum(JSONObject standard) {
 		// TODO Auto-generated method stub

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:background="@android:color/white"
+    >
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/date"
+        android:textColor="#565656"
+        android:textSize="@dimen/app_text_size_second"
+        android:text="09.18"
+        android:layout_marginLeft="6dp"
+        />
+    
+ <com.techfly.liutaitai.util.view.GridViewForScrollView 
+        android:id="@+id/home_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:horizontalSpacing="6dp"
+        android:listSelector="@drawable/bcg_item_grid"
+        android:numColumns="11"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:layout_marginBottom="-110dp"
+        android:paddingRight="10dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp"
+        android:background="@android:color/white"
+        />
+  </LinearLayout>

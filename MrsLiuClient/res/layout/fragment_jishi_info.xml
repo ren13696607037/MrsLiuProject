@@ -94,20 +94,16 @@
                 android:textColor="@color/color_gray2"
                 android:textSize="@dimen/app_text_size_first" />
         
-        <com.techfly.liutaitai.util.view.GridViewForScrollView 
-        android:id="@+id/home_grid"
+        <com.techfly.liutaitai.util.view.ListViewForScrollView 
+        android:id="@+id/time_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        android:horizontalSpacing="6dp"
         android:listSelector="@drawable/bcg_item_grid"
-        android:numColumns="11"
         android:paddingLeft="10dp"
         android:paddingTop="15dp"
-        android:layout_marginBottom="-110dp"
         android:paddingRight="10dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp"
+        android:scrollbars="none"
         android:background="@android:color/white"
         />
           <LinearLayout 

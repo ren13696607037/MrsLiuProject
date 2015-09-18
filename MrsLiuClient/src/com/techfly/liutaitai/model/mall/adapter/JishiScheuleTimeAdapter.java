@@ -2,11 +2,6 @@ package com.techfly.liutaitai.model.mall.adapter;
 
 import java.util.List;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.adapter.TimesAdapter.ViewHolder;
-import com.techfly.liutaitai.model.mall.bean.TimeBean;
-import com.techfly.liutaitai.model.mall.bean.TimePoints;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +9,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.bean.JishiScheuleTime;
+import com.techfly.liutaitai.model.mall.bean.TimePoints;
+import com.techfly.liutaitai.util.view.GridViewForScrollView;
+
 public class JishiScheuleTimeAdapter extends BaseAdapter {
-    private List<TimeBean> mList;
+    private List<JishiScheuleTime> mList;
     private List<TimePoints> mListPoints;
     private Context mContext;
-    public JishiScheuleTimeAdapter(Context context,List<TimeBean> list,List<TimePoints> time){
+    public JishiScheuleTimeAdapter(Context context,List<JishiScheuleTime> list,List<TimePoints> time){
         mList = list;   
         mContext = context;
         mListPoints = time;
@@ -31,7 +31,7 @@ public class JishiScheuleTimeAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mList!=null?mList.get(position):new TimeBean();
+        return mList!=null?mList.get(position):new JishiScheuleTime();
     }
 
     @Override
@@ -48,34 +48,19 @@ public class JishiScheuleTimeAdapter extends BaseAdapter {
         }
         if(convertView==null){
             holder=new ViewHolder();
-            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_base_text2, null);
-            holder.time = (TextView) convertView.findViewById(R.id.text);
+            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_jishi_time, null);
+            holder.time = (GridViewForScrollView) convertView.findViewById(R.id.home_grid);
+            holder.date = (TextView) convertView.findViewById(R.id.date);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder) convertView.getTag();
         }
-        if(position%11==0){
-        	   holder.time.setBackgroundDrawable(null);
-//        	   holder.time.setTextSize(10);
-        }else{
-        	if(mListPoints!=null){
-        		for(TimePoints points:mListPoints){
-        			      if(mList.get(position).getTimeMill()==points.getmTimeMills()){
-        			    	  if(points.ismIsWholeHours()){
-        			    		   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2); 
-        			    	  }else{
-        			    		   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2); 
-        			    	  }
-        			      }
-        		}
-        	}else{
-        		   holder.time.setBackgroundResource(R.drawable.jishi_time_bg2);
-        	}
-        }
-        holder.time.setText(mList.get(position).getTime());
+        holder.date.setText(mList.get(position).getmDate());
+        holder.time.setAdapter(new JishiScheuleSubTimeAdapter(mContext,mList.get(position).getList(),mListPoints));
        return convertView;
     }
     class ViewHolder{
-        private TextView time;
+        private GridViewForScrollView time;
+        private TextView date;
     }
 }

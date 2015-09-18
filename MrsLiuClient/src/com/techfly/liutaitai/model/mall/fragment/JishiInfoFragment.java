@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.adapter.JishiScheuleTimeAdapter;
 import com.techfly.liutaitai.model.mall.bean.JishiInfo;
+import com.techfly.liutaitai.model.mall.bean.JishiScheuleTime;
 import com.techfly.liutaitai.model.mall.bean.TimeBean;
 import com.techfly.liutaitai.model.mall.parser.JiShiInfoParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
@@ -36,6 +37,7 @@ import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.GridViewForScrollView;
+import com.techfly.liutaitai.util.view.ListViewForScrollView;
 
 public class JishiInfoFragment extends CommonFragment {
     private TextView mName;
@@ -44,11 +46,11 @@ public class JishiInfoFragment extends CommonFragment {
     private ImageView mHeadImg;
     private RatingBar mRate;
     private TextView mConfirm;
-    private GridViewForScrollView mGridView;
+    private ListViewForScrollView mListView;
     private JishiScheuleTimeAdapter mAdapter;
     private JishiInfo mInfo;
     private String mId;
-    private List<TimeBean> mList = new ArrayList<TimeBean>();
+    private List<JishiScheuleTime> mList = new ArrayList<JishiScheuleTime>();
     private static final String TIME_FORMAT1="MM dd";
     @Override
     public void requestData() {
@@ -118,31 +120,33 @@ public class JishiInfoFragment extends CommonFragment {
         mRate.setRating(mInfo.getmRating());
         mAdapter = new JishiScheuleTimeAdapter(getActivity(), mList,
                 mInfo.getmList());
-        mGridView.setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
     }
 
     private void initTimeList(TimeBean date) {
+        JishiScheuleTime scheuleTime = new JishiScheuleTime();
+        List<TimeBean> time = new ArrayList<TimeBean>();
         TimeBean time1 = new TimeBean();
         time1.setMisSelect(true);
         if(date.getTimeMill()-new Date().getTime()<24 * 60 * 60 * 1000){
-            time1.setTime("今天");
+            scheuleTime.setmDate("今天");
         }else if(date.getTimeMill()-new Date().getTime()<2*24 * 60 * 60 * 1000){
-            time1.setTime("明天");
+            scheuleTime.setmDate("明天");
         }else{
-        	time1.setTime(DateUtils.getTime(date.getTimeMill(), "MM.dd"));
+            scheuleTime.setmDate(DateUtils.getTime(date.getTimeMill(), "MM.dd"));
         }
         time1.setTimeMill(DateUtils.currentMills(date.getTimeMill(),"9:00"));
         time1.setTimeMill2(time1.getTimeMill()+30*60*1000);
-        mList.add(time1);
         for(int i=1;i<=10;i++){
             TimeBean time2 = new TimeBean();
             time2.setTime(DateUtils.getTime(time1.getTimeMill()+i*60*60*1000, "HH"));
             time2.setTimeMill(time1.getTimeMill()+i*60*60*1000);
             time2.setTimeMill2(time1.getTimeMill()+i*90*60*1000);
-            mList.add(time2); 
+            time.add(time1); 
         }
-    
+        scheuleTime.setList(time);
+        mList.add(scheuleTime);
     }
 
     private Response.ErrorListener createMyReqErrorListener() {
@@ -201,7 +205,7 @@ public class JishiInfoFragment extends CommonFragment {
         setTitleText("技师详情");
         mName = (TextView) view.findViewById(R.id.name);
         mConfirm = (TextView) view.findViewById(R.id.confirm);
-        mGridView = (GridViewForScrollView) view.findViewById(R.id.home_grid);
+        mListView = (ListViewForScrollView) view.findViewById(R.id.time_listview);
         mHeadImg = (ImageView) view.findViewById(R.id.img);
         mRate = (RatingBar) view.findViewById(R.id.rate_bar);
         mServiceTime = (TextView) view.findViewById(R.id.service_times);
