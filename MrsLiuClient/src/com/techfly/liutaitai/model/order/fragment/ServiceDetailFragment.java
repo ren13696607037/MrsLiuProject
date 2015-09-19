@@ -161,7 +161,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(mActivity, ServiceInfoActivity.class);
-				intent.putExtra(IntentBundleKey.ORDER_ID, mService.getmNum());
+				intent.putExtra(IntentBundleKey.ID, mService.getmNum());
 				startActivity(intent);
 			}
 		});

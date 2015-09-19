@@ -214,7 +214,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 			mTvBtn1.setVisibility(View.VISIBLE);
 			mTvBtn2.setVisibility(View.VISIBLE);
 			mTvBtn1.setText(R.string.order_text_0);
-			mTvBtn2.setText(R.string.order_text_1);
+			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 9:
 			mTvState.setText(R.string.order_state_9);

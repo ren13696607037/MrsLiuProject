@@ -93,10 +93,10 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             showSmartToast("请选择服务地点", Toast.LENGTH_LONG);
             return false;
         }
-        if (mJishi == null) {
-            showSmartToast("请选择技师", Toast.LENGTH_LONG);
-            return false;
-        }
+//        if (mJishi == null) {
+//            showSmartToast("请选择技师", Toast.LENGTH_LONG);
+//            return false;
+//        }
         if (mSelectTimeMills == 0) {
             showSmartToast("请选择服务时间", Toast.LENGTH_LONG);
             return false;
@@ -343,8 +343,12 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
         url.setmGetParamValues(mAddressManage.getmCity() + "  "
                 + mAddressManage.getmDetail());
 
-        url.setmGetParamPrefix("mid");
-        url.setmGetParamValues(mJishi.getmId());
+        
+        if(mJishi != null){
+        	url.setmGetParamPrefix("mid");
+        	url.setmGetParamValues(mJishi.getmId());
+        }
+        
 
         url.setmGetParamPrefix("mobile");
         url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity())
