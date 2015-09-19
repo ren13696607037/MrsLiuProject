@@ -15,6 +15,7 @@ import com.techfly.liutaitai.model.mall.OrderBasketClick;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.fragment.OrderBastketFragment;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
+import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.adapter.CommonAdapter;
 import com.techfly.liutaitai.util.view.ListViewForScrollView;
@@ -101,8 +102,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 					Product item, int position) {
 				holder.setText(R.id.item_order_basket_item_tv_name,
 						item.getmName());
-				holder.setImageResource(
-						Constant.IMG_URL + item.getmImg(),
+				holder.setImageResource(Constant.IMG_URL + item.getmImg(),
 						R.id.item_order_basket_item_iv);
 				holder.setText(R.id.item_order_basket_item_tv_price,
 						"￥" + item.getmPrice());
@@ -123,6 +123,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 	}
 
 	private void setType(TextView mTvType, int type) {
+		AppLog.Logd("Shi", "type===" + type);
 		switch (type) {
 		case 0:
 			mTvType.setText("干洗");
@@ -214,7 +215,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 			mTvBtn1.setVisibility(View.VISIBLE);
 			mTvBtn2.setVisibility(View.VISIBLE);
 			mTvBtn1.setText(R.string.order_text_0);
-			mTvBtn2.setText(R.string.order_text_1);
+			mTvBtn2.setText(R.string.order_text_2);
 			break;
 		case 9:
 			mTvState.setText(R.string.order_state_9);

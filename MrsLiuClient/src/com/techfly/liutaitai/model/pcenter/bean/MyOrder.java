@@ -20,7 +20,7 @@ public class MyOrder implements Serializable {
 	private String mExpShortName;
 	private String mExpNo;
 
-	private int mType;// 订单类型，分类 0 洗衣 1生鲜 2鲜花 4奢侈品
+	private int mType = -1;// 订单类型，分类 0 洗衣 1生鲜 2鲜花 4奢侈品
 	private int mTotalCount;// 产品总数量
 	private String mUnit;// 单位
 	private double mDeliverFee;// 运费
