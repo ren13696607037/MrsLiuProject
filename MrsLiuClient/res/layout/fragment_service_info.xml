@@ -48,7 +48,7 @@
                <ImageView
                  android:id="@+id/img"
                  android:layout_width="match_parent"
-                 android:layout_height="286dp"
+                 android:layout_height="wrap_content"
                  android:scaleType="fitXY"
                  android:src="@drawable/service_details_default" />
              <TextView 

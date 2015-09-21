@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -224,6 +225,10 @@ public class ServiceInfoFragment extends CommonFragment implements
         setTitleText("服务详情");
         mDescTv = (TextView) view.findViewById(R.id.desc);
         mImg = (ImageView) view.findViewById(R.id.img);
+        LayoutParams params = (LayoutParams) mImg.getLayoutParams();
+        params.width = Constant.SCREEN_WIDTH;
+        params.height = params.width;
+        mImg.setLayoutParams(params);
         mNameTv = (TextView) view.findViewById(R.id.name);
         mPriceTv = (TextView) view.findViewById(R.id.price);
         mServiceContentTv = (TextView) view.findViewById(R.id.service_content);
