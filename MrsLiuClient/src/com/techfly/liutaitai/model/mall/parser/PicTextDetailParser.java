@@ -20,7 +20,8 @@ public class PicTextDetailParser implements Parser {
 				AppLog.Logi("Shi", "ERROR:parse PicTextDetail with code");
 			}
 			if (resultCode == 0) {
-				String s = object.optString(JsonKey.DATA);
+			  String s = object.optJSONArray("data").optJSONObject(0).optString("description");
+				
 				return s;
 			}
 		}

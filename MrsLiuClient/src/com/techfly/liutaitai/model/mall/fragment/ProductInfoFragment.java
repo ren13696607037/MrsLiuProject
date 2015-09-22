@@ -331,7 +331,7 @@ public class ProductInfoFragment extends CommonFragment implements
                     break;
                 case R.id.product_info_product_name:
                 case R.id.product_info_text_and_pic_detail:
-                    UIHelper.toPicAndTextActivity(getActivity(), mProduct.getmDesc());
+                    UIHelper.toPicAndTextActivity(getActivity(), mProduct.getmDesc(),null);
                     break;
                 case R.id.product_info_comment:
                     if(mArrayList.size()>0){

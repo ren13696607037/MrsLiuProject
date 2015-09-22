@@ -12,20 +12,12 @@
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-      <TextView
+      <WebView
                             android:id="@+id/pic_text_webview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:textColor="#565656"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="@dimen/px_20"
-                            android:paddingRight="@dimen/px_20"
-                            android:paddingBottom="@dimen/px_10"
-                            android:paddingTop="@dimen/px_10"
-                            android:lineSpacingExtra="1.5dp"
-                            android:lineSpacingMultiplier="1.2"
-                            android:textSize="@dimen/app_text_size_first" />
+                           />
       
     </com.techfly.liutaitai.util.view.LoadingLayout>
 

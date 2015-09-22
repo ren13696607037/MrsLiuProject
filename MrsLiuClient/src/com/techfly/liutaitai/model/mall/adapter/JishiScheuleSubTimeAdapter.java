@@ -66,17 +66,14 @@ public class JishiScheuleSubTimeAdapter extends BaseAdapter {
                                 .setBackgroundResource(R.drawable.jishi_time_bg1);
                         holder.time.setTextColor(mContext.getResources().getColor(android.R.color.white));
                     } else {
-                        holder.time
-                                .setBackgroundResource(R.drawable.jishi_time_bg3);
-                    }
-                }else if(mList.get(position).getTimeMill2() == points.getmTimeMills()){
-                    if (points.ismIsWholeHours()) {
-                        holder.time
-                                .setBackgroundResource(R.drawable.jishi_time_bg1);
-                        holder.time.setTextColor(mContext.getResources().getColor(android.R.color.white));
-                    } else {
-                        holder.time
-                                .setBackgroundResource(R.drawable.jishi_time_bg4);
+                        if(points.ismBeforeHalfJHours()){
+                            holder.time
+                            .setBackgroundResource(R.drawable.jishi_time_bg3);
+                        }else{
+                            holder.time
+                            .setBackgroundResource(R.drawable.jishi_time_bg4);
+                        }
+                        
                     }
                 }
             }

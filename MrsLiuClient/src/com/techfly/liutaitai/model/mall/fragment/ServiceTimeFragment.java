@@ -161,11 +161,11 @@ public class ServiceTimeFragment extends CommonFragment implements
 
         TimeBean time1 = new TimeBean();
         time1.setMisSelect(true);
-        time1.setTime("10:00");
+        time1.setTime("09:00");
         time1.setTimeMill(DateUtils.currentMills(date.getTimeMill(),time1.getTime()));
         mList.add(time1);
         mSelectTimeMills = time1.getTimeMill();
-        for(int i=1;i<20;i++){
+        for(int i=1;i<=20;i++){
             TimeBean time2 = new TimeBean();
             time2.setTime(DateUtils.getTime(time1.getTimeMill()+i*30*60*1000, "HH:mm"));
             time2.setTimeMill(time1.getTimeMill()+i*30*60*1000);

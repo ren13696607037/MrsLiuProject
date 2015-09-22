@@ -9,10 +9,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -25,6 +25,7 @@ import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -33,46 +34,50 @@ public class PicAndTextDetailFragment extends CommonFragment {
 
 	private CommonFragment mFragment;
 
-	private TextView mWebView;
+	private WebView mWebView;
 	private LinearLayout mGroup;
 	private String mDesc = "暂无";
+	private String mId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mFragment = this;
 		Intent intent = getActivity().getIntent();
 		mDesc = intent.getStringExtra(JsonKey.AdvertisementKey.GOODSID);
+		mId =  intent.getStringExtra(IntentBundleKey.ID);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		return inflater.inflate(R.layout.fragment_pic_text, container, false);
 	}
 
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		super.onDestroyView();
-//		if (mWebView != null) {
-//			 mWebView.getSettings().setLoadWithOverviewMode(false);
-//		     mWebView.getSettings().setUseWideViewPort(false);
-//		     mWebView.getSettings().setJavaScriptEnabled(false);
-//		     mWebView.getSettings().setSupportZoom(false);
-//		     mWebView.getSettings().setBuiltInZoomControls(false);
-//		     mWebView.destroy();
-//		}
+		if (mWebView != null) {
+			 mWebView.getSettings().setLoadWithOverviewMode(false);
+		     mWebView.getSettings().setUseWideViewPort(false);
+		     mWebView.getSettings().setJavaScriptEnabled(false);
+		     mWebView.getSettings().setSupportZoom(false);
+		     mWebView.getSettings().setBuiltInZoomControls(false);
+		     mWebView.destroy();
+		}
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 		initHeader();
 		initViews(view);
+		if(!TextUtils.isEmpty(mId)){
+		    startReqTask(this);
+		}else{
+		    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+            mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+		}
 //		startReqTask(this);
 	}
 
@@ -100,20 +105,24 @@ public class PicAndTextDetailFragment extends CommonFragment {
 	private void initViews(View view) {
 		// TODO Auto-generated method stub
 		mGroup = (LinearLayout) view.findViewById(R.id.pic_text_group);
-		mWebView = (TextView) view.findViewById(R.id.pic_text_webview);
-//		mWebView.setWebViewClient(getClient());
-//		mWebView.getSettings().setLoadWithOverviewMode(true);
-//		mWebView.getSettings().setUseWideViewPort(true);
-//		mWebView.getSettings().setJavaScriptEnabled(true);
-//		mWebView.getSettings().setSupportZoom(false);
-//		mWebView.getSettings().setBuiltInZoomControls(false);
-//		mWebView.getSettings()
-//				.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 可能的话不要超过屏幕宽度
-//		mWebView.setInitialScale(150);
-//		AppLog.Logd("Fly", "mDesc==="+mDesc);
-//		mWebView.getSettings().setDefaultTextEncodingName("UTF-8");  
-//		mWebView.loadData(Html.fromHtml(mDesc).toString(), "text/html", "UTF-8");
-		mWebView.setText(Html.fromHtml(mDesc));
+		mWebView = (WebView) view.findViewById(R.id.pic_text_webview);
+		mWebView.setWebViewClient(getClient());
+		mWebView.getSettings().setLoadWithOverviewMode(true);
+		mWebView.getSettings().setUseWideViewPort(true);
+		mWebView.getSettings().setJavaScriptEnabled(true);
+		mWebView.getSettings().setSupportZoom(false);
+		mWebView.getSettings().setBuiltInZoomControls(false);
+		mWebView.getSettings()
+				.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 可能的话不要超过屏幕宽度
+		mWebView.setInitialScale(200);
+		AppLog.Logd("Fly", "mDesc==="+mDesc);
+		mWebView.getSettings().setDefaultTextEncodingName("UTF-8");  
+		if(!TextUtils.isEmpty(mDesc)){
+		      mWebView.loadDataWithBaseURL(null, mDesc, "text/html", "utf-8",  
+		                null);  
+		  }
+	
+//		mWebView.setText(Html.fromHtml(mDesc));
 	}
 
 	private WebViewClient getClient() {
@@ -144,7 +153,7 @@ public class PicAndTextDetailFragment extends CommonFragment {
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.GOODS_PIC_TEXT
-				+ mDesc);
+				+ mId);
 		param.setmHttpURL(url);
 		param.setmParserClassName(PicTextDetailParser.class.getName());
 		RequestManager
@@ -161,10 +170,12 @@ public class PicAndTextDetailFragment extends CommonFragment {
 				if (object instanceof String) {
 					String html = (String) object;
 					if (!TextUtils.isEmpty(html)) {
-						Html.fromHtml(html).toString();
-//						mWebView.loadDataWithBaseURL(null, html, "text/html",
-//								"UTF-8", null);
+//						Html.fromHtml(html).toString();
+						mWebView.loadDataWithBaseURL(null,html, "text/html",
+								"UTF-8", null);
 					} else {
+					    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+		                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
 						SmartToast.makeText(getActivity(), "未能获取到正确数据",
 								Toast.LENGTH_SHORT).show();
 					}

@@ -302,8 +302,13 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             UIHelper.toAddressManageActivity(this);// 跳到地址管理页面
             break;
         case R.id.jishi:
-            UIHelper.toSomeIdActivity(this, JishiListActivity.class.getName(),
-                    mSelectTimeMills + "", Integer.parseInt(mInfo.getmType()));
+            if(mSelectTimeMills==0){
+               showSmartToast(getString(R.string.choose_service_time_prompt),Toast.LENGTH_LONG); 
+            }else{
+                UIHelper.toSomeIdActivity(this, JishiListActivity.class.getName(),
+                        mSelectTimeMills + "", Integer.parseInt(mInfo.getmType()));
+            }
+       
             break;
 
         case R.id.clock:

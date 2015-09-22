@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/px_20"
             android:background="@drawable/order_button_yellow"
             android:padding="@dimen/px_15"
-            android:text="@string/submit"
+            android:text="@string/order_appointment_title"
             android:layout_alignParentBottom="true"
             android:textColor="@android:color/white"
             android:layout_marginBottom="10dp"

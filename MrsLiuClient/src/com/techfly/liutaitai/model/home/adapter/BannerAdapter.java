@@ -51,16 +51,12 @@ public class BannerAdapter extends PagerAdapter {
 		mLoader.displayImage(mdata.get(position).getmImage(), image, ImageLoaderUtil.mBannerLoaderOptions);
 		
 		final int type = mdata.get(position).getmTargetType();
-		final int targetId = mdata.get(position).getmTargetId();
+		final int targetId = mdata.get(position).getmId();
 		image.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				if(type == 1){
-					UIHelper.toSearchActivity(mContext, targetId);
-				}else if(type == 2){
-//					UIHelper.toProductInfoActivity(mContext, targetId,ProductInfoFragment.FLAG_NORMAL);
-				}
+				UIHelper.toPicAndTextActivity(mContext, null,targetId+"");
 			}
 		});
 		return image;

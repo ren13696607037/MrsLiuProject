@@ -548,5 +548,5 @@
 	<string name="collect_success">收藏成功~</string>
 	
 	<string name="common_phone_dial_num">4008275699</string>
-
+    <string name="choose_service_time_prompt">请选择服务时间</string>
 </resources>

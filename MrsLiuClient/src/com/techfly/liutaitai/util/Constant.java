@@ -55,7 +55,7 @@ public class Constant {
 	public static final String TUANGOU_DETAIL = "tuangou/detail";// 团购商品详情
 	public static final String GOODS_COLLECT = "goods/collect";// 收藏
 	public static final String GOODS_UNCOLLECT = "goods/collect/delete";// 取消收藏
-	public static final String GOODS_PIC_TEXT = "goods/detail/";// 取消收藏
+	public static final String GOODS_PIC_TEXT = "user/getImgDetail?id=";// 商品图文详情
 	public static final String PASS_URL = "user/modifypwd";// 修改密码
 	public static final String ORDER_SERVICE_URL = "commodity/bespeak/";// 美甲等预约订单
 	public static final String ORDER_APPOINTMENT_URL = "";// 洗衣预约订单
