@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/write"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <include layout="@layout/fragment_header" />
@@ -95,13 +95,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bcg_item_grid"
-            android:horizontalSpacing="30dp"
+            android:horizontalSpacing="12dp"
             android:listSelector="@drawable/bcg_item_grid"
             android:numColumns="2"
-            android:padding="12dp"
+            android:paddingTop="6dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="none"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp" >
+            android:verticalSpacing="16dp" >
         </com.techfly.liutaitai.util.view.PullableGridView>
 
         <include layout="@layout/load_more" />

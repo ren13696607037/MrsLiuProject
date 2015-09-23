@@ -16,7 +16,7 @@
                             android:id="@+id/pic_text_webview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                           
                            />
       
     </com.techfly.liutaitai.util.view.LoadingLayout>

@@ -213,11 +213,8 @@ public class WeixinPayImpl implements IPayment{
   //
    private String genProductArgs() {
        StringBuffer xml = new StringBuffer();
-
        try {
            String  nonceStr = genNonceStr();
-
-
            xml.append("</xml>");
            List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
            packageParams.add(new BasicNameValuePair("appid", Keys.APP_ID));
@@ -225,7 +222,8 @@ public class WeixinPayImpl implements IPayment{
            packageParams.add(new BasicNameValuePair("mch_id", Keys.MCH_ID));
            packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
            packageParams.add(new BasicNameValuePair("notify_url", mPayOrder.getmNotifyUrl()));
-           packageParams.add(new BasicNameValuePair("out_trade_no",genOutTradNo()));
+           AppLog.Logd("Fly", "mPayOrder.getmOrderNo())=="+mPayOrder.getmOrderNo());
+           packageParams.add(new BasicNameValuePair("out_trade_no",mPayOrder.getmOrderNo()));
            packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
            packageParams.add(new BasicNameValuePair("total_fee", (int)(Float.parseFloat(mPayOrder.getmProductPrice())*100)+""));
            packageParams.add(new BasicNameValuePair("trade_type", "APP"));

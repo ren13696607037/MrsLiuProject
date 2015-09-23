@@ -56,7 +56,7 @@ public class ServiceAdapter extends BaseAdapter{
             holder=(ViewHolder) convertView.getTag();
         }
      
-        ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
+        ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), holder.imageView,ImageLoaderUtil.mGridIconLoaderOptions);
         
         holder.personNum.setText(mList.get(position).getmServicePerson()+"人体验");
         

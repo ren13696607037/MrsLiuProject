@@ -56,7 +56,7 @@ public class ShengXianServiceAdapter extends BaseAdapter{
             holder=(ViewHolder) convertView.getTag();
         }
      
-        ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
+        ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.imageView,ImageLoaderUtil.mGridIconLoaderOptions);
         
         holder.personNum.setText(mList.get(position).getmSale()+"人购买");
         
