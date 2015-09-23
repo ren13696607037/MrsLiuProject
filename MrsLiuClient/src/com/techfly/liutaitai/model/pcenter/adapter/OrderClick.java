@@ -1,13 +1,11 @@
 package com.techfly.liutaitai.model.pcenter.adapter;
 
-import android.R.integer;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ManagerListener;
