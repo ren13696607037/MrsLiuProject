@@ -4,6 +4,7 @@ import android.R.integer;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
@@ -38,20 +39,24 @@ public class OrderClick implements OnClickListener {
 
 		} else if (mContext.getString(R.string.tech_order_list_btn3).equals(
 				mString)) {
-			if (mIndex == 0) {
-				ManagerListener.newManagerListener()
-						.notifyOrderLogiticsListener(mOrder);
-			} else if (mIndex == 1) {
-				ManagerListener.newManagerListener()
-						.notifyDetailOrderLogiticsListener(mOrder);
+			if(System.currentTimeMillis() >= Utility.Date2Millis(mOrder.getmCustomerTime())){
+				if (mIndex == 0) {
+					ManagerListener.newManagerListener()
+							.notifyOrderLogiticsListener(mOrder);
+				} else if (mIndex == 1) {
+					ManagerListener.newManagerListener()
+							.notifyDetailOrderLogiticsListener(mOrder);
+				}
+			}else{
+				Toast.makeText(mContext, "未到开始时间，无法开始！", Toast.LENGTH_LONG).show();
 			}
-
 		} else if (mContext.getString(R.string.tech_order_list_btn2).equals(
 				mString)) {
 			Utility.call(mContext, Constant.KEFU_PHONE);
 			// ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
 		} else if (mContext.getString(R.string.tech_order_list_btn4).equals(
 				mString)) {
+			//TODO
 			if (mIndex == 0) {
 				ManagerListener.newManagerListener().notifyOrderRateListener(
 						mOrder);

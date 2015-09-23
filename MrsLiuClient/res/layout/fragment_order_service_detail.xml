@@ -261,6 +261,33 @@
                 android:layout_height="0.5dp"
                 android:layout_below="@id/osd_text1"
                 android:background="@color/color_be" />
+            <TextView
+                android:id="@+id/osd_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_line4"
+                android:layout_margin="@dimen/px_20"
+                android:text="@string/service_detail_text10"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <TextView
+                android:id="@+id/osd_pay_way"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/osd_text2"
+                android:layout_marginRight="@dimen/px_20"
+                android:text="@string/recharge_text5"
+                android:textColor="@color/color_service_detail_red_color"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <View
+                android:id="@+id/osd_line6"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/osd_text2"
+                android:background="@color/color_be" />
         </RelativeLayout>
     </ScrollView>
 
