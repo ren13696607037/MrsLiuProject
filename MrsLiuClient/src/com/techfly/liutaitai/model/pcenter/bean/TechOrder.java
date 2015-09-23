@@ -143,5 +143,13 @@ public class TechOrder implements Serializable{
 	public void setmStartTime(String mStartTime) {
 		this.mStartTime = mStartTime;
 	}
+	public String getmMinutes() {
+		return mMinutes;
+	}
+
+	public void setmMinutes(String mMinutes) {
+		this.mMinutes = mMinutes;
+	}
+	private String mMinutes;
     
 }
