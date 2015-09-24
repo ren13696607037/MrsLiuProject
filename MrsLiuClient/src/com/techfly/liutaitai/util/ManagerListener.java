@@ -11,6 +11,9 @@ import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 
 public class ManagerListener {
+	public interface StartServiceListener{
+		void onStartService();
+	}
 	public interface CityUpdateListener {
 		void onUpdateListener(Area area);
 	}
@@ -112,6 +115,7 @@ public class ManagerListener {
 	private List<TechFinishDialogListener> mDialogListeners = new ArrayList<ManagerListener.TechFinishDialogListener>();
 	private List<CollectListener> mCollectListeners = new ArrayList<ManagerListener.CollectListener>();
 	private List<OrderDetailListener> mOrderDetailListeners = new ArrayList<ManagerListener.OrderDetailListener>();
+	private List<StartServiceListener> mStartServiceListeners = new ArrayList<ManagerListener.StartServiceListener>();
 	private static ManagerListener mListener;
 	private static Object object = new Object();
 
@@ -128,6 +132,19 @@ public class ManagerListener {
 			}
 		}
 		return mListener;
+	}
+	public void onRegisterStartServiceListener(
+			StartServiceListener startServiceListener) {
+		if (!mStartServiceListeners.contains(startServiceListener)) {
+			mStartServiceListeners.add(startServiceListener);
+		}
+	}
+
+	public void onUnRegisterStartServiceListener(
+			StartServiceListener startServiceListener) {
+		if (mStartServiceListeners.contains(startServiceListener)) {
+			mStartServiceListeners.remove(startServiceListener);
+		}
 	}
 
 	public void onRegisterOrderDetailListener(
@@ -505,6 +522,12 @@ public class ManagerListener {
 		int size = mOrderDetailListeners.size();
 		for (int i = 0; i < size; i++) {
 			mOrderDetailListeners.get(i).onDetailSubmit(url);
+		}
+	}
+	public void notifyStartServiceListener(){
+		int size = mStartServiceListeners.size();
+		for(int i = 0; i < size; i++){
+			mStartServiceListeners.get(i).onStartService();
 		}
 	}
 

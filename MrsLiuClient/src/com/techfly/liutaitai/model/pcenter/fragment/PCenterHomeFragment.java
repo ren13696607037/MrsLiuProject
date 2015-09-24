@@ -39,6 +39,7 @@ import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.CircleImageView;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
@@ -185,6 +186,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     		}else if("0".equals(mUser.getmType())){
     			mService.setVisibility(View.INVISIBLE);
     		}
+    		ManagerListener.newManagerListener().notifyStartServiceListener();
     	}
     }
     @Override

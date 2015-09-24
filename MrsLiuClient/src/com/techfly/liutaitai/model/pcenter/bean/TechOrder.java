@@ -151,5 +151,14 @@ public class TechOrder implements Serializable{
 		this.mMinutes = mMinutes;
 	}
 	private String mMinutes;
+	public String getmPayWay() {
+		return mPayWay;
+	}
+
+	public void setmPayWay(String mPayWay) {
+		this.mPayWay = mPayWay;
+	}
+
+    private String mPayWay;
     
 }

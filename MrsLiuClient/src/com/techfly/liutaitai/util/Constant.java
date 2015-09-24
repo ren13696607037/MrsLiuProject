@@ -1,5 +1,7 @@
 package com.techfly.liutaitai.util;
 
+import com.baidu.location.BDLocation;
+
 import android.R.integer;
 
 public class Constant {
@@ -28,6 +30,7 @@ public class Constant {
 	public static final String YTO_URL = "http://58.32.246.70:8088/MarketingInterface/";
 	public static final String YTO_JAVA_URL = "api-transffer/yto";
 	public static final String LOGOUT_URL = "auth/logout";
+	public static final String LocationUrl = "common/location";
 
 	// 启动整合接口
 	public static final String SYSTEM_URL = "system";
@@ -192,5 +195,5 @@ public class Constant {
 	public static final String KEFU_PHONE = "4008275899";
 	public static boolean isShouldRefresh = false;
 	
-
+	public static BDLocation mLocation=null;
 }

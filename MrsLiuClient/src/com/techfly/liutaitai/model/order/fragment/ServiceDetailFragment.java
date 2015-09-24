@@ -140,7 +140,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     	mServiceTime = (TextView) view.findViewById(R.id.osd_service_time);
     	mState = (TextView) view.findViewById(R.id.osd_state);
     	mServiewView = view.findViewById(R.id.osd_view);
-    	mPayWay = (TextView) view.findViewById(R.id.osd_pay_way);
+    	mPayWay = (TextView) view.findViewById(R.id.osd_text1);
     	
     }
     private void setData(){
@@ -171,13 +171,13 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     }
     private void setPayWay(TextView textView, String state){
     	if("0".equals(state)){
-    		textView.setText(R.string.recharge_text4);
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text4)));
     	}else if("1".equals(state)){
-    		textView.setText(R.string.recharge_text2);
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text2)));
     	}else if("2".equals(state)){
-    		textView.setText(R.string.recharge_text1);
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text1)));
     	}else if("3".equals(state)){
-    		textView.setText(R.string.recharge_text5);
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text5)));
     	}
     }
 

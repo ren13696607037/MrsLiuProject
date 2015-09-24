@@ -113,6 +113,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	public static final int IMAGE_TYPE_CAMERA = 0; // 摄像头拍照页面
 	private String mSelectItems;
 	private Uri mPhotoPath;
+	private TextView mPayWay;
 	BroadcastReceiver mImageWallChangeBroadcastReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -204,6 +205,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mIvAddress = (ImageView) view.findViewById(R.id.tsd_address_img);
 		mIvPhone = (ImageView) view.findViewById(R.id.tsd_phone_img);
 		mTimeStart = (StartTimeText) view.findViewById(R.id.tsd_time_start);
+		mPayWay = (TextView) view.findViewById(R.id.tsd_text1);
 
 		mIvAddress.setOnClickListener(this);
 		mIvPhone.setOnClickListener(this);
@@ -244,7 +246,19 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2
 				.getText().toString(),1));
 		mTimeStart.toStart(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())-60*1000);
+		setPayWay(mPayWay, mOrder.getmPayWay());
 	}
+	private void setPayWay(TextView textView, String state){
+    	if("0".equals(state)){
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text4)));
+    	}else if("1".equals(state)){
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text2)));
+    	}else if("2".equals(state)){
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text1)));
+    	}else if("3".equals(state)){
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text5)));
+    	}
+    }
 	
 
 	private void setState(TechOrder order, TextView textView, Button button,

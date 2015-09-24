@@ -409,7 +409,7 @@
     <string name="service_detail_text5">￥%1$s/次</string>
     <string name="service_detail_text6">使用代金券</string>
     <string name="service_detail_text7">￥ -%1$s</string>
-    <string name="service_detail_text8">共计（在线支付）</string>
+    <string name="service_detail_text8">共计（%1$s）</string>
     <string name="service_detail_text9">￥%1$s</string>
     <string name="service_detail_text10">支付方式</string>
     <string name="orders_detail_title">订单详情</string>

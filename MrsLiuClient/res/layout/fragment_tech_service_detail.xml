@@ -293,7 +293,7 @@
                 android:id="@+id/tsd_line4"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@id/osd_text1"
+                android:layout_below="@id/tsd_text1"
                 android:background="@color/color_be" />
         </RelativeLayout>
     </ScrollView>
