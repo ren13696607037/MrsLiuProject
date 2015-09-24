@@ -101,7 +101,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             showSmartToast("请选择服务时间", Toast.LENGTH_LONG);
             return false;
         }
-        if(Float.parseFloat(mInfo.getmPrice())>mVoucherMoney){
+        if( mInfo != null && mInfo.getmPrice() != null &&(Float.parseFloat(mInfo.getmPrice())>mVoucherMoney)){
             mInfo.setmPrice((Float.parseFloat(mInfo.getmPrice())-mVoucherMoney)+"");
         }else{
             mInfo.setmPrice("0.01");

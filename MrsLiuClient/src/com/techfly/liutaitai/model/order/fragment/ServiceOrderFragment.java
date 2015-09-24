@@ -374,7 +374,7 @@ public class ServiceOrderFragment extends CommonFragment implements
 		isRefresh=false;
 		mType = 4;
 		Intent intent = new Intent(getActivity(), ServiceOrderActivity.class);
-		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmNum());
+		intent.putExtra(IntentBundleKey.ID, service.getmNum());
 		startActivity(intent);
 	}
 
