@@ -377,6 +377,7 @@ public interface JsonKey {
 		static final String NAME = "goodsName";
 	}
 	interface OrderInfoKey{
+		static final String PAY_TYPE = "payType";
 		static final String TOTAL_COUNT = "total";
 		static final String TIME = "createTime";
 		static final String CUSTOMER_NAME = "username";

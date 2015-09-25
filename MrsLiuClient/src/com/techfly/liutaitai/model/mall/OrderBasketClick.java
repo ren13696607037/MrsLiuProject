@@ -29,6 +29,7 @@ import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.util.AlertDialogUtils;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
@@ -116,12 +117,25 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 		} else if (v.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_5))) {
 			// 删除订单
-			deleteOrder();
+			confirmDelete();
 		}
 
 	}
 
+	private void confirmDelete() {
+		AlertDialogUtils.displayMyAlertChoice(mFragment.getActivity(), "删除订单",
+				"确定删除订单？", "确定", new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						deleteOrder();
+
+					}
+				}, "取消", null).show();
+	}
+
 	private void deleteOrder() {
+
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.DELETE_ORDER);
@@ -171,13 +185,25 @@ public class OrderBasketClick implements OnClickListener, OnItemClickListener {
 	private void clickBtn1(TextView v) {
 		if (v.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_0))) {
-			cancelOrder();// 取消订单
+			confirmCancel();// 取消订单
 		} else if (v.getText().toString()
 				.equals(mFragment.getString(R.string.order_text_3))) {
 			// 去评价
 
 			UIHelper.toOrderEvaActivity(mFragment, mOrder);
 		}
+	}
+
+	private void confirmCancel() {
+		AlertDialogUtils.displayMyAlertChoice(mFragment.getActivity(), "删除订单",
+				"确定取消订单？", "确定", new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						cancelOrder();
+
+					}
+				}, "取消", null).show();
 	}
 
 	private void cancelOrder() {

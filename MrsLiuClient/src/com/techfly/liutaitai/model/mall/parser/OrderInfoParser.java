@@ -33,6 +33,8 @@ public class OrderInfoParser implements Parser {
 							.optInt(JsonKey.OrderInfoKey.TOTAL_COUNT));
 					mo.setmTime(mJsonObject
 							.optString(JsonKey.OrderInfoKey.TIME));
+					mo.setmPayType(mJsonObject
+							.optInt(JsonKey.OrderInfoKey.PAY_TYPE));
 					mo.setmCustomerName(mJsonObject
 							.optString(JsonKey.OrderInfoKey.CUSTOMER_NAME));
 					mo.setmCustomerAddr(mJsonObject

@@ -48,6 +48,7 @@ public class OrderInfoFragment extends CommonFragment {
 	private CommonAdapter<Product> mAdapter;
 	private ArrayList<Product> mDatas = new ArrayList<Product>();
 	private TextView mTvOffsetValue;
+	private TextView mTvPayWay;
 	private TextView mTvProductCount;
 	private TextView mTvTotalMoney;
 	private TextView mTvDeliverFee;
@@ -109,9 +110,11 @@ public class OrderInfoFragment extends CommonFragment {
 				.findViewById(R.id.order_info_tv_offset_value);
 		mTvProductCount = (TextView) view
 				.findViewById(R.id.order_info_tv_product_count);
+		mTvPayWay = (TextView) view.findViewById(R.id.order_info_tv_pay_way);
 		mTvTotalMoney = (TextView) view
 				.findViewById(R.id.order_info_tv_total_money);
-		mTvDeliverFee = (TextView)view.findViewById(R.id.order_info_tv_deliver_fee);
+		mTvDeliverFee = (TextView) view
+				.findViewById(R.id.order_info_tv_deliver_fee);
 
 		mListView = (ListViewForScrollView) view
 				.findViewById(R.id.order_info_list);
@@ -122,8 +125,7 @@ public class OrderInfoFragment extends CommonFragment {
 			public void convert(ViewHolder holder, Product item, int position) {
 				holder.setText(R.id.item_order_basket_item_tv_name,
 						item.getmName());
-				holder.setImageResource(
-						Constant.IMG_URL + item.getmImg(),
+				holder.setImageResource(Constant.IMG_URL + item.getmImg(),
 						R.id.item_order_basket_item_iv);
 				holder.setText(R.id.item_order_basket_item_tv_price,
 						"￥" + item.getmPrice());
@@ -202,8 +204,8 @@ public class OrderInfoFragment extends CommonFragment {
 		if (!TextUtils.isEmpty(mOrder.getmUnit())) {
 			unit = mOrder.getmUnit();
 		}
-
 		mTvProductCount.setText("共" + mOrder.getmTotalCount() + unit);
+		setPayWay();
 		mTvTime.setText("下单时间：" + mOrder.getmTime());
 		mTvTips.setText("备注：" + mOrder.getmTips());
 		mTvTotalMoney.setText("￥" + mOrder.getmTotalPrice());
@@ -212,6 +214,31 @@ public class OrderInfoFragment extends CommonFragment {
 			mDatas.addAll(mOrder.getmList());
 			mAdapter.notifyDataSetChanged();
 		}
+	}
+
+	private void setPayWay() {
+		String payWay = "";
+		switch (mOrder.getmPayType()) {
+		case 0:
+			payWay = getString(R.string.recharge_text4);
+			break;
+		case 1:
+			payWay = getString(R.string.recharge_text2);
+			break;
+		case 2:
+			payWay = getString(R.string.recharge_text1);
+			break;
+		case 3:
+			payWay = getString(R.string.recharge_text5);
+			break;
+
+		default:
+			break;
+		}
+
+		payWay = "(" + payWay + ")";
+		mTvPayWay.setText("总数" + payWay);
+
 	}
 
 	private void setState(int state) {

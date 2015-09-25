@@ -26,9 +26,9 @@ public class MyOrder implements Serializable {
 	private double mDeliverFee;// 运费
 	private String mCustomerName;// 客户姓名和电话
 	private String mCustomerAddr;// 配送地址
-	private double mOffsetValue;//抵价券金额
-	private String mTips;//备注
-	
+	private double mOffsetValue;// 抵价券金额
+	private String mTips;// 备注
+	private int mPayType;// 支付方式
 
 	public String getmTips() {
 		return mTips;
@@ -225,6 +225,14 @@ public class MyOrder implements Serializable {
 
 	public void setmExpShortName(String mExpShortName) {
 		this.mExpShortName = mExpShortName;
+	}
+
+	public int getmPayType() {
+		return mPayType;
+	}
+
+	public void setmPayType(int mPayType) {
+		this.mPayType = mPayType;
 	}
 
 }
