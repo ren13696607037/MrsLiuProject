@@ -58,27 +58,34 @@ public class JishiScheuleSubTimeAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.time.setBackgroundResource(R.drawable.jishi_time_bg2);
-        if (mListPoints != null) {
-            for (TimePoints points : mListPoints) {
-                if (mList.get(position).getTimeMill() == points.getmTimeMills()) {
-                    if (points.ismIsWholeHours()) {
-                        holder.time
-                                .setBackgroundResource(R.drawable.jishi_time_bg1);
-                        holder.time.setTextColor(mContext.getResources().getColor(android.R.color.white));
-                    } else {
-                        if(points.ismBeforeHalfJHours()){
+        if(mList.get(position).getTimeMill()==0){
+            holder.time.setText("");
+            holder.time
+            .setBackgroundDrawable(null);;
+        }else{
+            if (mListPoints != null) {
+                for (TimePoints points : mListPoints) {
+                    if (mList.get(position).getTimeMill() == points.getmTimeMills()) {
+                        if (points.ismIsWholeHours()) {
                             holder.time
-                            .setBackgroundResource(R.drawable.jishi_time_bg3);
-                        }else{
-                            holder.time
-                            .setBackgroundResource(R.drawable.jishi_time_bg4);
+                                    .setBackgroundResource(R.drawable.jishi_time_bg1);
+                            holder.time.setTextColor(mContext.getResources().getColor(android.R.color.white));
+                        } else {
+                            if(points.ismBeforeHalfJHours()){
+                                holder.time
+                                .setBackgroundResource(R.drawable.jishi_time_bg3);
+                            }else{
+                                holder.time
+                                .setBackgroundResource(R.drawable.jishi_time_bg4);
+                            }
+                            
                         }
-                        
                     }
                 }
-            }
-        } 
-        holder.time.setText(mList.get(position).getTime());
+            } 
+            holder.time.setText(mList.get(position).getTime());
+        }
+      
         return convertView;
     }
 

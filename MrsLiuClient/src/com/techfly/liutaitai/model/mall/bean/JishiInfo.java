@@ -10,6 +10,7 @@ public class JishiInfo {
     private float mRating;
     private String mServiceTime;
     private int type;
+    private int mIdleTime;
     
     private List<TimePoints> mList;
     
@@ -61,5 +62,11 @@ public class JishiInfo {
     }
     public void setmList(List<TimePoints> mList) {
         this.mList = mList;
+    }
+    public int getmIdleTime() {
+        return mIdleTime;
+    }
+    public void setmIdleTime(int mIdleTime) {
+        this.mIdleTime = mIdleTime;
     }
 }

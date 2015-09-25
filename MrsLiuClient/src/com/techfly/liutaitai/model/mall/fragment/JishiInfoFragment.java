@@ -50,7 +50,8 @@ public class JishiInfoFragment extends CommonFragment {
     private JishiInfo mInfo;
     private String mId;
     private List<JishiScheuleTime> mList = new ArrayList<JishiScheuleTime>();
-    private static final String TIME_FORMAT1="MM dd";
+    private static final String TIME_FORMAT1 = "MM dd";
+
     @Override
     public void requestData() {
         RequestParam param = new RequestParam();
@@ -101,13 +102,22 @@ public class JishiInfoFragment extends CommonFragment {
         c.set(java.util.Calendar.HOUR_OF_DAY, 0);
         c.set(java.util.Calendar.MINUTE, 0);
         c.set(java.util.Calendar.SECOND, 0);
-        for(int i=0;i<=6;i++){
+        int startTime = 0;
+        if (mInfo.getmIdleTime() == 0) {
+            startTime = 1;
+        }
+        for (int i = startTime; i <= 6; i++) {
             TimeBean time1 = new TimeBean();
-            long timeMill2 = c.getTimeInMillis()+ i * 24 * 60 * 60 * 1000;
+            long timeMill2 = c.getTimeInMillis() + i * 24 * 60 * 60 * 1000;
             time1.setMisSelect(true);
             time1.setTime(DateUtils.getTime(timeMill2, TIME_FORMAT1));
             time1.setTimeMill(timeMill2);
-            initTimeList(time1);
+            if (i == 0) {
+                initTimeList(time1, true);
+            } else {
+                initTimeList(time1, false);
+            }
+
         }
         mName.setText(mInfo.getmName());
         mSex.setText("性别：" + mInfo.getmSex());
@@ -121,29 +131,124 @@ public class JishiInfoFragment extends CommonFragment {
 
     }
 
-    private void initTimeList(TimeBean date) {
-        JishiScheuleTime scheuleTime = new JishiScheuleTime();
+    /**
+     * 初始化 每行的时间区域
+     * 
+     * @param starttime
+     * @return
+     */
+    private List<TimeBean> initTimeBean(long starttime, boolean isToady) {
         List<TimeBean> time = new ArrayList<TimeBean>();
         TimeBean time1 = new TimeBean();
         time1.setMisSelect(true);
-        if(date.getTimeMill()-new Date().getTime()<0){
-            scheuleTime.setmDate("今天");
-        }else if(date.getTimeMill()-new Date().getTime()<24 * 60 * 60 * 1000){
-            scheuleTime.setmDate("明天");
-        }else{
-            scheuleTime.setmDate(DateUtils.getTime(date.getTimeMill(), "MM.dd"));
+        time1.setTimeMill(starttime);
+        if (isToady) {
+            int delayTime = mInfo.getmIdleTime();
+            long currentTimeMills = new Date().getTime();
+            for (int i = 1; i <= 11; i++) {
+                    if (DateUtils.currentMills(currentTimeMills,
+                            "8:00") + i * 60 * 60 * 1000 <= currentTimeMills
+                            + delayTime * 60 * 60 * 1000) {
+                        TimeBean time2 = new TimeBean();
+                        time.add(time2);// 空闲的时间
+                        //
+                    } else {
+                        TimeBean time2 = new TimeBean();
+                        time2.setTime(DateUtils.getTime(DateUtils.currentMills(currentTimeMills,
+                                "8:00") + i
+                                * 60 * 60 * 1000, "HH"));
+                        time2.setTimeMill(time1.getTimeMill() + i * 60 * 60
+                                * 1000);
+                        time2.setTimeMill2(time1.getTimeMill() + i * 60 * 60
+                                * 1000 + 30 * 60 * 1000);
+                        time.add(time2);
+                    }
+            }
+
+        } else {
+            for (int i = 1; i <= 11; i++) {
+                TimeBean time2 = new TimeBean();
+                time2.setTime(DateUtils.getTime(time1.getTimeMill() + i * 60
+                        * 60 * 1000, "HH"));
+                time2.setTimeMill(time1.getTimeMill() + i * 60 * 60 * 1000);
+                time2.setTimeMill2(time1.getTimeMill() + i * 60 * 60 * 1000
+                        + 30 * 60 * 1000);
+                time.add(time2);
+            }
         }
-        time1.setTimeMill(DateUtils.currentMills(date.getTimeMill(),"8:00"));
-        time1.setTimeMill2(time1.getTimeMill()+30*60*1000);
-        for(int i=1;i<=11;i++){
-            TimeBean time2 = new TimeBean();
-            time2.setTime(DateUtils.getTime(time1.getTimeMill()+i*60*60*1000, "HH"));
-            time2.setTimeMill(time1.getTimeMill()+i*60*60*1000);
-            time2.setTimeMill2(time1.getTimeMill()+i*60*60*1000+30*60*1000);
-            time.add(time2); 
+
+        return time;
+    }
+
+    private void initTimeList(TimeBean date, boolean isToday) {
+        if (mInfo.getmIdleTime() != 0) {
+            if (isToday) {
+                int delayTime = mInfo.getmIdleTime();
+                long currentTimeMills = new Date().getTime();
+                if (currentTimeMills + delayTime * 60 * 60 * 1000 >= DateUtils
+                        .currentMills(date.getTimeMill(), "9:00")
+                        && currentTimeMills + delayTime * 60 * 60 * 1000 <= DateUtils
+                                .currentMills(date.getTimeMill(), "19:00")) {
+                    JishiScheuleTime scheuleTime = new JishiScheuleTime();
+                    scheuleTime.setmDate("今天");
+                    scheuleTime.setList(initTimeBean(currentTimeMills, true));
+                    mList.add(scheuleTime);
+                } else {
+                    if (currentTimeMills + delayTime * 60 * 60 * 1000 > DateUtils
+                            .currentMills(date.getTimeMill(), "19:00")) {
+                        JishiScheuleTime scheuleTime = new JishiScheuleTime();
+                        if (date.getTimeMill() - new Date().getTime() < 24 * 60 * 60 * 1000) {
+                            scheuleTime.setmDate("明天");
+                        } else {
+                            scheuleTime.setmDate(DateUtils.getTime(
+                                    date.getTimeMill(), "MM.dd"));
+                        }
+                        scheuleTime.setList(initTimeBean(DateUtils
+                                .currentMills(date.getTimeMill(), "8:00"),
+                                false));
+                        mList.add(scheuleTime);
+                    } else {
+                        JishiScheuleTime scheuleTime = new JishiScheuleTime();
+                        scheuleTime.setmDate("今天");
+                        scheuleTime
+                                .setList(initTimeBean(
+                                        DateUtils.currentMills(
+                                                date.getTimeMill(), "8:00"),
+                                        true));
+                        mList.add(scheuleTime);
+                    }
+                }
+            } else {
+                JishiScheuleTime scheuleTime = new JishiScheuleTime();
+                TimeBean time1 = new TimeBean();
+                time1.setMisSelect(true);
+                if (date.getTimeMill() - new Date().getTime() < 24 * 60 * 60 * 1000) {
+                    scheuleTime.setmDate("明天");
+                } else {
+                    scheuleTime.setmDate(DateUtils.getTime(date.getTimeMill(),
+                            "MM.dd"));
+                }
+                scheuleTime.setList(initTimeBean(
+                        DateUtils.currentMills(date.getTimeMill(), "8:00"),
+                        false));
+                mList.add(scheuleTime);
+            }
+
+        } else {
+            JishiScheuleTime scheuleTime = new JishiScheuleTime();
+            TimeBean time1 = new TimeBean();
+            time1.setMisSelect(true);
+            if (date.getTimeMill() - new Date().getTime() < 24 * 60 * 60 * 1000) {
+                scheuleTime.setmDate("明天");
+            } else {
+                scheuleTime.setmDate(DateUtils.getTime(date.getTimeMill(),
+                        "MM.dd"));
+            }
+            scheuleTime.setList(initTimeBean(
+                    DateUtils.currentMills(date.getTimeMill(), "8:00"), false));
+            mList.add(scheuleTime);
         }
-        scheuleTime.setList(time);
-        mList.add(scheuleTime);
+
     }
 
     private Response.ErrorListener createMyReqErrorListener() {
@@ -202,13 +307,14 @@ public class JishiInfoFragment extends CommonFragment {
         setTitleText("技师详情");
         mName = (TextView) view.findViewById(R.id.name);
         mConfirm = (TextView) view.findViewById(R.id.confirm);
-        mListView = (ListViewForScrollView) view.findViewById(R.id.time_listview);
+        mListView = (ListViewForScrollView) view
+                .findViewById(R.id.time_listview);
         mHeadImg = (ImageView) view.findViewById(R.id.img);
         mRate = (RatingBar) view.findViewById(R.id.rate_bar);
         mServiceTime = (TextView) view.findViewById(R.id.service_times);
         mSex = (TextView) view.findViewById(R.id.sex);
         mConfirm.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View view) {
                 getActivity().setResult(100);

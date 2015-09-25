@@ -33,6 +33,7 @@ public class JiShiInfoParser implements Parser{
                     jishi.setmName(jsonObject.optString("name"));
                     jishi.setmImg(Constant.YIHUIMALL_BASE_URL+jsonObject.optString("image"));
                     jishi.setmRating((float) jsonObject.optDouble("stars"));
+                    jishi.setmIdleTime(jsonObject.optInt("serviceTime"));
                     jishi.setmServiceTime(jsonObject.optString("times"));
                     if(jsonObject.optString("gender").equals("0")){
                         jishi.setmSex("男");
