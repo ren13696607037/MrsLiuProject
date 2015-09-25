@@ -59,7 +59,6 @@ public class ProductInfoFragment extends CommonFragment implements
     private Product mProduct;
     private CommonFragment mFragment;
     private Context mContext;
-
     private RollViewPager mViewPager;
     private LinearLayout mDotLinear;
     private RelativeLayout mPagerRelative;
@@ -88,6 +87,7 @@ public class ProductInfoFragment extends CommonFragment implements
         super.onAttach(activity);
         mContext = activity;
         type = activity.getIntent().getIntExtra(IntentBundleKey.TYPE,0);
+        
     }
 
     @Override
@@ -335,7 +335,7 @@ public class ProductInfoFragment extends CommonFragment implements
                     break;
                 case R.id.product_info_comment:
                     if(mArrayList.size()>0){
-                        UIHelper.toSomeIdActivity(ProductInfoFragment.this,ProductCommentActivity.class.getName(),mId,type);
+                        UIHelper.toSomeIdActivity(ProductInfoFragment.this,ProductCommentActivity.class.getName(),mProductId,type);
                     }else{
                         showSmartToast("还没有商品的评论", Toast.LENGTH_LONG);
                     }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <LinearLayout
+        android:id="@+id/loading_progress"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <ProgressBar
+            android:id="@+id/img_progress"
+            style="@style/ResourcesFirstLoadingProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/first_loading_text_id"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textColor="#b8b8b8"
+            android:textSize="16sp" />
+    </LinearLayout>
+    
+    <uk.co.senab.photoview.PhotoView
+        android:id="@+id/photoView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+         />
+
+</FrameLayout>

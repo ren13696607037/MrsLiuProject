@@ -35,7 +35,6 @@ import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.XListView;
 
 public class ProductCommentFragment extends CommonFragment implements XListView.IXListViewListener {
-
     private CommonAdapter<Comments> mAdapter;
     private XListView mListView;
     private ArrayList<Comments> mList = new ArrayList<Comments>(); 
@@ -56,7 +55,6 @@ public class ProductCommentFragment extends CommonFragment implements XListView.
     }
     private Response.Listener<Object> creatReqSuccessListener() {
         return new Listener<Object>() {
-
             @Override
             public void onResponse(Object result) {
                 AppLog.Logd(result.toString());
@@ -69,7 +67,6 @@ public class ProductCommentFragment extends CommonFragment implements XListView.
                         mListView.setPullRefreshEnable(true);
                         ArrayList<Comments> list =(ArrayList<Comments>) rInfo.getObject();
                         mList.addAll(list);
-                        mListView.setPullRefreshEnable(false);
                         if(list.size()<Constant.DEFAULT_SIZE){
                             mListView.setPullLoadEnable(false);
                         }else{
@@ -108,12 +105,11 @@ public class ProductCommentFragment extends CommonFragment implements XListView.
         // TODO Auto-generated method stub
         super.onAttach(activity);
         type =activity.getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
-        mId = activity.getIntent().getStringExtra(IntentBundleKey.TYPE);
+        mId = activity.getIntent().getStringExtra(IntentBundleKey.ID);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         startReqTask(this);
     }

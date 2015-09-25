@@ -196,17 +196,7 @@ public class JishiInfoFragment extends CommonFragment {
                 } else {
                     if (currentTimeMills + delayTime * 60 * 60 * 1000 > DateUtils
                             .currentMills(date.getTimeMill(), "19:00")) {
-                        JishiScheuleTime scheuleTime = new JishiScheuleTime();
-                        if (date.getTimeMill() - new Date().getTime() < 24 * 60 * 60 * 1000) {
-                            scheuleTime.setmDate("明天");
-                        } else {
-                            scheuleTime.setmDate(DateUtils.getTime(
-                                    date.getTimeMill(), "MM.dd"));
-                        }
-                        scheuleTime.setList(initTimeBean(DateUtils
-                                .currentMills(date.getTimeMill(), "8:00"),
-                                false));
-                        mList.add(scheuleTime);
+                     return;
                     } else {
                         JishiScheuleTime scheuleTime = new JishiScheuleTime();
                         scheuleTime.setmDate("今天");
