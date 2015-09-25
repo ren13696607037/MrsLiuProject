@@ -476,7 +476,7 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-<service android:name="com.techfly.liutaitai.service.LocationService"/>
+		<service android:name="com.techfly.liutaitai.service.LocationService"/>
         <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"

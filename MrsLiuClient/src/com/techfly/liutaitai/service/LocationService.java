@@ -1,5 +1,7 @@
 package com.techfly.liutaitai.service;
 
+import cn.jpush.android.api.m;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -17,6 +19,7 @@ public class LocationService extends Service {
 	private LocationClient mLocClient;
 	public MyListenner myListener = new MyListenner();
 	boolean isFirstLoc = true;// 是否首次定位
+	private int mCount = 0;
 
 	@Override
 	public void onCreate() {
@@ -36,13 +39,16 @@ public class LocationService extends Service {
 			public void run() {
 				while (!threadDisable) {
 					try {
-						Thread.sleep(1000*60*15);
+						if(mCount != 0){
+							Thread.sleep(1000*60*15);
+						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					// 发送广播
 					if (Constant.mLocation != null) {
-						AppLog.Loge("xll", Constant.mLocation.getLatitude() + "-=-=-"
+						mCount++;
+						AppLog.Loge("xll", "locationservice is in -=-=-"+Constant.mLocation.getLatitude() + "-=-=-"
 								+ Constant.mLocation.getLongitude());
 						Intent intent = new Intent();
 						intent.putExtra("lat", Constant.mLocation == null ? ""
@@ -69,6 +75,9 @@ public class LocationService extends Service {
 			// map view 销毁后不在处理新接收的位置
 			if (location == null)
 				return;
+			if(isFirstLoc){
+				isFirstLoc = false;
+			}
 			Constant.mLocation=location;
 		}
 

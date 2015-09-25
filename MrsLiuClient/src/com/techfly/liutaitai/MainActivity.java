@@ -142,7 +142,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
 
 		@Override
 		public void onReceive(Context arg0, Intent intent) {
-			
+			AppLog.Loge("xll", "mainactivity receiver is in");
 			   Bundle bundle=intent.getExtras();      
 			   String lon=bundle.getString("lon");    
 			   String lat=bundle.getString("lat"); 
@@ -199,7 +199,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
 		mUser = SharePreferenceUtils.getInstance(mContext).getUser();
 		if(mUser != null && "2".equals(mUser.getmType())){
 			//启动服务
-	        startService(new Intent(mContext, LocationService.class));
+	        startService(new Intent(MainActivity.this, LocationService.class));
 	        //注册广播
 	        mReceiver=new LocationReceiver();
 	        IntentFilter filter=new IntentFilter();
