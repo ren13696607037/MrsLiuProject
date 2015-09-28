@@ -62,6 +62,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 	private Button mButton;
 	private Button mButton2;
 	private Service mService;
+	private TextView mClear;
 	private int mType = 0;
 	private String mId;
 	private User mUser;
@@ -141,6 +142,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     	mState = (TextView) view.findViewById(R.id.osd_state);
     	mServiewView = view.findViewById(R.id.osd_view);
     	mPayWay = (TextView) view.findViewById(R.id.osd_text1);
+    	mClear = (TextView) view.findViewById(R.id.osd_service_clear);
     	
     }
     private void setData(){
@@ -168,6 +170,11 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 			}
 		});
     	setPayWay(mPayWay, mService.getmPayWay());
+    	if("0".equals(mService.getmServiceType()) && "1".equals(mService.getmClear())){
+    		mClear.setVisibility(View.VISIBLE);
+    	}else{
+    		mClear.setVisibility(View.GONE);
+    	}
     }
     private void setPayWay(TextView textView, String state){
     	if("0".equals(state)){

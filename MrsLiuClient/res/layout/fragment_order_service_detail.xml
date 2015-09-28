@@ -151,13 +151,26 @@
                 android:text="@string/order_service_text"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
+            <TextView 
+                android:id="@+id/osd_service_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/osd_service_time"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:layout_marginTop="@dimen/px_10"
+                android:text="@string/order_service_text4"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" 
+                android:visibility="gone"
+                />
 
             <View
                 android:id="@+id/osd_line1"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@id/osd_service_time"
                 android:layout_marginTop="@dimen/px_30"
+                android:layout_below="@id/osd_service_clear"
                 android:background="@color/color_be" />
 
             <ImageView

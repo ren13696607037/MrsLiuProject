@@ -31,11 +31,13 @@ public class TechOrderDetailParser implements Parser{
 					service.setmServicePrice(obj.optString(JsonKey.ServiceDetailKey.PRICE));
 					service.setmOrderTime(obj.optString(JsonKey.ServiceDetailKey.TIME));
 					service.setmServiceStatus(obj.optString(JsonKey.ServiceKey.STATE));
+					service.setmServiceType(obj.optString(JsonKey.ServiceDetailKey.TYPE));
 					service.setmCustomerTime(obj.optString(JsonKey.ServiceDetailKey.ADDTIME));
 					service.setmStartTime(obj.optString(JsonKey.ServiceDetailKey.STARTTIME));
 					service.setmMinutes(obj.optString("minutes"));
 					service.setmPayWay(obj.optString("paytype"));
 					service.setmServiceNum(obj.optString("serviceNum"));
+					service.setmClear(obj.optString("needClean"));
 				}
 			}else{
 				return object.optString(JsonKey.MESSAGE);

@@ -159,10 +159,19 @@ public class Service {
 		this.mServiceNum = mServiceNum;
 	}
 
+	public String getmClear() {
+		return mClear;
+	}
+
+	public void setmClear(String mClear) {
+		this.mClear = mClear;
+	}
+
 	private String mCash;// 代金券的数额
     private String mNum;//预约编号
     private String mTechId;
     private String mAliNo;
     private String mPayWay;
     private String mServiceNum;
+    private String mClear;
 }

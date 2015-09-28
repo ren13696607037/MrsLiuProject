@@ -93,6 +93,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	private String mId;
 	private ImageView mIvPhone;
 	private ImageView mIvAddress;
+	private TextView mClear;
 	private User mUser;
 	private StartTimeText mTimeStart;
 	private final int MSG_DATA = 0x101;
@@ -206,6 +207,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mIvPhone = (ImageView) view.findViewById(R.id.tsd_phone_img);
 		mTimeStart = (StartTimeText) view.findViewById(R.id.tsd_time_start);
 		mPayWay = (TextView) view.findViewById(R.id.tsd_text1);
+		mClear = (TextView) view.findViewById(R.id.tsd_service_clear);
 
 		mIvAddress.setOnClickListener(this);
 		mIvPhone.setOnClickListener(this);
@@ -247,6 +249,11 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				.getText().toString(),1));
 		mTimeStart.toStart(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())-60*1000);
 		setPayWay(mPayWay, mOrder.getmPayWay());
+		if("0".equals(mOrder.getmServiceType()) && "1".equals(mOrder.getmClear())){
+    		mClear.setVisibility(View.VISIBLE);
+    	}else{
+    		mClear.setVisibility(View.GONE);
+    	}
 	}
 	private void setPayWay(TextView textView, String state){
     	if("0".equals(state)){

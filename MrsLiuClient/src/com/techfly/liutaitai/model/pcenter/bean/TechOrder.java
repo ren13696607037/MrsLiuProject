@@ -166,7 +166,23 @@ public class TechOrder implements Serializable{
 	public void setmServiceNum(String mServiceNum) {
 		this.mServiceNum = mServiceNum;
 	}
+	public String getmClear() {
+		return mClear;
+	}
+
+	public void setmClear(String mClear) {
+		this.mClear = mClear;
+	}
+	public String getmServiceType() {
+		return mServiceType;
+	}
+
+	public void setmServiceType(String mServiceType) {
+		this.mServiceType = mServiceType;
+	}
 	private String mPayWay;
     private String mServiceNum;
+    private String mClear;
+    private String mServiceType;
     
 }
