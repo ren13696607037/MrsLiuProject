@@ -53,6 +53,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 	private RelativeLayout mAddress;//我的收货地址
 	private RelativeLayout mApply;//申请成为技师
 	private RelativeLayout mService;//我的服务
+	private RelativeLayout mShare;
 	private CircleImageView mHeader;
 	private TextView mTvNick;
 	private User mUser;
@@ -158,6 +159,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	mService = (RelativeLayout) view.findViewById(R.id.pcenter_service);
     	mVoucher = (RelativeLayout) view.findViewById(R.id.pcenter_voucher);
     	mButton = (Button) view.findViewById(R.id.mine_btn);
+    	mShare = (RelativeLayout) view.findViewById(R.id.pcenter_share);
     	
     	mButton.setOnClickListener(this);
     	mCollect.setOnClickListener(this);
@@ -168,14 +170,15 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     	mApply.setOnClickListener(this);
     	mService.setOnClickListener(this);
     	mBanlance.setOnClickListener(this);
+    	mShare.setOnClickListener(this);
     	
-    	mService.setVisibility(View.INVISIBLE);
+    	mService.setVisibility(View.GONE);
     }
     private void setView(){
     	if(mUser==null){
     		mTop.setVisibility(View.GONE);
         	mWelcome.setVisibility(View.VISIBLE);
-        	mService.setVisibility(View.INVISIBLE);
+        	mService.setVisibility(View.GONE);
     	}else{
     		mTop.setVisibility(View.VISIBLE);
     		mWelcome.setVisibility(View.GONE);
@@ -184,7 +187,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     		if("2".equals(mUser.getmType())){
     			mService.setVisibility(View.VISIBLE);
     		}else if("0".equals(mUser.getmType())){
-    			mService.setVisibility(View.INVISIBLE);
+    			mService.setVisibility(View.GONE);
     		}
     		ManagerListener.newManagerListener().notifyStartServiceListener();
     	}
@@ -264,6 +267,12 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
                 showSmartToast(R.string.login_notice, Toast.LENGTH_SHORT);
             }
 		    break;
+		case R.id.pcenter_share:
+			intent = new Intent(Intent.ACTION_SEND); // 启动分享发送的属性
+            intent.setType("text/plain"); // 分享发送的数据类型
+            intent.putExtra(Intent.EXTRA_TEXT, mActivity.getString(R.string.share_text)); // 分享的内容
+            Intent.createChooser(intent, "分享");
+			break;
 		default:
 			break;
 		}

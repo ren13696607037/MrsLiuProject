@@ -315,6 +315,46 @@
             		android:layout_alignParentRight="true"
                     />
             </RelativeLayout>
+            <RelativeLayout 
+                android:id="@+id/pcenter_share"
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:paddingTop="@dimen/px_25"
+            	android:paddingLeft="@dimen/px_25"
+            	android:paddingRight="@dimen/px_25"
+            	android:background="@drawable/selector_customer_background"
+                >
+                <ImageView 
+                    android:id="@+id/mine_share_img"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_share"
+            		android:layout_marginRight="@dimen/px_30"
+                    />
+                <TextView 
+                    android:id="@+id/mine_share_text"
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_toRightOf="@id/mine_share_img"
+            		android:text="@string/pcenter_share"
+            		android:textColor="@color/TextColorBLACK_NORMAL"
+            		android:textSize="@dimen/app_text_size_first"
+            		android:paddingBottom="@dimen/px_25"
+                    />
+                <View 
+	                android:layout_width="match_parent"
+	            	android:layout_height="1dp"
+	            	android:background="@color/color_gray"
+	            	android:layout_below="@id/mine_share_text"
+	            	android:layout_toRightOf="@id/mine_share_img"
+	                />
+                <ImageView 
+                    android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:src="@drawable/pcenter_arrow"
+            		android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
             
            
         </LinearLayout>
