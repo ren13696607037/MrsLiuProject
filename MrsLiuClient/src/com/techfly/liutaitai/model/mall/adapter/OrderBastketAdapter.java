@@ -153,6 +153,12 @@ public class OrderBastketAdapter extends BaseAdapter {
 		mTvBtn1.setVisibility(View.INVISIBLE);
 		mTvBtn2.setVisibility(View.INVISIBLE);
 		switch (state) {
+		case -2:
+			mTvState.setText(R.string.order_state_2_);
+			mTvBtn1.setVisibility(View.INVISIBLE);
+			mTvBtn2.setVisibility(View.VISIBLE);
+			mTvBtn2.setText(R.string.order_text_5);
+			break;
 		case -1:
 			mTvState.setText(R.string.order_state_1_);
 			mTvBtn1.setVisibility(View.INVISIBLE);
@@ -219,11 +225,15 @@ public class OrderBastketAdapter extends BaseAdapter {
 			break;
 		case 9:
 			mTvState.setText(R.string.order_state_9);
-		case 10:
-			mTvState.setText(R.string.order_state_1_);
 			mTvBtn1.setVisibility(View.INVISIBLE);
 			mTvBtn2.setVisibility(View.VISIBLE);
 			mTvBtn2.setText(R.string.order_text_5);
+		case 10:
+			mTvState.setText(R.string.order_state_10);
+//			mTvBtn1.setVisibility(View.INVISIBLE);
+//			mTvBtn2.setVisibility(View.VISIBLE);
+//			mTvBtn2.setText(R.string.order_text_5);
+			
 			break;
 
 		default:

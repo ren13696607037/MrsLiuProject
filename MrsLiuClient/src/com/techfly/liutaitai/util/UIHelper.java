@@ -17,6 +17,7 @@ import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceListActivity;
 import com.techfly.liutaitai.model.mall.activities.ShengXianActivity;
 import com.techfly.liutaitai.model.mall.bean.Product;
+import com.techfly.liutaitai.model.mall.fragment.OrderBastketFragment;
 import com.techfly.liutaitai.model.pcenter.activities.AddressManageActivity;
 import com.techfly.liutaitai.model.pcenter.activities.ChangeAddressActivity;
 import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
@@ -195,7 +196,7 @@ public class UIHelper {
 		Intent intent = new Intent(context.getActivity(),
 				OrderInfoActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER_ID, id);
-		context.startActivity(intent);
+		context.startActivityForResult(intent,OrderBastketFragment.REQUEST_CODE);
 	}
 
 	public static void toAfterActivity(Fragment context, String id) {
@@ -209,7 +210,7 @@ public class UIHelper {
 		Intent intent = new Intent(context.getActivity(),
 				OrderEvaActivity.class);
 		intent.putExtra(IntentBundleKey.ORDER, order);
-		context.startActivity(intent);
+		context.startActivityForResult(intent,OrderBastketFragment.REQUEST_CODE);
 	}
 	/**
      * 查看大图

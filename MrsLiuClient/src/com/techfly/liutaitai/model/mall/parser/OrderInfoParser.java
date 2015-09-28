@@ -11,6 +11,7 @@ import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.Utility;
 
 public class OrderInfoParser implements Parser {
 
@@ -39,8 +40,8 @@ public class OrderInfoParser implements Parser {
 							.optString(JsonKey.OrderInfoKey.CUSTOMER_NAME));
 					mo.setmCustomerAddr(mJsonObject
 							.optString(JsonKey.OrderInfoKey.CUSTOMER_ADDR));
-					mo.setmTotalPrice(mJsonObject
-							.optString(JsonKey.OrderInfoKey.TOTAL_PRICE));
+					mo.setmTotalPrice(Utility.dot2(mJsonObject
+							.optDouble(JsonKey.OrderInfoKey.TOTAL_PRICE)));
 					mo.setmState(mJsonObject.optInt(JsonKey.OrderInfoKey.STATE));
 					mo.setmOffsetValue(mJsonObject
 							.optDouble(JsonKey.OrderInfoKey.OFFSET_VALUE));
