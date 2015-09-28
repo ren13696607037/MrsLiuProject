@@ -557,4 +557,6 @@
     <string name="dialog_message3">是否取消该订单？</string>
     <string name="dialog_title1">确认取消</string>
     <string name="dialog_cancel">取消</string>
+    
+    <string name="share_text">刘太太生活，您生活中的好太太~</string>
 </resources>

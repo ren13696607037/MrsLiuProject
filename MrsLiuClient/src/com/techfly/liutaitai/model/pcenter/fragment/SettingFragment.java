@@ -111,7 +111,10 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
 			intent=new Intent(mActivity,SuggestActivity.class);
 			break;
 		case R.id.setting_share:
-			
+			intent = new Intent(Intent.ACTION_SEND); // 启动分享发送的属性
+            intent.setType("text/plain"); // 分享发送的数据类型
+            intent.putExtra(Intent.EXTRA_TEXT, mActivity.getString(R.string.share_text)); // 分享的内容
+            Intent.createChooser(intent, "分享");
 		    break;
 		case R.id.setting_exit:
 			mDialog = new Dialog(mActivity, R.style.MyDialog);
