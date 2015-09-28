@@ -31,49 +31,11 @@
                 android:layout_marginLeft="-3dp"
                 android:layout_toRightOf="@id/product_checkbox"
                 />
-	<View 
-	    android:layout_toRightOf="@id/product_img"
-	    android:layout_width="1dp"
-        android:layout_height="match_parent"
-		android:background="@color/background"
-		/>
-	    <TextView
-        android:id="@+id/product_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="1dp"
-        android:textColor="@color/orange_bg_home_header"
-        android:gravity="left"
-        android:text="￥1399.00"
-        android:textSize="@dimen/app_text_size_second"
-    />
+	
+	
 	    
-	      <TextView
-        android:id="@+id/product_market_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_price"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="1dp"
-        android:textColor="#545454"
-        android:gravity="left"
-        android:visibility="gone"
-        android:text="￥2399.00"
-        android:textSize="@dimen/app_text_size_min"
-    />
-	            <TextView
-        android:id="@+id/product_cha_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_market_price"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="1dp"
-        android:textColor="@color/color_gray2"
-        android:gravity="left"
-        android:text="已降￥99"
-        android:textSize="@dimen/app_text_size_min"
-    />
+	   
+	        
         
     <TextView
         android:id="@+id/product_name"
@@ -81,7 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
-        android:layout_toLeftOf="@id/product_price"
         android:layout_toRightOf="@id/product_img"
         android:gravity="left"
         android:textColor="@color/TextColorBLACK_NORMAL"
@@ -90,31 +51,41 @@
         android:maxLines="3"
         android:layout_marginTop="1dp"/>
     
-   <TextView
-        android:id="@+id/product_category"
-        android:layout_width="match_parent"
+        <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="8dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="6dp"
-        android:layout_toLeftOf="@id/product_price"
         android:layout_toRightOf="@id/product_img"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/orange_bg_home_header"
         android:layout_below="@id/product_name"
-        android:gravity="left"
-        android:textColor="#D4D4D4"
+        android:text="￥1399.00"
         android:textSize="@dimen/app_text_size_second"
-        android:text="颜色：白色"
-     />
+    />
+       <TextView
+        android:id="@+id/unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_price"
+        android:layout_toRightOf="@id/product_img"
+        android:layout_marginTop="8dp"
+        android:textColor="#545454"
+        android:layout_marginLeft="8dp"
+        android:gravity="left"
+        android:text="1sss"
+        android:textSize="@dimen/app_text_size_second"
+    />
+   
 
    
  <com.techfly.liutaitai.util.view.ShopCartChangeView
       android:id="@+id/product_update_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginLeft="12dp"
-      android:layout_toRightOf="@id/product_img"
-      android:layout_alignParentBottom="true"
-      android:layout_marginBottom="3dp"
+      android:layout_centerVertical="true"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="2dp"
      >
     </com.techfly.liutaitai.util.view.ShopCartChangeView>
     

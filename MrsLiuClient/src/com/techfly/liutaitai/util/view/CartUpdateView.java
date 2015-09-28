@@ -83,7 +83,7 @@ public class CartUpdateView extends LinearLayout implements OnClickListener{
                 mproduct = product;
         }
         int num = mproduct.getmAmount();
-        mNumText.setTextColor(mContext.getResources().getColor(R.color.color_blue));
+        mNumText.setTextColor(mContext.getResources().getColor(R.color.orange_bg_home_header));
         if(mproduct.ismEditable()){
             if (null != mNumText && num > 1) {
                 mAddIcon.setVisibility(View.VISIBLE);
@@ -111,7 +111,7 @@ public class CartUpdateView extends LinearLayout implements OnClickListener{
             mMinusIcon.setVisibility(View.GONE);
             mAddIcon.setVisibility(View.GONE);
             mNumText.setText("x"+num + "");
-            mNumText.setTextColor(mContext.getResources().getColor(R.color.TextColorBLACK_NORMAL));
+            mNumText.setTextColor(mContext.getResources().getColor(R.color.orange_bg_home_header));
             mNumText.setBackgroundDrawable(null);
             
         }

@@ -1,5 +1,7 @@
 package com.techfly.liutaitai.util;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,9 @@ import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.shopcar.activities.OrderPayFinishActivity;
 import com.techfly.liutaitai.model.shopcar.activities.ShopCarActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
+import com.techfly.liutaitai.scale.GalleryData;
+import com.techfly.liutaitai.scale.ImageEntity;
+import com.techfly.liutaitai.scale.ImageScaleActivity;
 
 /**
  * 
@@ -206,5 +211,26 @@ public class UIHelper {
 		intent.putExtra(IntentBundleKey.ORDER, order);
 		context.startActivity(intent);
 	}
-
+	/**
+     * 查看大图
+     */
+    public static void showImage(Context context, int index, ArrayList<ImageEntity> listItems,boolean isDel) {
+        if(listItems==null || listItems.size()<=0 ){
+            return;
+        }
+        ArrayList<String> tempPath = new ArrayList<String>();
+        ArrayList<GalleryData> tempRemark = new ArrayList<GalleryData>();
+        for(ImageEntity entity : listItems){
+            tempPath.add(entity.getImagePath());
+            GalleryData mGData = new GalleryData(entity.getRemark(),"");
+            tempRemark.add(mGData);
+        }
+        Intent intent = new Intent(context, ImageScaleActivity.class);
+        intent.putStringArrayListExtra(IntentBundleKey.PICTURE_URL, tempPath);
+        intent.putParcelableArrayListExtra(IntentBundleKey.PICTURE_TITLE, tempRemark);
+        intent.putExtra(IntentBundleKey.PICTURE_INDEX, index);
+        intent.putExtra(IntentBundleKey.PICTURE_DEL, isDel);
+        intent.putParcelableArrayListExtra(IntentBundleKey.PICTURE_ENTITY, listItems);
+        context.startActivity(intent);
+    }
 }

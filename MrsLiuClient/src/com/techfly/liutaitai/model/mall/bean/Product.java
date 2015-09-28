@@ -11,6 +11,7 @@ import java.util.Map;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.techfly.liutaitai.dao.Persistence;
+import com.techfly.liutaitai.scale.ImageEntity;
 
 public class Product extends Persistence implements Cloneable, Serializable {
 	/**
@@ -38,8 +39,11 @@ public class Product extends Persistence implements Cloneable, Serializable {
 	@Expose
 	@SerializedName("id")
 	private String mId;// 商品ID
-	private boolean mEditable = false;// 购物车是否编辑状态
+	private boolean mEditable = true;// 购物车是否编辑状态
 	private String mSale;
+	
+	private List<ImageEntity> mImageEntity;
+	
 	// 规格没有？
 	@Expose
 	@SerializedName("productId")
@@ -294,6 +298,16 @@ public class Product extends Persistence implements Cloneable, Serializable {
     public void setmContent(String mContent) {
         this.mContent = mContent;
     }
+
+    public List<ImageEntity> getmImageEntity() {
+        return mImageEntity;
+    }
+
+    public void setmImageEntity(List<ImageEntity> mImageEntity) {
+        this.mImageEntity = mImageEntity;
+    }
+
+  
 
 
 }

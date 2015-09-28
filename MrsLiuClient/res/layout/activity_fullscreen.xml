@@ -1,0 +1,61 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:background="#e0000000"
+    tools:context=".activity.FullscreenActivity" 
+    android:id="@+id/full_frame"
+    >
+
+    <com.techfly.liutaitai.scale.DragViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent" >
+    </com.techfly.liutaitai.scale.DragViewPager>
+
+    <RelativeLayout
+        android:id="@+id/pager_mask_layer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:id="@+id/pager_header"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical" 
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:id="@+id/iv_pager_header_left"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/head_back" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pager_footer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center" >
+
+            <Gallery
+                android:id="@+id/gallery_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

@@ -3,7 +3,9 @@ package com.techfly.liutaitai.scale.resource;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
@@ -14,11 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.scale.PerfUtil;
 import com.techfly.liutaitai.scale.PerfUtil.PerfLevel;
+import com.techfly.liutaitai.util.AppLog;
 
 public class HttpImageResource extends BaseImageResource<String> implements Parcelable {
 
@@ -48,30 +54,30 @@ public class HttpImageResource extends BaseImageResource<String> implements Parc
     @Override
     public synchronized void displayImage(Context context, ImageView view, int index) {
         if (index < this.size()) {
-//            ImageLoader.getInstance().displayImage(this.get(index), view,
-//                    mScaleOptions, new ImageLoadingListener() {
-//
-//                        @Override
-//                        public void onLoadingStarted(String imageUri, View view) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onLoadingFailed(String imageUri, View view,
-//                                FailReason failReason) {
-//                        }
-//
-//                        @Override
-//                        public void onLoadingComplete(String imageUri,
-//                                View view, Bitmap loadedImage) {
-//                            view.setBackgroundColor(Color.BLACK);
-//                        }
-//
-//                        @Override
-//                        public void onLoadingCancelled(String imageUri,
-//                                View view) {
-//                        }
-//                    });
+            ImageLoader.getInstance().displayImage(this.get(index), view,
+                    mScaleOptions, new ImageLoadingListener() {
+
+                        @Override
+                        public void onLoadingStarted(String imageUri, View view) {
+
+                        }
+
+                        @Override
+                        public void onLoadingFailed(String imageUri, View view,
+                                FailReason failReason) {
+                        }
+
+                        @Override
+                        public void onLoadingComplete(String imageUri,
+                                View view, Bitmap loadedImage) {
+                            view.setBackgroundColor(Color.BLACK);
+                        }
+
+                        @Override
+                        public void onLoadingCancelled(String imageUri,
+                                View view) {
+                        }
+                    });
         }
     }
 
@@ -89,36 +95,36 @@ public class HttpImageResource extends BaseImageResource<String> implements Parc
     public void displayImage(Context context, ImageView view, int index, ProgressBar progressBar, final Handler handler,final LinearLayout layout) {
         if (index < this.size()) {
             showProgress(progressBar, handler);
-//            ImageLoader.getInstance().displayImage(this.get(index), view,
-//                    mScaleOptions, new ImageLoadingListener() {
-//
-//                        @Override
-//                        public void onLoadingStarted(String imageUri, View view) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onLoadingFailed(String imageUri, View view,
-//                                FailReason failReason) {
-//                            AppLog.Loge("is load fail");
-//                            handler.sendEmptyMessage(2);
-//                            layout.setVisibility(View.GONE);
-//                        }
-//
-//                        @Override
-//                        public void onLoadingComplete(String imageUri,
-//                                View view, Bitmap loadedImage) {
-//                            AppLog.Loge("is load complete");
-//                            handler.sendEmptyMessage(2);
-//                            layout.setVisibility(View.GONE);
-//                            view.setBackgroundColor(Color.BLACK);
-//                        }
-//
-//                        @Override
-//                        public void onLoadingCancelled(String imageUri,
-//                                View view) {
-//                        }
-//                    });
+            ImageLoader.getInstance().displayImage(this.get(index), view,
+                    mScaleOptions, new ImageLoadingListener() {
+
+                        @Override
+                        public void onLoadingStarted(String imageUri, View view) {
+
+                        }
+
+                        @Override
+                        public void onLoadingFailed(String imageUri, View view,
+                                FailReason failReason) {
+                            AppLog.Loge("is load fail");
+                            handler.sendEmptyMessage(2);
+                            layout.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onLoadingComplete(String imageUri,
+                                View view, Bitmap loadedImage) {
+                            AppLog.Loge("is load complete");
+                            handler.sendEmptyMessage(2);
+                            layout.setVisibility(View.GONE);
+                            view.setBackgroundColor(Color.BLACK);
+                        }
+
+                        @Override
+                        public void onLoadingCancelled(String imageUri,
+                                View view) {
+                        }
+                    });
         }
     }
     

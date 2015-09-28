@@ -106,7 +106,7 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
             mProduct = product;
         }
         int num = mProduct.getmAmount();
-        mNumText.setTextColor(mContext.getResources().getColor(R.color.color_blue));
+        mNumText.setTextColor(mContext.getResources().getColor(R.color.orange_bg_home_header));
         if(mProduct.ismEditable()){
             if (null != mNumText && num > 1) {
                 mAddIcon.setVisibility(View.VISIBLE);
@@ -134,7 +134,7 @@ public class ShopCartChangeView extends LinearLayout implements OnClickListener{
             mMinusIcon.setVisibility(View.GONE);
             mAddIcon.setVisibility(View.GONE);
             mNumText.setText("x"+num + "");
-            mNumText.setTextColor(mContext.getResources().getColor(R.color.TextColorBLACK_NORMAL));
+            mNumText.setTextColor(mContext.getResources().getColor(R.color.orange_bg_home_header));
             mNumText.setBackgroundDrawable(null);
             
         }

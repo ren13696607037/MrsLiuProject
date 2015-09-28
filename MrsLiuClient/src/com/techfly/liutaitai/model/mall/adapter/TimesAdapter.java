@@ -1,10 +1,7 @@
 package com.techfly.liutaitai.model.mall.adapter;
 
+import java.util.Date;
 import java.util.List;
-
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.adapter.DateAdapter.ViewHolder;
-import com.techfly.liutaitai.model.mall.bean.TimeBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,13 +10,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.bean.TimeBean;
+
 public class TimesAdapter extends BaseAdapter{
 
     private List<TimeBean> mList;
     private Context mContext;
-    public TimesAdapter(Context context,List<TimeBean> list){
+    private int mDelayTime;
+    public TimesAdapter(Context context,List<TimeBean> list,int delayTime){
         mList = list;   
         mContext = context;
+        mDelayTime = delayTime;
       }
       
     @Override
@@ -46,19 +48,24 @@ public class TimesAdapter extends BaseAdapter{
         }
         if(convertView==null){
             holder=new ViewHolder();
-            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_base_text, null);
+            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_base_text3, null);
             holder.time = (TextView) convertView.findViewById(R.id.text);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder) convertView.getTag();
         }
-        if(mList.get(arg0).isMisSelect()){
-            convertView.setBackgroundResource(R.drawable.time_bg2);;
+        if(new Date().getTime()+mDelayTime*60*60*1000<=mList.get(arg0).getTimeMill()){
+            if(mList.get(arg0).isMisSelect()){
+                convertView.setBackgroundResource(R.drawable.time_bg2);;
+            }else{
+                convertView.setBackgroundResource(R.drawable.time_bg1);;
+            }
         }else{
-            convertView.setBackgroundResource(R.drawable.time_bg1);;
+            convertView.setBackgroundResource(R.drawable.time_invalid_bg);;
         }
+       
         holder.time.setText(mList.get(arg0).getTime());
-       return convertView;
+        return convertView;
     }
     class ViewHolder{
         private TextView time;

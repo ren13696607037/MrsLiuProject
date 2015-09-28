@@ -42,6 +42,7 @@ public class ShopCartParser implements Parser{
                     product.setmMarketPrice((float) obj.optDouble(JsonKey.ProductKey.PRICE));
                     product.setmImg(Constant.IMG_URL+obj.optString(JsonKey.ProductKey.ICON));
                     product.setmAmount(obj.optInt("count"));
+                    product.setmUnit(obj.optString("unti"));
                     ShopCar.getShopCar().setLocalCartProduct(product, true);
                     list.add(product);
                 }

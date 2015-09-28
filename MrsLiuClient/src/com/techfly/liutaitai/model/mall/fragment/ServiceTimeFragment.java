@@ -7,6 +7,8 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,11 +17,23 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.Response.Listener;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.adapter.DateAdapter;
 import com.techfly.liutaitai.model.mall.adapter.TimesAdapter;
+import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.bean.TimeBean;
+import com.techfly.liutaitai.model.mall.parser.NewProductInfoParser;
+import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
+import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.DateUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
@@ -44,12 +58,89 @@ public class ServiceTimeFragment extends CommonFragment implements
     
     private long mSelectTimeMills;
     private TextView mTextView;
+    protected int mDelayTime;
     
     @Override
     public void requestData() {
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/getMasterTime");
+        param.setmHttpURL(url);
+        param.setmParserClassName(CommonParser.class.getName());
+        RequestManager
+                .getRequestData(getActivity(), createMyReqSuccessListener(),
+                        createMyReqErrorListener(), param);
+    }
+    private Response.Listener<Object> createMyReqSuccessListener() {
+        return new Listener<Object>() {
+            @Override
+            public void onResponse(Object object) {
+                AppLog.Logd(object.toString());
+                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                ResultInfo  resultInfo = (ResultInfo) object;
+                if(resultInfo.getmCode()==0){
+                    mDelayTime = Integer.parseInt(resultInfo.getmData());
+                    mDAdapter =new DateAdapter(getActivity(), mDateList);
+                    mListView.setAdapter(mDAdapter);
+                    mListView.setOnItemClickListener(new OnItemClickListener() {
 
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                long arg3) {
+                            for(TimeBean time:mDateList){
+                                time.setMisSelect(false);
+                            }
+                            
+                           TimeBean time = (TimeBean) arg0.getItemAtPosition(arg2);
+                           time.setMisSelect(true);
+                           initTimeList(time);
+                           mAdapter.notifyDataSetChanged();
+                           mDAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    
+
+                  
+                  
+                    mAdapter  = new TimesAdapter(getActivity(), mList,mDelayTime);
+                    mGridView.setAdapter(mAdapter);
+                    mGridView.setOnItemClickListener(new OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                long arg3) {
+                            for(TimeBean time:mList){
+                                time.setMisSelect(false);
+                            }
+                            
+                           TimeBean time = (TimeBean) arg0.getItemAtPosition(arg2);
+                           time.setMisSelect(true);
+                           mSelectTimeMills = time.getTimeMill();
+                           mAdapter.notifyDataSetChanged();
+                            
+                        }
+                    });
+                }else{
+                    showSmartToast(R.string.loading_fail_network, Toast.LENGTH_LONG);
+                }
+              
+            }
+
+        };
     }
 
+    private Response.ErrorListener createMyReqErrorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+                mLoadHandler.removeMessages(Constant.NET_FAILURE);
+                mLoadHandler.sendEmptyMessage(Constant.NET_FAILURE);
+                showMessage(R.string.loading_fail);
+            }
+        };
+    }
     @Override
     public void onAttach(Activity activity) {
 
@@ -60,13 +151,13 @@ public class ServiceTimeFragment extends CommonFragment implements
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        startReqTask(this);
         TimeBean time1 = new TimeBean();
         time1.setMisSelect(true);
-        time1.setTime("明天\n"
-                + DateUtils.getTime(new Date().getTime() + 24 * 60 * 60 * 1000,
+        time1.setTime("今天\n"
+                + DateUtils.getTime(new Date().getTime(),
                         TIME_FORMAT1));
-        time1.setTimeMill(new Date().getTime() + 24 * 60 * 60 * 1000);
+        time1.setTimeMill(new Date().getTime());
         initDateList();
         initTimeList(time1);
 
@@ -112,53 +203,12 @@ public class ServiceTimeFragment extends CommonFragment implements
         mIvRight.setOnClickListener(this);
         mListView = (HorizontalListView) view.findViewById(R.id.home_list);
         mListView.setDivider(getActivity().getResources().getDrawable(R.drawable.vertical_line));
-        mDAdapter =new DateAdapter(getActivity(), mDateList);
-        mListView.setAdapter(mDAdapter);
-        mListView.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                    long arg3) {
-                for(TimeBean time:mDateList){
-                    time.setMisSelect(false);
-                }
-                
-               TimeBean time = (TimeBean) arg0.getItemAtPosition(arg2);
-               time.setMisSelect(true);
-               initTimeList(time);
-               
-               mAdapter.notifyDataSetChanged();
-               mDAdapter.notifyDataSetChanged();
-            }
-        });
-        
-
         mGridView = (GridViewForScrollView) view.findViewById(R.id.home_grid);
-      
-        mAdapter  = new TimesAdapter(getActivity(), mList);
-        mGridView.setAdapter(mAdapter);
-        mGridView.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                    long arg3) {
-                for(TimeBean time:mList){
-                    time.setMisSelect(false);
-                }
-                
-               TimeBean time = (TimeBean) arg0.getItemAtPosition(arg2);
-               time.setMisSelect(true);
-               mSelectTimeMills = time.getTimeMill();
-               mAdapter.notifyDataSetChanged();
-                
-            }
-        });
 
     }
 
     private void initTimeList(TimeBean date) {
         mList.clear();
-
         TimeBean time1 = new TimeBean();
         time1.setMisSelect(true);
         time1.setTime("09:00");
@@ -175,8 +225,15 @@ public class ServiceTimeFragment extends CommonFragment implements
     }
 
     private void initDateList() {
+        TimeBean time = new TimeBean();
+        time.setMisSelect(true);
+        time.setTime("今天\n"
+                + DateUtils.getTime(new Date().getTime(),
+                        TIME_FORMAT1));
+        time.setTimeMill(new Date().getTime());
+        
+        
         TimeBean time1 = new TimeBean();
-        time1.setMisSelect(true);
         time1.setTime("明天\n"
                 + DateUtils.getTime(new Date().getTime() + 24 * 60 * 60 * 1000,
                         TIME_FORMAT1));
@@ -211,7 +268,7 @@ public class ServiceTimeFragment extends CommonFragment implements
         time6.setTime(DateUtils.getWeek(timeMill6) + "\n"
                 + DateUtils.getTime(timeMill6, TIME_FORMAT1));
         time6.setTimeMill(timeMill6);
-
+        mDateList.add(time);
         mDateList.add(time1);
         mDateList.add(time2);
         mDateList.add(time3);
