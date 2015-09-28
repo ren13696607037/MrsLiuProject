@@ -40,7 +40,7 @@
     <string name="editable_all">编辑全部</string>
     <string name="editable_txt">编辑</string>
     <string name="finish">完成</string>
-    <string name="taking_order_txt">结算</string>
+    <string name="taking_order_txt">下单</string>
     <string name="sale_prefix_text">成交量%1$s笔</string>
     <string name="sale_prefix_text2">%1$s人已买</string>
     <string name="tuangou_title_txt">团购</string>
@@ -549,7 +549,7 @@
 	<string name="collect_cancel_success">取消收藏成功~</string>
 	<string name="collect_success">收藏成功~</string>
 	
-	<string name="common_phone_dial_num">4008275699</string>
+	<string name="common_phone_dial_num">4008275899</string>
     <string name="choose_service_time_prompt">请选择服务时间</string>
     <string name="dialog_title">确认删除</string>
     <string name="dialog_message">是否删除该预约？</string>

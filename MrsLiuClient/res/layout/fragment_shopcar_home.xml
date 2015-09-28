@@ -58,31 +58,12 @@
             android:layout_centerVertical="true"
             />
         
-        <TextView 
-            android:id="@+id/del_all"
-            android:textColor="@android:color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/address_delete"
-            android:layout_marginRight="12dp"
-            android:gravity="center_vertical"
-            android:layout_centerVertical="true"
-            android:paddingRight="6dp"
-            android:paddingLeft="3dp"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:textSize="@dimen/app_text_size_first"
-            android:background="@drawable/shop_car_delete"
-            android:drawableLeft="@drawable/ic_delete"
-            android:drawablePadding="0dp"
-            />
+     
            <TextView 
             android:id="@+id/collect"
             android:textColor="@color/color_blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/del_all"
             android:text="@string/collect_text"
             android:layout_marginRight="12dp"
             android:gravity="center_vertical"
@@ -134,6 +115,8 @@
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
             />
+                
+                
                  <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,14 +124,14 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
             android:gravity="center"
             android:textSize="@dimen/app_text_size_first"
             android:textColor="@android:color/white"
-            android:text="结算(0)"
+            android:text="下单"
             android:background="@drawable/shop_car_delete"/>
             <TextView
                     android:id="@+id/money_total"
@@ -173,7 +156,23 @@
                     android:layout_toLeftOf="@id/confirm_btn"
                     android:textColor="@color/TextColorBLACK_NORMAL"
                     android:textSize="@dimen/app_text_size_min" />
-                
+           <TextView 
+            android:id="@+id/del_all"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/confirm_btn"
+            android:text="@string/address_delete"
+            android:layout_marginRight="12dp"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:paddingRight="12dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:textSize="@dimen/app_text_size_first"
+            android:background="@drawable/button_order_blue"
+            />     
         </RelativeLayout>
     
     </LinearLayout>

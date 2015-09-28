@@ -32,7 +32,11 @@ public class IntentBundleKey {
     public static final String DATA = "data";
     public static String CHANGEADD_ID = "changeadd_id";
     public static String ORDER_SERVICE = "order_service";
-    
+    public static String PICTURE_TITLE = "picture_title";
+    public static String PICTURE_URL = "picture_url";
+    public static String PICTURE_INDEX = "picture_index";
+    public static String PICTURE_DEL = "picture_del";
+    public static String PICTURE_ENTITY = "picture_entity";
   //照片选择
     public static String REDIRECT_TYPE = "redirect_type";
     

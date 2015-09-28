@@ -76,11 +76,8 @@ public class ShopCarAdapter extends BaseAdapter{
             holder.productName = (TextView) convertView.findViewById(R.id.product_name);
             holder.productPrice = (TextView) convertView.findViewById(R.id.product_price);
             holder.productUpdateView = (ShopCartChangeView) convertView.findViewById(R.id.product_update_view);
-            holder.productCategory = (TextView) convertView.findViewById(R.id.product_category);
             holder.productEdit =(TextView) convertView.findViewById(R.id.product_edit);
-            holder.productMarketPrice = (TextView) convertView.findViewById(R.id.product_market_price);
-            holder.productChaPrice =  (TextView) convertView.findViewById(R.id.product_cha_price);
-            holder.productMarketPrice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);//下划线
+            holder.productUnit=(TextView) convertView.findViewById(R.id.unit);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder) convertView.getTag();
@@ -103,19 +100,8 @@ public class ShopCarAdapter extends BaseAdapter{
         holder.productCheckBox.setChecked(mList.get(position).ismIsCheck());
         holder.productName.setText(mList.get(position).getmName());
         holder.productPrice.setText("￥"+mList.get(position).getmPrice());
-        holder.productMarketPrice.setText("￥"+mList.get(position).getmMarketPrice());
         holder.productUpdateView.onAttachView(mList.get(position));
-        holder.productCategory.setText(mList.get(position).getmBelongCategory());
-        float chaPrice = mList.get(position).getmMarketPrice()-mList.get(position).getmPrice();
-        if(chaPrice>0){
-            long l1 = Math.round(chaPrice  * 100); // 四舍五入
-            chaPrice  = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
-            holder.productChaPrice.setVisibility(View.VISIBLE);
-            holder.productChaPrice.setText("已降￥"+chaPrice);
-        }else{
-            holder.productChaPrice.setVisibility(View.GONE);
-        }
-     
+        holder.productUnit.setText("1"+mList.get(position).getmUnit());
         holder.productCheckBox.setOnClickListener(new View.OnClickListener() {
             
             @Override
@@ -131,9 +117,7 @@ public class ShopCarAdapter extends BaseAdapter{
         private TextView productName;
         private ImageView imageView;
         private TextView productPrice;
-        private TextView productMarketPrice;
-        private TextView productCategory;
-        private TextView productChaPrice;
+        private TextView productUnit;
         private ShopCartChangeView productUpdateView;
         private TextView productEdit;
     }

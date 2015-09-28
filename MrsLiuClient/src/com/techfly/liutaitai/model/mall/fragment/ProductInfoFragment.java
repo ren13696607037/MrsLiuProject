@@ -35,6 +35,7 @@ import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.scale.ImageEntity;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
@@ -231,6 +232,7 @@ public class ProductInfoFragment extends CommonFragment implements
             @Override
             public void onPagerClick(int position) {
 //                UIHelper.toPicAndTextActivity(getActivity(), mProductId);
+                UIHelper.showImage(mContext, position, (ArrayList<ImageEntity>) mProduct.getmImageEntity(), false);
             }
         });
     }

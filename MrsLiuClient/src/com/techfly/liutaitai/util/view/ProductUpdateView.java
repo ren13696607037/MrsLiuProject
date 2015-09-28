@@ -122,7 +122,7 @@ public class ProductUpdateView extends LinearLayout implements OnClickListener{
             mMinusIcon.setClickable(false); 
         }
         mNumText.setText(num + "");
-        mNumText.setTextColor(mContext.getResources().getColor(R.color.color_blue));
+        mNumText.setTextColor(mContext.getResources().getColor(R.color.orange_bg_home_header));
         mNumText.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.shop_car_num_bg));
     }
     /**

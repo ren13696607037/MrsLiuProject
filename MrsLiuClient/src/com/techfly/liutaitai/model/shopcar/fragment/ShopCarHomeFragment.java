@@ -172,6 +172,8 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
         mDelAllTv.setOnClickListener(this);
         mEditRelativeLayout = (RelativeLayout) view.findViewById(R.id.editable_area);
         mFinishRelativeLayout = (RelativeLayout) view.findViewById(R.id.finish_area);
+        mFinishRelativeLayout.setVisibility(View.VISIBLE);
+        mEditRelativeLayout.setVisibility(View.GONE);
     }
     
     @Override
@@ -211,7 +213,7 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
         }else{
             setTitleText(getString(R.string.home_shopcar_tab));
         }
-        mConfirmTv.setText(getString(R.string.taking_order_txt)+"("+ShopCar.getShopCar().getShopCheckedAmountSum()+")");
+        mConfirmTv.setText(getString(R.string.taking_order_txt));
        
         mTotalPriceTv.setText("￥"+ShopCar.getShopCar().getTotalPrice());
         if(ShopCar.getShopCar().getShopCheckedAmountSum()==ShopCar.getShopCar().getShopAmountSum()){
@@ -231,27 +233,27 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
           setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
       }
        setTitleText(getString(R.string.shopcar)+"("+ShopCar.getShopCar().getShopAmountSum()+")");
-       setRightText(R.string.editable_all,new OnClickListener() {
-        
-        @Override
-        public void onClick(View view) {
-            // TODO Auto-generated method stub 
-           TextView tv = (TextView) view;
-           if(tv.getText().toString().equals(getString(R.string.editable_all))){
-               setRightText(getString(R.string.finish));
-               mFinishRelativeLayout.setVisibility(View.GONE);
-               mEditRelativeLayout.setVisibility(View.VISIBLE);
-               onChangeProAllEdit();
-            
-           }else{
-               setRightText(getString(R.string.editable_all));
-               mFinishRelativeLayout.setVisibility(View.VISIBLE);
-               mEditRelativeLayout.setVisibility(View.GONE);
-               onChangeProAllNotEdit();
-           }
-      
-        }
-    });
+//       setRightText(R.string.editable_all,new OnClickListener() {
+//        
+//        @Override
+//        public void onClick(View view) {
+//            // TODO Auto-generated method stub 
+//           TextView tv = (TextView) view;
+//           if(tv.getText().toString().equals(getString(R.string.editable_all))){
+//               setRightText(getString(R.string.finish));
+//               mFinishRelativeLayout.setVisibility(View.GONE);
+//               mEditRelativeLayout.setVisibility(View.VISIBLE);
+//               onChangeProAllEdit();
+//            
+//           }else{
+//               setRightText(getString(R.string.editable_all));
+//               mFinishRelativeLayout.setVisibility(View.VISIBLE);
+//               mEditRelativeLayout.setVisibility(View.GONE);
+//               onChangeProAllNotEdit();
+//           }
+//      
+//        }
+//    });
     }
     /**
      * 改变产品所有都不可以编辑
