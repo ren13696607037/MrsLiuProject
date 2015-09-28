@@ -133,10 +133,12 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
         TabSwitchListener.getTabSwitchLisManager()
                 .onUnRegisterTabSwitchListener(this);
         ManagerListener.newManagerListener().onUnRegisterStartServiceListener(this);
-      //注销服务
-  	  unregisterReceiver(mReceiver);
-  	  //结束服务，如果想让服务一直运行就注销此句
-  	  stopService(new Intent(this, LocationService.class));
+        if(mReceiver != null){
+        	//注销服务
+        	  unregisterReceiver(mReceiver);
+        	  //结束服务，如果想让服务一直运行就注销此句
+        	  stopService(new Intent(this, LocationService.class));
+        }
     }
     public class LocationReceiver extends BroadcastReceiver{
 

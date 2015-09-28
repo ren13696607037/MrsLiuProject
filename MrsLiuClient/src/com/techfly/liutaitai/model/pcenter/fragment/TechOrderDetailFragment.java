@@ -217,7 +217,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	private void setData() {
 		AppLog.Loge("xll", "tech order detail is set data but why??");
 		mNo.setText(mActivity.getString(R.string.service_detail_text,
-				mOrder.getmId()));
+				mOrder.getmServiceNum()));
 		mAddress.setText(mActivity.getString(R.string.service_detail_text4,
 				mOrder.getmCustomerAddress()));
 		ImageLoader.getInstance().displayImage(mOrder.getmServiceIcon(),

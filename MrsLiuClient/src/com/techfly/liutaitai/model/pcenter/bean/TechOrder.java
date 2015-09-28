@@ -159,6 +159,14 @@ public class TechOrder implements Serializable{
 		this.mPayWay = mPayWay;
 	}
 
-    private String mPayWay;
+    public String getmServiceNum() {
+		return mServiceNum;
+	}
+
+	public void setmServiceNum(String mServiceNum) {
+		this.mServiceNum = mServiceNum;
+	}
+	private String mPayWay;
+    private String mServiceNum;
     
 }

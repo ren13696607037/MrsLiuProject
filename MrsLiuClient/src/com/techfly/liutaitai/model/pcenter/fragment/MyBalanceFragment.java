@@ -73,6 +73,7 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
+        getInfo();
         startReqTask(this);
     }
     
@@ -112,7 +113,7 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(mActivity, BalanceHistoryActivity.class);
-				MyBalanceFragment.this.startActivityForResult(intent, Constant.BALANCE_INTENT);
+				startActivity(intent);
 			}
 		});
     	
@@ -132,13 +133,8 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 	public void requestData() {
 		RequestParam param = new RequestParam();
 		HttpURL url = new HttpURL();
-		if(isRefresh){
-			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.USER_INFO_URL);
-			param.setmParserClassName(LoginParser.class.getName());
-		}else{
-			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.BALANCE_URL);
-			param.setmParserClassName(BalanceListParser.class.getName());
-		}
+		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.BALANCE_URL);
+		param.setmParserClassName(BalanceListParser.class.getName());
 		param.setmIsLogin(true);
 		param.setmId(mUser.getmId());
 		param.setmToken(mUser.getmToken());
@@ -149,30 +145,26 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 						createMyReqErrorListener(), param);
 
 	}
+	private void getInfo(){
+		RequestParam param = new RequestParam();
+		HttpURL url = new HttpURL();
+		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.USER_INFO_URL);
+		param.setmParserClassName(LoginParser.class.getName());
+		param.setmIsLogin(true);
+		param.setmId(mUser.getmId());
+		param.setmToken(mUser.getmToken());
+		param.setmHttpURL(url);
+		param.setPostRequestMethod();
+		RequestManager
+					.getRequestData(getActivity(), createMyReqSuccessListener(),
+							createMyReqErrorListener(), param);
+	}
 
 	private Response.Listener<Object> createMyReqSuccessListener() {
 		return new Listener<Object>() {
 			@Override
 			public void onResponse(Object object) {
 				AppLog.Loge("xll", object.toString());
-//				ArrayList<Balance> list = (ArrayList<Balance>) object;
-//				if(isRefresh){
-//					mList.addAll(list);
-//				}else{
-//					mList.clear();
-//					mList.addAll(list);
-//				}
-//				if (list == null || list.size() == 0) {
-//
-//				} else if (list.size() < 10) {
-//					mListView.setVisibility(View.VISIBLE);
-//					mTextView.setVisibility(View.GONE);
-//					mListView.setPullLoadEnable(false);
-//				} else {
-//					mListView.setVisibility(View.VISIBLE);
-//					mTextView.setVisibility(View.GONE);
-//					mListView.setPullLoadEnable(true);
-//				}
 				mListView.stopLoadMore();
 				mListView.stopRefresh();
 				if (!isDetached()) {
@@ -238,7 +230,11 @@ public class MyBalanceFragment extends CommonFragment implements IXListViewListe
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == Constant.BALANCE_SUCCESS){
 			isRefresh = true;
-			startReqTask(MyBalanceFragment.this);
+			mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
+			if(mUser != null){
+				getInfo();
+				startReqTask(MyBalanceFragment.this);
+			}
 		}
 	}
 

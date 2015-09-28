@@ -35,6 +35,7 @@ public class TechOrderDetailParser implements Parser{
 					service.setmStartTime(obj.optString(JsonKey.ServiceDetailKey.STARTTIME));
 					service.setmMinutes(obj.optString("minutes"));
 					service.setmPayWay(obj.optString("paytype"));
+					service.setmServiceNum(obj.optString("serviceNum"));
 				}
 			}else{
 				return object.optString(JsonKey.MESSAGE);

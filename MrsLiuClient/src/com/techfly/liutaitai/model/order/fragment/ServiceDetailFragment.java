@@ -144,7 +144,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     	
     }
     private void setData(){
-    	mNo.setText(mActivity.getString(R.string.service_detail_text, mService.getmId()));
+    	mNo.setText(mActivity.getString(R.string.service_detail_text, mService.getmServiceNum()));
     	mAddress.setText(mActivity.getString(R.string.service_detail_text4, mService.getmCustomerAddress()));
     	ImageLoader.getInstance().displayImage(mService.getmServiceIcon(), mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
     	mName.setText(mActivity.getString(R.string.service_detail_text2, mService.getmCustomerName()));

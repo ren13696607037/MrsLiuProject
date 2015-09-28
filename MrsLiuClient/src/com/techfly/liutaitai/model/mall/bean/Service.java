@@ -151,9 +151,18 @@ public class Service {
 		this.mPayWay = mPayWay;
 	}
 
+	public String getmServiceNum() {
+		return mServiceNum;
+	}
+
+	public void setmServiceNum(String mServiceNum) {
+		this.mServiceNum = mServiceNum;
+	}
+
 	private String mCash;// 代金券的数额
     private String mNum;//预约编号
     private String mTechId;
     private String mAliNo;
     private String mPayWay;
+    private String mServiceNum;
 }

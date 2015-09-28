@@ -17,6 +17,7 @@ import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;
 import com.techfly.liutaitai.model.pcenter.fragment.MyBalanceFragment;
 import com.techfly.liutaitai.util.AppLog;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 
 public class BalanceAdapter extends BaseAdapter {
@@ -70,7 +71,7 @@ public class BalanceAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Intent intent = new Intent(mFragment.getActivity(), RechargeActivity.class);
 				intent.putExtra(IntentBundleKey.BALANCE_PRICE, mList.get(arg0));
-				mFragment.startActivity(intent);
+				mFragment.startActivityForResult(intent, Constant.BALANCE_INTENT);
 			}
 		});
 		return arg1;

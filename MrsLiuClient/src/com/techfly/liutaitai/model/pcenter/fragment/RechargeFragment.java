@@ -121,6 +121,8 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 	             @Override
 	             public void onPaySuccess() {
 	                 showSmartToast("充值成功", Toast.LENGTH_SHORT);
+	                 getActivity().setResult(Constant.BALANCE_SUCCESS);
+	                 getActivity().finish();
 	             }
 	         }); 
 			break;
