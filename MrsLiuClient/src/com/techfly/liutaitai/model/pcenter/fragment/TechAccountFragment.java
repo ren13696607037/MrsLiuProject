@@ -59,7 +59,7 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
-        mTechAccount = (TechAccount) mActivity.getIntent().getSerializableExtra(IntentBundleKey.TECH_CASH_ID);
+//        mTechAccount = (TechAccount) mActivity.getIntent().getSerializableExtra(IntentBundleKey.TECH_CASH_ID);
     }
     
     @Override
@@ -111,22 +111,22 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
     	mWeixin.setOnClickListener(this);
     	mAlipay.setOnClickListener(this);
     	
-    	if(mTechAccount != null && mTechAccount.getmType() != null){
-    		if(Integer.valueOf(mTechAccount.getmType()) == 0){
-    			mCard.setChecked(true);
-    			mCardName.setText(mTechAccount.getmBank());
-    			mCardNumber.setText(mTechAccount.getmAccount());
-    			mCardUserName.setText(mTechAccount.getmName());
-    		}else if(Integer.valueOf(mTechAccount.getmType()) == 1){
-    			mAlipay.setChecked(true);
-    			mAlipayName.setText(mTechAccount.getmAccount());
-    			mAlipayUserName.setText(mTechAccount.getmName());
-    		}else if(Integer.valueOf(mTechAccount.getmType()) == 2){
-    			mWeixin.setChecked(true);
-    			mWeixinName.setText(mTechAccount.getmAccount());
-    			mWeixinUserName.setText(mTechAccount.getmName());
-    		}
-    	}
+//    	if(mTechAccount != null && mTechAccount.getmType() != null){
+//    		if(Integer.valueOf(mTechAccount.getmType()) == 0){
+//    			mCard.setChecked(true);
+//    			mCardName.setText(mTechAccount.getmBank());
+//    			mCardNumber.setText(mTechAccount.getmAccount());
+//    			mCardUserName.setText(mTechAccount.getmName());
+//    		}else if(Integer.valueOf(mTechAccount.getmType()) == 1){
+//    			mAlipay.setChecked(true);
+//    			mAlipayName.setText(mTechAccount.getmAccount());
+//    			mAlipayUserName.setText(mTechAccount.getmName());
+//    		}else if(Integer.valueOf(mTechAccount.getmType()) == 2){
+//    			mWeixin.setChecked(true);
+//    			mWeixinName.setText(mTechAccount.getmAccount());
+//    			mWeixinUserName.setText(mTechAccount.getmName());
+//    		}
+//    	}
     }
 
 	@Override
