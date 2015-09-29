@@ -59,7 +59,7 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
-//        mTechAccount = (TechAccount) mActivity.getIntent().getSerializableExtra(IntentBundleKey.TECH_CASH_ID);
+        mTechAccount = (TechAccount) mActivity.getIntent().getSerializableExtra(IntentBundleKey.TECH_CASH_ID);
     }
     
     @Override
@@ -173,9 +173,10 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
 					mLoadHandler.removeMessages(Constant.NET_SUCCESS);
 					mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
 					if(info.getmCode() == 0){
-						
+						mActivity.finish();
+						showSmartToast(R.string.submit_success, Toast.LENGTH_SHORT);
 					}else{
-						
+						showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
 					}
 				}
 			}
