@@ -81,7 +81,7 @@ public class ViewHolder {
 	};
 
 	public ViewHolder setImageResource(String url, int viewId) {
-		AppLog.Logd("Shi", "imageUrl==" + url);
+//		AppLog.Logd("Shi", "imageUrl==" + url);
 		ImageView view = getView(viewId);
 		ImageLoader.getInstance().displayImage(url, view,
 				ImageLoaderUtil.mHallIconLoaderOptions);
