@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -27,11 +29,15 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
 import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
+import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.activities.ProductCommentActivity;
 import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.parser.NewProductInfoParser;
+import com.techfly.liutaitai.model.mall.parser.ShopCartParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.model.shopcar.adapter.ShopCarAdapter;
+import com.techfly.liutaitai.model.shopcar.fragment.ShopCarHomeFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -67,7 +73,8 @@ public class ProductInfoFragment extends CommonFragment implements
     public ArrayList<String> mImageUrls;
     // private ArrayList<HomePager> mPagerDatas;
 
-    private TextView mShopCar;
+    private FrameLayout mShopCar;
+    private TextView mShopCarNum;
     private TextView mAddShopCar;
     private TextView mShopNow;
     private TextView mProductName;
@@ -148,9 +155,12 @@ public class ProductInfoFragment extends CommonFragment implements
     private void initViews(View view) {
         // TODO Auto-generated method stub
         initPager(view);
-        mShopCar = (TextView) view.findViewById(R.id.product_info_shop_car);
+        mShopCar = (FrameLayout) view.findViewById(R.id.product_info_shop_car);
         mShopCar.setEnabled(false);
         mShopCar.setOnClickListener(getClickListener());
+        
+        view.findViewById(R.id.phone).setOnClickListener(getClickListener());
+        
         mAddShopCar = (TextView) view
                 .findViewById(R.id.product_info_shop_car_add);
         mAddShopCar.setOnClickListener(getClickListener());
@@ -171,7 +181,7 @@ public class ProductInfoFragment extends CommonFragment implements
         mProductUpdateCount = (ProductUpdateView) view
                 .findViewById(R.id.product_info_product_update_count);
 
-     
+        mShopCarNum = (TextView) view.findViewById(R.id.shop_car_num2);
 
         mListView = (ListViewForScrollView) view
                 .findViewById(R.id.product_info_listview);
@@ -343,6 +353,11 @@ public class ProductInfoFragment extends CommonFragment implements
                     }
                  
                     break;
+                case R.id.phone:
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri
+                            .parse("tel:" + getActivity().getString(R.string.common_phone_dial_num)));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getActivity().startActivity(intent);
                 default:
                     break;
                 }
@@ -350,7 +365,61 @@ public class ProductInfoFragment extends CommonFragment implements
         };
         return mListener;
     }
+   
+    public void requestShopCarNum() {
+       
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
+        
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+                + Constant.SHOP_CARD_REQUEST_URL);
+        url.setmGetParamPrefix("city");
+        url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getArea().getmId());
+        url.setmGetParamPrefix("type");
+        url.setmGetParamValues(type+"");
+        param.setmHttpURL(url);
+        param.setmParserClassName(ShopCartParser.class.getName());
+        RequestManager.getRequestData(getActivity(), creatSuccessListener(),
+                creatErrorListener(), param);//
+    }
+    private Response.Listener<Object> creatSuccessListener() {
+        return new Response.Listener<Object>() {
 
+            @Override
+            public void onResponse(Object obj) {
+                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                if(ShopCar.getShopCar().getShopproductList()!=null){
+                    mShopCarNum.setText(ShopCar.getShopCar().getShopproductList().size()+"");
+                }else{
+                    mShopCarNum.setText("0");
+                }
+               
+            }
+        };
+    }
+
+    private Response.ErrorListener creatErrorListener() {
+        return new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+
+            }
+        };
+    }
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
@@ -378,9 +447,8 @@ public class ProductInfoFragment extends CommonFragment implements
             @Override
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
-                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 if (object instanceof Product) {
+                    requestShopCarNum();
                     Product p = (Product) object;
                     if (p != null) {
                         mProduct = p;
@@ -409,7 +477,7 @@ public class ProductInfoFragment extends CommonFragment implements
                         }
                      
                     }
-
+                  
                 } 
 
             }

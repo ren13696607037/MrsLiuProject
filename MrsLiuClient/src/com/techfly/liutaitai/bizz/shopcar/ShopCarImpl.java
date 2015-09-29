@@ -12,7 +12,7 @@ import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.util.AppLog;
 
 public class ShopCarImpl implements IShopCar {
-	private List<Product> mProductLists;
+	private List<Product> mProductLists = new ArrayList<Product>();
 	/**
 	 * 添加菜品 到购物车
 	 */

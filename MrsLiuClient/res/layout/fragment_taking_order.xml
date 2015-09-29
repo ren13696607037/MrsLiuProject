@@ -209,7 +209,7 @@
                 	android:layout_height="wrap_content"
                 	android:layout_marginTop="6dp"
                 	android:layout_toRightOf="@id/note_prifix"
-                	android:hint="您还有什么吩咐请告诉我们~"
+                	android:hint="如期望送达时间等"
                 	android:lines="1"
                 	android:padding="6dp"
                 	android:textColor="#565656"

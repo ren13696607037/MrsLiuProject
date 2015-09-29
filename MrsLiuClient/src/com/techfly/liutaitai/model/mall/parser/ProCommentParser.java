@@ -11,6 +11,7 @@ import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.Utility;
 
 public class ProCommentParser implements Parser{
     @Override
@@ -39,8 +40,14 @@ public class ProCommentParser implements Parser{
                                 .optString("content"));
                         c.setmName(mJsonObject
                                 .optString("mobile"));
+                        if(c.getmName()!=null&&c.getmName().length()>=11&&Utility.isPhone(c.getmName())){
+                            c.setmName(c.getmName().replace(c.getmName().substring(3, 7), "****"));
+                        }
                         c.setmPhone(mJsonObject
                                 .optString("mobile"));
+                        if(c.getmPhone()!=null&&c.getmPhone().length()>=11){
+                            c.setmPhone(c.getmPhone().replace(c.getmPhone().substring(3, 7), "****"));
+                        }
 //                      c.setmReplay(mJsonObject
 //                              .optString(JsonKey.CommentsKey.REPLAY));
                         c.setmStarScore(mJsonObject

@@ -46,7 +46,8 @@ public class ProductCommentFragment extends CommonFragment implements XListView.
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + "common/reviews");
-        url.setmGetParamPrefix("type").setmGetParamValues(type+"");
+        AppLog.Logd("Fly", "type===="+type+"");
+        url.setmGetParamPrefix("type").setmGetParamValues(0+"");
         url.setmGetParamPrefix("id").setmGetParamValues(mId);
         url.setmGetParamPrefix(RequestParamConfig.PAGE).setmGetParamValues(mPage+"");
         param.setmParserClassName(ProCommentParser.class.getName());

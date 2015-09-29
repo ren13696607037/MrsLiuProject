@@ -14,6 +14,7 @@ import com.techfly.liutaitai.scale.ImageEntity;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.JsonKey;
+import com.techfly.liutaitai.util.Utility;
 
 public class NewProductInfoParser implements Parser {
 
@@ -63,7 +64,13 @@ public class NewProductInfoParser implements Parser {
                     c.setmId(mJsonObject.optInt("id"));
                     c.setmContent(mJsonObject.optString("content"));
                     c.setmName(mJsonObject.optString("mobile"));
+                    if(c.getmName()!=null&&c.getmName().length()>=11&&Utility.isPhone(c.getmName())){
+                        c.setmName(c.getmName().replace(c.getmName().substring(3, 7), "****"));
+                    }
                     c.setmPhone(mJsonObject.optString("mobile"));
+                    if(c.getmPhone()!=null&&c.getmPhone().length()>=11){
+                        c.setmPhone(c.getmPhone().replace(c.getmPhone().substring(3, 7), "****"));
+                    }
                     // c.setmReplay(mJsonObject
                     // .optString(JsonKey.CommentsKey.REPLAY));
                     c.setmStarScore(mJsonObject.optString("stars"));

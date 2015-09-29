@@ -310,6 +310,7 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
         case R.id.confirm_btn:
             if(ShopCar.getShopCar().getShopCheckedAmountSum()>0){
                 Intent intent = new Intent(getActivity(),TakingOrderActivity.class);
+                intent.putExtra(IntentBundleKey.TYPE, type);
                 startActivity(intent);
             }else{
                 showSmartToast("请选择要结算的商品", Toast.LENGTH_LONG);

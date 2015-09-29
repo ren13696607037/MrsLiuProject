@@ -314,11 +314,12 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
             UIHelper.toGanxiListActivity(this,0);// 干洗 洗衣
             break;
         case R.id.beauty_service:
-            UIHelper.toServiceListActivity(this,0);// 美甲
-            break;
-       case R.id.   cosmetology_service:
-           UIHelper.toServiceListActivity(this,1);// 美婕
+            UIHelper.toServiceListActivity(this,1);// 美婕
             break;      
+          
+       case R.id.   cosmetology_service:
+           UIHelper.toServiceListActivity(this,0);// 美甲
+           break;
        case R.id.   cleaning_service:
            UIHelper.toShengxianListActivity(this,2);// 鲜花
            break;   
