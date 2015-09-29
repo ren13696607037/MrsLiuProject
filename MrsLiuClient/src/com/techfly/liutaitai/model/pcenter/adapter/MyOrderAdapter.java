@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.home.activities.HomeActivity;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
@@ -66,6 +67,7 @@ public class MyOrderAdapter extends BaseAdapter {
 			mHolder.mTvState=(TextView) convertView.findViewById(R.id.iorder_state);
 			mHolder.mButton=(Button) convertView.findViewById(R.id.iorder_btn);
 			mHolder.mButton2=(Button) convertView.findViewById(R.id.iorder_btn2);
+			mHolder.mTvNo = (TextView) convertView.findViewById(R.id.iorder_num);
 //			holder.mView=convertView.findViewById(R.id.iorder_view);
 			mHolder.mTvTime=(TextView) convertView.findViewById(R.id.iorder_time);
 			mHolder.mStartTime = (StartTimeText) convertView.findViewById(R.id.iorder_time_start);
@@ -74,6 +76,8 @@ public class MyOrderAdapter extends BaseAdapter {
 		}else{
 			mHolder=(ViewHolder) convertView.getTag();
 		}
+		mHolder.mTvNo.setText(mContext.getString(R.string.service_detail_text,
+				mList.get(position).getmServiceNum()));
 		mHolder.mTvNum.setText(mContext.getString(R.string.tech_order_list_address,mList.get(position).getmCustomerAddress()));
 		ImageLoader.getInstance().displayImage(mList.get(position).getmServiceIcon(), mHolder.mImageView,ImageLoaderUtil.mHallIconLoaderOptions);
 		mHolder.mTvPrice.setText(mContext.getString(R.string.price,mList.get(position).getmServicePrice()));
@@ -103,6 +107,7 @@ public class MyOrderAdapter extends BaseAdapter {
 		private RelativeLayout mLayout;
 		private TextView mTvTime;
 		private StartTimeText mStartTime;
+		private TextView mTvNo;
 	}
 	private void setState(TechOrder order,TextView textView,Button button,Button button2,StartTimeText time){
 		time.setVisibility(View.GONE);
@@ -135,10 +140,27 @@ public class MyOrderAdapter extends BaseAdapter {
 			textView.setText(R.string.order_service_state);
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
+		}else if(state == -1){
+			textView.setText("订单已取消");
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else if(state == -2){
+			textView.setText(R.string.order_service_state8);
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else if(state == 7){
+			textView.setText(R.string.order_service_state7);
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else if(state == 9){
+			textView.setText("用户已删除");
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
 		}else{
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
 		}
+		
 	}
 	public void toFinish(){
 		if(mHolder != null && mHolder.mStartTime != null){

@@ -109,7 +109,6 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
     
     private void setData(){
     	if(mTechAccount != null && mTechAccount.getmId() != null){
-    		AppLog.Loge("xll", "why?????");
     		mCashAccountText.setVisibility(View.INVISIBLE);
     		mCashAccount.setVisibility(View.VISIBLE);
     		mCashName.setVisibility(View.VISIBLE);
@@ -126,7 +125,6 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
     			mCashName.setText(getString(R.string.cash_alipay_text2, mTechAccount.getmName()));
     		}
     	}else{
-    		AppLog.Loge("xll", "adjkfjslkd?????");
     		mCashAccountText.setVisibility(View.VISIBLE);
     		mCashAccount.setVisibility(View.GONE);
     		mCashName.setVisibility(View.GONE);
@@ -146,7 +144,6 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
 			url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.TECH_CASH_INFO_URL);
 			param.setmParserClassName(TechCashInfoParser.class.getName());
 		}
-		
 		param.setmIsLogin(true);
 		param.setmId(mUser.getmId());
 		param.setmToken(mUser.getmToken());
