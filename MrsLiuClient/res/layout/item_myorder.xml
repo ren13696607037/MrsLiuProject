@@ -5,7 +5,7 @@
     android:descendantFocusability="blocksDescendants" >
 
     <TextView
-        android:id="@+id/iorder_time"
+        android:id="@+id/iorder_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/px_15"
@@ -14,7 +14,20 @@
         android:paddingRight="@dimen/px_10"
         android:paddingTop="@dimen/px_5"
         android:textColor="@color/color_3d"
-        android:textSize="@dimen/app_text_size_first" />
+        android:textSize="@dimen/app_text_size_first" 
+        />
+    <TextView
+        android:id="@+id/iorder_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px_15"
+        android:layout_marginLeft="@dimen/px_20"
+        android:paddingRight="@dimen/px_10"
+        android:paddingTop="@dimen/px_5"
+        android:textColor="@color/color_3d"
+        android:textSize="@dimen/app_text_size_first" 
+        android:layout_below="@id/iorder_num"
+        />
 
     <TextView
         android:id="@+id/iorder_address"

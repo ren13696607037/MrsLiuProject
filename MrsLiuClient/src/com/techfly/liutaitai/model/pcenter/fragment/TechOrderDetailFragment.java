@@ -93,6 +93,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	private String mId;
 	private ImageView mIvPhone;
 	private ImageView mIvAddress;
+	private TextView mClear;
 	private User mUser;
 	private StartTimeText mTimeStart;
 	private final int MSG_DATA = 0x101;
@@ -206,6 +207,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mIvPhone = (ImageView) view.findViewById(R.id.tsd_phone_img);
 		mTimeStart = (StartTimeText) view.findViewById(R.id.tsd_time_start);
 		mPayWay = (TextView) view.findViewById(R.id.tsd_text1);
+		mClear = (TextView) view.findViewById(R.id.tsd_service_clear);
 
 		mIvAddress.setOnClickListener(this);
 		mIvPhone.setOnClickListener(this);
@@ -215,7 +217,6 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	}
 
 	private void setData() {
-		AppLog.Loge("xll", "tech order detail is set data but why??");
 		mNo.setText(mActivity.getString(R.string.service_detail_text,
 				mOrder.getmServiceNum()));
 		mAddress.setText(mActivity.getString(R.string.service_detail_text4,
@@ -247,6 +248,11 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				.getText().toString(),1));
 		mTimeStart.toStart(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())-60*1000);
 		setPayWay(mPayWay, mOrder.getmPayWay());
+		if("0".equals(mOrder.getmServiceType()) && "1".equals(mOrder.getmClear())){
+    		mClear.setVisibility(View.VISIBLE);
+    	}else{
+    		mClear.setVisibility(View.GONE);
+    	}
 	}
 	private void setPayWay(TextView textView, String state){
     	if("0".equals(state)){
@@ -423,9 +429,23 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				} else if (object instanceof ResultInfo) {
 					ResultInfo info = (ResultInfo) object;
 					if(info.getmCode() == 0){
-						ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
-						mType = 0;
-						startReqTask(TechOrderDetailFragment.this);
+						if(mType == 3){
+	            			if(info.getmCode()==0){
+	        					showSmartToast(R.string.delete_success, Toast.LENGTH_SHORT);
+	        					mActivity.finish();
+	        					ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
+	        				}else{
+	        					if(info.getmMessage()!=null&&!TextUtils.isEmpty(info.getmMessage())&&!"null".equals(info.getmMessage())){
+	        						showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
+	        					}else{
+	        						showSmartToast(R.string.delete_error, Toast.LENGTH_SHORT);
+	        					}
+	        				}
+	            		}else{
+	            			ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
+	            			mType = 0;
+							startReqTask(TechOrderDetailFragment.this);
+	            		}
 					}
 				}
 			}

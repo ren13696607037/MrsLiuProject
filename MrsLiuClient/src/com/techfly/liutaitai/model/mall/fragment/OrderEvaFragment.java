@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -121,10 +124,20 @@ public class OrderEvaFragment extends CommonFragment implements OnClickListener 
 				R.layout.item_order_eva) {
 
 			@Override
-			public void convert(ViewHolder holder, OrderEva item, int position) {
+			public void convert(ViewHolder holder, final OrderEva item, int position) {
 				holder.setText(R.id.order_eva_item_name, item.getmProductName());
 				holder.setRating(R.id.order_eva_item_bar,
 						(float) item.getmStar());
+				RatingBar rb = holder.getView(R.id.order_eva_item_bar);
+				rb.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+					
+					@Override
+					public void onRatingChanged(RatingBar ratingBar, float rating,
+							boolean fromUser) {
+						item.setmStar((int)rating);
+						
+					}
+				});
 			}
 		};
 		mListView.setAdapter(mAdapter);
@@ -143,6 +156,8 @@ public class OrderEvaFragment extends CommonFragment implements OnClickListener 
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.ORDER_EVA);
 		url.setmGetParamPrefix(Constant.ORDER_EVA_CONTENT).setmGetParamValues(
 				mJson);
+		url.setmGetParamPrefix(Constant.ORDER_EVA_ID).setmGetParamValues(
+				mOrder.getmId());
 		param.setmHttpURL(url);
 		param.setmIsLogin(true);
 		param.setmToken(mUser.getmToken());
@@ -169,6 +184,9 @@ public class OrderEvaFragment extends CommonFragment implements OnClickListener 
 					if (ri.getmCode() == 0) {
 						SmartToast.makeText(getActivity(), "评价成功",
 								Toast.LENGTH_SHORT).show();
+						Intent intent = new Intent();
+						intent.putExtra(IntentBundleKey.DATA, true);
+						getActivity().setResult(Activity.RESULT_OK, intent);
 						getActivity().finish();
 						return;
 					}

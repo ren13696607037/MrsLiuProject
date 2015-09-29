@@ -2,9 +2,9 @@ package com.techfly.liutaitai.model.mall;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
@@ -156,6 +156,9 @@ public class OrderInfoClick implements OnClickListener {
 						if (ri.getmCode() == 0) {
 							SmartToast.makeText(mFragment.getActivity(),
 									"操作成功", Toast.LENGTH_SHORT).show();
+							Intent intent = new Intent();
+							intent.putExtra(IntentBundleKey.DATA, true);
+							mFragment.getActivity().setResult(Activity.RESULT_OK, intent);
 							mFragment.getActivity().finish();
 						} else {
 							SmartToast.makeText(mFragment.getActivity(),
@@ -244,7 +247,9 @@ public class OrderInfoClick implements OnClickListener {
 						if (ri.getmCode() == 0) {
 							SmartToast.makeText(mFragment.getActivity(),
 									"操作成功", Toast.LENGTH_SHORT).show();
-							// 之后的一些操作,例如刷新列表
+							Intent intent = new Intent();
+							intent.putExtra(IntentBundleKey.DATA, true);
+							mFragment.getActivity().setResult(Activity.RESULT_OK, intent);
 							mFragment.refreshData();
 						} else {
 							SmartToast.makeText(mFragment.getActivity(),

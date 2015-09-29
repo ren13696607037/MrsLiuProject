@@ -104,6 +104,7 @@ public class Constant {
 	public static final String AFTER_SALE_SERVICE_CONTENT = "message";// 申请售后
 	public static final String ORDER_EVA = "common/reviewgoods";// 订单评价
 	public static final String ORDER_EVA_CONTENT = "msg";// 订单评价
+	public static final String ORDER_EVA_ID = "orderid";
 
 	public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
 	public static String UPDATE_TO_CART_REQUEST_URL = "product/editCartCount";

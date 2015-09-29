@@ -384,6 +384,7 @@
     <string name="order_service_text">服务时间：%1$s</string>
     <string name="order_service_text1">美甲师:%1$s</string>
     <string name="order_service_text3">美睫师:%1$s</string>
+    <string name="order_service_text4">需要卸甲</string>
     <string name="order_service_state">待支付</string>
     <string name="order_service_state1">待接单</string>
     <string name="order_service_state2">待服务</string>
@@ -391,6 +392,9 @@
     <string name="order_service_state4">待评价</string>
     <string name="order_service_state5">已完成</string>
     <string name="order_service_state6">已取消</string>
+    <string name="order_service_state7">退款中</string>
+    <string name="order_service_state8">已退款</string>
+    <string name="order_service_state9">已删除</string>
     <string name="order_service_btn">删除预约</string>
     <string name="order_service_btn1">去付款</string>
     <string name="order_service_btn2">取消预约</string>
@@ -445,6 +449,7 @@
     <string name="order_read">查看我的预约</string>
     <string name="order_basket_read">查看我的订单</string>
     <!-- 订单状态 -->
+	<string name="order_state_2_">已退款</string>
 	<string name="order_state_1_">已取消</string>
 	<string name="order_state_0">待支付</string>
 	<string name="order_state_1">已下单</string>
@@ -455,8 +460,8 @@
 	<string name="order_state_6">已完成</string>
 	<string name="order_state_7">退款中</string>
 	<string name="order_state_8">线下支付</string>
-	<string name="order_state_9">已删除</string>
-	<string name="order_state_10">无法送达</string>
+	<string name="order_state_9">无法送达</string>
+	<string name="order_state_10">已删除</string>
 	<!-- 订单操作 -->
 	<string name="order_text_0">取消订单</string>
 	<string name="order_text_1">去付款</string>

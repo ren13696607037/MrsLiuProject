@@ -3,6 +3,7 @@ package com.techfly.liutaitai.model.mall.fragment;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,6 +37,8 @@ import com.techfly.liutaitai.util.view.XListView.IXListViewListener;
 
 public class OrderBastketFragment extends CommonFragment implements
 		IXListViewListener {
+	
+	public static final int REQUEST_CODE = 0x111;
 
 	private TextView mTvNoData;
 
@@ -229,6 +232,12 @@ public class OrderBastketFragment extends CommonFragment implements
 							reqFinish = false;
 							mListView.setPullLoadEnable(true);
 						}
+						
+						for (int i = 0; i < list.size(); i++) {
+							if(list.get(i).getmState() == 10){
+								list.remove(i);
+							}
+						}
 
 						if (isRefresh) {
 							mDatas.clear();
@@ -294,5 +303,17 @@ public class OrderBastketFragment extends CommonFragment implements
 		startLoading(this);
 		onRefresh();
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null){
+			if(data.getBooleanExtra(IntentBundleKey.DATA, false)){
+				refreshList();
+			}
+		}
+	}
+	
+	
 
 }

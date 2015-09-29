@@ -39,6 +39,7 @@ public class TechOrderParser implements Parser{
 						service.setmOrderNo(obj.optString(JsonKey.ServiceDetailKey.SID));
 						service.setmStartTime(obj.optString(JsonKey.ServiceDetailKey.STARTTIME));
 						service.setmMinutes(obj.optString("minutes"));
+						service.setmServiceNum(obj.optString("serviceNum"));
 						list.add(service);
 					}
 				}

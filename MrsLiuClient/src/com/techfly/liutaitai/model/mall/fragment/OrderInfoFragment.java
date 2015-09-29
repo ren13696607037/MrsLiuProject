@@ -2,6 +2,8 @@ package com.techfly.liutaitai.model.mall.fragment;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -245,6 +247,12 @@ public class OrderInfoFragment extends CommonFragment {
 		mTvBtn1.setVisibility(View.INVISIBLE);
 		mTvBtn2.setVisibility(View.INVISIBLE);
 		switch (state) {
+		case -2:
+			mTvState.setText(R.string.order_state_2_);
+			mTvBtn1.setVisibility(View.INVISIBLE);
+			mTvBtn2.setVisibility(View.VISIBLE);
+			mTvBtn2.setText(R.string.order_text_5);
+			break;
 		case -1:
 			mTvState.setText(R.string.order_state_1_);
 			mTvBtn1.setVisibility(View.INVISIBLE);
@@ -311,11 +319,15 @@ public class OrderInfoFragment extends CommonFragment {
 			break;
 		case 9:
 			mTvState.setText(R.string.order_state_9);
-		case 10:
-			mTvState.setText(R.string.order_state_1_);
 			mTvBtn1.setVisibility(View.INVISIBLE);
 			mTvBtn2.setVisibility(View.VISIBLE);
 			mTvBtn2.setText(R.string.order_text_5);
+		case 10:
+			mTvState.setText(R.string.order_state_10);
+//			mTvBtn1.setVisibility(View.INVISIBLE);
+//			mTvBtn2.setVisibility(View.VISIBLE);
+//			mTvBtn2.setText(R.string.order_text_5);
+			
 			break;
 
 		default:
@@ -347,7 +359,18 @@ public class OrderInfoFragment extends CommonFragment {
 		if (Constant.isShouldRefresh) {
 			startReqTask(this);
 			Constant.isShouldRefresh = false;
-
 		}
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == OrderBastketFragment.REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null){
+			if(data.getBooleanExtra(IntentBundleKey.DATA, false)){
+				refreshData();
+			}
+		}
+	}
+	
+	
 }

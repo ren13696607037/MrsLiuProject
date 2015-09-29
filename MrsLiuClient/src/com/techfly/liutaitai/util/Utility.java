@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -454,4 +455,22 @@ public class Utility {
     	activity.startActivity(intent);
     	activity.finish();
     }
+	
+	/**
+	 * 小数点后两位
+	 * 
+	 * @param d
+	 * @return
+	 */
+
+	public static String dot2(double d) {
+		DecimalFormat df = new DecimalFormat("#.00");
+		String s = df.format(d);
+		if (s.startsWith(".")) {
+			s = "0" + s;
+		}
+		return s;
+
+	}
+
 }
