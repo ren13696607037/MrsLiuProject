@@ -206,7 +206,7 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
 			if(mTechAccount != null){
 				intent.putExtra(IntentBundleKey.TECH_CASH_ID, mTechAccount);
 			}
-			startActivity(intent);
+			startActivityForResult(intent, 123);
 			break;
 		case R.id.cash_btn:
 			if(mTechAccount != null){
@@ -217,6 +217,14 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
 
 		default:
 			break;
+		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == 123){
+			isSubmit = false;
+			startReqTask(TechCashFragment.this);
 		}
 	}
 
