@@ -401,7 +401,7 @@ public class ProductInfoFragment extends CommonFragment implements
                 mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
                 if(ShopCar.getShopCar().getShopproductList()!=null){
-                    mShopCarNum.setText(ShopCar.getShopCar().getShopproductList().size()+"");
+                    mShopCarNum.setText(ShopCar.getShopCar().getShopAmountSum()+"");
                 }else{
                     mShopCarNum.setText("0");
                 }
@@ -504,6 +504,7 @@ public class ProductInfoFragment extends CommonFragment implements
 
     @Override
     public void onSuccess() {
+        requestShopCarNum();
         showSmartToast("成功加入购物车", Toast.LENGTH_LONG);
     }
 

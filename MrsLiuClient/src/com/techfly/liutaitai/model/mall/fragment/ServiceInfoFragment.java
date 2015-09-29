@@ -1,9 +1,11 @@
 package com.techfly.liutaitai.model.mall.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +32,7 @@ import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.scale.ImageEntity;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
@@ -39,7 +42,6 @@ import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.ManagerListener.CollectListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
-import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class ServiceInfoFragment extends CommonFragment implements
@@ -225,6 +227,17 @@ public class ServiceInfoFragment extends CommonFragment implements
         setTitleText("服务详情");
         mDescTv = (TextView) view.findViewById(R.id.desc);
         mImg = (ImageView) view.findViewById(R.id.img);
+        mImg.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+                List<ImageEntity> list = new ArrayList<ImageEntity>();
+                ImageEntity img = new ImageEntity();
+                img.setImagePath(mInfo.getmImg());
+                list.add(img);
+                UIHelper.showImage(getActivity(), 0, (ArrayList<ImageEntity>) list, false);
+            }
+        });
         LayoutParams params = (LayoutParams) mImg.getLayoutParams();
         params.width = Constant.SCREEN_WIDTH;
         params.height = params.width;

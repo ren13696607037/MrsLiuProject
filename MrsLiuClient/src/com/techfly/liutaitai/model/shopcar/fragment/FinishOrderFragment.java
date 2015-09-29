@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.activities.MyOrderActivity;
 import com.techfly.liutaitai.model.mall.activities.MyYuYueActivity;
-import com.techfly.liutaitai.model.mall.activities.OrderBastketActivity;
-import com.techfly.liutaitai.model.order.activities.OrderActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;

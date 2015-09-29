@@ -275,7 +275,10 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment
 
 	public void onShowDisplay(Bundle bundle) {
 		mMoney = bundle.getString(IntentBundleKey.ORDER_MONEY, "");
-		mMoneyTv.setText(getString(R.string.submit_order_success, mMoney));
+		float totalPrice =Float.parseFloat(mMoney);
+        long l1 = Math.round(totalPrice * 100); // 四舍五入
+        totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
+		mMoneyTv.setText(getString(R.string.submit_order_success,   totalPrice+""));
 
 	}
 
