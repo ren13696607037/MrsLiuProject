@@ -110,8 +110,8 @@ public class PicAndTextDetailFragment extends CommonFragment {
 		mWebView.getSettings().setLoadWithOverviewMode(true);
 		mWebView.getSettings().setUseWideViewPort(true);
 		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.getSettings().setSupportZoom(true);
-		mWebView.getSettings().setBuiltInZoomControls(true);
+		mWebView.getSettings().setSupportZoom(false);
+		mWebView.getSettings().setBuiltInZoomControls(false);
 		mWebView.getSettings()
 				.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 可能的话不要超过屏幕宽度
 		mWebView.setInitialScale(200);
