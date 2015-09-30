@@ -36,8 +36,6 @@ import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.mall.parser.NewProductInfoParser;
 import com.techfly.liutaitai.model.mall.parser.ShopCartParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
-import com.techfly.liutaitai.model.shopcar.adapter.ShopCarAdapter;
-import com.techfly.liutaitai.model.shopcar.fragment.ShopCarHomeFragment;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -58,6 +56,12 @@ import com.techfly.liutaitai.util.view.RollViewPager.OnPagerClickCallback;
 
 public class ProductInfoFragment extends CommonFragment implements
         ShopCarCallBack {
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestShopCarNum();
+    }
 
     public static final int FLAG_SECKILL = 4;// 限时秒杀
     public static final int FLAG_TUAN_GOU = 5;// 团购
