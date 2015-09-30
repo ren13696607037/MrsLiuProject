@@ -473,7 +473,7 @@ public class ProductInfoFragment extends CommonFragment implements
                         mProductName.setText(p.getmName());
                         mProductPrice
                                 .setText(getString(R.string.product_info_money)
-                                        + p.getmPrice());
+                                        + p.getmPrice()+"/"+p.getmUnit());
                         mDescTv.setText(Html.fromHtml(p.getmContent()));
                         if (mArrayList != null && p.getmCommentsList() != null) {
                             mArrayList.clear();
