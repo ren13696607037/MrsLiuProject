@@ -144,7 +144,6 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
 
 		@Override
 		public void onReceive(Context arg0, Intent intent) {
-			AppLog.Loge("xll", "mainactivity receiver is in");
 			   Bundle bundle=intent.getExtras();      
 			   String lon=bundle.getString("lon");    
 			   String lat=bundle.getString("lat"); 
@@ -181,7 +180,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
             public void onResponse(Object object) {
                 AppLog.Logd(object.toString());
                 ResultInfo resultInfo=(ResultInfo) object;
-                AppLog.Loge("xll", resultInfo.toString());
+                AppLog.Loge("xll", "location request is -=-=-=-"+resultInfo.toString());
             }
         };
     }

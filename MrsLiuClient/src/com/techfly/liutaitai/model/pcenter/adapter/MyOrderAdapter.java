@@ -83,7 +83,9 @@ public class MyOrderAdapter extends BaseAdapter {
 		mHolder.mTvPrice.setText(mContext.getString(R.string.price,mList.get(position).getmServicePrice()));
 		mHolder.mTvTitle.setText(mList.get(position).getmServiceName());
 		if(mList.get(position).getmStartTime() != null){
-			mTime = System.currentTimeMillis() - Utility.Date2Millis(mList.get(position).getmStartTime())-60*1000;
+			if(System.currentTimeMillis() > Utility.Date2Millis(mList.get(position).getmCustomerTime())){
+				mTime = System.currentTimeMillis() - Utility.Date2Millis(mList.get(position).getmStartTime());
+			}
 		}
 		setState(mList.get(position), mHolder.mTvState, mHolder.mButton, mHolder.mButton2,mHolder.mStartTime);
 		mHolder.mButton.setOnClickListener(new OrderClick(mContext, mList.get(position), mHolder.mButton.getText().toString(),0));
@@ -128,13 +130,13 @@ public class MyOrderAdapter extends BaseAdapter {
 			button.setText(R.string.tech_order_list_btn4);
 			time.setVisibility(View.VISIBLE);
 			time.toStart(mTime);
-		}else if(state==4){
+		}else if(state==4 || state == 6){
 			textView.setText(R.string.tech_order_list_state3);
 			button.setText(R.string.tech_order_list_btn5);
 			button2.setVisibility(View.GONE);
-		}else if(state == 5 || state == 6){
-			textView.setText(R.string.tech_order_list_state4);
-			button.setText(R.string.tech_order_list_btn5);
+		}else if(state == 5){
+			textView.setText(R.string.order_service_state4);
+			button.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
 		}else if(state == 0){
 			textView.setText(R.string.order_service_state);

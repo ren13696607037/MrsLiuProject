@@ -246,7 +246,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				.getText().toString(),1));
 		mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2
 				.getText().toString(),1));
-		mTimeStart.toStart(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime())-60*1000);
+		mTimeStart.toStart(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime()));
 		setPayWay(mPayWay, mOrder.getmPayWay());
 		if("0".equals(mOrder.getmServiceType()) && "1".equals(mOrder.getmClear())){
     		mClear.setVisibility(View.VISIBLE);
@@ -273,32 +273,48 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		int state = Integer.valueOf(order.getmServiceStatus());
 		button.setVisibility(View.VISIBLE);
 		button2.setVisibility(View.VISIBLE);
-		if (state == 1) {
+		if(state==1){
 			textView.setText(R.string.tech_order_list_state);
 			button2.setText(R.string.tech_order_list_btn);
 			button.setText(R.string.tech_order_list_btn1);
-		} else if (state == 2) {
+		}else if(state==2){
 			textView.setText(R.string.tech_order_list_state1);
 			button.setText(R.string.tech_order_list_btn3);
 			button2.setText(R.string.tech_order_list_btn2);
-		} else if (state == 3) {
-			mTimeStart.setVisibility(View.VISIBLE);
+		}else if(state==3){
 			textView.setText(R.string.tech_order_list_state2);
 			button2.setVisibility(View.GONE);
 			button.setText(R.string.tech_order_list_btn4);
-		} else if (state == 4) {
+			mTimeStart.setVisibility(View.VISIBLE);
+		}else if(state==4 || state == 6){
 			textView.setText(R.string.tech_order_list_state3);
 			button.setText(R.string.tech_order_list_btn5);
 			button2.setVisibility(View.GONE);
-		} else if (state == 5 || state == 6) {
-			textView.setText(R.string.tech_order_list_state4);
-			button.setText(R.string.tech_order_list_btn5);
+		}else if(state == 5){
+			textView.setText(R.string.order_service_state4);
+			button.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
-		} else if (state == 0) {
+		}else if(state == 0){
 			textView.setText(R.string.order_service_state);
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
-		}else {
+		}else if(state == -1){
+			textView.setText("订单已取消");
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else if(state == -2){
+			textView.setText(R.string.order_service_state8);
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else if(state == 7){
+			textView.setText(R.string.order_service_state7);
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else if(state == 9){
+			textView.setText("用户已删除");
+			button.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+		}else{
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
 		}

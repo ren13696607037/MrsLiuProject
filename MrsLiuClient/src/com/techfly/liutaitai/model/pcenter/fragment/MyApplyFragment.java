@@ -146,13 +146,6 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
     	mEyelash = (CheckBox) view.findViewById(R.id.apply_eyelash);
     	mManicure = (CheckBox) view.findViewById(R.id.apply_manicure);
     	
-    	if(mEyelash.isChecked() && mManicure.isChecked()){
-    		mType = "0,1";
-    	}else if(mEyelash.isChecked()){
-    		mType = "1";
-    	}else if(mManicure.isChecked()){
-    		mType = "0";
-    	}
     	
     	mImageView = (ImageView) view.findViewById(R.id.apply_img);
     	mImageView2 = (ImageView) view.findViewById(R.id.apply_img1);
@@ -252,6 +245,13 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.apply_btn:
 			AppLog.Loge("xll", "click is in");
+			if(mEyelash.isChecked() && mManicure.isChecked()){
+	    		mType = "0,1";
+	    	}else if(mEyelash.isChecked()){
+	    		mType = "1";
+	    	}else if(mManicure.isChecked()){
+	    		mType = "0";
+	    	}
 			if(mSelectImageView != null && mSelectImageView1 != null){
 				startReqTask(MyApplyFragment.this);
 			}

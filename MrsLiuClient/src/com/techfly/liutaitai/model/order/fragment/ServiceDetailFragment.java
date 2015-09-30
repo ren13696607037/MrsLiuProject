@@ -151,8 +151,8 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     	ImageLoader.getInstance().displayImage(mService.getmServiceIcon(), mImageView, ImageLoaderUtil.mOrderServiceIconLoaderOptions);
     	mName.setText(mActivity.getString(R.string.service_detail_text2, mService.getmCustomerName()));
     	mPhone.setText(mActivity.getString(R.string.service_detail_text3, mService.getmCustomerPhone()));
-    	mTime.setText(mActivity.getString(R.string.order_service_text, mService.getmServiceTime()));
-    	mServiceTime.setText(mActivity.getString(R.string.service_detail_text1, mService.getmServicePerson()));
+    	mTime.setText(mActivity.getString(R.string.service_detail_text1, mService.getmServiceTime()));
+    	mServiceTime.setText(mActivity.getString(R.string.order_service_text, mService.getmServicePerson()));
     	mProName.setText(mService.getmServiceName());
     	mTotal.setText(mActivity.getString(R.string.service_detail_text9, mService.getmServicePrice()));
     	mVoucher.setText(mActivity.getString(R.string.service_detail_text7, mService.getmCash()));

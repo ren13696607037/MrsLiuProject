@@ -35,8 +35,9 @@ public class StartTimeText extends TextView {
 		}
 		Date date = new Date(MSG_TOTAL_TIME);
 		long min = MSG_TOTAL_TIME / 1000 / 60;
+		long hour = min / 60;
 		if (min > 60) {
-			this.setText(String.format("%1$d时%2$02d分%3$02d秒", date.getHours(),
+			this.setText(String.format("%1$d时%2$02d分%3$02d秒", hour,
 					date.getMinutes(), date.getSeconds()));
 		} else {
 			this.setText(String.format("%1$02d分%2$02d秒", date.getMinutes(),
