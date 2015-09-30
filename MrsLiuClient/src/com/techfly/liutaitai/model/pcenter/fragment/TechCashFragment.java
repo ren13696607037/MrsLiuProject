@@ -112,6 +112,7 @@ public class TechCashFragment extends CommonFragment implements OnClickListener{
     		mCashAccountText.setVisibility(View.INVISIBLE);
     		mCashAccount.setVisibility(View.VISIBLE);
     		mCashName.setVisibility(View.VISIBLE);
+    		mCashBank.setVisibility(View.GONE);
     		if(mTechAccount.getmType() != null && Integer.valueOf(mTechAccount.getmType()) == 0){
     			mCashBank.setVisibility(View.VISIBLE);
     			mCashBank.setText(getString(R.string.cash_card_text, mTechAccount.getmBank()));
