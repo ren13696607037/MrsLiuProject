@@ -204,15 +204,15 @@ public class TechAccountFragment extends CommonFragment implements OnClickListen
 					(mAlipay.isChecked() && mAlipayName.length() > 0 && mAlipayUserName.length() > 0) ||
 					(mWeixin.isChecked() && mWeixinName.length() > 0 && mWeixinUserName.length() > 0)
 					){
-				if(mCard.isChecked()){
-					if(!Utility.isCard(mCardNumber.getText().toString())){
-						showSmartToast("请输入正确的银行卡号", Toast.LENGTH_SHORT);
-					}else{
-						startReqTask(TechAccountFragment.this);
-					}
-				}else{
+//				if(mCard.isChecked()){
+//					if(!Utility.isCard(mCardNumber.getText().toString())){
+//						showSmartToast("请输入正确的银行卡号", Toast.LENGTH_SHORT);
+//					}else{
+//						startReqTask(TechAccountFragment.this);
+//					}
+//				}else{
 					startReqTask(TechAccountFragment.this);
-				}
+//				}
 				
 			}
 			break;
