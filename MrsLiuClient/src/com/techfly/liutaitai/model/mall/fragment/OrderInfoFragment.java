@@ -322,6 +322,7 @@ public class OrderInfoFragment extends CommonFragment {
 			mTvBtn1.setVisibility(View.INVISIBLE);
 			mTvBtn2.setVisibility(View.VISIBLE);
 			mTvBtn2.setText(R.string.order_text_5);
+			break;
 		case 10:
 			mTvState.setText(R.string.order_state_10);
 //			mTvBtn1.setVisibility(View.INVISIBLE);

@@ -150,6 +150,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 
 	private void setState(TextView mTvBtn1, TextView mTvBtn2,
 			TextView mTvState, int state) {
+		AppLog.Logd("Shi", "state:::" + state);
 		mTvBtn1.setVisibility(View.INVISIBLE);
 		mTvBtn2.setVisibility(View.INVISIBLE);
 		switch (state) {
@@ -228,6 +229,7 @@ public class OrderBastketAdapter extends BaseAdapter {
 			mTvBtn1.setVisibility(View.INVISIBLE);
 			mTvBtn2.setVisibility(View.VISIBLE);
 			mTvBtn2.setText(R.string.order_text_5);
+			break;
 		case 10:
 			mTvState.setText(R.string.order_state_10);
 //			mTvBtn1.setVisibility(View.INVISIBLE);
