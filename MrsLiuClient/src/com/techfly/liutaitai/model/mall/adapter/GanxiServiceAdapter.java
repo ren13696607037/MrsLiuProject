@@ -53,11 +53,11 @@ public class GanxiServiceAdapter extends BaseAdapter {
         }
         if(convertView==null){
             holder=new ViewHolder();
-            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_ganxi, null);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.product_icon);
-            holder.productName = (TextView) convertView.findViewById(R.id.product_name);
-            holder.productType = (TextView) convertView.findViewById(R.id.product_type);
-            holder.productMarketPrice = (TextView) convertView.findViewById(R.id.product_price);
+            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_service, null);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.service_img);
+            holder.productName= (TextView) convertView.findViewById(R.id.service_name);
+            holder.productType= (TextView) convertView.findViewById(R.id.service_person);
+            holder.productMarketPrice = (TextView) convertView.findViewById(R.id.service_price);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder) convertView.getTag();

@@ -19,7 +19,11 @@ public class WenxinPayImpl implements PayInterface{
         PayOrder order = new PayOrder();
         order.setmAccountId(Keys.DEFAULT_SELLER);
         order.setmMerchantId(Keys.DEFAULT_PARTNER);
-        order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
+        if(productName.equals("充值")){
+            order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_RECHARGER_CALLBACK_URL);
+        }else{
+            order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
+        }
         order.setmOrderNo(orderId);
         order.setmProductPrice(payMoney);
         order.setmProductName(productName);

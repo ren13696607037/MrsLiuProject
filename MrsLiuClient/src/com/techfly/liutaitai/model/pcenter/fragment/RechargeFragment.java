@@ -1,7 +1,10 @@
 package com.techfly.liutaitai.model.pcenter.fragment;
 
 
+import java.util.Random;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +17,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.paymanage.PayImplFactory;
+import com.techfly.liutaitai.bizz.shopcar.ShopCar;
+import com.techfly.liutaitai.bizz.wenxin.MD5;
 import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
+import com.techfly.liutaitai.model.mall.parser.ShopCartParser;
 import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;
 import com.techfly.liutaitai.model.pcenter.bean.User;
+import com.techfly.liutaitai.net.HttpURL;
+import com.techfly.liutaitai.net.RequestManager;
+import com.techfly.liutaitai.net.RequestParam;
+import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
@@ -37,6 +51,8 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 	private Button mBtn;
 	private Balance mBalance;
 	private int mType = Constant.PAY_ALIPAY;
+    protected String orderNo;
+
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -97,10 +113,122 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
     	
     }
 
+    public void chargeCallBack(){
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
+        
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+                + "common/payData");
+        url.setmGetParamPrefix("id");
+        url.setmGetParamValues(orderNo);
+        url.setmGetParamPrefix("type");
+        if(mType == Constant.PAY_ALIPAY){
+            url.setmGetParamValues("0");
+        }else{
+            url.setmGetParamValues("1");
+        }
+       
+        param.setmHttpURL(url);
+//        param.setmParserClassName(CommonParser.class.getName());
+        RequestManager.getRequestData(getActivity(), creatMySuccessListener(),
+                creatErrorListener(), param);//
+    }
+    private Response.Listener<Object> creatMySuccessListener() {
+        return new Response.Listener<Object>() {
+
+            @Override
+            public void onResponse(Object obj) {
+                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+//                ResultInfo result = (ResultInfo) obj;
+//                if(result.getmCode()==0){
+//                    AppLog.Logd("Fly", "result.getmData()==="+result.getmData());
+                    showSmartToast("充值成功", Toast.LENGTH_SHORT);
+                    getActivity().setResult(Constant.BALANCE_SUCCESS);
+                    getActivity().finish();
+//                }
+            }
+        };
+    }
+
 	@Override
 	public void requestData() {
+	    
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            return;
+        }
+        param.setmIsLogin(true);
+        param.setmId(user .getmId());
+        param.setmToken(user .getmToken());
+        
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+                + Constant.RECHARGE_REQUEST_URL);
+        url.setmGetParamPrefix("vid");
+        url.setmGetParamValues(mBalance.getmId());
+        url.setmGetParamPrefix("type");
+        if(mType == Constant.PAY_ALIPAY){
+            url.setmGetParamValues("0");
+        }else{
+            url.setmGetParamValues("1");
+        }
+        url.setmGetParamPrefix("money");
+        url.setmGetParamValues(mBalance.getmPrice());
+        param.setmHttpURL(url);
+        param.setmParserClassName(CommonParser.class.getName());
+        RequestManager.getRequestData(getActivity(), creatSuccessListener(),
+                creatErrorListener(), param);//
+    }
+    private Response.Listener<Object> creatSuccessListener() {
+        return new Response.Listener<Object>() {
 
-	}
+            @Override
+            public void onResponse(Object obj) {
+                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                ResultInfo result = (ResultInfo) obj;
+                if(result.getmCode()==0){
+                    AppLog.Logd("Fly", "result.getmData()==="+result.getmData());
+                    orderNo = result.getmData();
+                    PayImplFactory.getInstance().getPayImpl(mType).onPay(getActivity(),   orderNo, mBalance.getmPrice(), "充值", new PayCallBack() {
+                        
+                        @Override
+                        public void onPaySuccess() {
+                            chargeCallBack();
+                        }
+                    }); 
+                }
+            }
+        };
+    }
+
+    private Response.ErrorListener creatErrorListener() {
+        return new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+
+            }
+        };
+    }
 
 	@Override
 	public void onClick(View arg0) {
@@ -116,20 +244,25 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 			mCbAlipay.setImageResource(R.drawable.address_undefault);
 			break;
 		case R.id.recharge_btn:
-			PayImplFactory.getInstance().getPayImpl(mType).onPay(getActivity(), mBalance.getmId(), mBalance.getmPrice(), "充值", new PayCallBack() {
-	             
-	             @Override
-	             public void onPaySuccess() {
-	                 showSmartToast("充值成功", Toast.LENGTH_SHORT);
-	                 getActivity().setResult(Constant.BALANCE_SUCCESS);
-	                 getActivity().finish();
-	             }
-	         }); 
+		    AppLog.Logd("Fly","mBalance.getmId()==="+mBalance.getmId());
+		    AppLog.Logd("Fly","mBalance.getmPrice()==="+mBalance.getmPrice());
+		    mBalance.setmPrice("1");
+			requestData();
 			break;
 
 		default:
 			break;
 		}
 	}
+	@Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if(resultCode == Constant.BALANCE_SUCCESS){
+	        chargeCallBack();
+	    }
+    }
 
+    private String genOutTradNo() {
+	       Random random = new Random();
+	       return MD5.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
+	   }
 }

@@ -21,7 +21,11 @@ public class AlipayImpl implements PayInterface{
         PayOrder order = new PayOrder();
         order.setmAccountId(Keys.DEFAULT_SELLER);
         order.setmMerchantId(Keys.DEFAULT_PARTNER);
-        order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
+        if(productName.equals("充值")){
+            order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_RECHARGER_CALLBACK_URL);
+        }else{
+            order.setmNotifyUrl(Constant.YIHUIMALL_BASE_URL+Constant.ALIPAY_ORDER_CALLBACK_URL);
+        }
         order.setmOrderNo(orderId);
         order.setmProductPrice(payMoney);
         order.setmProductName(productName);
@@ -41,7 +45,7 @@ public class AlipayImpl implements PayInterface{
             
             @Override
             public void onComplete() {
-                    SmartToast.showText(context, R.string.alipay_success_promt);
+//                SmartToast.showText(context, R.string.alipay_success_promt);
                 if(callback!=null){
                     callback.onPaySuccess();
                 }

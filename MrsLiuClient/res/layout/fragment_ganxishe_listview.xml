@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.techfly.liutaitai.util.view.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        
+    </com.techfly.liutaitai.util.view.LoadingLayout>
+
+    <com.techfly.liutaitai.util.view.PullToRefreshLayout
+        android:id="@+id/layout_parts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <include layout="@layout/refresh_head" />
+
+        <com.techfly.liutaitai.util.view.PullableGridView
+            android:id="@+id/gridview_parts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bcg_item_grid"
+            android:horizontalSpacing="12dp"
+            android:listSelector="@drawable/bcg_item_grid"
+            android:numColumns="2"
+            android:paddingTop="6dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="16dp" >
+        </com.techfly.liutaitai.util.view.PullableGridView>
+
+        <include layout="@layout/load_more" />
+    </com.techfly.liutaitai.util.view.PullToRefreshLayout>
+
+</LinearLayout>

@@ -1,11 +1,13 @@
 package com.techfly.liutaitai.model.pcenter.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.techfly.liutaitai.model.pcenter.fragment.RechargeFragment;
+import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.activities.BaseActivity;
 
 public class RechargeActivity extends BaseActivity {
@@ -42,5 +44,11 @@ public class RechargeActivity extends BaseActivity {
     public void setDialog(ProgressDialog dialog) {
         mDialog = dialog;
         
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Constant.BALANCE_SUCCESS){
+            mFragment.chargeCallBack();
+        }
     }
 }

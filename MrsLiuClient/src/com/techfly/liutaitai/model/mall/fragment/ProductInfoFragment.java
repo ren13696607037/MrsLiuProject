@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
 import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
@@ -42,6 +44,7 @@ import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.scale.ImageEntity;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
@@ -70,10 +73,11 @@ public class ProductInfoFragment extends CommonFragment implements
     private Product mProduct;
     private CommonFragment mFragment;
     private Context mContext;
-    private RollViewPager mViewPager;
-    private LinearLayout mDotLinear;
-    private RelativeLayout mPagerRelative;
-    private ArrayList<View> dots; // 图片标题正文的那些点
+//    private RollViewPager mViewPager;
+//    private LinearLayout mDotLinear;
+//    private RelativeLayout mPagerRelative;
+//    private ArrayList<View> dots; // 图片标题正文的那些点
+    private LinearLayout mImgLinearLayout;
     public ArrayList<String> mImageUrls;
     // private ArrayList<HomePager> mPagerDatas;
 
@@ -231,60 +235,59 @@ public class ProductInfoFragment extends CommonFragment implements
 
     private void initPager(View view) {
         mImageUrls = new ArrayList<String>();
-        mPagerRelative = (RelativeLayout) view
-                .findViewById(R.id.product_info_relative);
-        LayoutParams params = (LayoutParams) mPagerRelative.getLayoutParams();
-        params.height = Constant.SCREEN_WIDTH * 11 / 16;
-        mPagerRelative.setLayoutParams(params);
-
-        mDotLinear = (LinearLayout) view
-                .findViewById(R.id.product_info_dot_linear);
-        mViewPager = (RollViewPager) view
-                .findViewById(R.id.product_info_viewpager);
-        mViewPager.setPagerCallback(new OnPagerClickCallback() {
-
-            @Override
-            public void onPagerClick(int position) {
-//                UIHelper.toPicAndTextActivity(getActivity(), mProductId);
-                UIHelper.showImage(mContext, position, (ArrayList<ImageEntity>) mProduct.getmImageEntity(), false);
-            }
-        });
+//        mPagerRelative = (RelativeLayout) view
+//                .findViewById(R.id.product_info_relative);
+        mImgLinearLayout = (LinearLayout) view
+       .findViewById(R.id.product_info_img_content);
+   
+//        mDotLinear = (LinearLayout) view
+//                .findViewById(R.id.product_info_dot_linear);
+//        mViewPager = (RollViewPager) view
+//                .findViewById(R.id.product_info_viewpager);
+//        mViewPager.setPagerCallback(new OnPagerClickCallback() {
+//
+//            @Override
+//            public void onPagerClick(int position) {
+////                UIHelper.toPicAndTextActivity(getActivity(), mProductId);
+//                UIHelper.showImage(mContext, position, (ArrayList<ImageEntity>) mProduct.getmImageEntity(), false);
+//            }
+//        });
     }
 
     private void startRollPager() {
-        if (mImageUrls != null) {
-            if (dots == null) {
-                dots = new ArrayList<View>();
-            }
-            dots.clear();
-            mDotLinear.removeAllViews();
-            for (int i = 0; i < mImageUrls.size(); i++) {
-                ImageView dot = new ImageView(mContext);
-                LayoutParams params = new LayoutParams(
-                        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                params.leftMargin = 2;
-                params.rightMargin = 2;
-                dot.setLayoutParams(params);
-                if (i != 0) {
-                    dot.setBackgroundResource(R.drawable.ic_dot_unselected);
-                } else {
-                    dot.setBackgroundResource(R.drawable.ic_dot_selected);
-                }
-                mDotLinear.addView(dot);
-                dots.add(dot);
-            }
-        }
-
-        mViewPager.setUriList(mImageUrls);
-        mViewPager.setDot(dots, R.drawable.ic_dot_selected,
-                R.drawable.ic_dot_unselected);
-        if (mViewPager.getAdapter() != null) {
-            mViewPager.getAdapter().notifyDataSetChanged();
-        }
-        mViewPager.removeCallback();
-        mViewPager.resetCurrentItem();
-        mViewPager.setHasSetAdapter(false);
-        mViewPager.startRoll();
+//        if (mImageUrls != null) {
+//            if (dots == null) {
+//                dots = new ArrayList<View>();
+//            }
+//            dots.clear();
+//            mDotLinear.removeAllViews();
+//            for (int i = 0; i < mImageUrls.size(); i++) {
+//                ImageView dot = new ImageView(mContext);
+//                LayoutParams params = new LayoutParams(
+//                        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//                params.leftMargin = 2;
+//                params.rightMargin = 2;
+//                dot.setLayoutParams(params);
+//                if (i != 0) {
+//                    dot.setBackgroundResource(R.drawable.ic_dot_unselected);
+//                } else {
+//                    dot.setBackgroundResource(R.drawable.ic_dot_selected);
+//                }
+//                mDotLinear.addView(dot);
+//                dots.add(dot);
+//            }
+//        }
+//
+//        mViewPager.setUriList(mImageUrls);
+//        mViewPager.setDot(dots, R.drawable.ic_dot_selected,
+//                R.drawable.ic_dot_unselected);
+//        if (mViewPager.getAdapter() != null) {
+//            mViewPager.getAdapter().notifyDataSetChanged();
+//        }
+//        mViewPager.removeCallback();
+//        mViewPager.resetCurrentItem();
+//        mViewPager.setHasSetAdapter(false);
+//        mViewPager.startRoll();
 
     }
 
@@ -380,6 +383,9 @@ public class ProductInfoFragment extends CommonFragment implements
             userId = Integer.parseInt(user.getmId());
         }
         if (userId == 0) {
+            mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+            mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+            mShopCarNum.setVisibility(View.VISIBLE);
             return;
         }
         param.setmIsLogin(true);
@@ -462,12 +468,33 @@ public class ProductInfoFragment extends CommonFragment implements
                         mAddShopCar.setEnabled(true);
                         if (p.getmImgArray() == null
                                 || p.getmImgArray().size() == 0) {
-                            mPagerRelative.setVisibility(View.GONE);
+//                            mPagerRelative.setVisibility(View.GONE);
                         } else {
-                            mPagerRelative.setVisibility(View.VISIBLE);
+//                            mPagerRelative.setVisibility(View.VISIBLE);
                             mImageUrls.clear();
                             mImageUrls.addAll(p.getmImgArray());
-                            startRollPager();
+                            for(int i =0 ;i< mImageUrls.size();i++){
+                                final int j = i;
+                                LayoutParams params = new LayoutParams(
+                                        LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                                ImageView img = new ImageView(mContext);
+                                img.setScaleType(ImageView.ScaleType.FIT_XY);
+                                params.height = Constant.SCREEN_WIDTH * 11 / 16;
+                                img.setLayoutParams(params);
+                                img.setOnClickListener(new OnClickListener() {
+                                    
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        UIHelper.showImage(mContext, j, (ArrayList<ImageEntity>) mProduct.getmImageEntity(), false);
+                                        
+                                    }
+                                });
+                                ImageLoader.getInstance().displayImage(mImageUrls.get(i), img, ImageLoaderUtil.mBannerLoaderOptions);
+                                mImgLinearLayout.addView(img);   
+                            }
+                        
+                            
+//                          startRollPager();
                         }
                         mProductUpdateCount.onAttachView(mProduct);
                         mProductName.setText(p.getmName());

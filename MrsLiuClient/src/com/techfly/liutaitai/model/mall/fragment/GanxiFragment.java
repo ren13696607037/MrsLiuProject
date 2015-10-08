@@ -1,6 +1,7 @@
 package com.techfly.liutaitai.model.mall.fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,12 +32,16 @@ import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.RequestParamConfig;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.view.PullToRefreshLayout;
+import com.techfly.liutaitai.util.view.PullToRefreshLayout.OnRefreshListener;
+import com.techfly.liutaitai.util.view.PullableGridView;
 import com.techfly.liutaitai.util.view.XListView;
 
-public class GanxiFragment extends CommonFragment implements XListView.IXListViewListener {
+public class GanxiFragment extends CommonFragment implements OnRefreshListener {
 
     private GanxiServiceAdapter mAdapter;
-    private XListView mListView;
+    private PullableGridView mListView;
+    private PullToRefreshLayout mPull;
     private ArrayList<Product> mList = new ArrayList<Product>(); 
     private int mPage =1;// 默认请求商品的起始页
     private int mSort = 0;
@@ -58,30 +63,31 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
         return new Listener<Object>() {
 
             @Override
-            public void onResponse(Object result) {
-                AppLog.Logd(result.toString());
-                AppLog.Loge(" data success to load" + result.toString());
-                if(getActivity()!=null&&!isDetached()){
+            public void onResponse(Object object) {
+                AppLog.Logd(object.toString());
+                if (getActivity()!=null&&!isDetached()) {
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
-                    mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-                    ResultInfo rInfo = (ResultInfo) result;
-                    if(rInfo.getmCode()==Constant.RESULT_CODE){
-                        mListView.setPullRefreshEnable(true);
-                        ArrayList<Product> list =(ArrayList<Product>) rInfo.getObject();
-                        mList.addAll(list);
-                        mListView.setPullRefreshEnable(false);
-                        if(list.size()<Constant.DEFAULT_SIZE){
-                            mListView.setPullLoadEnable(false);
-                        }else{
-                            mListView.setPullLoadEnable(true);
-                        }
-                        mAdapter.updateList(mList);
-                    }else{
-                        showSmartToast(rInfo.getmMessage()+"", Toast.LENGTH_LONG);
-                    }
-                 
+                    mLoadHandler.sendEmptyMessageDelayed(Constant.NET_SUCCESS,0);
+                    mPull.refreshFinish(PullToRefreshLayout.SUCCEED);
+                   ResultInfo result = (ResultInfo) object;
+                   if(result.getmCode()==0){
+                       List<Product> list = new ArrayList<Product>();
+                       list = (List<Product>) result.getObject();
+                       if(list.size()>=10){
+                           mPull.setPullRefreshEnable(true);
+                           mPull.setPullLoadEnable(true);
+                       }else{
+                           mPull.setPullRefreshEnable(true);
+                           mPull.setPullLoadEnable(false);
+                       }
+                       mList.addAll(list);
+                       mAdapter.notifyDataSetChanged();
+                   }else{
+                       showSmartToast(result.getmMessage(), Toast.LENGTH_LONG);
+                   }
+                
+                   
                 }
-              
             }
         };
     }
@@ -95,6 +101,7 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
                 if (getActivity() == null || isDetached()) {
                     return;
                 }
+                mPull.refreshFinish(PullToRefreshLayout.FAIL);
                 mLoadHandler.removeMessages(Constant.NET_FAILURE);
                 mLoadHandler.sendEmptyMessage(Constant.NET_FAILURE);
                
@@ -138,10 +145,9 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
     }
     private void initView(View view) {
         // TODO Auto-generated method stub
-        mListView=(XListView) view.findViewById(R.id.listview);
-        mListView.setPullLoadEnable(false);
-        mListView.setPullRefreshEnable(false);
-        mListView.setXListViewListener(this);
+        mListView=(PullableGridView) view.findViewById(R.id.gridview_parts);
+        mPull = (PullToRefreshLayout) view.findViewById(R.id.layout_parts);
+        mPull.setOnRefreshListener(this);
         mAdapter=new GanxiServiceAdapter(getActivity(), mList,Constant.TUANGOU_PRO_ITEM_STYLE);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new OnItemClickListener() {
@@ -149,7 +155,7 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
-               Product pro = (Product) arg0.getItemAtPosition(arg2);
+                Product pro = (Product) arg0.getItemAtPosition(arg2);
                 Intent intent = null;
                 intent = new Intent(getActivity(),
                         ProductInfoActivity.class);
@@ -181,7 +187,7 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_common_listview,
+        View view = inflater.inflate(R.layout.fragment_ganxishe_listview,
                 container, false);
         return view;
     }
@@ -200,17 +206,18 @@ public class GanxiFragment extends CommonFragment implements XListView.IXListVie
     public void onLowMemory() {
         super.onLowMemory();
     }
+    
     @Override
-    public void onRefresh() {
+    public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
         mPage =0;
         mList.clear();
         requestData();
         
     }
     @Override
-    public void onLoadMore() {
-      mPage = mPage+1;
-      requestData();
+    public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+        mPage = mPage+1;
+        requestData();
         
     }
     }

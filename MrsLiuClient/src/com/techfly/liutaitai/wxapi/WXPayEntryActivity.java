@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.wenxin.Keys;
@@ -12,6 +13,7 @@ import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.shopcar.activities.TakingOrderActivity;
 import com.techfly.liutaitai.util.AppManager;
+import com.techfly.liutaitai.util.Constant;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -56,7 +58,10 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
               ac.showOrderFinishFragment(ac.getBundleInfo());
               this.finish();
           }else  if(AppManager.getAppManager().currentActivity() instanceof RechargeActivity){
+              Toast.makeText(this,"充值成功", Toast.LENGTH_SHORT).show();;
               this.finish();
+              AppManager.getAppManager().currentActivity().setResult(Constant.BALANCE_SUCCESS);
+              AppManager.getAppManager().currentActivity().finish();
           }
 		    
 		  

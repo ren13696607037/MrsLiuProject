@@ -49,248 +49,86 @@ public class JiShiInfoParser implements Parser{
                         for(int i =0;i<array.length();i++){
                             JSONObject obj = array.optJSONObject(i);
                             AppLog.Logd("Fly", "time======="+DateUtils.getTime(obj.optLong("time"),"yyyy-MM-dd HH:mm"));
-                            if(obj.optInt("type")==0){
+                            // 以下是时间点的控制 分为 半小时，正小时，和正小时与半小时的结合 三个控制点
+                            if(obj.optInt("type")==1){
                                 if(DateUtils.getTime(obj.optLong("time"),"mm").equals("30")){
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(false);
-                                    points.setmTimeMills(obj.optLong("time")-30*60*1000);
-                                    points.setmBeforeHalfJHours(false);
-                                    
                                     TimePoints points1 = new TimePoints();
                                     points1.setmIsWholeHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+30*60*1000);
-                                    points1.setmBeforeHalfJHours(true);
+                                    points1.setmBeforeHalfJHours(false);
+                                    points1.setmTimeMills(obj.optLong("time")-30*60*1000);
                                     list.add(points1);
                                 }else{
                                     TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(true);
+                                    points.setmBeforeHalfJHours(true);
                                     points.setmTimeMills(obj.optLong("time"));
                                     list.add(points);
                                 }
                                
-                            }else if(obj.optInt("type")==1){
+                            }else if(obj.optInt("type")%2==0){
                                 if(DateUtils.getTime(obj.optLong("time"),"mm").equals("30")){
+                                
+                                    //前 30 分钟前半段 展示
+                                    TimePoints points1 = new TimePoints();
+                                    points1.setmIsWholeHours(false);
+                                    points1.setmBeforeHalfJHours(false);
+                                    points1.setmTimeMills(obj.optLong("time")-30*60*1000);
+                                    list.add(points1);
+                                    // 中间整个小时的展示
+                                    for(int k =0;k<obj.optInt("type")/2-1;k++){
+                                        TimePoints points = new TimePoints();
+                                        points.setmIsWholeHours(true);
+                                        points.setmTimeMills(obj.optLong("time")+30*60*1000+k*60*60*1000);
+                                        list.add(points);
+                                    }
+                                    
+                                    //后 30 分钟后半段展示  
                                     TimePoints points = new TimePoints();
                                     points.setmIsWholeHours(false);
                                     points.setmBeforeHalfJHours(true);
-                                    points.setmTimeMills(obj.optLong("time")+30*60*1000);
+                                    points.setmTimeMills(obj.optLong("time")+30*60*1000+(obj.optInt("type")/2-1)*60*60*1000);
                                     list.add(points);
+                                  
                                 }else{
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(false);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time"));
-                                    list.add(points);
+                                    for(int k =0;k<obj.optInt("type")/2;k++){
+                                        // 整个小时
+                                        TimePoints points = new TimePoints();
+                                        points.setmIsWholeHours(true);
+                                        points.setmBeforeHalfJHours(false);
+                                        points.setmTimeMills(obj.optLong("time")+k*60*60*1000);
+                                        list.add(points);
+                                    }
+                                   
                                 }
-                                
                              
-                            }else if(obj.optInt("type")==2){
+                            }else {
                                 if(DateUtils.getTime(obj.optLong("time"),"mm").equals("30")){
                                     TimePoints points = new TimePoints();
                                     points.setmIsWholeHours(false);
                                     points.setmBeforeHalfJHours(false);
                                     points.setmTimeMills(obj.optLong("time")-30*60*100);
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+30*60*1000);
-                                    
-                                    TimePoints points2 = new TimePoints();
-                                    points2.setmIsWholeHours(true);
-                                    points2.setmBeforeHalfJHours(false);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
-                                    list.add(points2);
-                                    list.add(points1);
                                     list.add(points);
-                                    
-                                    
-                                    
+                                    for(int j=0;j<obj.optInt("type")/2;j++){
+                                        TimePoints points1 = new TimePoints();
+                                        points1.setmIsWholeHours(true);
+                                        points1.setmTimeMills(obj.optLong("time")+30*60*1000+j*60*1000);
+                                        list.add(points1);
+                                    }
+                                  
                                 }else{
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(true);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time"));
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+60*60*1000);
                                     
+                                    for(int j=0;j<obj.optInt("type")/2;j++){
+                                        TimePoints points1 = new TimePoints();
+                                        points1.setmIsWholeHours(true);
+                                        points1.setmTimeMills(obj.optLong("time")+30*60*1000+j*60*1000);
+                                        list.add(points1);
+                                    }
+                                
                                     TimePoints points2 = new TimePoints();
                                     points2.setmIsWholeHours(false);
                                     points2.setmBeforeHalfJHours(true);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
+                                    points2.setmTimeMills(obj.optLong("time")+(obj.optInt("type")/2+1)*60*60*1000);
                                     list.add(points2);
-                                    list.add(points1);
-                                    list.add(points);
-                                }
-                               
-                                
-                                
-                            }else if(obj.optInt("type")==3){
-                                if(DateUtils.getTime(obj.optLong("time"),"mm").equals("30")){
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(false);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time")-30*60*100);
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+30*60*1000);
-                                    
-                                    TimePoints points2 = new TimePoints();
-                                    points2.setmIsWholeHours(true);
-                                    points2.setmBeforeHalfJHours(false);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
-                                    
-                                    TimePoints points3 = new TimePoints();
-                                    points3.setmIsWholeHours(true);
-                                    points3.setmBeforeHalfJHours(false);
-                                    points3.setmTimeMills(obj.optLong("time")+90*60*1000+60*60*1000);
-                                    
-                                    list.add(points3);
-                                    list.add(points2);
-                                    list.add(points1);
-                                    list.add(points);
-                                    
-                                    
-                                    
-                                }else{
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(true);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time"));
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+60*60*1000);
-                                    
-                                    TimePoints points2 = new TimePoints();
-                                    points2.setmIsWholeHours(true);
-                                    points2.setmBeforeHalfJHours(false);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
-                                    
-                                    TimePoints points3 = new TimePoints();
-                                    points3.setmIsWholeHours(false);
-                                    points3.setmBeforeHalfJHours(true);
-                                    points3.setmTimeMills(obj.optLong("time")+90*60*1000+60*60*1000);
-                                    list.add(points3);
-                                    list.add(points2);
-                                    list.add(points1);
-                                    list.add(points);
-                                }
-                                
-                            }else if(obj.optInt("type")==4){
-                                if(DateUtils.getTime(obj.optLong("time"),"mm").equals("30")){
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(false);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time")-30*60*100);
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+30*60*1000);
-                                    
-                                    TimePoints points2 = new TimePoints();
-                                    points2.setmIsWholeHours(true);
-                                    points2.setmBeforeHalfJHours(false);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
-                                    
-                                    TimePoints points3 = new TimePoints();
-                                    points3.setmIsWholeHours(true);
-                                    points3.setmBeforeHalfJHours(false);
-                                    points3.setmTimeMills(obj.optLong("time")+90*60*1000+60*60*1000);
-                                    
-                                    TimePoints points4 = new TimePoints();
-                                    points4.setmIsWholeHours(true);
-                                    points4.setmBeforeHalfJHours(false);
-                                    points4.setmTimeMills(obj.optLong("time")+90*60*1000+60*60*1000+60*60*1000);
-                                    
-                                    list.add(points4);
-                                    list.add(points3);
-                                    list.add(points2);
-                                    list.add(points1);
-                                    list.add(points);
-                                    
-                                    
-                                    
-                                }else{
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(true);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time"));
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+60*60*1000);
-                                    
-                                    TimePoints points2 = new TimePoints();
-                                    points2.setmIsWholeHours(true);
-                                    points2.setmBeforeHalfJHours(false);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
-                                    
-                                    TimePoints points3 = new TimePoints();
-                                    points3.setmIsWholeHours(true);
-                                    points3.setmBeforeHalfJHours(false);
-                                    points3.setmTimeMills(obj.optLong("time")+90*60*1000+60*60*1000);
-                                    
-                                    TimePoints points4 = new TimePoints();
-                                    points4.setmIsWholeHours(false);
-                                    points4.setmBeforeHalfJHours(true);
-                                    points4.setmTimeMills(obj.optLong("time")+90*60*1000+60*60*1000+60*60*1000);
-                                    
-                                    list.add(points4);
-                                    list.add(points3);
-                                    list.add(points2);
-                                    list.add(points1);
-                                    list.add(points);
-                                }
-                                
-                            }else if(obj.optInt("type")==5){
-                                if(DateUtils.getTime(obj.optLong("time"),"mm").equals("30")){
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(false);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time")-30*60*100);
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+30*60*1000);
-                                    
-                                    TimePoints points2 = new TimePoints();
-                                    points2.setmIsWholeHours(true);
-                                    points2.setmBeforeHalfJHours(false);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
-                                    list.add(points2);
-                                    list.add(points1);
-                                    list.add(points);
-                                    
-                                    
-                                    
-                                }else{
-                                    TimePoints points = new TimePoints();
-                                    points.setmIsWholeHours(true);
-                                    points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time"));
-                                 
-                                    TimePoints points1 = new TimePoints();
-                                    points1.setmIsWholeHours(true);
-                                    points1.setmBeforeHalfJHours(false);
-                                    points1.setmTimeMills(obj.optLong("time")+60*60*1000);
-                                    
-                                    TimePoints points2 = new TimePoints();
-                                    points2.setmIsWholeHours(false);
-                                    points2.setmBeforeHalfJHours(true);
-                                    points2.setmTimeMills(obj.optLong("time")+90*60*1000);
-                                    list.add(points2);
-                                    list.add(points1);
-                                    list.add(points);
+                                  
                                 }
                             }
                         }

@@ -93,6 +93,8 @@ public class Constant {
 	public static final String ALIPAY_CALLBACK_URL = "common/payNotify";
 	public static final String ALIPAY_ORDER_CALLBACK_URL = "common/payNotify";
 
+	public static final String ALIPAY_RECHARGER_CALLBACK_URL = "common/payNotify";
+	
 	public static final String ORDER_BASKET_LIST = "order/list";// 订单篮订单列表
 
 	public static final String ORDER_INFO = "order/detail";// 订单篮订单详情
@@ -107,6 +109,7 @@ public class Constant {
 	public static final String ORDER_EVA_ID = "orderid";
 
 	public static final String SHOP_CARD_REQUEST_URL = "product/cartList";
+	public static final String RECHARGE_REQUEST_URL = "user/charge";
 	public static String UPDATE_TO_CART_REQUEST_URL = "product/editCartCount";
 	public static String ADD_TO_CART_REQUEST_URL = "product/addCart";
 	public static String DELETE_TO_CART_REQUEST_URL = "product/deleteUserCart";
