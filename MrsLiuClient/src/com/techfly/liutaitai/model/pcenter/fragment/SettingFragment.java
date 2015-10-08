@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.activities.AboutUsActivity;
 import com.techfly.liutaitai.model.pcenter.activities.HelpActivity;
+import com.techfly.liutaitai.model.pcenter.activities.ServicesActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SettingActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SuggestActivity;
 import com.techfly.liutaitai.util.AlertDialogUtils;
@@ -27,6 +28,7 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
 	private RelativeLayout mAbout;//关于我们
 	private RelativeLayout mSuggest;//意见反馈
 	private RelativeLayout mShare;  //分享
+	private RelativeLayout mService;//服务说明
 	private Button mExit;      //退出登录
 	private Dialog mDialog;
 	private SharePreferenceUtils mPreferenceUtils;
@@ -80,6 +82,7 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
     	mSuggest=(RelativeLayout) view.findViewById(R.id.setting_suggest);
     	mShare = (RelativeLayout) view.findViewById(R.id.setting_share);
     	mExit = (Button) view.findViewById(R.id.setting_exit);
+    	mService= (RelativeLayout) view.findViewById(R.id.setting_service);
     	
     	if(mPreferenceUtils.getUser() == null){
     		mExit.setVisibility(View.INVISIBLE);
@@ -91,6 +94,7 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
     	mHelp.setOnClickListener(this);
     	mSuggest.setOnClickListener(this);
     	mShare.setOnClickListener(this);
+    	mService.setOnClickListener(this);
     }
 	@Override
 	public void requestData() {
@@ -106,6 +110,9 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
 			break;
 		case R.id.setting_help:
 			intent=new Intent(mActivity,HelpActivity.class);
+			break;
+		case R.id.setting_service:
+			intent=new Intent(mActivity,ServicesActivity.class);
 			break;
 		case R.id.setting_suggest:
 			intent=new Intent(mActivity,SuggestActivity.class);
