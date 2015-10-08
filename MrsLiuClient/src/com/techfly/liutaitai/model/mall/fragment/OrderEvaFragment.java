@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +11,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.HitTestResult;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -22,15 +23,13 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.model.mall.bean.OrderEva;
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.mall.bean.help.ListOrder;
-import com.techfly.liutaitai.model.mall.parser.OrderBasketParser;
 import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -124,20 +123,39 @@ public class OrderEvaFragment extends CommonFragment implements OnClickListener 
 				R.layout.item_order_eva) {
 
 			@Override
-			public void convert(ViewHolder holder, final OrderEva item, int position) {
+			public void convert(ViewHolder holder, final OrderEva item,
+					int position) {
 				holder.setText(R.id.order_eva_item_name, item.getmProductName());
 				holder.setRating(R.id.order_eva_item_bar,
 						(float) item.getmStar());
 				RatingBar rb = holder.getView(R.id.order_eva_item_bar);
 				rb.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-					
+
 					@Override
-					public void onRatingChanged(RatingBar ratingBar, float rating,
-							boolean fromUser) {
-						item.setmStar((int)rating);
-						
+					public void onRatingChanged(RatingBar ratingBar,
+							float rating, boolean fromUser) {
+						item.setmStar((int) rating);
+
 					}
 				});
+				holder.getView(R.id.order_eva_item_content)
+						.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+							@Override
+							public void onFocusChange(View arg0, boolean arg1) {
+								EditText et = (EditText) arg0;
+								String hint;
+								if (arg1) {
+									hint = et.getHint().toString();
+									et.setTag(hint);
+									et.setHint("");
+								} else {
+									hint = et.getTag().toString();
+									et.setHint(hint);
+								}
+
+							}
+						});
 			}
 		};
 		mListView.setAdapter(mAdapter);

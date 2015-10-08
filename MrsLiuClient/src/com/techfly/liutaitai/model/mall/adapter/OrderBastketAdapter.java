@@ -92,7 +92,8 @@ public class OrderBastketAdapter extends BaseAdapter {
 		viewHolder.mTvCount.setText("总数：" + order.getmTotalCount()
 				+ order.getmUnit());
 		viewHolder.mTvTime.setText(order.getmTime());
-		viewHolder.mTvTotalPrice.setText("合计：￥" + order.getmTotalPrice());
+		viewHolder.mTvTotalPrice.setText("合计：￥" + order.getmTotalPrice()
+				+ "(含运费￥" + order.getmDeliverFee() + ")");
 		CommonAdapter<Product> adapter = new CommonAdapter<Product>(context,
 				order.getmList(), R.layout.item_order_basket_item) {
 
@@ -232,10 +233,10 @@ public class OrderBastketAdapter extends BaseAdapter {
 			break;
 		case 10:
 			mTvState.setText(R.string.order_state_10);
-//			mTvBtn1.setVisibility(View.INVISIBLE);
-//			mTvBtn2.setVisibility(View.VISIBLE);
-//			mTvBtn2.setText(R.string.order_text_5);
-			
+			// mTvBtn1.setVisibility(View.INVISIBLE);
+			// mTvBtn2.setVisibility(View.VISIBLE);
+			// mTvBtn2.setText(R.string.order_text_5);
+
 			break;
 
 		default:
