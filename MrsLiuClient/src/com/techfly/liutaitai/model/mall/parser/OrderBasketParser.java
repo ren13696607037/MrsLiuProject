@@ -58,6 +58,8 @@ public class OrderBasketParser implements Parser {
 										.optString(JsonKey.OrderBasketKey.TOTAL_PRICE));
 								order.setmList(parseProducts(mJsonObject
 										.optJSONArray(JsonKey.OrderBasketKey.PRODUCTS)));
+								order.setmDeliverFee(mJsonObject
+										.optDouble(JsonKey.OrderInfoKey.DELIVER_FEE));
 
 								mArrayList.add(order);
 							}

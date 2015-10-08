@@ -47,7 +47,7 @@
         android:background="@drawable/shap_radio"
         android:gravity="top|left"
         android:hint="@string/order_eva_hint"
-        android:minLines="3"
+        android:minLines="4"
         android:padding="@dimen/px_20"
         android:textColor="@color/TextColorBLACK"
         android:textSize="@dimen/app_text_size_first" />
