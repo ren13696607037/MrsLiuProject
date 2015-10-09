@@ -173,15 +173,20 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
         mButton.setOnClickListener(this);
         mTvCode.setOnClickListener(this);
         mProgressBar = (ProgressBar) view.findViewById(R.id.code_progress);
+        mTextView = (TextView)view.findViewById(R.id.register_user);
         if(mExtra != 0){
     		setTitleText(R.string.login_forget);
     		mEtPass.setHint(R.string.pass_hint);
     		mButton.setText(R.string.submit);
+    		mTextView.setVisibility(View.INVISIBLE);
     	}else{
     		setTitleText(R.string.welcome_reg);
+    		mTextView.setVisibility(View.VISIBLE);
     	}
         
-        mTextView = (TextView)view.findViewById(R.id.register_user);
+        mTextView.setText(getActivity().getString(R.string.loging_text1, getActivity().getString(R.string.welcome_reg)));
+		mTextView.setText(Utility.setText(getActivity(), mTextView.getText().toString(), mTextView.getText().length()-12, mTextView.getText().length()));
+		
         mTextView.setOnClickListener(this);
     }
 	@Override

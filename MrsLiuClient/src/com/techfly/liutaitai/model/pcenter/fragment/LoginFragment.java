@@ -136,7 +136,8 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 //		mLayout = (LinearLayout) view.findViewById(R.id.login_about);
 		mTvForget = (TextView) view.findViewById(R.id.login_forget);
 		mTextView = (TextView) view.findViewById(R.id.login_user);
-		
+		mTextView.setText(mActivity.getString(R.string.loging_text1, mActivity.getString(R.string.welcome_login)));
+		mTextView.setText(Utility.setText(mActivity, mTextView.getText().toString(), mTextView.getText().length()-12, mTextView.getText().length()));
 		
 		mButton.setOnClickListener(this);
 		mRegister.setOnClickListener(this);

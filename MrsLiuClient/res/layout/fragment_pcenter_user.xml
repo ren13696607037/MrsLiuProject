@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_margin="3dp"
         android:textSize="@dimen/app_text_size_second"
-        android:text="@string/services_text"
+        android:text="@string/login_register_text"
         android:textColor="@color/TextColorBLACK_NORMAL" />
       </com.techfly.liutaitai.util.view.LoadingLayout>
     
