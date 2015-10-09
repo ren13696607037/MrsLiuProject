@@ -95,7 +95,6 @@ public class GanxiProductInfoFragment extends CommonFragment implements
 
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
         mContext = activity;
         type = activity.getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
@@ -104,7 +103,6 @@ public class GanxiProductInfoFragment extends CommonFragment implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         mFragment = this;
         Intent intent = getActivity().getIntent();
@@ -117,7 +115,7 @@ public class GanxiProductInfoFragment extends CommonFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater
-                .inflate(R.layout.fragment_productinfo, container, false);
+                .inflate(R.layout.fragment_ganxi_product_info, container, false);
     }
 
     @Override
@@ -127,7 +125,6 @@ public class GanxiProductInfoFragment extends CommonFragment implements
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
         initHeader();
         initViews(view);
