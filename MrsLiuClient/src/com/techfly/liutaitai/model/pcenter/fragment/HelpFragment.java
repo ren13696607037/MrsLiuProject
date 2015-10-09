@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
@@ -26,6 +28,7 @@ import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class HelpFragment extends CommonFragment {
     private WebView mWebView;
+    private TextView mTextView;
     @Override
     public void requestData() {
         RequestParam param = new RequestParam();
@@ -99,7 +102,7 @@ public class HelpFragment extends CommonFragment {
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        startReqTask(this);
+//        startReqTask(this);
     }
 
     @Override
@@ -112,30 +115,32 @@ public class HelpFragment extends CommonFragment {
     public void onDestroyView() {
         // TODO Auto-generated method stub
         super.onDestroyView();
-        if (mWebView != null) {
-            mWebView.getSettings().setLoadWithOverviewMode(false);
-            mWebView.getSettings().setUseWideViewPort(false);
-            mWebView.getSettings().setJavaScriptEnabled(false);
-            mWebView.getSettings().setSupportZoom(false);
-            mWebView.getSettings().setBuiltInZoomControls(false);
-            mWebView.destroy();
-       }
+//        if (mWebView != null) {
+//            mWebView.getSettings().setLoadWithOverviewMode(false);
+//            mWebView.getSettings().setUseWideViewPort(false);
+//            mWebView.getSettings().setJavaScriptEnabled(false);
+//            mWebView.getSettings().setSupportZoom(false);
+//            mWebView.getSettings().setBuiltInZoomControls(false);
+//            mWebView.destroy();
+//       }
         
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mWebView = (WebView) view.findViewById(R.id.help);
-        mWebView.setWebViewClient(getClient());
-        mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setUseWideViewPort(true);
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setSupportZoom(false);
-        mWebView.getSettings().setBuiltInZoomControls(false);
-        mWebView.getSettings()
-                .setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 可能的话不要超过屏幕宽度
-        mWebView.setInitialScale(120);
+        mTextView = (TextView) view.findViewById(R.id.help);
+        mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+//        mWebView = (WebView) view.findViewById(R.id.help);
+//        mWebView.setWebViewClient(getClient());
+//        mWebView.getSettings().setLoadWithOverviewMode(true);
+//        mWebView.getSettings().setUseWideViewPort(true);
+//        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.getSettings().setSupportZoom(false);
+//        mWebView.getSettings().setBuiltInZoomControls(false);
+//        mWebView.getSettings()
+//                .setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 可能的话不要超过屏幕宽度
+//        mWebView.setInitialScale(120);
         initTitleView();
     }
     private void initTitleView(){

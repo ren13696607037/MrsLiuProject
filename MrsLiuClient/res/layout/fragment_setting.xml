@@ -13,6 +13,30 @@
         android:background="@color/background"
         android:orientation="vertical" >
         <RelativeLayout
+            android:id="@+id/setting_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pcenter_frame"
+            android:padding="@dimen/px_20" 
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/px_20"
+                android:text="@string/pcenter_services"
+                android:textColor="@color/TextColorBLACK_NORMAL"
+                android:textSize="@dimen/app_text_size_first" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/pcenter_arrow" />
+        </RelativeLayout>
+        <RelativeLayout
             android:id="@+id/setting_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

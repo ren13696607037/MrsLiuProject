@@ -128,6 +128,17 @@
             android:text="@string/welcome_reg"
             android:textColor="@color/color_register"
             android:textSize="@dimen/app_text_size_first" />
+        
+        <TextView 
+            android:id="@+id/login_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loging_text1"
+            android:textColor="@color/color_be"
+            android:textSize="@dimen/app_text_size_second"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/px_25"
+            />
     </LinearLayout>
 
 </RelativeLayout>

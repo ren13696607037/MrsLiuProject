@@ -184,7 +184,7 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 
 					@Override
 					public void onSuccess(ResponseInfo<String> info) {
-						AppLog.Logd("Fly", "info===" + info.result);
+						AppLog.Loge("xll", "info===" + info.result);
 						if (!isDetached()) {
 							mLoadHandler.removeMessages(Constant.NET_SUCCESS);
 							mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
@@ -203,7 +203,7 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 										mActivity.finish();
 									} else {
 										SmartToast.makeText(getActivity(),
-												obj.optString(JsonKey.MESSAGE),
+												obj.optString(JsonKey.DATA),
 												Toast.LENGTH_LONG).show();
 									}
 								}

@@ -371,7 +371,7 @@ public class Utility {
 		// 用颜色标记文本
 		ss.setSpan(
 				new ForegroundColorSpan(context.getResources().getColor(
-						R.color.color_blue)), start, end,
+						R.color.bg_header)), start, end,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return ss;
 	}

@@ -24,6 +24,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.LoginParser;
 import com.techfly.liutaitai.model.pcenter.activities.LoginActivity;
 import com.techfly.liutaitai.model.pcenter.activities.RegisterActivity;
+import com.techfly.liutaitai.model.pcenter.activities.UserActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -48,6 +49,7 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 	private EditText mPass;
 	private Button mButton;
 	private Button mRegister;
+	private TextView mTextView;
 	private int mExtra = 0;
 
 	private Handler loginHandler = new Handler() {
@@ -133,11 +135,15 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 		mRegister = (Button) view.findViewById(R.id.register_button);
 //		mLayout = (LinearLayout) view.findViewById(R.id.login_about);
 		mTvForget = (TextView) view.findViewById(R.id.login_forget);
-
+		mTextView = (TextView) view.findViewById(R.id.login_user);
+		mTextView.setText(mActivity.getString(R.string.loging_text1, mActivity.getString(R.string.welcome_login)));
+		mTextView.setText(Utility.setText(mActivity, mTextView.getText().toString(), mTextView.getText().length()-12, mTextView.getText().length()));
+		
 		mButton.setOnClickListener(this);
 		mRegister.setOnClickListener(this);
 //		mLayout.setOnClickListener(this);
 		mTvForget.setOnClickListener(this);
+		mTextView.setOnClickListener(this);
 	}
 
 	@Override
@@ -217,6 +223,9 @@ public class LoginFragment extends CommonFragment implements OnClickListener {
 			break;
 		case R.id.register_button:
 			startActivityForResult(new Intent(getActivity(), RegisterActivity.class), Constant.REGISTER_INTENT);
+			break;
+		case R.id.login_user:
+			startActivity(new Intent(getActivity(), UserActivity.class));
 			break;
 
 		default:

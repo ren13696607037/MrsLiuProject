@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
       <TextView
-      	android:id="@+id/about_us"
+      	android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="3dp"
         android:textSize="@dimen/app_text_size_second"
-        android:text="@string/about_text"
+        android:text="@string/login_register_text"
         android:textColor="@color/TextColorBLACK_NORMAL" />
       </com.techfly.liutaitai.util.view.LoadingLayout>
     

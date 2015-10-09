@@ -24,6 +24,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.RegisterParser;
+import com.techfly.liutaitai.model.pcenter.activities.UserActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -52,6 +53,7 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
     private int mProgress;
     private String mToken;
     private int mExtra = 0;
+    private TextView mTextView;
     private Handler mRegisterHandler = new Handler() {
 
         @Override
@@ -171,13 +173,21 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
         mButton.setOnClickListener(this);
         mTvCode.setOnClickListener(this);
         mProgressBar = (ProgressBar) view.findViewById(R.id.code_progress);
+        mTextView = (TextView)view.findViewById(R.id.register_user);
         if(mExtra != 0){
     		setTitleText(R.string.login_forget);
     		mEtPass.setHint(R.string.pass_hint);
     		mButton.setText(R.string.submit);
+    		mTextView.setVisibility(View.INVISIBLE);
     	}else{
     		setTitleText(R.string.welcome_reg);
+    		mTextView.setVisibility(View.VISIBLE);
     	}
+        
+        mTextView.setText(getActivity().getString(R.string.loging_text1, getActivity().getString(R.string.welcome_reg)));
+		mTextView.setText(Utility.setText(getActivity(), mTextView.getText().toString(), mTextView.getText().length()-12, mTextView.getText().length()));
+		
+        mTextView.setOnClickListener(this);
     }
 	@Override
 	public void requestData() {
@@ -344,6 +354,9 @@ public class RegisterFragment extends CommonFragment implements OnClickListener{
             mIsCode = true;
             getCode();
             break;
+        case R.id.register_user:
+        	startActivity(new Intent(getActivity(), UserActivity.class));
+        	break;
         default:
             break;
         }

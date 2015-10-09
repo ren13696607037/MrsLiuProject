@@ -23,7 +23,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
-public class AboutUsFragment extends CommonFragment {
+public class UserFragment extends CommonFragment {
    private TextView mAboutUsTv;
     @Override
     public void requestData() {
@@ -96,17 +96,17 @@ public class AboutUsFragment extends CommonFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
-        mAboutUsTv = (TextView) view.findViewById(R.id.about_us);
+        mAboutUsTv = (TextView) view.findViewById(R.id.user);
         mAboutUsTv.setMovementMethod(ScrollingMovementMethod.getInstance());
         initTitleView();
     }
     private void initTitleView(){
-        setTitleText(R.string.pcenter_about);
+        setTitleText(R.string.pcenter_user);
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pcenter_aboutus,
+        View view = inflater.inflate(R.layout.fragment_pcenter_user,
                 container, false);
         return view;
     }
