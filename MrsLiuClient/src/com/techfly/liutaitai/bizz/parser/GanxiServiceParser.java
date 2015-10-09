@@ -41,6 +41,7 @@ public class GanxiServiceParser implements Parser {
                     product.setmSale(obj.optString(JsonKey.ProductKey.SALENUM));
                     product.setmImg(Constant.IMG_URL +obj.optString(JsonKey.ProductKey.ICON));
                     product.setmDesc(obj.optString("text"));;
+                    product.setmUnit(obj.optString("unti"));
                     list.add(product);
                 }
             }

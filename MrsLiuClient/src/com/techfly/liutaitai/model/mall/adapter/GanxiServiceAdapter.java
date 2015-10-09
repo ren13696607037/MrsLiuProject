@@ -65,8 +65,8 @@ public class GanxiServiceAdapter extends BaseAdapter {
       
         ImageLoader.getInstance().displayImage(mList.get(position).getmImg(), holder.imageView,ImageLoaderUtil.mHallIconLoaderOptions);
         holder.productName.setText(mList.get(position).getmName());
-        holder.productType.setText(mList.get(position).getmDesc());
-        holder.productMarketPrice.setText("￥"+mList.get(position).getmMarketPrice()+"元");
+        holder.productType.setText(mList.get(position).getmSale()+"人体验");
+        holder.productMarketPrice.setText("￥"+mList.get(position).getmMarketPrice()+"元"+"/"+mList.get(position).getmUnit());
        
        
         return convertView;

@@ -236,13 +236,9 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+       
         <activity
-            android:name=".model.mall.activities.ProSaleListActivity"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name=".model.mall.activities.ProPriceListActivity"
+            android:name=".model.mall.activities.GanxiProductInfoActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />

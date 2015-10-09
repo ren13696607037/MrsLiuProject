@@ -20,7 +20,7 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.GanxiServiceParser;
-import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
+import com.techfly.liutaitai.model.mall.activities.GanxiProductInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.GanxiServiceAdapter;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.net.HttpURL;
@@ -35,7 +35,6 @@ import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.PullToRefreshLayout;
 import com.techfly.liutaitai.util.view.PullToRefreshLayout.OnRefreshListener;
 import com.techfly.liutaitai.util.view.PullableGridView;
-import com.techfly.liutaitai.util.view.XListView;
 
 public class GanxiFragment extends CommonFragment implements OnRefreshListener {
 
@@ -85,8 +84,6 @@ public class GanxiFragment extends CommonFragment implements OnRefreshListener {
                    }else{
                        showSmartToast(result.getmMessage(), Toast.LENGTH_LONG);
                    }
-                
-                   
                 }
             }
         };
@@ -94,7 +91,6 @@ public class GanxiFragment extends CommonFragment implements OnRefreshListener {
 
     private Response.ErrorListener createErrorListener() {
         return new ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 AppLog.Loge(" data failed to load" + error.getMessage());
@@ -112,14 +108,12 @@ public class GanxiFragment extends CommonFragment implements OnRefreshListener {
 
     @Override
     public void onAttach(Activity activity) {
-        // TODO Auto-generated method stub
         super.onAttach(activity);
         type =activity.getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         startReqTask(this);
     }
@@ -132,13 +126,11 @@ public class GanxiFragment extends CommonFragment implements OnRefreshListener {
 
     @Override
     public void onDestroyView() {
-        // TODO Auto-generated method stub
         super.onDestroyView();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
         initTitleView();
         initView(view);
@@ -158,21 +150,17 @@ public class GanxiFragment extends CommonFragment implements OnRefreshListener {
                 Product pro = (Product) arg0.getItemAtPosition(arg2);
                 Intent intent = null;
                 intent = new Intent(getActivity(),
-                        ProductInfoActivity.class);
+                        GanxiProductInfoActivity.class);
                 intent.putExtra(IntentBundleKey.ID, pro.getmId());
                 intent.putExtra(IntentBundleKey.TYPE, type);
                 intent.putExtra(IntentBundleKey.IMAGE_PATH, pro.getmImg());
                 startActivityForResult(intent, 0);
-               
-              
             }
         });
     }
 
     private void initTitleView(){
-        
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-        
         if(type==0){
             setTitleText("干洗");
         }else if(type==1){
