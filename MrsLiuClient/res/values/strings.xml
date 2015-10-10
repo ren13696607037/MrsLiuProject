@@ -172,7 +172,7 @@
     <string name="order_all_text">亲~暂时没有订单</string>
     <string name="order_delivery_text">亲~暂时没有待服务的订单</string>
     <string name="order_deliveryed_text">亲~暂时没有进行中的订单</string>
-    <string name="rate_no_text">该商品还没有评论~</string>
+    <string name="rate_no_text">当前还没有用户为您的服务评论~</string>
     <string name="button_pay">去支付</string>
     <string name="button_deliveryed">查看物流</string>
     <string name="button_rate">去评价</string>
