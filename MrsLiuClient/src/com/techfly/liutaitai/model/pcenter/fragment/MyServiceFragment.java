@@ -211,6 +211,7 @@ public class MyServiceFragment extends CommonFragment implements OnClickListener
 			break;
 		case R.id.service_rate:
 			intent = new Intent(mActivity, RateListActivity.class);
+			intent.putExtra(IntentBundleKey.TECH_ID, mService.getmId());
 			break;
 		case R.id.service_servicing:
 			intent = new Intent(mActivity, MyOrderActivity.class);

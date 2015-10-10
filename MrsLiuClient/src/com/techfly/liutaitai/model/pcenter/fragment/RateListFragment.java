@@ -49,8 +49,8 @@ public class RateListFragment extends CommonFragment implements IXListViewListen
 	private final int MSG_LIST=0x101;
 	private RequestRate mRequestRate;
 	private User mUser;
+	private String mTechId;
 	public Handler mRateListHandler=new Handler(){
-
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -81,6 +81,7 @@ public class RateListFragment extends CommonFragment implements IXListViewListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mTechId = mActivity.getIntent().getStringExtra(IntentBundleKey.TECH_ID);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
         startReqTask(RateListFragment.this);
     }
@@ -139,7 +140,7 @@ public class RateListFragment extends CommonFragment implements IXListViewListen
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL+Constant.TECH_RATE_LIST_URL);
         url.setmGetParamPrefix(JsonKey.ServiceKey.TYPE).setmGetParamValues("1");
-        url.setmGetParamPrefix(JsonKey.RateKey.ID).setmGetParamValues(mUser.getmId());
+        url.setmGetParamPrefix(JsonKey.RateKey.ID).setmGetParamValues(mTechId);
         param.setmIsLogin(true);
 		param.setmId(mUser.getmId());
 		param.setmToken(mUser.getmToken());
