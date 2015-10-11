@@ -175,6 +175,8 @@
     <string name="rate_no_text">该商品还没有评论~</string>
     <string name="button_pay">去支付</string>
     <string name="button_deliveryed">查看物流</string>
+    <string name="check_comment">查看评价</string>
+   
     <string name="button_rate">去评价</string>
     <string name="button_cancel">取消订单</string>
     <string name="detail_text">支付方式</string>

@@ -305,8 +305,8 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             if(mSelectTimeMills==0){
                showSmartToast(getString(R.string.choose_service_time_prompt),Toast.LENGTH_LONG); 
             }else{
-                UIHelper.toSomeIdActivity(this, JishiListActivity.class.getName(),
-                        mSelectTimeMills + "", Integer.parseInt(mInfo.getmType()));
+                UIHelper.toJishiListActivity(this, JishiListActivity.class.getName(),
+                        mSelectTimeMills + "", Integer.parseInt(mInfo.getmType()),mId);
             }
        
             break;

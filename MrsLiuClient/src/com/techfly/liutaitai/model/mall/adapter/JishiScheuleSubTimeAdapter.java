@@ -74,9 +74,11 @@ public class JishiScheuleSubTimeAdapter extends BaseAdapter {
                             if(points.ismBeforeHalfJHours()){
                                 holder.time
                                 .setBackgroundResource(R.drawable.jishi_time_bg3);
+                                holder.time.setTextColor(mContext.getResources().getColor(android.R.color.black));
                             }else{
                                 holder.time
                                 .setBackgroundResource(R.drawable.jishi_time_bg4);
+                                holder.time.setTextColor(mContext.getResources().getColor(android.R.color.black));
                             }
                             
                         }

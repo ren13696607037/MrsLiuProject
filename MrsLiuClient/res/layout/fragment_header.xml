@@ -88,7 +88,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:textColor="@color/color_blue"
+            android:textColor="@color/write"
             android:textSize="@dimen/app_text_size_first"
             android:visibility="gone" />
     </LinearLayout>

@@ -115,18 +115,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
-                    
-                    <LinearLayout 
-                    android:id="@+id/product_info_img_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                        
-                        >
-                        
-                        
+
+                    <LinearLayout
+                        android:id="@+id/product_info_img_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
                     </LinearLayout>
-                    <!-- 
+                    <!--
                     <RelativeLayout
                         android:id="@+id/product_info_relative"
                         android:layout_width="match_parent"
@@ -149,12 +145,13 @@
                             android:paddingBottom="6dp"
                             android:paddingTop="6dp" >
                         </LinearLayout>
-                    </RelativeLayout>
- -->
+                    </RelativeLayout>                    -->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal"
+                        android:visibility="gone" >
 
                         <TextView
                             android:id="@+id/product_info_product_name"
@@ -178,7 +175,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_gray" />
+                        android:background="@color/color_gray"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,7 +201,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:paddingLeft="@dimen/px_20" >
                         </com.techfly.liutaitai.util.view.ProductUpdateView>
                     </LinearLayout>
@@ -211,7 +209,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_gray" />
+                        android:background="@color/color_gray"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/product_info_desc"
@@ -226,13 +225,15 @@
                         android:paddingRight="@dimen/px_20"
                         android:paddingTop="@dimen/px_10"
                         android:textColor="#565656"
-                        android:textSize="@dimen/app_text_size_first" />
+                        android:textSize="@dimen/app_text_size_first"
+                        android:visibility="gone" />
 
                     <View
                         android:id="@+id/product_info_view_3"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_gray" />
+                        android:background="@color/color_gray"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/product_info_text_and_pic_detail"
@@ -246,13 +247,15 @@
                         android:paddingTop="@dimen/px_20"
                         android:text="@string/product_info_text_pic_and_text_detail"
                         android:textColor="@color/TextColorBLACK_NORMAL"
-                        android:textSize="@dimen/app_text_size_first" >
+                        android:textSize="@dimen/app_text_size_first"
+                        android:visibility="gone" >
                     </TextView>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_gray" />
+                        android:background="@color/color_gray"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/product_info_comment"
@@ -266,13 +269,15 @@
                         android:paddingTop="@dimen/px_20"
                         android:text="@string/product_info_comment"
                         android:textColor="@color/TextColorBLACK_NORMAL"
-                        android:textSize="@dimen/app_text_size_first" >
+                        android:textSize="@dimen/app_text_size_first"
+                        android:visibility="gone" >
                     </TextView>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_gray" />
+                        android:background="@color/color_gray"
+                        android:visibility="gone" />
 
                     <com.techfly.liutaitai.util.view.ListViewForScrollView
                         android:id="@+id/product_info_listview"
@@ -280,7 +285,8 @@
                         android:layout_height="wrap_content"
                         android:divider="@color/white_bg_home"
                         android:dividerHeight="0.5dp"
-                        android:listSelector="#00000000" >
+                        android:listSelector="#00000000"
+                        android:visibility="gone" >
                     </com.techfly.liutaitai.util.view.ListViewForScrollView>
                 </LinearLayout>
             </ScrollView>

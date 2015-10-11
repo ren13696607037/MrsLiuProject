@@ -49,6 +49,7 @@ public class JiShiListFragment extends CommonFragment implements
     private int type;
     private String time;
     private Jishi mJishi;
+    private String sid;
 
     @Override
     public void requestData() {
@@ -71,6 +72,12 @@ public class JiShiListFragment extends CommonFragment implements
 
         url.setmGetParamPrefix("time");
         url.setmGetParamValues(time);
+        
+        url.setmGetParamPrefix("no");
+        url.setmGetParamValues(mPage+"");
+        
+        url.setmGetParamPrefix("sid");
+        url.setmGetParamValues(sid);
         
         url.setmGetParamPrefix("city");
         url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity()).getArea().getmId());
@@ -165,6 +172,7 @@ public class JiShiListFragment extends CommonFragment implements
         super.onAttach(activity);
         type = activity.getIntent().getIntExtra(IntentBundleKey.TYPE, 0);
         time = activity.getIntent().getStringExtra(IntentBundleKey.ID);
+        sid = activity.getIntent().getStringExtra(IntentBundleKey.SERVICE_ID);
     }
 
     @Override

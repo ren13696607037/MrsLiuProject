@@ -11,20 +11,20 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout.LayoutParams;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
@@ -151,6 +151,21 @@ public class GanxiProductInfoFragment extends CommonFragment implements
         // }
         // });
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
+        setRightText(R.string.check_comment,new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+                if (mArrayList.size() > 0) {
+                    UIHelper.toSomeIdActivity(
+                            GanxiProductInfoFragment.this,
+                            ProductCommentActivity.class.getName(),
+                            mProductId, type);
+                } else {
+                    showSmartToast("还没有商品的评论", Toast.LENGTH_LONG);
+                }
+                
+            }
+        });
     }
 
     private void initViews(View view) {

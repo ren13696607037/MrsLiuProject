@@ -377,7 +377,7 @@ public abstract class CommonFragment extends Fragment implements
 	protected void setRightText(int stringId, OnClickListener listener) {
 		if (null != headerRightText) {
 		    if(lineView!=null){
-                lineView.setVisibility(View.VISIBLE);
+//                lineView.setVisibility(View.VISIBLE);
             }
 			headerRightText.setVisibility(View.VISIBLE);
 			headerRightText.setText(stringId);

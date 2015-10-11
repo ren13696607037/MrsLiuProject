@@ -192,6 +192,32 @@ public class UIHelper {
 
 	}
 
+	/**
+     * 普通的跳转页面，无需携带任何参数
+     * 
+     * @param fragment
+     * @param className
+     */
+    public static void toJishiListActivity(Fragment fragment, String className,
+            String id, int type,String sid) {
+        Intent intent = null;
+        try {
+            intent = new Intent(fragment.getActivity(),
+                    Class.forName(className));
+            intent.putExtra(IntentBundleKey.ID, id);
+            intent.putExtra(IntentBundleKey.SERVICE_ID, sid);
+            intent.putExtra(IntentBundleKey.TYPE, type);
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (intent != null) {
+            fragment.startActivityForResult(intent, 0);
+            ;
+        }
+
+    }
+
 	public static void toOrderInfoActivity(Fragment context, String id) {
 		Intent intent = new Intent(context.getActivity(),
 				OrderInfoActivity.class);

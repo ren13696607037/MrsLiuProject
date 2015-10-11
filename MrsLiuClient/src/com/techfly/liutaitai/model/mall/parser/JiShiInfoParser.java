@@ -56,12 +56,23 @@ public class JiShiInfoParser implements Parser{
                                     points1.setmIsWholeHours(false);
                                     points1.setmBeforeHalfJHours(false);
                                     points1.setmTimeMills(obj.optLong("time")-30*60*1000);
-                                    list.add(points1);
+                                    if( list.contains(points1)){
+                                        points1.setmIsWholeHours(true);
+                                        list.set(list.indexOf(points1), points1);
+                                    }else{
+                                        list.add(points1);
+                                    }
+                              
                                 }else{
                                     TimePoints points = new TimePoints();
                                     points.setmBeforeHalfJHours(true);
                                     points.setmTimeMills(obj.optLong("time"));
-                                    list.add(points);
+                                    if( list.contains(points)){
+                                        points.setmIsWholeHours(true);
+                                        list.set(list.indexOf(points), points);
+                                    }else{
+                                        list.add(points);
+                                    }
                                 }
                                
                             }else if(obj.optInt("type")%2==0){
@@ -72,7 +83,12 @@ public class JiShiInfoParser implements Parser{
                                     points1.setmIsWholeHours(false);
                                     points1.setmBeforeHalfJHours(false);
                                     points1.setmTimeMills(obj.optLong("time")-30*60*1000);
-                                    list.add(points1);
+                                    if( list.contains(points1)){
+                                        points1.setmIsWholeHours(true);
+                                        list.set(list.indexOf(points1), points1);
+                                    }else{
+                                        list.add(points1);
+                                    }
                                     // 中间整个小时的展示
                                     for(int k =0;k<obj.optInt("type")/2-1;k++){
                                         TimePoints points = new TimePoints();
@@ -86,7 +102,12 @@ public class JiShiInfoParser implements Parser{
                                     points.setmIsWholeHours(false);
                                     points.setmBeforeHalfJHours(true);
                                     points.setmTimeMills(obj.optLong("time")+30*60*1000+(obj.optInt("type")/2-1)*60*60*1000);
-                                    list.add(points);
+                                    if( list.contains(points)){
+                                        points.setmIsWholeHours(true);
+                                        list.set(list.indexOf(points), points);
+                                    }else{
+                                        list.add(points);
+                                    }
                                   
                                 }else{
                                     for(int k =0;k<obj.optInt("type")/2;k++){
@@ -105,8 +126,13 @@ public class JiShiInfoParser implements Parser{
                                     TimePoints points = new TimePoints();
                                     points.setmIsWholeHours(false);
                                     points.setmBeforeHalfJHours(false);
-                                    points.setmTimeMills(obj.optLong("time")-30*60*100);
-                                    list.add(points);
+                                    points.setmTimeMills(obj.optLong("time")-30*60*1000);
+                                    if( list.contains(points)){
+                                        points.setmIsWholeHours(true);
+                                        list.set(list.indexOf(points), points);
+                                    }else{
+                                        list.add(points);
+                                    }
                                     for(int j=0;j<obj.optInt("type")/2;j++){
                                         TimePoints points1 = new TimePoints();
                                         points1.setmIsWholeHours(true);
@@ -127,7 +153,12 @@ public class JiShiInfoParser implements Parser{
                                     points2.setmIsWholeHours(false);
                                     points2.setmBeforeHalfJHours(true);
                                     points2.setmTimeMills(obj.optLong("time")+(obj.optInt("type")/2+1)*60*60*1000);
-                                    list.add(points2);
+                                    if( list.contains(points2)){
+                                        points2.setmIsWholeHours(true);
+                                        list.set(list.indexOf(points2), points2);
+                                    }else{
+                                        list.add(points2);
+                                    }
                                   
                                 }
                             }
