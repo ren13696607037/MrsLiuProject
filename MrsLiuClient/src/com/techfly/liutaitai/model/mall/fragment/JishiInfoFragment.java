@@ -134,12 +134,10 @@ public class JishiInfoFragment extends CommonFragment {
             scheuleTime.setmDate(DateUtils.getTime(date.getTimeMill(), "MM.dd"));
         }
         time1.setTimeMill(DateUtils.currentMills(date.getTimeMill(),"8:00"));
-        time1.setTimeMill2(time1.getTimeMill()+30*60*1000);
         for(int i=1;i<=11;i++){
             TimeBean time2 = new TimeBean();
             time2.setTime(DateUtils.getTime(time1.getTimeMill()+i*60*60*1000, "HH"));
             time2.setTimeMill(time1.getTimeMill()+i*60*60*1000);
-            time2.setTimeMill2(time1.getTimeMill()+i*60*60*1000+30*60*1000);
             time.add(time2); 
         }
         scheuleTime.setList(time);

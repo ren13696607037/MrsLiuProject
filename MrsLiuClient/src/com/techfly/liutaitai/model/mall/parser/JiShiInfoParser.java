@@ -141,18 +141,17 @@ public class JiShiInfoParser implements Parser{
                                     }
                                   
                                 }else{
-                                    
                                     for(int j=0;j<obj.optInt("type")/2;j++){
                                         TimePoints points1 = new TimePoints();
                                         points1.setmIsWholeHours(true);
-                                        points1.setmTimeMills(obj.optLong("time")+30*60*1000+j*60*1000);
+                                        points1.setmTimeMills(obj.optLong("time")+j*60*1000);
                                         list.add(points1);
                                     }
                                 
                                     TimePoints points2 = new TimePoints();
                                     points2.setmIsWholeHours(false);
                                     points2.setmBeforeHalfJHours(true);
-                                    points2.setmTimeMills(obj.optLong("time")+(obj.optInt("type")/2+1)*60*60*1000);
+                                    points2.setmTimeMills(obj.optLong("time")+(obj.optInt("type")/2)*60*60*1000);
                                     if( list.contains(points2)){
                                         points2.setmIsWholeHours(true);
                                         list.set(list.indexOf(points2), points2);

@@ -15,12 +15,43 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-
-            <LinearLayout
-                android:id="@+id/product_info_linear_car"
+             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:orientation="vertical"
+                android:id="@+id/product_info_linear_car"
+                >
+                 <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/px_10"
+                        android:paddingLeft="@dimen/px_20"
+                        android:paddingRight="@dimen/px_20"
+                        android:paddingTop="@dimen/px_10" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/product_info_text_count"
+                            android:textColor="@color/TextColorBLACK_NORMAL"
+                            android:textSize="@dimen/app_text_size_first" />
+
+                        <com.techfly.liutaitai.util.view.ProductUpdateView
+                            android:id="@+id/product_info_product_update_count"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingLeft="@dimen/px_20" >
+                        </com.techfly.liutaitai.util.view.ProductUpdateView>
+                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#eeeeee"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -103,6 +134,10 @@
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
+                 
+                 
+             </LinearLayout>
+
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -178,33 +213,7 @@
                         android:background="@color/color_gray"
                         android:visibility="gone" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/px_10"
-                        android:paddingLeft="@dimen/px_20"
-                        android:paddingRight="@dimen/px_20"
-                        android:paddingTop="@dimen/px_10" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/product_info_text_count"
-                            android:textColor="@color/TextColorBLACK_NORMAL"
-                            android:textSize="@dimen/app_text_size_first" />
-
-                        <com.techfly.liutaitai.util.view.ProductUpdateView
-                            android:id="@+id/product_info_product_update_count"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:paddingLeft="@dimen/px_20" >
-                        </com.techfly.liutaitai.util.view.ProductUpdateView>
-                    </LinearLayout>
+                    
 
                     <View
                         android:layout_width="match_parent"
