@@ -6,6 +6,7 @@ public class OrderEva {
 	private int mStar;
 	private String mContent;
 	private String mProductName;
+	private boolean isShould;
 
 	public int getmProductId() {
 		return mProductId;
@@ -37,6 +38,14 @@ public class OrderEva {
 
 	public void setmProductName(String mProductName) {
 		this.mProductName = mProductName;
+	}
+
+	public boolean isShould() {
+		return isShould;
+	}
+
+	public void setShould(boolean isShould) {
+		this.isShould = isShould;
 	}
 
 }

@@ -56,6 +56,7 @@
                 android:layout_alignParentTop="true"
                 android:divider="@color/line_color"
                 android:dividerHeight="@dimen/divider_hight"
+                android:descendantFocusability="beforeDescendants"
                 android:listSelector="#00000000" >
             </ListView>
         </RelativeLayout>

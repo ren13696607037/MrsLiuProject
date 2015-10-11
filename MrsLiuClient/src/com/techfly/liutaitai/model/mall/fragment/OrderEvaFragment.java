@@ -8,12 +8,15 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.HitTestResult;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -54,6 +57,7 @@ public class OrderEvaFragment extends CommonFragment implements OnClickListener 
 	private MyOrder mOrder;
 	private String mJson;
 	private User mUser;
+	private int index = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +128,7 @@ public class OrderEvaFragment extends CommonFragment implements OnClickListener 
 
 			@Override
 			public void convert(ViewHolder holder, final OrderEva item,
-					int position) {
+					final int position) {
 				holder.setText(R.id.order_eva_item_name, item.getmProductName());
 				holder.setRating(R.id.order_eva_item_bar,
 						(float) item.getmStar());
@@ -138,24 +142,66 @@ public class OrderEvaFragment extends CommonFragment implements OnClickListener 
 
 					}
 				});
-				holder.getView(R.id.order_eva_item_content)
-						.setOnFocusChangeListener(new OnFocusChangeListener() {
+				EditText et = holder.getView(R.id.order_eva_item_content);
 
-							@Override
-							public void onFocusChange(View arg0, boolean arg1) {
-								EditText et = (EditText) arg0;
-								String hint;
-								if (arg1) {
-									hint = et.getHint().toString();
-									et.setTag(hint);
-									et.setHint("");
-								} else {
-									hint = et.getTag().toString();
-									et.setHint(hint);
-								}
+				et.setOnFocusChangeListener(new OnFocusChangeListener() {
 
-							}
-						});
+					@Override
+					public void onFocusChange(View arg0, boolean arg1) {
+						EditText et = (EditText) arg0;
+						String hint;
+						if (arg1) {
+							hint = et.getHint().toString();
+							et.setTag(hint);
+							et.setHint("");
+						} else {
+							hint = et.getTag().toString();
+							et.setHint(hint);
+						}
+
+					}
+				});
+				et.addTextChangedListener(new TextWatcher() {
+
+					@Override
+					public void onTextChanged(CharSequence s, int start,
+							int before, int count) {
+						item.setmContent(s.toString());
+
+					}
+
+					@Override
+					public void beforeTextChanged(CharSequence s, int start,
+							int count, int after) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void afterTextChanged(Editable s) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+				et.setOnTouchListener(new OnTouchListener() {
+
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+						if (event.getAction() == MotionEvent.ACTION_UP) {
+							index = position;
+						}
+						return false;
+					}
+				});
+
+				if (index >= 0 && position == index) {
+					et.requestFocus();
+				}
+
+				if (item.getmContent() != null) {
+					et.setText(item.getmContent());
+				}
+
 			}
 		};
 		mListView.setAdapter(mAdapter);
