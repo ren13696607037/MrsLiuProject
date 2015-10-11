@@ -197,7 +197,7 @@ public class GanxiFragment extends CommonFragment implements OnRefreshListener {
     
     @Override
     public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-        mPage =0;
+        mPage =1;
         mList.clear();
         requestData();
         

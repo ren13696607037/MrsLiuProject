@@ -499,7 +499,7 @@ public class GanxiProductInfoFragment extends CommonFragment implements
                                         LayoutParams.WRAP_CONTENT);
                                 ImageView img = new ImageView(mContext);
                                 img.setScaleType(ImageView.ScaleType.FIT_XY);
-                                params.height = Constant.SCREEN_WIDTH * 11 / 16;
+                                params.height = Constant.SCREEN_WIDTH * 2 / 5;
                                 img.setLayoutParams(params);
                                 img.setOnClickListener(new OnClickListener() {
 
