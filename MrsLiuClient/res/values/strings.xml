@@ -168,7 +168,7 @@
     <string name="order_detail_free">运费</string>
     <string name="order_detail_pay">实付款：￥%1$s</string>
     <string name="order_detail_note">备注：</string>
-    <string name="order_pay_text">亲~暂时待接单的订单</string>
+    <string name="order_pay_text">亲~暂时没有待接单的订单</string>
     <string name="order_all_text">亲~暂时没有订单</string>
     <string name="order_delivery_text">亲~暂时没有待服务的订单</string>
     <string name="order_deliveryed_text">亲~暂时没有进行中的订单</string>
