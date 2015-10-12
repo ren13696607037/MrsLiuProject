@@ -379,8 +379,14 @@ public class ProductInfoFragment extends CommonFragment implements
         if (user != null) {
             userId = Integer.parseInt(user.getmId());
         }
+      
         if (userId == 0) {
+            mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+            mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+            mShopCarNum.setVisibility(View.GONE);
             return;
+        }else{
+            mShopCarNum.setVisibility(View.VISIBLE);
         }
         param.setmIsLogin(true);
         param.setmId(user .getmId());

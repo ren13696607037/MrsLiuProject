@@ -400,8 +400,10 @@ public class GanxiProductInfoFragment extends CommonFragment implements
         if (userId == 0) {
             mLoadHandler.removeMessages(Constant.NET_SUCCESS);
             mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
-            mShopCarNum.setVisibility(View.VISIBLE);
+            mShopCarNum.setVisibility(View.GONE);
             return;
+        }else{
+            mShopCarNum.setVisibility(View.VISIBLE);
         }
         param.setmIsLogin(true);
         param.setmId(user.getmId());
@@ -427,6 +429,8 @@ public class GanxiProductInfoFragment extends CommonFragment implements
             public void onResponse(Object obj) {
                 mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                 mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                
+                
                 if (ShopCar.getShopCar().getShopproductList() != null) {
                     mShopCarNum.setText(ShopCar.getShopCar().getShopAmountSum()
                             + "");
