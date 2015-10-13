@@ -45,7 +45,7 @@
         <TextView 
             android:id="@+id/service_person"
             android:layout_below="@id/service_name"
-            android:layout_marginTop="3dp"
+            android:paddingTop="3dp"
             android:layout_toRightOf="@id/service_price"
             android:layout_marginLeft="6dp"
             android:layout_alignParentRight="true"
@@ -65,8 +65,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/service_img"
-            android:layout_marginTop="3dp"
+            android:paddingTop="3dp"
             android:paddingRight="8dp"
+            android:paddingLeft="8dp"
             android:scaleType="fitXY"
             android:src="@drawable/item_add_shopcar_flag" />
 

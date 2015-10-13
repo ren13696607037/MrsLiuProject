@@ -100,7 +100,17 @@ public class ShengXianServiceAdapter extends BaseAdapter{
                 }
                 }
         });
-        
+        holder.personNum.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+                if (authLogin()) {
+                    mProduct = mList.get(position);
+                    requestData();
+                }
+                
+            }
+        });
         return convertView;
         
     }
