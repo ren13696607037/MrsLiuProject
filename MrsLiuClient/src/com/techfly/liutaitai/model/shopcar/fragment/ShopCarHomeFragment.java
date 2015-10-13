@@ -202,7 +202,9 @@ public class ShopCarHomeFragment extends CommonFragment implements OnClickListen
     
     private void onDispalyData(){
         mListView.setVisibility(View.VISIBLE);
-        mAdapter.notifyDataSetChanged();
+//        mAdapter = new ShopCarAdapter(getActivity(), mProList,ShopCarHomeFragment.this);
+//        mListView.setAdapter(mAdapter);
+        mAdapter.updateList((ArrayList<Product>) mProList);
         mCheckBox.setClickable(true);
         mCheckBox2.setClickable(true);
         mConfirmTv.setClickable(true);
