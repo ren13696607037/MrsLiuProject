@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+        >
+        <ImageView 
+             android:id="@+id/service_img"
+             android:layout_width="match_parent"
+	    	 android:layout_height="160dp" 
+             android:scaleType="fitXY"
+             android:layout_centerHorizontal="true"
+             android:src="@drawable/ic_hall_no_url"
+            />
+        
+        <TextView 
+            android:id="@+id/service_name"
+            android:layout_marginLeft="1dp"
+            android:layout_below="@id/service_img"
+            android:layout_marginTop="3dp"
+            android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content" 
+	    	android:textColor="@color/TextColorBLACK_NORMAL"
+	        android:textSize="@dimen/app_text_size_first" 
+	        android:text="纯色款"
+            />
+        
+        <TextView 
+            android:id="@+id/service_price"
+            android:layout_below="@id/service_name"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="1dp"
+            android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content" 
+	    	android:textColor="@color/color_red"
+	    	android:textSize="@dimen/app_text_size_second"
+	    	android:text="100￥"
+            />
+        
+        <TextView 
+            android:id="@+id/service_person"
+            android:layout_below="@id/service_name"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/service_price"
+            android:layout_marginLeft="6dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content" 
+	    	android:textColor="@color/color_gray2"
+	    	android:textSize="@dimen/app_text_size_second"
+	    	android:text="23人体验"
+	    	android:gravity="right"
+	    	
+            />
+
+        <ImageView
+            android:id="@+id/add_shopcar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/service_img"
+            android:layout_marginTop="3dp"
+            android:paddingRight="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/item_add_shopcar_flag" />
+
+    </RelativeLayout>
+   
+
+</LinearLayout>

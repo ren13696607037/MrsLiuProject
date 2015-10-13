@@ -31,13 +31,16 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.ServiceCategoryParser;
 import com.techfly.liutaitai.bizz.parser.ShengxianServiceParser;
+import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.activities.ProductInfoActivity;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter;
 import com.techfly.liutaitai.model.mall.adapter.PopUpAdapter2;
 import com.techfly.liutaitai.model.mall.adapter.ShengXianServiceAdapter;
+import com.techfly.liutaitai.model.mall.adapter.ShengXianServiceAdapter.AddShopCarCallBack;
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.mall.bean.SortRule;
+import com.techfly.liutaitai.model.mall.parser.ShopCartParser;
+import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
@@ -53,7 +56,7 @@ import com.techfly.liutaitai.util.view.GridViewForScrollView;
 import com.techfly.liutaitai.util.view.PullToRefreshLayout;
 import com.techfly.liutaitai.util.view.PullToRefreshLayout.OnRefreshListener;
 
-public class ShengXianFragment extends CommonFragment implements OnClickListener, OnRefreshListener{
+public class ShengXianFragment extends CommonFragment implements OnClickListener,AddShopCarCallBack, OnRefreshListener{
     private TextView mSortTv1;
     private TextView mSortTv2;
     private View mFlagImg1;
@@ -74,7 +77,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
     List<Product> mList = new ArrayList<Product>();
     private PullToRefreshLayout mPull;
     private GridView mGrid;
-    
+    private TextView mShopCarNum;
     private Handler mHander = new Handler(){
 
         @Override
@@ -84,6 +87,76 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         }
         
     };
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestShopCarNum();
+    }
+    public void requestShopCarNum() {
+
+        RequestParam param = new RequestParam();
+        HttpURL url = new HttpURL();
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        int userId = 0;
+        if (user != null) {
+            userId = Integer.parseInt(user.getmId());
+        }
+        if (userId == 0) {
+            mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+            mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+            mShopCarNum.setVisibility(View.GONE);
+            return;
+        }else{
+            mShopCarNum.setBackgroundDrawable(getResources().getDrawable(R.drawable.shop_car_header_num_bg));
+            mShopCarNum.setVisibility(View.VISIBLE);
+        }
+        param.setmIsLogin(true);
+        param.setmId(user.getmId());
+        param.setmToken(user.getmToken());
+
+        url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
+                + Constant.SHOP_CARD_REQUEST_URL);
+        url.setmGetParamPrefix("city");
+        url.setmGetParamValues(SharePreferenceUtils.getInstance(getActivity())
+                .getArea().getmId());
+        url.setmGetParamPrefix("type");
+        url.setmGetParamValues(type + "");
+        param.setmHttpURL(url);
+        param.setmParserClassName(ShopCartParser.class.getName());
+        RequestManager.getRequestData(getActivity(), creatSuccessListener(),
+                creatErrorListener(), param);//
+    }
+
+    private Response.Listener<Object> creatSuccessListener() {
+        return new Response.Listener<Object>() {
+
+            @Override
+            public void onResponse(Object obj) {
+                mLoadHandler.removeMessages(Constant.NET_SUCCESS);
+                mLoadHandler.sendEmptyMessage(Constant.NET_SUCCESS);
+                
+                
+                if (ShopCar.getShopCar().getShopproductList() != null) {
+                    mShopCarNum.setText(ShopCar.getShopCar().getShopAmountSum()
+                            + "");
+                } else {
+                    mShopCarNum.setText("0");
+                }
+
+            }
+        };
+    }
+
+    private Response.ErrorListener creatErrorListener() {
+        return new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load" + error.getMessage());
+
+            }
+        };
+    }
     private void initSortRule2(){
         SortRule rule = new SortRule();
         rule.setmId("0");
@@ -284,8 +357,9 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
                     mLoadHandler.removeMessages(Constant.NET_SUCCESS);
                     mLoadHandler.sendEmptyMessageDelayed(Constant.NET_SUCCESS,0);
                     mPull.refreshFinish(PullToRefreshLayout.SUCCEED);
-                   ResultInfo result = (ResultInfo) object;
+                    ResultInfo result = (ResultInfo) object;
                    if(result.getmCode()==0){
+                       requestShopCarNum();
                        List<Product> list = new ArrayList<Product>();
                        list = (List<Product>) result.getObject();
                        if(list.size()>=10){
@@ -345,7 +419,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
 
     private void initView(View view) {
        
-
+        mShopCarNum = (TextView) view.findViewById(R.id.shop_car_num);
         mSortTv1 = (TextView) view.findViewById(R.id.sort1);
         mSortTv2 = (TextView) view.findViewById(R.id.sort2);
         mFlagImg1 = view.findViewById(R.id.flag_img1);
@@ -355,7 +429,7 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         mPull = (PullToRefreshLayout) view.findViewById(R.id.layout_parts);
         mPull.setOnRefreshListener(this);
         mGrid = (GridView) view.findViewById(R.id.gridview_parts);
-        mAdapter = new ShengXianServiceAdapter(getActivity(), mList);
+        mAdapter = new ShengXianServiceAdapter(getActivity(), mList,this);
         mGrid.setAdapter(mAdapter);
         mGrid.setOnItemClickListener(new OnItemClickListener() {
 
@@ -384,8 +458,31 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
           }else if(type==2){
           setTitleText("鲜花");
       }
+      setRightHeadIcon(R.drawable.shop_car_header, new OnClickListener() {
+        
+        @Override
+        public void onClick(View arg0) {
+            if (authLogin()) {
+                UIHelper.toShopCarActivity(getActivity(), type);
+            } else {
+                UIHelper.toLoginActivity(getActivity());
+            }
+            
+        }
+    });
     }
-
+    private boolean authLogin() {
+        User user = SharePreferenceUtils.getInstance(getActivity()).getUser();
+        if (user != null && !TextUtils.isEmpty(user.getmId())) {
+            int id = Integer.parseInt(user.getmId());
+            if (id > 0) {
+                return true;
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -453,5 +550,9 @@ public class ShengXianFragment extends CommonFragment implements OnClickListener
         mPage = mPage + 1;
         getServiceList();
         
+    }
+    @Override
+    public void onSuccess() {
+        requestShopCarNum();
     }
 }

@@ -21,6 +21,7 @@ import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.net.RequestParam;
 import com.techfly.liutaitai.net.ResultCode;
+import com.techfly.liutaitai.util.AlertDialogUtils;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
@@ -129,7 +130,12 @@ public  abstract class CreateOrderPayCommonFragment extends CommonFragment {
                         }
                         onOrderCreateSuccess(mOrderId,mPayMoney,mProductName);
                      }else{
-                         showSmartToast(info.getmMessage()+"", Toast.LENGTH_LONG);
+                        if (mProductType==Constant.PRODUCT_TYPE_SERVICE){
+                            AlertDialogUtils.displayMyAlertChoice(getActivity(), "提示", "该技师已被预约",getString(R.string.confirm), null);
+                        }else{
+                            showSmartToast(info.getmMessage()+"", Toast.LENGTH_LONG);
+                        }
+                       
                      }
                }
                 }

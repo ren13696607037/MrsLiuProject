@@ -53,7 +53,7 @@ public class GanxiServiceAdapter extends BaseAdapter {
         }
         if(convertView==null){
             holder=new ViewHolder();
-            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_service, null);
+            convertView=LayoutInflater.from(mContext).inflate(R.layout.item_ganxi_service, null);
             holder.imageView = (ImageView) convertView.findViewById(R.id.service_img);
             holder.productName= (TextView) convertView.findViewById(R.id.service_name);
             holder.productType= (TextView) convertView.findViewById(R.id.service_person);
