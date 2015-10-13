@@ -15,8 +15,8 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.LocationParser;
 import com.techfly.liutaitai.model.home.activities.HomeActivity;
@@ -31,10 +31,10 @@ import com.techfly.liutaitai.service.LocationService;
 import com.techfly.liutaitai.update.UpdateMgr;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
-import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.ManagerListener;
-import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.ManagerListener.StartServiceListener;
+import com.techfly.liutaitai.util.SharePreferenceUtils;
+import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends TabActivity implements TabSwitchCallBack ,StartServiceListener{
     private TabHost mTabHost;
@@ -58,6 +58,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
         initTabHost();
         UpdateMgr.getInstance(mContext).checkUpdateInfo(null, false);
         ManagerListener.newManagerListener().notifyStartServiceListener();
+        UmengUpdateAgent.update(this);
     }
 
 

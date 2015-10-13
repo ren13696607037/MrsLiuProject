@@ -47,7 +47,7 @@
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
     </uses-permission>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:name="com.techfly.liutaitai.LiutaitaiApplication"
@@ -76,7 +76,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -141,8 +141,7 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
-          
+            android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -150,7 +149,6 @@
 
                 <data android:scheme="wx51956473b6a4801d" />
             </intent-filter>
-            
         </activity>
         <activity
             android:name=".model.shopcar.activities.OrderPayFinishActivity"
@@ -165,12 +163,11 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-       <activity
+        <activity
             android:name=".scale.ImageScaleActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-        
         <activity
             android:name=".model.mall.activities.OrderInfoActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
@@ -200,7 +197,7 @@
             android:name=".model.mall.activities.MyYuYueActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" /> 
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".model.mall.activities.ProductInfoActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
@@ -236,7 +233,6 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-       
         <activity
             android:name=".model.mall.activities.GanxiProductInfoActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
@@ -284,6 +280,11 @@
         <!-- 个人中心模块配置 -->
         <activity
             android:name=".model.pcenter.activities.PCenterHomeActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".model.pcenter.activities.AddressSelectMapActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
@@ -488,7 +489,8 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-		<service android:name="com.techfly.liutaitai.service.LocationService"/>
+
+        <service android:name="com.techfly.liutaitai.service.LocationService" />
         <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
@@ -527,7 +529,7 @@
             android:enabled="true" >
             <intent-filter android:priority="1000" >
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
- <!-- Required  显示通知栏 -->
+                <!-- Required  显示通知栏 -->
                 <category android:name="com.techfly.liutaitai" />
             </intent-filter>
             <intent-filter>
@@ -552,18 +554,18 @@
             android:enabled="true" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
- <!-- Required  用户注册SDK的intent -->
+                <!-- Required  用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
- <!-- Required  用户接收SDK消息的intent -->
+                <!-- Required  用户接收SDK消息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
- <!-- Required  用户接收SDK通知栏信息的intent -->
+                <!-- Required  用户接收SDK通知栏信息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
- <!-- Required  用户打开自定义通知栏的intent -->
+                <!-- Required  用户打开自定义通知栏的intent -->
                 <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
- <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
- <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <category android:name="com.techfly.liutaitai" />
             </intent-filter>
         </receiver>
@@ -586,7 +588,41 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="79bb08e1a3deb544983d1ebb" />
- <!-- </>值来自开发者平台取得的AppKey -->
+
+        <!-- </>值来自开发者平台取得的AppKey -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="9FG9don8GbItMa6m9NlAWcgn" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+        </service>
+        
+        <!-- umeng -->
+        <!-- Update Activitys Start -->
+        <activity 
+            android:name="com.umeng.update.UpdateDialogActivity"
+		  	android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <!-- Update Activitys End -->
+        
+        <!-- Caution! Do not change this app key. It is only for demo usage. -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="561cec91e0f55a8b73000dc8" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" >
+        </meta-data>
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
     </application>
 
 </manifest>

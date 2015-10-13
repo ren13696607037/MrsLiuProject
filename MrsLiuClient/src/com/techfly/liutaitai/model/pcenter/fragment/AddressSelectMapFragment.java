@@ -66,6 +66,7 @@ import com.baidu.mapapi.search.sug.SuggestionResult.SuggestionInfo;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
@@ -96,6 +97,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 	private String mLatitude;
 	private String mLongitude;
 	private String mCity;
+	private String mCityName;
 
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
@@ -119,14 +121,15 @@ public class AddressSelectMapFragment extends CommonFragment implements
 		public void run() {
 			if (mBDLocation != null && mBDLocation.getLatitude() != 0.0
 					&& mBDLocation.getLongitude() != 0.0) {
-				startReqTask(AddressSelectMapFragment.this);
+				LatLng latLng = new LatLng(mBDLocation.getLatitude(),
+						mBDLocation.getLongitude());
+				mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
 			} else {
 				mHandler.postDelayed(runnable, 1000);
 			}
 		}
 	};
 
-	private boolean isFIrst = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -135,7 +138,6 @@ public class AddressSelectMapFragment extends CommonFragment implements
 		mLocationClient = new LocationClient(getActivity()); // 声明LocationClient类
 		initLocationOption();
 		mLocationClient.registerLocationListener(myListener); // 注册监听函数
-		startLoading(this);
 
 	}
 
@@ -306,8 +308,6 @@ public class AddressSelectMapFragment extends CommonFragment implements
 					return;
 				}
 				mLatitude = point.latitude + "";
-				mLongitude = point.longitude + "";
-				requestData();
 				mSearch.reverseGeoCode(new ReverseGeoCodeOption()
 						.location(point));
 
@@ -371,6 +371,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 				MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory
 						.newLatLngZoom(point, 16);
 				mBaiduMap.animateMapStatus(mapStatusUpdate);
+				showInfoWindow();
 
 			}
 		});
@@ -509,6 +510,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 			mLatitude = location.getLatitude() + "";
 			mLongitude = location.getLongitude() + "";
 			mCity = location.getCity();
+			AppLog.Logd("Shi", "mCity:::"+mCity);
 			mStartLocationData = new MyLocationData.Builder()
 					.accuracy(location.getRadius())
 					// 此处设置开发者获取到的方向信息，顺时针0-360
@@ -542,6 +544,18 @@ public class AddressSelectMapFragment extends CommonFragment implements
 
 	@Override
 	public void onGetGeoCodeResult(GeoCodeResult arg0) {
+		if (arg0 == null || arg0.error != SearchResult.ERRORNO.NO_ERROR) {
+			Toast.makeText(getActivity(), "抱歉，未能找到结果", Toast.LENGTH_LONG)
+					.show();
+		}
+//		List<PoiInfo> list = arg0.getPoiList();
+//		if (list != null && list.size() > 0) {
+//			mTvLocateLocation.setText(arg0.getAddress());
+//		} else {
+//			mTvLocateLocation.setText(arg0.getAddress());
+//		}
+		mTvLocateLocation.setText(arg0.getAddress());
+		mTvLocateDetailLocation.setText(arg0.getAddress());
 	}
 
 	@Override
@@ -558,7 +572,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 			mTvLocateLocation.setText(arg0.getBusinessCircle());
 		}
 		mTvLocateDetailLocation.setText(arg0.getAddress());
-		startReqTask(AddressSelectMapFragment.this);
+//		startReqTask(AddressSelectMapFragment.this);
 
 	}
 

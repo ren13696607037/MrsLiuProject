@@ -3,12 +3,15 @@ package com.techfly.liutaitai;
 import android.app.Application;
 import cn.jpush.android.api.JPushInterface;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.util.Utility;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UpdateConfig;
 
 public class LiutaitaiApplication extends Application {
     @Override
@@ -25,6 +28,11 @@ public class LiutaitaiApplication extends Application {
         Utility.getScreenSize(this);
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        SDKInitializer.initialize(this);
+        
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.setDeltaUpdate(false);
+//        UpdateConfig.setDebug(true);
     }
     private void initImageLoader() {
         // This configuration tuning is custom. You can tune every option, you
