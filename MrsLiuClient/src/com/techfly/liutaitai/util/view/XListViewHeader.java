@@ -6,6 +6,8 @@
  */
 package com.techfly.liutaitai.util.view;
 
+import com.techfly.liutaitai.R;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -17,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.techfly.liutaitai.R;
 
 public class XListViewHeader extends LinearLayout {
 	private LinearLayout mContainer;
@@ -51,7 +51,7 @@ public class XListViewHeader extends LinearLayout {
 	}
 
 	private void initView(Context context) {
-		// 初始情况，设置下拉刷新view高度�?0
+		// 初始情况，设置下拉刷新view高度为0
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LayoutParams.FILL_PARENT, 0);
 		mContainer = (LinearLayout) LayoutInflater.from(context).inflate(

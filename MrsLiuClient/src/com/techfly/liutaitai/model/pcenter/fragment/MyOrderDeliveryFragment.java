@@ -252,6 +252,7 @@ public class MyOrderDeliveryFragment extends CommonFragment implements
 				isRefresh = false;
 				mPage = 1;
 				mList.clear();
+				mListView.setPullLoadEnable(false);
 				requestData();
 			}
 		}, 0);

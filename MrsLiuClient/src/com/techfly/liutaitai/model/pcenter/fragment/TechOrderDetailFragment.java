@@ -77,6 +77,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	private OrderDetailActivity mActivity;
 	private TextView mNo;
 	private TextView mTime;
+	private TextView mTimeShow;
 	private TextView mName;
 	private TextView mPhone;
 	private TextView mAddress;
@@ -208,6 +209,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mTimeStart = (StartTimeText) view.findViewById(R.id.tsd_time_start);
 		mPayWay = (TextView) view.findViewById(R.id.tsd_text1);
 		mClear = (TextView) view.findViewById(R.id.tsd_service_clear);
+		mTimeShow = (TextView) view.findViewById(R.id.tsd_service_time_show);
 
 		mIvAddress.setOnClickListener(this);
 		mIvPhone.setOnClickListener(this);
@@ -229,6 +231,8 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				mOrder.getmCustomerPhone()));
 		mTime.setText(mActivity.getString(R.string.order_service_text,
 				mOrder.getmCustomerTime()));
+		mTimeShow.setText(mActivity.getString(R.string.order_service_text2,
+				mOrder.getmMinutes()));
 		mServiceTime.setText(mActivity.getString(R.string.service_detail_text1,
 				mOrder.getmOrderTime()));
 		mProName.setText(mOrder.getmServiceName());
