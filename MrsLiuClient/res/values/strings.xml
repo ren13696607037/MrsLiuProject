@@ -387,6 +387,7 @@
     
     <string name="order_service_text">服务时间：%1$s</string>
     <string name="order_service_text1">美甲师:%1$s</string>
+    <string name="order_service_text2">服务时长：%1$s分钟</string>
     <string name="order_service_text3">美睫师:%1$s</string>
     <string name="order_service_text4">需要卸甲</string>
     <string name="order_service_state">待支付</string>

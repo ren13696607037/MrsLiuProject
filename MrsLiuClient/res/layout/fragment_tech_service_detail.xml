@@ -113,12 +113,23 @@
                 android:text="@string/service_detail_text1"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
+            <TextView
+                android:id="@+id/tsd_service_time_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tsd_time"
+                android:layout_marginLeft="@dimen/px_28"
+                android:layout_marginRight="@dimen/px_28"
+                android:layout_marginTop="@dimen/px_10"
+                android:text="@string/order_service_text2"
+                android:textColor="@color/color_22"
+                android:textSize="@dimen/app_text_size_first" />
 
             <View
                 android:id="@+id/tsd_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tsd_time"
+                android:layout_below="@id/tsd_service_time_show"
                 android:layout_margin="@dimen/px_20"
                 android:background="@drawable/order_line" />
 
@@ -196,6 +207,7 @@
                 android:text="@string/order_service_text"
                 android:textColor="@color/color_22"
                 android:textSize="@dimen/app_text_size_first" />
+            
             <TextView
                 android:id="@+id/tsd_service_clear"
                 android:layout_width="match_parent"

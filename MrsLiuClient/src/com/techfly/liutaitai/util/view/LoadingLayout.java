@@ -95,6 +95,7 @@ public class LoadingLayout extends FrameLayout {
 	}
 
 	private void loading() {
+		mLoadingLayout.setVisibility(View.VISIBLE);
 		mProgress.setVisibility(View.VISIBLE);
 		mLoadingText.setVisibility(View.VISIBLE);
 		setContentVisibility(false);

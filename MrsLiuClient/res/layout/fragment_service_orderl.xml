@@ -2,37 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    >
-    <include 
-        layout="@layout/fragment_header"
-        />
-      <com.techfly.liutaitai.util.view.LoadingLayout
+    android:background="@color/background" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.techfly.liutaitai.util.view.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
-        android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/header_bar_height"
-        >
-         </com.techfly.liutaitai.util.view.LoadingLayout>
-    <com.techfly.liutaitai.util.view.XListView 
-        android:id="@+id/all_list"
-        android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:divider="@color/color_be"
-    	android:dividerHeight="1dp"
-    	android:layout_marginTop="@dimen/header_bar_height"
-        />
-    <TextView 
-        android:id="@+id/all_text"
-        android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:textColor="@color/button_login1"
-    	android:textSize="@dimen/app_text_size_first"
-    	android:layout_centerHorizontal="true"
-    	android:visibility="invisible"
-    	android:layout_centerInParent="true"
-        />
-   
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/header_bar_height" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" 
+            >
+
+            <com.techfly.liutaitai.util.view.XListView
+                android:id="@+id/all_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/color_be"
+                android:dividerHeight="1dp" />
+
+            <TextView
+                android:id="@+id/all_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:textColor="@color/button_login1"
+                android:textSize="@dimen/app_text_size_first"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </com.techfly.liutaitai.util.view.LoadingLayout>
 
 </RelativeLayout>

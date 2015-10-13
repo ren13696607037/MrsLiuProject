@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_white_gray"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/poi_search_item_tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/px_20"
+        android:textColor="@color/TextColorBLACK"
+        android:textSize="@dimen/app_text_size_first" />
+
+</LinearLayout>

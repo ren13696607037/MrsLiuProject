@@ -72,8 +72,9 @@ public class ServiceOrderFragment extends CommonFragment implements
 				mTextView.setVisibility(View.GONE);
 				if (mList.size() == 0) {
 					setNoData();
+				}else{
+					mAdapter.updateList(mList);
 				}
-				mAdapter.updateList(mList);
 				break;
 
 			default:
@@ -319,7 +320,7 @@ public class ServiceOrderFragment extends CommonFragment implements
 				mList.clear();
 				startReqTask(ServiceOrderFragment.this);
 			}
-		}, 1000);
+		}, 0);
 	}
 
 	@Override

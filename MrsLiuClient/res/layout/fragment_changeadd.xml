@@ -114,7 +114,8 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/px_15"
-                android:src="@drawable/address_city_down" />
+                android:src="@drawable/address_city_down"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/changeadd_img3"
@@ -146,7 +147,7 @@
                 android:layout_toRightOf="@id/changeadd_img3"
                 android:layout_toLeftOf="@id/changeadd_city_img"
                 android:background="@null"
-                android:hint="@string/changeadd_text2"
+                android:text="点击选择地址"
                 android:singleLine="true"
                 android:textColor="@color/color_33"
                 android:textColorHint="@color/color_be"

@@ -68,6 +68,11 @@
 	<color name="TextColorWhite">#FFFFFF</color>
 	<color name="color_gray">#DFDFDF</color>
 	<color name="color_gray2">#B1B1B1</color>
+	<color name="TextColor_RED">#ff4400</color>
+	<color name="TextColor_WHITE">#ffffff</color>
+	<color name="TextColor_BLUE">#03A9F4</color>
+	<color name="TextColorGRAY">#BEBEBE</color>
+	
 	
 	<color name="color_gray_dark">#B5B5B5</color>
 	<color name="color_black">#383838</color>

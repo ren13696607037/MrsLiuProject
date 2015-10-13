@@ -24,6 +24,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CityListParser;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
+import com.techfly.liutaitai.model.pcenter.activities.AddressSelectMapActivity;
 import com.techfly.liutaitai.model.pcenter.activities.ChangeAddressActivity;
 import com.techfly.liutaitai.model.pcenter.bean.AddressManage;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
@@ -43,7 +44,8 @@ import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.ShowDialog;
 
-public class ChangeAddFragment extends CommonFragment implements CityUpdateListener{
+public class ChangeAddFragment extends CommonFragment implements
+		CityUpdateListener {
 	private ChangeAddressActivity mActivity;
 	private EditText mEtName;
 	private EditText mEtPhone;
@@ -74,7 +76,9 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 						// showSmartToast(R.string.addchange_success,
 						// Toast.LENGTH_SHORT);
 					}
-					mActivity.setResult(Constant.ADDRESS_SUCCESS, new Intent().putExtra(IntentBundleKey.ADDRESS_EXTRA, new AddressManage()));
+					mActivity.setResult(Constant.ADDRESS_SUCCESS, new Intent()
+							.putExtra(IntentBundleKey.ADDRESS_EXTRA,
+									new AddressManage()));
 					mActivity.finish();
 				} else {
 					showSmartToast(mInfo.getmMessage(), Toast.LENGTH_SHORT);
@@ -91,6 +95,8 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 
 	};
 
+	private static final int ADDR = 0x11;
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -100,8 +106,7 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ManagerListener.newManagerListener().onRegisterCityUpdateListener(
-				this);
+		ManagerListener.newManagerListener().onRegisterCityUpdateListener(this);
 		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 		mExtra = mActivity.getIntent().getStringExtra(
 				IntentBundleKey.ADDRESS_EXTRA);
@@ -149,12 +154,15 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		mEtName = (EditText) view.findViewById(R.id.changeadd_name);
 		mEtPhone = (EditText) view.findViewById(R.id.changeadd_phone);
 		mTvCity = (TextView) view.findViewById(R.id.changeadd_city);
-		
+
 		mTvCity.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				showCity();
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), AddressSelectMapActivity.class);
+				startActivityForResult(intent, ADDR);
+
 			}
 		});
 		mButton = (Button) view.findViewById(R.id.changeadd_btn);
@@ -182,19 +190,21 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		});
 		if (mAddressManage == null) {
 			setTitleText(R.string.add_title);
-			mTvCity.setText(SharePreferenceUtils.getInstance(mActivity).getArea().getmName());
-			mCity = SharePreferenceUtils.getInstance(mActivity).getArea().getmId();
+			// mTvCity.setText(SharePreferenceUtils.getInstance(mActivity)
+			// .getArea().getmName());
+			mCity = SharePreferenceUtils.getInstance(mActivity).getArea()
+					.getmId();
 		} else {
 			setTitleText(R.string.add_change_title);
 			mEtAddress.setText(mAddressManage.getmDetail());
 			mEtName.setText(mAddressManage.getmName());
 			mEtPhone.setText(mAddressManage.getmPhone());
-			mTvCity.setText(mAddressManage.getmCity());
+			// mTvCity.setText(mAddressManage.getmCity());
 			mCity = mAddressManage.getmCityId();
 		}
-		
+
 		mCityImageView = (ImageView) view.findViewById(R.id.changeadd_city_img);
-		
+
 	}
 
 	@Override
@@ -203,8 +213,9 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		HttpURL url = new HttpURL();
 		url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL
 				+ Constant.CHANGE_ADDRESS_URL);
-		if(mAddressManage != null){
-			url.setmGetParamPrefix(JsonKey.AddressKey.AID).setmGetParamValues(mAddressManage.getmId());
+		if (mAddressManage != null) {
+			url.setmGetParamPrefix(JsonKey.AddressKey.AID).setmGetParamValues(
+					mAddressManage.getmId());
 		}
 		url.setmGetParamPrefix(JsonKey.AddressKey.NAME).setmGetParamValues(
 				mEtName.getText().toString());
@@ -267,13 +278,13 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		RequestManager.getRequestData(mActivity, createMyReqSuccessListener(),
 				createMyReqErrorListener(), param);
 	}
-	private void showCity(){
+
+	private void showCity() {
 		mDialog = new ShowDialog(mActivity, mCitys);
 		mDialog.show();
 		mDialog.setCanceledOnTouchOutside(true);
 		mCityImageView.setImageResource(R.drawable.address_city_up);
 	}
-
 
 	@Override
 	public void onUpdateListener(Area area) {
@@ -281,6 +292,14 @@ public class ChangeAddFragment extends CommonFragment implements CityUpdateListe
 		mCity = area.getmId();
 		mDialog.dismiss();
 		mCityImageView.setImageResource(R.drawable.address_city_down);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == ADDR && resultCode == Activity.RESULT_OK
+				&& data != null) {
+			mTvCity.setText(data.getStringExtra(IntentBundleKey.ADDRESS_EXTRA));
+		}
 	}
 
 }
