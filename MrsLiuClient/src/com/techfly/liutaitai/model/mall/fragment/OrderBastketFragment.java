@@ -278,7 +278,7 @@ public class OrderBastketFragment extends CommonFragment implements
 		start = 1;
 		isRefresh = true;
 		reqFinish = false;
-		requestData();
+		startReqTask(OrderBastketFragment.this);
 	}
 
 	@Override
