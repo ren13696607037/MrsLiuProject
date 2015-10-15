@@ -244,9 +244,6 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
 			mCbAlipay.setImageResource(R.drawable.address_undefault);
 			break;
 		case R.id.recharge_btn:
-		    AppLog.Logd("Fly","mBalance.getmId()==="+mBalance.getmId());
-		    AppLog.Logd("Fly","mBalance.getmPrice()==="+mBalance.getmPrice());
-		    mBalance.setmPrice("1");
 			requestData();
 			break;
 

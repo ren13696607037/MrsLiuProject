@@ -64,8 +64,8 @@ public class PaymentImpl implements IPayment {
     sb.append("\"&body=\"");
     sb.append(order.getmProductDesc());
     sb.append("\"&total_fee=\"");
-//    sb.append(""+order.getmProductPrice());
-    sb.append("0.01");
+    sb.append(""+order.getmProductPrice());
+//    sb.append("0.01");
     sb.append("\"&notify_url=\"");
 
     // 网址需要做URL编码
