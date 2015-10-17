@@ -227,6 +227,7 @@ public class CreateOrderSucFragment extends CreateOrderPayCommonFragment
 
 							@Override
 							public void onPaySuccess() {
+								AppLog.Logd("Shi", "onPaySuccess==");
 								TakingOrderActivity activity = (TakingOrderActivity) getActivity();
 								activity.showOrderFinishFragment(bundle);
 							}

@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Dialog;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;

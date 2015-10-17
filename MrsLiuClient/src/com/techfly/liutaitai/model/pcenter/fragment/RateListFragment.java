@@ -17,7 +17,6 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.RateListParser;
-import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.pcenter.activities.RateListActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.RateListAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.Rate;

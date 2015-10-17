@@ -2,7 +2,6 @@ package com.techfly.liutaitai.util.view;
 
 import java.util.Date;
 
-import android.R.integer;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;

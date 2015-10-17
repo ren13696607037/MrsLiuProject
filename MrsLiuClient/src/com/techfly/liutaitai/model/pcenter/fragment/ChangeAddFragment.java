@@ -222,7 +222,7 @@ public class ChangeAddFragment extends CommonFragment implements
 		url.setmGetParamPrefix(JsonKey.AddressKey.MOBILE).setmGetParamValues(
 				mEtPhone.getText().toString());
 		url.setmGetParamPrefix(JsonKey.AddressKey.ADDRESS).setmGetParamValues(
-				mEtAddress.getText().toString());
+				mTvCity.getText().toString() + mEtAddress.getText().toString());
 		url.setmGetParamPrefix(JsonKey.AddressKey.CITY).setmGetParamValues(
 				mCity);
 		param.setmParserClassName(CommonParser.class.getName());

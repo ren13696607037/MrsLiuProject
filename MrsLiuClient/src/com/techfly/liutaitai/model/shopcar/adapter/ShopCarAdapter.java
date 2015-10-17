@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;

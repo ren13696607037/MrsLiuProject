@@ -20,7 +20,6 @@ import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
 import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
-import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;

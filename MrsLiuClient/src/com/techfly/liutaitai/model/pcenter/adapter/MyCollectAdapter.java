@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.mall.bean.Product;
-import com.techfly.liutaitai.model.pcenter.bean.MyCollect;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 
 public class MyCollectAdapter extends BaseAdapter {

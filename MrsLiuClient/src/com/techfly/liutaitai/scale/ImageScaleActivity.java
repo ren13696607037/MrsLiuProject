@@ -19,19 +19,12 @@ import android.widget.Gallery;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.scale.resource.BaseImageResource;
 import com.techfly.liutaitai.scale.resource.ImageResourceFactory;
 import com.techfly.liutaitai.scale.resource.ResourceType;
-import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
-import com.techfly.liutaitai.util.SmartToast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

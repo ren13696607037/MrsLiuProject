@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
-import com.techfly.liutaitai.bizz.parser.RegisterParser;
 import com.techfly.liutaitai.model.pcenter.activities.UserActivity;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;

@@ -8,9 +8,6 @@
  */
 package com.techfly.liutaitai.util.view;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.util.AppLog;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -23,7 +20,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
-import android.widget.TextView;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.util.AppLog;
 
 public class XListView extends ListView implements OnScrollListener {
 

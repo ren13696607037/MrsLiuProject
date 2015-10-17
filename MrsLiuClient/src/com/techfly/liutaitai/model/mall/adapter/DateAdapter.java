@@ -7,12 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.adapter.ServiceAdapter.ViewHolder;
-import com.techfly.liutaitai.model.mall.bean.Service;
 import com.techfly.liutaitai.model.mall.bean.TimeBean;
 
 public class DateAdapter extends BaseAdapter{

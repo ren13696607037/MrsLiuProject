@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.techfly.liutaitai.model.pcenter.fragment.AddressSelectMapFragment;
-import com.techfly.liutaitai.model.pcenter.fragment.ForgetNextFragment;
 import com.techfly.liutaitai.util.activities.BaseActivity;
 
 public class AddressSelectMapActivity extends BaseActivity {

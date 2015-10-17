@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.mall.adapter.JishiScheuleTimeAdapter.ViewHolder;
 import com.techfly.liutaitai.model.mall.bean.TimeBean;
 import com.techfly.liutaitai.model.mall.bean.TimePoints;
 

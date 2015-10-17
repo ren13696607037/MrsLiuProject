@@ -7,9 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.techfly.liutaitai.bean.ResultInfo;
-import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.bean.Jishi;
-import com.techfly.liutaitai.model.mall.bean.Product;
 import com.techfly.liutaitai.net.pscontrol.Parser;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;

@@ -8,15 +8,13 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.parser.BalanceHistoryListParser;
-import com.techfly.liutaitai.bizz.parser.BalanceListParser;
 import com.techfly.liutaitai.model.pcenter.activities.BalanceHistoryActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.BalanceHistoryAdapter;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;

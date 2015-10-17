@@ -16,7 +16,6 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.model.pcenter.activities.RechargeActivity;
 import com.techfly.liutaitai.model.pcenter.bean.Balance;
 import com.techfly.liutaitai.model.pcenter.fragment.MyBalanceFragment;
-import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 

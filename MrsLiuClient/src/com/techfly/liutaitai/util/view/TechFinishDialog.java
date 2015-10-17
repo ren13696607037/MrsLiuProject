@@ -3,7 +3,6 @@ package com.techfly.liutaitai.util.view;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;

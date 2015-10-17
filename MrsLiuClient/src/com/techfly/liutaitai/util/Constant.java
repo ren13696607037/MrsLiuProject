@@ -2,8 +2,6 @@ package com.techfly.liutaitai.util;
 
 import com.baidu.location.BDLocation;
 
-import android.R.integer;
-
 public class Constant {
 
 	public static final String YIHUIMALL_BASE_URL = "http://121.43.158.189/liu/";

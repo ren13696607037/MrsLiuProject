@@ -2,16 +2,15 @@ package com.techfly.liutaitai.model.pcenter.adapter;
 
 import java.util.ArrayList;
 
-import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.pcenter.bean.Balance;
-
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.pcenter.bean.Balance;
 
 public class BalanceHistoryAdapter extends BaseAdapter {
 	private Context mContext;

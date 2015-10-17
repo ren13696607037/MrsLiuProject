@@ -11,7 +11,6 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.techfly.liutaitai.net.RequestManager;
 import com.techfly.liutaitai.util.Utility;
 import com.umeng.update.UmengUpdateAgent;
-import com.umeng.update.UpdateConfig;
 
 public class LiutaitaiApplication extends Application {
     @Override

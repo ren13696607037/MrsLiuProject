@@ -29,7 +29,6 @@ import com.techfly.liutaitai.model.order.activities.RateActivity;
 import com.techfly.liutaitai.model.order.activities.ServiceDetailActivity;
 import com.techfly.liutaitai.model.order.adapter.ServiceClick;
 import com.techfly.liutaitai.model.order.parser.ServiceDetailParser;
-import com.techfly.liutaitai.model.order.parser.ServiceOrderParser;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;

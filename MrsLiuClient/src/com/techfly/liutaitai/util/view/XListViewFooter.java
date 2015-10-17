@@ -6,14 +6,14 @@
  */
 package com.techfly.liutaitai.util.view;
 
-import com.techfly.liutaitai.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.techfly.liutaitai.R;
 
 public class XListViewFooter extends LinearLayout {
 	public final static int STATE_NORMAL = 0;

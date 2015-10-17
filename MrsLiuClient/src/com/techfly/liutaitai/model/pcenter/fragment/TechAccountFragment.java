@@ -9,18 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
-import com.techfly.liutaitai.bizz.parser.MyServiceParser;
 import com.techfly.liutaitai.model.pcenter.activities.TechAccountActivity;
-import com.techfly.liutaitai.model.pcenter.bean.MyService;
 import com.techfly.liutaitai.model.pcenter.bean.TechAccount;
 import com.techfly.liutaitai.model.pcenter.bean.User;
 import com.techfly.liutaitai.net.HttpURL;
@@ -31,7 +28,6 @@ import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
-import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
 public class TechAccountFragment extends CommonFragment implements OnClickListener{

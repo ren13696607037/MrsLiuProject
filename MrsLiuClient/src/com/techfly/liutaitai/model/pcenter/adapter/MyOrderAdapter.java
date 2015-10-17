@@ -1,11 +1,8 @@
 package com.techfly.liutaitai.model.pcenter.adapter;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +14,8 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
-import com.techfly.liutaitai.model.home.activities.HomeActivity;
-import com.techfly.liutaitai.model.pcenter.bean.MyOrder;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
-import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.view.StartTimeText;
 

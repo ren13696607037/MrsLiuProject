@@ -1,7 +1,6 @@
 package com.techfly.liutaitai.model.home.fragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +17,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
@@ -32,10 +30,8 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CityListParser;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
-import com.techfly.liutaitai.bizz.parser.ServiceCategoryParser;
 import com.techfly.liutaitai.model.home.adapter.BannerAdapter;
 import com.techfly.liutaitai.model.home.bean.Banner;
-import com.techfly.liutaitai.model.mall.bean.SortRule;
 import com.techfly.liutaitai.model.pcenter.bean.Area;
 import com.techfly.liutaitai.net.HttpURL;
 import com.techfly.liutaitai.net.RequestManager;
@@ -47,7 +43,6 @@ import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.activities.CitySelectActivity;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
-import com.techfly.liutaitai.util.view.PullToRefreshLayout;
 import com.techfly.liutaitai.util.view.ViewPagerWrapper;
 
 public class HomeFragment2 extends CommonFragment implements OnClickListener{
