@@ -151,18 +151,22 @@ public class GanxiProductInfoFragment extends CommonFragment implements
         // }
         // });
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-        setRightText(R.string.check_comment,new OnClickListener() {
+        setRightText(R.string.product_info_text_pic_and_text_detail,new OnClickListener() {
             
             @Override
             public void onClick(View arg0) {
-                if (mArrayList.size() > 0) {
-                    UIHelper.toSomeIdActivity(
-                            GanxiProductInfoFragment.this,
-                            ProductCommentActivity.class.getName(),
-                            mProductId, type);
-                } else {
-                    showSmartToast("还没有商品的评论", Toast.LENGTH_LONG);
+                if(mProduct!=null){
+                    UIHelper.toPicAndTextActivity(getActivity(),
+                            mProduct.getmDesc(), null);
                 }
+//                if (mArrayList.size() > 0) {
+//                    UIHelper.toSomeIdActivity(
+//                            GanxiProductInfoFragment.this,
+//                            ProductCommentActivity.class.getName(),
+//                            mProductId, type);
+//                } else {
+//                    showSmartToast("还没有商品的评论", Toast.LENGTH_LONG);
+//                }
                 
             }
         });
