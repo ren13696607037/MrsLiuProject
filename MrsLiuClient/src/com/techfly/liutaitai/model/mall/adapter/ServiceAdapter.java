@@ -62,8 +62,7 @@ public class ServiceAdapter extends BaseAdapter{
         
         holder.serviceName.setText(mList.get(position).getmServiceName());
         
-        holder.servicePrice.setText("￥"+mList.get(position).getmServicePrice());
-        
+        holder.servicePrice.setText("￥"+mList.get(position).getmServicePrice()+"/"+mList.get(position).getmServiceUnit());
         return convertView;
         
     }

@@ -87,8 +87,8 @@ public class ShengXianServiceAdapter extends BaseAdapter{
         
         holder.serviceName.setText(mList.get(position).getmName());
         
-        holder.servicePrice.setText("￥"+mList.get(position).getmPrice());
-        
+        holder.servicePrice.setText("￥"+mList.get(position).getmPrice()+"/"+mList.get(position).getmUnit());
+
         holder.shopCarImg.setOnClickListener(new OnClickListener() {
             
             @Override

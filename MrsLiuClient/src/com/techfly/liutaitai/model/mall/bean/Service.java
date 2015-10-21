@@ -14,6 +14,8 @@ public class Service {
     private String mServiceIcon;// 服务类型的图像
 
     private String mServicePrice;// 服务价格
+    
+    private String mServiceUnit;// 服务价格
    
     private String mServiceStatus;// 服务状态，进行中，已结束
     
@@ -167,7 +169,15 @@ public class Service {
 		this.mClear = mClear;
 	}
 
-	private String mCash;// 代金券的数额
+	public String getmServiceUnit() {
+        return mServiceUnit;
+    }
+
+    public void setmServiceUnit(String mServiceUnit) {
+        this.mServiceUnit = mServiceUnit;
+    }
+
+    private String mCash;// 代金券的数额
     private String mNum;//预约编号
     private String mTechId;
     private String mAliNo;
