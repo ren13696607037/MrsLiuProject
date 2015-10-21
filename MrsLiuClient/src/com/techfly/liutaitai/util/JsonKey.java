@@ -69,9 +69,11 @@ public interface JsonKey {
 		static final String ADDRESSID = "addressId";
 		static final String ADDRESSPKS = "addressPks";
 		static final String ISDEFAULT = "isDefault";
-		static final String PROVINCE="province";
+		static final String PROVINCE = "province";
 		static final String AID = "aid";
 		static final String CNAME = "cname";
+		static final String LNG = "lng";
+		static final String LAT = "lat";
 	}
 
 	interface HomeKey {
@@ -83,9 +85,9 @@ public interface JsonKey {
 		static final String TUANGOUCARD = "tuangouCard";
 		static final String COMMODITYHOT = "commodityHot";
 		static final String SECKILLRESPONSE = "seckillResponse";
-	    static final String SHARE_CONTENT = "shareContent";
-	    static final String SHARE_URL = "shareUrl";
-		
+		static final String SHARE_CONTENT = "shareContent";
+		static final String SHARE_URL = "shareUrl";
+
 	}
 
 	interface BannerKey {
@@ -124,14 +126,14 @@ public interface JsonKey {
 		static final String ID = "id";
 		static final String Name = "name";
 	}
-	
+
 	interface CategoryShowKey {
 		static final String IMAGE = "image";
 		static final String DESCRIPTION = "description";
 		static final String TARGETID = "targetId";
 		static final String TARGETNAME = "targetName";
 	}
-	
+
 	interface HotGoodKey {
 		static final String ID = "id";
 		static final String COMMODITYID = "commodityId";
@@ -141,13 +143,13 @@ public interface JsonKey {
 		static final String MARKETPRICE = "marketPrice";
 		static final String PRICE = "price";
 	}
-	
+
 	interface SecKillKey {
 		static final String STARTTIME = "startTime";
 		static final String STATUS = "status";
 		static final String ITEMS = "items";
 	}
-	
+
 	interface SecKillItemKey {
 		static final String ID = "id";
 		static final String COMMODITYID = "commodityId";
@@ -276,7 +278,8 @@ public interface JsonKey {
 		static final String INRO = "ProcessInfo";
 
 	}
-	interface ServiceKey{
+
+	interface ServiceKey {
 		static final String ID = "id";
 		static final String TIME = "serviceTime";
 		static final String TECH = "master";
@@ -290,7 +293,8 @@ public interface JsonKey {
 		static final String ALINO = "alipayno";
 		static final String TOTALMONEY = "totalMoney";
 	}
-	interface ServiceDetailKey{
+
+	interface ServiceDetailKey {
 		static final String ID = "id";
 		static final String TIME = "createTime";
 		static final String TECH = "master";
@@ -310,7 +314,8 @@ public interface JsonKey {
 		static final String MID = "mid";
 		static final String STARTTIME = "startTime";
 	}
-	interface BalanceKey{
+
+	interface BalanceKey {
 		static final String PAGE = "no";
 		static final String SIZE = "size";
 		static final String DATAS = "datas";
@@ -320,7 +325,8 @@ public interface JsonKey {
 		static final String TYPE = "type";
 		static final String DESC = "description";
 	}
-	interface VoucherKey{
+
+	interface VoucherKey {
 		static final String PAGE = "no";
 		static final String SIZE = "size";
 		static final String DATAS = "datas";
@@ -328,7 +334,8 @@ public interface JsonKey {
 		static final String MONEY = "money";
 		static final String NEED = "need";
 	}
-	interface MyServiceKey{
+
+	interface MyServiceKey {
 		static final String ID = "id";
 		static final String MONEY = "money";
 		static final String ING_ORDERS = "ing_orders";
@@ -336,7 +343,8 @@ public interface JsonKey {
 		static final String TYPE = "type";
 		static final String NEW_ORDERS = "new_orders";
 	}
-	interface TechnicianKey{
+
+	interface TechnicianKey {
 		static final String ID = "id";
 		static final String TIMES = "times";
 		static final String STARS = "stars";
@@ -354,7 +362,8 @@ public interface JsonKey {
 		static final String BANK = "bank";
 		static final String ACCOUNT = "account";
 	}
-	interface OrderBasketKey{
+
+	interface OrderBasketKey {
 		static final String ID = "id";
 		static final String UNIT = "unit";
 		static final String STATUS = "status";
@@ -366,7 +375,8 @@ public interface JsonKey {
 		static final String TOTAL_COUNT = "totoal";
 		static final String TOTAL_PRICE = "totalPrice";
 	}
-	interface Product2Key{
+
+	interface Product2Key {
 		static final String ID = "id";
 		static final String PRODUCT_ID = "goods";
 		static final String ICON = "img";
@@ -376,7 +386,8 @@ public interface JsonKey {
 		static final String PRICE = "price";
 		static final String NAME = "goodsName";
 	}
-	interface OrderInfoKey{
+
+	interface OrderInfoKey {
 		static final String PAY_TYPE = "payType";
 		static final String TOTAL_COUNT = "total";
 		static final String TIME = "createTime";
@@ -392,8 +403,8 @@ public interface JsonKey {
 		static final String STATE = "status";
 		static final String DELIVER_FEE = "freight";
 	}
-	
-	interface RateKey{
+
+	interface RateKey {
 		static final String TYPE = "type";
 		static final String CONTENT = "content";
 		static final String STARS = "stars";
@@ -405,8 +416,8 @@ public interface JsonKey {
 		static final String AVERGE = "averge";
 		static final String ORDERID = "orderid";
 	}
-	
-	interface CollectKey{
+
+	interface CollectKey {
 		static final String ID = "id";
 		static final String IMAGE = "image";
 		static final String TITLE = "title";
