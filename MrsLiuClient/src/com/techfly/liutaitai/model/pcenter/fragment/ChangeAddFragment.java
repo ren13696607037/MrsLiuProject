@@ -227,10 +227,13 @@ public class ChangeAddFragment extends CommonFragment implements
 				mTvCity.getText().toString() + mEtAddress.getText().toString());
 		url.setmGetParamPrefix(JsonKey.AddressKey.CITY).setmGetParamValues(
 				mCity);
-		url.setmGetParamPrefix(JsonKey.AddressKey.LAT).setmGetParamValues(
-				lat + "");
-		url.setmGetParamPrefix(JsonKey.AddressKey.LNG).setmGetParamValues(
-				lng + "");
+		if (lat != 0 && lng != 0) {
+			url.setmGetParamPrefix(JsonKey.AddressKey.LAT).setmGetParamValues(
+					lat + "");
+			url.setmGetParamPrefix(JsonKey.AddressKey.LNG).setmGetParamValues(
+					lng + "");
+		}
+
 		param.setmParserClassName(CommonParser.class.getName());
 		param.setmIsLogin(true);
 		param.setmId(mUser.getmId());

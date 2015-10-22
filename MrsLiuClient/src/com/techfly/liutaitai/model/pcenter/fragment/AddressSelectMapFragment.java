@@ -145,6 +145,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 		option.setScanSpan(5000);// 设置发起定位请求的间隔时间为5000ms
 		option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
 		option.setNeedDeviceDirect(true);// 返回的定位结果包含手机机头的方向
+		option.setOpenGps(true);
 		mLocationClient.setLocOption(option);
 
 	}
