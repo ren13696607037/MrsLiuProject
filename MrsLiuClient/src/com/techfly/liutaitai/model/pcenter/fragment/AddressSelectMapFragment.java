@@ -120,13 +120,13 @@ public class AddressSelectMapFragment extends CommonFragment implements
 					&& mBDLocation.getLongitude() != 0.0) {
 				LatLng latLng = new LatLng(mBDLocation.getLatitude(),
 						mBDLocation.getLongitude());
-				mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
+				mSearch.reverseGeoCode(new ReverseGeoCodeOption()
+						.location(latLng));
 			} else {
 				mHandler.postDelayed(runnable, 1000);
 			}
 		}
 	};
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -145,6 +145,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 		option.setScanSpan(5000);// 设置发起定位请求的间隔时间为5000ms
 		option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
 		option.setNeedDeviceDirect(true);// 返回的定位结果包含手机机头的方向
+		option.setOpenGps(true);
 		mLocationClient.setLocOption(option);
 
 	}
@@ -507,7 +508,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 			mLatitude = location.getLatitude() + "";
 			mLongitude = location.getLongitude() + "";
 			mCity = location.getCity();
-			AppLog.Logd("Shi", "mCity:::"+mCity);
+			AppLog.Logd("Shi", "mCity:::" + mCity);
 			mStartLocationData = new MyLocationData.Builder()
 					.accuracy(location.getRadius())
 					// 此处设置开发者获取到的方向信息，顺时针0-360
@@ -545,12 +546,12 @@ public class AddressSelectMapFragment extends CommonFragment implements
 			Toast.makeText(getActivity(), "抱歉，未能找到结果", Toast.LENGTH_LONG)
 					.show();
 		}
-//		List<PoiInfo> list = arg0.getPoiList();
-//		if (list != null && list.size() > 0) {
-//			mTvLocateLocation.setText(arg0.getAddress());
-//		} else {
-//			mTvLocateLocation.setText(arg0.getAddress());
-//		}
+		// List<PoiInfo> list = arg0.getPoiList();
+		// if (list != null && list.size() > 0) {
+		// mTvLocateLocation.setText(arg0.getAddress());
+		// } else {
+		// mTvLocateLocation.setText(arg0.getAddress());
+		// }
 		mTvLocateLocation.setText(arg0.getAddress());
 		mTvLocateDetailLocation.setText(arg0.getAddress());
 	}
@@ -569,7 +570,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 			mTvLocateLocation.setText(arg0.getBusinessCircle());
 		}
 		mTvLocateDetailLocation.setText(arg0.getAddress());
-//		startReqTask(AddressSelectMapFragment.this);
+		// startReqTask(AddressSelectMapFragment.this);
 
 	}
 
@@ -579,6 +580,13 @@ public class AddressSelectMapFragment extends CommonFragment implements
 		Intent intent = new Intent();
 		intent.putExtra(IntentBundleKey.ADDRESS_EXTRA, mTvLocateLocation
 				.getText().toString());
+		if (mMarker != null) {
+			intent.putExtra(IntentBundleKey.LAT_LNG_EXTRA_LAT,
+					mMarker.getPosition().latitude);
+			intent.putExtra(IntentBundleKey.LAT_LNG_EXTRA_LNG,
+					mMarker.getPosition().longitude);
+
+		}
 		getActivity().setResult(Activity.RESULT_OK, intent);
 		getActivity().finish();
 	}

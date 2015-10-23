@@ -49,6 +49,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
 import com.techfly.liutaitai.bizz.parser.CommonParser;
 import com.techfly.liutaitai.bizz.parser.TechOrderDetailParser;
+import com.techfly.liutaitai.model.mall.OrderInfoClick;
 import com.techfly.liutaitai.model.pcenter.activities.OrderDetailActivity;
 import com.techfly.liutaitai.model.pcenter.adapter.OrderClick;
 import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
@@ -73,7 +74,7 @@ import com.techfly.liutaitai.util.view.StartTimeText;
 import com.techfly.liutaitai.util.view.TechFinishDialog;
 
 public class TechOrderDetailFragment extends CommonFragment implements
-		OnClickListener, OrderDetailListener{
+		OnClickListener, OrderDetailListener {
 	private OrderDetailActivity mActivity;
 	private TextView mNo;
 	private TextView mTime;
@@ -105,7 +106,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			}
 		};
 	};
-	
+
 	private int mType;
 	private TechFinishDialog mDialog;
 	private static final int TAKE_BIG_PICTURE = 0x901;
@@ -127,7 +128,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 			}
 			if (!TextUtils.isEmpty(mSelectItems)) {
 				mDialog = new TechFinishDialog(getActivity(), "file:///"
-						+ mSelectItems,1);
+						+ mSelectItems, 1);
 				mDialog.show();
 				mDialog.setCanceledOnTouchOutside(true);
 			}
@@ -146,7 +147,8 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_ID);
 		mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
 		startReqTask(TechOrderDetailFragment.this);
-		ManagerListener.newManagerListener().onRegisterOrderDetailListener(this);
+		ManagerListener.newManagerListener()
+				.onRegisterOrderDetailListener(this);
 	}
 
 	@Override
@@ -160,7 +162,8 @@ public class TechOrderDetailFragment extends CommonFragment implements
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		ManagerListener.newManagerListener().onUnRegisterOrderDetailListener(this);
+		ManagerListener.newManagerListener().onUnRegisterOrderDetailListener(
+				this);
 		mTimeStart.toFinishHandler();
 	}
 
@@ -189,6 +192,22 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				intentFilter);
 		setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
 		setTitleText(R.string.service_detail_title);
+		setRightText(R.string.service_detail_tail, new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (mOrder != null) {
+					Intent intent = new Intent(Intent.ACTION_DIAL, Uri
+							.parse("tel:" + mOrder.getmCustomerPhone()));
+
+					startActivity(intent);
+				} else {
+					SmartToast.makeText(getActivity(), "未获取到号码",
+							Toast.LENGTH_SHORT).show();
+				}
+
+			}
+		});
 
 		mAddress = (TextView) view.findViewById(R.id.tsd_address);
 		mButton = (Button) view.findViewById(R.id.tsd_btn);
@@ -247,29 +266,35 @@ public class TechOrderDetailFragment extends CommonFragment implements
 								.getmVoucher())) * 100) / 100));
 		setState(mOrder, mState, mButton, mButton2);
 		mButton.setOnClickListener(new OrderClick(mActivity, mOrder, mButton
-				.getText().toString(),1));
+				.getText().toString(), 1));
 		mButton2.setOnClickListener(new OrderClick(mActivity, mOrder, mButton2
-				.getText().toString(),1));
-		mTimeStart.toStart(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime()));
+				.getText().toString(), 1));
+		mTimeStart.toStart(System.currentTimeMillis()
+				- Utility.Date2Millis(mOrder.getmStartTime()));
 		setPayWay(mPayWay, mOrder.getmPayWay());
-		if("0".equals(mOrder.getmServiceType()) && "1".equals(mOrder.getmClear())){
-    		mClear.setVisibility(View.VISIBLE);
-    	}else{
-    		mClear.setVisibility(View.GONE);
-    	}
+		if ("0".equals(mOrder.getmServiceType())
+				&& "1".equals(mOrder.getmClear())) {
+			mClear.setVisibility(View.VISIBLE);
+		} else {
+			mClear.setVisibility(View.GONE);
+		}
 	}
-	private void setPayWay(TextView textView, String state){
-    	if("0".equals(state)){
-    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text4)));
-    	}else if("1".equals(state)){
-    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text2)));
-    	}else if("2".equals(state)){
-    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text1)));
-    	}else if("3".equals(state)){
-    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text5)));
-    	}
-    }
-	
+
+	private void setPayWay(TextView textView, String state) {
+		if ("0".equals(state)) {
+			textView.setText(getString(R.string.service_detail_text8,
+					getString(R.string.recharge_text4)));
+		} else if ("1".equals(state)) {
+			textView.setText(getString(R.string.service_detail_text8,
+					getString(R.string.recharge_text2)));
+		} else if ("2".equals(state)) {
+			textView.setText(getString(R.string.service_detail_text8,
+					getString(R.string.recharge_text1)));
+		} else if ("3".equals(state)) {
+			textView.setText(getString(R.string.service_detail_text8,
+					getString(R.string.recharge_text5)));
+		}
+	}
 
 	private void setState(TechOrder order, TextView textView, Button button,
 			Button button2) {
@@ -277,48 +302,48 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		int state = Integer.valueOf(order.getmServiceStatus());
 		button.setVisibility(View.VISIBLE);
 		button2.setVisibility(View.VISIBLE);
-		if(state==1){
+		if (state == 1) {
 			textView.setText(R.string.tech_order_list_state);
 			button2.setText(R.string.tech_order_list_btn);
 			button.setText(R.string.tech_order_list_btn1);
-		}else if(state==2){
+		} else if (state == 2) {
 			textView.setText(R.string.tech_order_list_state1);
 			button.setText(R.string.tech_order_list_btn3);
 			button2.setText(R.string.tech_order_list_btn2);
-		}else if(state==3){
+		} else if (state == 3) {
 			textView.setText(R.string.tech_order_list_state2);
 			button2.setVisibility(View.GONE);
 			button.setText(R.string.tech_order_list_btn4);
 			mTimeStart.setVisibility(View.VISIBLE);
-		}else if(state==4 || state == 6){
+		} else if (state == 4 || state == 6) {
 			textView.setText(R.string.tech_order_list_state3);
 			button.setText(R.string.tech_order_list_btn5);
 			button2.setVisibility(View.GONE);
-		}else if(state == 5){
+		} else if (state == 5) {
 			textView.setText(R.string.order_service_state4);
 			button.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
-		}else if(state == 0){
+		} else if (state == 0) {
 			textView.setText(R.string.order_service_state);
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
-		}else if(state == -1){
+		} else if (state == -1) {
 			textView.setText("订单已取消");
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
-		}else if(state == -2){
+		} else if (state == -2) {
 			textView.setText(R.string.order_service_state8);
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
-		}else if(state == 7){
+		} else if (state == 7) {
 			textView.setText(R.string.order_service_state7);
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
-		}else if(state == 9){
+		} else if (state == 9) {
 			textView.setText("用户已删除");
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
-		}else{
+		} else {
 			button.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
 		}
@@ -416,7 +441,8 @@ public class TechOrderDetailFragment extends CommonFragment implements
 														Toast.LENGTH_LONG)
 												.show();
 										mType = 0;
-										ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
+										ManagerListener.newManagerListener()
+												.notifyOrderPayListener(mOrder);
 										startReqTask(TechOrderDetailFragment.this);
 									} else {
 										SmartToast.makeText(getActivity(),
@@ -448,24 +474,32 @@ public class TechOrderDetailFragment extends CommonFragment implements
 					}
 				} else if (object instanceof ResultInfo) {
 					ResultInfo info = (ResultInfo) object;
-					if(info.getmCode() == 0){
-						if(mType == 3){
-	            			if(info.getmCode()==0){
-	        					showSmartToast(R.string.delete_success, Toast.LENGTH_SHORT);
-	        					mActivity.finish();
-	        					ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
-	        				}else{
-	        					if(info.getmMessage()!=null&&!TextUtils.isEmpty(info.getmMessage())&&!"null".equals(info.getmMessage())){
-	        						showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
-	        					}else{
-	        						showSmartToast(R.string.delete_error, Toast.LENGTH_SHORT);
-	        					}
-	        				}
-	            		}else{
-	            			ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
-	            			mType = 0;
+					if (info.getmCode() == 0) {
+						if (mType == 3) {
+							if (info.getmCode() == 0) {
+								showSmartToast(R.string.delete_success,
+										Toast.LENGTH_SHORT);
+								mActivity.finish();
+								ManagerListener.newManagerListener()
+										.notifyOrderPayListener(mOrder);
+							} else {
+								if (info.getmMessage() != null
+										&& !TextUtils.isEmpty(info
+												.getmMessage())
+										&& !"null".equals(info.getmMessage())) {
+									showSmartToast(info.getmMessage(),
+											Toast.LENGTH_SHORT);
+								} else {
+									showSmartToast(R.string.delete_error,
+											Toast.LENGTH_SHORT);
+								}
+							}
+						} else {
+							ManagerListener.newManagerListener()
+									.notifyOrderPayListener(mOrder);
+							mType = 0;
 							startReqTask(TechOrderDetailFragment.this);
-	            		}
+						}
 					}
 				}
 			}
@@ -498,7 +532,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 					getString(R.string.error_nosdcard),
 					getString(R.string.confirm));
 		} else {
-			mDialog = new TechFinishDialog(getActivity(), null,1);
+			mDialog = new TechFinishDialog(getActivity(), null, 1);
 			mDialog.show();
 			mDialog.setCanceledOnTouchOutside(true);
 		}
@@ -618,7 +652,7 @@ public class TechOrderDetailFragment extends CommonFragment implements
 				}
 				if (!TextUtils.isEmpty(mSelectItems)) {
 					mDialog = new TechFinishDialog(getActivity(), "file:///"
-							+ mSelectItems,1);
+							+ mSelectItems, 1);
 					mDialog.show();
 					mDialog.setCanceledOnTouchOutside(true);
 				}

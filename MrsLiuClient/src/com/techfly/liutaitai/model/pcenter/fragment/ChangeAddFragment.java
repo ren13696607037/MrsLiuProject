@@ -96,6 +96,8 @@ public class ChangeAddFragment extends CommonFragment implements
 	};
 
 	private static final int ADDR = 0x11;
+	private double lat = 0;
+	private double lng = 0;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -225,6 +227,13 @@ public class ChangeAddFragment extends CommonFragment implements
 				mTvCity.getText().toString() + mEtAddress.getText().toString());
 		url.setmGetParamPrefix(JsonKey.AddressKey.CITY).setmGetParamValues(
 				mCity);
+		if (lat != 0 && lng != 0) {
+			url.setmGetParamPrefix(JsonKey.AddressKey.LAT).setmGetParamValues(
+					lat + "");
+			url.setmGetParamPrefix(JsonKey.AddressKey.LNG).setmGetParamValues(
+					lng + "");
+		}
+
 		param.setmParserClassName(CommonParser.class.getName());
 		param.setmIsLogin(true);
 		param.setmId(mUser.getmId());
@@ -299,6 +308,8 @@ public class ChangeAddFragment extends CommonFragment implements
 		if (requestCode == ADDR && resultCode == Activity.RESULT_OK
 				&& data != null) {
 			mTvCity.setText(data.getStringExtra(IntentBundleKey.ADDRESS_EXTRA));
+			lat = data.getDoubleExtra(IntentBundleKey.LAT_LNG_EXTRA_LAT, 0);
+			lng = data.getDoubleExtra(IntentBundleKey.LAT_LNG_EXTRA_LNG, 0);
 		}
 	}
 

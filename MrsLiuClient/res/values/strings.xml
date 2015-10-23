@@ -416,6 +416,7 @@
     
     <string name="login_toast">您还没有登录呢~</string>
     <string name="service_detail_title">预约详情</string>
+    <string name="service_detail_tail">拨打电话</string>
     <string name="service_detail_text">预约编号：%1$s</string>
     <string name="service_detail_text1">预约时间：%1$s</string>
     <string name="service_detail_text2">姓名：%1$s</string>
