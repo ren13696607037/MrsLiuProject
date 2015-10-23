@@ -246,9 +246,9 @@ public class ServiceListFragment extends CommonFragment implements OnClickListen
         url.setmGetParamPrefix("city").setmGetParamValues(areaId);
         url.setmGetParamPrefix(RequestParamConfig.PAGE).setmGetParamValues(mPage+"");
         url.setmGetParamPrefix("size").setmGetParamValues("10");
-        url.setmGetParamPrefix(RequestParamConfig.SORT).setmGetParamValues(mSortId  +"");
+        url.setmGetParamPrefix("order").setmGetParamValues(mSortId  +"");
         if(!TextUtils.isEmpty(mCateID)){
-            url.setmGetParamPrefix("cate").setmGetParamValues(mCateID);
+            url.setmGetParamPrefix("cid").setmGetParamValues(mCateID);
         }
         param.setmHttpURL(url);
         param.setmParserClassName(ServiceParser.class.getName());
