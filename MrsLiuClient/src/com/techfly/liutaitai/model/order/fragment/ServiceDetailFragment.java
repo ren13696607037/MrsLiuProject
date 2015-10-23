@@ -39,11 +39,11 @@ import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.ManagerListener;
-import com.techfly.liutaitai.util.ManagerListener.ServiceClickListener;
+import com.techfly.liutaitai.util.ManagerListener.ServiceDetailClickListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
-public class ServiceDetailFragment extends CommonFragment implements ServiceClickListener{
+public class ServiceDetailFragment extends CommonFragment implements ServiceDetailClickListener{
 	private ServiceDetailActivity mActivity;
 	private TextView mNo;
 	private TextView mTime;
@@ -87,7 +87,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
         mId = mActivity.getIntent().getStringExtra(IntentBundleKey.ORDER_SERVICE);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
         startReqTask(ServiceDetailFragment.this);
-        ManagerListener.newManagerListener().onRegisterServiceClickListener(this);
+        ManagerListener.newManagerListener().onRegisterServiceDetailClickListener(this);
     }
     
 
@@ -101,7 +101,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ManagerListener.newManagerListener().onUnRegisterServiceClickListener(this);
+        ManagerListener.newManagerListener().onUnRegisterServiceDetailClickListener(this);
     }
 
     @Override
@@ -157,8 +157,8 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
     	mVoucher.setText(mActivity.getString(R.string.service_detail_text7, mService.getmCash()));
     	mPrice.setText(mActivity.getString(R.string.service_detail_text5, (float)Math.round((Float.valueOf(mService.getmServicePrice())+Float.valueOf(mService.getmCash()))*100)/100));
     	setState(mService.getmServiceStatus(), mState, mButton, mButton2);
-    	mButton.setOnClickListener(new ServiceClick(mActivity, mButton.getText().toString(), mService));
-    	mButton2.setOnClickListener(new ServiceClick(mActivity, mButton2.getText().toString(), mService));
+    	mButton.setOnClickListener(new ServiceClick(mActivity, mButton.getText().toString(), mService,1));
+    	mButton2.setOnClickListener(new ServiceClick(mActivity, mButton2.getText().toString(), mService,1));
     	mServiewView.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -232,7 +232,7 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
             			if(info.getmCode()==0){
         					showSmartToast(R.string.delete_success, Toast.LENGTH_SHORT);
         					mActivity.finish();
-        					ManagerListener.newManagerListener().notifyServiceDeleteListener(mService);
+        					ManagerListener.newManagerListener().notifyServiceDetailDeleteListener(mService);
         				}else{
         					if(info.getmMessage()!=null&&!TextUtils.isEmpty(info.getmMessage())&&!"null".equals(info.getmMessage())){
         						showSmartToast(info.getmMessage(), Toast.LENGTH_SHORT);
@@ -320,14 +320,14 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 	}
 
 	@Override
-	public void onServiceDeleteListener(Service service) {
+	public void onServiceDetailDeleteListener(Service service) {
 		mType = 1;
 		mService = service;
 		startReqTask(ServiceDetailFragment.this);
 	}
 
 	@Override
-	public void onServicePayListener(Service service) {
+	public void onServiceDetailPayListener(Service service) {
 		Intent intent = new Intent(getActivity(),ServiceOrderActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(IntentBundleKey.ORDER_ID,service.getmAliNo());// 支付订单号 例如 5666995444RSFR
@@ -339,30 +339,40 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceClic
 	}
 
 	@Override
-	public void onServiceCancelListener(Service service) {
+	public void onServiceDetailCancelListener(Service service) {
 		mType = 3;
 		mService = service;
 		startReqTask(ServiceDetailFragment.this);
 	}
 
 	@Override
-	public void onServiceAgainListener(Service service) {
+	public void onServiceDetailAgainListener(Service service) {
 		Intent intent = new Intent(getActivity(), ServiceOrderActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmNum());
 		startActivity(intent);
 	}
 
 	@Override
-	public void onServiceRateListener(Service service) {
+	public void onServiceDetailRateListener(Service service) {
 		mType = 5;
 		Intent intent = new Intent(getActivity(), RateActivity.class);
 		intent.putExtra(IntentBundleKey.SERVICE_ID, service.getmId());
 		intent.putExtra(IntentBundleKey.TECH_ID, service.getmTechId());
-		startActivity(intent);
+		startActivityForResult(intent, Constant.RATE_INTENT);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Constant.RATE_SUCCESS) {
+			mUser = SharePreferenceUtils.getInstance(getActivity()).getUser();
+			if (mUser != null) {
+				startReqTask(ServiceDetailFragment.this);
+			}
+		}
 	}
 
 	@Override
-	public void onServiceRefreshListener() {
+	public void onServiceDetailRefreshListener() {
 		if(mUser!=null){
         	startReqTask(ServiceDetailFragment.this);
         }
