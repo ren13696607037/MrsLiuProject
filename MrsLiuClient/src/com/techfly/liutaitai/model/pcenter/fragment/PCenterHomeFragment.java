@@ -187,7 +187,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
     		}else if("0".equals(mUser.getmType())){
     			mService.setVisibility(View.GONE);
     		}
-    		ManagerListener.newManagerListener().notifyStartServiceListener();
+    		ManagerListener.newManagerListener().notifyStartServiceListener(0);
     	}
     }
     @Override

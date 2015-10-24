@@ -10,7 +10,7 @@ import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 
 public class ManagerListener {
 	public interface StartServiceListener{
-		void onStartService();
+		void onStartService(int type);
 	}
 	public interface CityUpdateListener {
 		void onUpdateListener(Area area);
@@ -590,10 +590,10 @@ public class ManagerListener {
 			mOrderDetailListeners.get(i).onDetailSubmit(url);
 		}
 	}
-	public void notifyStartServiceListener(){
+	public void notifyStartServiceListener(int type){
 		int size = mStartServiceListeners.size();
 		for(int i = 0; i < size; i++){
-			mStartServiceListeners.get(i).onStartService();
+			mStartServiceListeners.get(i).onStartService(type);
 		}
 	}
 

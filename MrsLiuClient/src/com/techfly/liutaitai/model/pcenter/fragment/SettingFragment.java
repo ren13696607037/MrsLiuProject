@@ -19,6 +19,7 @@ import com.techfly.liutaitai.model.pcenter.activities.SettingActivity;
 import com.techfly.liutaitai.model.pcenter.activities.SuggestActivity;
 import com.techfly.liutaitai.util.AlertDialogUtils;
 import com.techfly.liutaitai.util.Constant;
+import com.techfly.liutaitai.util.ManagerListener;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 
@@ -131,6 +132,7 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
                 public void onClick(View arg0) {
                     mPreferenceUtils.clearUser();
                     mDialog.dismiss();
+                    ManagerListener.newManagerListener().notifyStartServiceListener(1);
                     mActivity.setResult(Constant.EXIT_SUCCESS);
                     mActivity.finish();
                 }
