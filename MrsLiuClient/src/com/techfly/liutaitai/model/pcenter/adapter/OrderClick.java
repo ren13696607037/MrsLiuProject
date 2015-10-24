@@ -57,7 +57,7 @@ public class OrderClick implements OnClickListener {
 			// ManagerListener.newManagerListener().notifyOrderPayListener(mOrder);
 		} else if (mContext.getString(R.string.tech_order_list_btn4).equals(
 				mString)) {
-			if(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime()) > (Integer.valueOf(mOrder.getmMinutes())*60*1000)){
+//			if(System.currentTimeMillis() - Utility.Date2Millis(mOrder.getmStartTime()) > (Integer.valueOf(mOrder.getmMinutes())*60*1000)){
 				if (mIndex == 0) {
 					ManagerListener.newManagerListener().notifyOrderRateListener(
 							mOrder);
@@ -65,9 +65,9 @@ public class OrderClick implements OnClickListener {
 					ManagerListener.newManagerListener()
 							.notifyDetailOrderRateListener(mOrder);
 				}
-			}else{
-				Toast.makeText(mContext, "尚在服务时间~~！", Toast.LENGTH_LONG).show();
-			}
+//			}else{
+//				Toast.makeText(mContext, "尚在服务时间~~！", Toast.LENGTH_LONG).show();
+//			}
 		} else if (mContext.getString(R.string.tech_order_list_btn5).equals(
 				mString)) {
 			mDialog = new Dialog(mContext, R.style.MyDialog);
