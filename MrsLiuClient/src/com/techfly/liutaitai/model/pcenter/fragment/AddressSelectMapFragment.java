@@ -319,6 +319,7 @@ public class AddressSelectMapFragment extends CommonFragment implements
 				MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory
 						.newLatLngZoom(point, 16);
 				mBaiduMap.animateMapStatus(mapStatusUpdate);
+				showInfoWindow();
 
 			}
 		});
