@@ -10,7 +10,7 @@ import com.techfly.liutaitai.model.pcenter.bean.TechOrder;
 
 public class ManagerListener {
 	public interface StartServiceListener{
-		void onStartService();
+		void onStartService(int type);
 	}
 	public interface CityUpdateListener {
 		void onUpdateListener(Area area);
@@ -85,6 +85,19 @@ public class ManagerListener {
 
 		void onServiceRefreshListener();
 	}
+	public interface ServiceDetailClickListener {
+		void onServiceDetailDeleteListener(Service service);
+
+		void onServiceDetailPayListener(Service service);
+
+		void onServiceDetailCancelListener(Service servicee);
+
+		void onServiceDetailAgainListener(Service service);
+
+		void onServiceDetailRateListener(Service service);
+
+		void onServiceDetailRefreshListener();
+	}
 
 	public interface TechFinishDialogListener {
 		void onCamera();
@@ -114,6 +127,7 @@ public class ManagerListener {
 	private List<CollectListener> mCollectListeners = new ArrayList<ManagerListener.CollectListener>();
 	private List<OrderDetailListener> mOrderDetailListeners = new ArrayList<ManagerListener.OrderDetailListener>();
 	private List<StartServiceListener> mStartServiceListeners = new ArrayList<ManagerListener.StartServiceListener>();
+	private List<ServiceDetailClickListener> mServiceDetailClickListeners = new ArrayList<ManagerListener.ServiceDetailClickListener>();
 	private static ManagerListener mListener;
 	private static Object object = new Object();
 
@@ -130,6 +144,19 @@ public class ManagerListener {
 			}
 		}
 		return mListener;
+	}
+	public void onRegisterServiceDetailClickListener(
+			ServiceDetailClickListener serviceDetailClickListener) {
+		if (!mServiceDetailClickListeners.contains(serviceDetailClickListener)) {
+			mServiceDetailClickListeners.add(serviceDetailClickListener);
+		}
+	}
+
+	public void onUnRegisterServiceDetailClickListener(
+			ServiceDetailClickListener serviceDetailClickListener) {
+		if (mServiceDetailClickListeners.contains(serviceDetailClickListener)) {
+			mServiceDetailClickListeners.remove(serviceDetailClickListener);
+		}
 	}
 	public void onRegisterStartServiceListener(
 			StartServiceListener startServiceListener) {
@@ -424,6 +451,47 @@ public class ManagerListener {
 			mServiceClickListeners.get(i).onServiceRefreshListener();
 		}
 	}
+	public void notifyServiceDetailDeleteListener(Service service) {
+		int size = mServiceDetailClickListeners.size();
+		for (int i = 0; i < size; i++) {
+			mServiceDetailClickListeners.get(i).onServiceDetailDeleteListener(service);
+		}
+	}
+
+	public void notifyServiceDetailPayListener(Service service) {
+		int size = mServiceDetailClickListeners.size();
+		for (int i = 0; i < size; i++) {
+			mServiceDetailClickListeners.get(i).onServiceDetailPayListener(service);
+		}
+	}
+
+	public void notifyServiceDetailCancelListener(Service service) {
+		int size = mServiceDetailClickListeners.size();
+		for (int i = 0; i < size; i++) {
+			mServiceDetailClickListeners.get(i).onServiceDetailCancelListener(service);
+		}
+	}
+
+	public void notifyServiceDetailAgainListener(Service service) {
+		int size = mServiceDetailClickListeners.size();
+		for (int i = 0; i < size; i++) {
+			mServiceDetailClickListeners.get(i).onServiceDetailAgainListener(service);
+		}
+	}
+
+	public void notifyServiceDetailRateListener(Service service) {
+		int size = mServiceDetailClickListeners.size();
+		for (int i = 0; i < size; i++) {
+			mServiceDetailClickListeners.get(i).onServiceDetailRateListener(service);
+		}
+	}
+
+	public void notifyServiceDetailRefreshListener() {
+		int size = mServiceDetailClickListeners.size();
+		for (int i = 0; i < size; i++) {
+			mServiceDetailClickListeners.get(i).onServiceDetailRefreshListener();
+		}
+	}
 
 	public void notifyDialogCameraListener() {
 		int size = mDialogListeners.size();
@@ -522,10 +590,10 @@ public class ManagerListener {
 			mOrderDetailListeners.get(i).onDetailSubmit(url);
 		}
 	}
-	public void notifyStartServiceListener(){
+	public void notifyStartServiceListener(int type){
 		int size = mStartServiceListeners.size();
 		for(int i = 0; i < size; i++){
-			mStartServiceListeners.get(i).onStartService();
+			mStartServiceListeners.get(i).onStartService(type);
 		}
 	}
 

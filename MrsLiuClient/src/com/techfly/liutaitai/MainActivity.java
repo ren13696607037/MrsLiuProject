@@ -57,7 +57,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
                 this);
         initTabHost();
         UpdateMgr.getInstance(mContext).checkUpdateInfo(null, false);
-        ManagerListener.newManagerListener().notifyStartServiceListener();
+        ManagerListener.newManagerListener().notifyStartServiceListener(0);
         UmengUpdateAgent.update(this);
     }
 
@@ -197,7 +197,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
 
 
 	@Override
-	public void onStartService() {
+	public void onStartService(int type) {
 		mUser = SharePreferenceUtils.getInstance(mContext).getUser();
 		if(mUser != null && "2".equals(mUser.getmType())){
 			//启动服务
@@ -207,6 +207,8 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
 	        IntentFilter filter=new IntentFilter();
 	        filter.addAction("com.techfly.liutaitai.LocationService");
 	        registerReceiver(mReceiver, filter);
+		}else if(type == 1){ 
+			getUpdateLoc("0", "0");
 		}
 	}
 
