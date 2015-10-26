@@ -189,14 +189,19 @@ public class HomeFragment2 extends CommonFragment implements OnClickListener{
                     if (!TextUtils.isEmpty(mLocCity) && !mLocCity.equals("null")){
                         Area area = new Area();
                         area.setmName(mLocCity);
-                        area = list.get(list.indexOf(area));
-                        SharePreferenceUtils.getInstance(getActivity()).saveArea(area);
-                        mCityTv.setText(mLocCity);
+                        if(list.indexOf(area)!=-1){
+                            area = list.get(list.indexOf(area));
+                            SharePreferenceUtils.getInstance(getActivity()).saveArea(area);
+                            mCityTv.setText(mLocCity);
+                        }else{
+                            SharePreferenceUtils.getInstance(getActivity()).saveArea(list.get(0));
+                            mCityTv.setText(list.get(0).getmName());
+                        }
+                     
                     }else{
                         SharePreferenceUtils.getInstance(getActivity()).saveArea(list.get(0));
                         mCityTv.setText(list.get(0).getmName());
                     }
-                    
                     requestData();
                 }
               

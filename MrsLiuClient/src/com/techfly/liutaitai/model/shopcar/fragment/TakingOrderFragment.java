@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
@@ -70,6 +71,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 	protected boolean mIsUseVoucher;
 	protected float mDeliverFee;
 	private String mVoucherId = "0";
+    private float mMinDeliverMoney;
 
 	private LinearLayout mLlVoucher;
 	private TextView mTvVoucher;
@@ -278,24 +280,35 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 			if (mIsFirstTakingOrder) {
 				UIHelper.toAddressAddActivity(this);// 跳到地址增加页面
 			} else {
+			  
 				if (mIsFromShopCar) {
 					StringBuffer buffer = new StringBuffer();
 					for (Product product : ShopCar.getShopCar()
 							.getCheckShopproductList()) {
 						buffer.append(product.getmName() + " ");
 					}
-					onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,
-							Constant.PAY_TYPE_CREATE, ShopCar.getShopCar()
-									.getTotalPrice() + mDeliverFee + "",
-							buffer.toString());
+					  if(ShopCar.getShopCar()
+                              .getTotalPrice()>=mMinDeliverMoney){
+					      onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,
+		                            Constant.PAY_TYPE_CREATE, ShopCar.getShopCar()
+		                                    .getTotalPrice() + mDeliverFee + "",
+		                            buffer.toString());
+		                }else{
+		                    showSmartToast("订单未达到起送金额"+mMinDeliverMoney+"元，无法下单", Toast.LENGTH_LONG);
+		                }
+				
 				} else {
 					float totalPrice = (float) (mProduct.getmPrice() * mProduct
 							.getmAmount()) + mDeliverFee;
 					long l1 = Math.round(totalPrice * 100); // 四舍五入
 					totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
-					onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,
-							Constant.PAY_TYPE_CREATE, totalPrice + "",
-							mProduct.getmName());
+					 if(totalPrice>=mMinDeliverMoney){
+					     onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,
+		                            Constant.PAY_TYPE_CREATE, totalPrice + "",
+		                            mProduct.getmName());
+					 }else{
+                        showSmartToast("订单未达到起送金额"+mMinDeliverMoney+"元，无法下单", Toast.LENGTH_LONG);
+                    }
 				}
 			}
 			break;
@@ -306,6 +319,15 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 			Intent intentss = null;
 			intentss = new Intent(getActivity(), MyVoucherActivity.class);
 			intentss.putExtra(IntentBundleKey.VOUCHER_EXTRA, 8);
+			 if (mIsFromShopCar) {
+			      intentss.putExtra(IntentBundleKey.VOUCHER_MONEY, ShopCar.getShopCar().getTotalPrice());
+		        } else {
+		            float totalPrice = (mProduct.getmPrice() * mProduct.getmAmount());
+		            long l1 = Math.round(totalPrice * 100); // 四舍五入
+		            totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
+		            intentss.putExtra(IntentBundleKey.VOUCHER_MONEY, totalPrice);
+		        }
+		
 			this.startActivityForResult(intentss, 101);
 			break;
 		default:
@@ -350,7 +372,8 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 
 	private Response.Listener<Object> creatConfirmReqSuccessListener() {
 		return new Listener<Object>() {
-			@Override
+		
+            @Override
 			public void onResponse(Object result) {
 				AppLog.Logd(result.toString());
 				AppLog.Loge(" data success to load" + result.toString());
@@ -368,6 +391,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 						}
 						mIsUseVoucher = confirm.ismIsUseVoucher();
 						mDeliverFee = confirm.getmDeliverFee();
+						mMinDeliverMoney = confirm.getmDeliverMinMoney();
 						onDisplay();
 					}
 				}

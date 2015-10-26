@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
@@ -63,6 +64,7 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
 		};
 	};
 	private int mExtra;
+    protected float mMoney;
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -74,6 +76,7 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
         super.onCreate(savedInstanceState);
         mUser = SharePreferenceUtils.getInstance(mActivity).getUser();
         mExtra = mActivity.getIntent().getIntExtra(IntentBundleKey.VOUCHER_EXTRA, 0);
+        mMoney =mActivity.getIntent().getFloatExtra(IntentBundleKey.VOUCHER_MONEY, 0);
         startReqTask(this);
     }
     
@@ -121,11 +124,16 @@ public class MyVoucherFragment extends CommonFragment implements IXListViewListe
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 					Voucher voucher = (Voucher) parent.getAdapter().getItem(position);
-					Intent intent = new Intent();
-					intent.putExtra(IntentBundleKey.VOUCHER_EXTRA, voucher.getmId());
-					intent.putExtra(IntentBundleKey.VOUCHER_MONEY, Float.valueOf(voucher.getmPrice()));
-					mActivity.setResult(102, intent);
-					mActivity.finish();
+					if(Float.parseFloat(voucher.getmNeed())<=mMoney){
+					    Intent intent = new Intent();
+	                    intent.putExtra(IntentBundleKey.VOUCHER_EXTRA, voucher.getmId());
+	                    intent.putExtra(IntentBundleKey.VOUCHER_MONEY, Float.valueOf(voucher.getmPrice()));
+	                    mActivity.setResult(102, intent);
+	                    mActivity.finish();
+					}else{
+					    showSmartToast("未达到代金券使用条件，请选择其他代金券", Toast.LENGTH_LONG);
+					}
+				
 				}
 			});
     	}

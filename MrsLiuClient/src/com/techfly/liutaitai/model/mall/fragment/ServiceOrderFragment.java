@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
+import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.activities.JishiListActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceTimeActivity;
@@ -321,6 +322,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             Intent intentss = null;
             intentss = new Intent(getActivity(), MyVoucherActivity.class);
             intentss.putExtra(IntentBundleKey.VOUCHER_EXTRA, 8);
+            intentss.putExtra(IntentBundleKey.VOUCHER_MONEY, mInfo.getmPrice());
             this.startActivityForResult(intentss, 101);
             break;
         case R.id.check_box:
