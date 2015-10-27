@@ -282,7 +282,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             @Override
             public void onClick(View view) {
                 if (onJudgeReq()) {
-                    onCommitOrder(Constant.PRODUCT_TYPE_SERVICE, Constant.PAY_TYPE_CREATE,mInfo.getmPrice()+"",mInfo.getmName());
+                    onCommitOrder(Constant.PRODUCT_TYPE_SERVICE, Constant.PAY_TYPE_CREATE,(Float.parseFloat(mInfo.getmPrice())-mVoucherMoney)+"",mInfo.getmName());
                 }
             }
         });

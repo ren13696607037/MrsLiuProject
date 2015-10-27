@@ -291,7 +291,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
                               .getTotalPrice()>=mMinDeliverMoney){
 					      onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,
 		                            Constant.PAY_TYPE_CREATE, ShopCar.getShopCar()
-		                                    .getTotalPrice() + mDeliverFee + "",
+		                                    .getTotalPrice() + mDeliverFee -mVoucherMoney+ "",
 		                            buffer.toString());
 		                }else{
 		                    showSmartToast("订单未达到起送金额"+mMinDeliverMoney+"元，无法下单", Toast.LENGTH_LONG);
@@ -303,6 +303,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 					long l1 = Math.round(totalPrice * 100); // 四舍五入
 					totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
 					 if(totalPrice>=mMinDeliverMoney){
+					     totalPrice =totalPrice -mVoucherMoney;
 					     onCommitOrder(Constant.PRODUCT_TYPE_ENTITY,
 		                            Constant.PAY_TYPE_CREATE, totalPrice + "",
 		                            mProduct.getmName());
