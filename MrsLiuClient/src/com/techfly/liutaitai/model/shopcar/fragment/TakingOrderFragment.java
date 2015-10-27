@@ -134,7 +134,7 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 
 		if (requestCode == 101) {
 			if (data != null) {
-				mVoucherId = data.getIntExtra(IntentBundleKey.VOUCHER_EXTRA, 0)
+				mVoucherId = data.getStringExtra(IntentBundleKey.VOUCHER_EXTRA)
 						+ "";
 				mVoucherMoney = data.getFloatExtra(
 						IntentBundleKey.VOUCHER_MONEY, 0);
@@ -448,11 +448,11 @@ public class TakingOrderFragment extends CreateOrderPayCommonFragment implements
 		url.setmGetParamValues(mDeliverFee + "");
 
 		url.setmGetParamPrefix("voucherId");
-		if (!mIsUseVoucher) {
-			url.setmGetParamValues("0");
-		} else {
+//		if (!mIsUseVoucher) {
+//			url.setmGetParamValues("0");
+//		} else {
 			url.setmGetParamValues(mVoucherId);
-		}
+//		}
 
 		url.setmGetParamPrefix("comment");
 		if (TextUtils.isEmpty(mEt.getText().toString())) {

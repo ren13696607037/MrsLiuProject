@@ -179,6 +179,8 @@ public class RechargeFragment extends CommonFragment implements OnClickListener{
                 + Constant.RECHARGE_REQUEST_URL);
         url.setmGetParamPrefix("vid");
         url.setmGetParamValues(mBalance.getmId());
+//        url.setmGetParamPrefix("userid");
+//        url.setmGetParamValues(user .getmId());
         url.setmGetParamPrefix("type");
         if(mType == Constant.PAY_ALIPAY){
             url.setmGetParamValues("0");
