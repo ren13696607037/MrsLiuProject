@@ -199,7 +199,7 @@ abstract class PhotoBaseActivity extends Activity {
 
     protected Bitmap rotateBitmap(String path, int degress) {
         try {
-            Bitmap bitmap = BitmapUtils.compressBitmap(path, mScreenWidth / 4, mScreenHeight / 4);
+            Bitmap bitmap = BitmapUtils.compressBitmap(path, mScreenWidth / 2, mScreenHeight / 2);
             bitmap = BitmapUtils.rotateBitmap(bitmap, degress);
             return bitmap;
         }catch(OutOfMemoryError error){

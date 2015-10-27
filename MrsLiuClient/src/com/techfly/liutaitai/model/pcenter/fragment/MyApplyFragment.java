@@ -265,11 +265,11 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 			break;
 		case R.id.apply_img:
 //			showDialog(0);
-			GalleryHelper.openGallerySingle(MyApplyFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mBannerLoaderOptions), CropMode.RATIO_4_3,0);
+			GalleryHelper.openGallerySingle(MyApplyFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mBannerLoaderOptions), CropMode.RATIO_FREE,0);
 			break;
 		case R.id.apply_img1:
 //			showDialog(1);
-			GalleryHelper.openGallerySingle(MyApplyFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mBannerLoaderOptions), CropMode.RATIO_16_9,1);
+			GalleryHelper.openGallerySingle(MyApplyFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mBannerLoaderOptions), CropMode.RATIO_FREE,1);
 			break;
 
 		default:
