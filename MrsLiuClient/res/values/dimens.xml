@@ -38,5 +38,11 @@
     <dimen name="seek_bar_dialog_height">90dp</dimen>
     <dimen name="seek_bar_dialog_width">90dp</dimen>
     <dimen name="search_view_margin_top">15dp</dimen>
+    <dimen name="gf_title_bar_height">56dp</dimen>
+    <dimen name="fab_size_normal">56dp</dimen>
+    <dimen name="fab_icon_size">24dp</dimen>
+    <dimen name="fab_shadow_offset">3dp</dimen>
+    <dimen name="fab_shadow_radius">9dp</dimen>
+    <dimen name="fab_stroke_width">0.0dp</dimen>
 
 </resources>

@@ -3,6 +3,7 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONException;
@@ -34,6 +35,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import cn.finalteam.galleryfinal.model.PhotoInfo;
+
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -51,6 +54,8 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.CircleImageView;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.FileTool;
+import com.techfly.liutaitai.util.GalleryHelper;
+import com.techfly.liutaitai.util.GalleryImageLoader;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
@@ -58,6 +63,7 @@ import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.view.CropImageView.CropMode;
 
 public class PcenterInfoFragment extends CommonFragment implements OnClickListener{
 	private PcenterInfoActivity mActivity;
@@ -225,7 +231,8 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 			startActivity(new Intent(mActivity,ChangeNickActivity.class));
 			break;
 		case R.id.info_header:
-			showDialog();
+//			showDialog();
+			GalleryHelper.openGallerySingle(PcenterInfoFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mUserIconLoaderOptions), CropMode.RATIO_1_1, -1);
 			break;
 
 		default:
@@ -283,6 +290,23 @@ public class PcenterInfoFragment extends CommonFragment implements OnClickListen
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if ( requestCode == GalleryHelper.GALLERY_REQUEST_CODE) {
+            if ( resultCode == GalleryHelper.GALLERY_RESULT_SUCCESS ) {
+                PhotoInfo photoInfo = data.getParcelableExtra(GalleryHelper.RESULT_DATA);
+                List<PhotoInfo> photoInfoList = (List<PhotoInfo>) data.getSerializableExtra(GalleryHelper.RESULT_LIST_DATA);
+                AppLog.Loge("xll", "photoInfo.getPhotoPath()" + photoInfo.getPhotoPath());
+                if ( photoInfo != null ) {
+                    ImageLoader.getInstance().displayImage("file:/" + photoInfo.getPhotoPath(), mCircleImageView);
+                    mSelectItems = photoInfo.getPhotoPath();
+                    startReqTask(PcenterInfoFragment.this);
+                }
+
+                if ( photoInfoList != null ) {
+//                	showSmartToast(resId, duration)
+//                    Toast.makeText(this, "选择�?" + photoInfoList.size() + "�?", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
 		if (resultCode == Constant.LOGIN_SUCCESS) {
 //			setView();
 //			ManagerListener.newManagerListener().notifyRefreshListener();

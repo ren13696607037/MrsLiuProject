@@ -4,6 +4,7 @@ package com.techfly.liutaitai.model.pcenter.fragment;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONException;
@@ -36,6 +37,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import cn.finalteam.galleryfinal.model.PhotoInfo;
+
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
@@ -53,12 +56,16 @@ import com.techfly.liutaitai.util.AlertDialogUtils;
 import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.FileTool;
+import com.techfly.liutaitai.util.GalleryHelper;
+import com.techfly.liutaitai.util.GalleryImageLoader;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
+import com.techfly.liutaitai.util.view.CropImageView.CropMode;
 
 public class MyApplyFragment extends CommonFragment implements OnClickListener{
 	private MyApplyActivity mActivity;
@@ -257,10 +264,12 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 			}
 			break;
 		case R.id.apply_img:
-			showDialog(0);
+//			showDialog(0);
+			GalleryHelper.openGallerySingle(MyApplyFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mBannerLoaderOptions), CropMode.RATIO_4_3,0);
 			break;
 		case R.id.apply_img1:
-			showDialog(1);
+//			showDialog(1);
+			GalleryHelper.openGallerySingle(MyApplyFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mBannerLoaderOptions), CropMode.RATIO_16_9,1);
 			break;
 
 		default:
@@ -312,6 +321,29 @@ public class MyApplyFragment extends CommonFragment implements OnClickListener{
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if ( requestCode == GalleryHelper.GALLERY_REQUEST_CODE) {
+            if ( resultCode == GalleryHelper.GALLERY_RESULT_SUCCESS ) {
+                PhotoInfo photoInfo = data.getParcelableExtra(GalleryHelper.RESULT_DATA);
+                List<PhotoInfo> photoInfoList = (List<PhotoInfo>) data.getSerializableExtra(GalleryHelper.RESULT_LIST_DATA);
+                mPhoto = data.getIntExtra(GalleryHelper.APPLY_TYPE, -1);
+                AppLog.Loge("xll", "photoInfo.getPhotoPath()" + photoInfo.getPhotoPath());
+                if ( photoInfo != null ) {
+                	if(mPhoto == 0){
+                		ImageLoader.getInstance().displayImage("file:/" + photoInfo.getPhotoPath(), mImageView);
+                        mSelectImageView = photoInfo.getPhotoPath();
+					}else if(mPhoto == 1){
+						ImageLoader.getInstance().displayImage("file:/" + photoInfo.getPhotoPath(), mImageView2);
+	                    mSelectImageView1 = photoInfo.getPhotoPath();
+					}
+                    
+                }
+
+                if ( photoInfoList != null ) {
+//                	showSmartToast(resId, duration)
+//                    Toast.makeText(this, "选择�?" + photoInfoList.size() + "�?", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
 		if (resultCode == Constant.LOGIN_SUCCESS) {
 //			setView();
 //			ManagerListener.newManagerListener().notifyRefreshListener();
