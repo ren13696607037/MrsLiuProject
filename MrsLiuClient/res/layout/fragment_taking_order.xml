@@ -99,7 +99,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/person_info"
                     android:layout_marginTop="6dp"
-                    android:text="收货地址：政务区蔚蓝商务港B座1406室"
                     android:textColor="#565656"
                     android:textSize="@dimen/app_text_size_first" />
 
@@ -122,7 +121,6 @@
                     android:gravity="center"
                     android:paddingBottom="6dp"
                     android:paddingTop="6dp"
-                    android:text="18626466963"
                     android:textColor="#565656"
                     android:textSize="@dimen/app_text_size_first" />
             </RelativeLayout>
@@ -159,7 +157,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="10dp"
-                    android:text="￥1399.00"
                     android:textColor="#FF602B"
                     android:textSize="@dimen/app_text_size_first" />
 
@@ -183,7 +180,6 @@
                     android:layout_marginTop="4dp"
                     android:layout_toLeftOf="@id/product_price"
                     android:layout_toRightOf="@id/product_icon"
-                    android:text="Sanyo/三洋DG-F306ssss洗衣机大床 大床大床"
                     android:textColor="#565656"
                     android:textSize="@dimen/app_text_size_first" />
             </RelativeLayout>

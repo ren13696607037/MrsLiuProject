@@ -41,7 +41,7 @@ public class ConfrimOrderParser implements Parser{
                 confirm.setAddressId(objd2.optString("id"));
                 confirm.setName(objd2.optString("name"));
                 confirm.setPhone(objd2.optString("mobile"));
-                confirm.setmDeliverMinMoney((float) objd2.optDouble("gratisCost"));
+                confirm.setmDeliverMinMoney((float) objd.optDouble("gratisCost"));
                 confirm.setmAddressManage(add);
             }
         }
