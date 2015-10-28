@@ -333,7 +333,16 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceDeta
 		Intent intent = new Intent(getActivity(),ServiceOrderActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(IntentBundleKey.ORDER_ID,service.getmAliNo());// 支付订单号 例如 5666995444RSFR
-        bundle.putString(IntentBundleKey.ORDER_MONEY, service.getmServicePrice());// 支付的钱
+        if(TextUtils.isEmpty(service.getmCash())){
+            bundle.putString(IntentBundleKey.ORDER_MONEY, service.getmServicePrice());// 支付的钱
+        }else{
+            float totalPrice = (float) (Float.parseFloat(service.getmServicePrice()) -Float.parseFloat(service.getmCash()));
+            long l1 = Math.round(totalPrice * 100); // 四舍五入
+            totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
+            ;   //  
+            bundle.putString(IntentBundleKey.ORDER_MONEY, service.getmServicePrice());// 支付的钱
+        }
+      
         bundle.putString(IntentBundleKey.ORDER_PRODUCT, service.getmServiceName());// 商品名称
         intent.putExtra(IntentBundleKey.DATA, bundle);
         intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);
