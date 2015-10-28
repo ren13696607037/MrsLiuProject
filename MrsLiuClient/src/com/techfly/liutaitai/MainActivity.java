@@ -199,7 +199,7 @@ public class MainActivity extends TabActivity implements TabSwitchCallBack ,Star
 	@Override
 	public void onStartService(int type) {
 		mUser = SharePreferenceUtils.getInstance(mContext).getUser();
-		if(mUser != null && "2".equals(mUser.getmType())){
+		if(mUser != null && "2".equals(mUser.getmType()) && type == 0){
 			//启动服务
 	        startService(new Intent(MainActivity.this, LocationService.class));
 	        //注册广播

@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONException;
@@ -40,6 +41,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.finalteam.galleryfinal.model.PhotoInfo;
+
 import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
@@ -67,6 +70,9 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.CircleImageView;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.FileTool;
+import com.techfly.liutaitai.util.GalleryHelper;
+import com.techfly.liutaitai.util.GalleryImageLoader;
+import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.ManagerListener;
@@ -76,6 +82,7 @@ import com.techfly.liutaitai.util.SmartToast;
 import com.techfly.liutaitai.util.Utility;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.ShowDialog;
+import com.techfly.liutaitai.util.view.CropImageView.CropMode;
 
 public class TechnicianInfoFragment extends CommonFragment implements CityUpdateListener, OnClickListener{
 	private TechnicianInfoActivity mActivity;
@@ -432,6 +439,23 @@ public class TechnicianInfoFragment extends CommonFragment implements CityUpdate
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		if ( requestCode == GalleryHelper.GALLERY_REQUEST_CODE) {
+            if ( resultCode == GalleryHelper.GALLERY_RESULT_SUCCESS ) {
+                PhotoInfo photoInfo = data.getParcelableExtra(GalleryHelper.RESULT_DATA);
+                List<PhotoInfo> photoInfoList = (List<PhotoInfo>) data.getSerializableExtra(GalleryHelper.RESULT_LIST_DATA);
+                AppLog.Loge("xll", "photoInfo.getPhotoPath()" + photoInfo.getPhotoPath());
+                if ( photoInfo != null ) {
+                    ImageLoader.getInstance().displayImage("file:/" + photoInfo.getPhotoPath(), mHeader);
+                    mSelectItems = photoInfo.getPhotoPath();
+                    startReqTask(TechnicianInfoFragment.this);
+                }
+
+                if ( photoInfoList != null ) {
+//                	showSmartToast(resId, duration)
+//                    Toast.makeText(this, "选择�?" + photoInfoList.size() + "�?", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
 		String path = null;
 		Uri mImageUri = null;
 		if (data != null) {
@@ -654,7 +678,8 @@ public class TechnicianInfoFragment extends CommonFragment implements CityUpdate
 		case R.id.tech_info_img:
 			isHeader = true;
 			isShow = false;
-			showDialog();
+//			showDialog();
+			GalleryHelper.openGallerySingle(TechnicianInfoFragment.this, true, new GalleryImageLoader(ImageLoaderUtil.mUserIconLoaderOptions), CropMode.RATIO_1_1, -1);
 			break;
 
 		default:

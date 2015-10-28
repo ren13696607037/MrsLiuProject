@@ -35,4 +35,14 @@
         <attr name="android:requiresFadingEdge" />
         <attr name="android:fadingEdgeLength" />
     </declare-styleable>
+    
+    <attr name="colorTheme" format="reference|color"/>
+    <attr name="colorThemeDark" format="reference|color"/>
+
+    <declare-styleable name="GFFloatingActionButton">
+        <attr name="fabColorPressed" format="color"/>
+        <attr name="fabColorNormal" format="color"/>
+        <attr name="fabIcon" format="reference"/>
+        <attr name="fabTitle" format="string"/>
+    </declare-styleable>
 </resources>

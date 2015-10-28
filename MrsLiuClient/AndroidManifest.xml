@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.techfly.liutaitai"
-    android:versionCode="112"
-    android:versionName="v1.4.6" >
+    android:versionCode="110"
+    android:versionName="v1.3.5" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -606,6 +606,10 @@
             android:name="com.umeng.update.UpdateDialogActivity"
 		  	android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
+        <activity android:name="com.techfly.liutaitai.util.activities.PhotoChooseActivity"
+            android:theme="@style/PhotoActivityTheme"/>
+        <activity android:name="com.techfly.liutaitai.util.activities.PhotoCropActivity"
+            android:theme="@style/PhotoActivityTheme"/>
 
         <!-- Update Activitys End -->
         

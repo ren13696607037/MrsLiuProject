@@ -30,7 +30,9 @@
         android:paddingTop="@dimen/px_15"
         android:text="@string/life_helper_camera_photo"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/app_text_size_first" />
+        android:textSize="@dimen/app_text_size_first" 
+        android:visibility="gone"
+        />
     <ImageView 
         android:id="@+id/finish_img"
         android:layout_width="@dimen/px_250"
@@ -53,6 +55,7 @@
         android:paddingTop="@dimen/px_15"
         android:text="@string/life_helper_image_photo"
         android:textColor="@color/color_register"
-        android:textSize="@dimen/app_text_size_first" />
+        android:textSize="@dimen/app_text_size_first" 
+        />
 
 </LinearLayout>

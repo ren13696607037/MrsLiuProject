@@ -209,7 +209,10 @@ public class OrderInfoFragment extends CommonFragment {
 		setPayWay();
 		mTvTime.setText("下单时间：" + mOrder.getmTime());
 		mTvTips.setText("备注：" + mOrder.getmTips());
-		mTvTotalMoney.setText("￥" + mOrder.getmTotalPrice());
+		   float totalPrice = (float) (Float.parseFloat(mOrder.getmTotalPrice())-mOrder.getmOffsetValue());
+           long l1 = Math.round(totalPrice * 100); // 四舍五入
+           totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
+		mTvTotalMoney.setText("￥" + totalPrice );
 		if (mAdapter != null) {
 			mDatas.clear();
 			mDatas.addAll(mOrder.getmList());
@@ -236,8 +239,9 @@ public class OrderInfoFragment extends CommonFragment {
 		default:
 			break;
 		}
-
-		payWay = "(" + payWay + ")";
+        if(!TextUtils.isEmpty(payWay)){
+            payWay = "(" + payWay + ")"; 
+        }
 		mTvPayWay.setText("总数" + payWay);
 
 	}

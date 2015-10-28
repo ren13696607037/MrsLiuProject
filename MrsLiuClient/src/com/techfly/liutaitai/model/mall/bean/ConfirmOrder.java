@@ -9,6 +9,7 @@ public class ConfirmOrder {
     private String address;
     private String phone;
     private  String name;
+    private float mDeliverMinMoney;//起送金额
    private AddressManage mAddressManage;
     public float getmDeliverFee() {
         return mDeliverFee;
@@ -65,4 +66,14 @@ public class ConfirmOrder {
     public void setmAddressManage(AddressManage mAddressManage) {
         this.mAddressManage = mAddressManage;
     }
+
+    public float getmDeliverMinMoney() {
+        return mDeliverMinMoney;
+    }
+
+    public void setmDeliverMinMoney(float mDeliverMinMoney) {
+        this.mDeliverMinMoney = mDeliverMinMoney;
+    }
+
+   
 }

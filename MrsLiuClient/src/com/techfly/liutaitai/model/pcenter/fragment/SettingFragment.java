@@ -130,11 +130,11 @@ public class SettingFragment extends CommonFragment implements OnClickListener{
                 
                 @Override
                 public void onClick(View arg0) {
-                    mPreferenceUtils.clearUser();
                     mDialog.dismiss();
                     ManagerListener.newManagerListener().notifyStartServiceListener(1);
                     mActivity.setResult(Constant.EXIT_SUCCESS);
                     mActivity.finish();
+                    mPreferenceUtils.clearUser();
                 }
             }, R.string.giveup, null);
         	mDialog.show();

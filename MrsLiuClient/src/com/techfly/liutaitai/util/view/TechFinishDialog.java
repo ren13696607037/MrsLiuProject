@@ -61,7 +61,7 @@ public class TechFinishDialog extends AlertDialog{
 			mButton2.setText(R.string.submit);
 		}else{
 			mButton2.setText(R.string.life_helper_image_photo);
-			mButton.setVisibility(View.VISIBLE);
+//			mButton.setVisibility(View.VISIBLE);
 			mImageView.setVisibility(View.GONE);
 		}
 		
@@ -89,12 +89,16 @@ public class TechFinishDialog extends AlertDialog{
 					}
 					dismiss();
 				}else{
+//					if(mIndex == 0){
+//						ManagerListener.newManagerListener().notifyDialogPhotoListener();
+//					}else if(mIndex == 1){
+//						ManagerListener.newManagerListener().notifyDetailDialogPhotoListener();
+//					}
 					if(mIndex == 0){
-						ManagerListener.newManagerListener().notifyDialogPhotoListener();
+						ManagerListener.newManagerListener().notifyDialogCameraListener();
 					}else if(mIndex == 1){
-						ManagerListener.newManagerListener().notifyDetailDialogPhotoListener();
+						ManagerListener.newManagerListener().notifyDetailDialogCameraListener();
 					}
-					
 					dismiss();
 				}
 			}
