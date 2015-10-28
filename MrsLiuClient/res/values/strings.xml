@@ -552,6 +552,7 @@
 	<string name="recharge_text2">微信支付</string>
 	<string name="recharge_text4">余额支付</string>
 	<string name="recharge_text5">线下支付</string>
+	<string name="recharge_text6">未支付</string>
 	<string name="recharge_text3">确认充值</string>
 	<string name="recharge_title">余额</string>
 	<string name="app_tip">提示</string>

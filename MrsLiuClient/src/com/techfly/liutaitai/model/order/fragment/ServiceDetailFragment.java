@@ -184,6 +184,8 @@ public class ServiceDetailFragment extends CommonFragment implements ServiceDeta
     		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text1)));
     	}else if("3".equals(state)){
     		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text5)));
+    	}else{
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text6)));
     	}
     }
 
