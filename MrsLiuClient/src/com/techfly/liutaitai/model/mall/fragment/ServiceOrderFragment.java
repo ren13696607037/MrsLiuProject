@@ -56,7 +56,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
     private String mId;
     private ServiceInfo mInfo;
     private long mSelectTimeMills = 0;
-    private int mVoucherId;
+    private String mVoucherId;
     private String mOrderId;
     private double mJingdu;// 经度
     private double mWeidu;// 纬度
@@ -187,7 +187,8 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             }
         } else if (requestCode == 101) {
             if (data != null) {
-                mVoucherId =data.getIntExtra(IntentBundleKey.VOUCHER_EXTRA,0);
+                mVoucherId = data.getStringExtra(IntentBundleKey.VOUCHER_EXTRA)
+                        + "";
                 mVoucherMoney = data.getFloatExtra(IntentBundleKey.VOUCHER_MONEY,0);
                 if( mVoucherMoney!=0){
                     mVoucherTv.setText( "￥"+ mVoucherMoney+"");
@@ -284,7 +285,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             @Override
             public void onClick(View view) {
                 if (onJudgeReq()) {
-                    onCommitOrder(Constant.PRODUCT_TYPE_SERVICE, Constant.PAY_TYPE_CREATE,(Float.parseFloat(mInfo.getmPrice())-mVoucherMoney)+"",mInfo.getmName());
+                    onCommitOrder(Constant.PRODUCT_TYPE_SERVICE, Constant.PAY_TYPE_CREATE,mInfo.getmPrice()+"",mInfo.getmName());
                 }
             }
         });
@@ -365,7 +366,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
         
         url.setmGetParamPrefix("clean");
         url.setmGetParamValues(mIsYujia?"1":"0");
-        if(mVoucherId!=0){
+        if(!TextUtils.isEmpty(mVoucherId)){
             url.setmGetParamPrefix("vocher");
             url.setmGetParamValues(mVoucherId+"");
         }
