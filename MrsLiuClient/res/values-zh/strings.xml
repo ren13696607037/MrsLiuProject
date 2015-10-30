@@ -35,6 +35,7 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
+    <string name="pic_and_text2">详情</string> 
     <string name="service_detail_tail">拨打电话</string>
     <string name="select_city_title_text">选择城市</string>
     <string name="search_city_hint_text">请输入城市中文名或者拼音</string>
