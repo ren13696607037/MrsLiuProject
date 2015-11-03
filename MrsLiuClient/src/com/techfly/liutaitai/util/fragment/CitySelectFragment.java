@@ -152,6 +152,7 @@ public class CitySelectFragment extends CommonFragment {
                            }
                            else{
                                showSmartToast(R.string.select_city_location_disable, Toast.LENGTH_LONG);
+                               return;
                            }
                			 if(mIsFromMainActivity){
                              Intent intent =   getActivity().getIntent().putExtra(IntentBundleKey.LOCCITY,mLocCity);

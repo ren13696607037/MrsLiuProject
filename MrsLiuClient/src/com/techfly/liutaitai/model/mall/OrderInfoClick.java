@@ -76,10 +76,15 @@ public class OrderInfoClick implements OnClickListener {
 					TakingOrderActivity.class);
 			Bundle bundle = new Bundle();
 			bundle.putString(IntentBundleKey.ORDER_ID, mOrder.getmNum());// 支付订单号
-																			// 例如
+			
+			float totalPrice = (float) (Float.parseFloat(mOrder.getmTotalPrice()) - mOrder .getmOffsetValue());
+            long l1 = Math.round(totalPrice * 100); // 四舍五入
+            totalPrice = (float) (l1 / 100.00); // 注意：使用 100.0 而不是 100
+			;	//	
+			// 例如
 			// 5666995444RSFR
 			bundle.putString(IntentBundleKey.ORDER_MONEY,
-					mOrder.getmTotalPrice());// 支付的钱
+			        totalPrice+"");// 支付的钱
 			bundle.putString(IntentBundleKey.ORDER_PRODUCT, name);// 商品名称
 			intent.putExtra(IntentBundleKey.DATA, bundle);
 			intent.putExtra(IntentBundleKey.IS_FROM_ORDER, true);

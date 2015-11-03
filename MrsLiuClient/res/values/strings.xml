@@ -278,6 +278,7 @@
 	<string name="product_info_text_standard">规格：</string> 
 	<string name="product_info_text_standard_normal">点击选择规格</string> 
 	<string name="product_info_text_pic_and_text_detail">图文详情</string> 
+	<string name="ganxi_pic_and_text_detail">干洗流程</string>
     <string name="product_info_comment">用户评价</string> 
 	<string name="product_info_text_shop_car">购物车</string> 
 	<string name="product_info_text_shop_car_add">加入购物车</string> 
@@ -307,6 +308,7 @@
 	<string name="store_count_not_enough">库存不足</string> 
 	<!-- pic and text -->
 	<string name="pic_and_text">图文详情</string> 
+	<string name="pic_and_text2">详情</string> 
 	<string name="app_toast">app上暂无此功能~</string>
 	<!-- 评论 -->
 	<string name="rate_title">用户评论</string>
@@ -552,6 +554,7 @@
 	<string name="recharge_text2">微信支付</string>
 	<string name="recharge_text4">余额支付</string>
 	<string name="recharge_text5">线下支付</string>
+	<string name="recharge_text6">未支付</string>
 	<string name="recharge_text3">确认充值</string>
 	<string name="recharge_title">余额</string>
 	<string name="app_tip">提示</string>

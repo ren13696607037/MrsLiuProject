@@ -299,7 +299,9 @@ public class TechOrderDetailFragment extends CommonFragment implements
 		} else if ("3".equals(state)) {
 			textView.setText(getString(R.string.service_detail_text8,
 					getString(R.string.recharge_text5)));
-		}
+		}else{
+    		textView.setText(getString(R.string.service_detail_text8,getString(R.string.recharge_text6)));
+    	}
 	}
 
 	private void setState(TechOrder order, TextView textView, Button button,

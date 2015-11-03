@@ -27,7 +27,7 @@
            android:layout_centerInParent="true"
            android:textSize="@dimen/app_text_size_first"
            android:textColor="@android:color/white"
-           android:text="刘太太 生活"
+           android:text="刘太太 ·生活"
            />
        
    </RelativeLayout>

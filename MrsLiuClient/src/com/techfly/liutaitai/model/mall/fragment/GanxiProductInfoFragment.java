@@ -30,6 +30,7 @@ import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bizz.shopcar.CallBackNullException;
 import com.techfly.liutaitai.bizz.shopcar.ProductCountException;
 import com.techfly.liutaitai.bizz.shopcar.ShopCar;
+import com.techfly.liutaitai.model.mall.activities.PicAndTextDetailActivity;
 import com.techfly.liutaitai.model.mall.activities.ProductCommentActivity;
 import com.techfly.liutaitai.model.mall.bean.Comments;
 import com.techfly.liutaitai.model.mall.bean.Product;
@@ -44,6 +45,7 @@ import com.techfly.liutaitai.util.AppLog;
 import com.techfly.liutaitai.util.Constant;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
+import com.techfly.liutaitai.util.JsonKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
 import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.adapter.CommonAdapter;
@@ -151,13 +153,30 @@ public class GanxiProductInfoFragment extends CommonFragment implements
         // }
         // });
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
-        setRightText(R.string.product_info_text_pic_and_text_detail,new OnClickListener() {
+        int stringId = R.string.product_info_text_pic_and_text_detail;
+         if(type ==0){
+             stringId = R.string.ganxi_pic_and_text_detail;
+         }else{
+             stringId = R.string.product_info_text_pic_and_text_detail;
+         }
+        
+        setRightText(stringId,new OnClickListener() {
             
             @Override
             public void onClick(View arg0) {
                 if(mProduct!=null){
-                    UIHelper.toPicAndTextActivity(getActivity(),
-                            mProduct.getmDesc(), null);
+                  
+                    if(type==0){
+                        Intent intent = new Intent(getActivity(), PicAndTextDetailActivity.class);
+                        intent.putExtra(JsonKey.AdvertisementKey.GOODSID, mProduct.getmDesc());
+                        intent.putExtra(IntentBundleKey.ID, "-100");
+                        getActivity().startActivity(intent);   
+                    }else{
+                        UIHelper.toPicAndTextActivity(getActivity(),
+                                mProduct.getmDesc(), null);
+                    }
+                 
+                    
                 }
 //                if (mArrayList.size() > 0) {
 //                    UIHelper.toSomeIdActivity(

@@ -35,13 +35,14 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
+    <string name="pic_and_text2">详情</string> 
     <string name="service_detail_tail">拨打电话</string>
     <string name="select_city_title_text">选择城市</string>
     <string name="search_city_hint_text">请输入城市中文名或者拼音</string>
     <string name="select_city_location">定位当前城市</string>
     <string name="select_city_location_ing">定位中...</string>
     <string name="select_city_location_disable">对不起，这个城市还没有开通服务</string>
-    
+    <string name="recharge_text6">未支付</string>
     <string name="home_pcenter_tab">我的</string>
   
     <string name="editable_all">编辑全部</string>
@@ -279,6 +280,7 @@
 	<string name="product_info_text_standard">规格：</string> 
 	<string name="product_info_text_standard_normal">点击选择规格</string> 
 	<string name="product_info_text_pic_and_text_detail">图文详情</string> 
+	<string name="ganxi_pic_and_text_detail">干洗流程</string>
     <string name="product_info_comment">用户评价</string> 
 	<string name="product_info_text_shop_car">购物车</string> 
 	<string name="product_info_text_shop_car_add">加入购物车</string> 

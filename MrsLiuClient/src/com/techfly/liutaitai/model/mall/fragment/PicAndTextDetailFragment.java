@@ -71,7 +71,7 @@ public class PicAndTextDetailFragment extends CommonFragment {
 		super.onViewCreated(view, savedInstanceState);
 		initHeader();
 		initViews(view);
-		if(!TextUtils.isEmpty(mId)){
+		if(!TextUtils.isEmpty(mId)&&!mId.equals("-100")){
 		    startReqTask(this);
 		}else{
 		    mLoadHandler.removeMessages(Constant.NET_SUCCESS);
@@ -82,7 +82,11 @@ public class PicAndTextDetailFragment extends CommonFragment {
 
 	private void initHeader() {
 		// TODO Auto-generated method stub
-		setTitleText(R.string.pic_and_text);
+	    if(!TextUtils.isEmpty(mId)&&mId.equals("-100")){
+	        setTitleText(R.string.ganxi_pic_and_text_detail);
+	    }else{
+	        setTitleText(R.string.pic_and_text2);
+	    }
 		setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
 //		setRightMoreIcon(R.drawable.share, new OnClickListener() {
 //
