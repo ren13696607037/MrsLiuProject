@@ -209,7 +209,9 @@ public class OrderInfoFragment extends CommonFragment {
 		setPayWay();
 		mTvTime.setText("下单时间：" + mOrder.getmTime());
 		mTvTips.setText("备注：" + mOrder.getmTips());
-		mTvTotalMoney.setText("￥" + mOrder.getmTotalPrice());
+		mTvTotalMoney.setText("￥"
+				+ (Double.valueOf(mOrder.getmTotalPrice()) - mOrder
+						.getmOffsetValue()));
 		if (mAdapter != null) {
 			mDatas.clear();
 			mDatas.addAll(mOrder.getmList());
@@ -324,10 +326,10 @@ public class OrderInfoFragment extends CommonFragment {
 			break;
 		case 10:
 			mTvState.setText(R.string.order_state_10);
-//			mTvBtn1.setVisibility(View.INVISIBLE);
-//			mTvBtn2.setVisibility(View.VISIBLE);
-//			mTvBtn2.setText(R.string.order_text_5);
-			
+			// mTvBtn1.setVisibility(View.INVISIBLE);
+			// mTvBtn2.setVisibility(View.VISIBLE);
+			// mTvBtn2.setText(R.string.order_text_5);
+
 			break;
 
 		default:
@@ -365,12 +367,12 @@ public class OrderInfoFragment extends CommonFragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == OrderBastketFragment.REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null){
-			if(data.getBooleanExtra(IntentBundleKey.DATA, false)){
+		if (requestCode == OrderBastketFragment.REQUEST_CODE
+				&& resultCode == Activity.RESULT_OK && data != null) {
+			if (data.getBooleanExtra(IntentBundleKey.DATA, false)) {
 				refreshData();
 			}
 		}
 	}
-	
-	
+
 }

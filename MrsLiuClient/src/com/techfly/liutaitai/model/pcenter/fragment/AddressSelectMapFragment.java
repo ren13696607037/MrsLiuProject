@@ -586,6 +586,8 @@ public class AddressSelectMapFragment extends CommonFragment implements
 					mMarker.getPosition().latitude);
 			intent.putExtra(IntentBundleKey.LAT_LNG_EXTRA_LNG,
 					mMarker.getPosition().longitude);
+			AppLog.Logd("Shi", "lng===" + mMarker.getPosition().longitude
+					+ "::::lat===" + mMarker.getPosition().latitude);
 
 		}
 		getActivity().setResult(Activity.RESULT_OK, intent);
