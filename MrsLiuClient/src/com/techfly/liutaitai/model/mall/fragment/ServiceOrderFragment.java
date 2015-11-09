@@ -20,7 +20,6 @@ import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
 import com.techfly.liutaitai.bean.ResultInfo;
-import com.techfly.liutaitai.bizz.shopcar.ShopCar;
 import com.techfly.liutaitai.model.mall.activities.JishiListActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceOrderActivity;
 import com.techfly.liutaitai.model.mall.activities.ServiceTimeActivity;
@@ -57,7 +56,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
     private String mId;
     private ServiceInfo mInfo;
     private long mSelectTimeMills = 0;
-    private int mVoucherId;
+    private String mVoucherId;
     private String mOrderId;
     private double mJingdu;// 经度
     private double mWeidu;// 纬度
@@ -70,6 +69,9 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
     @Override
     public void requestData() {
         // TODO Auto-generated method stub
+        if(TextUtils.isEmpty(mId) || mId.equals("null")){
+            return;
+        }
         RequestParam param = new RequestParam();
         HttpURL url = new HttpURL();
         url.setmBaseUrl(Constant.YIHUIMALL_BASE_URL + Constant.SERVICE_DETAIL);
@@ -185,7 +187,8 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             }
         } else if (requestCode == 101) {
             if (data != null) {
-                mVoucherId =data.getIntExtra(IntentBundleKey.VOUCHER_EXTRA,0);
+                mVoucherId = data.getStringExtra(IntentBundleKey.VOUCHER_EXTRA)
+                        + "";
                 mVoucherMoney = data.getFloatExtra(IntentBundleKey.VOUCHER_MONEY,0);
                 if( mVoucherMoney!=0){
                     mVoucherTv.setText( "￥"+ mVoucherMoney+"");
@@ -282,7 +285,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             @Override
             public void onClick(View view) {
                 if (onJudgeReq()) {
-                    onCommitOrder(Constant.PRODUCT_TYPE_SERVICE, Constant.PAY_TYPE_CREATE,(Float.parseFloat(mInfo.getmPrice())-mVoucherMoney)+"",mInfo.getmName());
+                    onCommitOrder(Constant.PRODUCT_TYPE_SERVICE, Constant.PAY_TYPE_CREATE,mInfo.getmPrice()+"",mInfo.getmName());
                 }
             }
         });
@@ -322,7 +325,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
             Intent intentss = null;
             intentss = new Intent(getActivity(), MyVoucherActivity.class);
             intentss.putExtra(IntentBundleKey.VOUCHER_EXTRA, 8);
-            intentss.putExtra(IntentBundleKey.VOUCHER_MONEY, mInfo.getmPrice());
+            intentss.putExtra(IntentBundleKey.VOUCHER_MONEY, Float.parseFloat(mInfo.getmPrice()));
             this.startActivityForResult(intentss, 101);
             break;
         case R.id.check_box:
@@ -363,7 +366,7 @@ public class ServiceOrderFragment extends CreateOrderPayCommonFragment implement
         
         url.setmGetParamPrefix("clean");
         url.setmGetParamValues(mIsYujia?"1":"0");
-        if(mVoucherId!=0){
+        if(!TextUtils.isEmpty(mVoucherId)){
             url.setmGetParamPrefix("vocher");
             url.setmGetParamValues(mVoucherId+"");
         }

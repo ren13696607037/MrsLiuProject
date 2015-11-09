@@ -162,15 +162,14 @@ public class GanxiFragment extends CommonFragment implements OnRefreshListener {
     private void initTitleView(){
         setLeftHeadIcon(Constant.HEADER_TITLE_LEFT_ICON_DISPLAY_FLAG);
         if(type==0){
-            setTitleText("干洗");
+            setTitleText("洗衣·保养");
         }else if(type==1){
             setTitleText("生鲜");
         }else if(type==2){
             setTitleText("鲜花");
         }else if(type==4){
-            setTitleText("奢侈品");
+            setTitleText("奢侈品·保养");
         }
-     
     }
     
     @Override

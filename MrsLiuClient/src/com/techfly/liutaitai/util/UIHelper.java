@@ -56,7 +56,7 @@ public class UIHelper {
 	public static void toPicAndTextActivity(Context context, String desc,String id) {
 		Intent intent = new Intent(context, PicAndTextDetailActivity.class);
 		intent.putExtra(JsonKey.AdvertisementKey.GOODSID, desc);
-		  intent.putExtra(IntentBundleKey.ID, id);
+		intent.putExtra(IntentBundleKey.ID, id);
 		context.startActivity(intent);
 	}
 

@@ -26,7 +26,7 @@ public class MyOrder implements Serializable {
 	private double mDeliverFee;// 运费
 	private String mCustomerName;// 客户姓名和电话
 	private String mCustomerAddr;// 配送地址
-	private double mOffsetValue;// 抵价券金额
+	private double mOffsetValue=0;// 抵价券金额
 	private String mTips;// 备注
 	private int mPayType;// 支付方式
 
