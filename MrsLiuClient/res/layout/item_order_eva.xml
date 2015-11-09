@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:numStars="5"
-            android:rating="0"
+            android:rating="5"
             android:stepSize="1" >
         </RatingBar>
     </LinearLayout>
