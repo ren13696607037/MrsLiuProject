@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -20,6 +21,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.techfly.liutaitai.R;
+import com.techfly.liutaitai.model.mall.activities.JiShiCommentActivity;
 import com.techfly.liutaitai.model.mall.adapter.JishiScheuleTimeAdapter;
 import com.techfly.liutaitai.model.mall.bean.JishiInfo;
 import com.techfly.liutaitai.model.mall.bean.JishiScheuleTime;
@@ -35,6 +37,7 @@ import com.techfly.liutaitai.util.DateUtils;
 import com.techfly.liutaitai.util.ImageLoaderUtil;
 import com.techfly.liutaitai.util.IntentBundleKey;
 import com.techfly.liutaitai.util.SharePreferenceUtils;
+import com.techfly.liutaitai.util.UIHelper;
 import com.techfly.liutaitai.util.fragment.CommonFragment;
 import com.techfly.liutaitai.util.view.ListViewForScrollView;
 
@@ -46,11 +49,13 @@ public class JishiInfoFragment extends CommonFragment {
     private RatingBar mRate;
     private TextView mConfirm;
     private ListViewForScrollView mListView;
+    private RelativeLayout mCommentLayout;
     private JishiScheuleTimeAdapter mAdapter;
     private JishiInfo mInfo;
     private String mId;
     private List<JishiScheuleTime> mList = new ArrayList<JishiScheuleTime>();
     private static final String TIME_FORMAT1="MM dd";
+    
     @Override
     public void requestData() {
         RequestParam param = new RequestParam();
@@ -211,6 +216,15 @@ public class JishiInfoFragment extends CommonFragment {
             public void onClick(View view) {
                 getActivity().setResult(100);
                 getActivity().finish();
+            }
+        });
+        mCommentLayout = (RelativeLayout) view.findViewById(R.id.product_info);
+        mCommentLayout.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+               UIHelper.toSomeIdActivity(JishiInfoFragment.this, JiShiCommentActivity.class.getName(),mId,888);
+                
             }
         });
 
