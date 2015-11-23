@@ -24,7 +24,7 @@ public class ViewPagerWrapper extends LinearLayout {
 	private ViewPager mPager;
 
 	private LinearLayout mDotsLayout;
-	private int mInterval = 2000;
+	private int mInterval = 5000;
 	private boolean mAutoPlay = true;
 	private boolean mShowDots = true;
 	private boolean mHeightChangable = true;

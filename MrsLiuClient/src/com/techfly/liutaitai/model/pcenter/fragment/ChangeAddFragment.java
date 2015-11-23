@@ -184,7 +184,10 @@ public class ChangeAddFragment extends CommonFragment implements
 						SmartToast.makeText(mActivity, R.string.phone_error,
 								Toast.LENGTH_SHORT).show();
 						mEtPhone.setText("");
-					} else {
+					} else if(lat == 0 || lng == 0){
+						SmartToast.makeText(mActivity, R.string.map_error,
+								Toast.LENGTH_SHORT).show();
+					}else{
 						startReqTask(ChangeAddFragment.this);
 					}
 				}
