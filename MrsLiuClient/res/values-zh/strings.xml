@@ -12,6 +12,7 @@
     <string name="home_shopcar_tab">预约</string>
      <string name="shopcar">购物车</string>
     <string name="home_tab">首页</string>
+        <string name="map_error">请点击选择地址按钮并在地图中搜索地址</string>
     <string name="home_mall_tab">订单篮</string>
     
     <string name="error_cacel_wx_pay">您已经取消付款</string>
