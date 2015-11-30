@@ -93,23 +93,26 @@ public class ViewPagerWrapper extends LinearLayout {
 		mPager.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
-			public void onPageSelected(int position) {
+			public void onPageSelected(final int position) {
 				if (mCurrentDotView != null) {
 					mCurrentDotView.setImageResource(R.drawable.ic_dot_unselected);
 				}
 				mCount = position;
-				ImageView dotView = (ImageView) mDotsLayout.getChildAt(position);
+				final ImageView dotView = (ImageView) mDotsLayout.getChildAt(position);
+				if(dotView==null){
+				    return;
+				}
 				dotView.setImageResource(R.drawable.ic_dot_selected);
 				mCurrentDotView = dotView;
 			}
 
 			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			public void onPageScrolled(final int arg0, final float arg1, final int arg2) {
 
 			}
 
 			@Override
-			public void onPageScrollStateChanged(int arg0) {
+			public void onPageScrollStateChanged(final int arg0) {
 
 			}
 		});
