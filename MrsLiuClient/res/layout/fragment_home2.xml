@@ -218,7 +218,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
-                        android:text="鲜花"
+                        android:text="鲜花蛋糕"
                         android:drawableTop="@drawable/tag3"
                         android:drawablePadding="8dp"
                         android:layout_gravity="center|center_vertical"

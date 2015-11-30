@@ -604,7 +604,7 @@ public class PCenterHomeFragment extends CommonFragment implements OnClickListen
 //		addEmail();
 
 		mController.getConfig().setPlatforms(SHARE_MEDIA.WEIXIN,
-				SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ,SHARE_MEDIA.SINA,
+				SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ,
 				SHARE_MEDIA.SMS);
 		mController.openShare(getActivity(), false);
 		// SHARE_MEDIA.TENCENT SHARE_MEDIA.SINA,
